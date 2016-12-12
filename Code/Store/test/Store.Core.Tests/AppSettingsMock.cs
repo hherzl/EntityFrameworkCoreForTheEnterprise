@@ -1,0 +1,15 @@
+﻿using Store.Core.DataLayer;
+
+namespace Store.Core.Tests
+{
+    public static class AppSettingsMock
+    {
+        public static AppSettings Default
+        {
+            get
+            {
+                return new AppSettings { ConnectionString = "server=(local);database=Store;integrated security=yes; " };
+            }
+        }
+    }
+}
