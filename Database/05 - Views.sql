@@ -1,13 +1,10 @@
-use Store
-go
-
 create view OrderSummary
 as
 	select
 		OrderHeader.OrderID,
 		OrderHeader.OrderDate,
 		Customer.CompanyName as CustomerName,
-		Employee.FirstName + ' ' + Employee.MiddleName + ' ' + Employee.LastName as EmployeeName,
+		Employee.FirstName + ' ' + isnull(Employee.MiddleName, '') + ' ' + Employee.LastName as EmployeeName,
 		Shipper.CompanyName as ShipperName
 	from
 		Sales.[Order] OrderHeader

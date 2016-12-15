@@ -8,6 +8,6 @@ namespace Store.Core.BusinessLayer
     {
         IListModelResponse<Order> GetOrders(Int32 pageSize, Int32 pageNumber);
 
-        void CreateOrder(Order header, OrderDetail[] details);
+        ISingleModelResponse<Order> CreateOrder(Order header, OrderDetail[] details);
     }
 }

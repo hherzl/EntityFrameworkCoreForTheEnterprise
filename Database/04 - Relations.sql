@@ -1,6 +1,3 @@
-use Store
-go
-
 alter table [Production].[Product] add constraint Production_Product_ProductCategory foreign key (ProductCategoryID) references [Production].[ProductCategory]
 go
 

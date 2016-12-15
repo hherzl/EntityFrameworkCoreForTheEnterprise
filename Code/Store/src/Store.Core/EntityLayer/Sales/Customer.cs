@@ -2,7 +2,7 @@
 
 namespace Store.Core.EntityLayer.Sales
 {
-    public class Customer
+    public class Customer : IEntity
     {
         public Customer()
         {

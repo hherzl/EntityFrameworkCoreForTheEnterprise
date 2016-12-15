@@ -8,12 +8,14 @@ namespace Store.Core.BusinessLayer
     public class BusinessObject : IBusinessObject
     {
         protected Boolean Disposed;
+        protected UserInfo UserInfo;
         protected StoreDbContext DbContext;
         protected IProductionRepository m_productionRepository;
         protected ISalesRepository m_salesRepository;
 
-        public BusinessObject(StoreDbContext dbContext)
+        public BusinessObject(UserInfo userInfo, StoreDbContext dbContext)
         {
+            UserInfo = userInfo;
             DbContext = dbContext;
         }
 
@@ -34,7 +36,7 @@ namespace Store.Core.BusinessLayer
         {
             get
             {
-                return m_productionRepository ?? (m_productionRepository = new ProductionRepository(DbContext));
+                return m_productionRepository ?? (m_productionRepository = new ProductionRepository(UserInfo, DbContext));
             }
         }
 
@@ -42,7 +44,7 @@ namespace Store.Core.BusinessLayer
         {
             get
             {
-                return m_salesRepository ?? (m_salesRepository = new SalesRepository(DbContext));
+                return m_salesRepository ?? (m_salesRepository = new SalesRepository(UserInfo, DbContext));
             }
         }
     }

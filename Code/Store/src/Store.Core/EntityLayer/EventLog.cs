@@ -2,7 +2,7 @@
 
 namespace Store.Core.EntityLayer
 {
-    public class EventLog
+    public class EventLog : IEntity
     {
         public EventLog()
         {

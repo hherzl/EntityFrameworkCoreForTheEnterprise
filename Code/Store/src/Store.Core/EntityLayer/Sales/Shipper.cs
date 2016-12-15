@@ -2,7 +2,7 @@
 
 namespace Store.Core.EntityLayer.Sales
 {
-    public class Shipper
+    public class Shipper : IEntity
     {
         public Shipper()
         {

@@ -1,12 +1,9 @@
-use Store
-go
-
 create table [EventLog]
 (
 	[EventLogID] int not null identity(1, 1),
 	[EventType] int not null,
 	[Key] varchar(255) not null,
-	[Message] varchar not null,
+	[Message] varchar(max) not null,
 	[EntryDate] datetime not null
 )
 
@@ -30,7 +27,9 @@ create table [Production].[Product]
 	[ProductID] int not null identity(1, 1),
 	[ProductName] varchar(100) not null,
 	[ProductCategoryID] int not null,
-	[Description] varchar(255) null
+	[UnitPrice] decimal(8, 4) not null,
+	[Description] varchar(255) null,
+	[Discontinued] bit not null
 )
 
 create table [Production].[ProductInventory]
@@ -62,7 +61,12 @@ create table [Sales].[Order]
 	[CustomerID] int not null,
 	[EmployeeID] int not null,
 	[ShipperID] int not null,
-	[Comments] varchar(255) null
+	[Total] decimal(12, 4) not null,
+	[Comments] varchar(255) null,
+	[CreationUser] varchar(25) not null,
+	[CreationDateTime] datetime not null,
+	[LastUpdateUser] varchar(25) null,
+	[LastUpdateDateTime] datetime null
 )
 
 create table [Sales].[OrderDetail]

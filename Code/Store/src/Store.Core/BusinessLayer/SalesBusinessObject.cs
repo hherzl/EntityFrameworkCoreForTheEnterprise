@@ -9,8 +9,8 @@ namespace Store.Core.BusinessLayer
 {
     public class SalesBusinessObject : BusinessObject, ISalesBusinessObject
     {
-        public SalesBusinessObject(StoreDbContext dbContext)
-            : base(dbContext)
+        public SalesBusinessObject(UserInfo userInfo, StoreDbContext dbContext)
+            : base(userInfo, dbContext)
         {
         }
 
@@ -33,39 +33,76 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public void CreateOrder(Order header, OrderDetail[] details)
+        public ISingleModelResponse<Order> CreateOrder(Order header, OrderDetail[] details)
         {
-            using (var transaction = DbContext.Database.BeginTransaction())
+            var response = new SingleModelResponse<Order>() as ISingleModelResponse<Order>;
+
+            try
             {
-                try
+                using (var transaction = DbContext.Database.BeginTransaction())
                 {
-                    SalesRepository.AddOrder(header);
-
-                    foreach(var detail in details)
+                    try
                     {
-                        detail.OrderID = header.OrderID;
-
-                        SalesRepository.AddOrderDetail(detail);
-
-                        var productInventory = new ProductInventory
+                        foreach (var detail in details)
                         {
-                            ProductID= detail.ProductID,
-                            EntryDate = DateTime.Now,
-                            Quantity = detail.Quantity
-                        };
+                            var product = ProductionRepository.GetProduct(new Product { ProductID = detail.ProductID });
 
-                        ProductionRepository.AddProductInventory(productInventory);
+                            if (product == null)
+                            {
+                                throw new NonExistingProductException(String.Format("Sent order has a non existing product with ID: '{0}', order has been cancelled.", product.ProductID));
+                            }
+                            else
+                            {
+                                detail.ProductName = product.ProductName;
+                            }
+
+                            if (product.Discontinued == true)
+                            {
+                                throw new AddOrderWithDiscontinuedProductException(String.Format("Product with ID: '{0}' is discontinued, order has been cancelled.", product.ProductID));
+                            }
+
+                            detail.Total = product.UnitPrice * detail.Quantity;
+                        }
+
+                        header.Total = details.Sum(item => item.Total);
+
+                        SalesRepository.AddOrder(header);
+
+                        foreach (var detail in details)
+                        {
+                            detail.OrderID = header.OrderID;
+
+                            SalesRepository.AddOrderDetail(detail);
+
+                            var productInventory = new ProductInventory
+                            {
+                                ProductID = detail.ProductID,
+                                EntryDate = DateTime.Now,
+                                Quantity = detail.Quantity * -1
+                            };
+
+                            ProductionRepository.AddProductInventory(productInventory);
+                        }
+
+                        response.Model = header;
+
+                        transaction.Commit();
                     }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
 
-                    transaction.Commit();
-                }
-                catch (Exception ex)
-                {
-                    transaction.Rollback();
-
-                    throw ex;
+                        throw ex;
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                response.DidError = true;
+                response.ErrorMessage = ex.Message;
+            }
+
+            return response;
         }
     }
 }

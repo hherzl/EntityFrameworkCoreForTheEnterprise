@@ -1,6 +1,3 @@
-use Store
-go
-
 alter table [EventLog] add constraint EventLog_PK primary key (EventLogID)
 go
 
@@ -11,6 +8,9 @@ alter table [Production].[ProductCategory] add constraint Production_ProductCate
 go
 
 alter table [Production].[Product] add constraint Production_Product_PK primary key (ProductID)
+go
+
+alter table [Production].[Product] add constraint Production_Product_ProductName unique (ProductName)
 go
 
 alter table [Production].[ProductInventory] add constraint Production_ProductInventory_PK primary key (ProductInventoryID)

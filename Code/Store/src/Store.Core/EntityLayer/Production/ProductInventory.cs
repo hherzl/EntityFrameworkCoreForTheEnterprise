@@ -2,7 +2,7 @@
 
 namespace Store.Core.EntityLayer.Production
 {
-    public class ProductInventory
+    public class ProductInventory : IEntity
     {
         public ProductInventory()
         {

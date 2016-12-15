@@ -7,8 +7,8 @@ namespace Store.Core.DataLayer.Repositories
 {
     public class StoreRepository : Repository, IStoreRepository
     {
-        public StoreRepository(StoreDbContext dbContext)
-            : base(dbContext)
+        public StoreRepository(UserInfo userInfo, StoreDbContext dbContext)
+            : base(userInfo, dbContext)
         {
         }
 
