@@ -21,7 +21,11 @@ namespace Store.Core.DataLayer.Repositories
             if (cast != null)
             {
                 cast.CreationUser = UserInfo.Name;
-                cast.CreationDateTime = DateTime.Now;
+
+                if (!cast.CreationDateTime.HasValue)
+                {
+                    cast.CreationDateTime = DateTime.Now;
+                }
             }
         }
 
@@ -32,7 +36,11 @@ namespace Store.Core.DataLayer.Repositories
             if (cast != null)
             {
                 cast.LastUpdateUser = UserInfo.Name;
-                cast.LastUpdateDateTime = DateTime.Now;
+
+                if (!cast.LastUpdateDateTime.HasValue)
+                {
+                    cast.LastUpdateDateTime = DateTime.Now;
+                }
             }
         }
     }

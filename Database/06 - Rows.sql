@@ -6,6 +6,7 @@ go
 
 insert into [Production].[Product] values ('King of Fighters XIV', 1, 59.99, 'KOF XIV', 0)
 insert into [Production].[Product] values ('Street Fighter V', 1, 49.99, 'SF V', 0)
+insert into [Production].[Product] values ('Guilty Gear', 1, 39.99, 'GG', 0)
 go
 
 insert into [Production].[ProductInventory] values (1, getdate(), 100000)
@@ -19,4 +20,5 @@ go
 
 insert into [Sales].[Shipper] values ('DHL', 'Ricardo A. Bartra')
 insert into [Sales].[Shipper] values ('FedEx', 'Rob Carter')
+insert into [Sales].[Shipper] values ('UPS', 'Juan R. Perez')
 go

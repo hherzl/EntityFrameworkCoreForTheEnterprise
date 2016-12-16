@@ -2,6 +2,7 @@
 using System.Linq;
 using Store.Core.BusinessLayer.Responses;
 using Store.Core.DataLayer;
+using Store.Core.EntityLayer.HumanResources;
 using Store.Core.EntityLayer.Production;
 using Store.Core.EntityLayer.Sales;
 
@@ -12,6 +13,82 @@ namespace Store.Core.BusinessLayer
         public SalesBusinessObject(UserInfo userInfo, StoreDbContext dbContext)
             : base(userInfo, dbContext)
         {
+        }
+
+        public IListModelResponse<Customer> GetCustomers(Int32 pageSize, Int32 pageNumber)
+        {
+            var response = new ListModelResponse<Customer>() as IListModelResponse<Customer>;
+
+            try
+            {
+                response.Model = SalesRepository
+                    .GetCustomers(pageSize, pageNumber)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                response.DidError = true;
+                response.ErrorMessage = ex.Message;
+            }
+
+            return response;
+        }
+
+        public IListModelResponse<Employee> GetEmployees(Int32 pageSize, Int32 pageNumber)
+        {
+            var response = new ListModelResponse<Employee>() as IListModelResponse<Employee>;
+
+            try
+            {
+                response.Model = HumanResourcesRepository
+                    .GetEmployees(pageSize, pageNumber)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                response.DidError = true;
+                response.ErrorMessage = ex.Message;
+            }
+
+            return response;
+        }
+
+        public IListModelResponse<Shipper> GetShippers(Int32 pageSize, Int32 pageNumber)
+        {
+            var response = new ListModelResponse<Shipper>() as IListModelResponse<Shipper>;
+
+            try
+            {
+                response.Model = SalesRepository
+                    .GetShippers(pageSize, pageNumber)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                response.DidError = true;
+                response.ErrorMessage = ex.Message;
+            }
+
+            return response;
+        }
+
+        public IListModelResponse<Product> GetProducts(Int32 pageSize, Int32 pageNumber)
+        {
+            var response = new ListModelResponse<Product>() as IListModelResponse<Product>;
+
+            try
+            {
+                response.Model = ProductionRepository
+                    .GetProducts(pageSize, pageNumber)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                response.DidError = true;
+                response.ErrorMessage = ex.Message;
+            }
+
+            return response;
         }
 
         public IListModelResponse<Order> GetOrders(Int32 pageSize, Int32 pageNumber)
@@ -61,6 +138,7 @@ namespace Store.Core.BusinessLayer
                                 throw new AddOrderWithDiscontinuedProductException(String.Format("Product with ID: '{0}' is discontinued, order has been cancelled.", product.ProductID));
                             }
 
+                            detail.UnitPrice = product.UnitPrice;
                             detail.Total = product.UnitPrice * detail.Quantity;
                         }
 

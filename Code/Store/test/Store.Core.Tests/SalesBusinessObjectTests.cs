@@ -1,41 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Extensions.Options;
-using Store.Core.BusinessLayer;
-using Store.Core.DataLayer;
-using Store.Core.DataLayer.Mapping;
-using Store.Core.EntityLayer.Sales;
-using Xunit;
+﻿using Xunit;
 
 namespace Store.Core.Tests
 {
     public class SalesBusinessObjectTests
     {
-        private ISalesBusinessObject SalesBusinessObject
-        {
-            get
-            {
-                var userInfo = new UserInfo { Name = "admin" };
-
-                var appSettings = Options.Create(AppSettingsMock.Default);
-
-                var entityMapper = new StoreEntityMapper() as IEntityMapper;
-
-                return new SalesBusinessObject(userInfo, new StoreDbContext(appSettings, entityMapper)) as ISalesBusinessObject;
-            }
-        }
-
         [Fact]
-        public void TestGetOrders()
+        public void TestGetCustomers()
         {
             // Arrange
-            using (var businessObject = SalesBusinessObject)
+            using (var businessObject = BusinessObjectMocker.GetSalesBusinessObject())
             {
                 var pageSize = 10;
                 var pageNumber = 1;
 
                 // Act
-                var response = businessObject.GetOrders(pageSize, pageNumber);
+                var response = businessObject.GetCustomers(pageSize, pageNumber);
 
                 // Assert
                 Assert.False(response.DidError);
@@ -43,29 +22,67 @@ namespace Store.Core.Tests
         }
 
         [Fact]
-        public void TestCreateOrder()
+        public void TestGetEmployees()
         {
             // Arrange
-            using (var businessObject = SalesBusinessObject)
+            using (var businessObject = BusinessObjectMocker.GetSalesBusinessObject())
             {
-                var header = new Order();
-
-                header.OrderDate = DateTime.Now;
-                header.CustomerID = 1;
-                header.EmployeeID = 1;
-                header.ShipperID = 1;
-
-                var details = new List<OrderDetail>();
-
-                details.Add(new OrderDetail
-                {
-                    ProductID = 1,
-                    Quantity = 1,
-                    UnitPrice = 1
-                });
+                var pageSize = 10;
+                var pageNumber = 1;
 
                 // Act
-                var response = businessObject.CreateOrder(header, details.ToArray());
+                var response = businessObject.GetEmployees(pageSize, pageNumber);
+
+                // Assert
+                Assert.False(response.DidError);
+            }
+        }
+
+        [Fact]
+        public void TestGetShippers()
+        {
+            // Arrange
+            using (var businessObject = BusinessObjectMocker.GetSalesBusinessObject())
+            {
+                var pageSize = 10;
+                var pageNumber = 1;
+
+                // Act
+                var response = businessObject.GetShippers(pageSize, pageNumber);
+
+                // Assert
+                Assert.False(response.DidError);
+            }
+        }
+
+        [Fact]
+        public void TestGetProducts()
+        {
+            // Arrange
+            using (var businessObject = BusinessObjectMocker.GetSalesBusinessObject())
+            {
+                var pageSize = 10;
+                var pageNumber = 1;
+
+                // Act
+                var response = businessObject.GetProducts(pageSize, pageNumber);
+
+                // Assert
+                Assert.False(response.DidError);
+            }
+        }
+
+        [Fact]
+        public void TestGetOrders()
+        {
+            // Arrange
+            using (var businessObject = BusinessObjectMocker.GetSalesBusinessObject())
+            {
+                var pageSize = 10;
+                var pageNumber = 1;
+
+                // Act
+                var response = businessObject.GetOrders(pageSize, pageNumber);
 
                 // Assert
                 Assert.False(response.DidError);

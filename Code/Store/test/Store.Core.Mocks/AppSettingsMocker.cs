@@ -1,8 +1,8 @@
 ﻿using Store.Core.DataLayer;
 
-namespace Store.Core.Tests
+namespace Store.Core.Mocks
 {
-    public static class AppSettingsMock
+    public static class AppSettingsMocker
     {
         public static AppSettings Default
         {

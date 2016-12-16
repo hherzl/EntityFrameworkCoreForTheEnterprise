@@ -10,6 +10,7 @@ namespace Store.Core.BusinessLayer
         protected Boolean Disposed;
         protected UserInfo UserInfo;
         protected StoreDbContext DbContext;
+        protected IHumanResourcesRepository m_humanResourcesRepository;
         protected IProductionRepository m_productionRepository;
         protected ISalesRepository m_salesRepository;
 
@@ -29,6 +30,14 @@ namespace Store.Core.BusinessLayer
 
                     Disposed = true;
                 }
+            }
+        }
+
+        protected IHumanResourcesRepository HumanResourcesRepository
+        {
+            get
+            {
+                return m_humanResourcesRepository ?? (m_humanResourcesRepository = new HumanResourcesRepository(UserInfo, DbContext));
             }
         }
 
