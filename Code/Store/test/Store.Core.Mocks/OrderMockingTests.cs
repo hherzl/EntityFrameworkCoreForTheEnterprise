@@ -18,15 +18,17 @@ namespace Store.Core.Mocks
                 {
                     var random = new Random();
 
-                    var businessObject = BusinessObjectMocker.GetSalesBusinessObject();
+                    var salesBusinessObject = BusinessObjectMocker.GetSalesBusinessObject();
+                    var humanResourcesBusinessObject = BusinessObjectMocker.GetHumanResourcesBusinessObject();
+                    var productionBusinessObject = BusinessObjectMocker.GetProductionBusinessObject();
 
                     var pageSize = 10;
                     var pageNumber = 1;
 
-                    var customers = businessObject.GetCustomers(pageSize, pageNumber).Model.ToList();
-                    var employees = businessObject.GetEmployees(pageSize, pageNumber).Model.ToList();
-                    var shippers = businessObject.GetShippers(pageSize, pageNumber).Model.ToList();
-                    var products = businessObject.GetProducts(pageSize, pageNumber).Model.ToList();
+                    var customers = salesBusinessObject.GetCustomers(pageSize, pageNumber).Model.ToList();
+                    var employees = humanResourcesBusinessObject.GetEmployees(pageSize, pageNumber).Model.ToList();
+                    var shippers = salesBusinessObject.GetShippers(pageSize, pageNumber).Model.ToList();
+                    var products = productionBusinessObject.GetProducts(pageSize, pageNumber).Model.ToList();
 
                     for (var i = 0; i < ordersLimitPerDay; i++)
                     {
@@ -55,10 +57,12 @@ namespace Store.Core.Mocks
                             });
                         }
 
-                        businessObject.CreateOrder(header, details.ToArray());
+                        salesBusinessObject.CreateOrder(header, details.ToArray());
                     }
 
-                    businessObject.Dispose();
+                    salesBusinessObject.Dispose();
+                    humanResourcesBusinessObject.Dispose();
+                    productionBusinessObject.Dispose();
                 }
 
                 date = date.AddDays(1);

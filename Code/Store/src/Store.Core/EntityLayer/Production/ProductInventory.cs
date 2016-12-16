@@ -15,5 +15,7 @@ namespace Store.Core.EntityLayer.Production
         public DateTime? EntryDate { get; set; }
 
         public Int32? Quantity { get; set; }
+
+        public virtual Product ProductFk { get; set; }
     }
 }

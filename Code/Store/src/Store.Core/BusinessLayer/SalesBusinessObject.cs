@@ -2,7 +2,6 @@
 using System.Linq;
 using Store.Core.BusinessLayer.Responses;
 using Store.Core.DataLayer;
-using Store.Core.EntityLayer.HumanResources;
 using Store.Core.EntityLayer.Production;
 using Store.Core.EntityLayer.Sales;
 
@@ -34,25 +33,6 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public IListModelResponse<Employee> GetEmployees(Int32 pageSize, Int32 pageNumber)
-        {
-            var response = new ListModelResponse<Employee>() as IListModelResponse<Employee>;
-
-            try
-            {
-                response.Model = HumanResourcesRepository
-                    .GetEmployees(pageSize, pageNumber)
-                    .ToList();
-            }
-            catch (Exception ex)
-            {
-                response.DidError = true;
-                response.ErrorMessage = ex.Message;
-            }
-
-            return response;
-        }
-
         public IListModelResponse<Shipper> GetShippers(Int32 pageSize, Int32 pageNumber)
         {
             var response = new ListModelResponse<Shipper>() as IListModelResponse<Shipper>;
@@ -61,25 +41,6 @@ namespace Store.Core.BusinessLayer
             {
                 response.Model = SalesRepository
                     .GetShippers(pageSize, pageNumber)
-                    .ToList();
-            }
-            catch (Exception ex)
-            {
-                response.DidError = true;
-                response.ErrorMessage = ex.Message;
-            }
-
-            return response;
-        }
-
-        public IListModelResponse<Product> GetProducts(Int32 pageSize, Int32 pageNumber)
-        {
-            var response = new ListModelResponse<Product>() as IListModelResponse<Product>;
-
-            try
-            {
-                response.Model = ProductionRepository
-                    .GetProducts(pageSize, pageNumber)
                     .ToList();
             }
             catch (Exception ex)
@@ -126,7 +87,9 @@ namespace Store.Core.BusinessLayer
 
                             if (product == null)
                             {
-                                throw new NonExistingProductException(String.Format("Sent order has a non existing product with ID: '{0}', order has been cancelled.", product.ProductID));
+                                throw new NonExistingProductException(
+                                    String.Format("Sent order has a non existing product with ID: '{0}', order has been cancelled.", product.ProductID)
+                                );
                             }
                             else
                             {
@@ -135,7 +98,9 @@ namespace Store.Core.BusinessLayer
 
                             if (product.Discontinued == true)
                             {
-                                throw new AddOrderWithDiscontinuedProductException(String.Format("Product with ID: '{0}' is discontinued, order has been cancelled.", product.ProductID));
+                                throw new AddOrderWithDiscontinuedProductException(
+                                    String.Format("Product with ID: '{0}' is discontinued, order has been cancelled.", product.ProductID)
+                                );
                             }
 
                             detail.UnitPrice = product.UnitPrice;

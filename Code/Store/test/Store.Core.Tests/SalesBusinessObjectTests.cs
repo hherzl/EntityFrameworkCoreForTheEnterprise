@@ -22,23 +22,6 @@ namespace Store.Core.Tests
         }
 
         [Fact]
-        public void TestGetEmployees()
-        {
-            // Arrange
-            using (var businessObject = BusinessObjectMocker.GetSalesBusinessObject())
-            {
-                var pageSize = 10;
-                var pageNumber = 1;
-
-                // Act
-                var response = businessObject.GetEmployees(pageSize, pageNumber);
-
-                // Assert
-                Assert.False(response.DidError);
-            }
-        }
-
-        [Fact]
         public void TestGetShippers()
         {
             // Arrange
@@ -49,23 +32,6 @@ namespace Store.Core.Tests
 
                 // Act
                 var response = businessObject.GetShippers(pageSize, pageNumber);
-
-                // Assert
-                Assert.False(response.DidError);
-            }
-        }
-
-        [Fact]
-        public void TestGetProducts()
-        {
-            // Arrange
-            using (var businessObject = BusinessObjectMocker.GetSalesBusinessObject())
-            {
-                var pageSize = 10;
-                var pageNumber = 1;
-
-                // Act
-                var response = businessObject.GetProducts(pageSize, pageNumber);
 
                 // Assert
                 Assert.False(response.DidError);
