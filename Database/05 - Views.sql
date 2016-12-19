@@ -8,7 +8,10 @@ as
 		Shipper.CompanyName as ShipperName
 	from
 		Sales.[Order] OrderHeader
-		inner join Sales.Customer Customer on OrderHeader.CustomerID = Customer.CustomerID
-		inner join HumanResources.Employee Employee on OrderHeader.EmployeeID = Employee.EmployeeID
-		inner join Sales.Shipper Shipper on OrderHeader.ShipperID = Shipper.ShipperID
+		inner join Sales.Customer Customer
+			on OrderHeader.CustomerID = Customer.CustomerID
+		inner join HumanResources.Employee Employee
+			on OrderHeader.EmployeeID = Employee.EmployeeID
+		inner join Sales.Shipper Shipper
+			on OrderHeader.ShipperID = Shipper.ShipperID
 go

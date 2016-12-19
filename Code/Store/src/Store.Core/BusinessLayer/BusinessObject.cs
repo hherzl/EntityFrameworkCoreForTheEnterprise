@@ -1,4 +1,5 @@
 ﻿using System;
+using Store.Core.BusinessLayer.Contracts;
 using Store.Core.DataLayer;
 using Store.Core.DataLayer.Contracts;
 using Store.Core.DataLayer.Repositories;

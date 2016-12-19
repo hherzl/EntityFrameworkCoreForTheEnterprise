@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using Store.Core.BusinessLayer;
+using Store.Core.BusinessLayer.Contracts;
 using Store.Core.DataLayer;
 using Store.Core.DataLayer.Mapping;
 

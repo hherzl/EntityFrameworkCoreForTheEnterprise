@@ -2,7 +2,7 @@
 using Store.Core.BusinessLayer.Responses;
 using Store.Core.EntityLayer.HumanResources;
 
-namespace Store.Core.BusinessLayer
+namespace Store.Core.BusinessLayer.Contracts
 {
     public interface IHumanResourcesBusinessObject : IBusinessObject
     {
