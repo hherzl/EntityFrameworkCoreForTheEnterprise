@@ -26,8 +26,7 @@ namespace Store.Core.BusinessLayer
             }
             catch (Exception ex)
             {
-                response.DidError = true;
-                response.ErrorMessage = ex.Message;
+                response.SetError(ex);
             }
 
             return response;

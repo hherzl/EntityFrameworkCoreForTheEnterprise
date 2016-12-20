@@ -27,8 +27,7 @@ namespace Store.Core.BusinessLayer
             }
             catch (Exception ex)
             {
-                response.DidError = true;
-                response.ErrorMessage = ex.Message;
+                response.SetError(ex);
             }
 
             return response;
@@ -46,8 +45,7 @@ namespace Store.Core.BusinessLayer
             }
             catch (Exception ex)
             {
-                response.DidError = true;
-                response.ErrorMessage = ex.Message;
+                response.SetError(ex);
             }
 
             return response;
@@ -65,8 +63,7 @@ namespace Store.Core.BusinessLayer
             }
             catch (Exception ex)
             {
-                response.DidError = true;
-                response.ErrorMessage = ex.Message;
+                response.SetError(ex);
             }
 
             return response;
@@ -89,7 +86,7 @@ namespace Store.Core.BusinessLayer
                             if (product == null)
                             {
                                 throw new NonExistingProductException(
-                                    String.Format("Sent order has a non existing product with ID: '{0}', order has been cancelled.", product.ProductID)
+                                    String.Format("Sent order has a non existing product with ID: '{0}', order has been cancelled.", detail.ProductID)
                                 );
                             }
                             else
@@ -142,8 +139,7 @@ namespace Store.Core.BusinessLayer
             }
             catch (Exception ex)
             {
-                response.DidError = true;
-                response.ErrorMessage = ex.Message;
+                response.SetError(ex);
             }
 
             return response;
