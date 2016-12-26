@@ -27,7 +27,7 @@ namespace Store.Core.BusinessLayer
             }
             catch (Exception ex)
             {
-                response.SetError(ex);
+                response.SetError(ex, Logger);
             }
 
             return response;
@@ -45,7 +45,7 @@ namespace Store.Core.BusinessLayer
             }
             catch (Exception ex)
             {
-                response.SetError(ex);
+                response.SetError(ex, Logger);
             }
 
             return response;
@@ -57,13 +57,32 @@ namespace Store.Core.BusinessLayer
 
             try
             {
+                response.PageSize = pageSize;
+                response.PageNumber = pageNumber;
+
                 response.Model = SalesRepository
                     .GetOrders(pageSize, pageNumber)
                     .ToList();
             }
             catch (Exception ex)
             {
-                response.SetError(ex);
+                response.SetError(ex, Logger);
+            }
+
+            return response;
+        }
+
+        public ISingleModelResponse<Order> GetOrder(Int32 id)
+        {
+            var response = new SingleModelResponse<Order>() as ISingleModelResponse<Order>;
+
+            try
+            {
+                response.Model = SalesRepository.GetOrder(new Order { OrderID = id });
+            }
+            catch (Exception ex)
+            {
+                response.SetError(ex, Logger);
             }
 
             return response;
@@ -139,7 +158,51 @@ namespace Store.Core.BusinessLayer
             }
             catch (Exception ex)
             {
-                response.SetError(ex);
+                response.SetError(ex, Logger);
+            }
+
+            return response;
+        }
+
+        public ISingleModelResponse<Order> CloneOrder(Int32 id)
+        {
+            var response = new SingleModelResponse<Order>() as ISingleModelResponse<Order>;
+
+            try
+            {
+                var entity = SalesRepository.GetOrder(new Order { OrderID = id });
+
+                if (entity != null)
+                {
+                    response.Model = new Order();
+
+                    response.Model.OrderID = entity.OrderID;
+                    response.Model.OrderDate = entity.OrderDate;
+                    response.Model.CustomerID = entity.CustomerID;
+                    response.Model.EmployeeID = entity.EmployeeID;
+                    response.Model.ShipperID = entity.ShipperID;
+                    response.Model.Total = entity.Total;
+                    response.Model.Comments = entity.Comments;
+
+                    if (entity.OrderDetails != null && entity.OrderDetails.Count > 0)
+                    {
+                        foreach (var detail in entity.OrderDetails)
+                        {
+                            response.Model.OrderDetails.Add(new OrderDetail
+                            {
+                                ProductID = detail.ProductID,
+                                ProductName = detail.ProductName,
+                                UnitPrice = detail.UnitPrice,
+                                Quantity = detail.Quantity,
+                                Total = detail.Total
+                            });
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                response.SetError(ex, Logger);
             }
 
             return response;

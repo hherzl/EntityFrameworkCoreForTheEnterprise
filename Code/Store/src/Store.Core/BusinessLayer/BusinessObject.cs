@@ -1,5 +1,6 @@
 ﻿using System;
 using Store.Core.BusinessLayer.Contracts;
+using Store.Core.Common;
 using Store.Core.DataLayer;
 using Store.Core.DataLayer.Contracts;
 using Store.Core.DataLayer.Repositories;
@@ -8,15 +9,17 @@ namespace Store.Core.BusinessLayer
 {
     public class BusinessObject : IBusinessObject
     {
+        protected ILog Logger;
+        protected IUserInfo UserInfo;
         protected Boolean Disposed;
-        protected UserInfo UserInfo;
         protected StoreDbContext DbContext;
         protected IHumanResourcesRepository m_humanResourcesRepository;
         protected IProductionRepository m_productionRepository;
         protected ISalesRepository m_salesRepository;
 
-        public BusinessObject(UserInfo userInfo, StoreDbContext dbContext)
+        public BusinessObject(IUserInfo userInfo, StoreDbContext dbContext)
         {
+            Logger = new Log();
             UserInfo = userInfo;
             DbContext = dbContext;
         }

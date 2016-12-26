@@ -8,7 +8,10 @@ namespace Store.Core.Tests
         {
             get
             {
-                return new AppSettings { ConnectionString = "server=(local);database=Store;integrated security=yes; " };
+                return new AppSettings
+                {
+                    ConnectionString = "server=(local);database=Store;integrated security=yes; "
+                };
             }
         }
     }
