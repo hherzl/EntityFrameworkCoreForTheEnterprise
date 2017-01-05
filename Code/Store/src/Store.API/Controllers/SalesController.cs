@@ -54,7 +54,7 @@ namespace Store.API.Controllers
         }
 
         [HttpGet]
-        [Route("OrderViewModel")]
+        [Route("CreateOrderViewModel")]
         public async Task<IActionResult> GetCreateOrderViewModel()
         {
             var viewModel = new CreateOrderViewModel();
