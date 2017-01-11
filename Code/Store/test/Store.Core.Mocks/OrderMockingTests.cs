@@ -38,10 +38,11 @@ namespace Store.Core.Mocks
                         var selectedEmployee = random.Next(0, employees.Count - 1);
                         var selectedShipper = random.Next(0, shippers.Count - 1);
 
+                        header.OrderDate = date;
+                        header.OrderStatusID = 100;
                         header.CustomerID = customers[selectedCustomer].CustomerID;
                         header.EmployeeID = employees[selectedEmployee].EmployeeID;
                         header.ShipperID = shippers[selectedShipper].ShipperID;
-                        header.OrderDate = date;
                         header.CreationDateTime = date;
 
                         var details = new List<OrderDetail>();
@@ -50,11 +51,18 @@ namespace Store.Core.Mocks
 
                         for (var j = 0; j < detailsCount; j++)
                         {
-                            details.Add(new OrderDetail
+                            var detail = new OrderDetail
                             {
                                 ProductID = products[random.Next(0, products.Count - 1)].ProductID,
                                 Quantity = (Int16)random.Next(1, 3)
-                            });
+                            };
+
+                            if (details.Count > 0 && details.Where(item => item.ProductID == detail.ProductID).Count() == 1)
+                            {
+                                continue;
+                            }
+
+                            details.Add(detail);
                         }
 
                         salesBusinessObject.CreateOrder(header, details.ToArray());
@@ -75,7 +83,7 @@ namespace Store.Core.Mocks
             CreateData(
                 startDate: new DateTime(DateTime.Now.Year, 1, 1),
                 endDate: new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month)),
-                ordersLimitPerDay: 10
+                ordersLimitPerDay: 5
             );
         }
     }

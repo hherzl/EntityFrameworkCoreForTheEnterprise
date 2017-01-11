@@ -10,7 +10,7 @@ namespace Store.Core.BusinessLayer
 {
     public class SalesBusinessObject : BusinessObject, ISalesBusinessObject
     {
-        public SalesBusinessObject(UserInfo userInfo, StoreDbContext dbContext)
+        public SalesBusinessObject(IUserInfo userInfo, StoreDbContext dbContext)
             : base(userInfo, dbContext)
         {
         }
@@ -134,11 +134,20 @@ namespace Store.Core.BusinessLayer
 
                             SalesRepository.AddOrderDetail(detail);
 
+                            var lastInventory = ProductionRepository
+                                .GetProductInventories()
+                                .Where(item => item.ProductID == detail.ProductID)
+                                .OrderByDescending(item => item.EntryDate)
+                                .FirstOrDefault();
+
+                            var stocks = lastInventory == null ? 0 : lastInventory.Stocks - detail.Quantity;
+                            
                             var productInventory = new ProductInventory
                             {
                                 ProductID = detail.ProductID,
                                 EntryDate = DateTime.Now,
-                                Quantity = detail.Quantity * -1
+                                Quantity = detail.Quantity * -1,
+                                Stocks = stocks
                             };
 
                             ProductionRepository.AddProductInventory(productInventory);

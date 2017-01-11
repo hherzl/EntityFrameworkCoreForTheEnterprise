@@ -9,7 +9,7 @@ namespace Store.Core.BusinessLayer
 {
     public class HumanResourcesBusinessObject : BusinessObject, IHumanResourcesBusinessObject
     {
-        public HumanResourcesBusinessObject(UserInfo userInfo, StoreDbContext dbContext)
+        public HumanResourcesBusinessObject(IUserInfo userInfo, StoreDbContext dbContext)
             : base(userInfo, dbContext)
         {
         }
@@ -26,7 +26,25 @@ namespace Store.Core.BusinessLayer
             }
             catch (Exception ex)
             {
-                response.SetError(ex,Logger);
+                response.SetError(ex, Logger);
+            }
+
+            return response;
+        }
+
+        public ISingleModelResponse<Employee> UpdateEmployee(Employee changes)
+        {
+            var response = new SingleModelResponse<Employee>() as ISingleModelResponse<Employee>;
+
+            try
+            {
+                HumanResourcesRepository.UpdateEmployee(changes);
+
+                response.Model = changes;
+            }
+            catch (Exception ex)
+            {
+                response.SetError(ex, Logger);
             }
 
             return response;

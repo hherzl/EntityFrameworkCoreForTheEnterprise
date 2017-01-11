@@ -16,6 +16,8 @@ namespace Store.Core.EntityLayer.Production
 
         public Int32? Quantity { get; set; }
 
+        public Int32? Stocks { get; set; }
+
         public virtual Product ProductFk { get; set; }
     }
 }

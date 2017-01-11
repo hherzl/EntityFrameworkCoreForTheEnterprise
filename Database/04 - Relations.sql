@@ -9,6 +9,11 @@ alter table [Production].[ProductInventory]
 go
 
 alter table [Sales].[Order]
+	add constraint Sales_Order_OrderStatus foreign key (OrderStatusID)
+		references [Sales].[OrderStatus]
+go
+
+alter table [Sales].[Order]
 	add constraint Sales_Order_Customer foreign key (CustomerID)
 		references [Sales].[Customer]
 go

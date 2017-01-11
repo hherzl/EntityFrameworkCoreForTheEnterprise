@@ -7,6 +7,17 @@ create table [EventLog]
 	[EntryDate] datetime not null
 )
 
+create table [ChangeLog]
+(
+	[ChangeLogID] int not null identity(1, 1),
+	[ClassName] varchar(255) not null,
+	[PropertyName] varchar(255) not null,
+	[OriginalValue] varchar(max) null,
+	[CurrentValue] varchar(max) null,
+	[UserName] varchar(25) not null,
+	[ChangeDate] datetime not null
+)
+
 create table [HumanResources].[Employee]
 (
 	[EmployeeID] int not null identity(1, 1),
@@ -29,7 +40,11 @@ create table [Production].[Product]
 	[ProductCategoryID] int not null,
 	[UnitPrice] decimal(8, 4) not null,
 	[Description] varchar(255) null,
-	[Discontinued] bit not null
+	[Discontinued] bit not null,
+	[CreationUser] varchar(25) not null,
+	[CreationDateTime] datetime not null,
+	[LastUpdateUser] varchar(25) null,
+	[LastUpdateDateTime] datetime null
 )
 
 create table [Production].[ProductInventory]
@@ -37,7 +52,8 @@ create table [Production].[ProductInventory]
 	[ProductInventoryID] int not null identity(1, 1),
 	[ProductID] int not null,
 	[EntryDate] datetime not null,
-	[Quantity] int not null
+	[Quantity] int not null,
+	[Stocks] int not null
 )
 
 create table [Sales].[Customer]
@@ -54,9 +70,16 @@ create table [Sales].[Shipper]
 	[ContactName] varchar(100) null
 )
 
+create table [Sales].[OrderStatus]
+(
+	[OrderStatusID] smallint not null identity(100, 100),
+	[Description] varchar(100) not null
+)
+
 create table [Sales].[Order]
 (
 	[OrderID] int not null identity(1, 1),
+	[OrderStatusID] smallint not null,
 	[OrderDate] datetime not null,
 	[CustomerID] int not null,
 	[EmployeeID] int not null,

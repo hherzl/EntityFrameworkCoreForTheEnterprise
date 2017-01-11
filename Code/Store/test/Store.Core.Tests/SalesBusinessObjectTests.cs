@@ -67,21 +67,33 @@ namespace Store.Core.Tests
                 var header = new Order();
 
                 header.OrderDate = DateTime.Now;
+                header.OrderStatusID = 100;
                 header.CustomerID = 1;
                 header.EmployeeID = 1;
                 header.ShipperID = 1;
 
                 var details = new List<OrderDetail>();
 
-                details.Add(new OrderDetail
-                {
-                    ProductID = 0,
-                    Quantity = 1,
-                    UnitPrice = 1
-                });
+                details.Add(new OrderDetail { ProductID = 1, Quantity = 1 });
 
                 // Act
                 var response = businessObject.CreateOrder(header, details.ToArray());
+
+                // Assert
+                Assert.False(response.DidError);
+            }
+        }
+
+        [Fact]
+        public void TestUpdateOrder()
+        {
+            // Arrange
+            using (var businessObject = BusinessObjectMocker.GetSalesBusinessObject())
+            {
+                var id = 1;
+
+                // Act
+                var response = businessObject.GetOrder(id);
 
                 // Assert
                 Assert.False(response.DidError);

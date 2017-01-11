@@ -26,7 +26,7 @@ namespace Store.Core.DataLayer.Repositories
         {
             DbContext.Set<EventLog>().Add(entity);
 
-            DbContext.SaveChanges();
+            CommitChanges();
         }
 
         public void UpdateEventLog(EventLog changes)
@@ -40,7 +40,7 @@ namespace Store.Core.DataLayer.Repositories
                 entity.Message = changes.Message;
                 entity.EntryDate = changes.EntryDate;
 
-                DbContext.SaveChanges();
+                CommitChanges();
             }
         }
 
@@ -48,7 +48,7 @@ namespace Store.Core.DataLayer.Repositories
         {
             DbContext.Set<EventLog>().Remove(entity);
 
-            DbContext.SaveChanges();
+            CommitChanges();
         }
     }
 }

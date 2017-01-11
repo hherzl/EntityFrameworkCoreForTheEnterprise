@@ -7,7 +7,7 @@ using Store.Core.DataLayer.Repositories;
 
 namespace Store.Core.BusinessLayer
 {
-    public class BusinessObject : IBusinessObject
+    public abstract class BusinessObject : IBusinessObject
     {
         protected ILog Logger;
         protected IUserInfo UserInfo;

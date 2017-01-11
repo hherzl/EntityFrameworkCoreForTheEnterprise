@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Store.API.Extensions;
 using Store.API.ViewModels;
 using Store.Core.BusinessLayer.Contracts;
+using Store.Core.BusinessLayer.Responses;
 
 namespace Store.API.Controllers
 {
@@ -57,29 +58,29 @@ namespace Store.API.Controllers
         [Route("CreateOrderViewModel")]
         public async Task<IActionResult> GetCreateOrderViewModel()
         {
-            var viewModel = new CreateOrderViewModel();
+            var response = new SingleModelResponse<CreateOrderViewModel>() as ISingleModelResponse<CreateOrderViewModel>;
 
-            viewModel.Customers = await Task.Run(() =>
+            response.Model.Customers = await Task.Run(() =>
             {
                 return SalesBusinessObject.GetCustomers(0, 0).Model.Select(item => new CustomerViewModel(item));
             });
 
-            viewModel.Employees = await Task.Run(() =>
+            response.Model.Employees = await Task.Run(() =>
             {
                 return HumanResourcesBusinessObject.GetEmployees(0, 0).Model.Select(item => new EmployeeViewModel(item));
             });
 
-            viewModel.Shippers = await Task.Run(() =>
+            response.Model.Shippers = await Task.Run(() =>
             {
                 return SalesBusinessObject.GetShippers(0, 0).Model.Select(item => new ShipperViewModel(item));
             });
 
-            viewModel.Products = await Task.Run(() =>
+            response.Model.Products = await Task.Run(() =>
             {
                 return ProductionBusinessObject.GetProducts(0, 0).Model.Select(item => new ProductViewModel(item));
             });
 
-            return viewModel.ToHttpResponse();
+            return response.ToHttpResponse();
         }
 
         [HttpPost]

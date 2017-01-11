@@ -2,6 +2,10 @@ alter table [EventLog]
 	add constraint EventLog_PK primary key (EventLogID)
 go
 
+alter table [ChangeLog]
+	add constraint ChangeLog_PK primary key (ChangeLogID)
+go
+
 alter table [HumanResources].[Employee]
 	add constraint HumanResources_Employee_PK primary key (EmployeeID)
 go
@@ -28,6 +32,10 @@ go
 
 alter table [Sales].[Shipper]
 	add constraint Sales_Shipper_PK primary key (ShipperID)
+go
+
+alter table [Sales].[OrderStatus]
+	add constraint Sales_OrderStatus_PK primary key (OrderStatusID)
 go
 
 alter table [Sales].[Order]

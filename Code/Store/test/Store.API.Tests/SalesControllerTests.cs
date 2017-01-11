@@ -86,9 +86,9 @@ namespace Store.API.Tests
                 var response = await controller.GetCreateOrderViewModel() as ObjectResult;
 
                 // Assert
-                var value = response.Value as CreateOrderViewModel;
+                var value = response.Value as ISingleModelResponse<CreateOrderViewModel>;
 
-                Assert.False(value == null);
+                Assert.False(value.DidError);
             }
         }
 

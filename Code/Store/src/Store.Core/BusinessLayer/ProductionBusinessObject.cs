@@ -9,7 +9,7 @@ namespace Store.Core.BusinessLayer
 {
     public class ProductionBusinessObject : BusinessObject, IProductionBusinessObject
     {
-        public ProductionBusinessObject(UserInfo userInfo, StoreDbContext dbContext)
+        public ProductionBusinessObject(IUserInfo userInfo, StoreDbContext dbContext)
             : base(userInfo, dbContext)
         {
         }

@@ -16,7 +16,7 @@ namespace Store.Core.BusinessLayer
             {
                 response.ErrorMessage = "There was an internal error, please contact to technical support.";
 
-                logger.Write(ex.Message);
+                logger.Write(ex.ToString());
             }
             else
             {
@@ -34,7 +34,7 @@ namespace Store.Core.BusinessLayer
             {
                 response.ErrorMessage = "There was an internal error, please contact to technical support.";
 
-                logger.Write(ex.Message);
+                logger.Write(ex.ToString());
             }
             else
             {
