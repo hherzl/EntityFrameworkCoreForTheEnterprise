@@ -3,7 +3,7 @@ using Store.Core.EntityLayer;
 
 namespace Store.Core.DataLayer.Contracts
 {
-    public interface IStoreRepository
+    public interface IStoreRepository : IRepository
     {
         IEnumerable<EventLog> GetEventLogs();
 

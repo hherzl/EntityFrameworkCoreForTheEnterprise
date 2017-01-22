@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Store.Core.EntityLayer;
@@ -78,7 +79,7 @@ namespace Store.Core.DataLayer.Repositories
             }
         }
 
-        protected void CommitChanges()
+        public Int32 CommitChanges()
         {
             var dbSet = DbContext.Set<ChangeLog>();
 
@@ -87,7 +88,19 @@ namespace Store.Core.DataLayer.Repositories
                 dbSet.Add(change);
             }
 
-            DbContext.SaveChanges();
+            return DbContext.SaveChanges();
+        }
+
+        public Task<Int32> CommitChangesAsync()
+        {
+            var dbSet = DbContext.Set<ChangeLog>();
+
+            foreach (var change in GetChanges().ToList())
+            {
+                dbSet.Add(change);
+            }
+
+            return DbContext.SaveChangesAsync();
         }
     }
 }
