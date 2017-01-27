@@ -38,7 +38,7 @@ namespace Store.API
 
             services.AddScoped<IEntityMapper, StoreEntityMapper>();
 
-            services.AddScoped<UserInfo>();
+            services.AddScoped<IUserInfo, UserInfo>();
 
             services.AddScoped<IHumanResourcesBusinessObject, HumanResourcesBusinessObject>();
             services.AddScoped<IProductionBusinessObject, ProductionBusinessObject>();

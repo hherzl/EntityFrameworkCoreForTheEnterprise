@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Store.Core.EntityLayer.Sales;
 using Xunit;
 
@@ -42,7 +43,7 @@ namespace Store.Core.Tests
         }
 
         [Fact]
-        public void TestGetOrders()
+        public async Task TestGetOrders()
         {
             // Arrange
             using (var businessObject = BusinessObjectMocker.GetSalesBusinessObject())
@@ -51,7 +52,7 @@ namespace Store.Core.Tests
                 var pageNumber = 1;
 
                 // Act
-                var response = businessObject.GetOrders(pageSize, pageNumber);
+                var response = await businessObject.GetOrders(pageSize, pageNumber);
 
                 // Assert
                 Assert.False(response.DidError);

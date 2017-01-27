@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -29,15 +30,12 @@ namespace Store.API.Controllers
 
             base.Dispose(disposing);
         }
-
+        
         [HttpGet]
         [Route("Order")]
         public async Task<IActionResult> GetOrders(Int32? pageSize = 10, Int32? pageNumber = 1)
         {
-            var response = await Task.Run(() =>
-            {
-                return SalesBusinessObject.GetOrders((Int32)pageSize, (Int32)pageNumber);
-            });
+            var response = await SalesBusinessObject.GetOrders((Int32)pageSize, (Int32)pageNumber);
 
             return response.ToHttpResponse();
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Store.Core.BusinessLayer.Responses;
 using Store.Core.EntityLayer.Sales;
 
@@ -10,7 +11,7 @@ namespace Store.Core.BusinessLayer.Contracts
 
         IListModelResponse<Shipper> GetShippers(Int32 pageSize, Int32 pageNumber);
 
-        IListModelResponse<Order> GetOrders(Int32 pageSize, Int32 pageNumber);
+        Task<IListModelResponse<Order>> GetOrders(Int32 pageSize, Int32 pageNumber);
 
         ISingleModelResponse<Order> GetOrder(Int32 id);
 

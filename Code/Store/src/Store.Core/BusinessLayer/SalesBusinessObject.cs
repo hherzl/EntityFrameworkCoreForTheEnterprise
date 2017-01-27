@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Store.Core.BusinessLayer.Contracts;
 using Store.Core.BusinessLayer.Responses;
 using Store.Core.DataLayer;
 using Store.Core.EntityLayer.Production;
 using Store.Core.EntityLayer.Sales;
+using Microsoft.EntityFrameworkCore;
 
 namespace Store.Core.BusinessLayer
 {
@@ -51,7 +53,7 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public IListModelResponse<Order> GetOrders(Int32 pageSize, Int32 pageNumber)
+        public async Task<IListModelResponse<Order>> GetOrders(Int32 pageSize, Int32 pageNumber)
         {
             var response = new ListModelResponse<Order>() as IListModelResponse<Order>;
 
@@ -60,9 +62,7 @@ namespace Store.Core.BusinessLayer
                 response.PageSize = pageSize;
                 response.PageNumber = pageNumber;
 
-                response.Model = SalesRepository
-                    .GetOrders(pageSize, pageNumber)
-                    .ToList();
+                response.Model = await SalesRepository.GetOrders(pageSize, pageNumber).ToListAsync();
             }
             catch (Exception ex)
             {
