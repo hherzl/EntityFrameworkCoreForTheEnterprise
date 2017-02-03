@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Store.Core.BusinessLayer.Contracts;
 using Store.Core.BusinessLayer.Responses;
 using Store.Core.DataLayer;
@@ -14,15 +15,13 @@ namespace Store.Core.BusinessLayer
         {
         }
 
-        public IListModelResponse<Employee> GetEmployees(Int32 pageSize, Int32 pageNumber)
+        public async Task<IListModelResponse<Employee>> GetEmployeesAsync(Int32 pageSize, Int32 pageNumber)
         {
             var response = new ListModelResponse<Employee>() as IListModelResponse<Employee>;
 
             try
             {
-                response.Model = HumanResourcesRepository
-                    .GetEmployees(pageSize, pageNumber)
-                    .ToList();
+                response.Model = await HumanResourcesRepository.GetEmployees(pageSize, pageNumber).ToListAsync();
             }
             catch (Exception ex)
             {

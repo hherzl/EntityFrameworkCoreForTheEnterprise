@@ -19,6 +19,20 @@ namespace Store.Core.DataLayer.Repositories
             DbContext = dbContext;
         }
 
+        protected IQueryable<TEntity> Paging<TEntity>(Int32 pageSize = 0, Int32 pageNumber = 0) where TEntity : class
+        {
+            var query = DbContext.Set<TEntity>().AsQueryable();
+
+            return pageSize > 0 && pageNumber > 0 ? query.Skip((pageNumber - 1) * pageSize).Take(pageSize) : query;
+        }
+
+        protected Task<IQueryable<TEntity>> PagingAsync<TEntity>(Int32 pageSize = 0, Int32 pageNumber = 0) where TEntity : class
+        {
+            var query = DbContext.Set<TEntity>().AsQueryable();
+            
+            return Task.FromResult<IQueryable<TEntity>>(pageSize > 0 && pageNumber > 0 ? query.Skip((pageNumber - 1) * pageSize).Take(pageSize) : query);
+        }
+
         protected virtual void Add(IEntity entity)
         {
             var cast = entity as IAuditEntity;

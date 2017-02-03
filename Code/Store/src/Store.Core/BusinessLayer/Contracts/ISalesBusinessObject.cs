@@ -7,16 +7,16 @@ namespace Store.Core.BusinessLayer.Contracts
 {
     public interface ISalesBusinessObject : IBusinessObject
     {
-        IListModelResponse<Customer> GetCustomers(Int32 pageSize, Int32 pageNumber);
+        Task<IListModelResponse<Customer>> GetCustomersAsync(Int32 pageSize, Int32 pageNumber);
 
-        IListModelResponse<Shipper> GetShippers(Int32 pageSize, Int32 pageNumber);
+        Task<IListModelResponse<Shipper>> GetShippersAsync(Int32 pageSize, Int32 pageNumber);
 
-        Task<IListModelResponse<Order>> GetOrders(Int32 pageSize, Int32 pageNumber);
+        Task<IListModelResponse<Order>> GetOrdersAsync(Int32 pageSize, Int32 pageNumber);
 
-        ISingleModelResponse<Order> GetOrder(Int32 id);
+        Task<ISingleModelResponse<Order>> GetOrderAsync(Int32 id);
 
-        ISingleModelResponse<Order> CreateOrder(Order header, OrderDetail[] details);
+        Task<ISingleModelResponse<Order>> CreateOrderAsync(Order header, OrderDetail[] details);
 
-        ISingleModelResponse<Order> CloneOrder(Int32 id);
+        Task<ISingleModelResponse<Order>> CloneOrderAsync(Int32 id);
     }
 }

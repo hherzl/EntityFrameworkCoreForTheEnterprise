@@ -16,7 +16,7 @@ namespace Store.Core.Tests
                 var pageNumber = 1;
 
                 // Act
-                var response = businessObject.GetEmployees(pageSize, pageNumber);
+                var response = businessObject.GetEmployeesAsync(pageSize, pageNumber);
 
                 // Assert
                 Assert.False(response.DidError);

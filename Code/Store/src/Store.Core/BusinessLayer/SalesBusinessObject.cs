@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Store.Core.BusinessLayer.Contracts;
 using Store.Core.BusinessLayer.Responses;
 using Store.Core.DataLayer;
 using Store.Core.EntityLayer.Production;
 using Store.Core.EntityLayer.Sales;
-using Microsoft.EntityFrameworkCore;
 
 namespace Store.Core.BusinessLayer
 {
@@ -17,15 +17,13 @@ namespace Store.Core.BusinessLayer
         {
         }
 
-        public IListModelResponse<Customer> GetCustomers(Int32 pageSize, Int32 pageNumber)
+        public async Task<IListModelResponse<Customer>> GetCustomersAsync(Int32 pageSize, Int32 pageNumber)
         {
             var response = new ListModelResponse<Customer>() as IListModelResponse<Customer>;
 
             try
             {
-                response.Model = SalesRepository
-                    .GetCustomers(pageSize, pageNumber)
-                    .ToList();
+                response.Model = await SalesRepository.GetCustomers(pageSize, pageNumber).ToListAsync();
             }
             catch (Exception ex)
             {
@@ -35,15 +33,13 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public IListModelResponse<Shipper> GetShippers(Int32 pageSize, Int32 pageNumber)
+        public async Task<IListModelResponse<Shipper>> GetShippersAsync(Int32 pageSize, Int32 pageNumber)
         {
             var response = new ListModelResponse<Shipper>() as IListModelResponse<Shipper>;
 
             try
             {
-                response.Model = SalesRepository
-                    .GetShippers(pageSize, pageNumber)
-                    .ToList();
+                response.Model = await SalesRepository.GetShippers(pageSize, pageNumber).ToListAsync();
             }
             catch (Exception ex)
             {
@@ -53,7 +49,7 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IListModelResponse<Order>> GetOrders(Int32 pageSize, Int32 pageNumber)
+        public async Task<IListModelResponse<Order>> GetOrdersAsync(Int32 pageSize, Int32 pageNumber)
         {
             var response = new ListModelResponse<Order>() as IListModelResponse<Order>;
 
@@ -72,13 +68,13 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public ISingleModelResponse<Order> GetOrder(Int32 id)
+        public async Task<ISingleModelResponse<Order>> GetOrderAsync(Int32 id)
         {
             var response = new SingleModelResponse<Order>() as ISingleModelResponse<Order>;
 
             try
             {
-                response.Model = SalesRepository.GetOrder(new Order { OrderID = id });
+                response.Model = await SalesRepository.GetOrderAsync(new Order { OrderID = id });
             }
             catch (Exception ex)
             {
@@ -88,19 +84,19 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public ISingleModelResponse<Order> CreateOrder(Order header, OrderDetail[] details)
+        public async Task <ISingleModelResponse<Order>> CreateOrderAsync(Order header, OrderDetail[] details)
         {
             var response = new SingleModelResponse<Order>() as ISingleModelResponse<Order>;
 
             try
             {
-                using (var transaction = DbContext.Database.BeginTransaction())
+                using (var transaction = await DbContext.Database.BeginTransactionAsync())
                 {
                     try
                     {
                         foreach (var detail in details)
                         {
-                            var product = ProductionRepository.GetProduct(new Product { ProductID = detail.ProductID });
+                            var product = await ProductionRepository.GetProductAsync(new Product { ProductID = detail.ProductID });
 
                             if (product == null)
                             {
@@ -126,13 +122,13 @@ namespace Store.Core.BusinessLayer
 
                         header.Total = details.Sum(item => item.Total);
 
-                        SalesRepository.AddOrder(header);
+                        await SalesRepository.AddOrderAsync(header);
 
                         foreach (var detail in details)
                         {
                             detail.OrderID = header.OrderID;
 
-                            SalesRepository.AddOrderDetail(detail);
+                            await SalesRepository.AddOrderDetailAsync(detail);
 
                             var lastInventory = ProductionRepository
                                 .GetProductInventories()
@@ -141,7 +137,7 @@ namespace Store.Core.BusinessLayer
                                 .FirstOrDefault();
 
                             var stocks = lastInventory == null ? 0 : lastInventory.Stocks - detail.Quantity;
-                            
+
                             var productInventory = new ProductInventory
                             {
                                 ProductID = detail.ProductID,
@@ -150,7 +146,7 @@ namespace Store.Core.BusinessLayer
                                 Stocks = stocks
                             };
 
-                            ProductionRepository.AddProductInventory(productInventory);
+                            await ProductionRepository.AddProductInventoryAsync(productInventory);
                         }
 
                         response.Model = header;
@@ -173,13 +169,13 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public ISingleModelResponse<Order> CloneOrder(Int32 id)
+        public async Task<ISingleModelResponse<Order>> CloneOrderAsync(Int32 id)
         {
             var response = new SingleModelResponse<Order>() as ISingleModelResponse<Order>;
 
             try
             {
-                var entity = SalesRepository.GetOrder(new Order { OrderID = id });
+                var entity = await SalesRepository.GetOrderAsync(new Order { OrderID = id });
 
                 if (entity != null)
                 {

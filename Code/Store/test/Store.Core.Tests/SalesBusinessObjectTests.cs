@@ -9,7 +9,7 @@ namespace Store.Core.Tests
     public class SalesBusinessObjectTests
     {
         [Fact]
-        public void TestGetCustomers()
+        public async Task TestGetCustomers()
         {
             // Arrange
             using (var businessObject = BusinessObjectMocker.GetSalesBusinessObject())
@@ -18,7 +18,7 @@ namespace Store.Core.Tests
                 var pageNumber = 1;
 
                 // Act
-                var response = businessObject.GetCustomers(pageSize, pageNumber);
+                var response = await businessObject.GetCustomersAsync(pageSize, pageNumber);
 
                 // Assert
                 Assert.False(response.DidError);
@@ -26,7 +26,7 @@ namespace Store.Core.Tests
         }
 
         [Fact]
-        public void TestGetShippers()
+        public async Task TestGetShippers()
         {
             // Arrange
             using (var businessObject = BusinessObjectMocker.GetSalesBusinessObject())
@@ -35,7 +35,7 @@ namespace Store.Core.Tests
                 var pageNumber = 1;
 
                 // Act
-                var response = businessObject.GetShippers(pageSize, pageNumber);
+                var response = await businessObject.GetShippersAsync(pageSize, pageNumber);
 
                 // Assert
                 Assert.False(response.DidError);
@@ -52,7 +52,7 @@ namespace Store.Core.Tests
                 var pageNumber = 1;
 
                 // Act
-                var response = await businessObject.GetOrders(pageSize, pageNumber);
+                var response = await businessObject.GetOrdersAsync(pageSize, pageNumber);
 
                 // Assert
                 Assert.False(response.DidError);
@@ -60,7 +60,7 @@ namespace Store.Core.Tests
         }
 
         [Fact]
-        public void TestCreateOrder()
+        public async Task TestCreateOrder()
         {
             // Arrange
             using (var businessObject = BusinessObjectMocker.GetSalesBusinessObject())
@@ -78,7 +78,7 @@ namespace Store.Core.Tests
                 details.Add(new OrderDetail { ProductID = 1, Quantity = 1 });
 
                 // Act
-                var response = businessObject.CreateOrder(header, details.ToArray());
+                var response = await businessObject.CreateOrderAsync(header, details.ToArray());
 
                 // Assert
                 Assert.False(response.DidError);
@@ -86,7 +86,7 @@ namespace Store.Core.Tests
         }
 
         [Fact]
-        public void TestUpdateOrder()
+        public async Task TestUpdateOrder()
         {
             // Arrange
             using (var businessObject = BusinessObjectMocker.GetSalesBusinessObject())
@@ -94,7 +94,7 @@ namespace Store.Core.Tests
                 var id = 1;
 
                 // Act
-                var response = businessObject.GetOrder(id);
+                var response = await businessObject.GetOrderAsync(id);
 
                 // Assert
                 Assert.False(response.DidError);

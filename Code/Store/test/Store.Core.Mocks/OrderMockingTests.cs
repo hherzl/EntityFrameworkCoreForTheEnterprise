@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Store.Core.EntityLayer.Sales;
 using Xunit;
 
@@ -8,7 +9,7 @@ namespace Store.Core.Mocks
 {
     public class OrderMockingTests
     {
-        private void CreateData(DateTime startDate, DateTime endDate, Int32 ordersLimitPerDay)
+        private async Task CreateData(DateTime startDate, DateTime endDate, Int32 ordersLimitPerDay)
         {
             var date = new DateTime(startDate.Year, startDate.Month, startDate.Day);
 
@@ -25,10 +26,15 @@ namespace Store.Core.Mocks
                     var pageSize = 10;
                     var pageNumber = 1;
 
-                    var customers = salesBusinessObject.GetCustomers(pageSize, pageNumber).Model.ToList();
-                    var employees = humanResourcesBusinessObject.GetEmployees(pageSize, pageNumber).Model.ToList();
-                    var shippers = salesBusinessObject.GetShippers(pageSize, pageNumber).Model.ToList();
-                    var products = productionBusinessObject.GetProducts(pageSize, pageNumber).Model.ToList();
+                    var customerResponse = await salesBusinessObject.GetCustomersAsync(pageSize, pageNumber);
+                    var employeesResponse = await humanResourcesBusinessObject.GetEmployeesAsync(pageSize, pageNumber);
+                    var shippersResponse = await salesBusinessObject.GetShippersAsync(pageSize, pageNumber);
+                    var productsResponse = await productionBusinessObject.GetProductsAsync(pageSize, pageNumber);
+
+                    var customers = customerResponse.Model.ToList();
+                    var employees = employeesResponse.Model.ToList();
+                    var shippers = shippersResponse.Model.ToList();
+                    var products = productsResponse.Model.ToList();
 
                     for (var i = 0; i < ordersLimitPerDay; i++)
                     {
@@ -65,7 +71,7 @@ namespace Store.Core.Mocks
                             details.Add(detail);
                         }
 
-                        salesBusinessObject.CreateOrder(header, details.ToArray());
+                        await salesBusinessObject.CreateOrderAsync(header, details.ToArray());
                     }
 
                     salesBusinessObject.Dispose();
@@ -78,12 +84,12 @@ namespace Store.Core.Mocks
         }
 
         [Fact]
-        public void CreateOrders()
+        public async Task CreateOrders()
         {
-            CreateData(
+            await CreateData(
                 startDate: new DateTime(DateTime.Now.Year, 1, 1),
                 endDate: new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month)),
-                ordersLimitPerDay: 5
+                ordersLimitPerDay: 10
             );
         }
     }

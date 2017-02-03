@@ -1,11 +1,12 @@
-﻿using Xunit;
+﻿using System.Threading.Tasks;
+using Xunit;
 
 namespace Store.Core.Tests
 {
     public class ProductionBusinessObjectTests
     {
         [Fact]
-        public void TestGetProducts()
+        public async Task TestGetProducts()
         {
             // Arrange
             using (var businessObject = BusinessObjectMocker.GetProductionBusinessObject())
@@ -14,7 +15,7 @@ namespace Store.Core.Tests
                 var pageNumber = 1;
 
                 // Act
-                var response = businessObject.GetProducts(pageSize, pageNumber);
+                var response = await businessObject.GetProductsAsync(pageSize, pageNumber);
 
                 // Assert
                 Assert.False(response.DidError);

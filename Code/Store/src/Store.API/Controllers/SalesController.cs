@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -30,12 +29,12 @@ namespace Store.API.Controllers
 
             base.Dispose(disposing);
         }
-        
+
         [HttpGet]
         [Route("Order")]
         public async Task<IActionResult> GetOrders(Int32? pageSize = 10, Int32? pageNumber = 1)
         {
-            var response = await SalesBusinessObject.GetOrders((Int32)pageSize, (Int32)pageNumber);
+            var response = await SalesBusinessObject.GetOrdersAsync((Int32)pageSize, (Int32)pageNumber);
 
             return response.ToHttpResponse();
         }
@@ -44,10 +43,7 @@ namespace Store.API.Controllers
         [Route("Order/{id}")]
         public async Task<IActionResult> GetOrder(Int32 id)
         {
-            var response = await Task.Run(() =>
-            {
-                return SalesBusinessObject.GetOrder(id);
-            });
+            var response = await SalesBusinessObject.GetOrderAsync(id);
 
             return response.ToHttpResponse();
         }
@@ -58,25 +54,21 @@ namespace Store.API.Controllers
         {
             var response = new SingleModelResponse<CreateOrderViewModel>() as ISingleModelResponse<CreateOrderViewModel>;
 
-            response.Model.Customers = await Task.Run(() =>
-            {
-                return SalesBusinessObject.GetCustomers(0, 0).Model.Select(item => new CustomerViewModel(item));
-            });
+            var customersResponse = await SalesBusinessObject.GetCustomersAsync(0, 0);
 
-            response.Model.Employees = await Task.Run(() =>
-            {
-                return HumanResourcesBusinessObject.GetEmployees(0, 0).Model.Select(item => new EmployeeViewModel(item));
-            });
+            response.Model.Customers = customersResponse.Model.Select(item => new CustomerViewModel(item));
 
-            response.Model.Shippers = await Task.Run(() =>
-            {
-                return SalesBusinessObject.GetShippers(0, 0).Model.Select(item => new ShipperViewModel(item));
-            });
+            var employeesResponse = await HumanResourcesBusinessObject.GetEmployeesAsync(0, 0);
 
-            response.Model.Products = await Task.Run(() =>
-            {
-                return ProductionBusinessObject.GetProducts(0, 0).Model.Select(item => new ProductViewModel(item));
-            });
+            response.Model.Employees = employeesResponse.Model.Select(item => new EmployeeViewModel(item));
+
+            var shippersResponse = await SalesBusinessObject.GetShippersAsync(0, 0);
+
+            response.Model.Shippers = shippersResponse.Model.Select(item => new ShipperViewModel(item));
+
+            var productsResponse = await ProductionBusinessObject.GetProductsAsync(0, 0);
+
+            response.Model.Products = productsResponse.Model.Select(item => new ProductViewModel(item));
 
             return response.ToHttpResponse();
         }
@@ -85,10 +77,7 @@ namespace Store.API.Controllers
         [Route("Order")]
         public async Task<IActionResult> CreateOrder([FromBody] OrderViewModel value)
         {
-            var response = await Task.Run(() =>
-            {
-                return SalesBusinessObject.CreateOrder(value.GetOrder(), value.GetOrderDetails().ToArray());
-            });
+            var response = await SalesBusinessObject.CreateOrderAsync(value.GetOrder(), value.GetOrderDetails().ToArray());
 
             return response.ToHttpResponse();
         }
@@ -97,10 +86,7 @@ namespace Store.API.Controllers
         [Route("CloneOrder/{id}")]
         public async Task<IActionResult> CloneOrder(Int32 id)
         {
-            var response = await Task.Run(() =>
-            {
-                return SalesBusinessObject.CloneOrder(id);
-            });
+            var response = await SalesBusinessObject.CloneOrderAsync(id);
 
             return response.ToHttpResponse();
         }
