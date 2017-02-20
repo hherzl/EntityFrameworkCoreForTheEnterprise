@@ -1,3 +1,6 @@
+use Store
+go
+
 create schema HumanResources
 go
 

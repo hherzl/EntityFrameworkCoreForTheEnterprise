@@ -19,12 +19,14 @@ namespace Store.Core.DataLayer.Repositories
 
         public EventLog GetEventLog(EventLog entity)
         {
-            return DbContext.Set<EventLog>().FirstOrDefault(item => item.EventLogID == entity.EventLogID);
+            return DbContext
+                .Set<EventLog>()
+                .FirstOrDefault(item => item.EventLogID == entity.EventLogID);
         }
 
         public void AddEventLog(EventLog entity)
         {
-            DbContext.Set<EventLog>().Add(entity);
+            Add(entity);
 
             CommitChanges();
         }
@@ -46,7 +48,7 @@ namespace Store.Core.DataLayer.Repositories
 
         public void DeleteEventLog(EventLog entity)
         {
-            DbContext.Set<EventLog>().Remove(entity);
+            Remove(entity);
 
             CommitChanges();
         }

@@ -43,5 +43,9 @@ alter table [Sales].[Order]
 go
 
 alter table [Sales].[OrderDetail]
-	add constraint Sales_OrderDetail_PK primary key (OrderID, ProductID)
+	add constraint Sales_OrderDetail_PK primary key (OrderDetailID)
+go
+
+alter table [Sales].[OrderDetail]
+	add constraint Sales_OrderDetail_U unique (OrderID, ProductID)
 go

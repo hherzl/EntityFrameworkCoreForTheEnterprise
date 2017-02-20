@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Store.Core.BusinessLayer.Contracts;
 using Store.Core.BusinessLayer.Responses;
 using Store.Core.DataLayer;
+using Store.Core.DataLayer.DataContracts;
 using Store.Core.EntityLayer.Production;
 using Store.Core.EntityLayer.Sales;
 
@@ -49,16 +50,16 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IListModelResponse<Order>> GetOrdersAsync(Int32 pageSize, Int32 pageNumber)
+        public async Task<IListModelResponse<OrderInfo>> GetOrdersAsync(Int32 pageSize, Int32 pageNumber, Int32? customerID = null, Int32? employeeID = null, Int32? shipperID = null)
         {
-            var response = new ListModelResponse<Order>() as IListModelResponse<Order>;
+            var response = new ListModelResponse<OrderInfo>() as IListModelResponse<OrderInfo>;
 
             try
             {
                 response.PageSize = pageSize;
                 response.PageNumber = pageNumber;
 
-                response.Model = await SalesRepository.GetOrders(pageSize, pageNumber).ToListAsync();
+                response.Model = await SalesRepository.GetOrders(pageSize, pageNumber, customerID, employeeID, shipperID).ToListAsync();
             }
             catch (Exception ex)
             {
@@ -74,7 +75,7 @@ namespace Store.Core.BusinessLayer
 
             try
             {
-                response.Model = await SalesRepository.GetOrderAsync(new Order { OrderID = id });
+                response.Model = await SalesRepository.GetOrderAsync(new Order(id));
             }
             catch (Exception ex)
             {
@@ -84,7 +85,7 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task <ISingleModelResponse<Order>> CreateOrderAsync(Order header, OrderDetail[] details)
+        public async Task<ISingleModelResponse<Order>> CreateOrderAsync(Order header, OrderDetail[] details)
         {
             var response = new SingleModelResponse<Order>() as ISingleModelResponse<Order>;
 
@@ -133,7 +134,7 @@ namespace Store.Core.BusinessLayer
                             var lastInventory = ProductionRepository
                                 .GetProductInventories()
                                 .Where(item => item.ProductID == detail.ProductID)
-                                .OrderByDescending(item => item.EntryDate)
+                                .OrderByDescending(item => item.CreationDateTime)
                                 .FirstOrDefault();
 
                             var stocks = lastInventory == null ? 0 : lastInventory.Stocks - detail.Quantity;
@@ -141,7 +142,7 @@ namespace Store.Core.BusinessLayer
                             var productInventory = new ProductInventory
                             {
                                 ProductID = detail.ProductID,
-                                EntryDate = DateTime.Now,
+                                CreationDateTime = DateTime.Now,
                                 Quantity = detail.Quantity * -1,
                                 Stocks = stocks
                             };
@@ -175,7 +176,7 @@ namespace Store.Core.BusinessLayer
 
             try
             {
-                var entity = await SalesRepository.GetOrderAsync(new Order { OrderID = id });
+                var entity = await SalesRepository.GetOrderAsync(new Order(id));
 
                 if (entity != null)
                 {
@@ -203,6 +204,29 @@ namespace Store.Core.BusinessLayer
                             });
                         }
                     }
+                }
+            }
+            catch (Exception ex)
+            {
+                response.SetError(ex, Logger);
+            }
+
+            return response;
+        }
+
+        public async Task<ISingleModelResponse<Order>> RemoveOrderAsync(Int32 id)
+        {
+            var response = new SingleModelResponse<Order>() as ISingleModelResponse<Order>;
+
+            try
+            {
+                response.Model = await SalesRepository.GetOrderAsync(new Order(id));
+
+                if (response.Model.OrderDetails.Count > 0)
+                {
+                    throw new ForeignKeyDependencyException(
+                        String.Format("Order with ID: {0} cannot be deleted, because has dependencies. Please contact to technical support for more details", id)
+                        );
                 }
             }
             catch (Exception ex)

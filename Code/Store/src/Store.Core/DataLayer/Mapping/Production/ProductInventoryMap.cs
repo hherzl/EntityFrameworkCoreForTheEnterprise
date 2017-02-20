@@ -14,6 +14,8 @@ namespace Store.Core.DataLayer.Mapping.Production
             entity.HasKey(p => p.ProductInventoryID);
 
             entity.Property(p => p.ProductInventoryID).UseSqlServerIdentityColumn();
+
+            entity.Property(p => p.Timestamp).ValueGeneratedOnAddOrUpdate().IsConcurrencyToken();
         }
     }
 }

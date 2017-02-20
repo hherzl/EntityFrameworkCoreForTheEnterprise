@@ -12,6 +12,7 @@ create table [ChangeLog]
 	[ChangeLogID] int not null identity(1, 1),
 	[ClassName] varchar(255) not null,
 	[PropertyName] varchar(255) not null,
+	[Key] varchar(255) not null,
 	[OriginalValue] varchar(max) null,
 	[CurrentValue] varchar(max) null,
 	[UserName] varchar(25) not null,
@@ -24,13 +25,23 @@ create table [HumanResources].[Employee]
 	[FirstName] varchar(25) not null,
 	[MiddleName] varchar(25) null,
 	[LastName] varchar(25) not null,
-	[BirthDate] datetime not null
+	[BirthDate] datetime not null,
+	[CreationUser] varchar(25) not null,
+	[CreationDateTime] datetime not null,
+	[LastUpdateUser] varchar(25) null,
+	[LastUpdateDateTime] datetime null,
+	[Timestamp] rowversion null
 )
 
 create table [Production].[ProductCategory]
 (
 	[ProductCategoryID] int not null identity(1, 1),
-	[ProductCategoryName] varchar(100) not null
+	[ProductCategoryName] varchar(100) not null,
+	[CreationUser] varchar(25) not null,
+	[CreationDateTime] datetime not null,
+	[LastUpdateUser] varchar(25) null,
+	[LastUpdateDateTime] datetime null,
+	[Timestamp] rowversion null
 )
 
 create table [Production].[Product]
@@ -44,36 +55,56 @@ create table [Production].[Product]
 	[CreationUser] varchar(25) not null,
 	[CreationDateTime] datetime not null,
 	[LastUpdateUser] varchar(25) null,
-	[LastUpdateDateTime] datetime null
+	[LastUpdateDateTime] datetime null,
+	[Timestamp] rowversion null
 )
 
 create table [Production].[ProductInventory]
 (
 	[ProductInventoryID] int not null identity(1, 1),
 	[ProductID] int not null,
-	[EntryDate] datetime not null,
 	[Quantity] int not null,
-	[Stocks] int not null
+	[Stocks] int not null,
+	[CreationUser] varchar(25) not null,
+	[CreationDateTime] datetime not null,
+	[LastUpdateUser] varchar(25) null,
+	[LastUpdateDateTime] datetime null,
+	[Timestamp] rowversion null
 )
 
 create table [Sales].[Customer]
 (
 	[CustomerID] int not null identity(1, 1),
 	[CompanyName] varchar(100) null,
-	[ContactName] varchar(100) null
+	[ContactName] varchar(100) null,
+	[CreationUser] varchar(25) not null,
+	[CreationDateTime] datetime not null,
+	[LastUpdateUser] varchar(25) null,
+	[LastUpdateDateTime] datetime null,
+	[Timestamp] rowversion null
 )
 
 create table [Sales].[Shipper]
 (
 	[ShipperID] int not null identity(1, 1),
 	[CompanyName] varchar(100) null,
-	[ContactName] varchar(100) null
+	[ContactName] varchar(100) null,
+	[CreationUser] varchar(25) not null,
+	[CreationDateTime] datetime not null,
+	[LastUpdateUser] varchar(25) null,
+	[LastUpdateDateTime] datetime null,
+	[Timestamp] rowversion null
 )
 
 create table [Sales].[OrderStatus]
 (
-	[OrderStatusID] smallint not null identity(100, 100),
-	[Description] varchar(100) not null
+	[OrderStatusID] smallint not null,
+	[Description] varchar(100) not null,
+	[CreationUser] varchar(25) not null,
+	[CreationDateTime] datetime not null,
+	[LastUpdateUser] varchar(25) null,
+	[LastUpdateDateTime] datetime null,
+	[Timestamp] rowversion null
 )
 
 create table [Sales].[Order]
@@ -89,16 +120,23 @@ create table [Sales].[Order]
 	[CreationUser] varchar(25) not null,
 	[CreationDateTime] datetime not null,
 	[LastUpdateUser] varchar(25) null,
-	[LastUpdateDateTime] datetime null
+	[LastUpdateDateTime] datetime null,
+	[Timestamp] rowversion null
 )
 
 create table [Sales].[OrderDetail]
 (
+	[OrderDetailID] int not null identity(1, 1),
 	[OrderID] int not null,
 	[ProductID] int not null,
 	[ProductName] varchar(255) not null,
 	[UnitPrice] decimal(8, 4) not null,
 	[Quantity] int not null,
-	[Total] decimal(8, 4) not null
+	[Total] decimal(8, 4) not null,
+	[CreationUser] varchar(25) not null,
+	[CreationDateTime] datetime not null,
+	[LastUpdateUser] varchar(25) null,
+	[LastUpdateDateTime] datetime null,
+	[Timestamp] rowversion null
 )
 go

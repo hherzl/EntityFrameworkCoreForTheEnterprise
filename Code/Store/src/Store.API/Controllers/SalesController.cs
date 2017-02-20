@@ -90,5 +90,14 @@ namespace Store.API.Controllers
 
             return response.ToHttpResponse();
         }
+
+        [HttpDelete]
+        [Route("Order/{id}")]
+        public async Task<IActionResult> RemoveOrder(Int32 id)
+        {
+            var response = await SalesBusinessObject.RemoveOrderAsync(id);
+
+            return response.ToHttpResponse();
+        }
     }
 }

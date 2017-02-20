@@ -14,6 +14,8 @@ namespace Store.Core.DataLayer.Mapping.Sales
             entity.HasKey(p => p.OrderStatusID);
 
             entity.Property(p => p.OrderStatusID).UseSqlServerIdentityColumn();
+
+            entity.Property(p => p.Timestamp).ValueGeneratedOnAddOrUpdate().IsConcurrencyToken();
         }
     }
 }

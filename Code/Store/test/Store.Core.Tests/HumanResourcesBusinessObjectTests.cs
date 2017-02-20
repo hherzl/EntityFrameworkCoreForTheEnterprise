@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Store.Core.EntityLayer.HumanResources;
 using Xunit;
 
@@ -7,7 +8,7 @@ namespace Store.Core.Tests
     public class HumanResourcesBusinessObjectTests
     {
         [Fact]
-        public void TestGetEmployees()
+        public async Task TestGetEmployees()
         {
             // Arrange
             using (var businessObject = BusinessObjectMocker.GetHumanResourcesBusinessObject())
@@ -16,7 +17,7 @@ namespace Store.Core.Tests
                 var pageNumber = 1;
 
                 // Act
-                var response = businessObject.GetEmployeesAsync(pageSize, pageNumber);
+                var response = await businessObject.GetEmployeesAsync(pageSize, pageNumber);
 
                 // Assert
                 Assert.False(response.DidError);
@@ -24,7 +25,7 @@ namespace Store.Core.Tests
         }
 
         [Fact]
-        public void TestUpdateEmployee()
+        public async Task TestUpdateEmployee()
         {
             // Arrange
             using (var businessObject = BusinessObjectMocker.GetHumanResourcesBusinessObject())
@@ -32,14 +33,14 @@ namespace Store.Core.Tests
                 var changes = new Employee
                 {
                     EmployeeID = 1,
-                    FirstName = "John",
-                    MiddleName = "Smith",
-                    LastName = "Doe",
-                    BirthDate = new DateTime(2017, 1, 6)
+                    FirstName = "John III",
+                    MiddleName = "Smith III",
+                    LastName = "Doe III",
+                    BirthDate = DateTime.Now.AddYears(-18)
                 };
 
                 // Act
-                var response = businessObject.UpdateEmployee(changes);
+                var response = await businessObject.UpdateEmployeeAsync(changes);
 
                 // Assert
                 Assert.False(response.DidError);

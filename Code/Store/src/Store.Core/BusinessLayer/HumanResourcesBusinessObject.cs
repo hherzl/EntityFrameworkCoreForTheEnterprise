@@ -31,13 +31,13 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public ISingleModelResponse<Employee> UpdateEmployee(Employee changes)
+        public async Task<ISingleModelResponse<Employee>> UpdateEmployeeAsync(Employee changes)
         {
             var response = new SingleModelResponse<Employee>() as ISingleModelResponse<Employee>;
 
             try
             {
-                HumanResourcesRepository.UpdateEmployee(changes);
+                await HumanResourcesRepository.UpdateEmployeeAsync(changes);
 
                 response.Model = changes;
             }

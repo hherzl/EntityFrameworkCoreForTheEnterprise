@@ -2,7 +2,7 @@
 
 namespace Store.Core.EntityLayer
 {
-    public class ChangeLog
+    public class ChangeLog : IEntity
     {
         public ChangeLog()
         {
@@ -13,6 +13,8 @@ namespace Store.Core.EntityLayer
         public String ClassName { get; set; }
 
         public String PropertyName { get; set; }
+
+        public String Key { get; set; }
 
         public String OriginalValue { get; set; }
 

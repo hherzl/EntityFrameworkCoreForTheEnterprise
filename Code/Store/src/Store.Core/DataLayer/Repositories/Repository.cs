@@ -19,21 +19,19 @@ namespace Store.Core.DataLayer.Repositories
             DbContext = dbContext;
         }
 
-        protected IQueryable<TEntity> Paging<TEntity>(Int32 pageSize = 0, Int32 pageNumber = 0) where TEntity : class
+        protected IQueryable<TEntity> Paging<TEntity>(Int32 pageSize = 0, Int32 pageNumber = 0) where TEntity : class, IEntity
         {
             var query = DbContext.Set<TEntity>().AsQueryable();
 
             return pageSize > 0 && pageNumber > 0 ? query.Skip((pageNumber - 1) * pageSize).Take(pageSize) : query;
         }
 
-        protected Task<IQueryable<TEntity>> PagingAsync<TEntity>(Int32 pageSize = 0, Int32 pageNumber = 0) where TEntity : class
+        protected IQueryable<T> Paging<T>(IQueryable<T> query, Int32 pageSize = 0, Int32 pageNumber = 0) where T : class
         {
-            var query = DbContext.Set<TEntity>().AsQueryable();
-            
-            return Task.FromResult<IQueryable<TEntity>>(pageSize > 0 && pageNumber > 0 ? query.Skip((pageNumber - 1) * pageSize).Take(pageSize) : query);
+            return pageSize > 0 && pageNumber > 0 ? query.Skip((pageNumber - 1) * pageSize).Take(pageSize) : query;
         }
 
-        protected virtual void Add(IEntity entity)
+        protected virtual void Add<TEntity>(TEntity entity) where TEntity : class, IEntity
         {
             var cast = entity as IAuditEntity;
 
@@ -46,9 +44,11 @@ namespace Store.Core.DataLayer.Repositories
                     cast.CreationDateTime = DateTime.Now;
                 }
             }
+
+            DbContext.Set<TEntity>().Add(entity);
         }
 
-        protected virtual void Update(IEntity entity)
+        protected virtual void Update<TEntity>(TEntity entity) where TEntity : class, IEntity
         {
             var cast = entity as IAuditEntity;
 
@@ -61,6 +61,11 @@ namespace Store.Core.DataLayer.Repositories
                     cast.LastUpdateDateTime = DateTime.Now;
                 }
             }
+        }
+
+        protected virtual void Remove <TEntity>(TEntity entity) where TEntity : class, IEntity
+        {
+            DbContext.Set<TEntity>().Remove(entity);
         }
 
         protected virtual IEnumerable<ChangeLog> GetChanges()
@@ -78,10 +83,14 @@ namespace Store.Core.DataLayer.Repositories
 
                         if (String.Concat(originalValue) != String.Concat(currentValue))
                         {
+                            // todo: improve the way to retrieve primary key value from entity instance
+                            var key = entry.Entity.GetType().GetProperties()[0].GetValue(entry.Entity, null).ToString();
+
                             yield return new ChangeLog
                             {
                                 ClassName = entityType.Name,
                                 PropertyName = property.Name,
+                                Key = key,
                                 OriginalValue = originalValue == null ? String.Empty : originalValue.ToString(),
                                 CurrentValue = currentValue == null ? String.Empty : currentValue.ToString(),
                                 UserName = UserInfo.Name,

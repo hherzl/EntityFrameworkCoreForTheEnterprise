@@ -14,6 +14,8 @@ namespace Store.Core.DataLayer.Mapping.Production
             entity.HasKey(p => p.ProductCategoryID);
 
             entity.Property(p => p.ProductCategoryID).UseSqlServerIdentityColumn();
+
+            entity.Property(p => p.Timestamp).ValueGeneratedOnAddOrUpdate().IsConcurrencyToken();
         }
     }
 }
