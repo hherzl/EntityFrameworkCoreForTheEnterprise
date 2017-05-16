@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Store.Core.BusinessLayer.Contracts;
 using Store.Core.BusinessLayer.Responses;
 using Store.Core.DataLayer;
@@ -13,13 +14,15 @@ namespace Store.Core.BusinessLayer
 {
     public class SalesBusinessObject : BusinessObject, ISalesBusinessObject
     {
-        public SalesBusinessObject(IUserInfo userInfo, StoreDbContext dbContext)
-            : base(userInfo, dbContext)
+        public SalesBusinessObject(ILogger logger, IUserInfo userInfo, StoreDbContext dbContext)
+            : base(logger, userInfo, dbContext)
         {
         }
 
         public async Task<IListModelResponse<Customer>> GetCustomersAsync(Int32 pageSize, Int32 pageNumber)
         {
+            Logger?.LogInformation("{0} has been invoked", nameof(GetCustomersAsync));
+
             var response = new ListModelResponse<Customer>() as IListModelResponse<Customer>;
 
             try
@@ -36,6 +39,8 @@ namespace Store.Core.BusinessLayer
 
         public async Task<IListModelResponse<Shipper>> GetShippersAsync(Int32 pageSize, Int32 pageNumber)
         {
+            Logger?.LogInformation("{0} has been invoked", nameof(GetShippersAsync));
+
             var response = new ListModelResponse<Shipper>() as IListModelResponse<Shipper>;
 
             try
@@ -52,6 +57,8 @@ namespace Store.Core.BusinessLayer
 
         public async Task<IListModelResponse<OrderInfo>> GetOrdersAsync(Int32 pageSize, Int32 pageNumber, Int32? customerID = null, Int32? employeeID = null, Int32? shipperID = null)
         {
+            Logger?.LogInformation("{0} has been invoked", nameof(GetOrdersAsync));
+
             var response = new ListModelResponse<OrderInfo>() as IListModelResponse<OrderInfo>;
 
             try
@@ -71,6 +78,8 @@ namespace Store.Core.BusinessLayer
 
         public async Task<ISingleModelResponse<Order>> GetOrderAsync(Int32 id)
         {
+            Logger?.LogInformation("{0} has been invoked", nameof(GetOrderAsync));
+
             var response = new SingleModelResponse<Order>() as ISingleModelResponse<Order>;
 
             try
@@ -87,6 +96,8 @@ namespace Store.Core.BusinessLayer
 
         public async Task<ISingleModelResponse<Order>> CreateOrderAsync(Order header, OrderDetail[] details)
         {
+            Logger?.LogInformation("{0} has been invoked", nameof(CreateOrderAsync));
+
             var response = new SingleModelResponse<Order>() as ISingleModelResponse<Order>;
 
             try
@@ -175,6 +186,8 @@ namespace Store.Core.BusinessLayer
 
         public async Task<ISingleModelResponse<Order>> CloneOrderAsync(Int32 id)
         {
+            Logger?.LogInformation("{0} has been invoked", nameof(CloneOrderAsync));
+
             var response = new SingleModelResponse<Order>() as ISingleModelResponse<Order>;
 
             try
@@ -219,6 +232,8 @@ namespace Store.Core.BusinessLayer
 
         public async Task<ISingleModelResponse<Order>> RemoveOrderAsync(Int32 id)
         {
+            Logger?.LogInformation("{0} has been invoked", nameof(RemoveOrderAsync));
+
             var response = new SingleModelResponse<Order>() as ISingleModelResponse<Order>;
 
             try

@@ -17,7 +17,7 @@ namespace Store.API.Tests
 
             var entityMapper = new StoreEntityMapper() as IEntityMapper;
 
-            return new HumanResourcesBusinessObject(userInfo, new StoreDbContext(appSettings, entityMapper)) as IHumanResourcesBusinessObject;
+            return new HumanResourcesBusinessObject(null, userInfo, new StoreDbContext(appSettings, entityMapper)) as IHumanResourcesBusinessObject;
         }
 
         public static IProductionBusinessObject GetProductionBusinessObject()
@@ -28,7 +28,7 @@ namespace Store.API.Tests
 
             var entityMapper = new StoreEntityMapper() as IEntityMapper;
 
-            return new ProductionBusinessObject(userInfo, new StoreDbContext(appSettings, entityMapper)) as IProductionBusinessObject;
+            return new ProductionBusinessObject(null, userInfo, new StoreDbContext(appSettings, entityMapper)) as IProductionBusinessObject;
         }
 
         public static ISalesBusinessObject GetSalesBusinessObject()
@@ -39,7 +39,7 @@ namespace Store.API.Tests
 
             var entityMapper = new StoreEntityMapper() as IEntityMapper;
 
-            return new SalesBusinessObject(userInfo, new StoreDbContext(appSettings, entityMapper)) as ISalesBusinessObject;
+            return new SalesBusinessObject(null, userInfo, new StoreDbContext(appSettings, entityMapper)) as ISalesBusinessObject;
         }
     }
 }

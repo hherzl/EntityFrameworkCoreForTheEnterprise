@@ -1,12 +1,12 @@
 ﻿using System;
+using Microsoft.Extensions.Logging;
 using Store.Core.BusinessLayer.Responses;
-using Store.Core.Common;
 
 namespace Store.Core.BusinessLayer
 {
     public static class ResponseExtensions
     {
-        public static void SetError<TModel>(this IListModelResponse<TModel> response, Exception ex, ILog logger)
+        public static void SetError<TModel>(this IListModelResponse<TModel> response, Exception ex, ILogger logger)
         {
             response.DidError = true;
 
@@ -16,7 +16,7 @@ namespace Store.Core.BusinessLayer
             {
                 response.ErrorMessage = "There was an internal error, please contact to technical support.";
 
-                logger.Write(ex.ToString());
+                logger.LogError(ex.ToString());
             }
             else
             {
@@ -24,7 +24,7 @@ namespace Store.Core.BusinessLayer
             }
         }
 
-        public static void SetError<TModel>(this ISingleModelResponse<TModel> response, Exception ex, ILog logger)
+        public static void SetError<TModel>(this ISingleModelResponse<TModel> response, Exception ex, ILogger logger)
         {
             response.DidError = true;
 
@@ -34,7 +34,7 @@ namespace Store.Core.BusinessLayer
             {
                 response.ErrorMessage = "There was an internal error, please contact to technical support.";
 
-                logger.Write(ex.ToString());
+                logger.LogError(ex.ToString());
             }
             else
             {

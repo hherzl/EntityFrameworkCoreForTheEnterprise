@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Store.Core.BusinessLayer.Contracts;
 using Store.Core.BusinessLayer.Responses;
 using Store.Core.DataLayer;
@@ -10,13 +11,15 @@ namespace Store.Core.BusinessLayer
 {
     public class ProductionBusinessObject : BusinessObject, IProductionBusinessObject
     {
-        public ProductionBusinessObject(IUserInfo userInfo, StoreDbContext dbContext)
-            : base(userInfo, dbContext)
+        public ProductionBusinessObject(ILogger logger, IUserInfo userInfo, StoreDbContext dbContext)
+            : base(logger, userInfo, dbContext)
         {
         }
 
         public async Task<IListModelResponse<Product>> GetProductsAsync(Int32 pageSize, Int32 pageNumber)
         {
+            Logger?.LogInformation("{0} has been invoked", nameof(GetProductsAsync));
+
             var response = new ListModelResponse<Product>() as IListModelResponse<Product>;
 
             try
@@ -33,6 +36,8 @@ namespace Store.Core.BusinessLayer
 
         public async Task<IListModelResponse<Warehouse>> GetWarehousesAsync(Int32 pageSize, Int32 pageNumber)
         {
+            Logger?.LogInformation("{0} has been invoked", nameof(GetWarehousesAsync));
+
             var response = new ListModelResponse<Warehouse>() as IListModelResponse<Warehouse>;
 
             try

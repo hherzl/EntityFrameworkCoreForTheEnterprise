@@ -1,6 +1,6 @@
 ﻿using System;
+using Microsoft.Extensions.Logging;
 using Store.Core.BusinessLayer.Contracts;
-using Store.Core.Common;
 using Store.Core.DataLayer;
 using Store.Core.DataLayer.Contracts;
 using Store.Core.DataLayer.Repositories;
@@ -9,7 +9,7 @@ namespace Store.Core.BusinessLayer
 {
     public abstract class BusinessObject : IBusinessObject
     {
-        protected ILog Logger;
+        protected ILogger Logger;
         protected IUserInfo UserInfo;
         protected Boolean Disposed;
         protected StoreDbContext DbContext;
@@ -17,9 +17,9 @@ namespace Store.Core.BusinessLayer
         protected IProductionRepository m_productionRepository;
         protected ISalesRepository m_salesRepository;
 
-        public BusinessObject(IUserInfo userInfo, StoreDbContext dbContext)
+        public BusinessObject(ILogger logger, IUserInfo userInfo, StoreDbContext dbContext)
         {
-            Logger = new Log();
+            Logger = logger;
             UserInfo = userInfo;
             DbContext = dbContext;
         }

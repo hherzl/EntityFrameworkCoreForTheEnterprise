@@ -18,7 +18,7 @@ namespace Store.API.Tests
             var productionBusinessObject = BusinessObjectMocker.GetProductionBusinessObject();
             var salesBusinessObject = BusinessObjectMocker.GetSalesBusinessObject();
 
-            using (var controller = new SalesController(humanResourcesBusinessObject, productionBusinessObject, salesBusinessObject))
+            using (var controller = new SalesController(null, humanResourcesBusinessObject, productionBusinessObject, salesBusinessObject))
             {
                 // Act
                 var response = await controller.GetOrders() as ObjectResult;
@@ -39,7 +39,7 @@ namespace Store.API.Tests
             var salesBusinessObject = BusinessObjectMocker.GetSalesBusinessObject();
             var id = 1;
 
-            using (var controller = new SalesController(humanResourcesBusinessObject, productionBusinessObject, salesBusinessObject))
+            using (var controller = new SalesController(null, humanResourcesBusinessObject, productionBusinessObject, salesBusinessObject))
             {
                 // Act
                 var response = await controller.GetOrder(id) as ObjectResult;
@@ -60,7 +60,7 @@ namespace Store.API.Tests
             var salesBusinessObject = BusinessObjectMocker.GetSalesBusinessObject();
             var id = 0;
 
-            using (var controller = new SalesController(humanResourcesBusinessObject, productionBusinessObject, salesBusinessObject))
+            using (var controller = new SalesController(null, humanResourcesBusinessObject, productionBusinessObject, salesBusinessObject))
             {
                 // Act
                 var response = await controller.GetOrder(id) as ObjectResult;
@@ -80,7 +80,7 @@ namespace Store.API.Tests
             var productionBusinessObject = BusinessObjectMocker.GetProductionBusinessObject();
             var salesBusinessObject = BusinessObjectMocker.GetSalesBusinessObject();
 
-            using (var controller = new SalesController(humanResourcesBusinessObject, productionBusinessObject, salesBusinessObject))
+            using (var controller = new SalesController(null, humanResourcesBusinessObject, productionBusinessObject, salesBusinessObject))
             {
                 // Act
                 var response = await controller.GetCreateOrderViewModel() as ObjectResult;
@@ -101,7 +101,7 @@ namespace Store.API.Tests
             var salesBusinessObject = BusinessObjectMocker.GetSalesBusinessObject();
             var id = 1;
 
-            using (var controller = new SalesController(humanResourcesBusinessObject, productionBusinessObject, salesBusinessObject))
+            using (var controller = new SalesController(null, humanResourcesBusinessObject, productionBusinessObject, salesBusinessObject))
             {
                 // Act
                 var response = await controller.CloneOrder(id) as ObjectResult;
