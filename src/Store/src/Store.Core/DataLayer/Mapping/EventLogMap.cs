@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Composition;
+using Microsoft.EntityFrameworkCore;
 using Store.Core.EntityLayer;
 
 namespace Store.Core.DataLayer.Mapping
 {
+    [Export(typeof(IEntityMap))]
     public class EventLogMap : IEntityMap
     {
         public void Map(ModelBuilder modelBuilder)

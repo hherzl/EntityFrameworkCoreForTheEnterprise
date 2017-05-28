@@ -2,15 +2,21 @@
   "version": "1.0.0-*",
 
   "dependencies": {
-    "NETStandard.Library": "1.6.0",
-    "Microsoft.EntityFrameworkCore": "1.0.1",
-    "Microsoft.EntityFrameworkCore.SqlServer": "1.0.1",
-    "Microsoft.AspNetCore.Mvc.Core": "1.0.1"
+    "NETStandard.Library": "1.6.1",
+    "Microsoft.Composition": "1.0.30",
+    "Microsoft.EntityFrameworkCore": "1.1.1",
+    "Microsoft.EntityFrameworkCore.SqlServer": "1.1.1"
   },
 
   "frameworks": {
-    "netstandard1.6": {
-      "imports": "dnxcore50"
+    "netcoreapp1.1": {
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "type": "platform",
+          "version": "1.1.0"
+        }
+      },
+      "imports": "portable-net45+win8+wp8+wpa81"
     }
   }
 }

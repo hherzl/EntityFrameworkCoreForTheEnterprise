@@ -19,64 +19,66 @@ namespace Store.Core.Mocks
                 {
                     var random = new Random();
 
-                    var salesBusinessObject = BusinessObjectMocker.GetSalesBusinessObject();
-                    var humanResourcesBusinessObject = BusinessObjectMocker.GetHumanResourcesBusinessObject();
-                    var productionBusinessObject = BusinessObjectMocker.GetProductionBusinessObject();
-
-                    var pageSize = 10;
-                    var pageNumber = 1;
-
-                    var customerResponse = await salesBusinessObject.GetCustomersAsync(pageSize, pageNumber);
-                    var employeesResponse = await humanResourcesBusinessObject.GetEmployeesAsync(pageSize, pageNumber);
-                    var shippersResponse = await salesBusinessObject.GetShippersAsync(pageSize, pageNumber);
-                    var productsResponse = await productionBusinessObject.GetProductsAsync(pageSize, pageNumber);
-
-                    var customers = customerResponse.Model.ToList();
-                    var employees = employeesResponse.Model.ToList();
-                    var shippers = shippersResponse.Model.ToList();
-                    var products = productsResponse.Model.ToList();
-
-                    for (var i = 0; i < ordersLimitPerDay; i++)
+                    using (var salesBusinessObject = BusinessObjectMocker.GetSalesBusinessObject())
                     {
-                        var header = new Order();
-
-                        var selectedCustomer = random.Next(0, customers.Count - 1);
-                        var selectedEmployee = random.Next(0, employees.Count - 1);
-                        var selectedShipper = random.Next(0, shippers.Count - 1);
-
-                        header.OrderDate = date;
-                        header.OrderStatusID = 100;
-                        header.CustomerID = customers[selectedCustomer].CustomerID;
-                        header.EmployeeID = employees[selectedEmployee].EmployeeID;
-                        header.ShipperID = shippers[selectedShipper].ShipperID;
-                        header.CreationDateTime = date;
-
-                        var details = new List<OrderDetail>();
-
-                        var detailsCount = random.Next(1, 3);
-
-                        for (var j = 0; j < detailsCount; j++)
+                        using (var humanResourcesBusinessObject = BusinessObjectMocker.GetHumanResourcesBusinessObject())
                         {
-                            var detail = new OrderDetail
+                            using (var productionBusinessObject = BusinessObjectMocker.GetProductionBusinessObject())
                             {
-                                ProductID = products[random.Next(0, products.Count - 1)].ProductID,
-                                Quantity = (Int16)random.Next(1, 3)
-                            };
+                                var pageSize = 10;
+                                var pageNumber = 1;
 
-                            if (details.Count > 0 && details.Where(item => item.ProductID == detail.ProductID).Count() == 1)
-                            {
-                                continue;
+                                var customerResponse = await salesBusinessObject.GetCustomersAsync(pageSize, pageNumber);
+                                var employeesResponse = await humanResourcesBusinessObject.GetEmployeesAsync(pageSize, pageNumber);
+                                var shippersResponse = await salesBusinessObject.GetShippersAsync(pageSize, pageNumber);
+                                var productsResponse = await productionBusinessObject.GetProductsAsync(pageSize, pageNumber);
+
+                                var customers = customerResponse.Model.ToList();
+                                var employees = employeesResponse.Model.ToList();
+                                var shippers = shippersResponse.Model.ToList();
+                                var products = productsResponse.Model.ToList();
+
+                                for (var i = 0; i < ordersLimitPerDay; i++)
+                                {
+                                    var header = new Order();
+
+                                    var selectedCustomer = random.Next(0, customers.Count - 1);
+                                    var selectedEmployee = random.Next(0, employees.Count - 1);
+                                    var selectedShipper = random.Next(0, shippers.Count - 1);
+
+                                    header.OrderDate = date;
+                                    header.OrderStatusID = 100;
+                                    header.CustomerID = customers[selectedCustomer].CustomerID;
+                                    header.EmployeeID = employees[selectedEmployee].EmployeeID;
+                                    header.ShipperID = shippers[selectedShipper].ShipperID;
+                                    header.CreationDateTime = date;
+
+                                    var details = new List<OrderDetail>();
+
+                                    var detailsCount = random.Next(1, 3);
+
+                                    for (var j = 0; j < detailsCount; j++)
+                                    {
+                                        var detail = new OrderDetail
+                                        {
+                                            ProductID = products[random.Next(0, products.Count - 1)].ProductID,
+                                            Quantity = (Int16)random.Next(1, 3)
+                                        };
+
+                                        if (details.Count > 0 && details.Where(item => item.ProductID == detail.ProductID).Count() == 1)
+                                        {
+                                            continue;
+                                        }
+
+                                        details.Add(detail);
+                                    }
+
+                                    await salesBusinessObject.CreateOrderAsync(header, details.ToArray());
+                                }
+
                             }
-
-                            details.Add(detail);
                         }
-
-                        await salesBusinessObject.CreateOrderAsync(header, details.ToArray());
                     }
-
-                    salesBusinessObject.Dispose();
-                    humanResourcesBusinessObject.Dispose();
-                    productionBusinessObject.Dispose();
                 }
 
                 date = date.AddDays(1);

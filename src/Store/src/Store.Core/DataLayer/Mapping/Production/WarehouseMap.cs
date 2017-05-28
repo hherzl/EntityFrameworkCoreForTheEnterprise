@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Composition;
+using Microsoft.EntityFrameworkCore;
 using Store.Core.EntityLayer.Production;
 
 namespace Store.Core.DataLayer.Mapping.Production
 {
+    [Export(typeof(IEntityMap))]
     public class WarehouseMap : IEntityMap
     {
         public void Map(ModelBuilder modelBuilder)

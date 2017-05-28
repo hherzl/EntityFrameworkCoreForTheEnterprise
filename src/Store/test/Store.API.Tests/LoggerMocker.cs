@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Store.Core.Mocks
+namespace Store.API.Tests
 {
     public static class LoggerMocker
     {

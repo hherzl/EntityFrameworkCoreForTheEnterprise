@@ -16,11 +16,13 @@ namespace Store.Core.BusinessLayer
             {
                 response.ErrorMessage = "There was an internal error, please contact to technical support.";
 
-                logger.LogError(ex.ToString());
+                logger?.LogCritical(ex.ToString());
             }
             else
             {
                 response.ErrorMessage = ex.Message;
+
+                logger?.LogError(ex.Message);
             }
         }
 
@@ -34,11 +36,13 @@ namespace Store.Core.BusinessLayer
             {
                 response.ErrorMessage = "There was an internal error, please contact to technical support.";
 
-                logger.LogError(ex.ToString());
+                logger?.LogCritical(ex.ToString());
             }
             else
             {
                 response.ErrorMessage = ex.Message;
+
+                logger?.LogError(ex.Message);
             }
         }
     }
