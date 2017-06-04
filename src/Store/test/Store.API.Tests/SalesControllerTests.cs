@@ -26,7 +26,7 @@ namespace Store.API.Tests
                 var response = await controller.GetOrders() as ObjectResult;
 
                 // Assert
-                var value = response.Value as IListModelResponse<OrderInfo>;
+                var value = response.Value as IPagingModelResponse<OrderInfo>;
 
                 Assert.False(value.DidError);
             }

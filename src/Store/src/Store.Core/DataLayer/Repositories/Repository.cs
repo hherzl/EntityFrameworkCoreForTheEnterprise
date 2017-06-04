@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Reflection;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Store.Core.EntityLayer;
 
@@ -18,19 +18,7 @@ namespace Store.Core.DataLayer.Repositories
             UserInfo = userInfo;
             DbContext = dbContext;
         }
-
-        protected IQueryable<TEntity> Paging<TEntity>(Int32 pageSize = 0, Int32 pageNumber = 0) where TEntity : class, IEntity
-        {
-            var query = DbContext.Set<TEntity>().AsQueryable();
-
-            return pageSize > 0 && pageNumber > 0 ? query.Skip((pageNumber - 1) * pageSize).Take(pageSize) : query;
-        }
-
-        protected IQueryable<T> Paging<T>(IQueryable<T> query, Int32 pageSize = 0, Int32 pageNumber = 0) where T : class
-        {
-            return pageSize > 0 && pageNumber > 0 ? query.Skip((pageNumber - 1) * pageSize).Take(pageSize) : query;
-        }
-
+        
         protected virtual void Add<TEntity>(TEntity entity) where TEntity : class, IEntity
         {
             var cast = entity as IAuditEntity;

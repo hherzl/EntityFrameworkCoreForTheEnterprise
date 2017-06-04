@@ -12,7 +12,7 @@ namespace Store.Core.BusinessLayer.Contracts
 
         Task<IListModelResponse<Shipper>> GetShippersAsync(Int32 pageSize, Int32 pageNumber);
 
-        Task<IListModelResponse<OrderInfo>> GetOrdersAsync(Int32 pageSize, Int32 pageNumber, Int32? customerID = null, Int32? employeeID = null, Int32? shipperID = null);
+        Task<IPagingModelResponse<OrderInfo>> GetOrdersAsync(Int32 pageSize, Int32 pageNumber, Int32? customerID = null, Int32? employeeID = null, Int32? shipperID = null);
 
         Task<ISingleModelResponse<Order>> GetOrderAsync(Int32 id);
 

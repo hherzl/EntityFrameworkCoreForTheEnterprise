@@ -20,7 +20,7 @@ namespace Store.Core.BusinessLayer
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetProductsAsync));
 
-            var response = new ListModelResponse<Product>() as IListModelResponse<Product>;
+            var response = new ListModelResponse<Product>();
 
             try
             {

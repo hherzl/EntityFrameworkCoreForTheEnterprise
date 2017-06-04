@@ -7,6 +7,7 @@ using Store.Core.BusinessLayer.Contracts;
 using Store.Core.BusinessLayer.Responses;
 using Store.Core.DataLayer;
 using Store.Core.DataLayer.DataContracts;
+using Store.Core.DataLayer.Repositories;
 using Store.Core.EntityLayer.Production;
 using Store.Core.EntityLayer.Sales;
 
@@ -23,7 +24,7 @@ namespace Store.Core.BusinessLayer
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetCustomersAsync));
 
-            var response = new ListModelResponse<Customer>() as IListModelResponse<Customer>;
+            var response = new ListModelResponse<Customer>();
 
             try
             {
@@ -41,7 +42,7 @@ namespace Store.Core.BusinessLayer
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetShippersAsync));
 
-            var response = new ListModelResponse<Shipper>() as IListModelResponse<Shipper>;
+            var response = new ListModelResponse<Shipper>();
 
             try
             {
@@ -55,18 +56,21 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IListModelResponse<OrderInfo>> GetOrdersAsync(Int32 pageSize, Int32 pageNumber, Int32? customerID = null, Int32? employeeID = null, Int32? shipperID = null)
+        public async Task<IPagingModelResponse<OrderInfo>> GetOrdersAsync(Int32 pageSize, Int32 pageNumber, Int32? customerID = null, Int32? employeeID = null, Int32? shipperID = null)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetOrdersAsync));
 
-            var response = new ListModelResponse<OrderInfo>() as IListModelResponse<OrderInfo>;
+            var response = new PagingModelResponse<OrderInfo>();
 
             try
             {
                 response.PageSize = pageSize;
                 response.PageNumber = pageNumber;
 
-                response.Model = await SalesRepository.GetOrders(pageSize, pageNumber, customerID, employeeID, shipperID).ToListAsync();
+                var query = SalesRepository.GetOrders(pageSize, pageNumber, customerID, employeeID, shipperID);
+
+                response.ItemCount = await query.CountAsync();
+                response.Model = await query.Paging(pageSize, pageNumber).ToListAsync();
             }
             catch (Exception ex)
             {
@@ -80,7 +84,7 @@ namespace Store.Core.BusinessLayer
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetOrderAsync));
 
-            var response = new SingleModelResponse<Order>() as ISingleModelResponse<Order>;
+            var response = new SingleModelResponse<Order>();
 
             try
             {
@@ -98,7 +102,7 @@ namespace Store.Core.BusinessLayer
         {
             Logger?.LogInformation("{0} has been invoked", nameof(CreateOrderAsync));
 
-            var response = new SingleModelResponse<Order>() as ISingleModelResponse<Order>;
+            var response = new SingleModelResponse<Order>();
 
             try
             {
@@ -188,7 +192,7 @@ namespace Store.Core.BusinessLayer
         {
             Logger?.LogInformation("{0} has been invoked", nameof(CloneOrderAsync));
 
-            var response = new SingleModelResponse<Order>() as ISingleModelResponse<Order>;
+            var response = new SingleModelResponse<Order>();
 
             try
             {
@@ -234,7 +238,7 @@ namespace Store.Core.BusinessLayer
         {
             Logger?.LogInformation("{0} has been invoked", nameof(RemoveOrderAsync));
 
-            var response = new SingleModelResponse<Order>() as ISingleModelResponse<Order>;
+            var response = new SingleModelResponse<Order>();
 
             try
             {
