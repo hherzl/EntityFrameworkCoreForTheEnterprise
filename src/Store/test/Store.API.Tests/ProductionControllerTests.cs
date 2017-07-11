@@ -18,7 +18,7 @@ namespace Store.API.Tests
             using (var controller = new ProductionController(null, productionBusinessObject))
             {
                 // Act
-                var response = await controller.GetProducts() as ObjectResult;
+                var response = await controller.GetProductsAsync() as ObjectResult;
 
                 // Assert
                 var value = response.Value as IListModelResponse<Product>;

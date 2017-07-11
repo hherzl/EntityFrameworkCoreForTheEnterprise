@@ -13,6 +13,7 @@ namespace Store.Core.Tests
 
             serviceProvider
                 .GetService<ILoggerFactory>()
+                .AddConsole(LogLevel.Debug)
                 .AddConsole(LogLevel.Trace)
                 .AddConsole(LogLevel.Information)
                 .AddConsole(LogLevel.Warning)

@@ -23,7 +23,7 @@ namespace Store.API.Tests
             using (var controller = new SalesController(logger, humanResourcesBusinessObject, productionBusinessObject, salesBusinessObject))
             {
                 // Act
-                var response = await controller.GetOrders() as ObjectResult;
+                var response = await controller.GetOrdersAsync() as ObjectResult;
 
                 // Assert
                 var value = response.Value as IPagingModelResponse<OrderInfo>;
@@ -45,7 +45,7 @@ namespace Store.API.Tests
             using (var controller = new SalesController(logger, humanResourcesBusinessObject, productionBusinessObject, salesBusinessObject))
             {
                 // Act
-                var response = await controller.GetOrder(id) as ObjectResult;
+                var response = await controller.GetOrderAsync(id) as ObjectResult;
 
                 // Assert
                 var value = response.Value as ISingleModelResponse<Order>;
@@ -67,7 +67,7 @@ namespace Store.API.Tests
             using (var controller = new SalesController(logger, humanResourcesBusinessObject, productionBusinessObject, salesBusinessObject))
             {
                 // Act
-                var response = await controller.GetOrder(id) as ObjectResult;
+                var response = await controller.GetOrderAsync(id) as ObjectResult;
 
                 // Assert
                 var value = response.Value as ISingleModelResponse<Order>;
@@ -88,7 +88,7 @@ namespace Store.API.Tests
             using (var controller = new SalesController(logger, humanResourcesBusinessObject, productionBusinessObject, salesBusinessObject))
             {
                 // Act
-                var response = await controller.GetCreateOrderViewModel() as ObjectResult;
+                var response = await controller.GetCreateOrderRequestAsync() as ObjectResult;
 
                 // Assert
                 var value = response.Value as ISingleModelResponse<CreateOrderViewModel>;
@@ -110,7 +110,7 @@ namespace Store.API.Tests
             using (var controller = new SalesController(logger, humanResourcesBusinessObject, productionBusinessObject, salesBusinessObject))
             {
                 // Act
-                var response = await controller.CloneOrder(id) as ObjectResult;
+                var response = await controller.CloneOrderAsync(id) as ObjectResult;
 
                 // Assert
                 var value = response.Value as ISingleModelResponse<Order>;

@@ -17,6 +17,20 @@ namespace Store.Core.DataLayer.Mapping.Sales
 
             entity.Property(p => p.CustomerID).UseSqlServerIdentityColumn();
 
+            entity.HasAlternateKey(p => new { p.CompanyName }).HasName("U_CompanyName");
+
+            entity.Property(p => p.CompanyName).HasColumnType("varchar(100)");
+
+            entity.Property(p => p.ContactName).HasColumnType("varchar(100)");
+
+            entity.Property(p => p.CreationUser).HasColumnType("varchar(25)").IsRequired();
+
+            entity.Property(p => p.CreationDateTime).HasColumnType("datetime").IsRequired();
+
+            entity.Property(p => p.LastUpdateUser).HasColumnType("varchar(25)");
+
+            entity.Property(p => p.LastUpdateDateTime).HasColumnType("datetime");
+
             entity.Property(p => p.Timestamp).ValueGeneratedOnAddOrUpdate().IsConcurrencyToken();
         }
     }

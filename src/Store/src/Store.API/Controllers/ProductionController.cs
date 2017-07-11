@@ -28,9 +28,9 @@ namespace Store.API.Controllers
 
         [HttpGet]
         [Route("Product")]
-        public async Task<IActionResult> GetProducts(Int32? pageSize = 10, Int32? pageNumber = 1)
+        public async Task<IActionResult> GetProductsAsync(Int32? pageSize = 10, Int32? pageNumber = 1)
         {
-            Logger?.LogInformation("{0} has been invoked", nameof(GetProducts));
+            Logger?.LogInformation("{0} has been invoked", nameof(GetProductsAsync));
 
             var response = await ProductionBusinessObject.GetProductsAsync((Int32)pageSize, (Int32)pageNumber);
 

@@ -17,6 +17,18 @@ namespace Store.Core.DataLayer.Mapping.Production
 
             entity.Property(p => p.ProductCategoryID).UseSqlServerIdentityColumn();
 
+            entity.HasAlternateKey(p => new { p.ProductCategoryName }).HasName("U_ProductCategoryName");
+
+            entity.Property(p => p.ProductCategoryName).HasColumnType("varchar(100)").IsRequired();
+
+            entity.Property(p => p.CreationUser).HasColumnType("varchar(25)").IsRequired();
+
+            entity.Property(p => p.CreationDateTime).HasColumnType("datetime").IsRequired();
+
+            entity.Property(p => p.LastUpdateUser).HasColumnType("varchar(25)");
+
+            entity.Property(p => p.LastUpdateDateTime).HasColumnType("datetime");
+
             entity.Property(p => p.Timestamp).ValueGeneratedOnAddOrUpdate().IsConcurrencyToken();
         }
     }

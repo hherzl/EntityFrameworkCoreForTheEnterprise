@@ -16,7 +16,7 @@ namespace Store.Core.BusinessLayer
         {
         }
 
-        public async Task<IListModelResponse<Employee>> GetEmployeesAsync(Int32 pageSize, Int32 pageNumber)
+        public async Task<IListModelResponse<Employee>> GetEmployeesAsync(Int32 pageSize = 0, Int32 pageNumber = 0)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetEmployeesAsync));
 

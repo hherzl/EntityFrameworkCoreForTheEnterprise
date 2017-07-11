@@ -33,6 +33,8 @@ namespace Store.Core.EntityLayer.Production
 
         public Byte[] Timestamp { get; set; }
 
-        public virtual Product ProductFk { get; set; }
+        public Product ProductFk { get; set; }
+
+        public Warehouse WarehouseFk { get; set; }
     }
 }

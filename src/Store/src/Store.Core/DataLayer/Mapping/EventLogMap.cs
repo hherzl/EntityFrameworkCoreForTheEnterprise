@@ -15,7 +15,13 @@ namespace Store.Core.DataLayer.Mapping
 
             entity.HasKey(p => p.EventLogID);
 
-            entity.Property(p => p.EventLogID).UseSqlServerIdentityColumn();
+            entity.Property(p => p.EventType).HasColumnType("int").IsRequired();
+
+            entity.Property(p => p.Key).HasColumnType("varchar(255)").IsRequired();
+
+            entity.Property(p => p.Message).HasColumnType("varchar(max)").IsRequired();
+
+            entity.Property(p => p.EntryDate).HasColumnType("datetime").IsRequired();
         }
     }
 }

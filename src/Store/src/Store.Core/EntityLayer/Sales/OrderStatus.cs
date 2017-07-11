@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 
 namespace Store.Core.EntityLayer.Sales
 {
@@ -26,5 +27,7 @@ namespace Store.Core.EntityLayer.Sales
         public DateTime? LastUpdateDateTime { get; set; }
 
         public Byte[] Timestamp { get; set; }
+
+        public virtual Collection<Order> Orders { get; set; }
     }
 }

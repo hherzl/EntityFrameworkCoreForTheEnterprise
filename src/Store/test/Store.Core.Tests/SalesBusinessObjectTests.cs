@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Store.Core.BusinessLayer;
 using Store.Core.EntityLayer.Sales;
 using Xunit;
 
@@ -115,7 +116,7 @@ namespace Store.Core.Tests
                 // Assert
                 if (response.DidError)
                 {
-                    Assert.True(response.ErrorMessage == String.Format("Order with ID: {0} cannot be deleted, because has dependencies. Please contact to technical support for more details", id));
+                    Assert.True(response.ErrorMessage == String.Format(SalesDisplays.RemoveOrderExceptionMessage, id));
                 }
             }
         }

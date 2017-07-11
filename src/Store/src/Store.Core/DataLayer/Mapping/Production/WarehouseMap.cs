@@ -25,10 +25,7 @@ namespace Store.Core.DataLayer.Mapping.Production
 
             entity.Property(p => p.LastUpdateDateTime).HasColumnType("datetime");
 
-            entity
-                .Property(p => p.Timestamp)
-                .ValueGeneratedOnAddOrUpdate()
-                .IsConcurrencyToken();
+            entity.Property(p => p.Timestamp).ValueGeneratedOnAddOrUpdate().IsConcurrencyToken();
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Store.Core.BusinessLayer
         {
         }
 
-        public async Task<IListModelResponse<Customer>> GetCustomersAsync(Int32 pageSize, Int32 pageNumber)
+        public async Task<IListModelResponse<Customer>> GetCustomersAsync(Int32 pageSize = 0, Int32 pageNumber = 0)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetCustomersAsync));
 
@@ -38,7 +38,7 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IListModelResponse<Shipper>> GetShippersAsync(Int32 pageSize, Int32 pageNumber)
+        public async Task<IListModelResponse<Shipper>> GetShippersAsync(Int32 pageSize = 0, Int32 pageNumber = 0)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetShippersAsync));
 
@@ -56,7 +56,7 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IPagingModelResponse<OrderInfo>> GetOrdersAsync(Int32 pageSize, Int32 pageNumber, Int32? customerID = null, Int32? employeeID = null, Int32? shipperID = null)
+        public async Task<IPagingModelResponse<OrderInfo>> GetOrdersAsync(Int32 pageSize = 0, Int32 pageNumber = 0, Int32? customerID = null, Int32? employeeID = null, Int32? shipperID = null)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetOrdersAsync));
 
@@ -118,9 +118,7 @@ namespace Store.Core.BusinessLayer
 
                             if (product == null)
                             {
-                                throw new NonExistingProductException(
-                                    String.Format("Sent order has a non existing product with ID: '{0}', order has been cancelled.", detail.ProductID)
-                                );
+                                throw new NonExistingProductException(String.Format(SalesDisplays.NonExistingProductExceptionMessage, detail.ProductID));
                             }
                             else
                             {
@@ -129,9 +127,7 @@ namespace Store.Core.BusinessLayer
 
                             if (product.Discontinued == true)
                             {
-                                throw new AddOrderWithDiscontinuedProductException(
-                                    String.Format("Product with ID: '{0}' is discontinued, order has been cancelled.", product.ProductID)
-                                );
+                                throw new AddOrderWithDiscontinuedProductException(String.Format(SalesDisplays.AddOrderWithDiscontinuedProductExceptionMessage, product.ProductID));
                             }
 
                             detail.UnitPrice = product.UnitPrice;
@@ -171,6 +167,8 @@ namespace Store.Core.BusinessLayer
                         response.Model = header;
 
                         transaction.Commit();
+
+                        Logger.LogInformation(SalesDisplays.CreateOrderMessage);
                     }
                     catch (Exception ex)
                     {
@@ -246,10 +244,12 @@ namespace Store.Core.BusinessLayer
 
                 if (response.Model?.OrderDetails.Count > 0)
                 {
-                    throw new ForeignKeyDependencyException(
-                        String.Format("Order with ID: {0} cannot be deleted, because has dependencies. Please contact to technical support for more details", id)
-                        );
+                    throw new ForeignKeyDependencyException(String.Format(SalesDisplays.RemoveOrderExceptionMessage, id));
                 }
+
+                await SalesRepository.DeleteOrderAsync(response.Model);
+
+                Logger?.LogInformation(SalesDisplays.DeleteOrderMessage);
             }
             catch (Exception ex)
             {

@@ -16,7 +16,7 @@ namespace Store.Core.BusinessLayer
         {
         }
 
-        public async Task<IListModelResponse<Product>> GetProductsAsync(Int32 pageSize, Int32 pageNumber)
+        public async Task<IListModelResponse<Product>> GetProductsAsync(Int32 pageSize = 0, Int32 pageNumber = 0)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetProductsAsync));
 
@@ -34,7 +34,7 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IListModelResponse<Warehouse>> GetWarehousesAsync(Int32 pageSize, Int32 pageNumber)
+        public async Task<IListModelResponse<Warehouse>> GetWarehousesAsync(Int32 pageSize = 0, Int32 pageNumber = 0)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetWarehousesAsync));
 
