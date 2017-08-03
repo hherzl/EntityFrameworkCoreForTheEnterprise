@@ -41,8 +41,6 @@ namespace Store.API
             services.AddScoped<IUserInfo, UserInfo>();
 
             services.AddScoped<ILogger, Logger<BusinessObject>>();
-            //services.AddScoped<ILogger, Logger<ProductionBusinessObject>>();
-            //services.AddScoped<ILogger, Logger<HumanResourcesBusinessObject>>();
 
             services.AddScoped<IHumanResourcesBusinessObject, HumanResourcesBusinessObject>();
             services.AddScoped<IProductionBusinessObject, ProductionBusinessObject>();

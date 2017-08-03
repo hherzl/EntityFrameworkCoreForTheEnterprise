@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Store.Core.Mocks
+namespace Store.Mocker
 {
-    public static class LoggerMocker
+    public class LoggerMocker
     {
         public static ILogger<T> GetLogger<T>()
         {

@@ -17,10 +17,15 @@ insert into [Production].[Product]
 insert into [Production].[Warehouse]
     values ('W0001', 'Warehouse 0001', @userName, getdate(), null, null, null)
 
+insert into [Production].[Warehouse]
+    values ('W0002', 'Warehouse 0002', @userName, getdate(), null, null, null)
+
 insert into [Production].[ProductInventory]
-    values (1, 'W0001', 100000, 100000, @userName, getdate(), null, null, null)
+    values (1, 'W0001', 1000000, 1000000, @userName, getdate(), null, null, null)
 insert into [Production].[ProductInventory]
-    values (2, 'W0001', 100000, 100000, @userName, getdate(), null, null, null)
+    values (2, 'W0002', 2000000, 2000000, @userName, getdate(), null, null, null)
+insert into [Production].[ProductInventory]
+    values (3, 'W0001', 1000000, 1000000, @userName, getdate(), null, null, null)
 
 insert into [Sales].[Customer]
     values ('Best Buy', 'Colleen Dunn', @userName, getdate(), null, null, null)
@@ -38,4 +43,10 @@ insert into [Sales].[Shipper]
 
 insert into [Sales].[OrderStatus]
     values (100, 'Created', @userName, getdate(), null, null, null)
+insert into [Sales].[OrderStatus]
+    values (200, 'Acepted', @userName, getdate(), null, null, null)
+insert into [Sales].[OrderStatus]
+    values (300, 'Shipped', @userName, getdate(), null, null, null)
+insert into [Sales].[OrderStatus]
+    values (400, 'Delivered', @userName, getdate(), null, null, null)
 go

@@ -3,13 +3,49 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Store.Core.EntityLayer.Sales;
-using Xunit;
 
-namespace Store.Core.Mocks
+namespace Store.Mocker
 {
-    public class OrderMockingTests
+    public class Program
     {
-        private async Task CreateData(DateTime startDate, DateTime endDate, Int32 ordersLimitPerDay)
+        public static void Main(String[] args)
+        {
+            var task = new Task(MockAsync);
+
+            task.Start();
+
+            task.Wait();
+
+            Console.ReadLine();
+        }
+
+        static async void MockAsync()
+        {
+            var year = DateTime.Now.Year;
+            var ordersLimitPerDay = 10;
+
+            var args = Environment.GetCommandLineArgs();
+
+            foreach (var arg in args)
+            {
+                if (arg.StartsWith("/year:"))
+                {
+                    year = Convert.ToInt32(arg.Replace("/year:", String.Empty));
+                }
+                else if (arg.StartsWith("/ordersLimitPerDay:"))
+                {
+                    ordersLimitPerDay = Convert.ToInt32(arg.Replace("/ordersLimitPerDay:", String.Empty));
+                }
+            }
+
+            await CreateDataAsync(
+                    startDate: new DateTime(year, 1, 1),
+                    endDate: new DateTime(year, DateTime.Now.Month, DateTime.DaysInMonth(year, DateTime.Now.Month)),
+                    ordersLimitPerDay: ordersLimitPerDay
+                );
+        }
+
+        static async Task CreateDataAsync(DateTime startDate, DateTime endDate, Int32 ordersLimitPerDay)
         {
             var date = new DateTime(startDate.Year, startDate.Month, startDate.Day);
 
@@ -83,16 +119,6 @@ namespace Store.Core.Mocks
 
                 date = date.AddDays(1);
             }
-        }
-
-        [Fact]
-        public async Task CreateOrders()
-        {
-            await CreateData(
-                startDate: new DateTime(DateTime.Now.Year, 1, 1),
-                endDate: new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month)),
-                ordersLimitPerDay: 10
-            );
         }
     }
 }

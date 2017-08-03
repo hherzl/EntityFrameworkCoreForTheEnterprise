@@ -1,12 +1,13 @@
 ﻿using Microsoft.Extensions.Options;
+using Store.Core;
 using Store.Core.BusinessLayer;
 using Store.Core.BusinessLayer.Contracts;
 using Store.Core.DataLayer;
 using Store.Core.DataLayer.Mapping;
 
-namespace Store.Core.Mocks
+namespace Store.Mocker
 {
-    public static class BusinessObjectMocker
+    public class BusinessObjectMocker
     {
         public static IHumanResourcesBusinessObject GetHumanResourcesBusinessObject()
         {
@@ -16,9 +17,7 @@ namespace Store.Core.Mocks
 
             var appSettings = Options.Create(AppSettingsMocker.Default);
 
-            var entityMapper = new StoreEntityMapper() as IEntityMapper;
-
-            return new HumanResourcesBusinessObject(logger, userInfo, new StoreDbContext(appSettings, entityMapper)) as IHumanResourcesBusinessObject;
+            return new HumanResourcesBusinessObject(logger, userInfo, new StoreDbContext(appSettings, new StoreEntityMapper()));
         }
 
         public static IProductionBusinessObject GetProductionBusinessObject()
@@ -29,9 +28,7 @@ namespace Store.Core.Mocks
 
             var appSettings = Options.Create(AppSettingsMocker.Default);
 
-            var entityMapper = new StoreEntityMapper() as IEntityMapper;
-
-            return new ProductionBusinessObject(logger, userInfo, new StoreDbContext(appSettings, entityMapper)) as IProductionBusinessObject;
+            return new ProductionBusinessObject(logger, userInfo, new StoreDbContext(appSettings, new StoreEntityMapper()));
         }
 
         public static ISalesBusinessObject GetSalesBusinessObject()
@@ -42,9 +39,7 @@ namespace Store.Core.Mocks
 
             var appSettings = Options.Create(AppSettingsMocker.Default);
 
-            var entityMapper = new StoreEntityMapper() as IEntityMapper;
-
-            return new SalesBusinessObject(logger, userInfo, new StoreDbContext(appSettings, entityMapper)) as ISalesBusinessObject;
+            return new SalesBusinessObject(logger, userInfo, new StoreDbContext(appSettings, new StoreEntityMapper()));
         }
     }
 }

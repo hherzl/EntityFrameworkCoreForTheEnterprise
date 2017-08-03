@@ -30,7 +30,7 @@ namespace Store.API.Controllers
         [Route("Product")]
         public async Task<IActionResult> GetProductsAsync(Int32? pageSize = 10, Int32? pageNumber = 1)
         {
-            Logger?.LogInformation("{0} has been invoked", nameof(GetProductsAsync));
+            Logger?.LogDebug("{0} has been invoked", nameof(GetProductsAsync));
 
             var response = await ProductionBusinessObject.GetProductsAsync((Int32)pageSize, (Int32)pageNumber);
 

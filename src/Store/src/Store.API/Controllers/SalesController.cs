@@ -37,7 +37,7 @@ namespace Store.API.Controllers
         [Route("Order")]
         public async Task<IActionResult> GetOrdersAsync(Int32? pageSize = 10, Int32? pageNumber = 1)
         {
-            Logger?.LogInformation("{0} has been invoked", nameof(GetOrdersAsync));
+            Logger?.LogDebug("{0} has been invoked", nameof(GetOrdersAsync));
 
             var response = await SalesBusinessObject.GetOrdersAsync((Int32)pageSize, (Int32)pageNumber);
 
@@ -48,7 +48,7 @@ namespace Store.API.Controllers
         [Route("Order/{id}")]
         public async Task<IActionResult> GetOrderAsync(Int32 id)
         {
-            Logger?.LogInformation("{0} has been invoked", nameof(GetOrderAsync));
+            Logger?.LogDebug("{0} has been invoked", nameof(GetOrderAsync));
 
             var response = await SalesBusinessObject.GetOrderAsync(id);
 
@@ -59,7 +59,7 @@ namespace Store.API.Controllers
         [Route("CreateOrderViewModel")]
         public async Task<IActionResult> GetCreateOrderRequestAsync()
         {
-            Logger?.LogInformation("{0} has been invoked", nameof(GetCreateOrderRequestAsync));
+            Logger?.LogDebug("{0} has been invoked", nameof(GetCreateOrderRequestAsync));
 
             var response = new SingleModelResponse<CreateOrderViewModel>() as ISingleModelResponse<CreateOrderViewModel>;
 
@@ -86,7 +86,7 @@ namespace Store.API.Controllers
         [Route("Order")]
         public async Task<IActionResult> CreateOrderAsync([FromBody] OrderViewModel value)
         {
-            Logger?.LogInformation("{0} has been invoked", nameof(CreateOrderAsync));
+            Logger?.LogDebug("{0} has been invoked", nameof(CreateOrderAsync));
 
             var response = await SalesBusinessObject.CreateOrderAsync(value.GetOrder(), value.GetOrderDetails().ToArray());
 
@@ -97,7 +97,7 @@ namespace Store.API.Controllers
         [Route("CloneOrder/{id}")]
         public async Task<IActionResult> CloneOrderAsync(Int32 id)
         {
-            Logger?.LogInformation("{0} has been invoked", nameof(CloneOrderAsync));
+            Logger?.LogDebug("{0} has been invoked", nameof(CloneOrderAsync));
 
             var response = await SalesBusinessObject.CloneOrderAsync(id);
 
@@ -108,7 +108,7 @@ namespace Store.API.Controllers
         [Route("Order/{id}")]
         public async Task<IActionResult> RemoveOrderAsync(Int32 id)
         {
-            Logger?.LogInformation("{0} has been invoked", nameof(RemoveOrderAsync));
+            Logger?.LogDebug("{0} has been invoked", nameof(RemoveOrderAsync));
 
             var response = await SalesBusinessObject.RemoveOrderAsync(id);
 

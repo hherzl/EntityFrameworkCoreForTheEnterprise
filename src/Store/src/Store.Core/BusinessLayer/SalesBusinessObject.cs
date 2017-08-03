@@ -118,7 +118,9 @@ namespace Store.Core.BusinessLayer
 
                             if (product == null)
                             {
-                                throw new NonExistingProductException(String.Format(SalesDisplays.NonExistingProductExceptionMessage, detail.ProductID));
+                                throw new NonExistingProductException(
+                                    String.Format(SalesDisplays.NonExistingProductExceptionMessage, detail.ProductID)
+                                    );
                             }
                             else
                             {
@@ -127,7 +129,9 @@ namespace Store.Core.BusinessLayer
 
                             if (product.Discontinued == true)
                             {
-                                throw new AddOrderWithDiscontinuedProductException(String.Format(SalesDisplays.AddOrderWithDiscontinuedProductExceptionMessage, product.ProductID));
+                                throw new AddOrderWithDiscontinuedProductException(
+                                    String.Format(SalesDisplays.AddOrderWithDiscontinuedProductExceptionMessage, product.ProductID)
+                                    );
                             }
 
                             detail.UnitPrice = product.UnitPrice;
