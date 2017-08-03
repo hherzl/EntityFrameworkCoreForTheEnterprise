@@ -9,35 +9,37 @@ namespace Store.Core.DataLayer.Mapping.Production
     {
         public void Map(ModelBuilder modelBuilder)
         {
-            var entity = modelBuilder.Entity<ProductInventory>();
+            modelBuilder.Entity<ProductInventory>(entity =>
+            {
+                entity.ToTable("ProductInventory", "Production");
 
-            entity.ToTable("ProductInventory", "Production");
+                entity.HasKey(p => p.ProductInventoryID);
 
-            entity.HasKey(p => p.ProductInventoryID);
+                entity.Property(p => p.ProductInventoryID).UseSqlServerIdentityColumn();
 
-            entity.Property(p => p.ProductInventoryID).UseSqlServerIdentityColumn();
+                entity.Property(p => p.ProductID).HasColumnType("int").IsRequired();
+                entity.Property(p => p.WarehouseID).HasColumnType("varchar(5)").IsRequired();
+                entity.Property(p => p.Quantity).HasColumnType("int").IsRequired();
+                entity.Property(p => p.Stocks).HasColumnType("int").IsRequired();
+                entity.Property(p => p.CreationUser).HasColumnType("varchar(25)").IsRequired();
+                entity.Property(p => p.CreationDateTime).HasColumnType("datetime").IsRequired();
+                entity.Property(p => p.LastUpdateUser).HasColumnType("varchar(25)");
+                entity.Property(p => p.LastUpdateDateTime).HasColumnType("datetime");
 
-            entity.HasOne(p => p.ProductFk).WithMany(b => b.ProductInventories).HasForeignKey(p => p.ProductID).HasConstraintName("fk_ProductInventory_ProductID_Product");
+                entity.Property(p => p.Timestamp).ValueGeneratedOnAddOrUpdate().IsConcurrencyToken();
 
-            entity.HasOne(p => p.WarehouseFk).WithMany(b => b.ProductInventories).HasForeignKey(p => p.WarehouseID).HasConstraintName("fk_ProductInventory_WarehouseID_Warehouse");
+                entity
+                    .HasOne(p => p.ProductFk)
+                    .WithMany(b => b.ProductInventories)
+                    .HasForeignKey(p => p.ProductID)
+                    .HasConstraintName("fk_ProductInventory_ProductID_Product");
 
-            entity.Property(p => p.ProductID).HasColumnType("int").IsRequired();
-
-            entity.Property(p => p.WarehouseID).HasColumnType("varchar(5)").IsRequired();
-
-            entity.Property(p => p.Quantity).HasColumnType("int").IsRequired();
-
-            entity.Property(p => p.Stocks).HasColumnType("int").IsRequired();
-
-            entity.Property(p => p.CreationUser).HasColumnType("varchar(25)").IsRequired();
-
-            entity.Property(p => p.CreationDateTime).HasColumnType("datetime").IsRequired();
-
-            entity.Property(p => p.LastUpdateUser).HasColumnType("varchar(25)");
-
-            entity.Property(p => p.LastUpdateDateTime).HasColumnType("datetime");
-
-            entity.Property(p => p.Timestamp).ValueGeneratedOnAddOrUpdate().IsConcurrencyToken();
+                entity
+                    .HasOne(p => p.WarehouseFk)
+                    .WithMany(b => b.ProductInventories)
+                    .HasForeignKey(p => p.WarehouseID)
+                    .HasConstraintName("fk_ProductInventory_WarehouseID_Warehouse");
+            });
         }
     }
 }
