@@ -1,6 +1,15 @@
 declare @userName varchar(25)
 select @userName = 'seed'
 
+insert into [dbo].[Country]
+    values (1, 'USA', @userName, getdate(), null, null, null)
+
+insert into [dbo].[Currency]
+    values ('US Dollar', '$', @userName, getdate(), null, null, null)
+
+insert into [dbo].[CountryCurrency]
+    values (1, 1000, @userName, getdate(), null, null, null)
+
 insert into [HumanResources].[Employee]
     values ('John', null, 'Doe', getdate(), @userName, getdate(), null, null, null)
 
@@ -49,4 +58,9 @@ insert into [Sales].[OrderStatus]
     values (300, 'Shipped', @userName, getdate(), null, null, null)
 insert into [Sales].[OrderStatus]
     values (400, 'Delivered', @userName, getdate(), null, null, null)
+
+insert into [Sales].[PaymentMethod]
+    values(newid(), 'Credit Card', 'Payment with credit card', @userName, getdate(), null, null, null)
+insert into [Sales].[PaymentMethod]
+    values(newid(), 'Debit Card', 'Payment with debit card', @userName, getdate(), null, null, null)
 go

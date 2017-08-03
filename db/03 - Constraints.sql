@@ -9,6 +9,18 @@ go
 alter table [ChangeLogExclusion]
 	add constraint [PK_ChangeLogExclusion] primary key(ChangeLogExclusionID)
 
+alter table [dbo].[Country]
+	add constraint [PK_Country] primary key([CountryID])
+go
+
+alter table [dbo].[Currency]
+	add constraint [PK_Currency] primary key([CurrencyID])
+go
+
+alter table [dbo].[CountryCurrency]
+	add constraint [PK_CountryCurrency] primary key([CountryCurrencyID])
+go
+
 alter table [HumanResources].[Employee]
 	add constraint [PK_HumanResources_Employee] primary key (EmployeeID)
 go
@@ -45,12 +57,20 @@ alter table [Sales].[OrderStatus]
 	add constraint [PK_Sales_OrderStatus] primary key (OrderStatusID)
 go
 
+alter table [Sales].[PaymentMethod]
+	add constraint [PK_Sales_PaymentMethod] primary key (PaymentMethodID)
+go
+
 alter table [Sales].[Order]
 	add constraint [PK_Sales_Order] primary key (OrderID)
 go
 
 alter table [Sales].[OrderDetail]
 	add constraint [PK_Sales_OrderDetail] primary key (OrderDetailID)
+go
+
+alter table [dbo].[CountryCurrency]
+	add constraint [U_CountryCurrency] unique (CountryID, CurrencyID)
 go
 
 alter table [Sales].[OrderDetail]

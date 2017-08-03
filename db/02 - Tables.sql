@@ -23,7 +23,47 @@ create table [ChangeLogExclusion]
 (
 	[ChangeLogExclusionID] varchar(25) not null,
 	[TableName] varchar(128) not null,
-	[ColumnName] varchar(128) not null
+	[ColumnName] varchar(128) not null,
+	[CreationUser] varchar(25) not null,
+	[CreationDateTime] datetime not null,
+	[LastUpdateUser] varchar(25) null,
+	[LastUpdateDateTime] datetime null,
+	[Timestamp] rowversion null
+)
+
+create table [dbo].[Country]
+(
+	[CountryID] int not null,
+	[CountryName] varchar(100) not null,
+	[CreationUser] varchar(25) not null,
+	[CreationDateTime] datetime not null,
+	[LastUpdateUser] varchar(25) null,
+	[LastUpdateDateTime] datetime null,
+	[Timestamp] rowversion null
+)
+
+create table [dbo].[Currency]
+(
+	[CurrencyID] smallint not null identity(1000, 1000),
+	[CurrencyName] varchar(50) not null,
+	[CurrencySymbol] varchar(1) not null,
+	[CreationUser] varchar(25) not null,
+	[CreationDateTime] datetime not null,
+	[LastUpdateUser] varchar(25) null,
+	[LastUpdateDateTime] datetime null,
+	[Timestamp] rowversion null
+)
+
+create table [dbo].[CountryCurrency]
+(
+	[CountryCurrencyID] int not null identity(1, 1),
+	[CountryID] int not null,
+	[CurrencyID] smallint not null,
+	[CreationUser] varchar(25) not null,
+	[CreationDateTime] datetime not null,
+	[LastUpdateUser] varchar(25) null,
+	[LastUpdateDateTime] datetime null,
+	[Timestamp] rowversion null
 )
 
 create table [HumanResources].[Employee]
@@ -91,6 +131,29 @@ create table [Production].[ProductInventory]
 	[Timestamp] rowversion null
 )
 
+create table [Sales].[OrderStatus]
+(
+	[OrderStatusID] smallint not null,
+	[Description] varchar(100) not null,
+	[CreationUser] varchar(25) not null,
+	[CreationDateTime] datetime not null,
+	[LastUpdateUser] varchar(25) null,
+	[LastUpdateDateTime] datetime null,
+	[Timestamp] rowversion null
+)
+
+create table [Sales].[PaymentMethod]
+(
+	[PaymentMethodID] uniqueidentifier not null,
+	[PaymentMethodName] varchar(50) not null,
+	[PaymentMethodDescription] varchar(255) not null,
+	[CreationUser] varchar(25) not null,
+	[CreationDateTime] datetime not null,
+	[LastUpdateUser] varchar(25) null,
+	[LastUpdateDateTime] datetime null,
+	[Timestamp] rowversion null
+)
+
 create table [Sales].[Customer]
 (
 	[CustomerID] int not null identity(1, 1),
@@ -115,27 +178,18 @@ create table [Sales].[Shipper]
 	[Timestamp] rowversion null
 )
 
-create table [Sales].[OrderStatus]
-(
-	[OrderStatusID] smallint not null,
-	[Description] varchar(100) not null,
-	[CreationUser] varchar(25) not null,
-	[CreationDateTime] datetime not null,
-	[LastUpdateUser] varchar(25) null,
-	[LastUpdateDateTime] datetime null,
-	[Timestamp] rowversion null
-)
-
 create table [Sales].[Order]
 (
 	[OrderID] int not null identity(1, 1),
 	[OrderStatusID] smallint not null,
-	[OrderDate] datetime not null,
 	[CustomerID] int not null,
 	[EmployeeID] int null,
 	[ShipperID] int null,
+	[OrderDate] datetime not null,
 	[Total] decimal(12, 4) not null,
-	[Comments] varchar(255) null,
+	[CurrencyID] smallint null,
+	[PaymentMethodID] uniqueidentifier null,
+	[Comments] varchar(max) null,
 	[CreationUser] varchar(25) not null,
 	[CreationDateTime] datetime not null,
 	[LastUpdateUser] varchar(25) null,
