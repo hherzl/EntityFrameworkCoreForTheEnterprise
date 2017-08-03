@@ -9,19 +9,17 @@ namespace Store.Core.DataLayer.Mapping
     {
         public void Map(ModelBuilder modelBuilder)
         {
-            var entity = modelBuilder.Entity<EventLog>();
+            modelBuilder.Entity<EventLog>(entity =>
+            {
+                entity.ToTable("EventLog", "dbo");
 
-            entity.ToTable("EventLog", "dbo");
+                entity.HasKey(p => p.EventLogID);
 
-            entity.HasKey(p => p.EventLogID);
-
-            entity.Property(p => p.EventType).HasColumnType("int").IsRequired();
-
-            entity.Property(p => p.Key).HasColumnType("varchar(255)").IsRequired();
-
-            entity.Property(p => p.Message).HasColumnType("varchar(max)").IsRequired();
-
-            entity.Property(p => p.EntryDate).HasColumnType("datetime").IsRequired();
+                entity.Property(p => p.EventType).HasColumnType("int").IsRequired();
+                entity.Property(p => p.Key).HasColumnType("varchar(255)").IsRequired();
+                entity.Property(p => p.Message).HasColumnType("varchar(max)").IsRequired();
+                entity.Property(p => p.EntryDate).HasColumnType("datetime").IsRequired();
+            });
         }
     }
 }
