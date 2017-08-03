@@ -1,10 +1,10 @@
 cls
 set initialPath=%cd%
 set srcPath=%cd%\src\Store.Core
-set mockPath=%cd%\test\Store.Core.Mocks
+set mockPath=%cd%\src\Store.Mocker
 cd %srcPath%
 dotnet build
 cd %mockPath%
-dotnet test
+dotnet run
 cd %initialPath%
 pause

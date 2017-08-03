@@ -56,7 +56,7 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IPagingModelResponse<OrderInfo>> GetOrdersAsync(Int32 pageSize = 0, Int32 pageNumber = 0, Int32? customerID = null, Int32? employeeID = null, Int32? shipperID = null)
+        public async Task<IPagingModelResponse<OrderInfo>> GetOrdersAsync(Int32 pageSize = 0, Int32 pageNumber = 0, Int16? orderStatusID = null, Int32? customerID = null, Int32? employeeID = null, Int32? shipperID = null)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetOrdersAsync));
 
@@ -67,7 +67,7 @@ namespace Store.Core.BusinessLayer
                 response.PageSize = pageSize;
                 response.PageNumber = pageNumber;
 
-                var query = SalesRepository.GetOrders(pageSize, pageNumber, customerID, employeeID, shipperID);
+                var query = SalesRepository.GetOrders(pageSize, pageNumber, orderStatusID, customerID, employeeID, shipperID);
 
                 response.ItemCount = await query.CountAsync();
                 response.Model = await query.Paging(pageSize, pageNumber).ToListAsync();
