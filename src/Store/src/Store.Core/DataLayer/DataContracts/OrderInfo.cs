@@ -22,6 +22,10 @@ namespace Store.Core.DataLayer.DataContracts
 
         public Decimal? Total { get; set; }
 
+        public Int16? CurrencyID { get; set; }
+
+        public Guid? PaymentMethodID { get; set; }
+
         public String Comments { get; set; }
 
         public String CreationUser { get; set; }
@@ -51,5 +55,13 @@ namespace Store.Core.DataLayer.DataContracts
         public String ShipperCompanyName { get; set; }
 
         public String ShipperContactName { get; set; }
+
+        public String CurrencyCurrencyName { get; set; }
+
+        public String CurrencyCurrencySymbol { get; set; }
+
+        public String PaymentMethodPaymentMethodName { get; set; }
+
+        public String PaymentMethodPaymentMethodDescription { get; set; }
     }
 }

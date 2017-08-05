@@ -21,14 +21,9 @@ create table [ChangeLog]
 
 create table [ChangeLogExclusion]
 (
-	[ChangeLogExclusionID] varchar(25) not null,
-	[TableName] varchar(128) not null,
-	[ColumnName] varchar(128) not null,
-	[CreationUser] varchar(25) not null,
-	[CreationDateTime] datetime not null,
-	[LastUpdateUser] varchar(25) null,
-	[LastUpdateDateTime] datetime null,
-	[Timestamp] rowversion null
+	[ChangeLogExclusionID] int not null identity(1, 1),
+	[EntityName] varchar(128) not null,
+	[PropertyName] varchar(128) not null
 )
 
 create table [dbo].[Country]

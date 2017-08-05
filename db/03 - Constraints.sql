@@ -76,3 +76,7 @@ go
 alter table [Sales].[OrderDetail]
 	add constraint [U_Sales_OrderDetail] unique (OrderID, ProductID)
 go
+
+alter table [ChangeLogExclusion]
+	add constraint [U_ChangeLogExclusion] unique(EntityName, PropertyName)
+go

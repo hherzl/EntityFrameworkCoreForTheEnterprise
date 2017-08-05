@@ -35,11 +35,11 @@ namespace Store.API.Controllers
 
         [HttpGet]
         [Route("Order")]
-        public async Task<IActionResult> GetOrdersAsync(Int32? pageSize = 10, Int32? pageNumber = 1)
+        public async Task<IActionResult> GetOrdersAsync(Int32? pageSize = 10, Int32? pageNumber = 1, Int16? currencyID = null, Int32? customerID = null, Int32? employeeID = null, Int16? orderStatusID = null, Guid? paymentMethodID = null, Int32? shipperID = null)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetOrdersAsync));
 
-            var response = await SalesBusinessObject.GetOrdersAsync((Int32)pageSize, (Int32)pageNumber);
+            var response = await SalesBusinessObject.GetOrdersAsync((Int32)pageSize, (Int32)pageNumber, currencyID = null, customerID = null, employeeID = null, orderStatusID = null, paymentMethodID, shipperID);
 
             return response.ToHttpResponse();
         }

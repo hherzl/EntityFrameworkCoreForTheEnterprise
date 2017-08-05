@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Store.Core.EntityLayer;
+using Store.Core.EntityLayer.Dbo;
 
 namespace Store.Core.DataLayer.Contracts
 {

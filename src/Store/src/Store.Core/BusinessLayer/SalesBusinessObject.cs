@@ -8,6 +8,7 @@ using Store.Core.BusinessLayer.Responses;
 using Store.Core.DataLayer;
 using Store.Core.DataLayer.DataContracts;
 using Store.Core.DataLayer.Repositories;
+using Store.Core.EntityLayer.Dbo;
 using Store.Core.EntityLayer.Production;
 using Store.Core.EntityLayer.Sales;
 
@@ -56,7 +57,7 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IPagingModelResponse<OrderInfo>> GetOrdersAsync(Int32 pageSize = 0, Int32 pageNumber = 0, Int16? orderStatusID = null, Int32? customerID = null, Int32? employeeID = null, Int32? shipperID = null)
+        public async Task<IPagingModelResponse<OrderInfo>> GetOrdersAsync(Int32 pageSize = 10, Int32 pageNumber = 1, Int16? currencyID = null, Int32? customerID = null, Int32? employeeID = null, Int16? orderStatusID = null, Guid? paymentMethodID = null, Int32? shipperID = null)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetOrdersAsync));
 
@@ -67,9 +68,10 @@ namespace Store.Core.BusinessLayer
                 response.PageSize = pageSize;
                 response.PageNumber = pageNumber;
 
-                var query = SalesRepository.GetOrders(pageSize, pageNumber, orderStatusID, customerID, employeeID, shipperID);
+                var query = SalesRepository.GetOrders(pageSize, pageNumber, currencyID, customerID, employeeID, orderStatusID, paymentMethodID, shipperID);
 
                 response.ItemCount = await query.CountAsync();
+
                 response.Model = await query.Paging(pageSize, pageNumber).ToListAsync();
             }
             catch (Exception ex)
@@ -246,14 +248,67 @@ namespace Store.Core.BusinessLayer
             {
                 response.Model = await SalesRepository.GetOrderAsync(new Order(id));
 
-                if (response.Model?.OrderDetails.Count > 0)
+                if (response.Model != null)
                 {
-                    throw new ForeignKeyDependencyException(String.Format(SalesDisplays.RemoveOrderExceptionMessage, id));
+                    if (response.Model.OrderDetails.Count > 0)
+                    {
+                        throw new ForeignKeyDependencyException(String.Format(SalesDisplays.RemoveOrderExceptionMessage, id));
+                    }
+
+                    await SalesRepository.DeleteOrderAsync(response.Model);
+
+                    Logger?.LogInformation(SalesDisplays.DeleteOrderMessage);
                 }
+            }
+            catch (Exception ex)
+            {
+                response.SetError(ex, Logger);
+            }
 
-                await SalesRepository.DeleteOrderAsync(response.Model);
+            return response;
+        }
 
-                Logger?.LogInformation(SalesDisplays.DeleteOrderMessage);
+        public async Task<IListModelResponse<Currency>> GetCurrenciesAsync(Int32 pageSize = 10, Int32 pageNumber = 1)
+        {
+            Logger?.LogInformation("{0} has been invoked", nameof(GetCurrenciesAsync));
+
+            var response = new PagingModelResponse<Currency>();
+
+            try
+            {
+                response.PageSize = pageSize;
+                response.PageNumber = pageNumber;
+
+                var query = SalesRepository.GetCurrencies(pageSize, pageNumber);
+
+                response.ItemCount = await query.CountAsync();
+
+                response.Model = await query.Paging(pageSize, pageNumber).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                response.SetError(ex, Logger);
+            }
+
+            return response;
+        }
+
+        public async Task<IListModelResponse<PaymentMethod>> GetPaymentMethodsAsync(Int32 pageSize = 10, Int32 pageNumber = 1)
+        {
+            Logger?.LogInformation("{0} has been invoked", nameof(GetPaymentMethodsAsync));
+
+            var response = new PagingModelResponse<PaymentMethod>();
+
+            try
+            {
+                response.PageSize = pageSize;
+                response.PageNumber = pageNumber;
+
+                var query = SalesRepository.GetPaymentMethods(pageSize, pageNumber);
+
+                response.ItemCount = await query.CountAsync();
+
+                response.Model = await query.Paging(pageSize, pageNumber).ToListAsync();
             }
             catch (Exception ex)
             {

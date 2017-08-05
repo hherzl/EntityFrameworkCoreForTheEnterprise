@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Store.Core.DataLayer.Contracts;
-using Store.Core.EntityLayer;
+using Store.Core.EntityLayer.Dbo;
 
 namespace Store.Core.DataLayer.Repositories
 {

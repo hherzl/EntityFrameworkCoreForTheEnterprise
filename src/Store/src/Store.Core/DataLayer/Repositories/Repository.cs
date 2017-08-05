@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Store.Core.EntityLayer;
+using Store.Core.EntityLayer.Dbo;
 
 namespace Store.Core.DataLayer.Repositories
 {

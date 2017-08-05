@@ -64,15 +64,12 @@ namespace Store.Mocker
                                 var pageSize = 10;
                                 var pageNumber = 1;
 
-                                var customerResponse = await salesBusinessObject.GetCustomersAsync(pageSize, pageNumber);
-                                var employeesResponse = await humanResourcesBusinessObject.GetEmployeesAsync(pageSize, pageNumber);
-                                var shippersResponse = await salesBusinessObject.GetShippersAsync(pageSize, pageNumber);
-                                var productsResponse = await productionBusinessObject.GetProductsAsync(pageSize, pageNumber);
-
-                                var customers = customerResponse.Model.ToList();
-                                var employees = employeesResponse.Model.ToList();
-                                var shippers = shippersResponse.Model.ToList();
-                                var products = productsResponse.Model.ToList();
+                                var customers = (await salesBusinessObject.GetCustomersAsync(pageSize, pageNumber)).Model.ToList();
+                                var employees = (await humanResourcesBusinessObject.GetEmployeesAsync(pageSize, pageNumber)).Model.ToList();
+                                var shippers = (await salesBusinessObject.GetShippersAsync(pageSize, pageNumber)).Model.ToList();
+                                var currencies = (await salesBusinessObject.GetCurrenciesAsync(pageSize, pageNumber)).Model.ToList();
+                                var paymentMethods = (await salesBusinessObject.GetPaymentMethodsAsync(pageSize, pageNumber)).Model.ToList();
+                                var products = (await productionBusinessObject.GetProductsAsync(pageSize, pageNumber)).Model.ToList();
 
                                 for (var i = 0; i < ordersLimitPerDay; i++)
                                 {
@@ -81,12 +78,18 @@ namespace Store.Mocker
                                     var selectedCustomer = random.Next(0, customers.Count - 1);
                                     var selectedEmployee = random.Next(0, employees.Count - 1);
                                     var selectedShipper = random.Next(0, shippers.Count - 1);
+                                    var selectedCurrency = random.Next(0, currencies.Count - 1);
+                                    var selectedPaymentMethod = random.Next(0, paymentMethods.Count - 1);
 
                                     header.OrderDate = date;
                                     header.OrderStatusID = 100;
+
                                     header.CustomerID = customers[selectedCustomer].CustomerID;
                                     header.EmployeeID = employees[selectedEmployee].EmployeeID;
                                     header.ShipperID = shippers[selectedShipper].ShipperID;
+                                    header.CurrencyID = currencies[selectedCurrency].CurrencyID;
+                                    header.PaymentMethodID = paymentMethods[selectedPaymentMethod].PaymentMethodID;
+
                                     header.CreationDateTime = date;
 
                                     var details = new List<OrderDetail>();

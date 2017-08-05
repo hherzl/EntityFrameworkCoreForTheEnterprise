@@ -1,6 +1,6 @@
 ﻿using System.Composition;
 using Microsoft.EntityFrameworkCore;
-using Store.Core.EntityLayer;
+using Store.Core.EntityLayer.Dbo;
 
 namespace Store.Core.DataLayer.Mapping
 {

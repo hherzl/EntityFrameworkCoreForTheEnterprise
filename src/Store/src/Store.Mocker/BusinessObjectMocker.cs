@@ -13,7 +13,7 @@ namespace Store.Mocker
         {
             var logger = LoggerMocker.GetLogger<IHumanResourcesBusinessObject>();
 
-            var userInfo = new UserInfo { Name = "admin" };
+            var userInfo = new UserInfo { Name = "mocker" };
 
             var appSettings = Options.Create(AppSettingsMocker.Default);
 
@@ -24,7 +24,7 @@ namespace Store.Mocker
         {
             var logger = LoggerMocker.GetLogger<IProductionBusinessObject>();
 
-            var userInfo = new UserInfo { Name = "admin" };
+            var userInfo = new UserInfo { Name = "mocker" };
 
             var appSettings = Options.Create(AppSettingsMocker.Default);
 
@@ -35,7 +35,7 @@ namespace Store.Mocker
         {
             var logger = LoggerMocker.GetLogger<ISalesBusinessObject>();
 
-            var userInfo = new UserInfo { Name = "admin" };
+            var userInfo = new UserInfo { Name = "mocker" };
 
             var appSettings = Options.Create(AppSettingsMocker.Default);
 

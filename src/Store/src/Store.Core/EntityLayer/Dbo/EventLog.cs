@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Store.Core.EntityLayer
+namespace Store.Core.EntityLayer.Dbo
 {
     public class EventLog : IEntity
     {
