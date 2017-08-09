@@ -21,7 +21,7 @@ namespace Store.API.Tests
                 var response = await controller.GetProductsAsync() as ObjectResult;
 
                 // Assert
-                var value = response.Value as IListModelResponse<Product>;
+                var value = response.Value as IListResponse<Product>;
 
                 Assert.False(value.DidError);
             }

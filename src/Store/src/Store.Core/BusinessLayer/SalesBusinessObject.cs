@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Store.Core.BusinessLayer.Contracts;
+using Store.Core.BusinessLayer.Requests;
 using Store.Core.BusinessLayer.Responses;
 using Store.Core.DataLayer;
 using Store.Core.DataLayer.DataContracts;
@@ -21,57 +22,24 @@ namespace Store.Core.BusinessLayer
         {
         }
 
-        public async Task<IListModelResponse<Customer>> GetCustomersAsync(Int32 pageSize = 0, Int32 pageNumber = 0)
+        public async Task<IPagingResponse<Customer>> GetCustomersAsync(Int32 pageSize = 0, Int32 pageNumber = 0)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetCustomersAsync));
 
-            var response = new ListModelResponse<Customer>();
+            var response = new PagingResponse<Customer>();
 
             try
             {
-                response.Model = await SalesRepository.GetCustomers(pageSize, pageNumber).ToListAsync();
-            }
-            catch (Exception ex)
-            {
-                response.SetError(ex, Logger);
-            }
+                // Get query
+                var query = SalesRepository
+                    .GetCustomers(pageSize, pageNumber);
 
-            return response;
-        }
+                // Set information for paging
+                response.PageSize = (Int32)pageSize;
+                response.PageNumber = (Int32)pageNumber;
+                response.ItemsCount = await query.CountAsync();
 
-        public async Task<IListModelResponse<Shipper>> GetShippersAsync(Int32 pageSize = 0, Int32 pageNumber = 0)
-        {
-            Logger?.LogInformation("{0} has been invoked", nameof(GetShippersAsync));
-
-            var response = new ListModelResponse<Shipper>();
-
-            try
-            {
-                response.Model = await SalesRepository.GetShippers(pageSize, pageNumber).ToListAsync();
-            }
-            catch (Exception ex)
-            {
-                response.SetError(ex, Logger);
-            }
-
-            return response;
-        }
-
-        public async Task<IPagingModelResponse<OrderInfo>> GetOrdersAsync(Int32 pageSize = 10, Int32 pageNumber = 1, Int16? currencyID = null, Int32? customerID = null, Int32? employeeID = null, Int16? orderStatusID = null, Guid? paymentMethodID = null, Int32? shipperID = null)
-        {
-            Logger?.LogInformation("{0} has been invoked", nameof(GetOrdersAsync));
-
-            var response = new PagingModelResponse<OrderInfo>();
-
-            try
-            {
-                response.PageSize = pageSize;
-                response.PageNumber = pageNumber;
-
-                var query = SalesRepository.GetOrders(pageSize, pageNumber, currencyID, customerID, employeeID, orderStatusID, paymentMethodID, shipperID);
-
-                response.ItemCount = await query.CountAsync();
-
+                // Retrieve items, set model for response
                 response.Model = await query.Paging(pageSize, pageNumber).ToListAsync();
             }
             catch (Exception ex)
@@ -82,11 +50,127 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<ISingleModelResponse<Order>> GetOrderAsync(Int32 id)
+        public async Task<IPagingResponse<Shipper>> GetShippersAsync(Int32 pageSize = 0, Int32 pageNumber = 0)
+        {
+            Logger?.LogInformation("{0} has been invoked", nameof(GetShippersAsync));
+
+            var response = new PagingResponse<Shipper>();
+
+            try
+            {
+                // Get query
+                var query = SalesRepository
+                    .GetShippers(pageSize, pageNumber);
+
+                // Set information for paging
+                response.PageSize = (Int32)pageSize;
+                response.PageNumber = (Int32)pageNumber;
+                response.ItemsCount = await query.CountAsync();
+
+                // Retrieve items, set model for response
+                response.Model = await query.Paging(pageSize, pageNumber).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                response.SetError(ex, Logger);
+            }
+
+            return response;
+        }
+
+        public async Task<IPagingResponse<Currency>> GetCurrenciesAsync(Int32 pageSize = 10, Int32 pageNumber = 1)
+        {
+            Logger?.LogInformation("{0} has been invoked", nameof(GetCurrenciesAsync));
+
+            var response = new PagingResponse<Currency>();
+
+            try
+            {
+                // Get query
+                var query = SalesRepository
+                    .GetCurrencies(pageSize, pageNumber);
+
+                // Set information for paging
+                response.PageSize = (Int32)pageSize;
+                response.PageNumber = (Int32)pageNumber;
+                response.ItemsCount = await query.CountAsync();
+
+                // Retrieve items, set model for response
+                response.Model = await query.Paging(pageSize, pageNumber).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                response.SetError(ex, Logger);
+            }
+
+            return response;
+        }
+
+        public async Task<IPagingResponse<PaymentMethod>> GetPaymentMethodsAsync(Int32 pageSize = 10, Int32 pageNumber = 1)
+        {
+            Logger?.LogInformation("{0} has been invoked", nameof(GetPaymentMethodsAsync));
+
+            var response = new PagingResponse<PaymentMethod>();
+
+            try
+            {
+                // Get query
+                var query = SalesRepository
+                    .GetPaymentMethods(pageSize, pageNumber);
+
+                // Set information for paging
+                response.PageSize = (Int32)pageSize;
+                response.PageNumber = (Int32)pageNumber;
+                response.ItemsCount = await query.CountAsync();
+
+                // Retrieve items, set model for response
+                response.Model = await query
+                    .Paging(pageSize, pageNumber)
+                    .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                response.SetError(ex, Logger);
+            }
+
+            return response;
+        }
+
+        public async Task<IPagingResponse<OrderInfo>> GetOrdersAsync(Int32 pageSize = 10, Int32 pageNumber = 1, Int16? currencyID = null, Int32? customerID = null, Int32? employeeID = null, Int16? orderStatusID = null, Guid? paymentMethodID = null, Int32? shipperID = null)
+        {
+            Logger?.LogInformation("{0} has been invoked", nameof(GetOrdersAsync));
+
+            var response = new PagingResponse<OrderInfo>();
+
+            try
+            {
+                // Get query
+                var query = SalesRepository
+                    .GetOrders(pageSize, pageNumber, currencyID, customerID, employeeID, orderStatusID, paymentMethodID, shipperID);
+
+                // Set information for paging
+                response.PageSize = (Int32)pageSize;
+                response.PageNumber = (Int32)pageNumber;
+                response.ItemsCount = await query.CountAsync();
+
+                // Retrieve items, set model for response
+                response.Model = await query
+                    .Paging(pageSize, pageNumber)
+                    .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                response.SetError(ex, Logger);
+            }
+
+            return response;
+        }
+
+        public async Task<ISingleResponse<Order>> GetOrderAsync(Int32 id)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetOrderAsync));
 
-            var response = new SingleModelResponse<Order>();
+            var response = new SingleResponse<Order>();
 
             try
             {
@@ -100,11 +184,35 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<ISingleModelResponse<Order>> CreateOrderAsync(Order header, OrderDetail[] details)
+        public async Task<ISingleResponse<CreateOrderRequest>> GetCreateRequestAsync()
+        {
+            Logger?.LogInformation("{0} has been invoked", nameof(GetCreateRequestAsync));
+
+            var response = new SingleResponse<CreateOrderRequest>();
+
+            try
+            {
+                response.Model.Customers = (await GetCustomersAsync()).Model;
+
+                response.Model.Employees = (await HumanResourcesRepository.GetEmployees().ToListAsync());
+
+                response.Model.Shippers = (await GetShippersAsync()).Model;
+
+                response.Model.Products = (await ProductionRepository.GetProducts().ToListAsync());
+            }
+            catch (Exception ex)
+            {
+                response.SetError(ex, Logger);
+            }
+
+            return response;
+        }
+
+        public async Task<ISingleResponse<Order>> CreateOrderAsync(Order header, OrderDetail[] details)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(CreateOrderAsync));
 
-            var response = new SingleModelResponse<Order>();
+            var response = new SingleResponse<Order>();
 
             try
             {
@@ -192,11 +300,11 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<ISingleModelResponse<Order>> CloneOrderAsync(Int32 id)
+        public async Task<ISingleResponse<Order>> CloneOrderAsync(Int32 id)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(CloneOrderAsync));
 
-            var response = new SingleModelResponse<Order>();
+            var response = new SingleResponse<Order>();
 
             try
             {
@@ -238,11 +346,11 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<ISingleModelResponse<Order>> RemoveOrderAsync(Int32 id)
+        public async Task<ISingleResponse<Order>> RemoveOrderAsync(Int32 id)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(RemoveOrderAsync));
 
-            var response = new SingleModelResponse<Order>();
+            var response = new SingleResponse<Order>();
 
             try
             {
@@ -259,56 +367,6 @@ namespace Store.Core.BusinessLayer
 
                     Logger?.LogInformation(SalesDisplays.DeleteOrderMessage);
                 }
-            }
-            catch (Exception ex)
-            {
-                response.SetError(ex, Logger);
-            }
-
-            return response;
-        }
-
-        public async Task<IListModelResponse<Currency>> GetCurrenciesAsync(Int32 pageSize = 10, Int32 pageNumber = 1)
-        {
-            Logger?.LogInformation("{0} has been invoked", nameof(GetCurrenciesAsync));
-
-            var response = new PagingModelResponse<Currency>();
-
-            try
-            {
-                response.PageSize = pageSize;
-                response.PageNumber = pageNumber;
-
-                var query = SalesRepository.GetCurrencies(pageSize, pageNumber);
-
-                response.ItemCount = await query.CountAsync();
-
-                response.Model = await query.Paging(pageSize, pageNumber).ToListAsync();
-            }
-            catch (Exception ex)
-            {
-                response.SetError(ex, Logger);
-            }
-
-            return response;
-        }
-
-        public async Task<IListModelResponse<PaymentMethod>> GetPaymentMethodsAsync(Int32 pageSize = 10, Int32 pageNumber = 1)
-        {
-            Logger?.LogInformation("{0} has been invoked", nameof(GetPaymentMethodsAsync));
-
-            var response = new PagingModelResponse<PaymentMethod>();
-
-            try
-            {
-                response.PageSize = pageSize;
-                response.PageNumber = pageNumber;
-
-                var query = SalesRepository.GetPaymentMethods(pageSize, pageNumber);
-
-                response.ItemCount = await query.CountAsync();
-
-                response.Model = await query.Paging(pageSize, pageNumber).ToListAsync();
             }
             catch (Exception ex)
             {

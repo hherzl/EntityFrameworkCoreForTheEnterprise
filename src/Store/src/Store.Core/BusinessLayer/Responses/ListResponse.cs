@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Store.Core.BusinessLayer.Responses
 {
-    public class ListModelResponse<TModel> : IListModelResponse<TModel>
+    public class ListResponse<TModel> : IListResponse<TModel>
     {
         public String Message { get; set; }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Store.Core.BusinessLayer.Responses
 {
-    public class PagingModelResponse<TModel> : IPagingModelResponse<TModel>
+    public class PagingResponse<TModel> : IPagingResponse<TModel>
     {
         public String Message { get; set; }
 
@@ -17,9 +17,9 @@ namespace Store.Core.BusinessLayer.Responses
 
         public Int32 PageNumber { get; set; }
 
-        public Int32 ItemCount { get; set; }
+        public Int32 ItemsCount { get; set; }
 
         public Int32 PageCount =>
-            ItemCount == 0 ? 0 : ItemCount / PageSize;
+            PageSize == 0 ? 0 : ItemsCount / PageSize;
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Store.Core.BusinessLayer.Responses
 {
-    public class SingleModelResponse<TModel> : ISingleModelResponse<TModel> where TModel : new()
+    public class SingleResponse<TModel> : ISingleResponse<TModel> where TModel : new()
     {
-        public SingleModelResponse()
+        public SingleResponse()
         {
             Model = new TModel();
         }

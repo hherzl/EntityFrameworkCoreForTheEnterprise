@@ -14,7 +14,5 @@ namespace Store.Core.BusinessLayer.Requests
         public IEnumerable<Shipper> Shippers { get; set; }
 
         public IEnumerable<Product> Products { get; set; }
-
-        public Order Order { get; set; }
     }
 }

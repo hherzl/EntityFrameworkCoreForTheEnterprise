@@ -7,8 +7,8 @@ namespace Store.Core.BusinessLayer.Contracts
 {
     public interface IHumanResourcesBusinessObject : IBusinessObject
     {
-        Task<IListModelResponse<Employee>> GetEmployeesAsync(Int32 pageSize = 0, Int32 pageNumber = 0);
+        Task<IListResponse<Employee>> GetEmployeesAsync(Int32 pageSize = 0, Int32 pageNumber = 0);
 
-        Task<ISingleModelResponse<Employee>> UpdateEmployeeAsync(Employee changes);
+        Task<ISingleResponse<Employee>> UpdateEmployeeAsync(Employee changes);
     }
 }

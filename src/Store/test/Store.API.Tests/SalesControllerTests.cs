@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Store.API.Controllers;
-using Store.API.ViewModels;
+using Store.Core.BusinessLayer.Requests;
 using Store.Core.BusinessLayer.Responses;
 using Store.Core.DataLayer.DataContracts;
 using Store.Core.EntityLayer.Sales;
@@ -12,7 +12,7 @@ namespace Store.API.Tests
     public class SalesControllerTests
     {
         [Fact]
-        public async Task GetOrdersTestAsync()
+        public async Task TestGetOrdersAsync()
         {
             // Arrange
             var logger = LoggerMocker.GetLogger<SalesController>();
@@ -24,16 +24,15 @@ namespace Store.API.Tests
             {
                 // Act
                 var response = await controller.GetOrdersAsync() as ObjectResult;
+                var value = response.Value as IPagingResponse<OrderInfo>;
 
                 // Assert
-                var value = response.Value as IPagingModelResponse<OrderInfo>;
-
                 Assert.False(value.DidError);
             }
         }
 
         [Fact]
-        public async Task GetOrderTestAsync()
+        public async Task TestGetOrderAsync()
         {
             // Arrange
             var logger = LoggerMocker.GetLogger<SalesController>();
@@ -46,16 +45,15 @@ namespace Store.API.Tests
             {
                 // Act
                 var response = await controller.GetOrderAsync(id) as ObjectResult;
+                var value = response.Value as ISingleResponse<Order>;
 
                 // Assert
-                var value = response.Value as ISingleModelResponse<Order>;
-
                 Assert.False(value.DidError);
             }
         }
 
         [Fact]
-        public async Task GetNonExistingOrderTestAsync()
+        public async Task TestGetNonExistingOrderAsync()
         {
             // Arrange
             var logger = LoggerMocker.GetLogger<SalesController>();
@@ -68,16 +66,15 @@ namespace Store.API.Tests
             {
                 // Act
                 var response = await controller.GetOrderAsync(id) as ObjectResult;
+                var value = response.Value as ISingleResponse<Order>;
 
                 // Assert
-                var value = response.Value as ISingleModelResponse<Order>;
-
                 Assert.False(value.DidError);
             }
         }
 
         [Fact]
-        public async Task GetCreateOrderViewModelTestAsync()
+        public async Task TestGetCreateOrderRequestAsync()
         {
             // Arrange
             var logger = LoggerMocker.GetLogger<SalesController>();
@@ -89,16 +86,15 @@ namespace Store.API.Tests
             {
                 // Act
                 var response = await controller.GetCreateOrderRequestAsync() as ObjectResult;
+                var value = response.Value as ISingleResponse<CreateOrderRequest>;
 
                 // Assert
-                var value = response.Value as ISingleModelResponse<CreateOrderViewModel>;
-
                 Assert.False(value.DidError);
             }
         }
 
         [Fact]
-        public async Task GetCloneOrderTestAsync()
+        public async Task TestCloneOrderAsync()
         {
             // Arrange
             var logger = LoggerMocker.GetLogger<SalesController>();
@@ -111,10 +107,9 @@ namespace Store.API.Tests
             {
                 // Act
                 var response = await controller.CloneOrderAsync(id) as ObjectResult;
+                var value = response.Value as ISingleResponse<Order>;
 
                 // Assert
-                var value = response.Value as ISingleModelResponse<Order>;
-
                 Assert.False(value.DidError);
             }
         }

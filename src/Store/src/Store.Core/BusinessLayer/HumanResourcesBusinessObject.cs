@@ -16,11 +16,11 @@ namespace Store.Core.BusinessLayer
         {
         }
 
-        public async Task<IListModelResponse<Employee>> GetEmployeesAsync(Int32 pageSize = 0, Int32 pageNumber = 0)
+        public async Task<IListResponse<Employee>> GetEmployeesAsync(Int32 pageSize = 0, Int32 pageNumber = 0)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetEmployeesAsync));
 
-            var response = new ListModelResponse<Employee>() as IListModelResponse<Employee>;
+            var response = new ListResponse<Employee>() as IListResponse<Employee>;
 
             try
             {
@@ -34,11 +34,11 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<ISingleModelResponse<Employee>> UpdateEmployeeAsync(Employee changes)
+        public async Task<ISingleResponse<Employee>> UpdateEmployeeAsync(Employee changes)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(UpdateEmployeeAsync));
 
-            var response = new SingleModelResponse<Employee>() as ISingleModelResponse<Employee>;
+            var response = new SingleResponse<Employee>() as ISingleResponse<Employee>;
 
             try
             {

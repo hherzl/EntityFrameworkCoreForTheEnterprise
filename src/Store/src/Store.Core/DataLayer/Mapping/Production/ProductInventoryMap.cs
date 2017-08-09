@@ -11,12 +11,17 @@ namespace Store.Core.DataLayer.Mapping.Production
         {
             modelBuilder.Entity<ProductInventory>(entity =>
             {
+                // Mapping for table
                 entity.ToTable("ProductInventory", "Production");
 
+                // Set key for entity
                 entity.HasKey(p => p.ProductInventoryID);
 
+                // Set identity for entity (auto increment)
                 entity.Property(p => p.ProductInventoryID).UseSqlServerIdentityColumn();
 
+                // Set mapping for columns
+                entity.Property(p => p.ProductInventoryID).HasColumnType("int").IsRequired();
                 entity.Property(p => p.ProductID).HasColumnType("int").IsRequired();
                 entity.Property(p => p.WarehouseID).HasColumnType("varchar(5)").IsRequired();
                 entity.Property(p => p.Quantity).HasColumnType("int").IsRequired();
@@ -26,8 +31,10 @@ namespace Store.Core.DataLayer.Mapping.Production
                 entity.Property(p => p.LastUpdateUser).HasColumnType("varchar(25)");
                 entity.Property(p => p.LastUpdateDateTime).HasColumnType("datetime");
 
+                // Set concurrency token for entity
                 entity.Property(p => p.Timestamp).ValueGeneratedOnAddOrUpdate().IsConcurrencyToken();
 
+                // Add configuration for foreign keys
                 entity
                     .HasOne(p => p.ProductFk)
                     .WithMany(b => b.ProductInventories)

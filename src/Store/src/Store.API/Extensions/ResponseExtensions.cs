@@ -7,7 +7,7 @@ namespace Store.API.Extensions
 {
     public static class ResponseExtensions
     {
-        public static IActionResult ToHttpResponse<TModel>(this IListModelResponse<TModel> response)
+        public static IActionResult ToHttpResponse<TModel>(this IListResponse<TModel> response)
         {
             var status = HttpStatusCode.OK;
 
@@ -26,7 +26,7 @@ namespace Store.API.Extensions
             };
         }
 
-        public static IActionResult ToHttpResponse<TModel>(this ISingleModelResponse<TModel> response)
+        public static IActionResult ToHttpResponse<TModel>(this ISingleResponse<TModel> response)
         {
             var status = HttpStatusCode.OK;
 

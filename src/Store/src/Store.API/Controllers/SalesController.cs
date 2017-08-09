@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 using Store.API.Extensions;
 using Store.API.ViewModels;
 using Store.Core.BusinessLayer.Contracts;
-using Store.Core.BusinessLayer.Responses;
 
 namespace Store.API.Controllers
 {
@@ -39,7 +38,8 @@ namespace Store.API.Controllers
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetOrdersAsync));
 
-            var response = await SalesBusinessObject.GetOrdersAsync((Int32)pageSize, (Int32)pageNumber, currencyID = null, customerID = null, employeeID = null, orderStatusID = null, paymentMethodID, shipperID);
+            var response = await SalesBusinessObject
+                .GetOrdersAsync((Int32)pageSize, (Int32)pageNumber, currencyID = null, customerID = null, employeeID = null, orderStatusID = null, paymentMethodID, shipperID);
 
             return response.ToHttpResponse();
         }
@@ -50,7 +50,8 @@ namespace Store.API.Controllers
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetOrderAsync));
 
-            var response = await SalesBusinessObject.GetOrderAsync(id);
+            var response = await SalesBusinessObject
+                .GetOrderAsync(id);
 
             return response.ToHttpResponse();
         }
@@ -61,23 +62,8 @@ namespace Store.API.Controllers
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetCreateOrderRequestAsync));
 
-            var response = new SingleModelResponse<CreateOrderViewModel>() as ISingleModelResponse<CreateOrderViewModel>;
-
-            var customersResponse = await SalesBusinessObject.GetCustomersAsync();
-
-            response.Model.Customers = customersResponse.Model.Select(item => new CustomerViewModel(item));
-
-            var employeesResponse = await HumanResourcesBusinessObject.GetEmployeesAsync();
-
-            response.Model.Employees = employeesResponse.Model.Select(item => new EmployeeViewModel(item));
-
-            var shippersResponse = await SalesBusinessObject.GetShippersAsync();
-
-            response.Model.Shippers = shippersResponse.Model.Select(item => new ShipperViewModel(item));
-
-            var productsResponse = await ProductionBusinessObject.GetProductsAsync();
-
-            response.Model.Products = productsResponse.Model.Select(item => new ProductViewModel(item));
+            var response = await SalesBusinessObject
+                .GetCreateRequestAsync();
 
             return response.ToHttpResponse();
         }
@@ -88,7 +74,8 @@ namespace Store.API.Controllers
         {
             Logger?.LogDebug("{0} has been invoked", nameof(CreateOrderAsync));
 
-            var response = await SalesBusinessObject.CreateOrderAsync(value.GetOrder(), value.GetOrderDetails().ToArray());
+            var response = await SalesBusinessObject
+                .CreateOrderAsync(value.GetOrder(), value.GetOrderDetails().ToArray());
 
             return response.ToHttpResponse();
         }
@@ -99,7 +86,8 @@ namespace Store.API.Controllers
         {
             Logger?.LogDebug("{0} has been invoked", nameof(CloneOrderAsync));
 
-            var response = await SalesBusinessObject.CloneOrderAsync(id);
+            var response = await SalesBusinessObject
+                .CloneOrderAsync(id);
 
             return response.ToHttpResponse();
         }
@@ -110,7 +98,8 @@ namespace Store.API.Controllers
         {
             Logger?.LogDebug("{0} has been invoked", nameof(RemoveOrderAsync));
 
-            var response = await SalesBusinessObject.RemoveOrderAsync(id);
+            var response = await SalesBusinessObject
+                .RemoveOrderAsync(id);
 
             return response.ToHttpResponse();
         }
