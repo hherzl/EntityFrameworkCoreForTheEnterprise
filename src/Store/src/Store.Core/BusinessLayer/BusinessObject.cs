@@ -38,27 +38,12 @@ namespace Store.Core.BusinessLayer
         }
 
         protected IHumanResourcesRepository HumanResourcesRepository
-        {
-            get
-            {
-                return m_humanResourcesRepository ?? (m_humanResourcesRepository = new HumanResourcesRepository(UserInfo, DbContext));
-            }
-        }
+            => m_humanResourcesRepository ?? (m_humanResourcesRepository = new HumanResourcesRepository(UserInfo, DbContext));
 
         protected IProductionRepository ProductionRepository
-        {
-            get
-            {
-                return m_productionRepository ?? (m_productionRepository = new ProductionRepository(UserInfo, DbContext));
-            }
-        }
+            => m_productionRepository ?? (m_productionRepository = new ProductionRepository(UserInfo, DbContext));
 
         protected ISalesRepository SalesRepository
-        {
-            get
-            {
-                return m_salesRepository ?? (m_salesRepository = new SalesRepository(UserInfo, DbContext));
-            }
-        }
+            => m_salesRepository ?? (m_salesRepository = new SalesRepository(UserInfo, DbContext));
     }
 }

@@ -16,15 +16,21 @@ namespace Store.Core.BusinessLayer
         {
         }
 
-        public async Task<IListResponse<Product>> GetProductsAsync(Int32 pageSize = 0, Int32 pageNumber = 0)
+        public async Task<IPagingResponse<Product>> GetProductsAsync(Int32 pageSize = 10, Int32 pageNumber = 1, Int32? productCategoryID = null)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetProductsAsync));
 
-            var response = new ListResponse<Product>();
+            var response = new PagingResponse<Product>();
 
             try
             {
-                response.Model = await ProductionRepository.GetProducts(pageSize, pageNumber).ToListAsync();
+                // Get query
+                var query = ProductionRepository.GetProducts(productCategoryID);
+
+                // Set information for paging
+                response.PageSize = (Int32)pageSize;
+                response.PageNumber = (Int32)pageNumber;
+                response.ItemsCount = await query.CountAsync();
             }
             catch (Exception ex)
             {
@@ -34,15 +40,21 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IListResponse<Warehouse>> GetWarehousesAsync(Int32 pageSize = 0, Int32 pageNumber = 0)
+        public async Task<IPagingResponse<Warehouse>> GetWarehousesAsync(Int32 pageSize = 10, Int32 pageNumber = 1)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetWarehousesAsync));
 
-            var response = new ListResponse<Warehouse>() as IListResponse<Warehouse>;
+            var response = new PagingResponse<Warehouse>();
 
             try
             {
-                response.Model = await ProductionRepository.GetWarehouses(pageSize, pageNumber).ToListAsync();
+                // Get query
+                var query = ProductionRepository.GetWarehouses();
+
+                // Set information for paging
+                response.PageSize = (Int32)pageSize;
+                response.PageNumber = (Int32)pageNumber;
+                response.ItemsCount = await query.CountAsync();
             }
             catch (Exception ex)
             {

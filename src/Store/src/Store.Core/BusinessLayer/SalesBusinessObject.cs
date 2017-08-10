@@ -22,7 +22,7 @@ namespace Store.Core.BusinessLayer
         {
         }
 
-        public async Task<IPagingResponse<Customer>> GetCustomersAsync(Int32 pageSize = 0, Int32 pageNumber = 0)
+        public async Task<IPagingResponse<Customer>> GetCustomersAsync(Int32 pageSize = 10, Int32 pageNumber = 1)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetCustomersAsync));
 
@@ -31,8 +31,7 @@ namespace Store.Core.BusinessLayer
             try
             {
                 // Get query
-                var query = SalesRepository
-                    .GetCustomers(pageSize, pageNumber);
+                var query = SalesRepository.GetCustomers();
 
                 // Set information for paging
                 response.PageSize = (Int32)pageSize;
@@ -50,7 +49,7 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IPagingResponse<Shipper>> GetShippersAsync(Int32 pageSize = 0, Int32 pageNumber = 0)
+        public async Task<IPagingResponse<Shipper>> GetShippersAsync(Int32 pageSize = 10, Int32 pageNumber = 1)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetShippersAsync));
 
@@ -59,8 +58,7 @@ namespace Store.Core.BusinessLayer
             try
             {
                 // Get query
-                var query = SalesRepository
-                    .GetShippers(pageSize, pageNumber);
+                var query = SalesRepository.GetShippers();
 
                 // Set information for paging
                 response.PageSize = (Int32)pageSize;
@@ -87,8 +85,7 @@ namespace Store.Core.BusinessLayer
             try
             {
                 // Get query
-                var query = SalesRepository
-                    .GetCurrencies(pageSize, pageNumber);
+                var query = SalesRepository.GetCurrencies();
 
                 // Set information for paging
                 response.PageSize = (Int32)pageSize;
@@ -115,8 +112,7 @@ namespace Store.Core.BusinessLayer
             try
             {
                 // Get query
-                var query = SalesRepository
-                    .GetPaymentMethods(pageSize, pageNumber);
+                var query = SalesRepository.GetPaymentMethods();
 
                 // Set information for paging
                 response.PageSize = (Int32)pageSize;
@@ -146,7 +142,7 @@ namespace Store.Core.BusinessLayer
             {
                 // Get query
                 var query = SalesRepository
-                    .GetOrders(pageSize, pageNumber, currencyID, customerID, employeeID, orderStatusID, paymentMethodID, shipperID);
+                    .GetOrders(currencyID, customerID, employeeID, orderStatusID, paymentMethodID, shipperID);
 
                 // Set information for paging
                 response.PageSize = (Int32)pageSize;

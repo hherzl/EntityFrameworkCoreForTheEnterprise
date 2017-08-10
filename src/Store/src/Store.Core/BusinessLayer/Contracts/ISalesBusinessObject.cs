@@ -10,9 +10,9 @@ namespace Store.Core.BusinessLayer.Contracts
 {
     public interface ISalesBusinessObject : IBusinessObject
     {
-        Task<IPagingResponse<Customer>> GetCustomersAsync(Int32 pageSize = 0, Int32 pageNumber = 0);
+        Task<IPagingResponse<Customer>> GetCustomersAsync(Int32 pageSize = 10, Int32 pageNumber = 1);
 
-        Task<IPagingResponse<Shipper>> GetShippersAsync(Int32 pageSize = 0, Int32 pageNumber = 0);
+        Task<IPagingResponse<Shipper>> GetShippersAsync(Int32 pageSize = 10, Int32 pageNumber = 1);
 
         Task<IPagingResponse<Currency>> GetCurrenciesAsync(Int32 pageSize = 10, Int32 pageNumber = 1);
 

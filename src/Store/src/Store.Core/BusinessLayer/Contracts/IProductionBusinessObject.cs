@@ -7,8 +7,8 @@ namespace Store.Core.BusinessLayer.Contracts
 {
     public interface IProductionBusinessObject : IBusinessObject
     {
-        Task<IListResponse<Product>> GetProductsAsync(Int32 pageSize = 0, Int32 pageNumber = 0);
+        Task<IPagingResponse<Product>> GetProductsAsync(Int32 pageSize = 10, Int32 pageNumber = 1, Int32? productCategoryID = null);
 
-        Task<IListResponse<Warehouse>> GetWarehousesAsync(Int32 pageSize = 0, Int32 pageNumber = 0);
+        Task<IPagingResponse<Warehouse>> GetWarehousesAsync(Int32 pageSize = 10, Int32 pageNumber = 1);
     }
 }
