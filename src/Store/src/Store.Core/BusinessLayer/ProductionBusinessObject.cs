@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using Store.Core.BusinessLayer.Contracts;
 using Store.Core.BusinessLayer.Responses;
 using Store.Core.DataLayer;
+using Store.Core.DataLayer.Repositories;
 using Store.Core.EntityLayer.Production;
 
 namespace Store.Core.BusinessLayer
@@ -31,6 +32,9 @@ namespace Store.Core.BusinessLayer
                 response.PageSize = (Int32)pageSize;
                 response.PageNumber = (Int32)pageNumber;
                 response.ItemsCount = await query.CountAsync();
+
+                // Retrieve items, set model for response
+                response.Model = await query.Paging(pageSize, pageNumber).ToListAsync();
             }
             catch (Exception ex)
             {
@@ -55,6 +59,9 @@ namespace Store.Core.BusinessLayer
                 response.PageSize = (Int32)pageSize;
                 response.PageNumber = (Int32)pageNumber;
                 response.ItemsCount = await query.CountAsync();
+
+                // Retrieve items, set model for response
+                response.Model = await query.Paging(pageSize, pageNumber).ToListAsync();
             }
             catch (Exception ex)
             {
