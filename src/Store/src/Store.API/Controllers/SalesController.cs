@@ -39,7 +39,7 @@ namespace Store.API.Controllers
             Logger?.LogDebug("{0} has been invoked", nameof(GetOrdersAsync));
 
             var response = await SalesBusinessObject
-                .GetOrdersAsync((Int32)pageSize, (Int32)pageNumber, currencyID = null, customerID = null, employeeID = null, orderStatusID = null, paymentMethodID, shipperID);
+                .GetOrdersAsync((Int32)pageSize, (Int32)pageNumber, currencyID: currencyID, customerID: customerID, employeeID: employeeID, orderStatusID: orderStatusID, paymentMethodID: paymentMethodID, shipperID: shipperID);
 
             return response.ToHttpResponse();
         }

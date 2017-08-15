@@ -53,9 +53,7 @@ namespace Store.Core.DataLayer.Repositories
         }
 
         protected virtual void Remove <TEntity>(TEntity entity) where TEntity : class, IEntity
-        {
-            DbContext.Set<TEntity>().Remove(entity);
-        }
+            => DbContext.Set<TEntity>().Remove(entity);
 
         protected virtual IEnumerable<ChangeLog> GetChanges()
         {
