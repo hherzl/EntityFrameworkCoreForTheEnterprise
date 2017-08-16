@@ -36,5 +36,16 @@ namespace Store.API.Controllers
 
             return response.ToHttpResponse();
         }
+
+        [HttpGet]
+        [Route("InventoryByProduct/{id}")]
+        public async Task<IActionResult> GetInventoryByProduct(Int32 id)
+        {
+            Logger?.LogDebug("{0} has been invoked", nameof(GetInventoryByProduct));
+
+            var response = await ProductionBusinessObject.GetInventoryByProduct(id);
+
+            return response.ToHttpResponse();
+        }
     }
 }

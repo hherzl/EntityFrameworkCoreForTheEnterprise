@@ -19,7 +19,7 @@ namespace Store.Core.DataLayer.Repositories
             UserInfo = userInfo;
             DbContext = dbContext;
         }
-        
+
         protected virtual void Add<TEntity>(TEntity entity) where TEntity : class, IEntity
         {
             var cast = entity as IAuditEntity;
@@ -52,7 +52,7 @@ namespace Store.Core.DataLayer.Repositories
             }
         }
 
-        protected virtual void Remove <TEntity>(TEntity entity) where TEntity : class, IEntity
+        protected virtual void Remove<TEntity>(TEntity entity) where TEntity : class, IEntity
             => DbContext.Set<TEntity>().Remove(entity);
 
         protected virtual IEnumerable<ChangeLog> GetChanges()

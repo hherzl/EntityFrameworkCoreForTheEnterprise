@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -62,6 +63,31 @@ namespace Store.Core.BusinessLayer
 
                 // Retrieve items, set model for response
                 response.Model = await query.Paging(pageSize, pageNumber).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                response.SetError(ex, Logger);
+            }
+
+            return response;
+        }
+
+        public async Task<IListResponse<ProductInventory>> GetInventoryByProduct(Int32? productID)
+        {
+            Logger?.LogInformation("{0} has been invoked", nameof(GetInventoryByProduct));
+
+            var response = new ListResponse<ProductInventory>();
+
+            try
+            {
+                // Get query
+                var query = ProductionRepository.GetProductInventories(productID: productID);
+
+                // Retrieve items, set model for response
+                var list = await query.ToListAsync();
+
+                // Sorting results
+                response.Model = list.OrderByDescending(item => item.CreationDateTime);
             }
             catch (Exception ex)
             {

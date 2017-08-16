@@ -39,7 +39,9 @@ namespace Store.Core.BusinessLayer
                 response.ItemsCount = await query.CountAsync();
 
                 // Retrieve items, set model for response
-                response.Model = await query.Paging(pageSize, pageNumber).ToListAsync();
+                response.Model = await query
+                    .Paging(pageSize, pageNumber)
+                    .ToListAsync();
             }
             catch (Exception ex)
             {
@@ -66,7 +68,9 @@ namespace Store.Core.BusinessLayer
                 response.ItemsCount = await query.CountAsync();
 
                 // Retrieve items, set model for response
-                response.Model = await query.Paging(pageSize, pageNumber).ToListAsync();
+                response.Model = await query
+                    .Paging(pageSize, pageNumber)
+                    .ToListAsync();
             }
             catch (Exception ex)
             {
@@ -93,7 +97,9 @@ namespace Store.Core.BusinessLayer
                 response.ItemsCount = await query.CountAsync();
 
                 // Retrieve items, set model for response
-                response.Model = await query.Paging(pageSize, pageNumber).ToListAsync();
+                response.Model = await query
+                    .Paging(pageSize, pageNumber)
+                    .ToListAsync();
             }
             catch (Exception ex)
             {
@@ -224,9 +230,7 @@ namespace Store.Core.BusinessLayer
 
                             if (product == null)
                             {
-                                throw new NonExistingProductException(
-                                    String.Format(SalesDisplays.NonExistingProductExceptionMessage, detail.ProductID)
-                                    );
+                                throw new NonExistingProductException(String.Format(SalesDisplays.NonExistingProductExceptionMessage, detail.ProductID));
                             }
                             else
                             {
@@ -235,9 +239,7 @@ namespace Store.Core.BusinessLayer
 
                             if (product.Discontinued == true)
                             {
-                                throw new AddOrderWithDiscontinuedProductException(
-                                    String.Format(SalesDisplays.AddOrderWithDiscontinuedProductExceptionMessage, product.ProductID)
-                                    );
+                                throw new AddOrderWithDiscontinuedProductException(String.Format(SalesDisplays.AddOrderWithDiscontinuedProductExceptionMessage, product.ProductID));
                             }
 
                             detail.UnitPrice = product.UnitPrice;

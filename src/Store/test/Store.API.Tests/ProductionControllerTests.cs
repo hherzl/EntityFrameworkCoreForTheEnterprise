@@ -13,16 +13,35 @@ namespace Store.API.Tests
         public async Task GetProductsTestAsync()
         {
             // Arrange
+            var logger = LoggerMocker.GetLogger<ProductionController>();
             var productionBusinessObject = BusinessObjectMocker.GetProductionBusinessObject();
 
-            using (var controller = new ProductionController(null, productionBusinessObject))
+            using (var controller = new ProductionController(logger, productionBusinessObject))
             {
                 // Act
                 var response = await controller.GetProductsAsync() as ObjectResult;
+                var value = response.Value as IPagingResponse<Product>;
 
                 // Assert
-                var value = response.Value as IListResponse<Product>;
+                Assert.False(value.DidError);
+            }
+        }
 
+        [Fact]
+        public async Task GetInventoryByProductTestAsync()
+        {
+            // Arrange
+            var logger = LoggerMocker.GetLogger<ProductionController>();
+            var productionBusinessObject = BusinessObjectMocker.GetProductionBusinessObject();
+            var id = 1;
+
+            using (var controller = new ProductionController(logger, productionBusinessObject))
+            {
+                // Act
+                var response = await controller.GetInventoryByProduct(id) as ObjectResult;
+                var value = response.Value as IListResponse<ProductInventory>;
+
+                // Assert
                 Assert.False(value.DidError);
             }
         }
