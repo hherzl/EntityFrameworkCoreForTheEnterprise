@@ -1,8 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.Logging;
-using Store.Core.BusinessLayer.Responses;
 
-namespace Store.Core.BusinessLayer
+namespace Store.Core.BusinessLayer.Responses
 {
     public static class ResponseExtensions
     {
