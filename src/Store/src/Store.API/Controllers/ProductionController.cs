@@ -26,24 +26,24 @@ namespace Store.API.Controllers
             base.Dispose(disposing);
         }
 
-        [HttpGet]
-        [Route("Product")]
+        [HttpGet("Product")]
         public async Task<IActionResult> GetProductsAsync(Int32? pageSize = 10, Int32? pageNumber = 1)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetProductsAsync));
 
-            var response = await ProductionBusinessObject.GetProductsAsync((Int32)pageSize, (Int32)pageNumber);
+            var response = await ProductionBusinessObject
+                .GetProductsAsync((Int32)pageSize, (Int32)pageNumber);
 
             return response.ToHttpResponse();
         }
 
-        [HttpGet]
-        [Route("InventoryByProduct/{id}")]
+        [HttpGet("InventoryByProduct/{id}")]
         public async Task<IActionResult> GetInventoryByProduct(Int32 id)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetInventoryByProduct));
 
-            var response = await ProductionBusinessObject.GetInventoryByProduct(id);
+            var response = await ProductionBusinessObject
+                .GetInventoryByProduct(id);
 
             return response.ToHttpResponse();
         }

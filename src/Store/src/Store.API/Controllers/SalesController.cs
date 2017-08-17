@@ -32,8 +32,7 @@ namespace Store.API.Controllers
             base.Dispose(disposing);
         }
 
-        [HttpGet]
-        [Route("Order")]
+        [HttpGet("Order")]
         public async Task<IActionResult> GetOrdersAsync(Int32? pageSize = 10, Int32? pageNumber = 1, Int16? currencyID = null, Int32? customerID = null, Int32? employeeID = null, Int16? orderStatusID = null, Guid? paymentMethodID = null, Int32? shipperID = null)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetOrdersAsync));
@@ -44,8 +43,7 @@ namespace Store.API.Controllers
             return response.ToHttpResponse();
         }
 
-        [HttpGet]
-        [Route("Order/{id}")]
+        [HttpGet("Order/{id}")]
         public async Task<IActionResult> GetOrderAsync(Int32 id)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetOrderAsync));
@@ -56,8 +54,7 @@ namespace Store.API.Controllers
             return response.ToHttpResponse();
         }
 
-        [HttpGet]
-        [Route("CreateOrderViewModel")]
+        [HttpGet("CreateOrderViewModel")]
         public async Task<IActionResult> GetCreateOrderRequestAsync()
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetCreateOrderRequestAsync));
@@ -80,8 +77,7 @@ namespace Store.API.Controllers
             return response.ToHttpResponse();
         }
 
-        [HttpGet]
-        [Route("CloneOrder/{id}")]
+        [HttpGet("CloneOrder/{id}")]
         public async Task<IActionResult> CloneOrderAsync(Int32 id)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(CloneOrderAsync));
@@ -92,11 +88,10 @@ namespace Store.API.Controllers
             return response.ToHttpResponse();
         }
 
-        [HttpDelete]
-        [Route("Order/{id}")]
-        public async Task<IActionResult> RemoveOrderAsync(Int32 id)
+        [HttpDelete("Order/{id}")]
+        public async Task<IActionResult> DeleteOrderAsync(Int32 id)
         {
-            Logger?.LogDebug("{0} has been invoked", nameof(RemoveOrderAsync));
+            Logger?.LogDebug("{0} has been invoked", nameof(DeleteOrderAsync));
 
             var response = await SalesBusinessObject
                 .RemoveOrderAsync(id);
