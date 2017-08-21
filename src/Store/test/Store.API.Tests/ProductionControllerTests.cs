@@ -20,7 +20,7 @@ namespace Store.API.Tests
             {
                 // Act
                 var response = await controller.GetProductsAsync() as ObjectResult;
-                var value = response.Value as IPagingResponse<Product>;
+                var value = response.Value as IPagedResponse<Product>;
 
                 // Assert
                 Assert.False(value.DidError);

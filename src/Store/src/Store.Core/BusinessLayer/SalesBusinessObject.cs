@@ -22,11 +22,11 @@ namespace Store.Core.BusinessLayer
         {
         }
 
-        public async Task<IPagingResponse<Customer>> GetCustomersAsync(Int32 pageSize = 10, Int32 pageNumber = 1)
+        public async Task<IPagedResponse<Customer>> GetCustomersAsync(Int32 pageSize = 10, Int32 pageNumber = 1)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetCustomersAsync));
 
-            var response = new PagingResponse<Customer>();
+            var response = new PagedResponse<Customer>();
 
             try
             {
@@ -51,11 +51,11 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IPagingResponse<Shipper>> GetShippersAsync(Int32 pageSize = 10, Int32 pageNumber = 1)
+        public async Task<IPagedResponse<Shipper>> GetShippersAsync(Int32 pageSize = 10, Int32 pageNumber = 1)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetShippersAsync));
 
-            var response = new PagingResponse<Shipper>();
+            var response = new PagedResponse<Shipper>();
 
             try
             {
@@ -80,11 +80,11 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IPagingResponse<Currency>> GetCurrenciesAsync(Int32 pageSize = 10, Int32 pageNumber = 1)
+        public async Task<IPagedResponse<Currency>> GetCurrenciesAsync(Int32 pageSize = 10, Int32 pageNumber = 1)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetCurrenciesAsync));
 
-            var response = new PagingResponse<Currency>();
+            var response = new PagedResponse<Currency>();
 
             try
             {
@@ -109,11 +109,11 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IPagingResponse<PaymentMethod>> GetPaymentMethodsAsync(Int32 pageSize = 10, Int32 pageNumber = 1)
+        public async Task<IPagedResponse<PaymentMethod>> GetPaymentMethodsAsync(Int32 pageSize = 10, Int32 pageNumber = 1)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetPaymentMethodsAsync));
 
-            var response = new PagingResponse<PaymentMethod>();
+            var response = new PagedResponse<PaymentMethod>();
 
             try
             {
@@ -138,11 +138,11 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IPagingResponse<OrderInfo>> GetOrdersAsync(Int32 pageSize = 10, Int32 pageNumber = 1, Int16? currencyID = null, Int32? customerID = null, Int32? employeeID = null, Int16? orderStatusID = null, Guid? paymentMethodID = null, Int32? shipperID = null)
+        public async Task<IPagedResponse<OrderInfo>> GetOrdersAsync(Int32 pageSize = 10, Int32 pageNumber = 1, Int16? currencyID = null, Int32? customerID = null, Int32? employeeID = null, Int16? orderStatusID = null, Guid? paymentMethodID = null, Int32? shipperID = null)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetOrdersAsync));
 
-            var response = new PagingResponse<OrderInfo>();
+            var response = new PagedResponse<OrderInfo>();
 
             try
             {

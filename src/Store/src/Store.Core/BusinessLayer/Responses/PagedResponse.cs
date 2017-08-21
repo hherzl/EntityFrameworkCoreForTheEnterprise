@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Store.Core.BusinessLayer.Responses
 {
-    public class PagingResponse<TModel> : IPagingResponse<TModel>
+    public class PagedResponse<TModel> : IPagedResponse<TModel>
     {
         public String Message { get; set; }
 

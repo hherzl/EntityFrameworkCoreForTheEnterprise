@@ -18,11 +18,11 @@ namespace Store.Core.BusinessLayer
         {
         }
 
-        public async Task<IPagingResponse<Product>> GetProductsAsync(Int32 pageSize = 10, Int32 pageNumber = 1, Int32? productCategoryID = null)
+        public async Task<IPagedResponse<Product>> GetProductsAsync(Int32 pageSize = 10, Int32 pageNumber = 1, Int32? productCategoryID = null)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetProductsAsync));
 
-            var response = new PagingResponse<Product>();
+            var response = new PagedResponse<Product>();
 
             try
             {
@@ -45,11 +45,11 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IPagingResponse<Warehouse>> GetWarehousesAsync(Int32 pageSize = 10, Int32 pageNumber = 1)
+        public async Task<IPagedResponse<Warehouse>> GetWarehousesAsync(Int32 pageSize = 10, Int32 pageNumber = 1)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetWarehousesAsync));
 
-            var response = new PagingResponse<Warehouse>();
+            var response = new PagedResponse<Warehouse>();
 
             try
             {

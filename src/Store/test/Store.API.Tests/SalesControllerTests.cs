@@ -26,7 +26,7 @@ namespace Store.API.Tests
             {
                 // Act
                 var response = await controller.GetOrdersAsync() as ObjectResult;
-                var value = response.Value as IPagingResponse<OrderInfo>;
+                var value = response.Value as IPagedResponse<OrderInfo>;
 
                 // Assert
                 Assert.False(value.DidError);
@@ -47,7 +47,7 @@ namespace Store.API.Tests
             {
                 // Act
                 var response = await controller.GetOrdersAsync(currencyID: currencyID) as ObjectResult;
-                var value = response.Value as IPagingResponse<OrderInfo>;
+                var value = response.Value as IPagedResponse<OrderInfo>;
 
                 // Assert
                 Assert.False(value.DidError);
@@ -69,7 +69,7 @@ namespace Store.API.Tests
             {
                 // Act
                 var response = await controller.GetOrdersAsync(customerID: customerID) as ObjectResult;
-                var value = response.Value as IPagingResponse<OrderInfo>;
+                var value = response.Value as IPagedResponse<OrderInfo>;
 
                 // Assert
                 Assert.False(value.DidError);
@@ -91,7 +91,7 @@ namespace Store.API.Tests
             {
                 // Act
                 var response = await controller.GetOrdersAsync(employeeID: employeeID) as ObjectResult;
-                var value = response.Value as IPagingResponse<OrderInfo>;
+                var value = response.Value as IPagedResponse<OrderInfo>;
 
                 // Assert
                 Assert.False(value.DidError);
