@@ -28,12 +28,9 @@ namespace Store.Core.BusinessLayer
         {
             if (!Disposed)
             {
-                if (DbContext != null)
-                {
-                    DbContext.Dispose();
+                DbContext?.Dispose();
 
-                    Disposed = true;
-                }
+                Disposed = true;
             }
         }
 
