@@ -11,12 +11,16 @@ namespace Store.Core.DataLayer.Mapping
         {
             modelBuilder.Entity<ChangeLog>(entity =>
             {
+                // Mapping for table
                 entity.ToTable("ChangeLog", "dbo");
 
+                // Set key for entity
                 entity.HasKey(p => p.ChangeLogID);
 
+                // Set identity for entity (auto increment)
                 entity.Property(p => p.ChangeLogID).UseSqlServerIdentityColumn();
 
+                // Set mapping for columns
                 entity.Property(p => p.ClassName).HasColumnType("varchar(128)").IsRequired();
                 entity.Property(p => p.PropertyName).HasColumnType("varchar(128)").IsRequired();
                 entity.Property(p => p.Key).HasColumnType("varchar(255)").IsRequired();

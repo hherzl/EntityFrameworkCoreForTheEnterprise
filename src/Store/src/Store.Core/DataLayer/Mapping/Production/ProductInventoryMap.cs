@@ -38,14 +38,12 @@ namespace Store.Core.DataLayer.Mapping.Production
                 entity
                     .HasOne(p => p.ProductFk)
                     .WithMany(b => b.ProductInventories)
-                    .HasForeignKey(p => p.ProductID)
-                    .HasConstraintName("fk_ProductInventory_ProductID_Product");
+                    .HasForeignKey(p => p.ProductID);
 
                 entity
                     .HasOne(p => p.WarehouseFk)
                     .WithMany(b => b.ProductInventories)
-                    .HasForeignKey(p => p.WarehouseID)
-                    .HasConstraintName("fk_ProductInventory_WarehouseID_Warehouse");
+                    .HasForeignKey(p => p.WarehouseID);
             });
         }
     }
