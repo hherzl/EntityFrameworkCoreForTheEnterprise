@@ -22,7 +22,7 @@ namespace Store.Core.BusinessLayer.Contracts
 
         Task<ISingleResponse<Order>> GetOrderAsync(Int32 id);
 
-        Task<ISingleResponse<CreateOrderRequest>> GetCreateRequestAsync();
+        Task<ISingleResponse<CreateOrderRequest>> GetCreateOrderRequestAsync();
 
         Task<ISingleResponse<Order>> CreateOrderAsync(Order header, OrderDetail[] details);
 

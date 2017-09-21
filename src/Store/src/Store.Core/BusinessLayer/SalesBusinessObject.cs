@@ -176,7 +176,9 @@ namespace Store.Core.BusinessLayer
 
             try
             {
-                response.Model = await SalesRepository.GetOrderAsync(new Order(id));
+                // Retrieve order by id
+                response.Model = await SalesRepository
+                    .GetOrderAsync(new Order(id));
             }
             catch (Exception ex)
             {
@@ -186,20 +188,24 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<ISingleResponse<CreateOrderRequest>> GetCreateRequestAsync()
+        public async Task<ISingleResponse<CreateOrderRequest>> GetCreateOrderRequestAsync()
         {
-            Logger?.LogInformation("{0} has been invoked", nameof(GetCreateRequestAsync));
+            Logger?.LogInformation("{0} has been invoked", nameof(GetCreateOrderRequestAsync));
 
             var response = new SingleResponse<CreateOrderRequest>();
 
             try
             {
+                // Retrieve customers list
                 response.Model.Customers = (await GetCustomersAsync()).Model;
 
+                // Retrieve employees list
                 response.Model.Employees = (await HumanResourcesRepository.GetEmployees().ToListAsync());
 
+                // Retrieve shippers list
                 response.Model.Shippers = (await GetShippersAsync()).Model;
 
+                // Retrieve products list
                 response.Model.Products = (await ProductionRepository.GetProducts().ToListAsync());
             }
             catch (Exception ex)
@@ -218,52 +224,69 @@ namespace Store.Core.BusinessLayer
 
             try
             {
+                // Begin transaction
                 using (var transaction = await DbContext.Database.BeginTransactionAsync())
                 {
-                    var warehouses = await ProductionRepository.GetWarehouses().ToListAsync();
+                    // Retrieve warehouses
+                    var warehouses = await ProductionRepository
+                        .GetWarehouses()
+                        .ToListAsync();
 
                     try
                     {
                         foreach (var detail in details)
                         {
-                            var product = await ProductionRepository.GetProductAsync(new Product { ProductID = detail.ProductID });
+                            // Retrieve product by id
+                            var product = await ProductionRepository
+                                .GetProductAsync(new Product(detail.ProductID));
 
                             if (product == null)
                             {
+                                // Throw exception if product no exists
                                 throw new NonExistingProductException(String.Format(SalesDisplays.NonExistingProductExceptionMessage, detail.ProductID));
                             }
                             else
                             {
+                                // Set product name from existing entity
                                 detail.ProductName = product.ProductName;
                             }
 
                             if (product.Discontinued == true)
                             {
+                                // Throw exception if product is discontinued
                                 throw new AddOrderWithDiscontinuedProductException(String.Format(SalesDisplays.AddOrderWithDiscontinuedProductExceptionMessage, product.ProductID));
                             }
 
+                            // Set unit price and total for product detail
                             detail.UnitPrice = product.UnitPrice;
                             detail.Total = product.UnitPrice * detail.Quantity;
                         }
 
+                        // Calculate total for order header from order's details
                         header.Total = details.Sum(item => item.Total);
 
+                        // Save order header
                         await SalesRepository.AddOrderAsync(header);
 
                         foreach (var detail in details)
                         {
+                            // Set order id for order detail
                             detail.OrderID = header.OrderID;
 
+                            // Add order detail
                             await SalesRepository.AddOrderDetailAsync(detail);
 
+                            // Get last inventory for product
                             var lastInventory = ProductionRepository
                                 .GetProductInventories()
                                 .Where(item => item.ProductID == detail.ProductID)
                                 .OrderByDescending(item => item.CreationDateTime)
                                 .FirstOrDefault();
 
+                            // Calculate stocks for product
                             var stocks = lastInventory == null ? 0 : lastInventory.Stocks - detail.Quantity;
 
+                            // Create product inventory instance
                             var productInventory = new ProductInventory
                             {
                                 ProductID = detail.ProductID,
@@ -273,11 +296,13 @@ namespace Store.Core.BusinessLayer
                                 Stocks = stocks
                             };
 
+                            // Save product inventory
                             await ProductionRepository.AddProductInventoryAsync(productInventory);
                         }
 
                         response.Model = header;
 
+                        // Commit transaction
                         transaction.Commit();
 
                         Logger.LogInformation(SalesDisplays.CreateOrderMessage);
@@ -306,12 +331,16 @@ namespace Store.Core.BusinessLayer
 
             try
             {
-                var entity = await SalesRepository.GetOrderAsync(new Order(id));
+                // Retrieve order by id
+                var entity = await SalesRepository
+                    .GetOrderAsync(new Order(id));
 
                 if (entity != null)
                 {
+                    // Init a new instance for order
                     response.Model = new Order();
 
+                    // Set values from existing order
                     response.Model.OrderID = entity.OrderID;
                     response.Model.OrderDate = entity.OrderDate;
                     response.Model.CustomerID = entity.CustomerID;
@@ -324,6 +353,7 @@ namespace Store.Core.BusinessLayer
                     {
                         foreach (var detail in entity.OrderDetails)
                         {
+                            // Add order detail clone to collection
                             response.Model.OrderDetails.Add(new OrderDetail
                             {
                                 ProductID = detail.ProductID,
@@ -352,15 +382,19 @@ namespace Store.Core.BusinessLayer
 
             try
             {
-                response.Model = await SalesRepository.GetOrderAsync(new Order(id));
+                // Retrieve order by id
+                response.Model = await SalesRepository
+                    .GetOrderAsync(new Order(id));
 
                 if (response.Model != null)
                 {
                     if (response.Model.OrderDetails.Count > 0)
                     {
+                        // Restrict remove operation for orders with details
                         throw new ForeignKeyDependencyException(String.Format(SalesDisplays.RemoveOrderExceptionMessage, id));
                     }
 
+                    // Delete order
                     await SalesRepository.DeleteOrderAsync(response.Model);
 
                     Logger?.LogInformation(SalesDisplays.DeleteOrderMessage);

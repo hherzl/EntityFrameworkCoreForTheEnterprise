@@ -31,9 +31,11 @@ namespace Store.API.Controllers
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetProductsAsync));
 
+            // Get response from business logic
             var response = await ProductionBusinessObject
                 .GetProductsAsync((Int32)pageSize, (Int32)pageNumber);
 
+            // Return as http response
             return response.ToHttpResponse();
         }
 
@@ -42,9 +44,11 @@ namespace Store.API.Controllers
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetInventoryByProduct));
 
+            // Get response from business logic
             var response = await ProductionBusinessObject
                 .GetInventoryByProduct(id);
 
+            // Return as http response
             return response.ToHttpResponse();
         }
     }

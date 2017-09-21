@@ -37,6 +37,7 @@ namespace Store.API.Controllers
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetOrdersAsync));
 
+            // Get response from business logic
             var response = await SalesBusinessObject
                 .GetOrdersAsync(
                     (Int32)pageSize,
@@ -49,6 +50,7 @@ namespace Store.API.Controllers
                     shipperID: shipperID
                 );
 
+            // Return as http response
             return response.ToHttpResponse();
         }
 
@@ -57,9 +59,11 @@ namespace Store.API.Controllers
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetOrderAsync));
 
+            // Get response from business logic
             var response = await SalesBusinessObject
                 .GetOrderAsync(id);
 
+            // Return as http response
             return response.ToHttpResponse();
         }
 
@@ -68,9 +72,11 @@ namespace Store.API.Controllers
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetCreateOrderRequestAsync));
 
+            // Get response from business logic
             var response = await SalesBusinessObject
-                .GetCreateRequestAsync();
+                .GetCreateOrderRequestAsync();
 
+            // Return as http response
             return response.ToHttpResponse();
         }
 
@@ -80,9 +86,11 @@ namespace Store.API.Controllers
         {
             Logger?.LogDebug("{0} has been invoked", nameof(CreateOrderAsync));
 
+            // Get response from business logic
             var response = await SalesBusinessObject
                 .CreateOrderAsync(value.GetOrder(), value.GetOrderDetails().ToArray());
 
+            // Return as http response
             return response.ToHttpResponse();
         }
 
@@ -91,9 +99,11 @@ namespace Store.API.Controllers
         {
             Logger?.LogDebug("{0} has been invoked", nameof(CloneOrderAsync));
 
+            // Get response from business logic
             var response = await SalesBusinessObject
                 .CloneOrderAsync(id);
 
+            // Return as http response
             return response.ToHttpResponse();
         }
 
@@ -102,9 +112,11 @@ namespace Store.API.Controllers
         {
             Logger?.LogDebug("{0} has been invoked", nameof(DeleteOrderAsync));
 
+            // Get response from business logic
             var response = await SalesBusinessObject
                 .RemoveOrderAsync(id);
 
+            // Return as http response
             return response.ToHttpResponse();
         }
     }
