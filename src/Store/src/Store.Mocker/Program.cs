@@ -51,71 +51,70 @@ namespace Store.Mocker
 
             while (date <= endDate)
             {
-                if (date.DayOfWeek != DayOfWeek.Sunday)
+                if (date.DayOfWeek == DayOfWeek.Sunday)
                 {
-                    var random = new Random();
+                    continue;
+                }
 
-                    using (var salesBusinessObject = BusinessObjectMocker.GetSalesBusinessObject())
+                var random = new Random();
+
+                using (var salesBusinessObject = BusinessObjectMocker.GetSalesBusinessObject())
+                {
+                    using (var humanResourcesBusinessObject = BusinessObjectMocker.GetHumanResourcesBusinessObject())
                     {
-                        using (var humanResourcesBusinessObject = BusinessObjectMocker.GetHumanResourcesBusinessObject())
+                        using (var productionBusinessObject = BusinessObjectMocker.GetProductionBusinessObject())
                         {
-                            using (var productionBusinessObject = BusinessObjectMocker.GetProductionBusinessObject())
+                            var customers = (await salesBusinessObject.GetCustomersAsync()).Model.ToList();
+                            var employees = (await humanResourcesBusinessObject.GetEmployeesAsync()).Model.ToList();
+                            var shippers = (await salesBusinessObject.GetShippersAsync()).Model.ToList();
+                            var currencies = (await salesBusinessObject.GetCurrenciesAsync()).Model.ToList();
+                            var paymentMethods = (await salesBusinessObject.GetPaymentMethodsAsync()).Model.ToList();
+                            var products = (await productionBusinessObject.GetProductsAsync()).Model.ToList();
+
+                            for (var i = 0; i < ordersLimitPerDay; i++)
                             {
-                                var pageSize = 10;
-                                var pageNumber = 1;
+                                var header = new Order();
 
-                                var customers = (await salesBusinessObject.GetCustomersAsync(pageSize, pageNumber)).Model.ToList();
-                                var employees = (await humanResourcesBusinessObject.GetEmployeesAsync(pageSize, pageNumber)).Model.ToList();
-                                var shippers = (await salesBusinessObject.GetShippersAsync(pageSize, pageNumber)).Model.ToList();
-                                var currencies = (await salesBusinessObject.GetCurrenciesAsync(pageSize, pageNumber)).Model.ToList();
-                                var paymentMethods = (await salesBusinessObject.GetPaymentMethodsAsync(pageSize, pageNumber)).Model.ToList();
-                                var products = (await productionBusinessObject.GetProductsAsync(pageSize, pageNumber)).Model.ToList();
+                                var selectedCustomer = random.Next(0, customers.Count - 1);
+                                var selectedEmployee = random.Next(0, employees.Count - 1);
+                                var selectedShipper = random.Next(0, shippers.Count - 1);
+                                var selectedCurrency = random.Next(0, currencies.Count - 1);
+                                var selectedPaymentMethod = random.Next(0, paymentMethods.Count - 1);
 
-                                for (var i = 0; i < ordersLimitPerDay; i++)
+                                header.OrderDate = date;
+                                header.OrderStatusID = 100;
+
+                                header.CustomerID = customers[selectedCustomer].CustomerID;
+                                header.EmployeeID = employees[selectedEmployee].EmployeeID;
+                                header.ShipperID = shippers[selectedShipper].ShipperID;
+                                header.CurrencyID = currencies[selectedCurrency].CurrencyID;
+                                header.PaymentMethodID = paymentMethods[selectedPaymentMethod].PaymentMethodID;
+
+                                header.CreationDateTime = date;
+
+                                var details = new List<OrderDetail>();
+
+                                var detailsCount = random.Next(1, 2);
+
+                                for (var j = 0; j < detailsCount; j++)
                                 {
-                                    var header = new Order();
-
-                                    var selectedCustomer = random.Next(0, customers.Count - 1);
-                                    var selectedEmployee = random.Next(0, employees.Count - 1);
-                                    var selectedShipper = random.Next(0, shippers.Count - 1);
-                                    var selectedCurrency = random.Next(0, currencies.Count - 1);
-                                    var selectedPaymentMethod = random.Next(0, paymentMethods.Count - 1);
-
-                                    header.OrderDate = date;
-                                    header.OrderStatusID = 100;
-
-                                    header.CustomerID = customers[selectedCustomer].CustomerID;
-                                    header.EmployeeID = employees[selectedEmployee].EmployeeID;
-                                    header.ShipperID = shippers[selectedShipper].ShipperID;
-                                    header.CurrencyID = currencies[selectedCurrency].CurrencyID;
-                                    header.PaymentMethodID = paymentMethods[selectedPaymentMethod].PaymentMethodID;
-
-                                    header.CreationDateTime = date;
-
-                                    var details = new List<OrderDetail>();
-
-                                    var detailsCount = random.Next(1, 3);
-
-                                    for (var j = 0; j < detailsCount; j++)
+                                    var detail = new OrderDetail
                                     {
-                                        var detail = new OrderDetail
-                                        {
-                                            ProductID = products[random.Next(0, products.Count - 1)].ProductID,
-                                            Quantity = (Int16)random.Next(1, 3)
-                                        };
+                                        ProductID = products[random.Next(0, products.Count - 1)].ProductID,
+                                        Quantity = (Int16)random.Next(1, 2)
+                                    };
 
-                                        if (details.Count > 0 && details.Where(item => item.ProductID == detail.ProductID).Count() == 1)
-                                        {
-                                            continue;
-                                        }
-
-                                        details.Add(detail);
+                                    if (details.Count > 0 && details.Where(item => item.ProductID == detail.ProductID).Count() == 1)
+                                    {
+                                        continue;
                                     }
 
-                                    await salesBusinessObject.CreateOrderAsync(header, details.ToArray());
+                                    details.Add(detail);
                                 }
 
+                                await salesBusinessObject.CreateOrderAsync(header, details.ToArray());
                             }
+
                         }
                     }
                 }

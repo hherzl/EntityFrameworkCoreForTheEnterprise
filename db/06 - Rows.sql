@@ -17,11 +17,15 @@ insert [Production].[ProductCategory]
     values ('PS4 Games', @userName, getdate(), null, null, null)
 
 insert into [Production].[Product]
-    values ('King of Fighters XIV', 1, 59.99, 'KOF XIV', 0, @userName, getdate(), null, null, null)
+    values ('King of Fighters XIV', 1, 29.99, 'KOF XIV', 0, @userName, getdate(), null, null, null)
 insert into [Production].[Product]
-    values ('Street Fighter V', 1, 49.99, 'SF V', 0, @userName, getdate(), null, null, null)
+    values ('Street Fighter V', 1, 19.99, 'SF V', 0, @userName, getdate(), null, null, null)
 insert into [Production].[Product]
-    values ('Guilty Gear', 1, 39.99, 'GG', 0, @userName, getdate(), null, null, null)
+    values ('Guilty Gear Xrd REV 2', 1, 39.99, 'GG', 0, @userName, getdate(), null, null, null)
+insert into [Production].[Product]
+    values ('Tekken 7', 1, 49.99, 'GG', 0, @userName, getdate(), null, null, null)
+insert into [Production].[Product]
+    values ('Marvel vs. Campcom: Infinite', 1, 49.99, 'GG', 0, @userName, getdate(), null, null, null)
 
 insert into [Production].[Warehouse]
     values ('W0001', 'Warehouse 0001', @userName, getdate(), null, null, null)
@@ -30,11 +34,15 @@ insert into [Production].[Warehouse]
     values ('W0002', 'Warehouse 0002', @userName, getdate(), null, null, null)
 
 insert into [Production].[ProductInventory]
-    values (1, 'W0001', 1000000, 1000000, @userName, getdate(), null, null, null)
+    values (1, 'W0001', 150000, 150000, @userName, getdate(), null, null, null)
 insert into [Production].[ProductInventory]
-    values (2, 'W0002', 2000000, 2000000, @userName, getdate(), null, null, null)
+    values (2, 'W0002', 120000, 120000, @userName, getdate(), null, null, null)
 insert into [Production].[ProductInventory]
-    values (3, 'W0001', 1000000, 1000000, @userName, getdate(), null, null, null)
+    values (3, 'W0001', 100000, 100000, @userName, getdate(), null, null, null)
+insert into [Production].[ProductInventory]
+    values (4, 'W0002', 300000, 300000, @userName, getdate(), null, null, null)
+insert into [Production].[ProductInventory]
+    values (5, 'W0001', 400000, 400000, @userName, getdate(), null, null, null)
 
 insert into [Sales].[Customer]
     values ('Best Buy', 'Colleen Dunn', @userName, getdate(), null, null, null)
@@ -42,6 +50,8 @@ insert into [Sales].[Customer]
     values ('Circuit City', 'Bill McCorey', @userName, getdate(), null, null, null)
 insert into [Sales].[Customer]
     values ('Game Stop', 'Michael Cooper', @userName, getdate(), null, null, null)
+insert into [Sales].[Customer]
+    values ('Fry''s Electronics', 'John Fry', @userName, getdate(), null, null, null)
 
 insert into [Sales].[Shipper]
     values ('DHL', 'Ricardo A. Bartra', @userName, getdate(), null, null, null)
