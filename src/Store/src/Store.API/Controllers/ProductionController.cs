@@ -11,9 +11,9 @@ namespace Store.API.Controllers
     public class ProductionController : Controller
     {
         protected ILogger Logger;
-        protected IProductionBusinessObject ProductionBusinessObject;
+        protected IProductionService ProductionBusinessObject;
 
-        public ProductionController(ILogger<ProductionController> logger, IProductionBusinessObject productionBusinessObject)
+        public ProductionController(ILogger<ProductionController> logger, IProductionService productionBusinessObject)
         {
             Logger = logger;
             ProductionBusinessObject = productionBusinessObject;

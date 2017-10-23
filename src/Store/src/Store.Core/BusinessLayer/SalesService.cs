@@ -15,16 +15,16 @@ using Store.Core.EntityLayer.Sales;
 
 namespace Store.Core.BusinessLayer
 {
-    public class SalesBusinessObject : BusinessObject, ISalesBusinessObject
+    public class SalesService : Service, ISalesService
     {
-        public SalesBusinessObject(ILogger logger, IUserInfo userInfo, StoreDbContext dbContext)
+        public SalesService(ILogger logger, IUserInfo userInfo, StoreDbContext dbContext)
             : base(logger, userInfo, dbContext)
         {
         }
 
         public async Task<IPagedResponse<Customer>> GetCustomersAsync(Int32 pageSize = 10, Int32 pageNumber = 1)
         {
-            Logger?.LogInformation("{0} has been invoked", nameof(GetCustomersAsync));
+            Logger?.LogDebug("{0} has been invoked", nameof(GetCustomersAsync));
 
             var response = new PagedResponse<Customer>();
 
@@ -53,7 +53,7 @@ namespace Store.Core.BusinessLayer
 
         public async Task<IPagedResponse<Shipper>> GetShippersAsync(Int32 pageSize = 10, Int32 pageNumber = 1)
         {
-            Logger?.LogInformation("{0} has been invoked", nameof(GetShippersAsync));
+            Logger?.LogDebug("{0} has been invoked", nameof(GetShippersAsync));
 
             var response = new PagedResponse<Shipper>();
 
@@ -82,7 +82,7 @@ namespace Store.Core.BusinessLayer
 
         public async Task<IPagedResponse<Currency>> GetCurrenciesAsync(Int32 pageSize = 10, Int32 pageNumber = 1)
         {
-            Logger?.LogInformation("{0} has been invoked", nameof(GetCurrenciesAsync));
+            Logger?.LogDebug("{0} has been invoked", nameof(GetCurrenciesAsync));
 
             var response = new PagedResponse<Currency>();
 
@@ -111,7 +111,7 @@ namespace Store.Core.BusinessLayer
 
         public async Task<IPagedResponse<PaymentMethod>> GetPaymentMethodsAsync(Int32 pageSize = 10, Int32 pageNumber = 1)
         {
-            Logger?.LogInformation("{0} has been invoked", nameof(GetPaymentMethodsAsync));
+            Logger?.LogDebug("{0} has been invoked", nameof(GetPaymentMethodsAsync));
 
             var response = new PagedResponse<PaymentMethod>();
 
@@ -140,7 +140,7 @@ namespace Store.Core.BusinessLayer
 
         public async Task<IPagedResponse<OrderInfo>> GetOrdersAsync(Int32 pageSize = 10, Int32 pageNumber = 1, Int16? currencyID = null, Int32? customerID = null, Int32? employeeID = null, Int16? orderStatusID = null, Guid? paymentMethodID = null, Int32? shipperID = null)
         {
-            Logger?.LogInformation("{0} has been invoked", nameof(GetOrdersAsync));
+            Logger?.LogDebug("{0} has been invoked", nameof(GetOrdersAsync));
 
             var response = new PagedResponse<OrderInfo>();
 
@@ -170,7 +170,7 @@ namespace Store.Core.BusinessLayer
 
         public async Task<ISingleResponse<Order>> GetOrderAsync(Int32 id)
         {
-            Logger?.LogInformation("{0} has been invoked", nameof(GetOrderAsync));
+            Logger?.LogDebug("{0} has been invoked", nameof(GetOrderAsync));
 
             var response = new SingleResponse<Order>();
 
@@ -190,7 +190,7 @@ namespace Store.Core.BusinessLayer
 
         public async Task<ISingleResponse<CreateOrderRequest>> GetCreateOrderRequestAsync()
         {
-            Logger?.LogInformation("{0} has been invoked", nameof(GetCreateOrderRequestAsync));
+            Logger?.LogDebug("{0} has been invoked", nameof(GetCreateOrderRequestAsync));
 
             var response = new SingleResponse<CreateOrderRequest>();
 
@@ -218,7 +218,7 @@ namespace Store.Core.BusinessLayer
 
         public async Task<ISingleResponse<Order>> CreateOrderAsync(Order header, OrderDetail[] details)
         {
-            Logger?.LogInformation("{0} has been invoked", nameof(CreateOrderAsync));
+            Logger?.LogDebug("{0} has been invoked", nameof(CreateOrderAsync));
 
             var response = new SingleResponse<Order>();
 
@@ -325,7 +325,7 @@ namespace Store.Core.BusinessLayer
 
         public async Task<ISingleResponse<Order>> CloneOrderAsync(Int32 id)
         {
-            Logger?.LogInformation("{0} has been invoked", nameof(CloneOrderAsync));
+            Logger?.LogDebug("{0} has been invoked", nameof(CloneOrderAsync));
 
             var response = new SingleResponse<Order>();
 
@@ -376,7 +376,7 @@ namespace Store.Core.BusinessLayer
 
         public async Task<ISingleResponse<Order>> RemoveOrderAsync(Int32 id)
         {
-            Logger?.LogInformation("{0} has been invoked", nameof(RemoveOrderAsync));
+            Logger?.LogDebug("{0} has been invoked", nameof(RemoveOrderAsync));
 
             var response = new SingleResponse<Order>();
 

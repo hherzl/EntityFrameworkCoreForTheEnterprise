@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -34,17 +35,17 @@ namespace Store.API
                 .AddMvc()
                 .AddJsonOptions(a => a.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
 
-            services.AddEntityFrameworkSqlServer().AddDbContext<StoreDbContext>();
+            services.AddDbContext<StoreDbContext>(options => options.UseSqlServer(Configuration["AppSettings:ConnectionString"]));
 
             services.AddScoped<IEntityMapper, StoreEntityMapper>();
 
             services.AddScoped<IUserInfo, UserInfo>();
 
-            services.AddScoped<ILogger, Logger<BusinessObject>>();
+            services.AddScoped<ILogger, Logger<Service>>();
 
-            services.AddScoped<IHumanResourcesBusinessObject, HumanResourcesBusinessObject>();
-            services.AddScoped<IProductionBusinessObject, ProductionBusinessObject>();
-            services.AddScoped<ISalesBusinessObject, SalesBusinessObject>();
+            services.AddScoped<IHumanResourcesService, HumanResourcesService>();
+            services.AddScoped<IProductionService, ProductionService>();
+            services.AddScoped<ISalesService, SalesService>();
 
             services.AddOptions();
 

@@ -18,11 +18,11 @@ namespace Store.API.Tests
         {
             // Arrange
             var logger = LoggerMocker.GetLogger<SalesController>();
-            var humanResourcesBusinessObject = BusinessObjectMocker.GetHumanResourcesBusinessObject();
-            var productionBusinessObject = BusinessObjectMocker.GetProductionBusinessObject();
-            var salesBusinessObject = BusinessObjectMocker.GetSalesBusinessObject();
+            var humanResourcesService = ServiceMocker.GetHumanResourcesService();
+            var productionService = ServiceMocker.GetProductionService();
+            var salesService = ServiceMocker.GetSalesService();
 
-            using (var controller = new SalesController(logger, humanResourcesBusinessObject, productionBusinessObject, salesBusinessObject))
+            using (var controller = new SalesController(logger, humanResourcesService, productionService, salesService))
             {
                 // Act
                 var response = await controller.GetOrdersAsync() as ObjectResult;
@@ -38,12 +38,12 @@ namespace Store.API.Tests
         {
             // Arrange
             var logger = LoggerMocker.GetLogger<SalesController>();
-            var humanResourcesBusinessObject = BusinessObjectMocker.GetHumanResourcesBusinessObject();
-            var productionBusinessObject = BusinessObjectMocker.GetProductionBusinessObject();
-            var salesBusinessObject = BusinessObjectMocker.GetSalesBusinessObject();
+            var humanResourcesService = ServiceMocker.GetHumanResourcesService();
+            var productionService = ServiceMocker.GetProductionService();
+            var salesService = ServiceMocker.GetSalesService();
             var currencyID = (Int16?)1;
 
-            using (var controller = new SalesController(logger, humanResourcesBusinessObject, productionBusinessObject, salesBusinessObject))
+            using (var controller = new SalesController(logger, humanResourcesService, productionService, salesService))
             {
                 // Act
                 var response = await controller.GetOrdersAsync(currencyID: currencyID) as ObjectResult;
@@ -60,12 +60,12 @@ namespace Store.API.Tests
         {
             // Arrange
             var logger = LoggerMocker.GetLogger<SalesController>();
-            var humanResourcesBusinessObject = BusinessObjectMocker.GetHumanResourcesBusinessObject();
-            var productionBusinessObject = BusinessObjectMocker.GetProductionBusinessObject();
-            var salesBusinessObject = BusinessObjectMocker.GetSalesBusinessObject();
+            var humanResourcesService = ServiceMocker.GetHumanResourcesService();
+            var productionService = ServiceMocker.GetProductionService();
+            var salesService = ServiceMocker.GetSalesService();
             var customerID = 1;
 
-            using (var controller = new SalesController(logger, humanResourcesBusinessObject, productionBusinessObject, salesBusinessObject))
+            using (var controller = new SalesController(logger, humanResourcesService, productionService, salesService))
             {
                 // Act
                 var response = await controller.GetOrdersAsync(customerID: customerID) as ObjectResult;
@@ -82,12 +82,12 @@ namespace Store.API.Tests
         {
             // Arrange
             var logger = LoggerMocker.GetLogger<SalesController>();
-            var humanResourcesBusinessObject = BusinessObjectMocker.GetHumanResourcesBusinessObject();
-            var productionBusinessObject = BusinessObjectMocker.GetProductionBusinessObject();
-            var salesBusinessObject = BusinessObjectMocker.GetSalesBusinessObject();
+            var humanResourcesService = ServiceMocker.GetHumanResourcesService();
+            var productionService = ServiceMocker.GetProductionService();
+            var salesService = ServiceMocker.GetSalesService();
             var employeeID = 1;
 
-            using (var controller = new SalesController(logger, humanResourcesBusinessObject, productionBusinessObject, salesBusinessObject))
+            using (var controller = new SalesController(logger, humanResourcesService, productionService, salesService))
             {
                 // Act
                 var response = await controller.GetOrdersAsync(employeeID: employeeID) as ObjectResult;
@@ -104,12 +104,12 @@ namespace Store.API.Tests
         {
             // Arrange
             var logger = LoggerMocker.GetLogger<SalesController>();
-            var humanResourcesBusinessObject = BusinessObjectMocker.GetHumanResourcesBusinessObject();
-            var productionBusinessObject = BusinessObjectMocker.GetProductionBusinessObject();
-            var salesBusinessObject = BusinessObjectMocker.GetSalesBusinessObject();
+            var humanResourcesService = ServiceMocker.GetHumanResourcesService();
+            var productionService = ServiceMocker.GetProductionService();
+            var salesService = ServiceMocker.GetSalesService();
             var id = 1;
 
-            using (var controller = new SalesController(logger, humanResourcesBusinessObject, productionBusinessObject, salesBusinessObject))
+            using (var controller = new SalesController(logger, humanResourcesService, productionService, salesService))
             {
                 // Act
                 var response = await controller.GetOrderAsync(id) as ObjectResult;
@@ -125,12 +125,12 @@ namespace Store.API.Tests
         {
             // Arrange
             var logger = LoggerMocker.GetLogger<SalesController>();
-            var humanResourcesBusinessObject = BusinessObjectMocker.GetHumanResourcesBusinessObject();
-            var productionBusinessObject = BusinessObjectMocker.GetProductionBusinessObject();
-            var salesBusinessObject = BusinessObjectMocker.GetSalesBusinessObject();
+            var humanResourcesService = ServiceMocker.GetHumanResourcesService();
+            var productionService = ServiceMocker.GetProductionService();
+            var salesService = ServiceMocker.GetSalesService();
             var id = 0;
 
-            using (var controller = new SalesController(logger, humanResourcesBusinessObject, productionBusinessObject, salesBusinessObject))
+            using (var controller = new SalesController(logger, humanResourcesService, productionService, salesService))
             {
                 // Act
                 var response = await controller.GetOrderAsync(id) as ObjectResult;
@@ -146,11 +146,11 @@ namespace Store.API.Tests
         {
             // Arrange
             var logger = LoggerMocker.GetLogger<SalesController>();
-            var humanResourcesBusinessObject = BusinessObjectMocker.GetHumanResourcesBusinessObject();
-            var productionBusinessObject = BusinessObjectMocker.GetProductionBusinessObject();
-            var salesBusinessObject = BusinessObjectMocker.GetSalesBusinessObject();
+            var humanResourcesService = ServiceMocker.GetHumanResourcesService();
+            var productionService = ServiceMocker.GetProductionService();
+            var salesService = ServiceMocker.GetSalesService();
 
-            using (var controller = new SalesController(logger, humanResourcesBusinessObject, productionBusinessObject, salesBusinessObject))
+            using (var controller = new SalesController(logger, humanResourcesService, productionService, salesService))
             {
                 // Act
                 var response = await controller.GetCreateOrderRequestAsync() as ObjectResult;
@@ -166,12 +166,12 @@ namespace Store.API.Tests
         {
             // Arrange
             var logger = LoggerMocker.GetLogger<SalesController>();
-            var humanResourcesBusinessObject = BusinessObjectMocker.GetHumanResourcesBusinessObject();
-            var productionBusinessObject = BusinessObjectMocker.GetProductionBusinessObject();
-            var salesBusinessObject = BusinessObjectMocker.GetSalesBusinessObject();
+            var humanResourcesService = ServiceMocker.GetHumanResourcesService();
+            var productionService = ServiceMocker.GetProductionService();
+            var salesService = ServiceMocker.GetSalesService();
             var id = 1;
 
-            using (var controller = new SalesController(logger, humanResourcesBusinessObject, productionBusinessObject, salesBusinessObject))
+            using (var controller = new SalesController(logger, humanResourcesService, productionService, salesService))
             {
                 // Act
                 var response = await controller.CloneOrderAsync(id) as ObjectResult;

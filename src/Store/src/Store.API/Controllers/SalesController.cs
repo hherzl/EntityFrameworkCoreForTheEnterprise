@@ -13,11 +13,11 @@ namespace Store.API.Controllers
     public class SalesController : Controller
     {
         protected ILogger Logger;
-        protected IHumanResourcesBusinessObject HumanResourcesBusinessObject;
-        protected IProductionBusinessObject ProductionBusinessObject;
-        protected ISalesBusinessObject SalesBusinessObject;
+        protected IHumanResourcesService HumanResourcesBusinessObject;
+        protected IProductionService ProductionBusinessObject;
+        protected ISalesService SalesBusinessObject;
 
-        public SalesController(ILogger<SalesController> logger, IHumanResourcesBusinessObject humanResourcesBusinessObject, IProductionBusinessObject productionBusinessObject, ISalesBusinessObject salesBusinessObject)
+        public SalesController(ILogger<SalesController> logger, IHumanResourcesService humanResourcesBusinessObject, IProductionService productionBusinessObject, ISalesService salesBusinessObject)
         {
             Logger = logger;
             HumanResourcesBusinessObject = humanResourcesBusinessObject;

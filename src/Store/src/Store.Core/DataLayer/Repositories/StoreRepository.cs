@@ -13,16 +13,10 @@ namespace Store.Core.DataLayer.Repositories
         }
 
         public IEnumerable<EventLog> GetEventLogs()
-        {
-            return DbContext.Set<EventLog>();
-        }
+            => DbContext.Set<EventLog>();
 
         public EventLog GetEventLog(EventLog entity)
-        {
-            return DbContext
-                .Set<EventLog>()
-                .FirstOrDefault(item => item.EventLogID == entity.EventLogID);
-        }
+            => DbContext.Set<EventLog>().FirstOrDefault(item => item.EventLogID == entity.EventLogID);
 
         public void AddEventLog(EventLog entity)
         {
@@ -33,17 +27,9 @@ namespace Store.Core.DataLayer.Repositories
 
         public void UpdateEventLog(EventLog changes)
         {
-            var entity = GetEventLog(changes);
+            Update(changes);
 
-            if (entity != null)
-            {
-                entity.EventType = changes.EventType;
-                entity.Key = changes.Key;
-                entity.Message = changes.Message;
-                entity.EntryDate = changes.EntryDate;
-
-                CommitChanges();
-            }
+            CommitChanges();
         }
 
         public void DeleteEventLog(EventLog entity)

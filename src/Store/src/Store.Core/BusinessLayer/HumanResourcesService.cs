@@ -9,9 +9,9 @@ using Store.Core.EntityLayer.HumanResources;
 
 namespace Store.Core.BusinessLayer
 {
-    public class HumanResourcesBusinessObject : BusinessObject, IHumanResourcesBusinessObject
+    public class HumanResourcesService : Service, IHumanResourcesService
     {
-        public HumanResourcesBusinessObject(ILogger logger, IUserInfo userInfo, StoreDbContext dbContext)
+        public HumanResourcesService(ILogger logger, IUserInfo userInfo, StoreDbContext dbContext)
             : base(logger, userInfo, dbContext)
         {
         }
@@ -20,7 +20,7 @@ namespace Store.Core.BusinessLayer
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetEmployeesAsync));
 
-            var response = new ListResponse<Employee>() as IListResponse<Employee>;
+            var response = new ListResponse<Employee>();
 
             try
             {
@@ -34,11 +34,27 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
+        public async Task<ISingleResponse<Employee>> GetEmployeeAsync(Employee entity)
+        {
+            var response = new SingleResponse<Employee>();
+
+            try
+            {
+                response.Model = await HumanResourcesRepository.GetEmployeeAsync(entity);
+            }
+            catch (Exception ex)
+            {
+                response.SetError(ex, Logger);
+            }
+
+            return response;
+        }
+
         public async Task<ISingleResponse<Employee>> UpdateEmployeeAsync(Employee changes)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(UpdateEmployeeAsync));
 
-            var response = new SingleResponse<Employee>() as ISingleResponse<Employee>;
+            var response = new SingleResponse<Employee>();
 
             try
             {

@@ -20,7 +20,9 @@ namespace Store.Core.Tests
                 .AddConsole(LogLevel.Critical)
                 .AddConsole(LogLevel.Error);
 
-            return serviceProvider.GetService<ILoggerFactory>().CreateLogger<T>();
+            return serviceProvider
+                .GetService<ILoggerFactory>()
+                .CreateLogger<T>();
         }
     }
 }

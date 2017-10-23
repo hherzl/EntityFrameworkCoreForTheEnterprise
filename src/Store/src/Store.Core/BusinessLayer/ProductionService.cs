@@ -11,9 +11,9 @@ using Store.Core.EntityLayer.Production;
 
 namespace Store.Core.BusinessLayer
 {
-    public class ProductionBusinessObject : BusinessObject, IProductionBusinessObject
+    public class ProductionService : Service, IProductionService
     {
-        public ProductionBusinessObject(ILogger logger, IUserInfo userInfo, StoreDbContext dbContext)
+        public ProductionService(ILogger logger, IUserInfo userInfo, StoreDbContext dbContext)
             : base(logger, userInfo, dbContext)
         {
         }

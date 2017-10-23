@@ -14,9 +14,9 @@ namespace Store.API.Tests
         {
             // Arrange
             var logger = LoggerMocker.GetLogger<ProductionController>();
-            var productionBusinessObject = BusinessObjectMocker.GetProductionBusinessObject();
+            var productionService = ServiceMocker.GetProductionService();
 
-            using (var controller = new ProductionController(logger, productionBusinessObject))
+            using (var controller = new ProductionController(logger, productionService))
             {
                 // Act
                 var response = await controller.GetProductsAsync() as ObjectResult;
@@ -32,10 +32,10 @@ namespace Store.API.Tests
         {
             // Arrange
             var logger = LoggerMocker.GetLogger<ProductionController>();
-            var productionBusinessObject = BusinessObjectMocker.GetProductionBusinessObject();
+            var productionService = ServiceMocker.GetProductionService();
             var id = 1;
 
-            using (var controller = new ProductionController(logger, productionBusinessObject))
+            using (var controller = new ProductionController(logger, productionService))
             {
                 // Act
                 var response = await controller.GetInventoryByProduct(id) as ObjectResult;

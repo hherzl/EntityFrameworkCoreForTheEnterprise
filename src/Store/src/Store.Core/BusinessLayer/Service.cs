@@ -7,7 +7,7 @@ using Store.Core.DataLayer.Repositories;
 
 namespace Store.Core.BusinessLayer
 {
-    public abstract class BusinessObject : IBusinessObject
+    public abstract class Service : IService
     {
         protected ILogger Logger;
         protected IUserInfo UserInfo;
@@ -17,7 +17,7 @@ namespace Store.Core.BusinessLayer
         protected IProductionRepository m_productionRepository;
         protected ISalesRepository m_salesRepository;
 
-        public BusinessObject(ILogger logger, IUserInfo userInfo, StoreDbContext dbContext)
+        public Service(ILogger logger, IUserInfo userInfo, StoreDbContext dbContext)
         {
             Logger = logger;
             UserInfo = userInfo;

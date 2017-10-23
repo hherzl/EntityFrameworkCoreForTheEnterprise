@@ -8,7 +8,7 @@ using Store.Core.EntityLayer.Sales;
 
 namespace Store.Core.BusinessLayer.Contracts
 {
-    public interface ISalesBusinessObject : IBusinessObject
+    public interface ISalesService : IService
     {
         Task<IPagedResponse<Customer>> GetCustomersAsync(Int32 pageSize = 10, Int32 pageNumber = 1);
 

@@ -2,7 +2,7 @@
 
 namespace Store.Core.BusinessLayer.Contracts
 {
-    public interface IBusinessObject : IDisposable
+    public interface IService : IDisposable
     {
         
     }
