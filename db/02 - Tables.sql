@@ -175,7 +175,7 @@ create table [Sales].[Shipper]
 
 create table [Sales].[Order]
 (
-	[OrderID] int not null identity(1, 1),
+	[OrderID] bigint not null identity(1, 1),
 	[OrderStatusID] smallint not null,
 	[CustomerID] int not null,
 	[EmployeeID] int null,
@@ -194,8 +194,8 @@ create table [Sales].[Order]
 
 create table [Sales].[OrderDetail]
 (
-	[OrderDetailID] int not null identity(1, 1),
-	[OrderID] int not null,
+	[OrderDetailID] bigint not null identity(1, 1),
+	[OrderID] bigint not null,
 	[ProductID] int not null,
 	[ProductName] varchar(255) not null,
 	[UnitPrice] decimal(8, 4) not null,

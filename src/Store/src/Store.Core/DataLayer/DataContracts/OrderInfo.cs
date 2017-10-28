@@ -8,7 +8,7 @@ namespace Store.Core.DataLayer.DataContracts
         {
         }
 
-        public Int32? OrderID { get; set; }
+        public Int64? OrderID { get; set; }
 
         public Int16? OrderStatusID { get; set; }
 

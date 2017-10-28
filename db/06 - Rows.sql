@@ -73,6 +73,4 @@ insert into [Sales].[PaymentMethod]
     values(newid(), 'Credit Card', 'Payment with credit card', @userName, getdate(), null, null, null)
 insert into [Sales].[PaymentMethod]
     values(newid(), 'Debit Card', 'Payment with debit card', @userName, getdate(), null, null, null)
-insert into [Sales].[PaymentMethod]
-    values(newid(), 'Paypal', 'Payment with Paypal account', @userName, getdate(), null, null, null)
 go

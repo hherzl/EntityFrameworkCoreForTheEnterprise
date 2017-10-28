@@ -20,7 +20,7 @@ namespace Store.Core.BusinessLayer.Contracts
 
         Task<IPagedResponse<OrderInfo>> GetOrdersAsync(Int32 pageSize = 10, Int32 pageNumber = 1, Int16? currencyID = null, Int32? customerID = null, Int32? employeeID = null, Int16? orderStatusID = null, Guid? paymentMethodID = null, Int32? shipperID = null);
 
-        Task<ISingleResponse<Order>> GetOrderAsync(Int32 id);
+        Task<ISingleResponse<Order>> GetOrderAsync(Int64 id);
 
         Task<ISingleResponse<CreateOrderRequest>> GetCreateOrderRequestAsync();
 

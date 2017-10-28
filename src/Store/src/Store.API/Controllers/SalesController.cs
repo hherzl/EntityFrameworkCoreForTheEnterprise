@@ -55,7 +55,7 @@ namespace Store.API.Controllers
         }
 
         [HttpGet("Order/{id}")]
-        public async Task<IActionResult> GetOrderAsync(Int32 id)
+        public async Task<IActionResult> GetOrderAsync(Int64 id)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetOrderAsync));
 

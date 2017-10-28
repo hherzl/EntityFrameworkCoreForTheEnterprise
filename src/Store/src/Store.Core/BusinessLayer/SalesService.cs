@@ -168,7 +168,7 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<ISingleResponse<Order>> GetOrderAsync(Int32 id)
+        public async Task<ISingleResponse<Order>> GetOrderAsync(Int64 id)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetOrderAsync));
 
