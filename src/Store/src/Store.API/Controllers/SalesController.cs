@@ -67,7 +67,7 @@ namespace Store.API.Controllers
             return response.ToHttpResponse();
         }
 
-        [HttpGet("CreateOrderViewModel")]
+        [HttpGet("CreateOrderRequest")]
         public async Task<IActionResult> GetCreateOrderRequestAsync()
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetCreateOrderRequestAsync));

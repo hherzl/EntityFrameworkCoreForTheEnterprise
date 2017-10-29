@@ -9,12 +9,15 @@ namespace Store.Mocker
 {
     public class ServiceMocker
     {
+        private static string ConnectionString
+            => "server=(local);database=Store;integrated security=yes;MultipleActiveResultSets=True;";
+
         public static IHumanResourcesService GetHumanResourcesService()
         {
             var logger = LoggerMocker.GetLogger<IHumanResourcesService>();
 
             var options = new DbContextOptionsBuilder<StoreDbContext>()
-                .UseSqlServer("server=(local);database=Store;integrated security=yes;MultipleActiveResultSets=True;")
+                .UseSqlServer(ConnectionString)
                 .Options;
 
             return new HumanResourcesService(logger, new UserInfo { Name = "mocker" }, new StoreDbContext(options, new StoreEntityMapper()));
@@ -25,7 +28,7 @@ namespace Store.Mocker
             var logger = LoggerMocker.GetLogger<IProductionService>();
 
             var options = new DbContextOptionsBuilder<StoreDbContext>()
-                .UseSqlServer("server=(local);database=Store;integrated security=yes;MultipleActiveResultSets=True;")
+                .UseSqlServer(ConnectionString)
                 .Options;
 
             return new ProductionService(logger, new UserInfo { Name = "mocker" }, new StoreDbContext(options, new StoreEntityMapper()));
@@ -36,7 +39,7 @@ namespace Store.Mocker
             var logger = LoggerMocker.GetLogger<ISalesService>();
 
             var options = new DbContextOptionsBuilder<StoreDbContext>()
-                .UseSqlServer("server=(local);database=Store;integrated security=yes;MultipleActiveResultSets=True;")
+                .UseSqlServer(ConnectionString)
                 .Options;
 
             return new SalesService(logger, new UserInfo { Name = "mocker" }, new StoreDbContext(options, new StoreEntityMapper()));

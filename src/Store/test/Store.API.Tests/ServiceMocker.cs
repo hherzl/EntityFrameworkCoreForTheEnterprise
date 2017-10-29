@@ -9,10 +9,13 @@ namespace Store.API.Tests
 {
     public static class ServiceMocker
     {
+        private static string ConnectionString
+            => "server=(local);database=Store;integrated security=yes;MultipleActiveResultSets=True;";
+
         public static IHumanResourcesService GetHumanResourcesService()
         {
             var options = new DbContextOptionsBuilder<StoreDbContext>()
-                .UseSqlServer("server=(local);database=Store;integrated security=yes;MultipleActiveResultSets=True;")
+                .UseSqlServer(ConnectionString)
                 .Options;
 
             return new HumanResourcesService(null, new UserInfo { Name = "admin" }, new StoreDbContext(options, new StoreEntityMapper()));
@@ -21,7 +24,7 @@ namespace Store.API.Tests
         public static IProductionService GetProductionService()
         {
             var options = new DbContextOptionsBuilder<StoreDbContext>()
-                .UseSqlServer("server=(local);database=Store;integrated security=yes;MultipleActiveResultSets=True;")
+                .UseSqlServer(ConnectionString)
                 .Options;
 
             return new ProductionService(null, new UserInfo { Name = "admin" }, new StoreDbContext(options, new StoreEntityMapper()));
@@ -30,7 +33,7 @@ namespace Store.API.Tests
         public static ISalesService GetSalesService()
         {
             var options = new DbContextOptionsBuilder<StoreDbContext>()
-                .UseSqlServer("server=(local);database=Store;integrated security=yes;MultipleActiveResultSets=True;")
+                .UseSqlServer(ConnectionString)
                 .Options;
 
             return new SalesService(null, new UserInfo { Name = "admin" }, new StoreDbContext(options, new StoreEntityMapper()));
