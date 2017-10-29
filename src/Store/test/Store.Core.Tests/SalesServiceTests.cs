@@ -114,10 +114,8 @@ namespace Store.Core.Tests
                 var response = await service.RemoveOrderAsync(id);
 
                 // Assert
-                if (response.DidError)
-                {
-                    Assert.True(response.ErrorMessage == String.Format(SalesDisplays.RemoveOrderExceptionMessage, id));
-                }
+                Assert.True(response.DidError);
+                Assert.True(response.ErrorMessage == String.Format(SalesDisplays.RemoveOrderExceptionMessage, id));
             }
         }
     }
