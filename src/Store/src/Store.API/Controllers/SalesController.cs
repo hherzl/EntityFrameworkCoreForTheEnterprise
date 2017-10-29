@@ -13,21 +13,17 @@ namespace Store.API.Controllers
     public class SalesController : Controller
     {
         protected ILogger Logger;
-        protected IHumanResourcesService HumanResourcesBusinessObject;
-        protected IProductionService ProductionBusinessObject;
-        protected ISalesService SalesBusinessObject;
+        protected ISalesService SalesService;
 
-        public SalesController(ILogger<SalesController> logger, IHumanResourcesService humanResourcesBusinessObject, IProductionService productionBusinessObject, ISalesService salesBusinessObject)
+        public SalesController(ILogger<SalesController> logger, ISalesService salesService)
         {
             Logger = logger;
-            HumanResourcesBusinessObject = humanResourcesBusinessObject;
-            ProductionBusinessObject = productionBusinessObject;
-            SalesBusinessObject = salesBusinessObject;
+            SalesService = salesService;
         }
 
         protected override void Dispose(Boolean disposing)
         {
-            SalesBusinessObject?.Dispose();
+            SalesService?.Dispose();
 
             base.Dispose(disposing);
         }
@@ -38,7 +34,7 @@ namespace Store.API.Controllers
             Logger?.LogDebug("{0} has been invoked", nameof(GetOrdersAsync));
 
             // Get response from business logic
-            var response = await SalesBusinessObject
+            var response = await SalesService
                 .GetOrdersAsync(
                     (Int32)pageSize,
                     (Int32)pageNumber,
@@ -60,7 +56,7 @@ namespace Store.API.Controllers
             Logger?.LogDebug("{0} has been invoked", nameof(GetOrderAsync));
 
             // Get response from business logic
-            var response = await SalesBusinessObject
+            var response = await SalesService
                 .GetOrderAsync(id);
 
             // Return as http response
@@ -73,7 +69,7 @@ namespace Store.API.Controllers
             Logger?.LogDebug("{0} has been invoked", nameof(GetCreateOrderRequestAsync));
 
             // Get response from business logic
-            var response = await SalesBusinessObject
+            var response = await SalesService
                 .GetCreateOrderRequestAsync();
 
             // Return as http response
@@ -87,7 +83,7 @@ namespace Store.API.Controllers
             Logger?.LogDebug("{0} has been invoked", nameof(CreateOrderAsync));
 
             // Get response from business logic
-            var response = await SalesBusinessObject
+            var response = await SalesService
                 .CreateOrderAsync(value.GetOrder(), value.GetOrderDetails().ToArray());
 
             // Return as http response
@@ -100,7 +96,7 @@ namespace Store.API.Controllers
             Logger?.LogDebug("{0} has been invoked", nameof(CloneOrderAsync));
 
             // Get response from business logic
-            var response = await SalesBusinessObject
+            var response = await SalesService
                 .CloneOrderAsync(id);
 
             // Return as http response
@@ -113,7 +109,7 @@ namespace Store.API.Controllers
             Logger?.LogDebug("{0} has been invoked", nameof(DeleteOrderAsync));
 
             // Get response from business logic
-            var response = await SalesBusinessObject
+            var response = await SalesService
                 .RemoveOrderAsync(id);
 
             // Return as http response

@@ -197,16 +197,16 @@ namespace Store.Core.BusinessLayer
             try
             {
                 // Retrieve customers list
-                response.Model.Customers = (await GetCustomersAsync()).Model;
+                response.Model.Customers = await SalesRepository.GetCustomers().ToListAsync();
 
                 // Retrieve employees list
-                response.Model.Employees = (await HumanResourcesRepository.GetEmployees().ToListAsync());
+                response.Model.Employees = await HumanResourcesRepository.GetEmployees().ToListAsync();
 
                 // Retrieve shippers list
-                response.Model.Shippers = (await GetShippersAsync()).Model;
+                response.Model.Shippers = await SalesRepository.GetShippers().ToListAsync();
 
                 // Retrieve products list
-                response.Model.Products = (await ProductionRepository.GetProducts().ToListAsync());
+                response.Model.Products = await ProductionRepository.GetProducts().ToListAsync();
             }
             catch (Exception ex)
             {
