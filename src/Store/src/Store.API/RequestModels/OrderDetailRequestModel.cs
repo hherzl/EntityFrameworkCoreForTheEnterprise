@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Store.API.ViewModels
+namespace Store.API.RequestModels
 {
-    public class OrderDetailViewModel
+    public class OrderDetailRequestModel
     {
         public Int32? OrderID { get; set; }
 

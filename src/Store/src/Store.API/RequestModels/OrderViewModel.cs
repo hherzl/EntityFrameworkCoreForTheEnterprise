@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Store.API.ViewModels
+namespace Store.API.RequestModels
 {
     public class OrderViewModel
     {

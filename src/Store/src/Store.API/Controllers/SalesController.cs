@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Store.API.Extensions;
-using Store.API.ViewModels;
+using Store.API.RequestModels;
 using Store.Core.BusinessLayer.Contracts;
 
 namespace Store.API.Controllers

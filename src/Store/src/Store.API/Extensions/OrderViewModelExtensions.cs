@@ -1,32 +1,32 @@
 ﻿using System.Collections.Generic;
-using Store.API.ViewModels;
+using Store.API.RequestModels;
 using Store.Core.EntityLayer.Sales;
 
 namespace Store.API.Extensions
 {
     public static class OrderViewModelExtensions
     {
-        public static Order GetOrder(this OrderViewModel viewModel)
+        public static Order GetOrder(this OrderViewModel requestModel)
         {
             return new Order
             {
-                OrderID = viewModel.OrderID,
-                OrderDate = viewModel.OrderDate,
-                CustomerID = viewModel.CustomerID,
-                EmployeeID = viewModel.EmployeeID,
-                ShipperID = viewModel.ShipperID,
-                Total = viewModel.Total,
-                Comments = viewModel.Comments,
-                CreationUser = viewModel.CreationUser,
-                CreationDateTime = viewModel.CreationDateTime,
-                LastUpdateUser = viewModel.LastUpdateUser,
-                LastUpdateDateTime = viewModel.LastUpdateDateTime
+                OrderID = requestModel.OrderID,
+                OrderDate = requestModel.OrderDate,
+                CustomerID = requestModel.CustomerID,
+                EmployeeID = requestModel.EmployeeID,
+                ShipperID = requestModel.ShipperID,
+                Total = requestModel.Total,
+                Comments = requestModel.Comments,
+                CreationUser = requestModel.CreationUser,
+                CreationDateTime = requestModel.CreationDateTime,
+                LastUpdateUser = requestModel.LastUpdateUser,
+                LastUpdateDateTime = requestModel.LastUpdateDateTime
             };
         }
 
-        public static IEnumerable<OrderDetail> GetOrderDetails(this OrderViewModel viewModel)
+        public static IEnumerable<OrderDetail> GetOrderDetails(this OrderViewModel requestModel)
         {
-            foreach (var item in viewModel.Details)
+            foreach (var item in requestModel.Details)
             {
                 yield return new OrderDetail
                 {

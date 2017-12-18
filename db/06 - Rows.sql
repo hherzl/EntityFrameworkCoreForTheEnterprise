@@ -17,7 +17,7 @@ insert [Production].[ProductCategory]
     values ('PS4 Games', @userName, getdate(), null, null, null)
 
 insert into [Production].[Product]
-    values ('King of Fighters XIV', 1, 29.99, 'KOF XIV', 0, @userName, getdate(), null, null, null)
+    values ('The King of Fighters XIV', 1, 29.99, 'KOF XIV', 0, @userName, getdate(), null, null, null)
 insert into [Production].[Product]
     values ('Street Fighter V', 1, 19.99, 'SF V', 0, @userName, getdate(), null, null, null)
 insert into [Production].[Product]
