@@ -1,11 +1,10 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Store.Core.BusinessLayer.Responses;
 
-namespace Store.API.Extensions
+namespace Store.API.Responses
 {
-    public static class ResponseExtensions
+    public static class Extensions
     {
         public static IActionResult ToHttpResponse<TModel>(this IListResponse<TModel> response)
         {
@@ -22,7 +21,7 @@ namespace Store.API.Extensions
 
             return new ObjectResult(response)
             {
-                StatusCode = (Int32)status
+                StatusCode = (int)status
             };
         }
 
@@ -41,7 +40,7 @@ namespace Store.API.Extensions
 
             return new ObjectResult(response)
             {
-                StatusCode = (Int32)status
+                StatusCode = (int)status
             };
         }
     }

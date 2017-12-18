@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Store.API.Controllers;
@@ -37,7 +36,7 @@ namespace Store.API.Tests
             // Arrange
             var logger = LoggerMocker.GetLogger<SalesController>();
             var salesService = ServiceMocker.GetSalesService();
-            var currencyID = (Int16?)1;
+            var currencyID = (short?)1;
 
             using (var controller = new SalesController(logger, salesService))
             {

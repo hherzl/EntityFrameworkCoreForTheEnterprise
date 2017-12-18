@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using Store.API.RequestModels;
 using Store.Core.EntityLayer.Sales;
 
-namespace Store.API.Extensions
+namespace Store.API.RequestModels
 {
-    public static class OrderViewModelExtensions
+    public static class Extensions
     {
         public static Order GetOrder(this OrderViewModel requestModel)
         {

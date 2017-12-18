@@ -1,8 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Store.API.Extensions;
+using Store.API.Responses;
 using Store.Core.BusinessLayer.Contracts;
 
 namespace Store.API.Controllers
@@ -19,7 +18,7 @@ namespace Store.API.Controllers
             ProductionBusinessObject = productionBusinessObject;
         }
 
-        protected override void Dispose(Boolean disposing)
+        protected override void Dispose(bool disposing)
         {
             ProductionBusinessObject?.Dispose();
 
@@ -27,26 +26,24 @@ namespace Store.API.Controllers
         }
 
         [HttpGet("Product")]
-        public async Task<IActionResult> GetProductsAsync(Int32? pageSize = 10, Int32? pageNumber = 1)
+        public async Task<IActionResult> GetProductsAsync(int? pageSize = 10, int? pageNumber = 1)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetProductsAsync));
 
             // Get response from business logic
-            var response = await ProductionBusinessObject
-                .GetProductsAsync((Int32)pageSize, (Int32)pageNumber);
+            var response = await ProductionBusinessObject.GetProductsAsync((int)pageSize, (int)pageNumber);
 
             // Return as http response
             return response.ToHttpResponse();
         }
 
         [HttpGet("InventoryByProduct/{id}")]
-        public async Task<IActionResult> GetInventoryByProduct(Int32 id)
+        public async Task<IActionResult> GetInventoryByProduct(int id)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetInventoryByProduct));
 
             // Get response from business logic
-            var response = await ProductionBusinessObject
-                .GetInventoryByProduct(id);
+            var response = await ProductionBusinessObject.GetInventoryByProduct(id);
 
             // Return as http response
             return response.ToHttpResponse();

@@ -3,8 +3,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Store.API.Extensions;
 using Store.API.RequestModels;
+using Store.API.Responses;
 using Store.Core.BusinessLayer.Contracts;
 
 namespace Store.API.Controllers
@@ -21,7 +21,7 @@ namespace Store.API.Controllers
             SalesService = salesService;
         }
 
-        protected override void Dispose(Boolean disposing)
+        protected override void Dispose(bool disposing)
         {
             SalesService?.Dispose();
 
@@ -29,15 +29,15 @@ namespace Store.API.Controllers
         }
 
         [HttpGet("Order")]
-        public async Task<IActionResult> GetOrdersAsync(Int32? pageSize = 10, Int32? pageNumber = 1, Int16? currencyID = null, Int32? customerID = null, Int32? employeeID = null, Int16? orderStatusID = null, Guid? paymentMethodID = null, Int32? shipperID = null)
+        public async Task<IActionResult> GetOrdersAsync(int? pageSize = 10, int? pageNumber = 1, short? currencyID = null, int? customerID = null, int? employeeID = null, short? orderStatusID = null, Guid? paymentMethodID = null, int? shipperID = null)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetOrdersAsync));
 
             // Get response from business logic
             var response = await SalesService
                 .GetOrdersAsync(
-                    (Int32)pageSize,
-                    (Int32)pageNumber,
+                    (int)pageSize,
+                    (int)pageNumber,
                     currencyID: currencyID,
                     customerID: customerID,
                     employeeID: employeeID,
@@ -51,13 +51,12 @@ namespace Store.API.Controllers
         }
 
         [HttpGet("Order/{id}")]
-        public async Task<IActionResult> GetOrderAsync(Int64 id)
+        public async Task<IActionResult> GetOrderAsync(long id)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetOrderAsync));
 
             // Get response from business logic
-            var response = await SalesService
-                .GetOrderAsync(id);
+            var response = await SalesService.GetOrderAsync(id);
 
             // Return as http response
             return response.ToHttpResponse();
@@ -69,8 +68,7 @@ namespace Store.API.Controllers
             Logger?.LogDebug("{0} has been invoked", nameof(GetCreateOrderRequestAsync));
 
             // Get response from business logic
-            var response = await SalesService
-                .GetCreateOrderRequestAsync();
+            var response = await SalesService.GetCreateOrderRequestAsync();
 
             // Return as http response
             return response.ToHttpResponse();
@@ -83,34 +81,31 @@ namespace Store.API.Controllers
             Logger?.LogDebug("{0} has been invoked", nameof(CreateOrderAsync));
 
             // Get response from business logic
-            var response = await SalesService
-                .CreateOrderAsync(value.GetOrder(), value.GetOrderDetails().ToArray());
+            var response = await SalesService.CreateOrderAsync(value.GetOrder(), value.GetOrderDetails().ToArray());
 
             // Return as http response
             return response.ToHttpResponse();
         }
 
         [HttpGet("CloneOrder/{id}")]
-        public async Task<IActionResult> CloneOrderAsync(Int32 id)
+        public async Task<IActionResult> CloneOrderAsync(int id)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(CloneOrderAsync));
 
             // Get response from business logic
-            var response = await SalesService
-                .CloneOrderAsync(id);
+            var response = await SalesService.CloneOrderAsync(id);
 
             // Return as http response
             return response.ToHttpResponse();
         }
 
         [HttpDelete("Order/{id}")]
-        public async Task<IActionResult> DeleteOrderAsync(Int32 id)
+        public async Task<IActionResult> DeleteOrderAsync(int id)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(DeleteOrderAsync));
 
             // Get response from business logic
-            var response = await SalesService
-                .RemoveOrderAsync(id);
+            var response = await SalesService.RemoveOrderAsync(id);
 
             // Return as http response
             return response.ToHttpResponse();
