@@ -2,7 +2,7 @@
 
 namespace Store.Core.EntityLayer
 {
-    public interface IAuditEntity : IEntity
+    public interface IAuditableEntity : IEntity
     {
         String CreationUser { get; set; }
 

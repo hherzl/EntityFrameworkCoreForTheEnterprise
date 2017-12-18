@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 
 namespace Store.Core.EntityLayer.Production
 {
-    public class ProductCategory : IAuditEntity
+    public class ProductCategory : IAuditableEntity
     {
         public ProductCategory()
         {

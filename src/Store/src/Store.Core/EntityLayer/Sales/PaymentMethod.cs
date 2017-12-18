@@ -2,7 +2,7 @@
 
 namespace Store.Core.EntityLayer.Sales
 {
-    public class PaymentMethod : IAuditEntity
+    public class PaymentMethod : IAuditableEntity
     {
         public PaymentMethod()
         {

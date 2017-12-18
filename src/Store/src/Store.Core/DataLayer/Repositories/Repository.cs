@@ -20,9 +20,9 @@ namespace Store.Core.DataLayer.Repositories
             DbContext = dbContext;
         }
 
-        protected virtual void Add<TEntity>(TEntity entity) where TEntity : class, IEntity
+        protected virtual void Add<TEntity>(TEntity entity) where TEntity : class, IAuditableEntity
         {
-            var cast = entity as IAuditEntity;
+            var cast = entity as IAuditableEntity;
 
             if (cast != null)
             {
@@ -37,9 +37,9 @@ namespace Store.Core.DataLayer.Repositories
             DbContext.Set<TEntity>().Add(entity);
         }
 
-        protected virtual void Update<TEntity>(TEntity entity) where TEntity : class, IEntity
+        protected virtual void Update<TEntity>(TEntity entity) where TEntity : class, IAuditableEntity
         {
-            var cast = entity as IAuditEntity;
+            var cast = entity as IAuditableEntity;
 
             if (cast != null)
             {
@@ -52,7 +52,7 @@ namespace Store.Core.DataLayer.Repositories
             }
         }
 
-        protected virtual void Remove<TEntity>(TEntity entity) where TEntity : class, IEntity
+        protected virtual void Remove<TEntity>(TEntity entity) where TEntity : class, IAuditableEntity
             => DbContext.Set<TEntity>().Remove(entity);
 
         protected virtual IEnumerable<ChangeLog> GetChanges()
@@ -68,7 +68,7 @@ namespace Store.Core.DataLayer.Repositories
                         var originalValue = entry.Property(property.Name).OriginalValue;
                         var currentValue = entry.Property(property.Name).CurrentValue;
 
-                        if (String.Concat(originalValue) != String.Concat(currentValue))
+                        if (string.Concat(originalValue) != string.Concat(currentValue))
                         {
                             // todo: improve the way to retrieve primary key value from entity instance
                             var key = entry.Entity.GetType().GetProperties()[0].GetValue(entry.Entity, null).ToString();
@@ -78,8 +78,8 @@ namespace Store.Core.DataLayer.Repositories
                                 ClassName = entityType.Name,
                                 PropertyName = property.Name,
                                 Key = key,
-                                OriginalValue = originalValue == null ? String.Empty : originalValue.ToString(),
-                                CurrentValue = currentValue == null ? String.Empty : currentValue.ToString(),
+                                OriginalValue = originalValue == null ? string.Empty : originalValue.ToString(),
+                                CurrentValue = currentValue == null ? string.Empty : currentValue.ToString(),
                                 UserName = UserInfo.Name,
                                 ChangeDate = DateTime.Now
                             };
@@ -89,7 +89,7 @@ namespace Store.Core.DataLayer.Repositories
             }
         }
 
-        public Int32 CommitChanges()
+        public int CommitChanges()
         {
             var dbSet = DbContext.Set<ChangeLog>();
 
@@ -101,7 +101,7 @@ namespace Store.Core.DataLayer.Repositories
             return DbContext.SaveChanges();
         }
 
-        public Task<Int32> CommitChangesAsync()
+        public Task<int> CommitChangesAsync()
         {
             var dbSet = DbContext.Set<ChangeLog>();
 

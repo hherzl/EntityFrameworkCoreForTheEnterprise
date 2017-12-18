@@ -2,7 +2,7 @@
 
 namespace Store.Core.EntityLayer.Dbo
 {
-    public class CountryCurrency : IAuditEntity
+    public class CountryCurrency : IAuditableEntity
     {
         public CountryCurrency()
         {

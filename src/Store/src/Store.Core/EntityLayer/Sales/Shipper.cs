@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 
 namespace Store.Core.EntityLayer.Sales
 {
-    public class Shipper : IAuditEntity
+    public class Shipper : IAuditableEntity
     {
         public Shipper()
         {
