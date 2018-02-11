@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Store.Core.EntityLayer.Dbo
+﻿namespace Store.Core.EntityLayer.Dbo
 {
     public class ChangeLogExclusion : IEntity
     {
@@ -8,10 +6,10 @@ namespace Store.Core.EntityLayer.Dbo
         {
         }
 
-        public String ChangeLogExclusionID { get; set; }
+        public int? ChangeLogExclusionID { get; set; }
 
-        public String EntityName { get; set; }
+        public string EntityName { get; set; }
 
-        public String PropertyName { get; set; }
+        public string PropertyName { get; set; }
     }
 }

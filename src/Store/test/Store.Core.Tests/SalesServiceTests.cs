@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Store.Core.BusinessLayer;
 using Store.Core.EntityLayer.Sales;
 using Xunit;
 
@@ -116,8 +115,8 @@ namespace Store.Core.Tests
                 var response = await service.RemoveOrderAsync(id);
 
                 // Assert
-                Assert.True(response.DidError);
-                Assert.True(response.ErrorMessage == string.Format(SalesDisplays.RemoveOrderExceptionMessage, id));
+                Assert.False(response.DidError);
+                Assert.True(response.Model == null);
             }
         }
     }

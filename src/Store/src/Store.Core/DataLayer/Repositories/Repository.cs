@@ -53,34 +53,47 @@ namespace Store.Core.DataLayer.Repositories
 
         protected virtual IEnumerable<ChangeLog> GetChanges()
         {
+            var exclusions = DbContext.Set<ChangeLogExclusion>().ToList();
+
             foreach (var entry in DbContext.ChangeTracker.Entries())
             {
-                if (entry.State == EntityState.Modified)
+                if (entry.State != EntityState.Modified)
+                    continue;
+
+                var entityType = entry.Entity.GetType();
+
+                if (exclusions.Where(item => item.EntityName == entityType.Name && item.PropertyName == "*").Count() == 1)
+                    yield break;
+
+                foreach (var property in entityType.GetTypeInfo().DeclaredProperties)
                 {
-                    var entityType = entry.Entity.GetType();
+                    // Validate if there is an exclusion for *.Property
+                    if (exclusions.Where(item => item.EntityName == "*" && string.Compare(item.PropertyName, property.Name, true) == 0).Count() == 1)
+                        continue;
 
-                    foreach (var property in entityType.GetTypeInfo().DeclaredProperties)
+                    // Validate if there is an exclusion for Entity.Property
+                    if (exclusions.Where(item => item.EntityName == entityType.Name && string.Compare(item.PropertyName, property.Name, true) == 0).Count() == 1)
+                        continue;
+
+                    var originalValue = entry.Property(property.Name).OriginalValue;
+                    var currentValue = entry.Property(property.Name).CurrentValue;
+
+                    if (string.Concat(originalValue) == string.Concat(currentValue))
+                        continue;
+
+                    // todo: improve the way to retrieve primary key value from entity instance
+                    var key = entry.Entity.GetType().GetProperties()[0].GetValue(entry.Entity, null).ToString();
+
+                    yield return new ChangeLog
                     {
-                        var originalValue = entry.Property(property.Name).OriginalValue;
-                        var currentValue = entry.Property(property.Name).CurrentValue;
-
-                        if (string.Concat(originalValue) != string.Concat(currentValue))
-                        {
-                            // todo: improve the way to retrieve primary key value from entity instance
-                            var key = entry.Entity.GetType().GetProperties()[0].GetValue(entry.Entity, null).ToString();
-
-                            yield return new ChangeLog
-                            {
-                                ClassName = entityType.Name,
-                                PropertyName = property.Name,
-                                Key = key,
-                                OriginalValue = originalValue == null ? string.Empty : originalValue.ToString(),
-                                CurrentValue = currentValue == null ? string.Empty : currentValue.ToString(),
-                                UserName = UserInfo.Name,
-                                ChangeDate = DateTime.Now
-                            };
-                        }
-                    }
+                        ClassName = entityType.Name,
+                        PropertyName = property.Name,
+                        Key = key,
+                        OriginalValue = originalValue == null ? string.Empty : originalValue.ToString(),
+                        CurrentValue = currentValue == null ? string.Empty : currentValue.ToString(),
+                        UserName = UserInfo.Name,
+                        ChangeDate = DateTime.Now
+                    };
                 }
             }
         }
