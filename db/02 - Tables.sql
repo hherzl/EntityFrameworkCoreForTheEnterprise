@@ -75,6 +75,35 @@ create table [HumanResources].[Employee]
 	[Timestamp] rowversion null
 )
 
+create table [HumanResources].[EmployeeAddress]
+(
+	[EmployeeAddressID] int not null identity(1, 1),
+	[EmployeeID] int not null,
+	[AddressLine1] varchar(50) not null,
+	[AddressLine2] varchar(50) null,
+	[City] varchar(25) not null,
+	[State] varchar(25) not null,
+	[ZipCode] varchar(5) null,
+	[PhoneNumber] varchar(25) null,
+	[CreationUser] varchar(25) not null,
+	[CreationDateTime] datetime not null,
+	[LastUpdateUser] varchar(25) null,
+	[LastUpdateDateTime] datetime null,
+	[Timestamp] rowversion null
+)
+
+create table [HumanResources].[EmployeeEmail]
+(
+	[EmployeeEmailID] int not null identity(1, 1),
+	[EmployeeID] int not null,
+	[Email] varchar(50) not null,
+	[CreationUser] varchar(25) not null,
+	[CreationDateTime] datetime not null,
+	[LastUpdateUser] varchar(25) null,
+	[LastUpdateDateTime] datetime null,
+	[Timestamp] rowversion null
+)
+
 create table [Production].[ProductCategory]
 (
 	[ProductCategoryID] int not null identity(1, 1),
@@ -154,6 +183,35 @@ create table [Sales].[Customer]
 	[CustomerID] int not null identity(1, 1),
 	[CompanyName] varchar(100) null,
 	[ContactName] varchar(100) null,
+	[CreationUser] varchar(25) not null,
+	[CreationDateTime] datetime not null,
+	[LastUpdateUser] varchar(25) null,
+	[LastUpdateDateTime] datetime null,
+	[Timestamp] rowversion null
+)
+
+create table [Sales].[CustomerAddress]
+(
+	[CustomerAddressID] int not null identity(1, 1),
+	[CustomerID] int not null,
+	[AddressLine1] varchar(50) not null,
+	[AddressLine2] varchar(50) null,
+	[City] varchar(25) not null,
+	[State] varchar(25) not null,
+	[ZipCode] varchar(5) null,
+	[PhoneNumber] varchar(25) null,
+	[CreationUser] varchar(25) not null,
+	[CreationDateTime] datetime not null,
+	[LastUpdateUser] varchar(25) null,
+	[LastUpdateDateTime] datetime null,
+	[Timestamp] rowversion null
+)
+
+create table [Sales].[CustomerEmail]
+(
+	[CustomerEmailID] int not null identity(1, 1),
+	[CustomerID] int not null,
+	[Email] varchar(50) not null,
 	[CreationUser] varchar(25) not null,
 	[CreationDateTime] datetime not null,
 	[LastUpdateUser] varchar(25) null,

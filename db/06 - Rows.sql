@@ -1,6 +1,11 @@
 declare @userName varchar(25)
 select @userName = 'seed'
 
+insert into [dbo].[ChangeLogExclusion] values('*', 'CreationUser')
+insert into [dbo].[ChangeLogExclusion] values('*', 'CreationDateTime')
+insert into [dbo].[ChangeLogExclusion] values('*', 'LastUpdateUser')
+insert into [dbo].[ChangeLogExclusion] values('*', 'LastUpdateDateTime')
+
 insert into [dbo].[Country]
     values (1, 'USA', @userName, getdate(), null, null, null)
 

@@ -23,6 +23,26 @@ alter table [Production].[ProductInventory]
 		references [Production].[Warehouse]
 go
 
+alter table [HumanResources].[EmployeeAddress]
+	add constraint [FK_HumanResources_EmployeeAddress] foreign key (EmployeeID)
+		references [HumanResources].[Employee]
+go
+
+alter table [HumanResources].[EmployeeEmail]
+	add constraint [FK_HumanResources_EmployeeEmail] foreign key (EmployeeID)
+		references [HumanResources].[Employee]
+go
+
+alter table [Sales].[CustomerAddress]
+	add constraint [FK_Sales_CustomerAddress] foreign key (CustomerID)
+		references [Sales].[Customer]
+go
+
+alter table [Sales].[CustomerEmail]
+	add constraint [FK_Sales_CustomerEmail] foreign key (CustomerID)
+		references [Sales].[Customer]
+go
+
 alter table [Sales].[Order]
 	add constraint [FK_Sales_Order_OrderStatus] foreign key (OrderStatusID)
 		references [Sales].[OrderStatus]

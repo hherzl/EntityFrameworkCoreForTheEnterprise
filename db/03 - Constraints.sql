@@ -25,6 +25,14 @@ alter table [HumanResources].[Employee]
 	add constraint [PK_HumanResources_Employee] primary key (EmployeeID)
 go
 
+alter table [HumanResources].[EmployeeAddress]
+	add constraint [PK_HumanResources_EmployeeAddress] primary key (EmployeeAddressID)
+go
+
+alter table [HumanResources].[EmployeeEmail]
+	add constraint [PK_HumanResources_EmployeeEmail] primary key (EmployeeEmailID)
+go
+
 alter table [Production].[ProductCategory]
 	add constraint [PK_Production_ProductCategory] primary key (ProductCategoryID)
 go
@@ -47,6 +55,14 @@ go
 
 alter table [Sales].[Customer]
 	add constraint [PK_Sales_Customer] primary key (CustomerID)
+go
+
+alter table [Sales].[CustomerAddress]
+	add constraint [PK_Sales_CustomerAddress] primary key (CustomerAddressID)
+go
+
+alter table [Sales].[CustomerEmail]
+	add constraint [PK_Sales_CustomerEmail] primary key (CustomerEmailID)
 go
 
 alter table [Sales].[Shipper]
