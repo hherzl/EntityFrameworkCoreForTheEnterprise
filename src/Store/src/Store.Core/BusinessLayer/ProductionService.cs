@@ -18,7 +18,7 @@ namespace Store.Core.BusinessLayer
         {
         }
 
-        public async Task<IPagedResponse<Product>> GetProductsAsync(Int32 pageSize = 10, Int32 pageNumber = 1, Int32? productCategoryID = null)
+        public async Task<IPagedResponse<Product>> GetProductsAsync(int pageSize = 10, int pageNumber = 1, int? productCategoryID = null)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetProductsAsync));
 
@@ -30,8 +30,8 @@ namespace Store.Core.BusinessLayer
                 var query = ProductionRepository.GetProducts(productCategoryID);
 
                 // Set information for paging
-                response.PageSize = (Int32)pageSize;
-                response.PageNumber = (Int32)pageNumber;
+                response.PageSize = pageSize;
+                response.PageNumber = pageNumber;
                 response.ItemsCount = await query.CountAsync();
 
                 // Retrieve items, set model for response
@@ -45,7 +45,7 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IPagedResponse<Warehouse>> GetWarehousesAsync(Int32 pageSize = 10, Int32 pageNumber = 1)
+        public async Task<IPagedResponse<Warehouse>> GetWarehousesAsync(int pageSize = 10, int pageNumber = 1)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetWarehousesAsync));
 
@@ -57,8 +57,8 @@ namespace Store.Core.BusinessLayer
                 var query = ProductionRepository.GetWarehouses();
 
                 // Set information for paging
-                response.PageSize = (Int32)pageSize;
-                response.PageNumber = (Int32)pageNumber;
+                response.PageSize = pageSize;
+                response.PageNumber = pageNumber;
                 response.ItemsCount = await query.CountAsync();
 
                 // Retrieve items, set model for response
@@ -72,7 +72,7 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IListResponse<ProductInventory>> GetInventoryByProduct(Int32? productID)
+        public async Task<IListResponse<ProductInventory>> GetInventoryByProduct(int? productID)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetInventoryByProduct));
 

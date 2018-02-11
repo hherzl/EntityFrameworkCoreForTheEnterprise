@@ -2,7 +2,6 @@
 using Store.Core.BusinessLayer;
 using Store.Core.BusinessLayer.Contracts;
 using Store.Core.DataLayer;
-using Store.Core.DataLayer.Mapping;
 
 namespace Store.Core.Tests
 {
@@ -19,7 +18,7 @@ namespace Store.Core.Tests
                 .UseSqlServer(ConnectionString)
                 .Options;
 
-            return new HumanResourcesService(logger, new UserInfo { Name = "admin" }, new StoreDbContext(options, new StoreEntityMapper()));
+            return new HumanResourcesService(logger, new UserInfo { Name = "admin" }, new StoreDbContext(options));
         }
 
         public static IProductionService GetProductionService()
@@ -30,7 +29,7 @@ namespace Store.Core.Tests
                 .UseSqlServer(ConnectionString)
                 .Options;
 
-            return new ProductionService(logger, new UserInfo { Name = "admin" }, new StoreDbContext(options, new StoreEntityMapper()));
+            return new ProductionService(logger, new UserInfo { Name = "admin" }, new StoreDbContext(options));
         }
 
         public static ISalesService GetSalesService()
@@ -41,7 +40,7 @@ namespace Store.Core.Tests
                 .UseSqlServer(ConnectionString)
                 .Options;
 
-            return new SalesService(logger, new UserInfo { Name = "admin" }, new StoreDbContext(options, new StoreEntityMapper()));
+            return new SalesService(logger, new UserInfo { Name = "admin" }, new StoreDbContext(options));
         }
     }
 }

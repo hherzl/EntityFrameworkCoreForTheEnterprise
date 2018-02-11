@@ -37,8 +37,6 @@ namespace Store.API
 
             services.AddDbContext<StoreDbContext>(options => options.UseSqlServer(Configuration["AppSettings:ConnectionString"]));
 
-            services.AddScoped<IEntityMapper, StoreEntityMapper>();
-
             services.AddScoped<IUserInfo, UserInfo>();
 
             services.AddScoped<ILogger, Logger<Service>>();

@@ -1,13 +1,11 @@
-﻿using System;
-
-namespace Store.Core.BusinessLayer.Responses
+﻿namespace Store.Core.BusinessLayer.Responses
 {
     public interface IResponse
     {
-        String Message { get; set; }
+        string Message { get; set; }
 
-        Boolean DidError { get; set; }
+        bool DidError { get; set; }
 
-        String ErrorMessage { get; set; }
+        string ErrorMessage { get; set; }
     }
 }

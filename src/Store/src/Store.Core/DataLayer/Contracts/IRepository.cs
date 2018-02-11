@@ -1,12 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Store.Core.DataLayer.Contracts
 {
     public interface IRepository
     {
-        Int32 CommitChanges();
+        int CommitChanges();
 
-        Task<Int32> CommitChangesAsync();
+        Task<int> CommitChangesAsync();
     }
 }

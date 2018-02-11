@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Store.Core
+﻿namespace Store.Core
 {
     public class UserInfo : IUserInfo
     {
@@ -8,10 +6,10 @@ namespace Store.Core
         {
         }
 
-        public String Domain { get; set; }
+        public string Domain { get; set; }
 
-        public String Name { get; set; }
+        public string Name { get; set; }
 
-        public String[] Roles { get; set; }
+        public string[] Roles { get; set; }
     }
 }

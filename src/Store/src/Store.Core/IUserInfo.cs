@@ -1,13 +1,11 @@
-﻿using System;
-
-namespace Store.Core
+﻿namespace Store.Core
 {
     public interface IUserInfo
     {
-        String Domain { get; set; }
+        string Domain { get; set; }
 
-        String Name { get; set; }
+        string Name { get; set; }
 
-        String[] Roles { get; set; }
+        string[] Roles { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace Store.Core.BusinessLayer
         {
         }
 
-        public async Task<IListResponse<Employee>> GetEmployeesAsync(Int32 pageSize = 0, Int32 pageNumber = 0)
+        public async Task<IListResponse<Employee>> GetEmployeesAsync(int pageSize = 0, int pageNumber = 0)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetEmployeesAsync));
 
@@ -36,6 +36,8 @@ namespace Store.Core.BusinessLayer
 
         public async Task<ISingleResponse<Employee>> GetEmployeeAsync(Employee entity)
         {
+            Logger?.LogInformation("{0} has been invoked", nameof(GetEmployeeAsync));
+
             var response = new SingleResponse<Employee>();
 
             try

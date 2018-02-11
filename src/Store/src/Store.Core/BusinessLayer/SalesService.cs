@@ -22,7 +22,7 @@ namespace Store.Core.BusinessLayer
         {
         }
 
-        public async Task<IPagedResponse<Customer>> GetCustomersAsync(Int32 pageSize = 10, Int32 pageNumber = 1)
+        public async Task<IPagedResponse<Customer>> GetCustomersAsync(int pageSize = 10, int pageNumber = 1)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetCustomersAsync));
 
@@ -34,8 +34,8 @@ namespace Store.Core.BusinessLayer
                 var query = SalesRepository.GetCustomers();
 
                 // Set information for paging
-                response.PageSize = (Int32)pageSize;
-                response.PageNumber = (Int32)pageNumber;
+                response.PageSize = pageSize;
+                response.PageNumber = pageNumber;
                 response.ItemsCount = await query.CountAsync();
 
                 // Retrieve items, set model for response
@@ -51,7 +51,7 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IPagedResponse<Shipper>> GetShippersAsync(Int32 pageSize = 10, Int32 pageNumber = 1)
+        public async Task<IPagedResponse<Shipper>> GetShippersAsync(int pageSize = 10, int pageNumber = 1)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetShippersAsync));
 
@@ -63,8 +63,8 @@ namespace Store.Core.BusinessLayer
                 var query = SalesRepository.GetShippers();
 
                 // Set information for paging
-                response.PageSize = (Int32)pageSize;
-                response.PageNumber = (Int32)pageNumber;
+                response.PageSize = pageSize;
+                response.PageNumber = pageNumber;
                 response.ItemsCount = await query.CountAsync();
 
                 // Retrieve items, set model for response
@@ -80,7 +80,7 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IPagedResponse<Currency>> GetCurrenciesAsync(Int32 pageSize = 10, Int32 pageNumber = 1)
+        public async Task<IPagedResponse<Currency>> GetCurrenciesAsync(int pageSize = 10, int pageNumber = 1)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetCurrenciesAsync));
 
@@ -92,8 +92,8 @@ namespace Store.Core.BusinessLayer
                 var query = SalesRepository.GetCurrencies();
 
                 // Set information for paging
-                response.PageSize = (Int32)pageSize;
-                response.PageNumber = (Int32)pageNumber;
+                response.PageSize = pageSize;
+                response.PageNumber = pageNumber;
                 response.ItemsCount = await query.CountAsync();
 
                 // Retrieve items, set model for response
@@ -109,7 +109,7 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IPagedResponse<PaymentMethod>> GetPaymentMethodsAsync(Int32 pageSize = 10, Int32 pageNumber = 1)
+        public async Task<IPagedResponse<PaymentMethod>> GetPaymentMethodsAsync(int pageSize = 10, int pageNumber = 1)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetPaymentMethodsAsync));
 
@@ -121,8 +121,8 @@ namespace Store.Core.BusinessLayer
                 var query = SalesRepository.GetPaymentMethods();
 
                 // Set information for paging
-                response.PageSize = (Int32)pageSize;
-                response.PageNumber = (Int32)pageNumber;
+                response.PageSize = pageSize;
+                response.PageNumber = pageNumber;
                 response.ItemsCount = await query.CountAsync();
 
                 // Retrieve items, set model for response
@@ -138,7 +138,7 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IPagedResponse<OrderInfo>> GetOrdersAsync(Int32 pageSize = 10, Int32 pageNumber = 1, Int16? currencyID = null, Int32? customerID = null, Int32? employeeID = null, Int16? orderStatusID = null, Guid? paymentMethodID = null, Int32? shipperID = null)
+        public async Task<IPagedResponse<OrderInfo>> GetOrdersAsync(int pageSize = 10, int pageNumber = 1, Int16? currencyID = null, int? customerID = null, int? employeeID = null, Int16? orderStatusID = null, Guid? paymentMethodID = null, int? shipperID = null)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetOrdersAsync));
 
@@ -151,8 +151,8 @@ namespace Store.Core.BusinessLayer
                     .GetOrders(currencyID, customerID, employeeID, orderStatusID, paymentMethodID, shipperID);
 
                 // Set information for paging
-                response.PageSize = (Int32)pageSize;
-                response.PageNumber = (Int32)pageNumber;
+                response.PageSize = pageSize;
+                response.PageNumber = pageNumber;
                 response.ItemsCount = await query.CountAsync();
 
                 // Retrieve items, set model for response
@@ -168,7 +168,7 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<ISingleResponse<Order>> GetOrderAsync(Int64 id)
+        public async Task<ISingleResponse<Order>> GetOrderAsync(long id)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetOrderAsync));
 
@@ -243,7 +243,7 @@ namespace Store.Core.BusinessLayer
                             if (product == null)
                             {
                                 // Throw exception if product no exists
-                                throw new NonExistingProductException(String.Format(SalesDisplays.NonExistingProductExceptionMessage, detail.ProductID));
+                                throw new NonExistingProductException(string.Format(SalesDisplays.NonExistingProductExceptionMessage, detail.ProductID));
                             }
                             else
                             {
@@ -254,7 +254,7 @@ namespace Store.Core.BusinessLayer
                             if (product.Discontinued == true)
                             {
                                 // Throw exception if product is discontinued
-                                throw new AddOrderWithDiscontinuedProductException(String.Format(SalesDisplays.AddOrderWithDiscontinuedProductExceptionMessage, product.ProductID));
+                                throw new AddOrderWithDiscontinuedProductException(string.Format(SalesDisplays.AddOrderWithDiscontinuedProductExceptionMessage, product.ProductID));
                             }
 
                             // Set unit price and total for product detail
@@ -323,7 +323,7 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<ISingleResponse<Order>> CloneOrderAsync(Int32 id)
+        public async Task<ISingleResponse<Order>> CloneOrderAsync(int id)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(CloneOrderAsync));
 
@@ -374,7 +374,7 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<ISingleResponse<Order>> RemoveOrderAsync(Int32 id)
+        public async Task<ISingleResponse<Order>> RemoveOrderAsync(int id)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(RemoveOrderAsync));
 
@@ -391,7 +391,7 @@ namespace Store.Core.BusinessLayer
                     if (response.Model.OrderDetails.Count > 0)
                     {
                         // Restrict remove operation for orders with details
-                        throw new ForeignKeyDependencyException(String.Format(SalesDisplays.RemoveOrderExceptionMessage, id));
+                        throw new ForeignKeyDependencyException(string.Format(SalesDisplays.RemoveOrderExceptionMessage, id));
                     }
 
                     // Delete order

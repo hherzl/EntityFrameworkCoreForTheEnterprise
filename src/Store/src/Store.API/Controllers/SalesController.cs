@@ -34,17 +34,7 @@ namespace Store.API.Controllers
             Logger?.LogDebug("{0} has been invoked", nameof(GetOrdersAsync));
 
             // Get response from business logic
-            var response = await SalesService
-                .GetOrdersAsync(
-                    (int)pageSize,
-                    (int)pageNumber,
-                    currencyID: currencyID,
-                    customerID: customerID,
-                    employeeID: employeeID,
-                    orderStatusID: orderStatusID,
-                    paymentMethodID: paymentMethodID,
-                    shipperID: shipperID
-                );
+            var response = await SalesService.GetOrdersAsync((int)pageSize, (int)pageNumber, currencyID, customerID, employeeID, orderStatusID, paymentMethodID, shipperID);
 
             // Return as http response
             return response.ToHttpResponse();

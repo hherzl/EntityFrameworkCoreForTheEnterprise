@@ -3,7 +3,6 @@
 
   "dependencies": {
     "NETStandard.Library": "1.6.1",
-    "Microsoft.Composition": "1.0.30",
     "Microsoft.EntityFrameworkCore": "1.1.1",
     "Microsoft.EntityFrameworkCore.SqlServer": "1.1.1"
   },

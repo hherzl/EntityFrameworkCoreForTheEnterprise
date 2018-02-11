@@ -29,9 +29,7 @@ namespace Store.Core.DataLayer.Repositories
                 cast.CreationUser = UserInfo.Name;
 
                 if (!cast.CreationDateTime.HasValue)
-                {
                     cast.CreationDateTime = DateTime.Now;
-                }
             }
 
             DbContext.Set<TEntity>().Add(entity);
@@ -46,9 +44,7 @@ namespace Store.Core.DataLayer.Repositories
                 cast.LastUpdateUser = UserInfo.Name;
 
                 if (!cast.LastUpdateDateTime.HasValue)
-                {
                     cast.LastUpdateDateTime = DateTime.Now;
-                }
             }
         }
 

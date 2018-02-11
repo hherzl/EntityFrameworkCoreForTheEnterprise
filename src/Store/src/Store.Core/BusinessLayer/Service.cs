@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Store.Core.BusinessLayer.Contracts;
 using Store.Core.DataLayer;
 using Store.Core.DataLayer.Contracts;
@@ -11,8 +10,8 @@ namespace Store.Core.BusinessLayer
     {
         protected ILogger Logger;
         protected IUserInfo UserInfo;
-        protected Boolean Disposed;
-        protected StoreDbContext DbContext;
+        protected bool Disposed;
+        protected readonly StoreDbContext DbContext;
         protected IHumanResourcesRepository m_humanResourcesRepository;
         protected IProductionRepository m_productionRepository;
         protected ISalesRepository m_salesRepository;
