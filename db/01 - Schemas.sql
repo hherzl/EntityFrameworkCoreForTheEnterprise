@@ -1,4 +1,4 @@
-use Store
+use [Store]
 go
 
 create schema [HumanResources]

@@ -1,12 +1,12 @@
-alter table [EventLog]
+alter table [dbo].[EventLog]
 	add constraint [PK_EventLog] primary key (EventLogID)
 go
 
-alter table [ChangeLog]
+alter table [dbo].[ChangeLog]
 	add constraint [PK_ChangeLog] primary key (ChangeLogID)
 go
 
-alter table [ChangeLogExclusion]
+alter table [dbo].[ChangeLogExclusion]
 	add constraint [PK_ChangeLogExclusion] primary key(ChangeLogExclusionID)
 
 alter table [dbo].[Country]

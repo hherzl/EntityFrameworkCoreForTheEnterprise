@@ -1,4 +1,4 @@
-create table [EventLog]
+create table [dbo].[EventLog]
 (
 	[EventLogID] uniqueidentifier not null,
 	[EventType] int not null,
@@ -7,7 +7,7 @@ create table [EventLog]
 	[EntryDate] datetime not null
 )
 
-create table [ChangeLog]
+create table [dbo].[ChangeLog]
 (
 	[ChangeLogID] int not null identity(1, 1),
 	[ClassName] varchar(255) not null,
@@ -19,7 +19,7 @@ create table [ChangeLog]
 	[ChangeDate] datetime not null
 )
 
-create table [ChangeLogExclusion]
+create table [dbo].[ChangeLogExclusion]
 (
 	[ChangeLogExclusionID] int not null identity(1, 1),
 	[EntityName] varchar(128) not null,
