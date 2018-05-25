@@ -9,7 +9,7 @@ using Store.Core.BusinessLayer.Contracts;
 
 namespace Store.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class SalesController : Controller
     {
         protected ILogger Logger;
@@ -66,7 +66,7 @@ namespace Store.API.Controllers
 
         [HttpPost]
         [Route("Order")]
-        public async Task<IActionResult> CreateOrderAsync([FromBody] OrderViewModel value)
+        public async Task<IActionResult> CreateOrderAsync([FromBody] OrderRequestModel value)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(CreateOrderAsync));
 

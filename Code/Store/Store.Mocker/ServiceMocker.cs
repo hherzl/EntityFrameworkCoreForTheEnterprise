@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Store.Common;
 using Store.Core;
 using Store.Core.BusinessLayer;
 using Store.Core.BusinessLayer.Contracts;
@@ -17,7 +18,7 @@ namespace Store.Mocker
                 .UseSqlServer(ConnectionString)
                 .Options;
 
-            return new HumanResourcesService(LoggerMocker.GetLogger<IHumanResourcesService>(), new UserInfo { Name = "mocker" }, new StoreDbContext(options));
+            return new HumanResourcesService(LogHelper.GetLogger<HumanResourcesService>(), new UserInfo { Name = "mocker" }, new StoreDbContext(options));
         }
 
         public static IProductionService GetProductionService()
@@ -26,7 +27,7 @@ namespace Store.Mocker
                 .UseSqlServer(ConnectionString)
                 .Options;
 
-            return new ProductionService(LoggerMocker.GetLogger<IProductionService>(), new UserInfo { Name = "mocker" }, new StoreDbContext(options));
+            return new ProductionService(LogHelper.GetLogger<ProductionService>(), new UserInfo { Name = "mocker" }, new StoreDbContext(options));
         }
 
         public static ISalesService GetSalesService()
@@ -35,7 +36,7 @@ namespace Store.Mocker
                 .UseSqlServer(ConnectionString)
                 .Options;
 
-            return new SalesService(LoggerMocker.GetLogger<ISalesService>(), new UserInfo { Name = "mocker" }, new StoreDbContext(options));
+            return new SalesService(LogHelper.GetLogger<SalesService>(), new UserInfo { Name = "mocker" }, new StoreDbContext(options));
         }
     }
 }

@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Store.Core", "Store.Core\Store.Core.csproj", "{A2575AB0-09CB-4032-86EC-AB300B557C7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Store.Core", "Store.Core\Store.Core.csproj", "{A2575AB0-09CB-4032-86EC-AB300B557C7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Store.API", "Store.API\Store.API.csproj", "{BB75C89C-8A22-45C7-9214-A4C5AE35FAF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Store.API", "Store.API\Store.API.csproj", "{BB75C89C-8A22-45C7-9214-A4C5AE35FAF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Store.Mocker", "Store.Mocker\Store.Mocker.csproj", "{EB3C5EE9-3B0A-48F4-B085-040EDE292ED8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Store.Mocker", "Store.Mocker\Store.Mocker.csproj", "{EB3C5EE9-3B0A-48F4-B085-040EDE292ED8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Store.API.UnitTests", "Store.API.UnitTests\Store.API.UnitTests.csproj", "{37DC7C88-4993-4D94-845C-4D30702BEC60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Store.API.UnitTests", "Store.API.UnitTests\Store.API.UnitTests.csproj", "{37DC7C88-4993-4D94-845C-4D30702BEC60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Store.API.IntegrationTests", "Store.API.IntegrationTests\Store.API.IntegrationTests.csproj", "{EEBA4744-03AC-460D-B825-102F25EF34C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Store.API.IntegrationTests", "Store.API.IntegrationTests\Store.API.IntegrationTests.csproj", "{EEBA4744-03AC-460D-B825-102F25EF34C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Store.Common", "Store.Common\Store.Common.csproj", "{A90A8C6F-9B4C-404E-B7DF-CB59F73E75C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{EEBA4744-03AC-460D-B825-102F25EF34C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEBA4744-03AC-460D-B825-102F25EF34C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEBA4744-03AC-460D-B825-102F25EF34C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A90A8C6F-9B4C-404E-B7DF-CB59F73E75C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A90A8C6F-9B4C-404E-B7DF-CB59F73E75C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A90A8C6F-9B4C-404E-B7DF-CB59F73E75C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A90A8C6F-9B4C-404E-B7DF-CB59F73E75C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

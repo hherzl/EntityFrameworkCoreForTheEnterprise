@@ -17,7 +17,7 @@ namespace Store.Core.BusinessLayer
 {
     public class SalesService : Service, ISalesService
     {
-        public SalesService(ILogger logger, IUserInfo userInfo, StoreDbContext dbContext)
+        public SalesService(ILogger<SalesService> logger, IUserInfo userInfo, StoreDbContext dbContext)
             : base(logger, userInfo, dbContext)
         {
         }
@@ -338,16 +338,17 @@ namespace Store.Core.BusinessLayer
                 if (entity != null)
                 {
                     // Init a new instance for order
-                    response.Model = new Order();
-
                     // Set values from existing order
-                    response.Model.OrderID = entity.OrderID;
-                    response.Model.OrderDate = entity.OrderDate;
-                    response.Model.CustomerID = entity.CustomerID;
-                    response.Model.EmployeeID = entity.EmployeeID;
-                    response.Model.ShipperID = entity.ShipperID;
-                    response.Model.Total = entity.Total;
-                    response.Model.Comments = entity.Comments;
+                    response.Model = new Order
+                    {
+                        OrderID = entity.OrderID,
+                        OrderDate = entity.OrderDate,
+                        CustomerID = entity.CustomerID,
+                        EmployeeID = entity.EmployeeID,
+                        ShipperID = entity.ShipperID,
+                        Total = entity.Total,
+                        Comments = entity.Comments
+                    };
 
                     if (entity.OrderDetails != null && entity.OrderDetails.Count > 0)
                     {

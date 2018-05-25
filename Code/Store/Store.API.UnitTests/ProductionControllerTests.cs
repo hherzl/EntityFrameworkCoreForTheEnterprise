@@ -1,11 +1,12 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Store.API.Controllers;
+using Store.Common;
 using Store.Core.BusinessLayer.Responses;
 using Store.Core.EntityLayer.Production;
 using Xunit;
 
-namespace Store.API.Tests
+namespace Store.API.UnitTests
 {
     public class ProductionControllerTests
     {
@@ -13,7 +14,7 @@ namespace Store.API.Tests
         public async Task GetProductsTestAsync()
         {
             // Arrange
-            var logger = LoggerMocker.GetLogger<ProductionController>();
+            var logger = LogHelper.GetLogger<ProductionController>();
             var productionService = ServiceMocker.GetProductionService();
 
             using (var controller = new ProductionController(logger, productionService))
@@ -31,7 +32,7 @@ namespace Store.API.Tests
         public async Task GetInventoryByProductTestAsync()
         {
             // Arrange
-            var logger = LoggerMocker.GetLogger<ProductionController>();
+            var logger = LogHelper.GetLogger<ProductionController>();
             var productionService = ServiceMocker.GetProductionService();
             var id = 1;
 

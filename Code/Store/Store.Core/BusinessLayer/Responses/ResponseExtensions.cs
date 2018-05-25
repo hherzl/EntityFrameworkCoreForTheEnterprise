@@ -13,15 +13,13 @@ namespace Store.Core.BusinessLayer.Responses
 
             if (cast == null)
             {
-                response.ErrorMessage = "There was an internal error, please contact to technical support.";
-
                 logger?.LogCritical(ex.ToString());
+                response.ErrorMessage = "There was an internal error, please contact to technical support.";
             }
             else
             {
-                response.ErrorMessage = ex.Message;
-
                 logger?.LogError(ex.Message);
+                response.ErrorMessage = ex.Message;
             }
         }
     }

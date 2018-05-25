@@ -27,6 +27,6 @@ namespace Store.API.RequestModels
 
         public DateTime? LastUpdateDateTime { get; set; }
 
-        public List<OrderDetailViewModel> Details { get; set; }
+        public List<OrderDetailRequestModel> Details { get; set; }
     }
 }

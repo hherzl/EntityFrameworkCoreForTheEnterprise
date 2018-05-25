@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Store.API\Store.API.csproj" />
+    <ProjectReference Include="..\Store.Common\Store.Common.csproj" />
   </ItemGroup>
 
 </Project>

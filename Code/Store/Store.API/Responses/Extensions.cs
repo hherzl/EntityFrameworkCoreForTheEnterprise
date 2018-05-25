@@ -11,13 +11,9 @@ namespace Store.API.Responses
             var status = HttpStatusCode.OK;
 
             if (response.DidError)
-            {
                 status = HttpStatusCode.InternalServerError;
-            }
             else if (response.Model == null)
-            {
                 status = HttpStatusCode.NoContent;
-            }
 
             return new ObjectResult(response)
             {
@@ -30,13 +26,9 @@ namespace Store.API.Responses
             var status = HttpStatusCode.OK;
 
             if (response.DidError)
-            {
                 status = HttpStatusCode.InternalServerError;
-            }
             else if (response.Model == null)
-            {
                 status = HttpStatusCode.NotFound;
-            }
 
             return new ObjectResult(response)
             {

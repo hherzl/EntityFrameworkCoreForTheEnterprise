@@ -6,7 +6,7 @@ using Store.Core.BusinessLayer.Contracts;
 
 namespace Store.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class ProductionController : Controller
     {
         protected ILogger Logger;

@@ -2,13 +2,14 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Store.API.Controllers;
+using Store.Common;
 using Store.Core.BusinessLayer.Requests;
 using Store.Core.BusinessLayer.Responses;
 using Store.Core.DataLayer.DataContracts;
 using Store.Core.EntityLayer.Sales;
 using Xunit;
 
-namespace Store.API.Tests
+namespace Store.API.UnitTests
 {
     public class SalesControllerTests
     {
@@ -16,7 +17,7 @@ namespace Store.API.Tests
         public async Task TestGetOrdersAsync()
         {
             // Arrange
-            var logger = LoggerMocker.GetLogger<SalesController>();
+            var logger = LogHelper.GetLogger<SalesController>();
             var salesService = ServiceMocker.GetSalesService();
 
             using (var controller = new SalesController(logger, salesService))
@@ -34,7 +35,7 @@ namespace Store.API.Tests
         public async Task TestGetOrdersByCurrencyAsync()
         {
             // Arrange
-            var logger = LoggerMocker.GetLogger<SalesController>();
+            var logger = LogHelper.GetLogger<SalesController>();
             var salesService = ServiceMocker.GetSalesService();
             var currencyID = (short?)1;
 
@@ -54,7 +55,7 @@ namespace Store.API.Tests
         public async Task TestGetOrdersByCustomerAsync()
         {
             // Arrange
-            var logger = LoggerMocker.GetLogger<SalesController>();
+            var logger = LogHelper.GetLogger<SalesController>();
             var salesService = ServiceMocker.GetSalesService();
             var customerID = 1;
 
@@ -74,7 +75,7 @@ namespace Store.API.Tests
         public async Task TestGetOrdersByEmployeeAsync()
         {
             // Arrange
-            var logger = LoggerMocker.GetLogger<SalesController>();
+            var logger = LogHelper.GetLogger<SalesController>();
             var salesService = ServiceMocker.GetSalesService();
             var employeeID = 1;
 
@@ -94,7 +95,7 @@ namespace Store.API.Tests
         public async Task TestGetOrderAsync()
         {
             // Arrange
-            var logger = LoggerMocker.GetLogger<SalesController>();
+            var logger = LogHelper.GetLogger<SalesController>();
             var salesService = ServiceMocker.GetSalesService();
             var id = 1;
 
@@ -113,7 +114,7 @@ namespace Store.API.Tests
         public async Task TestGetNonExistingOrderAsync()
         {
             // Arrange
-            var logger = LoggerMocker.GetLogger<SalesController>();
+            var logger = LogHelper.GetLogger<SalesController>();
             var salesService = ServiceMocker.GetSalesService();
             var id = 0;
 
@@ -132,7 +133,7 @@ namespace Store.API.Tests
         public async Task TestGetCreateOrderRequestAsync()
         {
             // Arrange
-            var logger = LoggerMocker.GetLogger<SalesController>();
+            var logger = LogHelper.GetLogger<SalesController>();
             var salesService = ServiceMocker.GetSalesService();
 
             using (var controller = new SalesController(logger, salesService))
@@ -151,7 +152,7 @@ namespace Store.API.Tests
         public async Task TestCloneOrderAsync()
         {
             // Arrange
-            var logger = LoggerMocker.GetLogger<SalesController>();
+            var logger = LogHelper.GetLogger<SalesController>();
             var salesService = ServiceMocker.GetSalesService();
             var id = 1;
 

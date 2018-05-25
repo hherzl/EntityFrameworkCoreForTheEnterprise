@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Store.Common;
 using Store.Core;
 using Store.Core.BusinessLayer;
 using Store.Core.BusinessLayer.Contracts;
 using Store.Core.DataLayer;
 
-namespace Store.API.Tests
+namespace Store.API.UnitTests
 {
     public static class ServiceMocker
     {
@@ -17,7 +18,7 @@ namespace Store.API.Tests
                 .UseSqlServer(ConnectionString)
                 .Options;
 
-            return new HumanResourcesService(null, new UserInfo { Name = "admin" }, new StoreDbContext(options));
+            return new HumanResourcesService(LogHelper.GetLogger<HumanResourcesService>(), new UserInfo { Name = "qa" }, new StoreDbContext(options));
         }
 
         public static IProductionService GetProductionService()
@@ -26,7 +27,7 @@ namespace Store.API.Tests
                 .UseSqlServer(ConnectionString)
                 .Options;
 
-            return new ProductionService(null, new UserInfo { Name = "admin" }, new StoreDbContext(options));
+            return new ProductionService(LogHelper.GetLogger<ProductionService>(), new UserInfo { Name = "qa" }, new StoreDbContext(options));
         }
 
         public static ISalesService GetSalesService()
@@ -35,7 +36,7 @@ namespace Store.API.Tests
                 .UseSqlServer(ConnectionString)
                 .Options;
 
-            return new SalesService(null, new UserInfo { Name = "admin" }, new StoreDbContext(options));
+            return new SalesService(LogHelper.GetLogger<SalesService>(), new UserInfo { Name = "qa" }, new StoreDbContext(options));
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Store.API.RequestModels
 {
     public static class Extensions
     {
-        public static Order GetOrder(this OrderViewModel requestModel)
+        public static Order GetOrder(this OrderRequestModel requestModel)
         {
             return new Order
             {
@@ -23,7 +23,7 @@ namespace Store.API.RequestModels
             };
         }
 
-        public static IEnumerable<OrderDetail> GetOrderDetails(this OrderViewModel requestModel)
+        public static IEnumerable<OrderDetail> GetOrderDetails(this OrderRequestModel requestModel)
         {
             foreach (var item in requestModel.Details)
             {

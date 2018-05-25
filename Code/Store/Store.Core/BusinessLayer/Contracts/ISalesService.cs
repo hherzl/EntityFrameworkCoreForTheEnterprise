@@ -10,15 +10,15 @@ namespace Store.Core.BusinessLayer.Contracts
 {
     public interface ISalesService : IService
     {
-        Task<IPagedResponse<Customer>> GetCustomersAsync(Int32 pageSize = 10, Int32 pageNumber = 1);
+        Task<IPagedResponse<Customer>> GetCustomersAsync(int pageSize = 10, int pageNumber = 1);
 
-        Task<IPagedResponse<Shipper>> GetShippersAsync(Int32 pageSize = 10, Int32 pageNumber = 1);
+        Task<IPagedResponse<Shipper>> GetShippersAsync(int pageSize = 10, int pageNumber = 1);
 
-        Task<IPagedResponse<Currency>> GetCurrenciesAsync(Int32 pageSize = 10, Int32 pageNumber = 1);
+        Task<IPagedResponse<Currency>> GetCurrenciesAsync(int pageSize = 10, int pageNumber = 1);
 
-        Task<IPagedResponse<PaymentMethod>> GetPaymentMethodsAsync(Int32 pageSize = 10, Int32 pageNumber = 1);
+        Task<IPagedResponse<PaymentMethod>> GetPaymentMethodsAsync(int pageSize = 10, int pageNumber = 1);
 
-        Task<IPagedResponse<OrderInfo>> GetOrdersAsync(Int32 pageSize = 10, Int32 pageNumber = 1, Int16? currencyID = null, Int32? customerID = null, Int32? employeeID = null, Int16? orderStatusID = null, Guid? paymentMethodID = null, Int32? shipperID = null);
+        Task<IPagedResponse<OrderInfo>> GetOrdersAsync(int pageSize = 10, int pageNumber = 1, short? currencyID = null, int? customerID = null, int? employeeID = null, short? orderStatusID = null, Guid? paymentMethodID = null, int? shipperID = null);
 
         Task<ISingleResponse<Order>> GetOrderAsync(Int64 id);
 
@@ -26,8 +26,8 @@ namespace Store.Core.BusinessLayer.Contracts
 
         Task<ISingleResponse<Order>> CreateOrderAsync(Order header, OrderDetail[] details);
 
-        Task<ISingleResponse<Order>> CloneOrderAsync(Int32 id);
+        Task<ISingleResponse<Order>> CloneOrderAsync(int id);
 
-        Task<ISingleResponse<Order>> RemoveOrderAsync(Int32 id);
+        Task<ISingleResponse<Order>> RemoveOrderAsync(int id);
     }
 }
