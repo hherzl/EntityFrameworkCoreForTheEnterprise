@@ -26,11 +26,11 @@ insert into [Production].[Product]
 insert into [Production].[Product]
     values ('Street Fighter V', 1, 19.99, 'SF V', 0, @userName, getdate(), null, null, null)
 insert into [Production].[Product]
-    values ('Guilty Gear Xrd REV 2', 1, 39.99, 'GG', 0, @userName, getdate(), null, null, null)
+    values ('Guilty Gear Xrd REV 2', 1, 29.99, 'GG', 0, @userName, getdate(), null, null, null)
 insert into [Production].[Product]
-    values ('Tekken 7', 1, 49.99, 'GG', 0, @userName, getdate(), null, null, null)
+    values ('Tekken 7', 1, 39.99, 'GG', 0, @userName, getdate(), null, null, null)
 insert into [Production].[Product]
-    values ('Marvel vs. Campcom: Infinite', 1, 49.99, 'GG', 0, @userName, getdate(), null, null, null)
+    values ('Marvel vs. Campcom: Infinite', 1, 19.99, 'GG', 0, @userName, getdate(), null, null, null)
 
 insert into [Production].[Warehouse]
     values ('W0001', 'Warehouse 0001', @userName, getdate(), null, null, null)
