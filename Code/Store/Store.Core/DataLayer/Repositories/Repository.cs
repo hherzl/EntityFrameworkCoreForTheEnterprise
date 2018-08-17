@@ -22,9 +22,7 @@ namespace Store.Core.DataLayer.Repositories
 
         protected virtual void Add<TEntity>(TEntity entity) where TEntity : class, IAuditableEntity
         {
-            var cast = entity as IAuditableEntity;
-
-            if (cast != null)
+            if (entity is IAuditableEntity cast)
             {
                 cast.CreationUser = UserInfo.Name;
 
@@ -37,9 +35,7 @@ namespace Store.Core.DataLayer.Repositories
 
         protected virtual void Update<TEntity>(TEntity entity) where TEntity : class, IAuditableEntity
         {
-            var cast = entity as IAuditableEntity;
-
-            if (cast != null)
+            if (entity is IAuditableEntity cast)
             {
                 cast.LastUpdateUser = UserInfo.Name;
 
@@ -99,27 +95,9 @@ namespace Store.Core.DataLayer.Repositories
         }
 
         public int CommitChanges()
-        {
-            var dbSet = DbContext.Set<ChangeLog>();
-
-            foreach (var change in GetChanges().ToList())
-            {
-                dbSet.Add(change);
-            }
-
-            return DbContext.SaveChanges();
-        }
+            => DbContext.SaveChanges();
 
         public Task<int> CommitChangesAsync()
-        {
-            var dbSet = DbContext.Set<ChangeLog>();
-
-            foreach (var change in GetChanges().ToList())
-            {
-                dbSet.Add(change);
-            }
-
-            return DbContext.SaveChangesAsync();
-        }
+            => DbContext.SaveChangesAsync();
     }
 }

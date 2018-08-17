@@ -29,22 +29,16 @@ namespace Store.Mocker
             foreach (var arg in args)
             {
                 if (arg.StartsWith("/year:"))
-                {
                     year = Convert.ToInt32(arg.Replace("/year:", string.Empty));
-                }
                 else if (arg.StartsWith("/ordersLimitPerDay:"))
-                {
                     ordersLimitPerDay = Convert.ToInt32(arg.Replace("/ordersLimitPerDay:", string.Empty));
-                }
             }
 
             var start = new DateTime(year, 1, 1);
-            var end = new DateTime(year, DateTime.Now.Month, DateTime.DaysInMonth(year, DateTime.Now.Month));
+            var end = new DateTime(year, 12, DateTime.DaysInMonth(year, DateTime.Now.Month));
 
             if (start.DayOfWeek == DayOfWeek.Sunday)
-            {
                 start = start.AddDays(1);
-            }
 
             while (start <= end)
             {
@@ -114,9 +108,7 @@ namespace Store.Mocker
                     };
 
                     if (details.Count > 0 && details.Where(item => item.ProductID == detail.ProductID).Count() == 1)
-                    {
                         continue;
-                    }
 
                     details.Add(detail);
                 }

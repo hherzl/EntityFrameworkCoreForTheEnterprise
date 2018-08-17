@@ -9,34 +9,33 @@ namespace Store.Mocker
 {
     public static class ServiceMocker
     {
-        private static string ConnectionString
-            => "server=(local);database=Store;integrated security=yes;MultipleActiveResultSets=True;";
+        private static readonly string ConnectionString;
+
+        static ServiceMocker()
+        {
+            // todo: Load connection string from appsettings.json file
+            ConnectionString = "server=(local);database=Store;integrated security=yes;MultipleActiveResultSets=True;";
+        }
 
         public static IHumanResourcesService GetHumanResourcesService()
-        {
-            var options = new DbContextOptionsBuilder<StoreDbContext>()
-                .UseSqlServer(ConnectionString)
-                .Options;
-
-            return new HumanResourcesService(LogHelper.GetLogger<HumanResourcesService>(), new UserInfo { Name = "mocker" }, new StoreDbContext(options));
-        }
+            => new HumanResourcesService(
+                LogHelper.GetLogger<HumanResourcesService>(),
+                new UserInfo { Name = "mocker" },
+                new StoreDbContext(new DbContextOptionsBuilder<StoreDbContext>().UseSqlServer(ConnectionString).Options)
+            );
 
         public static IProductionService GetProductionService()
-        {
-            var options = new DbContextOptionsBuilder<StoreDbContext>()
-                .UseSqlServer(ConnectionString)
-                .Options;
-
-            return new ProductionService(LogHelper.GetLogger<ProductionService>(), new UserInfo { Name = "mocker" }, new StoreDbContext(options));
-        }
+            => new ProductionService(
+                LogHelper.GetLogger<ProductionService>(),
+                new UserInfo { Name = "mocker" },
+                new StoreDbContext(new DbContextOptionsBuilder<StoreDbContext>().UseSqlServer(ConnectionString).Options)
+            );
 
         public static ISalesService GetSalesService()
-        {
-            var options = new DbContextOptionsBuilder<StoreDbContext>()
-                .UseSqlServer(ConnectionString)
-                .Options;
-
-            return new SalesService(LogHelper.GetLogger<SalesService>(), new UserInfo { Name = "mocker" }, new StoreDbContext(options));
-        }
+            => new SalesService(
+                LogHelper.GetLogger<SalesService>(),
+                new UserInfo { Name = "mocker" },
+                new StoreDbContext(new DbContextOptionsBuilder<StoreDbContext>().UseSqlServer(ConnectionString).Options)
+            );
     }
 }

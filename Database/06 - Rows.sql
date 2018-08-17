@@ -22,15 +22,15 @@ insert [Production].[ProductCategory]
     values ('PS4 Games', @userName, getdate(), null, null, null)
 
 insert into [Production].[Product]
-    values ('The King of Fighters XIV', 1, 29.99, 'KOF XIV', 0, @userName, getdate(), null, null, null)
+    values ('The King of Fighters XIV', 1, 29.99, 'KOF XIV', 0, 15000, @userName, getdate(), null, null, null)
 insert into [Production].[Product]
-    values ('Street Fighter V', 1, 19.99, 'SF V', 0, @userName, getdate(), null, null, null)
+    values ('Street Fighter V', 1, 19.99, 'SF V', 0, 12000, @userName, getdate(), null, null, null)
 insert into [Production].[Product]
-    values ('Guilty Gear Xrd REV 2', 1, 29.99, 'GG', 0, @userName, getdate(), null, null, null)
+    values ('Guilty Gear Xrd REV 2', 1, 29.99, 'GG', 0, 11000, @userName, getdate(), null, null, null)
 insert into [Production].[Product]
-    values ('Tekken 7', 1, 39.99, 'GG', 0, @userName, getdate(), null, null, null)
+    values ('Tekken 7', 1, 24.99, 'GG', 0, 11000, @userName, getdate(), null, null, null)
 insert into [Production].[Product]
-    values ('Marvel vs. Campcom: Infinite', 1, 19.99, 'GG', 0, @userName, getdate(), null, null, null)
+    values ('Marvel vs. Campcom: Infinite', 1, 19.99, 'GG', 0, 10000, @userName, getdate(), null, null, null)
 
 insert into [Production].[Warehouse]
     values ('W0001', 'Warehouse 0001', @userName, getdate(), null, null, null)
@@ -51,6 +51,10 @@ insert into [Production].[ProductInventory]
 
 insert into [Sales].[Customer]
     values ('Best Buy', 'Colleen Dunn', @userName, getdate(), null, null, null)
+
+    insert into [Sales].[CustomerAddress]
+        values (1, '16-County Metro Area', '#110', 'Minneapolis–Saint Paul', 'Mississippi', '55101', 1, '32088446622', @userName, getdate(), null, null, null)
+
 insert into [Sales].[Customer]
     values ('Circuit City', 'Bill McCorey', @userName, getdate(), null, null, null)
 insert into [Sales].[Customer]

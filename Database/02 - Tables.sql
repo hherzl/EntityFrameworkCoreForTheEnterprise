@@ -124,6 +124,7 @@ create table [Production].[Product]
 	[UnitPrice] decimal(8, 4) not null,
 	[Description] varchar(255) null,
 	[Discontinued] bit not null,
+	[Stocks] int not null,
 	[CreationUser] varchar(25) not null,
 	[CreationDateTime] datetime not null,
 	[LastUpdateUser] varchar(25) null,

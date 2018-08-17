@@ -222,102 +222,93 @@ namespace Store.Core.BusinessLayer
 
             var response = new SingleResponse<Order>();
 
-            try
+            // Begin transaction
+            using (var transaction = await DbContext.Database.BeginTransactionAsync())
             {
-                // Begin transaction
-                using (var transaction = await DbContext.Database.BeginTransactionAsync())
+                try
                 {
                     // Retrieve warehouses
                     var warehouses = await ProductionRepository
                         .GetWarehouses()
                         .ToListAsync();
 
-                    try
+                    foreach (var detail in details)
                     {
-                        foreach (var detail in details)
+                        // Retrieve product by id
+                        var product = await ProductionRepository
+                            .GetProductAsync(new Product(detail.ProductID));
+
+                        if (product == null)
                         {
-                            // Retrieve product by id
-                            var product = await ProductionRepository
-                                .GetProductAsync(new Product(detail.ProductID));
-
-                            if (product == null)
-                            {
-                                // Throw exception if product no exists
-                                throw new NonExistingProductException(string.Format(SalesDisplays.NonExistingProductExceptionMessage, detail.ProductID));
-                            }
-                            else
-                            {
-                                // Set product name from existing entity
-                                detail.ProductName = product.ProductName;
-                            }
-
-                            if (product.Discontinued == true)
-                            {
-                                // Throw exception if product is discontinued
-                                throw new AddOrderWithDiscontinuedProductException(string.Format(SalesDisplays.AddOrderWithDiscontinuedProductExceptionMessage, product.ProductID));
-                            }
-
-                            // Set unit price and total for product detail
-                            detail.UnitPrice = product.UnitPrice;
-                            detail.Total = product.UnitPrice * detail.Quantity;
+                            // Throw exception if product no exists
+                            throw new NonExistingProductException(string.Format(SalesDisplays.NonExistingProductExceptionMessage, detail.ProductID));
+                        }
+                        else
+                        {
+                            // Set product name from existing entity
+                            detail.ProductName = product.ProductName;
                         }
 
-                        // Calculate total for order header from order's details
-                        header.Total = details.Sum(item => item.Total);
-
-                        // Save order header
-                        await SalesRepository.AddOrderAsync(header);
-
-                        foreach (var detail in details)
+                        if (product.Discontinued == true)
                         {
-                            // Set order id for order detail
-                            detail.OrderID = header.OrderID;
-
-                            // Add order detail
-                            await SalesRepository.AddOrderDetailAsync(detail);
-
-                            // Get last inventory for product
-                            var lastInventory = ProductionRepository
-                                .GetProductInventories()
-                                .Where(item => item.ProductID == detail.ProductID)
-                                .OrderByDescending(item => item.CreationDateTime)
-                                .FirstOrDefault();
-
-                            // Calculate stocks for product
-                            var stocks = lastInventory == null ? 0 : lastInventory.Stocks - detail.Quantity;
-
-                            // Create product inventory instance
-                            var productInventory = new ProductInventory
-                            {
-                                ProductID = detail.ProductID,
-                                WarehouseID = warehouses.First().WarehouseID,
-                                CreationDateTime = DateTime.Now,
-                                Quantity = detail.Quantity * -1,
-                                Stocks = stocks
-                            };
-
-                            // Save product inventory
-                            await ProductionRepository.AddProductInventoryAsync(productInventory);
+                            // Throw exception if product is discontinued
+                            throw new AddOrderWithDiscontinuedProductException(string.Format(SalesDisplays.AddOrderWithDiscontinuedProductExceptionMessage, product.ProductID));
                         }
 
-                        response.Model = header;
-
-                        // Commit transaction
-                        transaction.Commit();
-
-                        Logger.LogInformation(SalesDisplays.CreateOrderMessage);
+                        // Set unit price and total for product detail
+                        detail.UnitPrice = product.UnitPrice;
+                        detail.Total = product.UnitPrice * detail.Quantity;
                     }
-                    catch (Exception ex)
+
+                    // Calculate total for order header from order's details
+                    header.Total = details.Sum(item => item.Total);
+
+                    // Save order header
+                    await SalesRepository.AddOrderAsync(header);
+
+                    foreach (var detail in details)
                     {
-                        transaction.Rollback();
+                        // Set order id for order detail
+                        detail.OrderID = header.OrderID;
 
-                        throw ex;
+                        // Add order detail
+                        await SalesRepository.AddOrderDetailAsync(detail);
+
+                        // Get last inventory for product
+                        var lastInventory = DbContext
+                            .Set<ProductInventory>()
+                            .Where(item => item.ProductID == detail.ProductID)
+                            .OrderByDescending(item => item.CreationDateTime)
+                            .FirstOrDefault();
+
+                        // Calculate stocks for product
+                        var stocks = lastInventory == null ? 0 : lastInventory.Stocks - detail.Quantity;
+
+                        // Create product inventory instance
+                        var productInventory = new ProductInventory
+                        {
+                            ProductID = detail.ProductID,
+                            WarehouseID = warehouses.First().WarehouseID,
+                            CreationDateTime = DateTime.Now,
+                            Quantity = detail.Quantity * -1,
+                            Stocks = 0
+                        };
+
+                        // Save product inventory
+                        await ProductionRepository.AddProductInventoryAsync(productInventory);
                     }
+
+                    response.Model = header;
+
+                    // Commit transaction
+                    transaction.Commit();
+
+                    Logger.LogInformation(SalesDisplays.CreateOrderMessage);
                 }
-            }
-            catch (Exception ex)
-            {
-                response.SetError(ex, Logger);
+                catch (Exception ex)
+                {
+                    response.SetError(ex, Logger);
+                }
             }
 
             return response;
