@@ -238,22 +238,16 @@ namespace Store.Core.BusinessLayer
                         var product = await ProductionRepository
                             .GetProductAsync(new Product(detail.ProductID));
 
+                        // Throw exception if product no exists
                         if (product == null)
-                        {
-                            // Throw exception if product no exists
                             throw new NonExistingProductException(string.Format(SalesDisplays.NonExistingProductExceptionMessage, detail.ProductID));
-                        }
-                        else
-                        {
-                            // Set product name from existing entity
-                            detail.ProductName = product.ProductName;
-                        }
 
+                        // Set product name from existing entity
+                        detail.ProductName = product.ProductName;
+
+                        // Throw exception if product is discontinued
                         if (product.Discontinued == true)
-                        {
-                            // Throw exception if product is discontinued
                             throw new AddOrderWithDiscontinuedProductException(string.Format(SalesDisplays.AddOrderWithDiscontinuedProductExceptionMessage, product.ProductID));
-                        }
 
                         // Set unit price and total for product detail
                         detail.UnitPrice = product.UnitPrice;
@@ -264,7 +258,10 @@ namespace Store.Core.BusinessLayer
                     header.Total = details.Sum(item => item.Total);
 
                     // Save order header
-                    await SalesRepository.AddOrderAsync(header);
+                    //await SalesRepository.AddOrderAsync(header);
+                    SalesRepository.Add(header);
+
+                    await SalesRepository.CommitChangesAsync();
 
                     foreach (var detail in details)
                     {
@@ -272,7 +269,9 @@ namespace Store.Core.BusinessLayer
                         detail.OrderID = header.OrderID;
 
                         // Add order detail
-                        await SalesRepository.AddOrderDetailAsync(detail);
+                        SalesRepository.Add(detail);
+
+                        await SalesRepository.CommitChangesAsync();
 
                         // Get last inventory for product
                         var lastInventory = DbContext
@@ -295,7 +294,9 @@ namespace Store.Core.BusinessLayer
                         };
 
                         // Save product inventory
-                        await ProductionRepository.AddProductInventoryAsync(productInventory);
+                        ProductionRepository.Add(productInventory);
+
+                        await SalesRepository.CommitChangesAsync();
                     }
 
                     response.Model = header;

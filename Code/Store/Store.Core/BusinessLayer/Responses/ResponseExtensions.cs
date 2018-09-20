@@ -9,17 +9,17 @@ namespace Store.Core.BusinessLayer.Responses
         {
             response.DidError = true;
 
-            var cast = ex as StoreException;
-
-            if (cast == null)
+            if (ex is StoreException cast)
             {
-                logger?.LogCritical(ex.ToString());
-                response.ErrorMessage = "There was an internal error, please contact to technical support.";
+                logger?.LogError(ex.Message);
+
+                response.ErrorMessage = ex.Message;
             }
             else
             {
-                logger?.LogError(ex.Message);
-                response.ErrorMessage = ex.Message;
+                logger?.LogCritical(ex.ToString());
+
+                response.ErrorMessage = "There was an internal error, please contact to technical support.";
             }
         }
     }

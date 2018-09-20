@@ -19,8 +19,8 @@ namespace Store.Core.DataLayer.Repositories
             UserInfo = userInfo;
             DbContext = dbContext;
         }
-
-        protected virtual void Add<TEntity>(TEntity entity) where TEntity : class, IAuditableEntity
+        
+        public virtual void Add<TEntity>(TEntity entity) where TEntity : class, IAuditableEntity
         {
             if (entity is IAuditableEntity cast)
             {
@@ -33,7 +33,7 @@ namespace Store.Core.DataLayer.Repositories
             DbContext.Set<TEntity>().Add(entity);
         }
 
-        protected virtual void Update<TEntity>(TEntity entity) where TEntity : class, IAuditableEntity
+        public virtual void Update<TEntity>(TEntity entity) where TEntity : class, IAuditableEntity
         {
             if (entity is IAuditableEntity cast)
             {
@@ -44,7 +44,7 @@ namespace Store.Core.DataLayer.Repositories
             }
         }
 
-        protected virtual void Remove<TEntity>(TEntity entity) where TEntity : class, IAuditableEntity
+        public virtual void Remove<TEntity>(TEntity entity) where TEntity : class, IAuditableEntity
             => DbContext.Set<TEntity>().Remove(entity);
 
         protected virtual IEnumerable<ChangeLog> GetChanges()

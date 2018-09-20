@@ -22,7 +22,7 @@ namespace Store.Mocker
         static async void MockAsync()
         {
             var year = DateTime.Now.Year;
-            var ordersLimitPerDay = 10;
+            var ordersLimitPerDay = 2;
 
             var args = Environment.GetCommandLineArgs();
 
