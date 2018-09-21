@@ -388,7 +388,9 @@ namespace Store.Core.BusinessLayer
                     }
 
                     // Delete order
-                    await SalesRepository.DeleteOrderAsync(response.Model);
+                    SalesRepository.Remove(response.Model);
+
+                    await SalesRepository.CommitChangesAsync();
 
                     Logger?.LogInformation(SalesDisplays.DeleteOrderMessage);
                 }

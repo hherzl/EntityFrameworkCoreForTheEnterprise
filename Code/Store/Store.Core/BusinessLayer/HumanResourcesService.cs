@@ -60,7 +60,9 @@ namespace Store.Core.BusinessLayer
 
             try
             {
-                await HumanResourcesRepository.UpdateEmployeeAsync(changes);
+                HumanResourcesRepository.Update(changes);
+
+                await HumanResourcesRepository.CommitChangesAsync();
 
                 response.Model = changes;
             }
