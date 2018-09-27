@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Store.API.Controllers;
 using Store.Common;
 using Store.Core.BusinessLayer.Responses;
+using Store.Core.DataLayer;
 using Store.Core.EntityLayer.Production;
 using Xunit;
 
@@ -10,6 +11,16 @@ namespace Store.API.UnitTests
 {
     public class ProductionControllerTests
     {
+        public ProductionControllerTests()
+        {
+            using (var dbContext = new StoreDbContext(DbContextOptionsMocker.GetDbContextOptions("ProductionDbInMemory")))
+            {
+                dbContext.Database.EnsureDeleted();
+
+                dbContext.SeedInMemory();
+            }
+        }
+
         [Fact]
         public async Task GetProductsTestAsync()
         {

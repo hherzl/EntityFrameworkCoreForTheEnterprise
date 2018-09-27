@@ -5,6 +5,7 @@ using Store.API.Controllers;
 using Store.Common;
 using Store.Core.BusinessLayer.Requests;
 using Store.Core.BusinessLayer.Responses;
+using Store.Core.DataLayer;
 using Store.Core.DataLayer.DataContracts;
 using Store.Core.EntityLayer.Sales;
 using Xunit;
@@ -13,6 +14,16 @@ namespace Store.API.UnitTests
 {
     public class SalesControllerTests
     {
+        public SalesControllerTests()
+        {
+            using (var dbContext = new StoreDbContext(DbContextOptionsMocker.GetDbContextOptions("SalesDbInMemory")))
+            {
+                dbContext.Database.EnsureDeleted();
+
+                dbContext.SeedInMemory();
+            }
+        }
+
         [Fact]
         public async Task TestGetOrdersAsync()
         {

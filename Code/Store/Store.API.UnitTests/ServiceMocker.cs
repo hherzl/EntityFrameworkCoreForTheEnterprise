@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Store.Common;
+﻿using Store.Common;
 using Store.Core;
 using Store.Core.BusinessLayer;
 using Store.Core.BusinessLayer.Contracts;
@@ -9,34 +8,25 @@ namespace Store.API.UnitTests
 {
     public static class ServiceMocker
     {
-        private static string ConnectionString
-            => "server=(local);database=Store;integrated security=yes;MultipleActiveResultSets=True;";
-
         public static IHumanResourcesService GetHumanResourcesService()
-        {
-            var options = new DbContextOptionsBuilder<StoreDbContext>()
-                .UseSqlServer(ConnectionString)
-                .Options;
-
-            return new HumanResourcesService(LogHelper.GetLogger<HumanResourcesService>(), new UserInfo { Name = "qa" }, new StoreDbContext(options));
-        }
+            => new HumanResourcesService(
+                LogHelper.GetLogger<HumanResourcesService>(),
+                new UserInfo { Name = "unittests" },
+                new StoreDbContext(DbContextOptionsMocker.GetDbContextOptions("StoreDbInMemory"))
+                );
 
         public static IProductionService GetProductionService()
-        {
-            var options = new DbContextOptionsBuilder<StoreDbContext>()
-                .UseSqlServer(ConnectionString)
-                .Options;
-
-            return new ProductionService(LogHelper.GetLogger<ProductionService>(), new UserInfo { Name = "qa" }, new StoreDbContext(options));
-        }
+            => new ProductionService(
+                LogHelper.GetLogger<ProductionService>(),
+                new UserInfo { Name = "unittests" },
+                new StoreDbContext(DbContextOptionsMocker.GetDbContextOptions("StoreDbInMemory"))
+                );
 
         public static ISalesService GetSalesService()
-        {
-            var options = new DbContextOptionsBuilder<StoreDbContext>()
-                .UseSqlServer(ConnectionString)
-                .Options;
-
-            return new SalesService(LogHelper.GetLogger<SalesService>(), new UserInfo { Name = "qa" }, new StoreDbContext(options));
-        }
+            => new SalesService(
+                LogHelper.GetLogger<SalesService>(),
+                new UserInfo { Name = "unittests" },
+                new StoreDbContext(DbContextOptionsMocker.GetDbContextOptions("StoreDbInMemory"))
+                );
     }
 }
