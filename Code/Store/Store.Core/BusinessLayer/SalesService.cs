@@ -138,7 +138,7 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IPagedResponse<OrderInfo>> GetOrdersAsync(int pageSize = 10, int pageNumber = 1, Int16? currencyID = null, int? customerID = null, int? employeeID = null, Int16? orderStatusID = null, Guid? paymentMethodID = null, int? shipperID = null)
+        public async Task<IPagedResponse<OrderInfo>> GetOrdersAsync(int pageSize = 10, int pageNumber = 1, short? currencyID = null, int? customerID = null, int? employeeID = null, short? orderStatusID = null, Guid? paymentMethodID = null, int? shipperID = null)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetOrdersAsync));
 

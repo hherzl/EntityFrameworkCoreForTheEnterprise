@@ -8,30 +8,30 @@ namespace Store.Core.EntityLayer.Production
         {
         }
 
-        public ProductInventory(Int32? productInventoryID)
+        public ProductInventory(int? productInventoryID)
         {
             ProductInventoryID = productInventoryID;
         }
 
-        public Int32? ProductInventoryID { get; set; }
+        public int? ProductInventoryID { get; set; }
 
-        public Int32? ProductID { get; set; }
+        public int? ProductID { get; set; }
 
-        public String WarehouseID { get; set; }
+        public string WarehouseID { get; set; }
 
-        public Int32? Quantity { get; set; }
+        public int? Quantity { get; set; }
 
-        public Int32? Stocks { get; set; }
+        public int? Stocks { get; set; }
 
-        public String CreationUser { get; set; }
+        public string CreationUser { get; set; }
 
         public DateTime? CreationDateTime { get; set; }
 
-        public String LastUpdateUser { get; set; }
+        public string LastUpdateUser { get; set; }
 
         public DateTime? LastUpdateDateTime { get; set; }
 
-        public Byte[] Timestamp { get; set; }
+        public byte[] Timestamp { get; set; }
 
         public Product ProductFk { get; set; }
 

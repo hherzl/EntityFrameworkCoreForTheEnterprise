@@ -9,12 +9,12 @@ namespace Store.Core.BusinessLayer
         {
         }
 
-        public StoreException(String message)
+        public StoreException(string  message)
             : base(message)
         {
         }
 
-        public StoreException(String message, Exception innerException)
+        public StoreException(string  message, Exception innerException)
             : base(message, innerException)
         {
         }

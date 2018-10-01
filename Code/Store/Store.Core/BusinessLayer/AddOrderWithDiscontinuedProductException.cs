@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Store.Core.BusinessLayer
+﻿namespace Store.Core.BusinessLayer
 {
     public class AddOrderWithDiscontinuedProductException : StoreException
     {
@@ -9,7 +7,7 @@ namespace Store.Core.BusinessLayer
         {
         }
 
-        public AddOrderWithDiscontinuedProductException(String message)
+        public AddOrderWithDiscontinuedProductException(string  message)
             : base(message)
         {
         }

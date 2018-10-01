@@ -9,24 +9,24 @@ namespace Store.Core.EntityLayer.Production
         {
         }
 
-        public ProductCategory(Int32? productCategoryID)
+        public ProductCategory(int? productCategoryID)
         {
             ProductCategoryID = productCategoryID;
         }
 
-        public Int32? ProductCategoryID { get; set; }
+        public int? ProductCategoryID { get; set; }
 
-        public String ProductCategoryName { get; set; }
+        public string ProductCategoryName { get; set; }
 
-        public String CreationUser { get; set; }
+        public string CreationUser { get; set; }
 
         public DateTime? CreationDateTime { get; set; }
 
-        public String LastUpdateUser { get; set; }
+        public string LastUpdateUser { get; set; }
 
         public DateTime? LastUpdateDateTime { get; set; }
 
-        public Byte[] Timestamp { get; set; }
+        public byte[] Timestamp { get; set; }
 
         public virtual Collection<Product> Products { get; set; }
     }

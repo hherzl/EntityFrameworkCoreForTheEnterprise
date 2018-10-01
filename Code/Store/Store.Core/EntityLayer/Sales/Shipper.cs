@@ -9,26 +9,26 @@ namespace Store.Core.EntityLayer.Sales
         {
         }
 
-        public Shipper(Int32? shipperID)
+        public Shipper(int? shipperID)
         {
             ShipperID = shipperID;
         }
 
-        public Int32? ShipperID { get; set; }
+        public int? ShipperID { get; set; }
 
-        public String CompanyName { get; set; }
+        public string CompanyName { get; set; }
 
-        public String ContactName { get; set; }
+        public string ContactName { get; set; }
 
-        public String CreationUser { get; set; }
+        public string CreationUser { get; set; }
 
         public DateTime? CreationDateTime { get; set; }
 
-        public String LastUpdateUser { get; set; }
+        public string LastUpdateUser { get; set; }
 
         public DateTime? LastUpdateDateTime { get; set; }
 
-        public Byte[] Timestamp { get; set; }
+        public byte[] Timestamp { get; set; }
 
         public virtual Collection<Order> Orders { get; set; }
     }

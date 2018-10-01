@@ -8,18 +8,18 @@ namespace Store.Core.EntityLayer.Dbo
         {
         }
 
-        public Int32? CountryID { get; set; }
+        public int? CountryID { get; set; }
 
-        public String CountryName { get; set; }
+        public string  CountryName { get; set; }
 
-        public String CreationUser { get; set; }
+        public string  CreationUser { get; set; }
 
         public DateTime? CreationDateTime { get; set; }
 
-        public String LastUpdateUser { get; set; }
+        public string  LastUpdateUser { get; set; }
 
         public DateTime? LastUpdateDateTime { get; set; }
 
-        public Byte[] Timestamp { get; set; }
+        public byte[] Timestamp { get; set; }
     }
 }

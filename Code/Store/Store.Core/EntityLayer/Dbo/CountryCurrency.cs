@@ -8,20 +8,20 @@ namespace Store.Core.EntityLayer.Dbo
         {
         }
 
-        public Int32? CountryCurrencyID { get; set; }
+        public int? CountryCurrencyID { get; set; }
 
-        public Int32? CountryID { get; set; }
+        public int? CountryID { get; set; }
 
-        public Int16? CurrencyID { get; set; }
+        public short? CurrencyID { get; set; }
 
-        public String CreationUser { get; set; }
+        public string  CreationUser { get; set; }
 
         public DateTime? CreationDateTime { get; set; }
 
-        public String LastUpdateUser { get; set; }
+        public string  LastUpdateUser { get; set; }
 
         public DateTime? LastUpdateDateTime { get; set; }
 
-        public Byte[] Timestamp { get; set; }
+        public byte[] Timestamp { get; set; }
     }
 }

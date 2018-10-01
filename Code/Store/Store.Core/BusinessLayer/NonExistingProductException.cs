@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Store.Core.BusinessLayer
+﻿namespace Store.Core.BusinessLayer
 {
     public class NonExistingProductException : StoreException
     {
@@ -9,7 +7,7 @@ namespace Store.Core.BusinessLayer
         {
         }
 
-        public NonExistingProductException(String message)
+        public NonExistingProductException(string  message)
             : base(message)
         {
         }

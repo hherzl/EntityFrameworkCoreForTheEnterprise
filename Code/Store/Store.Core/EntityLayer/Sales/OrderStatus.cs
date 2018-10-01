@@ -9,24 +9,24 @@ namespace Store.Core.EntityLayer.Sales
         {
         }
 
-        public OrderStatus(Int16? orderStatusID)
+        public OrderStatus(short? orderStatusID)
         {
             OrderStatusID = orderStatusID;
         }
 
-        public Int16? OrderStatusID { get; set; }
+        public short? OrderStatusID { get; set; }
 
-        public String Description { get; set; }
+        public string Description { get; set; }
 
-        public String CreationUser { get; set; }
+        public string CreationUser { get; set; }
 
         public DateTime? CreationDateTime { get; set; }
 
-        public String LastUpdateUser { get; set; }
+        public string LastUpdateUser { get; set; }
 
         public DateTime? LastUpdateDateTime { get; set; }
 
-        public Byte[] Timestamp { get; set; }
+        public byte[] Timestamp { get; set; }
 
         public virtual Collection<Order> Orders { get; set; }
     }

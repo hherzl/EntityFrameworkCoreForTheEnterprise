@@ -4,11 +4,11 @@ namespace Store.Core.EntityLayer
 {
     public interface IAuditableEntity : IEntity
     {
-        String CreationUser { get; set; }
+        string  CreationUser { get; set; }
 
         DateTime? CreationDateTime { get; set; }
 
-        String LastUpdateUser { get; set; }
+        string  LastUpdateUser { get; set; }
 
         DateTime? LastUpdateDateTime { get; set; }
     }

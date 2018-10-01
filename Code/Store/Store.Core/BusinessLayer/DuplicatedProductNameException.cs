@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Store.Core.BusinessLayer
+﻿namespace Store.Core.BusinessLayer
 {
     public class DuplicatedProductNameException : StoreException
     {
@@ -9,7 +7,7 @@ namespace Store.Core.BusinessLayer
         {
         }
 
-        public DuplicatedProductNameException(String message)
+        public DuplicatedProductNameException(string message)
             : base(message)
         {
         }

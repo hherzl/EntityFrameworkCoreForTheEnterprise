@@ -10,18 +10,18 @@ namespace Store.Core.EntityLayer.Sales
 
         public Guid? PaymentMethodID { get; set; }
 
-        public String PaymentMethodName { get; set; }
+        public string PaymentMethodName { get; set; }
 
-        public String PaymentMethodDescription { get; set; }
+        public string PaymentMethodDescription { get; set; }
 
-        public String CreationUser { get; set; }
+        public string CreationUser { get; set; }
 
         public DateTime? CreationDateTime { get; set; }
 
-        public String LastUpdateUser { get; set; }
+        public string LastUpdateUser { get; set; }
 
         public DateTime? LastUpdateDateTime { get; set; }
 
-        public Byte[] Timestamp { get; set; }
+        public byte[] Timestamp { get; set; }
     }
 }

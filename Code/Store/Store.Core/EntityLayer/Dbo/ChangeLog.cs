@@ -8,19 +8,19 @@ namespace Store.Core.EntityLayer.Dbo
         {
         }
 
-        public Int32? ChangeLogID { get; set; }
+        public int? ChangeLogID { get; set; }
 
-        public String ClassName { get; set; }
+        public string  ClassName { get; set; }
 
-        public String PropertyName { get; set; }
+        public string  PropertyName { get; set; }
 
-        public String Key { get; set; }
+        public string  Key { get; set; }
 
-        public String OriginalValue { get; set; }
+        public string  OriginalValue { get; set; }
 
-        public String CurrentValue { get; set; }
+        public string  CurrentValue { get; set; }
 
-        public String UserName { get; set; }
+        public string  UserName { get; set; }
 
         public DateTime? ChangeDate { get; set; }
     }

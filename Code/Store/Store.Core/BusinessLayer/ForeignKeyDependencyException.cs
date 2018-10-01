@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Store.Core.BusinessLayer
+﻿namespace Store.Core.BusinessLayer
 {
     public class ForeignKeyDependencyException : StoreException
     {
@@ -8,7 +6,7 @@ namespace Store.Core.BusinessLayer
         {
         }
 
-        public ForeignKeyDependencyException(String message)
+        public ForeignKeyDependencyException(string  message)
             : base(message)
         {
         }

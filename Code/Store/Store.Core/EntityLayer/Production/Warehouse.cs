@@ -9,19 +9,19 @@ namespace Store.Core.EntityLayer.Production
         {
         }
 
-        public String WarehouseID { get; set; }
+        public string WarehouseID { get; set; }
 
-        public String WarehouseName { get; set; }
+        public string WarehouseName { get; set; }
 
-        public String CreationUser { get; set; }
+        public string CreationUser { get; set; }
 
         public DateTime? CreationDateTime { get; set; }
 
-        public String LastUpdateUser { get; set; }
+        public string LastUpdateUser { get; set; }
 
         public DateTime? LastUpdateDateTime { get; set; }
 
-        public Byte[] Timestamp { get; set; }
+        public byte[] Timestamp { get; set; }
 
         public Collection<ProductInventory> ProductInventories { get; set; }
     }

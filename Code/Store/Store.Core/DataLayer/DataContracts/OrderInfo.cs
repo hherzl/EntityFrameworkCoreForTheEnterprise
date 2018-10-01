@@ -8,60 +8,60 @@ namespace Store.Core.DataLayer.DataContracts
         {
         }
 
-        public Int64? OrderID { get; set; }
+        public long? OrderID { get; set; }
 
-        public Int16? OrderStatusID { get; set; }
+        public short? OrderStatusID { get; set; }
 
         public DateTime? OrderDate { get; set; }
 
-        public Int32? CustomerID { get; set; }
+        public int? CustomerID { get; set; }
 
-        public Int32? EmployeeID { get; set; }
+        public int? EmployeeID { get; set; }
 
-        public Int32? ShipperID { get; set; }
+        public int? ShipperID { get; set; }
 
-        public Decimal? Total { get; set; }
+        public decimal? Total { get; set; }
 
-        public Int16? CurrencyID { get; set; }
+        public short? CurrencyID { get; set; }
 
         public Guid? PaymentMethodID { get; set; }
 
-        public String Comments { get; set; }
+        public string  Comments { get; set; }
 
-        public String CreationUser { get; set; }
+        public string  CreationUser { get; set; }
 
         public DateTime? CreationDateTime { get; set; }
 
-        public String LastUpdateUser { get; set; }
+        public string  LastUpdateUser { get; set; }
 
         public DateTime? LastUpdateDateTime { get; set; }
 
-        public Byte[] Timestamp { get; set; }
+        public byte[] Timestamp { get; set; }
 
-        public String CustomerCompanyName { get; set; }
+        public string  CustomerCompanyName { get; set; }
 
-        public String CustomerContactName { get; set; }
+        public string  CustomerContactName { get; set; }
 
-        public String EmployeeFirstName { get; set; }
+        public string  EmployeeFirstName { get; set; }
 
-        public String EmployeeMiddleName { get; set; }
+        public string  EmployeeMiddleName { get; set; }
 
-        public String EmployeeLastName { get; set; }
+        public string  EmployeeLastName { get; set; }
 
         public DateTime? EmployeeBirthDate { get; set; }
 
-        public String OrderStatusDescription { get; set; }
+        public string  OrderStatusDescription { get; set; }
 
-        public String ShipperCompanyName { get; set; }
+        public string  ShipperCompanyName { get; set; }
 
-        public String ShipperContactName { get; set; }
+        public string  ShipperContactName { get; set; }
 
-        public String CurrencyCurrencyName { get; set; }
+        public string  CurrencyCurrencyName { get; set; }
 
-        public String CurrencyCurrencySymbol { get; set; }
+        public string  CurrencyCurrencySymbol { get; set; }
 
-        public String PaymentMethodPaymentMethodName { get; set; }
+        public string  PaymentMethodPaymentMethodName { get; set; }
 
-        public String PaymentMethodPaymentMethodDescription { get; set; }
+        public string  PaymentMethodPaymentMethodDescription { get; set; }
     }
 }
