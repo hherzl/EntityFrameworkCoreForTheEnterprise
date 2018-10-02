@@ -79,7 +79,7 @@ insert into [Sales].[OrderStatus]
     values (400, 'Delivered', @userName, getdate(), null, null, null)
 
 insert into [Sales].[PaymentMethod]
-    values(newid(), 'Credit Card', 'Payment with credit card', @userName, getdate(), null, null, null)
+    values('7671A4F7-A735-4CB7-AAB4-CF47AE20171D', 'Credit Card', 'Payment with credit card', @userName, getdate(), null, null, null)
 insert into [Sales].[PaymentMethod]
-    values(newid(), 'Debit Card', 'Payment with debit card', @userName, getdate(), null, null, null)
+    values('F9439225-18BD-4654-AA50-156789BE8B0B', 'Debit Card', 'Payment with debit card', @userName, getdate(), null, null, null)
 go

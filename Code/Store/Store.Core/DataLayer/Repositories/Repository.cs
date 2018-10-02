@@ -19,12 +19,13 @@ namespace Store.Core.DataLayer.Repositories
             UserInfo = userInfo;
             DbContext = dbContext;
         }
-        
+
         public virtual void Add<TEntity>(TEntity entity) where TEntity : class, IAuditableEntity
         {
             if (entity is IAuditableEntity cast)
             {
-                cast.CreationUser = UserInfo.Name;
+                if (string.IsNullOrEmpty(cast.CreationUser))
+                    cast.CreationUser = UserInfo.Name;
 
                 if (!cast.CreationDateTime.HasValue)
                     cast.CreationDateTime = DateTime.Now;
@@ -37,7 +38,8 @@ namespace Store.Core.DataLayer.Repositories
         {
             if (entity is IAuditableEntity cast)
             {
-                cast.LastUpdateUser = UserInfo.Name;
+                if (string.IsNullOrEmpty(cast.LastUpdateUser))
+                    cast.LastUpdateUser = UserInfo.Name;
 
                 if (!cast.LastUpdateDateTime.HasValue)
                     cast.LastUpdateDateTime = DateTime.Now;

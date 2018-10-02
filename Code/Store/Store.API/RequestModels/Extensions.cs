@@ -9,17 +9,13 @@ namespace Store.API.RequestModels
         {
             return new Order
             {
-                OrderID = requestModel.OrderID,
                 OrderDate = requestModel.OrderDate,
                 CustomerID = requestModel.CustomerID,
-                EmployeeID = requestModel.EmployeeID,
-                ShipperID = requestModel.ShipperID,
-                Total = requestModel.Total,
+                CurrencyID = requestModel.CurrencyID,
+                PaymentMethodID = requestModel.PaymentMethodID,
                 Comments = requestModel.Comments,
                 CreationUser = requestModel.CreationUser,
-                CreationDateTime = requestModel.CreationDateTime,
-                LastUpdateUser = requestModel.LastUpdateUser,
-                LastUpdateDateTime = requestModel.LastUpdateDateTime
+                CreationDateTime = requestModel.CreationDateTime
             };
         }
 
@@ -29,12 +25,12 @@ namespace Store.API.RequestModels
             {
                 yield return new OrderDetail
                 {
-                    OrderID = item.OrderID,
                     ProductID = item.ProductID,
                     ProductName = item.ProductName,
                     UnitPrice = item.UnitPrice,
                     Quantity = item.Quantity,
-                    Total = item.Total
+                    CreationUser = requestModel.CreationUser,
+                    CreationDateTime = requestModel.CreationDateTime
                 };
             }
         }

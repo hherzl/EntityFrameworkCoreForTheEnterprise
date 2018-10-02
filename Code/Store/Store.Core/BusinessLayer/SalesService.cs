@@ -252,11 +252,14 @@ namespace Store.Core.BusinessLayer
                         detail.Total = product.UnitPrice * detail.Quantity;
                     }
 
+                    // Set default values for order header
+                    header.OrderDate = DateTime.Now;
+                    header.OrderStatusID = 100;
+
                     // Calculate total for order header from order's details
                     header.Total = details.Sum(item => item.Total);
 
                     // Save order header
-                    //await SalesRepository.AddOrderAsync(header);
                     SalesRepository.Add(header);
 
                     await SalesRepository.CommitChangesAsync();
@@ -288,14 +291,15 @@ namespace Store.Core.BusinessLayer
                             WarehouseID = warehouses.First().WarehouseID,
                             CreationDateTime = DateTime.Now,
                             Quantity = detail.Quantity * -1,
-                            Stocks = 0
+                            Stocks = 0,
+                            CreationUser = header.CreationUser
                         };
 
                         // Save product inventory
                         ProductionRepository.Add(productInventory);
-
-                        await SalesRepository.CommitChangesAsync();
                     }
+
+                    await SalesRepository.CommitChangesAsync();
 
                     response.Model = header;
 

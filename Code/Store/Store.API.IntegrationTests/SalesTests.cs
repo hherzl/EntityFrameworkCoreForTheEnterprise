@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
@@ -110,6 +111,35 @@ namespace Store.API.IntegrationTests
 
             // Act
             var response = await Client.GetAsync(request);
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+        }
+
+        [Fact]
+        public async Task TestCreateOrderAsync()
+        {
+            // Arrange
+            var request = "/api/v1/Sales/Order";
+            var model = new
+            {
+                CustomerID = 1,
+                PaymentMethodID = new Guid("7671A4F7-A735-4CB7-AAB4-CF47AE20171D"),
+                Comments = "Order from integration tests",
+                CreationUser = "integrationtests",
+                CreationDateTime = DateTime.Now,
+                Details = new[]
+                {
+                    new
+                    {
+                        ProductID = 1,
+                        Quantity = 1
+                    }
+                }
+            };
+
+            // Act
+            var response = await Client.PostAsync(request, ContentHelper.GetStringContent(model));
 
             // Assert
             response.EnsureSuccessStatusCode();

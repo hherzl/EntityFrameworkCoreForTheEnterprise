@@ -164,11 +164,8 @@ namespace Store.API.UnitTests
             var controller = new SalesController(logger, salesService);
             var model = new OrderRequestModel
             {
-                OrderDate = DateTime.Now,
                 CustomerID = 1,
-                EmployeeID = 1,
-                ShipperID = 1,
-                Total = 29.99m,
+                PaymentMethodID = new Guid("7671A4F7-A735-4CB7-AAB4-CF47AE20171D"),
                 Comments = "Order from unit tests",
                 CreationUser = "unitests",
                 CreationDateTime = DateTime.Now,
@@ -178,9 +175,7 @@ namespace Store.API.UnitTests
                     {
                         ProductID = 1,
                         ProductName = "The King of Fighters XIV",
-                        UnitPrice = 29.99m,
                         Quantity = 1,
-                        Total = 29.99m
                     }
                 }
             };
