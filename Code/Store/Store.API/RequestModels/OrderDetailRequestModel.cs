@@ -1,19 +1,17 @@
-﻿using System;
-
-namespace Store.API.RequestModels
+﻿namespace Store.API.RequestModels
 {
     public class OrderDetailRequestModel
     {
-        public Int32? OrderID { get; set; }
+        public int? OrderID { get; set; }
 
-        public Int32? ProductID { get; set; }
+        public int? ProductID { get; set; }
 
-        public String ProductName { get; set; }
+        public string ProductName { get; set; }
 
-        public Decimal? UnitPrice { get; set; }
+        public decimal? UnitPrice { get; set; }
 
-        public Int32? Quantity { get; set; }
+        public int? Quantity { get; set; }
 
-        public Decimal? Total { get; set; }
+        public decimal? Total { get; set; }
     }
 }

@@ -5,25 +5,25 @@ namespace Store.API.RequestModels
 {
     public class OrderRequestModel
     {
-        public Int32? OrderID { get; set; }
+        public int? OrderID { get; set; }
 
         public DateTime? OrderDate { get; set; }
 
-        public Int32? CustomerID { get; set; }
+        public int? CustomerID { get; set; }
 
-        public Int32? EmployeeID { get; set; }
+        public int? EmployeeID { get; set; }
 
-        public Int32? ShipperID { get; set; }
+        public int? ShipperID { get; set; }
 
-        public Decimal? Total { get; set; }
+        public decimal? Total { get; set; }
 
-        public String Comments { get; set; }
+        public string Comments { get; set; }
 
-        public String CreationUser { get; set; }
+        public string CreationUser { get; set; }
 
         public DateTime? CreationDateTime { get; set; }
 
-        public String LastUpdateUser { get; set; }
+        public string LastUpdateUser { get; set; }
 
         public DateTime? LastUpdateDateTime { get; set; }
 

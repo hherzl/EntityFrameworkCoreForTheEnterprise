@@ -15,7 +15,7 @@ namespace Store.API.IntegrationTests
         }
 
         [Fact]
-        public async Task TestOrderAsync()
+        public async Task TestGetOrdersAsync()
         {
             // Arrange
             var request = "/api/v1/Sales/Order";
@@ -47,7 +47,7 @@ namespace Store.API.IntegrationTests
         public async Task TestGetOrdersByCustomerAsync()
         {
             // Arrange
-            var customerID = (short)1;
+            var customerID = 1;
             var request = string.Format("/api/v1/Sales/Order?customerID={0}", customerID);
 
             // Act
@@ -62,7 +62,7 @@ namespace Store.API.IntegrationTests
         public async Task TestGetOrdersByEmployeeAsync()
         {
             // Arrange
-            var employeeID = (short)1;
+            var employeeID = 1;
             var request = string.Format("/api/v1/Sales/Order?employeeID={0}", employeeID);
 
             // Act
@@ -74,7 +74,7 @@ namespace Store.API.IntegrationTests
         }
 
         [Fact]
-        public async Task TestGetOrderAsync()
+        public async Task TestGetOrderByIdAsync()
         {
             // Arrange
             var id = 1;
@@ -89,7 +89,7 @@ namespace Store.API.IntegrationTests
         }
 
         [Fact]
-        public async Task TestGetNonExistingOrderAsync()
+        public async Task TestGetOrderByNonExistingIdAsync()
         {
             // Arrange
             var id = 0;
@@ -103,7 +103,7 @@ namespace Store.API.IntegrationTests
         }
 
         [Fact]
-        public async Task GetCreateOrderRequestAsync()
+        public async Task TestGetCreateOrderRequestAsync()
         {
             // Arrange
             var request = "/api/v1/Sales/CreateOrderRequest";

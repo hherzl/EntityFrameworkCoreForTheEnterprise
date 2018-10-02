@@ -6,6 +6,11 @@
         {
         }
 
+        public UserInfo(string name)
+        {
+            Name = name;
+        }
+
         public string Domain { get; set; }
 
         public string Name { get; set; }

@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Store.API.Controllers;
 using Store.Common;
 using Store.Core.BusinessLayer.Responses;
-using Store.Core.DataLayer;
 using Store.Core.EntityLayer.Production;
 using Xunit;
 
@@ -11,51 +11,43 @@ namespace Store.API.UnitTests
 {
     public class ProductionControllerTests
     {
-        public ProductionControllerTests()
-        {
-            using (var dbContext = new StoreDbContext(DbContextOptionsMocker.GetDbContextOptions("ProductionDbInMemory")))
-            {
-                dbContext.Database.EnsureDeleted();
-
-                dbContext.SeedInMemory();
-            }
-        }
-
         [Fact]
-        public async Task GetProductsTestAsync()
+        public async Task TestGetProductsTestAsync()
         {
             // Arrange
             var logger = LogHelper.GetLogger<ProductionController>();
-            var productionService = ServiceMocker.GetProductionService();
+            var productionService = ServiceMocker.GetProductionService(nameof(TestGetProductsTestAsync));
+            var controller = new ProductionController(logger, productionService);
 
-            using (var controller = new ProductionController(logger, productionService))
-            {
-                // Act
-                var response = await controller.GetProductsAsync() as ObjectResult;
-                var value = response.Value as IPagedResponse<Product>;
+            // Act
+            var response = await controller.GetProductsAsync() as ObjectResult;
+            var value = response.Value as IPagedResponse<Product>;
 
-                // Assert
-                Assert.False(value.DidError);
-            }
+            controller.Dispose();
+
+            // Assert
+            Assert.False(value.DidError);
+            Assert.True(value.Model.Count() > 0);
         }
 
         [Fact]
-        public async Task GetInventoryByProductTestAsync()
+        public async Task TestGetInventoryByProductTestAsync()
         {
             // Arrange
             var logger = LogHelper.GetLogger<ProductionController>();
-            var productionService = ServiceMocker.GetProductionService();
+            var productionService = ServiceMocker.GetProductionService(nameof(TestGetInventoryByProductTestAsync));
+            var controller = new ProductionController(logger, productionService);
             var id = 1;
 
-            using (var controller = new ProductionController(logger, productionService))
-            {
-                // Act
-                var response = await controller.GetInventoryByProduct(id) as ObjectResult;
-                var value = response.Value as IListResponse<ProductInventory>;
+            // Act
+            var response = await controller.GetInventoryByProduct(id) as ObjectResult;
+            var value = response.Value as IListResponse<ProductInventory>;
 
-                // Assert
-                Assert.False(value.DidError);
-            }
+            controller.Dispose();
+
+            // Assert
+            Assert.False(value.DidError);
+            Assert.True(value.Model.Count() > 0);
         }
     }
 }

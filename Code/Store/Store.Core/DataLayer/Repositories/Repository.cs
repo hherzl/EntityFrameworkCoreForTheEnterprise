@@ -12,9 +12,9 @@ namespace Store.Core.DataLayer.Repositories
     public abstract class Repository
     {
         protected IUserInfo UserInfo;
-        protected DbContext DbContext;
+        protected StoreDbContext DbContext;
 
-        public Repository(IUserInfo userInfo, DbContext dbContext)
+        public Repository(IUserInfo userInfo, StoreDbContext dbContext)
         {
             UserInfo = userInfo;
             DbContext = dbContext;

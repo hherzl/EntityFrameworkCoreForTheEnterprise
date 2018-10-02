@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Store.Core.DataLayer;
 using Store.Core.EntityLayer.Dbo;
 using Store.Core.EntityLayer.HumanResources;
@@ -16,6 +17,7 @@ namespace Store.API.UnitTests
 
             var country = new Country
             {
+                CountryID = 1,
                 CountryName = "USA",
                 CreationUser = creationUser,
                 CreationDateTime = creationDateTime
@@ -23,10 +25,9 @@ namespace Store.API.UnitTests
 
             dbContext.Set<Country>().Add(country);
 
-            dbContext.SaveChanges();
-
             var currency = new Currency
             {
+                CurrencyID = 1000,
                 CurrencyName = "US Dollar",
                 CurrencySymbol = "$",
                 CreationUser = creationUser,
@@ -51,6 +52,7 @@ namespace Store.API.UnitTests
 
             var employee = new Employee
             {
+                EmployeeID = 1,
                 FirstName = "John",
                 LastName = "Doe",
                 BirthDate = DateTime.Now.AddYears(-25),
@@ -64,6 +66,7 @@ namespace Store.API.UnitTests
 
             var productCategory = new ProductCategory
             {
+                ProductCategoryID = 1,
                 ProductCategoryName = "PS4 Games",
                 CreationUser = creationUser,
                 CreationDateTime = creationDateTime
@@ -75,6 +78,7 @@ namespace Store.API.UnitTests
 
             var product = new Product
             {
+                ProductID = 1,
                 ProductName = "The King of Fighters XIV",
                 ProductCategoryID = 1,
                 UnitPrice = 29.99m,
@@ -103,8 +107,8 @@ namespace Store.API.UnitTests
 
             var productInventory = new ProductInventory
             {
-                ProductID = 1,
-                WarehouseID = "W0001",
+                ProductID = product.ProductID,
+                WarehouseID = warehouse.WarehouseID,
                 Stocks = 1500,
                 Quantity = 1500,
                 CreationUser = creationUser,
@@ -115,29 +119,7 @@ namespace Store.API.UnitTests
 
             dbContext.SaveChanges();
 
-            var customer = new Customer
-            {
-                CompanyName = "Best Buy",
-                ContactName = "Colleen Dunn",
-                CreationUser = creationUser,
-                CreationDateTime = creationDateTime
-            };
-
-            dbContext.Set<Customer>().Add(customer);
-
-            dbContext.SaveChanges();
-
-            var shipper = new Shipper
-            {
-                CompanyName = "DHL",
-                ContactName = "Ricardo A. Bartra",
-                CreationUser = creationUser,
-                CreationDateTime = creationDateTime
-            };
-
-            dbContext.Set<Shipper>().Add(shipper);
-
-            dbContext.SaveChanges();
+            var foo = dbContext.Set<ProductInventory>().ToList();
 
             var orderStatus = new OrderStatus
             {
@@ -163,6 +145,32 @@ namespace Store.API.UnitTests
 
             dbContext.SaveChanges();
 
+            var customer = new Customer
+            {
+                CustomerID = 1,
+                CompanyName = "Best Buy",
+                ContactName = "Colleen Dunn",
+                CreationUser = creationUser,
+                CreationDateTime = creationDateTime
+            };
+
+            dbContext.Set<Customer>().Add(customer);
+
+            dbContext.SaveChanges();
+
+            var shipper = new Shipper
+            {
+                ShipperID = 1,
+                CompanyName = "DHL",
+                ContactName = "Ricardo A. Bartra",
+                CreationUser = creationUser,
+                CreationDateTime = creationDateTime
+            };
+
+            dbContext.Set<Shipper>().Add(shipper);
+
+            dbContext.SaveChanges();
+
             var order = new Order
             {
                 OrderStatusID = 100,
@@ -171,7 +179,7 @@ namespace Store.API.UnitTests
                 ShipperID = 1,
                 OrderDate = DateTime.Now,
                 Total = 29.99m,
-                CurrencyID = 1,
+                CurrencyID = 1000,
                 PaymentMethodID = paymentMethod.PaymentMethodID,
                 Comments = "Order from mocks",
                 CreationUser = creationUser,
@@ -184,7 +192,7 @@ namespace Store.API.UnitTests
 
             var orderDetail = new OrderDetail
             {
-                OrderID = 1,
+                OrderID = order.OrderID,
                 ProductID = 1,
                 ProductName = "The King of Fighters XIV",
                 UnitPrice = 29.99m,

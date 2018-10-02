@@ -227,10 +227,8 @@ namespace Store.Core.BusinessLayer
             {
                 try
                 {
-                    // Retrieve warehouses
-                    var warehouses = await ProductionRepository
-                        .GetWarehouses()
-                        .ToListAsync();
+                    // todo: Retrieve available warehouse to dispatch products
+                    var warehouses = await ProductionRepository.GetWarehouses().ToListAsync();
 
                     foreach (var detail in details)
                     {
@@ -329,8 +327,7 @@ namespace Store.Core.BusinessLayer
 
                 if (entity != null)
                 {
-                    // Init a new instance for order
-                    // Set values from existing order
+                    // Create a new instance for order and set values from existing order
                     response.Model = new Order
                     {
                         OrderID = entity.OrderID,
