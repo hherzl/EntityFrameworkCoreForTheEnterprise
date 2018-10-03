@@ -10,17 +10,17 @@ namespace Store.API.Controllers
     public class ProductionController : Controller
     {
         protected ILogger Logger;
-        protected IProductionService ProductionBusinessObject;
+        protected IProductionService ProductionService;
 
-        public ProductionController(ILogger<ProductionController> logger, IProductionService productionBusinessObject)
+        public ProductionController(ILogger<ProductionController> logger, IProductionService productionService)
         {
             Logger = logger;
-            ProductionBusinessObject = productionBusinessObject;
+            ProductionService = productionService;
         }
 
         protected override void Dispose(bool disposing)
         {
-            ProductionBusinessObject?.Dispose();
+            ProductionService?.Dispose();
 
             base.Dispose(disposing);
         }
@@ -31,19 +31,19 @@ namespace Store.API.Controllers
             Logger?.LogDebug("{0} has been invoked", nameof(GetProductsAsync));
 
             // Get response from business logic
-            var response = await ProductionBusinessObject.GetProductsAsync((int)pageSize, (int)pageNumber);
+            var response = await ProductionService.GetProductsAsync((int)pageSize, (int)pageNumber);
 
             // Return as http response
             return response.ToHttpResponse();
         }
 
-        [HttpGet("InventoryByProduct/{id}")]
-        public async Task<IActionResult> GetInventoryByProduct(int id)
+        [HttpGet("ProductInventory")]
+        public async Task<IActionResult> GetProductInventoryAsync(int? productID, string warehouseID)
         {
-            Logger?.LogDebug("{0} has been invoked", nameof(GetInventoryByProduct));
+            Logger?.LogDebug("{0} has been invoked", nameof(GetProductInventoryAsync));
 
             // Get response from business logic
-            var response = await ProductionBusinessObject.GetInventoryByProduct(id);
+            var response = await ProductionService.GetProductInventories(productID, warehouseID);
 
             // Return as http response
             return response.ToHttpResponse();

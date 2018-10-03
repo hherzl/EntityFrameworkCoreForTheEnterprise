@@ -72,16 +72,16 @@ namespace Store.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IListResponse<ProductInventory>> GetInventoryByProduct(int? productID)
+        public async Task<IListResponse<ProductInventory>> GetProductInventories(int? productID = null, string warehouseID = null)
         {
-            Logger?.LogInformation("{0} has been invoked", nameof(GetInventoryByProduct));
+            Logger?.LogInformation("{0} has been invoked", nameof(GetProductInventories));
 
             var response = new ListResponse<ProductInventory>();
 
             try
             {
                 // Get query
-                var query = ProductionRepository.GetProductInventories(productID: productID);
+                var query = ProductionRepository.GetProductInventories(productID, warehouseID);
 
                 // Retrieve items, set model for response
                 var list = await query.ToListAsync();

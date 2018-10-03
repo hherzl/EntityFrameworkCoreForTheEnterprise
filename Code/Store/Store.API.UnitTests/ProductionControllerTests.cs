@@ -37,10 +37,11 @@ namespace Store.API.UnitTests
             var logger = LogHelper.GetLogger<ProductionController>();
             var productionService = ServiceMocker.GetProductionService(nameof(TestGetInventoryByProductTestAsync));
             var controller = new ProductionController(logger, productionService);
-            var id = 1;
+            var productID = 1;
+            var warehouseID = "W0001";
 
             // Act
-            var response = await controller.GetInventoryByProduct(id) as ObjectResult;
+            var response = await controller.GetProductInventoryAsync(productID, warehouseID) as ObjectResult;
             var value = response.Value as IListResponse<ProductInventory>;
 
             controller.Dispose();

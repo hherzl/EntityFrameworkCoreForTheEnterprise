@@ -10,6 +10,6 @@ namespace Store.Core.BusinessLayer.Contracts
 
         Task<IPagedResponse<Warehouse>> GetWarehousesAsync(int pageSize = 10, int pageNumber = 1);
 
-        Task<IListResponse<ProductInventory>> GetInventoryByProduct(int? productID);
+        Task<IListResponse<ProductInventory>> GetProductInventories(int? productID = null, string warehouseID = null);
     }
 }

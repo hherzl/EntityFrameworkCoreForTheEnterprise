@@ -28,11 +28,10 @@ namespace Store.API.IntegrationTests
         }
 
         [Fact]
-        public async Task GetInventoryByProductTestAsync()
+        public async Task GetProductInventoriesAsync()
         {
             // Arrange
-            var id = 1;
-            var request = string.Format("/api/v1/Production/InventoryByProduct/{0}", id);
+            var request = string.Format("/api/v1/Production/ProductInventory");
 
             // Act
             var response = await Client.GetAsync(request);
