@@ -127,7 +127,6 @@ namespace Store.API.IntegrationTests
                 PaymentMethodID = new Guid("7671A4F7-A735-4CB7-AAB4-CF47AE20171D"),
                 Comments = "Order from integration tests",
                 CreationUser = "integrationtests",
-                CreationDateTime = DateTime.Now,
                 Details = new[]
                 {
                     new

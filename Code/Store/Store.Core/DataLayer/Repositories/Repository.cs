@@ -97,9 +97,27 @@ namespace Store.Core.DataLayer.Repositories
         }
 
         public int CommitChanges()
-            => DbContext.SaveChanges();
+        {
+            var dbSet = DbContext.Set<ChangeLog>();
+
+            foreach (var change in GetChanges().ToList())
+            {
+                dbSet.Add(change);
+            }
+
+            return DbContext.SaveChanges();
+        }
 
         public Task<int> CommitChangesAsync()
-            => DbContext.SaveChangesAsync();
+        {
+            var dbSet = DbContext.Set<ChangeLog>();
+
+            foreach (var change in GetChanges().ToList())
+            {
+                dbSet.Add(change);
+            }
+
+            return DbContext.SaveChangesAsync();
+        }
     }
 }
