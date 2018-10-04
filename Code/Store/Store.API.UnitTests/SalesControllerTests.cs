@@ -150,9 +150,7 @@ namespace Store.API.UnitTests
             // Assert
             Assert.False(value.DidError);
             Assert.True(value.Model.Products.Count() > 0);
-            Assert.True(value.Model.Employees.Count() > 0);
             Assert.True(value.Model.Customers.Count() > 0);
-            Assert.True(value.Model.Shippers.Count() > 0);
         }
 
         [Fact]
