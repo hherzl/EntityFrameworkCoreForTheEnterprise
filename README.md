@@ -1,4 +1,4 @@
-# Entity Framework Core For Enterprise
+# Entity Framework Core 2 for Enterprise
 
 ## Introduction
 
