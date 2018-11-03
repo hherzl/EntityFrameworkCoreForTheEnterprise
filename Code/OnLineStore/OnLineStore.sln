@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnLineStore.Mocker", "OnLin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnLineStore.WebAPI.UnitTests", "OnLineStore.WebAPI.UnitTests\OnLineStore.WebAPI.UnitTests.csproj", "{00B0C85E-BD67-4A92-82F9-2AC88DBB39B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnLineStore.WebAPI.IntegrationTests", "OnLineStore.WebAPI.IntegrationTests\OnLineStore.WebAPI.IntegrationTests.csproj", "{7A281B1B-B69C-4CB6-A5AA-3F250FB95BBA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{00B0C85E-BD67-4A92-82F9-2AC88DBB39B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00B0C85E-BD67-4A92-82F9-2AC88DBB39B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00B0C85E-BD67-4A92-82F9-2AC88DBB39B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A281B1B-B69C-4CB6-A5AA-3F250FB95BBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A281B1B-B69C-4CB6-A5AA-3F250FB95BBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A281B1B-B69C-4CB6-A5AA-3F250FB95BBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A281B1B-B69C-4CB6-A5AA-3F250FB95BBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
