@@ -8,9 +8,9 @@ namespace OnLineStore.Mocker
     public static class ServiceMocker
     {
         public static IProductionService GetProductionService()
-            => new ProductionService(LogHelper.GetLogger<ProductionService>(), new UserInfo("mocker"), DbContextMocker.GetStoreDbContext());
+            => new ProductionService(LogHelper.GetLogger<ProductionService>(), new UserInfo("mocker"), DbContextMocker.GetOnLineStoreDbContext());
 
         public static ISalesService GetSalesService()
-            => new SalesService(LogHelper.GetLogger<SalesService>(), new UserInfo("mocker"), DbContextMocker.GetStoreDbContext());
+            => new SalesService(LogHelper.GetLogger<SalesService>(), new UserInfo("mocker"), DbContextMocker.GetOnLineStoreDbContext());
     }
 }

@@ -13,7 +13,7 @@ namespace OnLineStore.Mocker
             ConnectionString = "server=(local);database=Store;integrated security=yes;MultipleActiveResultSets=True;";
         }
 
-        public static OnLineStoreDbContext GetStoreDbContext()
+        public static OnLineStoreDbContext GetOnLineStoreDbContext()
             => new OnLineStoreDbContext(new DbContextOptionsBuilder<OnLineStoreDbContext>().UseSqlServer(ConnectionString).Options);
     }
 }

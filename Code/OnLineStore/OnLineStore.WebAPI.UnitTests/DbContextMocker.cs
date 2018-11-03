@@ -6,7 +6,7 @@ namespace OnLineStore.WebAPI.UnitTests
 {
     public static class DbContextMocker
     {
-        public static OnLineStoreDbContext GetStoreDbContextInMemory(string dbName)
+        public static OnLineStoreDbContext GetOnLineStoreDbContextInMemory(string dbName)
         {
             var options = new DbContextOptionsBuilder<OnLineStoreDbContext>()
                 .UseInMemoryDatabase(databaseName: dbName)

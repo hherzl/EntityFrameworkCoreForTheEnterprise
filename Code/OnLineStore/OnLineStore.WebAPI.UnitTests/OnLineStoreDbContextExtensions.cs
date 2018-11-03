@@ -8,7 +8,7 @@ using OnLineStore.Core.EntityLayer.Sales;
 
 namespace OnLineStore.WebAPI.UnitTests
 {
-    public static class StoreDbContextExtensions
+    public static class OnLineStoreDbContextExtensions
     {
         public static void SeedInMemory(this OnLineStoreDbContext dbContext)
         {

@@ -8,12 +8,12 @@ namespace OnLineStore.WebAPI.UnitTests
     public static class ServiceMocker
     {
         public static IHumanResourcesService GetHumanResourcesService(string dbName)
-            => new HumanResourcesService(LogHelper.GetLogger<HumanResourcesService>(), new UserInfo("unittests"), DbContextMocker.GetStoreDbContextInMemory(dbName));
+            => new HumanResourcesService(LogHelper.GetLogger<HumanResourcesService>(), new UserInfo("unittests"), DbContextMocker.GetOnLineStoreDbContextInMemory(dbName));
 
         public static IProductionService GetProductionService(string dbName)
-            => new ProductionService(LogHelper.GetLogger<ProductionService>(), new UserInfo("unittests"), DbContextMocker.GetStoreDbContextInMemory(dbName));
+            => new ProductionService(LogHelper.GetLogger<ProductionService>(), new UserInfo("unittests"), DbContextMocker.GetOnLineStoreDbContextInMemory(dbName));
 
         public static ISalesService GetSalesService(string dbName)
-            => new SalesService(LogHelper.GetLogger<SalesService>(), new UserInfo("unittests"), DbContextMocker.GetStoreDbContextInMemory(dbName));
+            => new SalesService(LogHelper.GetLogger<SalesService>(), new UserInfo("unittests"), DbContextMocker.GetOnLineStoreDbContextInMemory(dbName));
     }
 }
