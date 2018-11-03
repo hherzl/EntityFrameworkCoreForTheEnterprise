@@ -13,7 +13,7 @@ namespace OnLineStore.Core.BusinessLayer
 {
     public class ProductionService : Service, IProductionService
     {
-        public ProductionService(ILogger<ProductionService> logger, IUserInfo userInfo, StoreDbContext dbContext)
+        public ProductionService(ILogger<ProductionService> logger, IUserInfo userInfo, OnLineStoreDbContext dbContext)
             : base(logger, userInfo, dbContext)
         {
         }

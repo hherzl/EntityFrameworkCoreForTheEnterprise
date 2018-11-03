@@ -6,7 +6,7 @@ namespace OnLineStore.Core.DataLayer.Repositories
 {
     public class StoreRepository : Repository, IStoreRepository
     {
-        public StoreRepository(UserInfo userInfo, StoreDbContext dbContext)
+        public StoreRepository(UserInfo userInfo, OnLineStoreDbContext dbContext)
             : base(userInfo, dbContext)
         {
         }

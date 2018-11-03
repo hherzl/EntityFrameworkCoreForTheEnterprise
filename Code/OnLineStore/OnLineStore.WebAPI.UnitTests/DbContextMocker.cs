@@ -6,14 +6,14 @@ namespace OnLineStore.WebAPI.UnitTests
 {
     public static class DbContextMocker
     {
-        public static StoreDbContext GetStoreDbContextInMemory(string dbName)
+        public static OnLineStoreDbContext GetStoreDbContextInMemory(string dbName)
         {
-            var options = new DbContextOptionsBuilder<StoreDbContext>()
+            var options = new DbContextOptionsBuilder<OnLineStoreDbContext>()
                 .UseInMemoryDatabase(databaseName: dbName)
                 .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                 .Options;
 
-            var dbContext = new StoreDbContext(options);
+            var dbContext = new OnLineStoreDbContext(options);
 
             dbContext.SeedInMemory();
 

@@ -10,7 +10,7 @@ namespace OnLineStore.WebAPI.UnitTests
 {
     public static class StoreDbContextExtensions
     {
-        public static void SeedInMemory(this StoreDbContext dbContext)
+        public static void SeedInMemory(this OnLineStoreDbContext dbContext)
         {
             var creationUser = "seed";
             var creationDateTime = DateTime.Now;

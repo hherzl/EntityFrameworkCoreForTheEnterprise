@@ -11,12 +11,12 @@ namespace OnLineStore.Core.BusinessLayer
         protected ILogger Logger;
         protected IUserInfo UserInfo;
         protected bool Disposed;
-        protected readonly StoreDbContext DbContext;
+        protected readonly OnLineStoreDbContext DbContext;
         protected IHumanResourcesRepository m_humanResourcesRepository;
         protected IProductionRepository m_productionRepository;
         protected ISalesRepository m_salesRepository;
 
-        public Service(ILogger logger, IUserInfo userInfo, StoreDbContext dbContext)
+        public Service(ILogger logger, IUserInfo userInfo, OnLineStoreDbContext dbContext)
         {
             Logger = logger;
             UserInfo = userInfo;

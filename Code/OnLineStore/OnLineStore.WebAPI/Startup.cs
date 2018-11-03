@@ -32,7 +32,7 @@ namespace OnLineStore.WebAPI
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
 
-            services.AddDbContext<StoreDbContext>(options => options.UseSqlServer(Configuration["AppSettings:ConnectionString"]));
+            services.AddDbContext<OnLineStoreDbContext>(options => options.UseSqlServer(Configuration["AppSettings:ConnectionString"]));
 
             services.AddScoped<IUserInfo, UserInfo>();
 

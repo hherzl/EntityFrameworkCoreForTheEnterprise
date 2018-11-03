@@ -17,7 +17,7 @@ namespace OnLineStore.Core.BusinessLayer
 {
     public class SalesService : Service, ISalesService
     {
-        public SalesService(ILogger<SalesService> logger, IUserInfo userInfo, StoreDbContext dbContext)
+        public SalesService(ILogger<SalesService> logger, IUserInfo userInfo, OnLineStoreDbContext dbContext)
             : base(logger, userInfo, dbContext)
         {
         }

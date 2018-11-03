@@ -12,9 +12,9 @@ namespace OnLineStore.Core.DataLayer.Repositories
     public abstract class Repository
     {
         protected IUserInfo UserInfo;
-        protected StoreDbContext DbContext;
+        protected OnLineStoreDbContext DbContext;
 
-        public Repository(IUserInfo userInfo, StoreDbContext dbContext)
+        public Repository(IUserInfo userInfo, OnLineStoreDbContext dbContext)
         {
             UserInfo = userInfo;
             DbContext = dbContext;
