@@ -1,6 +1,6 @@
-﻿namespace Store.API.RequestModels
+﻿namespace Store.API.Requests
 {
-    public class OrderDetailRequestModel
+    public class OrderDetailRequest
     {
         public int? OrderID { get; set; }
 

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using Store.Core.EntityLayer.Sales;
 
-namespace Store.API.RequestModels
+namespace Store.API.Requests
 {
     public static class Extensions
     {
-        public static Order GetOrder(this OrderRequestModel requestModel)
+        public static Order GetOrder(this OrderRequest requestModel)
         {
             return new Order
             {
@@ -19,7 +19,7 @@ namespace Store.API.RequestModels
             };
         }
 
-        public static IEnumerable<OrderDetail> GetOrderDetails(this OrderRequestModel requestModel)
+        public static IEnumerable<OrderDetail> GetOrderDetails(this OrderRequest requestModel)
         {
             foreach (var item in requestModel.Details)
             {

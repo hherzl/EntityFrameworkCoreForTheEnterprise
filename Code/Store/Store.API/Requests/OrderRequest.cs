@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Store.API.RequestModels
+namespace Store.API.Requests
 {
-    public class OrderRequestModel
+    public class OrderRequest
     {
         public int? OrderID { get; set; }
 
@@ -27,6 +27,6 @@ namespace Store.API.RequestModels
 
         public DateTime? LastUpdateDateTime { get; set; }
 
-        public List<OrderDetailRequestModel> Details { get; set; }
+        public List<OrderDetailRequest> Details { get; set; }
     }
 }

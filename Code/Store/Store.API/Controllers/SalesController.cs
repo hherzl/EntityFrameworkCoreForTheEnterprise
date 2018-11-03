@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Store.API.RequestModels;
+using Store.API.Requests;
 using Store.API.Responses;
 using Store.Core.BusinessLayer.Contracts;
 
@@ -66,7 +66,7 @@ namespace Store.API.Controllers
 
         [HttpPost]
         [Route("Order")]
-        public async Task<IActionResult> CreateOrderAsync([FromBody] OrderRequestModel value)
+        public async Task<IActionResult> CreateOrderAsync([FromBody] OrderRequest value)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(CreateOrderAsync));
 

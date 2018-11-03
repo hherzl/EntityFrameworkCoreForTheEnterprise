@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Store.API.Controllers;
-using Store.API.RequestModels;
+using Store.API.Requests;
 using Store.Common;
 using Store.Core.BusinessLayer.Requests;
 using Store.Core.BusinessLayer.Responses;
@@ -160,16 +160,16 @@ namespace Store.API.UnitTests
             var logger = LogHelper.GetLogger<SalesController>();
             var salesService = ServiceMocker.GetSalesService(nameof(TestCreateOrderAsync));
             var controller = new SalesController(logger, salesService);
-            var model = new OrderRequestModel
+            var model = new OrderRequest
             {
                 CustomerID = 1,
                 PaymentMethodID = new Guid("7671A4F7-A735-4CB7-AAB4-CF47AE20171D"),
                 Comments = "Order from unit tests",
                 CreationUser = "unitests",
                 CreationDateTime = DateTime.Now,
-                Details = new List<OrderDetailRequestModel>
+                Details = new List<OrderDetailRequest>
                 {
-                    new OrderDetailRequestModel
+                    new OrderDetailRequest
                     {
                         ProductID = 1,
                         ProductName = "The King of Fighters XIV",
