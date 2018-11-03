@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OnLineStore.Common\OnLineStore.Common.csproj" />
     <ProjectReference Include="..\OnLineStore.Core\OnLineStore.Core.csproj" />
   </ItemGroup>
 
