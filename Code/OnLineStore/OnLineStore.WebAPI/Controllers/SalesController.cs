@@ -3,14 +3,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using OnLineStore.Core.BusinessLayer.Contracts;
 using OnLineStore.WebAPI.Requests;
 using OnLineStore.WebAPI.Responses;
-using OnLineStore.Core.BusinessLayer.Contracts;
 
 namespace OnLineStore.WebAPI.Controllers
 {
+    [ApiController]
     [Route("api/v1/[controller]")]
-    public class SalesController : Controller
+    public class SalesController : ControllerBase
     {
         protected ILogger Logger;
         protected ISalesService SalesService;
@@ -19,13 +20,6 @@ namespace OnLineStore.WebAPI.Controllers
         {
             Logger = logger;
             SalesService = salesService;
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            SalesService?.Dispose();
-
-            base.Dispose(disposing);
         }
 
         [HttpGet("Order")]

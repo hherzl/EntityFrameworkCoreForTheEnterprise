@@ -1,13 +1,14 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using OnLineStore.WebAPI.Responses;
 using OnLineStore.Core.BusinessLayer.Contracts;
+using OnLineStore.WebAPI.Responses;
 
 namespace OnLineStore.WebAPI.Controllers
 {
+    [ApiController]
     [Route("api/v1/[controller]")]
-    public class ProductionController : Controller
+    public class ProductionController : ControllerBase
     {
         protected ILogger Logger;
         protected IProductionService ProductionService;
@@ -16,13 +17,6 @@ namespace OnLineStore.WebAPI.Controllers
         {
             Logger = logger;
             ProductionService = productionService;
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            ProductionService?.Dispose();
-
-            base.Dispose(disposing);
         }
 
         [HttpGet("Product")]

@@ -28,8 +28,6 @@ namespace OnLineStore.WebAPI.UnitTests
             var response = await controller.GetOrdersAsync() as ObjectResult;
             var value = response.Value as IPagedResponse<OrderInfo>;
 
-            controller.Dispose();
-
             // Assert
             Assert.False(value.DidError);
         }
@@ -46,8 +44,6 @@ namespace OnLineStore.WebAPI.UnitTests
             // Act
             var response = await controller.GetOrdersAsync(currencyID: currencyID) as ObjectResult;
             var value = response.Value as IPagedResponse<OrderInfo>;
-
-            controller.Dispose();
 
             // Assert
             Assert.False(value.DidError);
@@ -68,8 +64,6 @@ namespace OnLineStore.WebAPI.UnitTests
             var response = await controller.GetOrdersAsync(customerID: customerID) as ObjectResult;
             var value = response.Value as IPagedResponse<OrderInfo>;
 
-            controller.Dispose();
-
             // Assert
             Assert.False(value.DidError);
             Assert.True(value.Model.Where(item => item.CustomerID == customerID).Count() == value.Model.Count());
@@ -87,8 +81,6 @@ namespace OnLineStore.WebAPI.UnitTests
             // Act
             var response = await controller.GetOrdersAsync(employeeID: employeeID) as ObjectResult;
             var value = response.Value as IPagedResponse<OrderInfo>;
-
-            controller.Dispose();
 
             // Assert
             Assert.False(value.DidError);
@@ -108,8 +100,6 @@ namespace OnLineStore.WebAPI.UnitTests
             var response = await controller.GetOrderAsync(id) as ObjectResult;
             var value = response.Value as ISingleResponse<Order>;
 
-            controller.Dispose();
-
             // Assert
             Assert.False(value.DidError);
         }
@@ -127,8 +117,6 @@ namespace OnLineStore.WebAPI.UnitTests
             var response = await controller.GetOrderAsync(id) as ObjectResult;
             var value = response.Value as ISingleResponse<Order>;
 
-            controller.Dispose();
-
             // Assert
             Assert.False(value.DidError);
         }
@@ -144,8 +132,6 @@ namespace OnLineStore.WebAPI.UnitTests
             // Act
             var response = await controller.GetCreateOrderRequestAsync() as ObjectResult;
             var value = response.Value as ISingleResponse<CreateOrderRequest>;
-
-            controller.Dispose();
 
             // Assert
             Assert.False(value.DidError);
@@ -182,8 +168,6 @@ namespace OnLineStore.WebAPI.UnitTests
             var response = await controller.CreateOrderAsync(model) as ObjectResult;
             var value = response.Value as ISingleResponse<Order>;
 
-            controller.Dispose();
-
             // Assert
             Assert.False(value.DidError);
             Assert.True(value.Model.OrderID.HasValue);
@@ -201,8 +185,6 @@ namespace OnLineStore.WebAPI.UnitTests
             // Act
             var response = await controller.CloneOrderAsync(id) as ObjectResult;
             var value = response.Value as ISingleResponse<Order>;
-
-            controller.Dispose();
 
             // Assert
             Assert.False(value.DidError);

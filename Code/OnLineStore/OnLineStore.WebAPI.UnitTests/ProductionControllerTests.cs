@@ -23,8 +23,6 @@ namespace OnLineStore.WebAPI.UnitTests
             var response = await controller.GetProductsAsync() as ObjectResult;
             var value = response.Value as IPagedResponse<Product>;
 
-            controller.Dispose();
-
             // Assert
             Assert.False(value.DidError);
             Assert.True(value.Model.Count() > 0);
@@ -43,8 +41,6 @@ namespace OnLineStore.WebAPI.UnitTests
             // Act
             var response = await controller.GetProductInventoryAsync(productID, warehouseID) as ObjectResult;
             var value = response.Value as IListResponse<ProductInventory>;
-
-            controller.Dispose();
 
             // Assert
             Assert.False(value.DidError);
