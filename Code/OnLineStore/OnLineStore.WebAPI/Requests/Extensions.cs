@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using OnLineStore.Core.EntityLayer.Sales;
 
-namespace OnlineStore.WebAPI.Requests
+namespace OnLineStore.WebAPI.Requests
 {
     public static class Extensions
     {

@@ -3,11 +3,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using OnlineStore.WebAPI.Requests;
-using OnlineStore.WebAPI.Responses;
+using OnLineStore.WebAPI.Requests;
+using OnLineStore.WebAPI.Responses;
 using OnLineStore.Core.BusinessLayer.Contracts;
 
-namespace OnlineStore.WebAPI.Controllers
+namespace OnLineStore.WebAPI.Controllers
 {
     [Route("api/v1/[controller]")]
     public class SalesController : Controller

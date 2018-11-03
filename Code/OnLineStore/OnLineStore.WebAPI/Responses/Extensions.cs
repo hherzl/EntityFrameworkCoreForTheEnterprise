@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OnLineStore.Core.BusinessLayer.Responses;
 
-namespace OnlineStore.WebAPI.Responses
+namespace OnLineStore.WebAPI.Responses
 {
     public static class Extensions
     {

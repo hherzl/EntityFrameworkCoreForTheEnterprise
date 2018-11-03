@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using OnLineStore.WebAPI.Controllers;
 using OnLineStore.Common;
 using OnLineStore.Core.BusinessLayer.Responses;
 using OnLineStore.Core.EntityLayer.Production;
+using OnLineStore.WebAPI.Controllers;
 using Xunit;
 
 namespace OnLineStore.WebAPI.UnitTests

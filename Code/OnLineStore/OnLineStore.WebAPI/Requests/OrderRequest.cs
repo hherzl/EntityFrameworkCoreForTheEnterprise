@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace OnlineStore.WebAPI.Requests
+namespace OnLineStore.WebAPI.Requests
 {
     public class OrderRequest
     {

@@ -1,4 +1,4 @@
-﻿namespace OnlineStore.WebAPI.Requests
+﻿namespace OnLineStore.WebAPI.Requests
 {
     public class OrderDetailRequest
     {

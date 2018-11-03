@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using OnLineStore.WebAPI.Controllers;
-using OnLineStore.WebAPI.Requests;
 using OnLineStore.Common;
 using OnLineStore.Core.BusinessLayer.Requests;
 using OnLineStore.Core.BusinessLayer.Responses;
 using OnLineStore.Core.DataLayer.DataContracts;
 using OnLineStore.Core.EntityLayer.Sales;
+using OnLineStore.WebAPI.Controllers;
+using OnLineStore.WebAPI.Requests;
 using Xunit;
 
 namespace OnLineStore.WebAPI.UnitTests
