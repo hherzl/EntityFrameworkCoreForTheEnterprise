@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnLineStore.Core", "OnLineS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnLineStore.Mocker", "OnLineStore.Mocker\OnLineStore.Mocker.csproj", "{5BEB0A3A-B98C-4EF3-A082-4532D6CD4264}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnLineStore.WebAPI.UnitTests", "OnLineStore.WebAPI.UnitTests\OnLineStore.WebAPI.UnitTests.csproj", "{00B0C85E-BD67-4A92-82F9-2AC88DBB39B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{5BEB0A3A-B98C-4EF3-A082-4532D6CD4264}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BEB0A3A-B98C-4EF3-A082-4532D6CD4264}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BEB0A3A-B98C-4EF3-A082-4532D6CD4264}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00B0C85E-BD67-4A92-82F9-2AC88DBB39B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00B0C85E-BD67-4A92-82F9-2AC88DBB39B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00B0C85E-BD67-4A92-82F9-2AC88DBB39B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00B0C85E-BD67-4A92-82F9-2AC88DBB39B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
