@@ -35,5 +35,15 @@ namespace OnLineStore.WebAPI.Responses
                 StatusCode = (int)status
             };
         }
+
+        public static IActionResult ToHttpResponse(this IResponse response)
+        {
+            var status = response.DidError ? HttpStatusCode.InternalServerError : HttpStatusCode.OK;
+
+            return new ObjectResult(response)
+            {
+                StatusCode = (int)status
+            };
+        }
     }
 }

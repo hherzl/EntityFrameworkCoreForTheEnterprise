@@ -10,6 +10,6 @@ namespace OnLineStore.Core.BusinessLayer.Contracts
 
         Task<ISingleResponse<Employee>> GetEmployeeAsync(Employee entity);
 
-        Task<ISingleResponse<Employee>> UpdateEmployeeAsync(Employee changes);
+        Task<IResponse> UpdateEmployeeAsync(Employee changes);
     }
 }

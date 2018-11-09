@@ -1,6 +1,6 @@
 ﻿namespace OnLineStore.Core.BusinessLayer
 {
-    public class AddOrderWithDiscontinuedProductException : StoreException
+    public class AddOrderWithDiscontinuedProductException : OnLineStoreException
     {
         public AddOrderWithDiscontinuedProductException()
             : base()

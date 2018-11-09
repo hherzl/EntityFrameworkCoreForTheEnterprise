@@ -1,6 +1,6 @@
 ﻿namespace OnLineStore.Core.BusinessLayer
 {
-    public class NonExistingProductException : StoreException
+    public class NonExistingProductException : OnLineStoreException
     {
         public NonExistingProductException()
             : base()

@@ -5,19 +5,19 @@ namespace OnLineStore.Core.BusinessLayer.Responses
 {
     public static class ResponseExtensions
     {
-        public static void SetError(this IResponse response, Exception ex, ILogger logger)
+        public static void SetError(this IResponse response, ILogger logger, string actionName, Exception ex)
         {
             response.DidError = true;
 
-            if (ex is StoreException cast)
+            if (ex is OnLineStoreException cast)
             {
-                logger?.LogError(ex.Message);
+                logger?.LogError("There was an error on '{0}': {1}", actionName, ex);
 
                 response.ErrorMessage = ex.Message;
             }
             else
             {
-                logger?.LogCritical(ex.ToString());
+                logger?.LogCritical("There was a critical error on '{0}': {1}", actionName, ex);
 
                 response.ErrorMessage = "There was an internal error, please contact to technical support.";
             }

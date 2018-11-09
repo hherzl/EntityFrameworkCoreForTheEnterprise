@@ -45,7 +45,7 @@ namespace OnLineStore.Core.BusinessLayer
             }
             catch (Exception ex)
             {
-                response.SetError(ex, Logger);
+                response.SetError(Logger, nameof(GetCustomersAsync), ex);
             }
 
             return response;
@@ -74,7 +74,7 @@ namespace OnLineStore.Core.BusinessLayer
             }
             catch (Exception ex)
             {
-                response.SetError(ex, Logger);
+                response.SetError(Logger, nameof(GetShippersAsync), ex);
             }
 
             return response;
@@ -103,7 +103,7 @@ namespace OnLineStore.Core.BusinessLayer
             }
             catch (Exception ex)
             {
-                response.SetError(ex, Logger);
+                response.SetError(Logger, nameof(GetCurrenciesAsync), ex);
             }
 
             return response;
@@ -132,7 +132,7 @@ namespace OnLineStore.Core.BusinessLayer
             }
             catch (Exception ex)
             {
-                response.SetError(ex, Logger);
+                response.SetError(Logger, nameof(GetPaymentMethodsAsync), ex);
             }
 
             return response;
@@ -162,7 +162,7 @@ namespace OnLineStore.Core.BusinessLayer
             }
             catch (Exception ex)
             {
-                response.SetError(ex, Logger);
+                response.SetError(Logger, nameof(GetOrdersAsync), ex);
             }
 
             return response;
@@ -182,7 +182,7 @@ namespace OnLineStore.Core.BusinessLayer
             }
             catch (Exception ex)
             {
-                response.SetError(ex, Logger);
+                response.SetError(Logger, nameof(GetOrderAsync), ex);
             }
 
             return response;
@@ -204,7 +204,7 @@ namespace OnLineStore.Core.BusinessLayer
             }
             catch (Exception ex)
             {
-                response.SetError(ex, Logger);
+                response.SetError(Logger, nameof(GetCreateOrderRequestAsync), ex);
             }
 
             return response;
@@ -304,7 +304,7 @@ namespace OnLineStore.Core.BusinessLayer
                 }
                 catch (Exception ex)
                 {
-                    response.SetError(ex, Logger);
+                    response.SetError(Logger, nameof(CreateOrderAsync), ex);
                 }
             }
 
@@ -356,34 +356,33 @@ namespace OnLineStore.Core.BusinessLayer
             }
             catch (Exception ex)
             {
-                response.SetError(ex, Logger);
+                response.SetError(Logger, nameof(CloneOrderAsync), ex);
             }
 
             return response;
         }
 
-        public async Task<ISingleResponse<Order>> RemoveOrderAsync(int id)
+        public async Task<IResponse> RemoveOrderAsync(int id)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(RemoveOrderAsync));
 
-            var response = new SingleResponse<Order>();
+            var response = new Response();
 
             try
             {
                 // Retrieve order by id
-                response.Model = await SalesRepository
-                    .GetOrderAsync(new Order(id));
+                var entity = await SalesRepository.GetOrderAsync(new Order(id));
 
-                if (response.Model != null)
+                if (entity != null)
                 {
-                    if (response.Model.OrderDetails.Count > 0)
+                    if (entity.OrderDetails.Count > 0)
                     {
                         // Restrict remove operation for orders with details
                         throw new ForeignKeyDependencyException(string.Format(SalesDisplays.RemoveOrderExceptionMessage, id));
                     }
 
                     // Delete order
-                    SalesRepository.Remove(response.Model);
+                    SalesRepository.Remove(entity);
 
                     await SalesRepository.CommitChangesAsync();
 
@@ -392,7 +391,7 @@ namespace OnLineStore.Core.BusinessLayer
             }
             catch (Exception ex)
             {
-                response.SetError(ex, Logger);
+                response.SetError(Logger, nameof(RemoveOrderAsync), ex);
             }
 
             return response;

@@ -1,6 +1,6 @@
 ﻿namespace OnLineStore.Core.BusinessLayer
 {
-    public class ForeignKeyDependencyException : StoreException
+    public class ForeignKeyDependencyException : OnLineStoreException
     {
         public ForeignKeyDependencyException()
         {

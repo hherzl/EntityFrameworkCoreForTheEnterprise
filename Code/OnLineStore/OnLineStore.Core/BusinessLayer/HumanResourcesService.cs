@@ -28,7 +28,7 @@ namespace OnLineStore.Core.BusinessLayer
             }
             catch (Exception ex)
             {
-                response.SetError(ex, Logger);
+                response.SetError(Logger, nameof(GetEmployeesAsync), ex);
             }
 
             return response;
@@ -46,29 +46,27 @@ namespace OnLineStore.Core.BusinessLayer
             }
             catch (Exception ex)
             {
-                response.SetError(ex, Logger);
+                response.SetError(Logger, nameof(GetEmployeeAsync), ex);
             }
 
             return response;
         }
 
-        public async Task<ISingleResponse<Employee>> UpdateEmployeeAsync(Employee changes)
+        public async Task<IResponse> UpdateEmployeeAsync(Employee changes)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(UpdateEmployeeAsync));
 
-            var response = new SingleResponse<Employee>();
+            var response = new Response();
 
             try
             {
                 HumanResourcesRepository.Update(changes);
 
                 await HumanResourcesRepository.CommitChangesAsync();
-
-                response.Model = changes;
             }
             catch (Exception ex)
             {
-                response.SetError(ex, Logger);
+                response.SetError(Logger, nameof(UpdateEmployeeAsync), ex);
             }
 
             return response;

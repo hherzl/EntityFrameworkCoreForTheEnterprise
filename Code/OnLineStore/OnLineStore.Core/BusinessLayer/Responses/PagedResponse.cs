@@ -18,7 +18,7 @@ namespace OnLineStore.Core.BusinessLayer.Responses
 
         public int ItemsCount { get; set; }
 
-        public int PageCount =>
-            PageSize == 0 ? 0 : ItemsCount / PageSize;
+        public double PageCount
+            => ItemsCount < PageSize ? 1 : (int)(((double)ItemsCount / PageSize) + 1);
     }
 }

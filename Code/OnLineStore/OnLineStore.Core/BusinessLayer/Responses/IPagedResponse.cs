@@ -4,6 +4,6 @@
     {
         int ItemsCount { get; set; }
 
-        int PageCount { get; }
+        double PageCount { get; }
     }
 }

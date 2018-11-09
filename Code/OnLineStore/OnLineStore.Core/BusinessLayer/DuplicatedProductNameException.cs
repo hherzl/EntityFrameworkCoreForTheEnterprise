@@ -1,6 +1,6 @@
 ﻿namespace OnLineStore.Core.BusinessLayer
 {
-    public class DuplicatedProductNameException : StoreException
+    public class DuplicatedProductNameException : OnLineStoreException
     {
         public DuplicatedProductNameException()
             : base()

@@ -39,7 +39,7 @@ namespace OnLineStore.Core.BusinessLayer
             }
             catch (Exception ex)
             {
-                response.SetError(ex, Logger);
+                response.SetError(Logger, nameof(GetProductsAsync), ex);
             }
 
             return response;
@@ -66,7 +66,7 @@ namespace OnLineStore.Core.BusinessLayer
             }
             catch (Exception ex)
             {
-                response.SetError(ex, Logger);
+                response.SetError(Logger, nameof(GetWarehousesAsync), ex);
             }
 
             return response;
@@ -91,7 +91,7 @@ namespace OnLineStore.Core.BusinessLayer
             }
             catch (Exception ex)
             {
-                response.SetError(ex, Logger);
+                response.SetError(Logger, nameof(GetProductInventories), ex);
             }
 
             return response;

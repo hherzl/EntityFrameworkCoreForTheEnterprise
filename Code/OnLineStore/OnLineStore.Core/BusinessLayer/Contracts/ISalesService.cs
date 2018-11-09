@@ -28,6 +28,6 @@ namespace OnLineStore.Core.BusinessLayer.Contracts
 
         Task<ISingleResponse<Order>> CloneOrderAsync(int id);
 
-        Task<ISingleResponse<Order>> RemoveOrderAsync(int id);
+        Task<IResponse> RemoveOrderAsync(int id);
     }
 }

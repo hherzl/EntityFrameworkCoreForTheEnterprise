@@ -2,19 +2,19 @@
 
 namespace OnLineStore.Core.BusinessLayer
 {
-    public class StoreException : Exception
+    public class OnLineStoreException : Exception
     {
-        public StoreException()
+        public OnLineStoreException()
             : base()
         {
         }
 
-        public StoreException(string  message)
+        public OnLineStoreException(string  message)
             : base(message)
         {
         }
 
-        public StoreException(string  message, Exception innerException)
+        public OnLineStoreException(string  message, Exception innerException)
             : base(message, innerException)
         {
         }
