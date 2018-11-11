@@ -23,7 +23,6 @@ namespace OnLineStore.WebAPI.IntegrationTests
 
             // Act
             var response = await Client.GetAsync(request);
-            var value = await response.Content.ReadAsStringAsync();
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -38,7 +37,6 @@ namespace OnLineStore.WebAPI.IntegrationTests
 
             // Act
             var response = await Client.GetAsync(request);
-            var value = await response.Content.ReadAsStringAsync();
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -53,7 +51,6 @@ namespace OnLineStore.WebAPI.IntegrationTests
 
             // Act
             var response = await Client.GetAsync(request);
-            var value = await response.Content.ReadAsStringAsync();
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -68,7 +65,6 @@ namespace OnLineStore.WebAPI.IntegrationTests
 
             // Act
             var response = await Client.GetAsync(request);
-            var value = await response.Content.ReadAsStringAsync();
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -83,7 +79,6 @@ namespace OnLineStore.WebAPI.IntegrationTests
 
             // Act
             var response = await Client.GetAsync(request);
-            var value = await response.Content.ReadAsStringAsync();
 
             // Assert
             response.EnsureSuccessStatusCode();
