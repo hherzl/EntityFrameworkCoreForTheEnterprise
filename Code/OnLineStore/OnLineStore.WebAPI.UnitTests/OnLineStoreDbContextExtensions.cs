@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using OnLineStore.Core.DataLayer;
 using OnLineStore.Core.EntityLayer.Dbo;
 using OnLineStore.Core.EntityLayer.HumanResources;
@@ -23,7 +22,7 @@ namespace OnLineStore.WebAPI.UnitTests
                 CreationDateTime = creationDateTime
             };
 
-            dbContext.Set<Country>().Add(country);
+            dbContext.Countries.Add(country);
 
             var currency = new Currency
             {
@@ -34,7 +33,7 @@ namespace OnLineStore.WebAPI.UnitTests
                 CreationDateTime = creationDateTime
             };
 
-            dbContext.Set<Currency>().Add(currency);
+            dbContext.Currencies.Add(currency);
 
             dbContext.SaveChanges();
 
@@ -46,7 +45,7 @@ namespace OnLineStore.WebAPI.UnitTests
                 CreationDateTime = creationDateTime
             };
 
-            dbContext.Set<CountryCurrency>().Add(countryCurrency);
+            dbContext.CountryCurrencies.Add(countryCurrency);
 
             dbContext.SaveChanges();
 
@@ -60,7 +59,7 @@ namespace OnLineStore.WebAPI.UnitTests
                 CreationDateTime = creationDateTime
             };
 
-            dbContext.Set<Employee>().Add(employee);
+            dbContext.Employees.Add(employee);
 
             dbContext.SaveChanges();
 
@@ -72,7 +71,7 @@ namespace OnLineStore.WebAPI.UnitTests
                 CreationDateTime = creationDateTime
             };
 
-            dbContext.Set<ProductCategory>().Add(productCategory);
+            dbContext.ProductCategories.Add(productCategory);
 
             dbContext.SaveChanges();
 
@@ -89,7 +88,7 @@ namespace OnLineStore.WebAPI.UnitTests
                 CreationDateTime = creationDateTime
             };
 
-            dbContext.Set<Product>().Add(product);
+            dbContext.Products.Add(product);
 
             dbContext.SaveChanges();
 
@@ -101,7 +100,7 @@ namespace OnLineStore.WebAPI.UnitTests
                 CreationDateTime = creationDateTime
             };
 
-            dbContext.Set<Warehouse>().Add(warehouse);
+            dbContext.Warehouses.Add(warehouse);
 
             dbContext.SaveChanges();
 
@@ -115,11 +114,9 @@ namespace OnLineStore.WebAPI.UnitTests
                 CreationDateTime = creationDateTime
             };
 
-            dbContext.Set<ProductInventory>().Add(productInventory);
+            dbContext.ProductInventories.Add(productInventory);
 
             dbContext.SaveChanges();
-
-            var foo = dbContext.Set<ProductInventory>().ToList();
 
             var orderStatus = new OrderStatus
             {
@@ -129,7 +126,7 @@ namespace OnLineStore.WebAPI.UnitTests
                 CreationDateTime = creationDateTime
             };
 
-            dbContext.Set<OrderStatus>().Add(orderStatus);
+            dbContext.OrderStatuses.Add(orderStatus);
 
             dbContext.SaveChanges();
 
@@ -141,7 +138,7 @@ namespace OnLineStore.WebAPI.UnitTests
                 CreationDateTime = creationDateTime
             };
 
-            dbContext.Set<PaymentMethod>().Add(paymentMethod);
+            dbContext.PaymentMethods.Add(paymentMethod);
 
             dbContext.SaveChanges();
 
@@ -154,7 +151,7 @@ namespace OnLineStore.WebAPI.UnitTests
                 CreationDateTime = creationDateTime
             };
 
-            dbContext.Set<Customer>().Add(customer);
+            dbContext.Customers.Add(customer);
 
             dbContext.SaveChanges();
 
@@ -167,7 +164,7 @@ namespace OnLineStore.WebAPI.UnitTests
                 CreationDateTime = creationDateTime
             };
 
-            dbContext.Set<Shipper>().Add(shipper);
+            dbContext.Shippers.Add(shipper);
 
             dbContext.SaveChanges();
 
@@ -186,7 +183,7 @@ namespace OnLineStore.WebAPI.UnitTests
                 CreationDateTime = creationDateTime
             };
 
-            dbContext.Set<Order>().Add(order);
+            dbContext.Orders.Add(order);
 
             dbContext.SaveChanges();
 
@@ -202,7 +199,7 @@ namespace OnLineStore.WebAPI.UnitTests
                 CreationDateTime = creationDateTime
             };
 
-            dbContext.Set<OrderDetail>().Add(orderDetail);
+            dbContext.OrderDetails.Add(orderDetail);
 
             dbContext.SaveChanges();
         }

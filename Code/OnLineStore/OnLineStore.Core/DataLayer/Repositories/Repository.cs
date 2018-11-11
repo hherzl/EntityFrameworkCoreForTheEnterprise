@@ -53,7 +53,7 @@ namespace OnLineStore.Core.DataLayer.Repositories
 
         protected virtual IEnumerable<ChangeLog> GetChanges()
         {
-            var exclusions = DbContext.Set<ChangeLogExclusion>().ToList();
+            var exclusions = DbContext.ChangeLogExclusions.ToList();
 
             foreach (var entry in DbContext.ChangeTracker.Entries())
             {
@@ -62,17 +62,17 @@ namespace OnLineStore.Core.DataLayer.Repositories
 
                 var entityType = entry.Entity.GetType();
 
-                if (exclusions.Where(item => item.EntityName == entityType.Name && item.PropertyName == "*").Count() == 1)
+                if (exclusions.Count(item => item.EntityName == entityType.Name && item.PropertyName == "*") == 1)
                     yield break;
 
                 foreach (var property in entityType.GetTypeInfo().DeclaredProperties)
                 {
                     // Validate if there is an exclusion for *.Property
-                    if (exclusions.Where(item => item.EntityName == "*" && string.Compare(item.PropertyName, property.Name, true) == 0).Count() == 1)
+                    if (exclusions.Count(item => item.EntityName == "*" && string.Compare(item.PropertyName, property.Name, true) == 0) == 1)
                         continue;
 
                     // Validate if there is an exclusion for Entity.Property
-                    if (exclusions.Where(item => item.EntityName == entityType.Name && string.Compare(item.PropertyName, property.Name, true) == 0).Count() == 1)
+                    if (exclusions.Count(item => item.EntityName == entityType.Name && string.Compare(item.PropertyName, property.Name, true) == 0) == 1)
                         continue;
 
                     var originalValue = entry.Property(property.Name).OriginalValue;
@@ -82,7 +82,7 @@ namespace OnLineStore.Core.DataLayer.Repositories
                         continue;
 
                     // todo: improve the way to retrieve primary key value from entity instance
-                    var key = entry.Entity.GetType().GetProperties()[0].GetValue(entry.Entity, null).ToString();
+                    var key = entry.Entity.GetType().GetProperties().First().GetValue(entry.Entity, null).ToString();
 
                     yield return new ChangeLog
                     {
@@ -100,11 +100,9 @@ namespace OnLineStore.Core.DataLayer.Repositories
 
         public int CommitChanges()
         {
-            var dbSet = DbContext.Set<ChangeLog>();
-
             foreach (var change in GetChanges().ToList())
             {
-                dbSet.Add(change);
+                DbContext.ChangeLogs.Add(change);
             }
 
             return DbContext.SaveChanges();
@@ -112,11 +110,9 @@ namespace OnLineStore.Core.DataLayer.Repositories
 
         public async Task<int> CommitChangesAsync()
         {
-            var dbSet = DbContext.Set<ChangeLog>();
-
             foreach (var change in GetChanges().ToList())
             {
-                dbSet.Add(change);
+                DbContext.ChangeLogs.Add(change);
             }
 
             return await DbContext.SaveChangesAsync();
