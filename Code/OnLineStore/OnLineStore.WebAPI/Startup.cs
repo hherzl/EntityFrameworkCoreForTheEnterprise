@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using System.IO;
+using System.Reflection;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +13,7 @@ using OnLineStore.Core;
 using OnLineStore.Core.BusinessLayer;
 using OnLineStore.Core.BusinessLayer.Contracts;
 using OnLineStore.Core.DataLayer;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace OnLineStore.WebAPI
 {
@@ -41,6 +45,18 @@ namespace OnLineStore.WebAPI
             services.AddScoped<IHumanResourcesService, HumanResourcesService>();
             services.AddScoped<IProductionService, ProductionService>();
             services.AddScoped<ISalesService, SalesService>();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "OnLine Store API", Version = "v1" });
+
+                // Set the comments path for the Swagger JSON and UI.
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
+                c.IncludeXmlComments(xmlPath);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +64,13 @@ namespace OnLineStore.WebAPI
         {
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "OnLine Store API");
+            });
 
             app.UseMvc();
         }
