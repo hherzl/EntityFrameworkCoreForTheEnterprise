@@ -7,6 +7,8 @@ namespace OnLineStore.Core.BusinessLayer.Responses
     {
         public static void SetError(this IResponse response, ILogger logger, string actionName, Exception ex)
         {
+            // todo: Save error in log file
+
             response.DidError = true;
 
             if (ex is OnLineStoreException cast)

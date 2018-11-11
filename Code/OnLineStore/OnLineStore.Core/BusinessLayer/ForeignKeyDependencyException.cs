@@ -3,6 +3,7 @@
     public class ForeignKeyDependencyException : OnLineStoreException
     {
         public ForeignKeyDependencyException()
+            : base()
         {
         }
 

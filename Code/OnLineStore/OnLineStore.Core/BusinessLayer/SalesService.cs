@@ -234,14 +234,16 @@ namespace OnLineStore.Core.BusinessLayer
                         if (product == null)
                             throw new NonExistingProductException(string.Format(SalesDisplays.NonExistingProductExceptionMessage, detail.ProductID));
 
-                        // Set product name from existing entity
-                        detail.ProductName = product.ProductName;
-
                         // Throw exception if product is discontinued
                         if (product.Discontinued == true)
                             throw new AddOrderWithDiscontinuedProductException(string.Format(SalesDisplays.AddOrderWithDiscontinuedProductExceptionMessage, product.ProductID));
 
-                        // Set unit price and total for product detail
+                        // Throw exception if quantity for product is invalid
+                        if (detail.Quantity <= 0)
+                            throw new InvalidQuantityException(string.Format(SalesDisplays.InvalidQuantityExceptionMessage, product.ProductID));
+
+                        // Set values for detail
+                        detail.ProductName = product.ProductName;
                         detail.UnitPrice = product.UnitPrice;
                         detail.Total = product.UnitPrice * detail.Quantity;
                     }
@@ -311,7 +313,7 @@ namespace OnLineStore.Core.BusinessLayer
             return response;
         }
 
-        public async Task<ISingleResponse<Order>> CloneOrderAsync(int id)
+        public async Task<ISingleResponse<Order>> CloneOrderAsync(long id)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(CloneOrderAsync));
 
@@ -362,7 +364,7 @@ namespace OnLineStore.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IResponse> RemoveOrderAsync(int id)
+        public async Task<IResponse> RemoveOrderAsync(long id)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(RemoveOrderAsync));
 
@@ -375,11 +377,9 @@ namespace OnLineStore.Core.BusinessLayer
 
                 if (entity != null)
                 {
+                    // Restrict remove operation for orders with details
                     if (entity.OrderDetails.Count > 0)
-                    {
-                        // Restrict remove operation for orders with details
                         throw new ForeignKeyDependencyException(string.Format(SalesDisplays.RemoveOrderExceptionMessage, id));
-                    }
 
                     // Delete order
                     SalesRepository.Remove(entity);

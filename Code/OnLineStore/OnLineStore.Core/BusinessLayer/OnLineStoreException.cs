@@ -9,13 +9,8 @@ namespace OnLineStore.Core.BusinessLayer
         {
         }
 
-        public OnLineStoreException(string  message)
+        public OnLineStoreException(string message)
             : base(message)
-        {
-        }
-
-        public OnLineStoreException(string  message, Exception innerException)
-            : base(message, innerException)
         {
         }
     }

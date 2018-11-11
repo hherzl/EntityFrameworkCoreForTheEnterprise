@@ -44,6 +44,8 @@ namespace OnLineStore.Core.DataLayer.Repositories
                 if (!cast.LastUpdateDateTime.HasValue)
                     cast.LastUpdateDateTime = DateTime.Now;
             }
+
+            DbContext.Set<TEntity>().Update(entity);
         }
 
         public virtual void Remove<TEntity>(TEntity entity) where TEntity : class, IAuditableEntity
@@ -108,7 +110,7 @@ namespace OnLineStore.Core.DataLayer.Repositories
             return DbContext.SaveChanges();
         }
 
-        public Task<int> CommitChangesAsync()
+        public async Task<int> CommitChangesAsync()
         {
             var dbSet = DbContext.Set<ChangeLog>();
 
@@ -117,7 +119,7 @@ namespace OnLineStore.Core.DataLayer.Repositories
                 dbSet.Add(change);
             }
 
-            return DbContext.SaveChangesAsync();
+            return await DbContext.SaveChangesAsync();
         }
     }
 }
