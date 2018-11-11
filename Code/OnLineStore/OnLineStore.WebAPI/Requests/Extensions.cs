@@ -3,6 +3,7 @@ using OnLineStore.Core.EntityLayer.Sales;
 
 namespace OnLineStore.WebAPI.Requests
 {
+#pragma warning disable CS1591
     public static class Extensions
     {
         public static Order GetOrder(this OrderRequest request)
@@ -35,4 +36,5 @@ namespace OnLineStore.WebAPI.Requests
             }
         }
     }
+#pragma warning restore CS1591
 }

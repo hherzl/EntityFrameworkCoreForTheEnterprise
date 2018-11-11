@@ -4,6 +4,7 @@ using OnLineStore.Core.BusinessLayer.Responses;
 
 namespace OnLineStore.WebAPI.Responses
 {
+#pragma warning disable CS1591
     public static class Extensions
     {
         public static IActionResult ToHttpResponse<TModel>(this IListResponse<TModel> response)
@@ -46,4 +47,5 @@ namespace OnLineStore.WebAPI.Responses
             };
         }
     }
+#pragma warning restore CS1591
 }

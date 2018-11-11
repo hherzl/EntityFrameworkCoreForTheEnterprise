@@ -6,6 +6,7 @@ using OnLineStore.WebAPI.Responses;
 
 namespace OnLineStore.WebAPI.Controllers
 {
+#pragma warning disable CS1591
     [ApiController]
     [Route("api/v1/[controller]")]
     public class ProductionController : ControllerBase
@@ -18,8 +19,17 @@ namespace OnLineStore.WebAPI.Controllers
             Logger = logger;
             ProductionService = productionService;
         }
+#pragma warning restore CS1591
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pageSize"></param>
+        /// <param name="pageNumber"></param>
+        /// <returns></returns>
         [HttpGet("Product")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(500)]
         public async Task<IActionResult> GetProductsAsync(int? pageSize = 10, int? pageNumber = 1)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetProductsAsync));
@@ -31,7 +41,15 @@ namespace OnLineStore.WebAPI.Controllers
             return response.ToHttpResponse();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="productID"></param>
+        /// <param name="warehouseID"></param>
+        /// <returns></returns>
         [HttpGet("ProductInventory")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(500)]
         public async Task<IActionResult> GetProductInventoryAsync(int? productID, string warehouseID)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetProductInventoryAsync));

@@ -17,6 +17,7 @@ using Swashbuckle.AspNetCore.Swagger;
 
 namespace OnLineStore.WebAPI
 {
+#pragma warning disable CS1591
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -75,4 +76,5 @@ namespace OnLineStore.WebAPI
             app.UseMvc();
         }
     }
+#pragma warning restore CS1591
 }
