@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.IO;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using OnLineStore.Core.DataLayer;
 
 namespace OnLineStore.Mocker
@@ -9,8 +11,13 @@ namespace OnLineStore.Mocker
 
         static DbContextMocker()
         {
-            // todo: Load connection string from appsettings.json file
-            ConnectionString = "server=(local);database=Store;integrated security=yes;MultipleActiveResultSets=True;";
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+            var configuration = builder.Build();
+
+            ConnectionString = configuration.GetSection("ConnectionStrings")["OnLineStore"];
         }
 
         public static OnLineStoreDbContext GetOnLineStoreDbContext()

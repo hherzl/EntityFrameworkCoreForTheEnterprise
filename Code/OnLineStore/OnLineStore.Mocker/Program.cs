@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using OnLineStore.Common;
@@ -19,19 +20,13 @@ namespace OnLineStore.Mocker
 
         public static void Main(string[] args)
         {
-            var task = new Task(MockAsync);
-
-            task.Start();
-
-            task.Wait();
-
-            Console.ReadLine();
+            MainAsync().GetAwaiter().GetResult();
         }
 
-        static async void MockAsync()
+        static async Task MainAsync()
         {
             var year = DateTime.Now.AddYears(-1).Year;
-            var ordersLimitPerDay = 5;
+            var ordersLimitPerDay = 2;
 
             var args = Environment.GetCommandLineArgs();
 
@@ -55,15 +50,12 @@ namespace OnLineStore.Mocker
 
                 if (start.DayOfWeek != DayOfWeek.Sunday)
                 {
-                    await Task.Factory.StartNew(async () =>
-                    {
-                        await CreateDataAsync(start, ordersLimitPerDay);
-                    });
+                    await CreateDataAsync(start, ordersLimitPerDay);
+
+                    Thread.Sleep(1000);
                 }
 
                 start = start.AddDays(1);
-
-                System.Threading.Thread.Sleep(1000);
             }
         }
 
@@ -97,17 +89,17 @@ namespace OnLineStore.Mocker
 
                 var details = new List<OrderDetail>();
 
-                var detailsCount = random.Next(1, 2);
+                var detailsCount = random.Next(1, 5);
 
                 for (var j = 0; j < detailsCount; j++)
                 {
                     var detail = new OrderDetail
                     {
                         ProductID = products[random.Next(0, products.Count - 1)].ProductID,
-                        Quantity = (short)random.Next(1, 2)
+                        Quantity = (short)random.Next(1, 5)
                     };
 
-                    if (details.Count > 0 && details.Where(item => item.ProductID == detail.ProductID).Count() == 1)
+                    if (details.Count > 0 && details.Count(item => item.ProductID == detail.ProductID) == 1)
                         continue;
 
                     details.Add(detail);
