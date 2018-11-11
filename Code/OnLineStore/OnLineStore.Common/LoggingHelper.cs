@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 
 namespace OnLineStore.Common
 {
-    public static class LogHelper
+    public static class LoggingHelper
     {
         public static ILogger<T> GetLogger<T>(bool addTrace = true, bool addDebug = true, bool addInformation = true, bool addWarning = true, bool addError = true, bool addCritical = true)
         {

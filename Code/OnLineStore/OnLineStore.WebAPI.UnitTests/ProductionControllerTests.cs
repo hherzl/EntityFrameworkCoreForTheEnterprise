@@ -15,7 +15,7 @@ namespace OnLineStore.WebAPI.UnitTests
         public async Task TestGetProductsTestAsync()
         {
             // Arrange
-            var logger = LogHelper.GetLogger<ProductionController>();
+            var logger = LoggingHelper.GetLogger<ProductionController>();
             var productionService = ServiceMocker.GetProductionService(nameof(TestGetProductsTestAsync));
             var controller = new ProductionController(logger, productionService);
 
@@ -32,7 +32,7 @@ namespace OnLineStore.WebAPI.UnitTests
         public async Task TestGetInventoryByProductTestAsync()
         {
             // Arrange
-            var logger = LogHelper.GetLogger<ProductionController>();
+            var logger = LoggingHelper.GetLogger<ProductionController>();
             var productionService = ServiceMocker.GetProductionService(nameof(TestGetInventoryByProductTestAsync));
             var controller = new ProductionController(logger, productionService);
             var productID = 1;

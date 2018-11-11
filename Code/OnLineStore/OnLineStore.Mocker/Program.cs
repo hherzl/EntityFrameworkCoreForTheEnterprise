@@ -14,7 +14,7 @@ namespace OnLineStore.Mocker
 
         static Program()
         {
-            Logger = LogHelper.GetLogger<Program>();
+            Logger = LoggingHelper.GetLogger<Program>();
         }
 
         public static void Main(string[] args)
