@@ -12,9 +12,9 @@ namespace OnLineStore.Core.DataLayer.Repositories
         }
 
         public IQueryable<EventLog> GetEventLogs()
-            => DbContext.Set<EventLog>();
+            => DbContext.EventLogs;
 
         public EventLog GetEventLog(EventLog entity)
-            => DbContext.Set<EventLog>().FirstOrDefault(item => item.EventLogID == entity.EventLogID);
+            => DbContext.EventLogs.FirstOrDefault(item => item.EventLogID == entity.EventLogID);
     }
 }
