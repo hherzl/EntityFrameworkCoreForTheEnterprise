@@ -66,6 +66,15 @@ namespace OnLineStore.WebAPI
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
+            // todo: Set port number for client app
+            app.UseCors(policy =>
+            {
+                // Add client origin in CORS policy
+                policy.WithOrigins("http://localhost:4200");
+                policy.AllowAnyHeader();
+                policy.AllowAnyMethod();
+            });
+
             app.UseSwagger();
 
             app.UseSwaggerUI(c =>

@@ -1,0 +1,16 @@
+<h1>Orders List</h1>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Status</th>
+    <th>Customer</th>
+    <th>Total</th>
+  </tr>
+  <tr *ngFor="let item of response?.model">
+    <td>{{ item.orderID }}</td>
+    <td>{{ item.orderStatusDescription }}</td>
+    <td>{{ item.customerCompanyName }}</td>
+    <td>{{ item.total }}</td>
+  </tr>
+</table>
