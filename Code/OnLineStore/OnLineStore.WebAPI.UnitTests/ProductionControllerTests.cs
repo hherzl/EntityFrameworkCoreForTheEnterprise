@@ -16,14 +16,14 @@ namespace OnLineStore.WebAPI.UnitTests
         {
             // Arrange
             var logger = LoggingHelper.GetLogger<ProductionController>();
-            var productionService = ServiceMocker.GetProductionService(nameof(TestGetProductsTestAsync));
-            var controller = new ProductionController(logger, productionService);
+            var service = ServiceMocker.GetProductionService(nameof(TestGetProductsTestAsync));
+            var controller = new ProductionController(logger, service);
 
             // Act
             var response = await controller.GetProductsAsync() as ObjectResult;
             var value = response.Value as IPagedResponse<Product>;
 
-            productionService.Dispose();
+            service.Dispose();
 
             // Assert
             Assert.False(value.DidError);
@@ -35,8 +35,8 @@ namespace OnLineStore.WebAPI.UnitTests
         {
             // Arrange
             var logger = LoggingHelper.GetLogger<ProductionController>();
-            var productionService = ServiceMocker.GetProductionService(nameof(TestGetInventoryByProductTestAsync));
-            var controller = new ProductionController(logger, productionService);
+            var service = ServiceMocker.GetProductionService(nameof(TestGetInventoryByProductTestAsync));
+            var controller = new ProductionController(logger, service);
             var productID = 1;
             var warehouseID = "W0001";
 
@@ -44,7 +44,7 @@ namespace OnLineStore.WebAPI.UnitTests
             var response = await controller.GetProductInventoryAsync(productID, warehouseID) as ObjectResult;
             var value = response.Value as IListResponse<ProductInventory>;
 
-            productionService.Dispose();
+            service.Dispose();
 
             // Assert
             Assert.False(value.DidError);

@@ -21,14 +21,14 @@ namespace OnLineStore.WebAPI.UnitTests
         {
             // Arrange
             var logger = LoggingHelper.GetLogger<SalesController>();
-            var salesService = ServiceMocker.GetSalesService(nameof(TestGetOrdersAsync));
-            var controller = new SalesController(logger, salesService);
+            var service = ServiceMocker.GetSalesService(nameof(TestGetOrdersAsync));
+            var controller = new SalesController(logger, service);
 
             // Act
             var response = await controller.GetOrdersAsync() as ObjectResult;
             var value = response.Value as IPagedResponse<OrderInfo>;
 
-            salesService.Dispose();
+            service.Dispose();
 
             // Assert
             Assert.False(value.DidError);
@@ -39,20 +39,20 @@ namespace OnLineStore.WebAPI.UnitTests
         {
             // Arrange
             var logger = LoggingHelper.GetLogger<SalesController>();
-            var salesService = ServiceMocker.GetSalesService(nameof(TestGetOrdersByCurrencyAsync));
-            var controller = new SalesController(logger, salesService);
+            var service = ServiceMocker.GetSalesService(nameof(TestGetOrdersByCurrencyAsync));
+            var controller = new SalesController(logger, service);
             var currencyID = (short?)1000;
 
             // Act
             var response = await controller.GetOrdersAsync(currencyID: currencyID) as ObjectResult;
             var value = response.Value as IPagedResponse<OrderInfo>;
 
-            salesService.Dispose();
+            service.Dispose();
 
             // Assert
             Assert.False(value.DidError);
             Assert.True(value.Model.Count() > 0);
-            Assert.True(value.Model.Where(item => item.CurrencyID == currencyID).Count() == value.Model.Count());
+            Assert.True(value.Model.Count(item => item.CurrencyID == currencyID) == value.Model.Count());
         }
 
         [Fact]
@@ -60,19 +60,19 @@ namespace OnLineStore.WebAPI.UnitTests
         {
             // Arrange
             var logger = LoggingHelper.GetLogger<SalesController>();
-            var salesService = ServiceMocker.GetSalesService(nameof(TestGetOrdersByCustomerAsync));
-            var controller = new SalesController(logger, salesService);
+            var service = ServiceMocker.GetSalesService(nameof(TestGetOrdersByCustomerAsync));
+            var controller = new SalesController(logger, service);
             var customerID = 1;
 
             // Act
             var response = await controller.GetOrdersAsync(customerID: customerID) as ObjectResult;
             var value = response.Value as IPagedResponse<OrderInfo>;
 
-            salesService.Dispose();
+            service.Dispose();
 
             // Assert
             Assert.False(value.DidError);
-            Assert.True(value.Model.Where(item => item.CustomerID == customerID).Count() == value.Model.Count());
+            Assert.True(value.Model.Count(item => item.CustomerID == customerID) == value.Model.Count());
         }
 
         [Fact]
@@ -80,19 +80,19 @@ namespace OnLineStore.WebAPI.UnitTests
         {
             // Arrange
             var logger = LoggingHelper.GetLogger<SalesController>();
-            var salesService = ServiceMocker.GetSalesService(nameof(TestGetOrdersByEmployeeAsync));
-            var controller = new SalesController(logger, salesService);
+            var service = ServiceMocker.GetSalesService(nameof(TestGetOrdersByEmployeeAsync));
+            var controller = new SalesController(logger, service);
             var employeeID = 1;
 
             // Act
             var response = await controller.GetOrdersAsync(employeeID: employeeID) as ObjectResult;
             var value = response.Value as IPagedResponse<OrderInfo>;
 
-            salesService.Dispose();
+            service.Dispose();
 
             // Assert
             Assert.False(value.DidError);
-            Assert.True(value.Model.Where(item => item.EmployeeID == employeeID).Count() == value.Model.Count());
+            Assert.True(value.Model.Count(item => item.EmployeeID == employeeID) == value.Model.Count());
         }
 
         [Fact]
@@ -100,15 +100,15 @@ namespace OnLineStore.WebAPI.UnitTests
         {
             // Arrange
             var logger = LoggingHelper.GetLogger<SalesController>();
-            var salesService = ServiceMocker.GetSalesService(nameof(TestGetOrderAsync));
-            var controller = new SalesController(logger, salesService);
+            var service = ServiceMocker.GetSalesService(nameof(TestGetOrderAsync));
+            var controller = new SalesController(logger, service);
             var id = 1;
 
             // Act
             var response = await controller.GetOrderAsync(id) as ObjectResult;
             var value = response.Value as ISingleResponse<Order>;
 
-            salesService.Dispose();
+            service.Dispose();
 
             // Assert
             Assert.False(value.DidError);
@@ -119,15 +119,15 @@ namespace OnLineStore.WebAPI.UnitTests
         {
             // Arrange
             var logger = LoggingHelper.GetLogger<SalesController>();
-            var salesService = ServiceMocker.GetSalesService(nameof(TestGetNonExistingOrderAsync));
-            var controller = new SalesController(logger, salesService);
+            var service = ServiceMocker.GetSalesService(nameof(TestGetNonExistingOrderAsync));
+            var controller = new SalesController(logger, service);
             var id = 0;
 
             // Act
             var response = await controller.GetOrderAsync(id) as ObjectResult;
             var value = response.Value as ISingleResponse<Order>;
 
-            salesService.Dispose();
+            service.Dispose();
 
             // Assert
             Assert.False(value.DidError);
@@ -138,14 +138,14 @@ namespace OnLineStore.WebAPI.UnitTests
         {
             // Arrange
             var logger = LoggingHelper.GetLogger<SalesController>();
-            var salesService = ServiceMocker.GetSalesService(nameof(TestGetCreateOrderRequestAsync));
-            var controller = new SalesController(logger, salesService);
+            var service = ServiceMocker.GetSalesService(nameof(TestGetCreateOrderRequestAsync));
+            var controller = new SalesController(logger, service);
 
             // Act
             var response = await controller.GetCreateOrderRequestAsync() as ObjectResult;
             var value = response.Value as ISingleResponse<CreateOrderRequest>;
 
-            salesService.Dispose();
+            service.Dispose();
 
             // Assert
             Assert.False(value.DidError);
@@ -158,8 +158,8 @@ namespace OnLineStore.WebAPI.UnitTests
         {
             // Arrange
             var logger = LoggingHelper.GetLogger<SalesController>();
-            var salesService = ServiceMocker.GetSalesService(nameof(TestCreateOrderAsync));
-            var controller = new SalesController(logger, salesService);
+            var service = ServiceMocker.GetSalesService(nameof(TestCreateOrderAsync));
+            var controller = new SalesController(logger, service);
             var model = new OrderRequest
             {
                 CustomerID = 1,
@@ -182,7 +182,7 @@ namespace OnLineStore.WebAPI.UnitTests
             var response = await controller.CreateOrderAsync(model) as ObjectResult;
             var value = response.Value as ISingleResponse<Order>;
 
-            salesService.Dispose();
+            service.Dispose();
 
             // Assert
             Assert.False(value.DidError);
@@ -194,15 +194,15 @@ namespace OnLineStore.WebAPI.UnitTests
         {
             // Arrange
             var logger = LoggingHelper.GetLogger<SalesController>();
-            var salesService = ServiceMocker.GetSalesService(nameof(TestCloneOrderAsync));
-            var controller = new SalesController(logger, salesService);
+            var service = ServiceMocker.GetSalesService(nameof(TestCloneOrderAsync));
+            var controller = new SalesController(logger, service);
             var id = 1;
 
             // Act
             var response = await controller.CloneOrderAsync(id) as ObjectResult;
             var value = response.Value as ISingleResponse<Order>;
 
-            salesService.Dispose();
+            service.Dispose();
 
             // Assert
             Assert.False(value.DidError);
