@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OnLineStore.WebAPI</name>
+    </assembly>
+    <members>
+        <member name="M:OnLineStore.WebAPI.Controllers.ProductionController.GetProductsAsync(System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            
+            </summary>
+            <param name="pageSize"></param>
+            <param name="pageNumber"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OnLineStore.WebAPI.Controllers.ProductionController.GetProductInventoryAsync(System.Nullable{System.Int32},System.String)">
+            <summary>
+            
+            </summary>
+            <param name="productID"></param>
+            <param name="warehouseID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OnLineStore.WebAPI.Controllers.SalesController.GetOrdersAsync(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int16},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int16},System.Nullable{System.Guid},System.Nullable{System.Int32})">
+            <summary>
+            
+            </summary>
+            <param name="pageSize"></param>
+            <param name="pageNumber"></param>
+            <param name="currencyID"></param>
+            <param name="customerID"></param>
+            <param name="employeeID"></param>
+            <param name="orderStatusID"></param>
+            <param name="paymentMethodID"></param>
+            <param name="shipperID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OnLineStore.WebAPI.Controllers.SalesController.GetOrderAsync(System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OnLineStore.WebAPI.Controllers.SalesController.GetCreateOrderRequestAsync">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OnLineStore.WebAPI.Controllers.SalesController.CreateOrderAsync(OnLineStore.WebAPI.Requests.OrderRequest)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OnLineStore.WebAPI.Controllers.SalesController.CloneOrderAsync(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OnLineStore.WebAPI.Controllers.SalesController.DeleteOrderAsync(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OnLineStore.WebAPI.Requests.OrderDetailRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:OnLineStore.WebAPI.Requests.OrderDetailRequest.OrderID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:OnLineStore.WebAPI.Requests.OrderDetailRequest.ProductID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:OnLineStore.WebAPI.Requests.OrderDetailRequest.ProductName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:OnLineStore.WebAPI.Requests.OrderDetailRequest.UnitPrice">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:OnLineStore.WebAPI.Requests.OrderDetailRequest.Quantity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:OnLineStore.WebAPI.Requests.OrderDetailRequest.Total">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:OnLineStore.WebAPI.Requests.OrderRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:OnLineStore.WebAPI.Requests.OrderRequest.OrderID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:OnLineStore.WebAPI.Requests.OrderRequest.OrderDate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:OnLineStore.WebAPI.Requests.OrderRequest.CustomerID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:OnLineStore.WebAPI.Requests.OrderRequest.Total">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:OnLineStore.WebAPI.Requests.OrderRequest.CurrencyID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:OnLineStore.WebAPI.Requests.OrderRequest.PaymentMethodID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:OnLineStore.WebAPI.Requests.OrderRequest.Comments">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:OnLineStore.WebAPI.Requests.OrderRequest.CreationUser">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:OnLineStore.WebAPI.Requests.OrderRequest.CreationDateTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:OnLineStore.WebAPI.Requests.OrderRequest.LastUpdateUser">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:OnLineStore.WebAPI.Requests.OrderRequest.LastUpdateDateTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:OnLineStore.WebAPI.Requests.OrderRequest.Details">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>

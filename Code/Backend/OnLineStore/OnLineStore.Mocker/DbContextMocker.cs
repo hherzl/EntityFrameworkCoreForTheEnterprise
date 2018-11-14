@@ -1,5 +1,4 @@
-﻿using System.IO;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using OnLineStore.Core.DataLayer;
 
@@ -11,9 +10,7 @@ namespace OnLineStore.Mocker
 
         static DbContextMocker()
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            var builder = new ConfigurationBuilder().AddJsonFile("appsettings.json");
 
             var configuration = builder.Build();
 
