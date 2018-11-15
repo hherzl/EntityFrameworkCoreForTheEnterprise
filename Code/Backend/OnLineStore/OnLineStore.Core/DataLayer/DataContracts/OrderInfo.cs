@@ -26,6 +26,10 @@ namespace OnLineStore.Core.DataLayer.DataContracts
 
         public Guid? PaymentMethodID { get; set; }
 
+        public int? DetailsCount { get; set; }
+
+        public long? ReferenceOrderID { get; set; }
+
         public string  Comments { get; set; }
 
         public string  CreationUser { get; set; }

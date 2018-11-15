@@ -245,6 +245,8 @@ create table [Sales].[Order]
 	[Total] decimal(12, 4) not null,
 	[CurrencyID] smallint null,
 	[PaymentMethodID] uniqueidentifier null,
+	[DetailsCount] int not null,
+	[ReferenceOrderID] bigint null,
 	[Comments] varchar(max) null,
 	[CreationUser] varchar(25) not null,
 	[CreationDateTime] datetime not null,

@@ -9,7 +9,11 @@
   </select>
 </form>
 
-<strong>{{ response.message }}</strong>
+<br />
+
+<p><strong>{{ response.message }}</strong></p>
+
+<br />
 
 <table mat-table [dataSource]="response?.model">
   <ng-container matColumnDef="orderID">
@@ -22,9 +26,9 @@
     <td mat-cell *matCellDef="let element">{{ element.orderStatusDescription }}</td>
   </ng-container>
 
-  <ng-container matColumnDef="orderStatusDescription">
+  <ng-container matColumnDef="orderDate">
     <th mat-header-cell *matHeaderCellDef>Date</th>
-    <td mat-cell *matCellDef="let element">{{ element.orderDate }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.orderDate | date: 'short' }}</td>
   </ng-container>
 
   <ng-container matColumnDef="customerCompanyName">
@@ -37,6 +41,16 @@
     <td mat-cell *matCellDef="let element">{{ element.total }}</td>
   </ng-container>
 
+  <ng-container matColumnDef="detailsCount">
+    <th mat-header-cell *matHeaderCellDef>Details</th>
+    <td mat-cell *matCellDef="let element">{{ element.detailsCount }}</td>
+  </ng-container>
+  
+  <ng-container matColumnDef="referenceOrderID">
+    <th mat-header-cell *matHeaderCellDef>Reference Order</th>
+    <td mat-cell *matCellDef="let element">{{ element.referenceOrderID }}</td>
+  </ng-container>
+  
   <tr mat-header-row *matHeaderRowDef="columnsForOrders"></tr>
   <tr mat-row *matRowDef="let row; columns: columnsForOrders;" class="element-row"></tr>
 </table>

@@ -16,4 +16,6 @@ export class OrderInfo {
     public orderStatusDescription: string;
     public customerCompanyName: string;
     public total: number;
+    public detailsCount: number;
+    public referenceOrderID: number;
 }

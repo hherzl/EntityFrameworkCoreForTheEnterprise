@@ -258,6 +258,7 @@ namespace OnLineStore.Core.BusinessLayer
 
                     // Calculate total for order header from order's details
                     header.Total = details.Sum(item => item.Total);
+                    header.DetailsCount = details.Count();
 
                     // Save order header
                     SalesRepository.Add(header);

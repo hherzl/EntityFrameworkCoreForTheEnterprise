@@ -26,7 +26,7 @@ namespace OnLineStore.Mocker
         static async Task MainAsync()
         {
             var year = DateTime.Now.AddYears(-1).Year;
-            var ordersLimitPerDay = 2;
+            var ordersLimitPerDay = 3;
 
             var args = Environment.GetCommandLineArgs();
 
@@ -39,7 +39,7 @@ namespace OnLineStore.Mocker
             }
 
             var start = new DateTime(year, 1, 1);
-            var end = new DateTime(year, 12, 31);
+            var end = new DateTime(year, 1, 31);
 
             if (start.DayOfWeek == DayOfWeek.Sunday)
                 start = start.AddDays(1);

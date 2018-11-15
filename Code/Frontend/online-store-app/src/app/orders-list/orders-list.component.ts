@@ -30,7 +30,9 @@ export class OrdersListComponent implements OnInit {
       'orderStatusDescription',
       'orderDate',
       'customerCompanyName',
-      'total'
+      'total',
+      'detailsCount',
+      'referenceOrderID'
     ];
 
     this.search();
