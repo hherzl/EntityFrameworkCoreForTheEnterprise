@@ -1,5 +1,14 @@
 <h1>Orders List</h1>
 
+<form [formGroup]="form">
+  <select [(ngModel)]="response.pageSize" formControlName="pageSize">
+    <option [ngValue]="10">10</option>
+    <option [ngValue]="25">25</option>
+    <option [ngValue]="50">50</option>
+    <option [ngValue]="100">100</option>
+  </select>
+</form>
+
 <table>
   <tr>
     <th>ID</th>
