@@ -35,13 +35,22 @@ insert into [Production].[Product]
     values ('Marvel vs. Campcom: Infinite', 1, 19.99, 'GG', 0, 10000, @userName, @creationDateTime, null, null, null)
 
 insert [Production].[ProductCategory]
-    values ('PS4 Accesories', @userName, getdate(), null, null, null)
+    values ('PS4 Arcade Sticks', @userName, getdate(), null, null, null)
 
 insert into [Production].[Product]
     values ('Qanba Dragon Arcade Stick', 2, 260.00, 'Qanba Dragon', 0, 1000, @userName, @creationDateTime, null, null, null)
 
 insert into [Production].[Product]
     values ('Hori Edge PS4', 2, 199.00, 'Hori Edge PS4', 0, 1000, @userName, @creationDateTime, null, null, null)
+
+insert [Production].[ProductCategory]
+    values ('Arcade Accesories', @userName, getdate(), null, null, null)
+
+insert into [Production].[Product]
+    values ('Qanba Guardian', 3, 75.00, 'Qanba Guardian', 0, 300, @userName, @creationDateTime, null, null, null)
+
+insert into [Production].[Product]
+    values ('Qanba Aegis', 3, 100.00, 'Qanba Aegis', 0, 300, @userName, @creationDateTime, null, null, null)
 
 insert into [Production].[Warehouse]
     values ('W0001', 'Warehouse 0001', @userName, @creationDateTime, null, null, null)
