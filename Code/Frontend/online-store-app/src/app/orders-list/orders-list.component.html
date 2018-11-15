@@ -1,6 +1,6 @@
 <h1>Orders List</h1>
 
-<form [formGroup]="form">
+<form [formGroup]="form" (change)="changePageSize()">
   <select [(ngModel)]="response.pageSize" formControlName="pageSize">
     <option [ngValue]="10">10</option>
     <option [ngValue]="25">25</option>
@@ -9,17 +9,29 @@
   </select>
 </form>
 
-<table>
-  <tr>
-    <th>ID</th>
-    <th>Status</th>
-    <th>Customer</th>
-    <th>Total</th>
-  </tr>
-  <tr *ngFor="let item of response?.model">
-    <td>{{ item.orderID }}</td>
-    <td>{{ item.orderStatusDescription }}</td>
-    <td>{{ item.customerCompanyName }}</td>
-    <td>{{ item.total }}</td>
-  </tr>
+<strong>{{ response.message }}</strong>
+
+<table mat-table [dataSource]="response?.model">
+  <ng-container matColumnDef="orderID">
+    <th mat-header-cell *matHeaderCellDef>ID</th>
+    <td mat-cell *matCellDef="let element">{{ element.orderID }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="orderStatusDescription">
+    <th mat-header-cell *matHeaderCellDef>Status</th>
+    <td mat-cell *matCellDef="let element">{{ element.orderStatusDescription }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="customerCompanyName">
+    <th mat-header-cell *matHeaderCellDef>Customer</th>
+    <td mat-cell *matCellDef="let element">{{ element.customerCompanyName }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="total">
+    <th mat-header-cell *matHeaderCellDef>Total</th>
+    <td mat-cell *matCellDef="let element">{{ element.total }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnsForOrders"></tr>
+  <tr mat-row *matRowDef="let row; columns: columnsForOrders;" class="element-row"></tr>
 </table>

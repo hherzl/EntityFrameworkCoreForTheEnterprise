@@ -11,6 +11,7 @@ import { PagedResponse, OrderInfo } from '../models';
 export class OrdersListComponent implements OnInit {
   private form: FormGroup;
   private response: PagedResponse<OrderInfo>;
+  private columnsForOrders: string[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -19,11 +20,28 @@ export class OrdersListComponent implements OnInit {
 
   ngOnInit() {
     this.response = new PagedResponse<OrderInfo>();
+
     this.form = new FormGroup({
-      pageSize: new FormControl('')
+      pageSize: new FormControl('50')
     });
-    this.salesService.getOrders(50, 1).subscribe((data: PagedResponse<OrderInfo>) => {
+
+    this.columnsForOrders = [
+      'orderID',
+      'orderStatusDescription',
+      'customerCompanyName',
+      'total'
+    ];
+
+    this.search();
+  }
+
+  public search(): void {
+    this.salesService.getOrders(this.form.get('pageSize').value, 1).subscribe((data: PagedResponse<OrderInfo>) => {
       this.response = data;
     });
+  }
+
+  public changePageSize(): void {
+    this.search();
   }
 }

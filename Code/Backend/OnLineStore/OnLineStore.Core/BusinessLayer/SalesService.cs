@@ -159,6 +159,10 @@ namespace OnLineStore.Core.BusinessLayer
                 response.Model = await query
                     .Paging(pageSize, pageNumber)
                     .ToListAsync();
+
+                response.Message = string.Format("Page {0} of {1}, Total of rows: {2}", response.PageNumber, response.PageCount, response.ItemsCount);
+
+                Logger?.LogInformation(response.Message);
             }
             catch (Exception ex)
             {

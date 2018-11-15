@@ -1,0 +1,15 @@
+table {
+    width: 100%;
+}
+
+tr.element-row:hover {
+    background: #f5f5f5;
+}
+
+tr.element-row:active {
+    background: #efefef;
+}
+
+.form-field {
+    width: 100%;
+}
