@@ -14,7 +14,7 @@ export class OrdersListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.salesService.getOrders(10, 1).subscribe((data: PagedResponse<OrderInfo>) => {
+    this.salesService.getOrders(50, 1).subscribe((data: PagedResponse<OrderInfo>) => {
       this.response = data;
     });
   }
