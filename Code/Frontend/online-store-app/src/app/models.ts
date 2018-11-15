@@ -12,6 +12,7 @@ export class PagedResponse<TModel> {
 export class OrderInfo {
     public orderID: number;
     public orderStatusID: number;
+    public orderDate: Date;
     public orderStatusDescription: string;
     public customerCompanyName: string;
     public total: number;

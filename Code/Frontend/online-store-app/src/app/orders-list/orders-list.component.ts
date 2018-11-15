@@ -28,6 +28,7 @@ export class OrdersListComponent implements OnInit {
     this.columnsForOrders = [
       'orderID',
       'orderStatusDescription',
+      'orderDate',
       'customerCompanyName',
       'total'
     ];
