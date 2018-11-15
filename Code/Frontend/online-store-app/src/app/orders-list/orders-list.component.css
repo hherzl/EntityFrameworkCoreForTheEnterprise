@@ -13,3 +13,9 @@ tr.element-row:active {
 .form-field {
     width: 100%;
 }
+
+.spinner {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}

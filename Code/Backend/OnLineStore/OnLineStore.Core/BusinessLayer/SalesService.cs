@@ -253,7 +253,9 @@ namespace OnLineStore.Core.BusinessLayer
                     }
 
                     // Set default values for order header
-                    header.OrderDate = DateTime.Now;
+                    if (!header.OrderDate.HasValue)
+                        header.OrderDate = DateTime.Now;
+
                     header.OrderStatusID = 100;
 
                     // Calculate total for order header from order's details

@@ -1,6 +1,9 @@
 <h1>Orders List</h1>
 
+<mat-spinner class="spinner" mode="indeterminate" *ngIf="loading"></mat-spinner>
+
 <form [formGroup]="form" (change)="changePageSize()">
+  <span>Page size: </span>
   <select [(ngModel)]="response.pageSize" formControlName="pageSize">
     <option [ngValue]="10">10</option>
     <option [ngValue]="25">25</option>
@@ -19,7 +22,7 @@
   <button mat-icon-button [disabled]="isNextDisabled" (click)="next()">
     <mat-icon aria-label="Next">skip_next</mat-icon>
   </button>
-</div>  
+</div>
 
 <br />
 

@@ -10,6 +10,7 @@ import { PagedResponse, OrderInfo } from '../models';
 })
 export class OrdersListComponent implements OnInit {
   private form: FormGroup;
+  private loading: boolean;
   private response: PagedResponse<OrderInfo>;
   private columnsForOrders: string[];
   private isPreviousDisabled: boolean;
@@ -46,10 +47,12 @@ export class OrdersListComponent implements OnInit {
   }
 
   public search(): void {
+    this.loading = true;
     this.salesService.getOrders(this.form.get('pageSize').value, this.response.pageNumber).subscribe((data: PagedResponse<OrderInfo>) => {
       this.response = data;
       this.isPreviousDisabled = this.response.pageNumber === 1;
       this.isNextDisabled = this.response.pageNumber >= this.response.pageCount;
+      this.loading = false;
     });
   }
 

@@ -20,15 +20,13 @@ namespace OnLineStore.Mocker
 
         public static void Main(string[] args)
         {
-            MainAsync().GetAwaiter().GetResult();
+            MainAsync(args).GetAwaiter().GetResult();
         }
 
-        static async Task MainAsync()
+        static async Task MainAsync(string[] args)
         {
             var year = DateTime.Now.AddYears(-1).Year;
             var ordersLimitPerDay = 3;
-
-            var args = Environment.GetCommandLineArgs();
 
             foreach (var arg in args)
             {
@@ -39,15 +37,13 @@ namespace OnLineStore.Mocker
             }
 
             var start = new DateTime(year, 1, 1);
-            var end = new DateTime(year, 1, 31);
+            var end = new DateTime(year, 12, DateTime.DaysInMonth(year, 12));
 
             if (start.DayOfWeek == DayOfWeek.Sunday)
                 start = start.AddDays(1);
 
-            while (start <= end)
+            do
             {
-                Logger.LogInformation("Date: {0}", start);
-
                 if (start.DayOfWeek != DayOfWeek.Sunday)
                 {
                     await CreateDataAsync(start, ordersLimitPerDay);
@@ -57,6 +53,7 @@ namespace OnLineStore.Mocker
 
                 start = start.AddDays(1);
             }
+            while (start <= end);
         }
 
         static async Task CreateDataAsync(DateTime date, int ordersLimitPerDay)
@@ -75,7 +72,11 @@ namespace OnLineStore.Mocker
 
             for (var i = 0; i < ordersLimitPerDay; i++)
             {
-                var header = new Order();
+                var header = new Order
+                {
+                    OrderDate = date,
+                    CreationDateTime = date
+                };
 
                 var selectedCustomer = random.Next(0, customers.Count - 1);
                 var selectedCurrency = random.Next(0, currencies.Count - 1);
@@ -84,8 +85,6 @@ namespace OnLineStore.Mocker
                 header.CustomerID = customers[selectedCustomer].CustomerID;
                 header.CurrencyID = currencies[selectedCurrency].CurrencyID;
                 header.PaymentMethodID = paymentMethods[selectedPaymentMethod].PaymentMethodID;
-
-                header.CreationDateTime = date;
 
                 var details = new List<OrderDetail>();
 
@@ -106,6 +105,8 @@ namespace OnLineStore.Mocker
                 }
 
                 await salesService.CreateOrderAsync(header, details.ToArray());
+
+                Logger.LogInformation("Date: {0}", date);
             }
 
             productionService.Dispose();
