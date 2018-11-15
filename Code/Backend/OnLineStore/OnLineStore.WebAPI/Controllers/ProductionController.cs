@@ -22,11 +22,11 @@ namespace OnLineStore.WebAPI.Controllers
 #pragma warning restore CS1591
 
         /// <summary>
-        /// 
+        /// Retrieves the products
         /// </summary>
-        /// <param name="pageSize"></param>
-        /// <param name="pageNumber"></param>
-        /// <returns></returns>
+        /// <param name="pageSize">Page size</param>
+        /// <param name="pageNumber">Page number</param>
+        /// <returns>A sequence that contains the products</returns>
         [HttpGet("Product")]
         [ProducesResponseType(200)]
         [ProducesResponseType(500)]
@@ -42,11 +42,11 @@ namespace OnLineStore.WebAPI.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Gets the inventory for product by warehouse
         /// </summary>
-        /// <param name="productID"></param>
-        /// <param name="warehouseID"></param>
-        /// <returns></returns>
+        /// <param name="productID">Product</param>
+        /// <param name="warehouseID">Warehouse</param>
+        /// <returns>A sequence of inventory transactions by product and warehouse</returns>
         [HttpGet("ProductInventory")]
         [ProducesResponseType(200)]
         [ProducesResponseType(500)]
