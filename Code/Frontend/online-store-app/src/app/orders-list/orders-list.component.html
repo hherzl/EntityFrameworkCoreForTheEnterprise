@@ -11,7 +11,15 @@
 
 <br />
 
-<p><strong>{{ response.message }}</strong></p>
+<div>
+  <button mat-icon-button [disabled]="isPreviousDisabled" (click)="previous()">
+    <mat-icon aria-label="Previous">skip_previous</mat-icon>
+  </button>
+  <span> {{ response?.message }} </span>
+  <button mat-icon-button [disabled]="isNextDisabled" (click)="next()">
+    <mat-icon aria-label="Next">skip_next</mat-icon>
+  </button>
+</div>  
 
 <br />
 
@@ -54,3 +62,15 @@
   <tr mat-header-row *matHeaderRowDef="columnsForOrders"></tr>
   <tr mat-row *matRowDef="let row; columns: columnsForOrders;" class="element-row"></tr>
 </table>
+
+<br />
+
+<div>
+  <button mat-icon-button [disabled]="isPreviousDisabled" (click)="previous()">
+    <mat-icon aria-label="Previous">skip_previous</mat-icon>
+  </button>
+  <span> {{ response?.message }} </span>
+  <button mat-icon-button [disabled]="isNextDisabled" (click)="next()">
+    <mat-icon aria-label="Next">skip_next</mat-icon>
+  </button>
+</div>

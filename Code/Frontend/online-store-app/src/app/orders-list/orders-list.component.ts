@@ -12,6 +12,8 @@ export class OrdersListComponent implements OnInit {
   private form: FormGroup;
   private response: PagedResponse<OrderInfo>;
   private columnsForOrders: string[];
+  private isPreviousDisabled: boolean;
+  private isNextDisabled: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -22,7 +24,7 @@ export class OrdersListComponent implements OnInit {
     this.response = new PagedResponse<OrderInfo>();
 
     this.form = new FormGroup({
-      pageSize: new FormControl('50')
+      pageSize: new FormControl('10')
     });
 
     this.columnsForOrders = [
@@ -38,13 +40,26 @@ export class OrdersListComponent implements OnInit {
     this.search();
   }
 
+  public changePageSize(): void {
+    this.response.pageNumber = 1;
+    this.search();
+  }
+
   public search(): void {
-    this.salesService.getOrders(this.form.get('pageSize').value, 1).subscribe((data: PagedResponse<OrderInfo>) => {
+    this.salesService.getOrders(this.form.get('pageSize').value, this.response.pageNumber).subscribe((data: PagedResponse<OrderInfo>) => {
       this.response = data;
+      this.isPreviousDisabled = this.response.pageNumber === 1;
+      this.isNextDisabled = this.response.pageNumber >= this.response.pageCount;
     });
   }
 
-  public changePageSize(): void {
+  previous(): void {
+    this.response.pageNumber -= 1;
+    this.search();
+  }
+
+  next(): void {
+    this.response.pageNumber += 1;
     this.search();
   }
 }
