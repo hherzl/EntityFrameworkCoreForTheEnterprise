@@ -7,6 +7,7 @@ using OnLineStore.Core.BusinessLayer.Contracts;
 using OnLineStore.Core.BusinessLayer.Responses;
 using OnLineStore.Core.DataLayer;
 using OnLineStore.Core.DataLayer.Repositories;
+using OnLineStore.Core.DataLayer.Warehouse;
 using OnLineStore.Core.EntityLayer.Production;
 
 namespace OnLineStore.Core.BusinessLayer
@@ -27,7 +28,7 @@ namespace OnLineStore.Core.BusinessLayer
             try
             {
                 // Get query
-                var query = ProductionRepository.GetProducts(productCategoryID);
+                var query = DbContext.GetProducts(productCategoryID);
 
                 // Set information for paging
                 response.PageSize = pageSize;
@@ -45,16 +46,16 @@ namespace OnLineStore.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IPagedResponse<Warehouse>> GetWarehousesAsync(int pageSize = 10, int pageNumber = 1)
+        public async Task<IPagedResponse<EntityLayer.Production.Warehouse>> GetWarehousesAsync(int pageSize = 10, int pageNumber = 1)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetWarehousesAsync));
 
-            var response = new PagedResponse<Warehouse>();
+            var response = new PagedResponse<EntityLayer.Production.Warehouse>();
 
             try
             {
                 // Get query
-                var query = ProductionRepository.GetWarehouses();
+                var query = DbContext.Warehouses;
 
                 // Set information for paging
                 response.PageSize = pageSize;
@@ -81,7 +82,7 @@ namespace OnLineStore.Core.BusinessLayer
             try
             {
                 // Get query
-                var query = ProductionRepository.GetProductInventories(productID, warehouseID);
+                var query = DbContext.GetProductInventories(productID, warehouseID);
 
                 // Retrieve items, set model for response
                 var list = await query.ToListAsync();

@@ -1,12 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OnLineStore.Core.EntityLayer.Production;
 
 namespace OnLineStore.Core.DataLayer.Mapping.Production
 {
-    public class WarehouseConfiguration : IEntityTypeConfiguration<Warehouse>
+    public class WarehouseConfiguration : IEntityTypeConfiguration<EntityLayer.Production.Warehouse>
     {
-        public void Configure(EntityTypeBuilder<Warehouse> builder)
+        public void Configure(EntityTypeBuilder<EntityLayer.Production.Warehouse> builder)
         {
             // Mapping for table
             builder.ToTable("Warehouse", "Production");

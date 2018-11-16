@@ -12,7 +12,6 @@ namespace OnLineStore.Core.BusinessLayer
         protected IUserInfo UserInfo;
         protected bool Disposed;
         protected IHumanResourcesRepository m_humanResourcesRepository;
-        protected IProductionRepository m_productionRepository;
 
         public Service(ILogger logger, IUserInfo userInfo, OnLineStoreDbContext dbContext)
         {
@@ -35,8 +34,5 @@ namespace OnLineStore.Core.BusinessLayer
 
         protected IHumanResourcesRepository HumanResourcesRepository
             => m_humanResourcesRepository ?? (m_humanResourcesRepository = new HumanResourcesRepository(UserInfo, DbContext));
-
-        protected IProductionRepository ProductionRepository
-            => m_productionRepository ?? (m_productionRepository = new ProductionRepository(UserInfo, DbContext));
     }
 }

@@ -9,6 +9,7 @@ using OnLineStore.Core.BusinessLayer.Responses;
 using OnLineStore.Core.DataLayer;
 using OnLineStore.Core.DataLayer.Repositories;
 using OnLineStore.Core.DataLayer.Sales;
+using OnLineStore.Core.DataLayer.Warehouse;
 using OnLineStore.Core.EntityLayer.Dbo;
 using OnLineStore.Core.EntityLayer.Production;
 using OnLineStore.Core.EntityLayer.Sales;
@@ -199,7 +200,7 @@ namespace OnLineStore.Core.BusinessLayer
             try
             {
                 // Retrieve products list
-                response.Model.Products = await ProductionRepository.GetProducts().ToListAsync();
+                response.Model.Products = await DbContext.GetProducts().ToListAsync();
 
                 // Retrieve customers list
                 response.Model.Customers = await DbContext.Customers.ToListAsync();
@@ -224,13 +225,12 @@ namespace OnLineStore.Core.BusinessLayer
                 try
                 {
                     // todo: Retrieve available warehouse to dispatch products
-                    var warehouses = await ProductionRepository.GetWarehouses().ToListAsync();
+                    var warehouses = await DbContext.Warehouses.ToListAsync();
 
                     foreach (var detail in details)
                     {
                         // Retrieve product by id
-                        var product = await ProductionRepository
-                            .GetProductAsync(new Product(detail.ProductID));
+                        var product = await DbContext.GetProductAsync(new Product(detail.ProductID));
 
                         // Throw exception if product no exists
                         if (product == null)
@@ -297,7 +297,7 @@ namespace OnLineStore.Core.BusinessLayer
                         };
 
                         // Save product inventory
-                        ProductionRepository.Add(productInventory);
+                        DbContext.Add(productInventory);
                     }
 
                     await DbContext.SaveChangesAsync();
