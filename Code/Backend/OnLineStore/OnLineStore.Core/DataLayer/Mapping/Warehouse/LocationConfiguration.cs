@@ -1,21 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using OnLineStore.Core.EntityLayer.Warehouse;
 
-namespace OnLineStore.Core.DataLayer.Mapping.Production
+namespace OnLineStore.Core.DataLayer.Mapping.Warehouse
 {
-    public class WarehouseConfiguration : IEntityTypeConfiguration<EntityLayer.Production.Warehouse>
+    public class LocationConfiguration : IEntityTypeConfiguration<Location>
     {
-        public void Configure(EntityTypeBuilder<EntityLayer.Production.Warehouse> builder)
+        public void Configure(EntityTypeBuilder<Location> builder)
         {
             // Mapping for table
             builder.ToTable("Warehouse", "Production");
 
             // Set key for entity
-            builder.HasKey(p => p.WarehouseID);
+            builder.HasKey(p => p.LocationID);
 
             // Set mapping for columns
-            builder.Property(p => p.WarehouseID).HasColumnType("varchar(5)").IsRequired();
-            builder.Property(p => p.WarehouseName).HasColumnType("varchar(100)").IsRequired();
+            builder.Property(p => p.LocationID).HasColumnName("WarehouseID").HasColumnType("varchar(5)").IsRequired();
+            builder.Property(p => p.LocationName).HasColumnName("WarehouseName").HasColumnType("varchar(100)").IsRequired();
             builder.Property(p => p.CreationUser).HasColumnType("varchar(25)").IsRequired();
             builder.Property(p => p.CreationDateTime).HasColumnType("datetime").IsRequired();
             builder.Property(p => p.LastUpdateUser).HasColumnType("varchar(25)");

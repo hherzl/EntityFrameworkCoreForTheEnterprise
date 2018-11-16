@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OnLineStore.Core.EntityLayer.Production
+namespace OnLineStore.Core.EntityLayer.Warehouse
 {
     public class ProductInventory : IAuditableEntity
     {
@@ -35,6 +35,6 @@ namespace OnLineStore.Core.EntityLayer.Production
 
         public Product ProductFk { get; set; }
 
-        public Warehouse WarehouseFk { get; set; }
+        public Location LocationFk { get; set; }
     }
 }

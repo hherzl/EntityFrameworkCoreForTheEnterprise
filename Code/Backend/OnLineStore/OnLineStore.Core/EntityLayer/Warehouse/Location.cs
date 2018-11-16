@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 
-namespace OnLineStore.Core.EntityLayer.Production
+namespace OnLineStore.Core.EntityLayer.Warehouse
 {
-    public class Warehouse : IAuditableEntity
+    public class Location : IAuditableEntity
     {
-        public Warehouse()
+        public Location()
         {
         }
 
-        public string WarehouseID { get; set; }
+        public string LocationID { get; set; }
 
-        public string WarehouseName { get; set; }
+        public string LocationName { get; set; }
 
         public string CreationUser { get; set; }
 

@@ -8,13 +8,13 @@ using OnLineStore.Core.BusinessLayer.Responses;
 using OnLineStore.Core.DataLayer;
 using OnLineStore.Core.DataLayer.Repositories;
 using OnLineStore.Core.DataLayer.Warehouse;
-using OnLineStore.Core.EntityLayer.Production;
+using OnLineStore.Core.EntityLayer.Warehouse;
 
 namespace OnLineStore.Core.BusinessLayer
 {
-    public class ProductionService : Service, IProductionService
+    public class WarehouseService : Service, IWarehouseService
     {
-        public ProductionService(ILogger<ProductionService> logger, IUserInfo userInfo, OnLineStoreDbContext dbContext)
+        public WarehouseService(ILogger<WarehouseService> logger, IUserInfo userInfo, OnLineStoreDbContext dbContext)
             : base(logger, userInfo, dbContext)
         {
         }
@@ -46,11 +46,11 @@ namespace OnLineStore.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IPagedResponse<EntityLayer.Production.Warehouse>> GetWarehousesAsync(int pageSize = 10, int pageNumber = 1)
+        public async Task<IPagedResponse<EntityLayer.Warehouse.Location>> GetWarehousesAsync(int pageSize = 10, int pageNumber = 1)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetWarehousesAsync));
 
-            var response = new PagedResponse<EntityLayer.Production.Warehouse>();
+            var response = new PagedResponse<EntityLayer.Warehouse.Location>();
 
             try
             {

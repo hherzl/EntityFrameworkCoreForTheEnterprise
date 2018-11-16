@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OnLineStore.Core.EntityLayer.Production;
+using OnLineStore.Core.EntityLayer.Warehouse;
 
-namespace OnLineStore.Core.DataLayer.Mapping.Production
+namespace OnLineStore.Core.DataLayer.Mapping.Warehouse
 {
     public class ProductCategoryConfiguration : IEntityTypeConfiguration<ProductCategory>
     {

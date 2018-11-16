@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OnLineStore.Core.EntityLayer.Production;
+using OnLineStore.Core.EntityLayer.Warehouse;
 
-namespace OnLineStore.Core.DataLayer.Mapping.Production
+namespace OnLineStore.Core.DataLayer.Mapping.Warehouse
 {
     public class ProductInventoryConfiguration : IEntityTypeConfiguration<ProductInventory>
     {
@@ -38,7 +38,7 @@ namespace OnLineStore.Core.DataLayer.Mapping.Production
                 .HasForeignKey(p => p.ProductID);
 
             builder
-                .HasOne(p => p.WarehouseFk)
+                .HasOne(p => p.LocationFk)
                 .WithMany(b => b.ProductInventories)
                 .HasForeignKey(p => p.WarehouseID);
         }

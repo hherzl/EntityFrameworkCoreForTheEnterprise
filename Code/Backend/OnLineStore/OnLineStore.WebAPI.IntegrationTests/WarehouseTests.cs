@@ -4,11 +4,11 @@ using Xunit;
 
 namespace OnLineStore.WebAPI.IntegrationTests
 {
-    public class ProductionTests : IClassFixture<TestFixture<Startup>>
+    public class WarehouseTests : IClassFixture<TestFixture<Startup>>
     {
         private HttpClient Client;
 
-        public ProductionTests(TestFixture<Startup> fixture)
+        public WarehouseTests(TestFixture<Startup> fixture)
         {
             Client = fixture.Client;
         }
@@ -17,7 +17,7 @@ namespace OnLineStore.WebAPI.IntegrationTests
         public async Task GetProductsTestAsync()
         {
             // Arrange
-            var request = "/api/v1/Production/Product";
+            var request = "/api/v1/Warehouse/Product";
 
             // Act
             var response = await Client.GetAsync(request);
@@ -30,7 +30,7 @@ namespace OnLineStore.WebAPI.IntegrationTests
         public async Task GetProductInventoriesAsync()
         {
             // Arrange
-            var request = string.Format("/api/v1/Production/ProductInventory");
+            var request = string.Format("/api/v1/Warehouse/ProductInventory");
 
             // Act
             var response = await Client.GetAsync(request);

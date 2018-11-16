@@ -9,15 +9,15 @@ namespace OnLineStore.WebAPI.Controllers
 #pragma warning disable CS1591
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class ProductionController : ControllerBase
+    public class WarehouseController : ControllerBase
     {
         protected ILogger Logger;
-        protected IProductionService ProductionService;
+        protected IWarehouseService Service;
 
-        public ProductionController(ILogger<ProductionController> logger, IProductionService productionService)
+        public WarehouseController(ILogger<WarehouseController> logger, IWarehouseService service)
         {
             Logger = logger;
-            ProductionService = productionService;
+            Service = service;
         }
 #pragma warning restore CS1591
 
@@ -35,7 +35,7 @@ namespace OnLineStore.WebAPI.Controllers
             Logger?.LogDebug("{0} has been invoked", nameof(GetProductsAsync));
 
             // Get response from business logic
-            var response = await ProductionService.GetProductsAsync((int)pageSize, (int)pageNumber);
+            var response = await Service.GetProductsAsync((int)pageSize, (int)pageNumber);
 
             // Return as http response
             return response.ToHttpResponse();
@@ -55,7 +55,7 @@ namespace OnLineStore.WebAPI.Controllers
             Logger?.LogDebug("{0} has been invoked", nameof(GetProductInventoryAsync));
 
             // Get response from business logic
-            var response = await ProductionService.GetProductInventories(productID, warehouseID);
+            var response = await Service.GetProductInventories(productID, warehouseID);
 
             // Return as http response
             return response.ToHttpResponse();

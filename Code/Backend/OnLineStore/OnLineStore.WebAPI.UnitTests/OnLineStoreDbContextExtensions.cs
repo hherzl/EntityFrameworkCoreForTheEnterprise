@@ -2,7 +2,7 @@
 using OnLineStore.Core.DataLayer;
 using OnLineStore.Core.EntityLayer.Dbo;
 using OnLineStore.Core.EntityLayer.HumanResources;
-using OnLineStore.Core.EntityLayer.Production;
+using OnLineStore.Core.EntityLayer.Warehouse;
 using OnLineStore.Core.EntityLayer.Sales;
 
 namespace OnLineStore.WebAPI.UnitTests
@@ -92,10 +92,10 @@ namespace OnLineStore.WebAPI.UnitTests
 
             dbContext.SaveChanges();
 
-            var warehouse = new Warehouse
+            var warehouse = new Location
             {
-                WarehouseID = "W0001",
-                WarehouseName = "Warehouse 001",
+                LocationID = "W0001",
+                LocationName = "Warehouse 001",
                 CreationUser = creationUser,
                 CreationDateTime = creationDateTime
             };
@@ -107,7 +107,7 @@ namespace OnLineStore.WebAPI.UnitTests
             var productInventory = new ProductInventory
             {
                 ProductID = product.ProductID,
-                WarehouseID = warehouse.WarehouseID,
+                WarehouseID = warehouse.LocationID,
                 Stocks = 1500,
                 Quantity = 1500,
                 CreationUser = creationUser,

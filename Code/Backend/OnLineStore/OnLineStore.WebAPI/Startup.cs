@@ -44,7 +44,7 @@ namespace OnLineStore.WebAPI
             services.AddScoped<ILogger, Logger<Service>>();
 
             services.AddScoped<IHumanResourcesService, HumanResourcesService>();
-            services.AddScoped<IProductionService, ProductionService>();
+            services.AddScoped<IWarehouseService, WarehouseService>();
             services.AddScoped<ISalesService, SalesService>();
 
             services.AddSwaggerGen(c =>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 
-namespace OnLineStore.Core.EntityLayer.Production
+namespace OnLineStore.Core.EntityLayer.Warehouse
 {
     public class ProductCategory : IAuditableEntity
     {

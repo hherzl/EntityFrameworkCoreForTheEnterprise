@@ -11,7 +11,7 @@ using OnLineStore.Core.DataLayer.Repositories;
 using OnLineStore.Core.DataLayer.Sales;
 using OnLineStore.Core.DataLayer.Warehouse;
 using OnLineStore.Core.EntityLayer.Dbo;
-using OnLineStore.Core.EntityLayer.Production;
+using OnLineStore.Core.EntityLayer.Warehouse;
 using OnLineStore.Core.EntityLayer.Sales;
 
 namespace OnLineStore.Core.BusinessLayer
@@ -289,7 +289,7 @@ namespace OnLineStore.Core.BusinessLayer
                         var productInventory = new ProductInventory
                         {
                             ProductID = detail.ProductID,
-                            WarehouseID = warehouses.First().WarehouseID,
+                            WarehouseID = warehouses.First().LocationID,
                             CreationDateTime = DateTime.Now,
                             Quantity = detail.Quantity * -1,
                             Stocks = 0,

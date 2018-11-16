@@ -3,21 +3,21 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OnLineStore.Common;
 using OnLineStore.Core.BusinessLayer.Responses;
-using OnLineStore.Core.EntityLayer.Production;
+using OnLineStore.Core.EntityLayer.Warehouse;
 using OnLineStore.WebAPI.Controllers;
 using Xunit;
 
 namespace OnLineStore.WebAPI.UnitTests
 {
-    public class ProductionControllerTests
+    public class WarehouseControllerTests
     {
         [Fact]
         public async Task TestGetProductsTestAsync()
         {
             // Arrange
-            var logger = LoggingHelper.GetLogger<ProductionController>();
-            var service = ServiceMocker.GetProductionService(nameof(TestGetProductsTestAsync));
-            var controller = new ProductionController(logger, service);
+            var logger = LoggingHelper.GetLogger<WarehouseController>();
+            var service = ServiceMocker.GetWarehouseService(nameof(TestGetProductsTestAsync));
+            var controller = new WarehouseController(logger, service);
 
             // Act
             var response = await controller.GetProductsAsync() as ObjectResult;
@@ -34,9 +34,9 @@ namespace OnLineStore.WebAPI.UnitTests
         public async Task TestGetInventoryByProductTestAsync()
         {
             // Arrange
-            var logger = LoggingHelper.GetLogger<ProductionController>();
-            var service = ServiceMocker.GetProductionService(nameof(TestGetInventoryByProductTestAsync));
-            var controller = new ProductionController(logger, service);
+            var logger = LoggingHelper.GetLogger<WarehouseController>();
+            var service = ServiceMocker.GetWarehouseService(nameof(TestGetInventoryByProductTestAsync));
+            var controller = new WarehouseController(logger, service);
             var productID = 1;
             var warehouseID = "W0001";
 

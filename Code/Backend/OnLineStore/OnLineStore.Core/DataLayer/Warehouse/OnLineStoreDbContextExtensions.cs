@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using OnLineStore.Core.EntityLayer.Production;
+using OnLineStore.Core.EntityLayer.Warehouse;
 
 namespace OnLineStore.Core.DataLayer.Warehouse
 {
@@ -42,7 +42,7 @@ namespace OnLineStore.Core.DataLayer.Warehouse
         public static async Task<ProductInventory> GetProductInventoryAsync(this OnLineStoreDbContext dbContext, ProductInventory entity)
             => await dbContext.ProductInventories.FirstOrDefaultAsync(item => item.ProductInventoryID == entity.ProductInventoryID);
 
-        public static async Task<EntityLayer.Production.Warehouse> GetWarehouseAsync(this OnLineStoreDbContext dbContext, EntityLayer.Production.Warehouse entity)
-            => await dbContext.Warehouses.FirstOrDefaultAsync(item => item.WarehouseID == entity.WarehouseID);
+        public static async Task<EntityLayer.Warehouse.Location> GetWarehouseAsync(this OnLineStoreDbContext dbContext, EntityLayer.Warehouse.Location entity)
+            => await dbContext.Warehouses.FirstOrDefaultAsync(item => item.LocationID == entity.LocationID);
     }
 }

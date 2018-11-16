@@ -60,13 +60,13 @@ namespace OnLineStore.Mocker
         {
             var random = new Random();
 
-            var productionService = ServiceMocker.GetProductionService();
+            var warehouseService = ServiceMocker.GetWarehouseService();
             var salesService = ServiceMocker.GetSalesService();
 
             var customers = (await salesService.GetCustomersAsync()).Model.ToList();
             var currencies = (await salesService.GetCurrenciesAsync()).Model.ToList();
             var paymentMethods = (await salesService.GetPaymentMethodsAsync()).Model.ToList();
-            var products = (await productionService.GetProductsAsync()).Model.ToList();
+            var products = (await warehouseService.GetProductsAsync()).Model.ToList();
 
             Logger.LogInformation("Creating orders for {0}", date);
 
@@ -109,7 +109,7 @@ namespace OnLineStore.Mocker
                 Logger.LogInformation("Date: {0}", date);
             }
 
-            productionService.Dispose();
+            warehouseService.Dispose();
             salesService.Dispose();
         }
     }
