@@ -5,6 +5,8 @@ using Microsoft.Extensions.Logging;
 using OnLineStore.Core.BusinessLayer.Contracts;
 using OnLineStore.Core.BusinessLayer.Responses;
 using OnLineStore.Core.DataLayer;
+using OnLineStore.Core.DataLayer.HumanResources;
+using OnLineStore.Core.DataLayer.Repositories;
 using OnLineStore.Core.EntityLayer.HumanResources;
 
 namespace OnLineStore.Core.BusinessLayer
@@ -24,7 +26,7 @@ namespace OnLineStore.Core.BusinessLayer
 
             try
             {
-                response.Model = await HumanResourcesRepository.GetEmployees(pageSize, pageNumber).ToListAsync();
+                response.Model = await DbContext.Employees.Paging(pageSize, pageNumber).ToListAsync();
             }
             catch (Exception ex)
             {
@@ -42,7 +44,7 @@ namespace OnLineStore.Core.BusinessLayer
 
             try
             {
-                response.Model = await HumanResourcesRepository.GetEmployeeAsync(entity);
+                response.Model = await DbContext.GetEmployeeAsync(entity);
             }
             catch (Exception ex)
             {
@@ -60,9 +62,9 @@ namespace OnLineStore.Core.BusinessLayer
 
             try
             {
-                HumanResourcesRepository.Update(changes);
+                DbContext.Update(changes);
 
-                await HumanResourcesRepository.CommitChangesAsync();
+                await DbContext.SaveChangesAsync();
             }
             catch (Exception ex)
             {
