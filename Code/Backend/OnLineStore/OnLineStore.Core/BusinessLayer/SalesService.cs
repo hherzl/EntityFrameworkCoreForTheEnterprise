@@ -7,8 +7,8 @@ using OnLineStore.Core.BusinessLayer.Contracts;
 using OnLineStore.Core.BusinessLayer.Requests;
 using OnLineStore.Core.BusinessLayer.Responses;
 using OnLineStore.Core.DataLayer;
-using OnLineStore.Core.DataLayer.DataContracts;
 using OnLineStore.Core.DataLayer.Repositories;
+using OnLineStore.Core.DataLayer.Sales;
 using OnLineStore.Core.EntityLayer.Dbo;
 using OnLineStore.Core.EntityLayer.Production;
 using OnLineStore.Core.EntityLayer.Sales;
@@ -31,7 +31,7 @@ namespace OnLineStore.Core.BusinessLayer
             try
             {
                 // Get query
-                var query = SalesRepository.GetCustomers();
+                var query = DbContext.Customers;
 
                 // Set information for paging
                 response.PageSize = pageSize;
@@ -60,7 +60,7 @@ namespace OnLineStore.Core.BusinessLayer
             try
             {
                 // Get query
-                var query = SalesRepository.GetShippers();
+                var query = DbContext.Shippers;
 
                 // Set information for paging
                 response.PageSize = pageSize;
@@ -89,7 +89,7 @@ namespace OnLineStore.Core.BusinessLayer
             try
             {
                 // Get query
-                var query = SalesRepository.GetCurrencies();
+                var query = DbContext.Currencies;
 
                 // Set information for paging
                 response.PageSize = pageSize;
@@ -118,7 +118,7 @@ namespace OnLineStore.Core.BusinessLayer
             try
             {
                 // Get query
-                var query = SalesRepository.GetPaymentMethods();
+                var query = DbContext.PaymentMethods;
 
                 // Set information for paging
                 response.PageSize = pageSize;
@@ -138,7 +138,7 @@ namespace OnLineStore.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IPagedResponse<OrderInfo>> GetOrdersAsync(int pageSize = 10, int pageNumber = 1, short? currencyID = null, int? customerID = null, int? employeeID = null, short? orderStatusID = null, Guid? paymentMethodID = null, int? shipperID = null)
+        public async Task<IPagedResponse<OrderInfo>> GetOrdersAsync(int pageSize = 10, int pageNumber = 1, short? orderStatusID = null, int? customerID = null, int? employeeID = null, int? shipperID = null, short? currencyID = null, Guid? paymentMethodID = null)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetOrdersAsync));
 
@@ -147,8 +147,7 @@ namespace OnLineStore.Core.BusinessLayer
             try
             {
                 // Get query
-                var query = SalesRepository
-                    .GetOrders(currencyID, customerID, employeeID, orderStatusID, paymentMethodID, shipperID);
+                var query = DbContext.GetOrders(currencyID, customerID, employeeID, orderStatusID, paymentMethodID, shipperID);
 
                 // Set information for paging
                 response.PageSize = pageSize;
@@ -181,8 +180,7 @@ namespace OnLineStore.Core.BusinessLayer
             try
             {
                 // Retrieve order by id
-                response.Model = await SalesRepository
-                    .GetOrderAsync(new Order(id));
+                response.Model = await DbContext.GetOrderAsync(new Order(id));
             }
             catch (Exception ex)
             {
@@ -204,7 +202,7 @@ namespace OnLineStore.Core.BusinessLayer
                 response.Model.Products = await ProductionRepository.GetProducts().ToListAsync();
 
                 // Retrieve customers list
-                response.Model.Customers = await SalesRepository.GetCustomers().ToListAsync();
+                response.Model.Customers = await DbContext.Customers.ToListAsync();
             }
             catch (Exception ex)
             {
@@ -263,9 +261,9 @@ namespace OnLineStore.Core.BusinessLayer
                     header.DetailsCount = details.Count();
 
                     // Save order header
-                    SalesRepository.Add(header);
+                    DbContext.Add(header, UserInfo);
 
-                    await SalesRepository.CommitChangesAsync();
+                    await DbContext.SaveChangesAsync();
 
                     foreach (var detail in details)
                     {
@@ -273,9 +271,9 @@ namespace OnLineStore.Core.BusinessLayer
                         detail.OrderID = header.OrderID;
 
                         // Add order detail
-                        SalesRepository.Add(detail);
+                        DbContext.Add(detail, UserInfo);
 
-                        await SalesRepository.CommitChangesAsync();
+                        await DbContext.SaveChangesAsync();
 
                         // Get last inventory for product
                         var lastInventory = DbContext
@@ -302,7 +300,7 @@ namespace OnLineStore.Core.BusinessLayer
                         ProductionRepository.Add(productInventory);
                     }
 
-                    await SalesRepository.CommitChangesAsync();
+                    await DbContext.SaveChangesAsync();
 
                     response.Model = header;
 
@@ -329,8 +327,7 @@ namespace OnLineStore.Core.BusinessLayer
             try
             {
                 // Retrieve order by id
-                var entity = await SalesRepository
-                    .GetOrderAsync(new Order(id));
+                var entity = await DbContext.GetOrderAsync(new Order(id));
 
                 if (entity != null)
                 {
@@ -380,7 +377,7 @@ namespace OnLineStore.Core.BusinessLayer
             try
             {
                 // Retrieve order by id
-                var entity = await SalesRepository.GetOrderAsync(new Order(id));
+                var entity = await DbContext.GetOrderAsync(new Order(id));
 
                 if (entity != null)
                 {
@@ -389,9 +386,9 @@ namespace OnLineStore.Core.BusinessLayer
                         throw new ForeignKeyDependencyException(string.Format(SalesDisplays.RemoveOrderExceptionMessage, id));
 
                     // Delete order
-                    SalesRepository.Remove(entity);
+                    DbContext.Remove(entity);
 
-                    await SalesRepository.CommitChangesAsync();
+                    await DbContext.SaveChangesAsync();
 
                     Logger?.LogInformation(SalesDisplays.DeleteOrderMessage);
                 }

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using OnLineStore.Core.BusinessLayer.Requests;
 using OnLineStore.Core.BusinessLayer.Responses;
-using OnLineStore.Core.DataLayer.DataContracts;
+using OnLineStore.Core.DataLayer.Sales;
 using OnLineStore.Core.EntityLayer.Dbo;
 using OnLineStore.Core.EntityLayer.Sales;
 
@@ -18,7 +18,7 @@ namespace OnLineStore.Core.BusinessLayer.Contracts
 
         Task<IPagedResponse<PaymentMethod>> GetPaymentMethodsAsync(int pageSize = 10, int pageNumber = 1);
 
-        Task<IPagedResponse<OrderInfo>> GetOrdersAsync(int pageSize = 10, int pageNumber = 1, short? currencyID = null, int? customerID = null, int? employeeID = null, short? orderStatusID = null, Guid? paymentMethodID = null, int? shipperID = null);
+        Task<IPagedResponse<OrderInfo>> GetOrdersAsync(int pageSize = 10, int pageNumber = 1, short? orderStatusID = null, int? customerID = null, int? employeeID = null, int? shipperID = null, short? currencyID = null, Guid? paymentMethodID = null);
 
         Task<ISingleResponse<Order>> GetOrderAsync(long id);
 

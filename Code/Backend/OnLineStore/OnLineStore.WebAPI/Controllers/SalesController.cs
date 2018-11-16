@@ -29,22 +29,22 @@ namespace OnLineStore.WebAPI.Controllers
         /// </summary>
         /// <param name="pageSize">Page size</param>
         /// <param name="pageNumber">Page number</param>
-        /// <param name="currencyID">Currency</param>
+        /// <param name="orderStatusID">Order status</param>
         /// <param name="customerID">Customer</param>
         /// <param name="employeeID">Employee</param>
-        /// <param name="orderStatusID">Order status</param>
-        /// <param name="paymentMethodID">Payment method</param>
         /// <param name="shipperID">Shipper</param>
+        /// <param name="currencyID">Currency</param>
+        /// <param name="paymentMethodID">Payment method</param>
         /// <returns>A sequence of orders</returns>
         [HttpGet("Order")]
         [ProducesResponseType(200)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> GetOrdersAsync(int? pageSize = 50, int? pageNumber = 1, short? currencyID = null, int? customerID = null, int? employeeID = null, short? orderStatusID = null, Guid? paymentMethodID = null, int? shipperID = null)
+        public async Task<IActionResult> GetOrdersAsync(int? pageSize = 50, int? pageNumber = 1, short? orderStatusID = null, int? customerID = null, int? employeeID = null, int? shipperID = null, short? currencyID = null, Guid? paymentMethodID = null)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetOrdersAsync));
 
             // Get response from business logic
-            var response = await SalesService.GetOrdersAsync((int)pageSize, (int)pageNumber, currencyID, customerID, employeeID, orderStatusID, paymentMethodID, shipperID);
+            var response = await SalesService.GetOrdersAsync((int)pageSize, (int)pageNumber, orderStatusID, customerID, employeeID, shipperID, currencyID, paymentMethodID);
 
             // Return as http response
             return response.ToHttpResponse();

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using OnLineStore.Common;
 using OnLineStore.Core.BusinessLayer.Requests;
 using OnLineStore.Core.BusinessLayer.Responses;
-using OnLineStore.Core.DataLayer.DataContracts;
+using OnLineStore.Core.DataLayer.Sales;
 using OnLineStore.Core.EntityLayer.Sales;
 using OnLineStore.WebAPI.Controllers;
 using OnLineStore.WebAPI.Requests;
