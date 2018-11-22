@@ -1,13 +1,13 @@
 alter table [dbo].[EventLog]
-	add constraint [PK_EventLog] primary key (EventLogID)
+	add constraint [PK_EventLog] primary key ([EventLogID])
 go
 
 alter table [dbo].[ChangeLog]
-	add constraint [PK_ChangeLog] primary key (ChangeLogID)
+	add constraint [PK_ChangeLog] primary key ([ChangeLogID])
 go
 
 alter table [dbo].[ChangeLogExclusion]
-	add constraint [PK_ChangeLogExclusion] primary key(ChangeLogExclusionID)
+	add constraint [PK_ChangeLogExclusion] primary key([ChangeLogExclusionID])
 
 alter table [dbo].[Country]
 	add constraint [PK_Country] primary key([CountryID])
@@ -22,71 +22,71 @@ alter table [dbo].[CountryCurrency]
 go
 
 alter table [HumanResources].[Employee]
-	add constraint [PK_HumanResources_Employee] primary key (EmployeeID)
+	add constraint [PK_HumanResources_Employee] primary key ([EmployeeID])
 go
 
 alter table [HumanResources].[EmployeeAddress]
-	add constraint [PK_HumanResources_EmployeeAddress] primary key (EmployeeAddressID)
+	add constraint [PK_HumanResources_EmployeeAddress] primary key ([EmployeeAddressID])
 go
 
 alter table [HumanResources].[EmployeeEmail]
-	add constraint [PK_HumanResources_EmployeeEmail] primary key (EmployeeEmailID)
+	add constraint [PK_HumanResources_EmployeeEmail] primary key ([EmployeeEmailID])
 go
 
-alter table [Production].[ProductCategory]
-	add constraint [PK_Production_ProductCategory] primary key (ProductCategoryID)
+alter table [Warehouse].[ProductCategory]
+	add constraint [PK_Production_ProductCategory] primary key ([ProductCategoryID])
 go
 
-alter table [Production].[Product]
-	add constraint [PK_Production_Product] primary key (ProductID)
+alter table [Warehouse].[Product]
+	add constraint [PK_Production_Product] primary key ([ProductID])
 go
 
-alter table [Production].[Product]
-	add constraint [U_Production_Product_ProductName] unique (ProductName)
+alter table [Warehouse].[Product]
+	add constraint [U_Production_Product_ProductName] unique ([ProductName])
 go
 
-alter table [Production].[ProductInventory]
-	add constraint [PK_Production_ProductInventory] primary key (ProductInventoryID)
+alter table [Warehouse].[ProductInventory]
+	add constraint [PK_Production_ProductInventory] primary key ([ProductInventoryID])
 go
 
-alter table [Production].[Warehouse]
-	add constraint [PK_Production_Warehouse] primary key (WarehouseID)
+alter table [Warehouse].[Location]
+	add constraint [PK_Warehouse_Location] primary key ([LocationID])
 go
 
 alter table [Sales].[Customer]
-	add constraint [PK_Sales_Customer] primary key (CustomerID)
+	add constraint [PK_Sales_Customer] primary key ([CustomerID])
 go
 
 alter table [Sales].[CustomerAddress]
-	add constraint [PK_Sales_CustomerAddress] primary key (CustomerAddressID)
+	add constraint [PK_Sales_CustomerAddress] primary key ([CustomerAddressID])
 go
 
 alter table [Sales].[CustomerEmail]
-	add constraint [PK_Sales_CustomerEmail] primary key (CustomerEmailID)
+	add constraint [PK_Sales_CustomerEmail] primary key ([CustomerEmailID])
 go
 
 alter table [Sales].[Shipper]
-	add constraint [PK_Sales_Shipper] primary key (ShipperID)
+	add constraint [PK_Sales_Shipper] primary key ([ShipperID])
 go
 
 alter table [Sales].[OrderStatus]
-	add constraint [PK_Sales_OrderStatus] primary key (OrderStatusID)
+	add constraint [PK_Sales_OrderStatus] primary key ([OrderStatusID])
 go
 
 alter table [Sales].[PaymentMethod]
-	add constraint [PK_Sales_PaymentMethod] primary key (PaymentMethodID)
+	add constraint [PK_Sales_PaymentMethod] primary key ([PaymentMethodID])
 go
 
 alter table [Sales].[Order]
-	add constraint [PK_Sales_Order] primary key (OrderID)
+	add constraint [PK_Sales_Order] primary key ([OrderID])
 go
 
 alter table [Sales].[OrderDetail]
-	add constraint [PK_Sales_OrderDetail] primary key (OrderDetailID)
+	add constraint [PK_Sales_OrderDetail] primary key ([OrderDetailID])
 go
 
 alter table [dbo].[CountryCurrency]
-	add constraint [U_CountryCurrency] unique (CountryID, CurrencyID)
+	add constraint [U_CountryCurrency] unique ([CountryID], [CurrencyID])
 go
 
 alter table [Sales].[OrderDetail]
@@ -98,86 +98,91 @@ alter table [ChangeLogExclusion]
 go
 
 alter table [dbo].[CountryCurrency]
-	add constraint [FK_CountryCurrency_Country] foreign key (CountryID)
+	add constraint [FK_CountryCurrency_Country] foreign key ([CountryID])
 		references [dbo].[Country]
 go
 
 alter table [dbo].[CountryCurrency]
-	add constraint [FK_CountryCurrency_Currency] foreign key (CurrencyID)
+	add constraint [FK_CountryCurrency_Currency] foreign key ([CurrencyID])
 		references [dbo].[Currency]
 go
 
-alter table [Production].[Product]
-	add constraint [FK_Production_Product_ProductCategory] foreign key (ProductCategoryID)
-		references [Production].[ProductCategory]
+alter table [Warehouse].[Product]
+	add constraint [FK_Warehouse_Product_ProductCategory] foreign key ([ProductCategoryID])
+		references [Warehouse].[ProductCategory]
 go
 
-alter table [Production].[ProductInventory]
-	add constraint [FK_Production_ProductInventory_Product] foreign key (ProductID)
-		references [Production].[Product]
+alter table [Warehouse].[ProductInventory]
+	add constraint [FK_Warehouse_ProductInventory_Product] foreign key ([ProductID])
+		references [Warehouse].[Product]
 go
 
-alter table [Production].[ProductInventory]
-	add constraint [FK_Production_ProductInventory_Warehouse] foreign key (WarehouseID)
-		references [Production].[Warehouse]
+alter table [Warehouse].[ProductInventory]
+	add constraint [FK_Warehouse_ProductInventory_Warehouse_Location] foreign key ([LocationID])
+		references [Warehouse].[Location]
+go
+
+alter table [Warehouse].[ProductInventory]
+	add constraint [FK_Warehouse_ProductInventory_Sales_OrderDetail] foreign key ([OrderDetailID])
+		references [Sales].[OrderDetail]
 go
 
 alter table [HumanResources].[EmployeeAddress]
-	add constraint [FK_HumanResources_EmployeeAddress] foreign key (EmployeeID)
+	add constraint [FK_HumanResources_EmployeeAddress] foreign key ([EmployeeID])
 		references [HumanResources].[Employee]
 go
 
 alter table [HumanResources].[EmployeeEmail]
-	add constraint [FK_HumanResources_EmployeeEmail] foreign key (EmployeeID)
+	add constraint [FK_HumanResources_EmployeeEmail] foreign key ([EmployeeID])
 		references [HumanResources].[Employee]
 go
 
 alter table [Sales].[CustomerAddress]
-	add constraint [FK_Sales_CustomerAddress] foreign key (CustomerID)
+	add constraint [FK_Sales_CustomerAddress] foreign key ([CustomerID])
 		references [Sales].[Customer]
 go
 
 alter table [Sales].[CustomerEmail]
-	add constraint [FK_Sales_CustomerEmail] foreign key (CustomerID)
+	add constraint [FK_Sales_CustomerEmail] foreign key ([CustomerID])
 		references [Sales].[Customer]
 go
 
 alter table [Sales].[Order]
-	add constraint [FK_Sales_Order_OrderStatus] foreign key (OrderStatusID)
+	add constraint [FK_Sales_Order_OrderStatus] foreign key ([OrderStatusID])
 		references [Sales].[OrderStatus]
 go
 
 alter table [Sales].[Order]
-	add constraint [FK_Sales_Order_Customer] foreign key (CustomerID)
+	add constraint [FK_Sales_Order_Customer] foreign key ([CustomerID])
 		references [Sales].[Customer]
 go
 
 alter table [Sales].[Order]
-	add constraint [FK_Sales_Order_Employee] foreign key (EmployeeID)
+	add constraint [FK_Sales_Order_Employee] foreign key ([EmployeeID])
 		references [HumanResources].[Employee]
 go
 
 alter table [Sales].[Order]
-	add constraint [FK_Sales_Order_Shipper] foreign key (ShipperID)
+	add constraint [FK_Sales_Order_Shipper] foreign key ([ShipperID])
 		references [Sales].[Shipper]
 go
 
 alter table [Sales].[Order]
-	add constraint [FK_Sales_Order_Currency] foreign key (CurrencyID)
+	add constraint [FK_Sales_Order_Currency] foreign key ([CurrencyID])
 		references [dbo].[Currency]
 go
 
 alter table [Sales].[Order]
-	add constraint [FK_Sales_Order_PaymentMethod] foreign key (PaymentMethodID)
+	add constraint [FK_Sales_Order_PaymentMethod] foreign key ([PaymentMethodID])
 		references [Sales].[PaymentMethod]
 go
 
 alter table [Sales].[OrderDetail]
-	add constraint [FK_Sales_OrderDetail_Order] foreign key (OrderID)
+	add constraint [FK_Sales_OrderDetail_Order] foreign key ([OrderID])
 		references [Sales].[Order]
 go
 
 alter table [Sales].[OrderDetail]
-	add constraint [FK_Sales_OrderDetail_Product] foreign key (ProductID)
-		references [Production].[Product]
+	add constraint [FK_Sales_OrderDetail_Product] foreign key ([ProductID])
+		references [Warehouse].[Product]
 go

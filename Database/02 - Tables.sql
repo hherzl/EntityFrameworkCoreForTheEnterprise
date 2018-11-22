@@ -105,7 +105,7 @@ create table [HumanResources].[EmployeeEmail]
 	[Timestamp] rowversion null
 )
 
-create table [Production].[ProductCategory]
+create table [Warehouse].[ProductCategory]
 (
 	[ProductCategoryID] int not null identity(1, 1),
 	[ProductCategoryName] varchar(100) not null,
@@ -116,7 +116,7 @@ create table [Production].[ProductCategory]
 	[Timestamp] rowversion null
 )
 
-create table [Production].[Product]
+create table [Warehouse].[Product]
 (
 	[ProductID] int not null identity(1, 1),
 	[ProductName] varchar(100) not null,
@@ -132,10 +132,10 @@ create table [Production].[Product]
 	[Timestamp] rowversion null
 )
 
-create table [Production].[Warehouse]
+create table [Warehouse].[Location]
 (
-	[WarehouseID] varchar(5) not null,
-	[WarehouseName] varchar(100) not null,
+	[LocationID] varchar(5) not null,
+	[LocationName] varchar(100) not null,
 	[CreationUser] varchar(25) not null,
 	[CreationDateTime] datetime not null,
 	[LastUpdateUser] varchar(25) null,
@@ -143,11 +143,11 @@ create table [Production].[Warehouse]
 	[Timestamp] rowversion null
 )
 
-create table [Production].[ProductInventory]
+create table [Warehouse].[ProductInventory]
 (
 	[ProductInventoryID] int not null identity(1, 1),
 	[ProductID] int not null,
-	[WarehouseID] varchar(5) not null,
+	[LocationID] varchar(5) not null,
 	[OrderDetailID] bigint null,
 	[Quantity] int not null,
 	[CreationUser] varchar(25) not null,

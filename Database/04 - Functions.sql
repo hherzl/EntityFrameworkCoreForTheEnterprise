@@ -1,9 +1,10 @@
-create function [Production].[ufnGetStock](@productID int)
+create function [Warehouse].[ufnGetStock](@productID int)
     returns int
 as
     begin
         declare @value int
-        select @value = sum([Quantity]) from [Production].[ProductInventory] where [ProductID] = @productID
+        select @value = sum
+        ([Quantity]) from [Warehouse].[ProductInventory] where [ProductID] = @productID
         if (@value is null)
             set @value = 0
         

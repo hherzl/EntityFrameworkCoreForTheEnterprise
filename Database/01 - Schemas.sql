@@ -4,7 +4,7 @@ go
 create schema [HumanResources]
 go
 
-create schema [Production]
+create schema [Warehouse]
 go
 
 create schema [Sales]
