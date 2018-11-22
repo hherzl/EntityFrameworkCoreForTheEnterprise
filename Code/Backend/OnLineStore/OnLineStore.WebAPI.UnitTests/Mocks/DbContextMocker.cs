@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using OnLineStore.Core.DataLayer;
 
-namespace OnLineStore.WebAPI.UnitTests
+namespace OnLineStore.WebAPI.UnitTests.Mocks
 {
     public static class DbContextMocker
     {

@@ -5,7 +5,7 @@ using OnLineStore.Core.EntityLayer.HumanResources;
 using OnLineStore.Core.EntityLayer.Sales;
 using OnLineStore.Core.EntityLayer.Warehouse;
 
-namespace OnLineStore.WebAPI.UnitTests
+namespace OnLineStore.WebAPI.UnitTests.Mocks
 {
     public static class OnLineStoreDbContextExtensions
     {

@@ -5,6 +5,7 @@ using OnLineStore.Common;
 using OnLineStore.Core.BusinessLayer.Responses;
 using OnLineStore.Core.EntityLayer.Warehouse;
 using OnLineStore.WebAPI.Controllers;
+using OnLineStore.WebAPI.UnitTests.Mocks;
 using Xunit;
 
 namespace OnLineStore.WebAPI.UnitTests

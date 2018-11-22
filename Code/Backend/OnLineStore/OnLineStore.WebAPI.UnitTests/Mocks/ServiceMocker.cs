@@ -3,7 +3,7 @@ using OnLineStore.Core;
 using OnLineStore.Core.BusinessLayer;
 using OnLineStore.Core.BusinessLayer.Contracts;
 
-namespace OnLineStore.WebAPI.UnitTests
+namespace OnLineStore.WebAPI.UnitTests.Mocks
 {
     public static class ServiceMocker
     {
