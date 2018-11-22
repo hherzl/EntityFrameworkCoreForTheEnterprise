@@ -9,7 +9,7 @@ namespace OnLineStore.Core.DataLayer.Configurations.Warehouse
         public void Configure(EntityTypeBuilder<ProductCategory> builder)
         {
             // Mapping for table
-            builder.ToTable("ProductCategory", "Production");
+            builder.ToTable("ProductCategory", "Warehouse");
 
             // Set key for entity
             builder.HasKey(p => p.ProductCategoryID);
