@@ -20,7 +20,7 @@ namespace OnLineStore.Core.DataLayer.Mapping.Warehouse
             // Set mapping for columns
             builder.Property(p => p.ProductInventoryID).HasColumnType("int").IsRequired();
             builder.Property(p => p.ProductID).HasColumnType("int").IsRequired();
-            builder.Property(p => p.WarehouseID).HasColumnType("varchar(5)").IsRequired();
+            builder.Property(p => p.LocationID).HasColumnName("WarehouseID").HasColumnType("varchar(5)").IsRequired();
             builder.Property(p => p.Quantity).HasColumnType("int").IsRequired();
             builder.Property(p => p.Stocks).HasColumnType("int").IsRequired();
             builder.Property(p => p.CreationUser).HasColumnType("varchar(25)").IsRequired();
@@ -40,7 +40,7 @@ namespace OnLineStore.Core.DataLayer.Mapping.Warehouse
             builder
                 .HasOne(p => p.LocationFk)
                 .WithMany(b => b.ProductInventories)
-                .HasForeignKey(p => p.WarehouseID);
+                .HasForeignKey(p => p.LocationID);
         }
     }
 }

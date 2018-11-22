@@ -11,8 +11,8 @@ using OnLineStore.Core.DataLayer.Repositories;
 using OnLineStore.Core.DataLayer.Sales;
 using OnLineStore.Core.DataLayer.Warehouse;
 using OnLineStore.Core.EntityLayer.Dbo;
-using OnLineStore.Core.EntityLayer.Warehouse;
 using OnLineStore.Core.EntityLayer.Sales;
+using OnLineStore.Core.EntityLayer.Warehouse;
 
 namespace OnLineStore.Core.BusinessLayer
 {
@@ -148,7 +148,7 @@ namespace OnLineStore.Core.BusinessLayer
             try
             {
                 // Get query
-                var query = DbContext.GetOrders(currencyID, customerID, employeeID, orderStatusID, paymentMethodID, shipperID);
+                var query = DbContext.GetOrders(orderStatusID, customerID, employeeID, shipperID, currencyID, paymentMethodID);
 
                 // Set information for paging
                 response.PageSize = pageSize;
@@ -277,7 +277,7 @@ namespace OnLineStore.Core.BusinessLayer
 
                         // Get last inventory for product
                         var lastInventory = DbContext
-                            .Set<ProductInventory>()
+                            .ProductInventories
                             .Where(item => item.ProductID == detail.ProductID)
                             .OrderByDescending(item => item.CreationDateTime)
                             .FirstOrDefault();
@@ -289,7 +289,7 @@ namespace OnLineStore.Core.BusinessLayer
                         var productInventory = new ProductInventory
                         {
                             ProductID = detail.ProductID,
-                            WarehouseID = warehouses.First().LocationID,
+                            LocationID = warehouses.First().LocationID,
                             CreationDateTime = DateTime.Now,
                             Quantity = detail.Quantity * -1,
                             Stocks = 0,

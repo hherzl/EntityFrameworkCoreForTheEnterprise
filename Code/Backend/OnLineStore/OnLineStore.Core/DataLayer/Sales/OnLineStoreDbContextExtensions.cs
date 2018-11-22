@@ -18,7 +18,7 @@ namespace OnLineStore.Core.DataLayer.Sales
         public static async Task<Shipper> GetShipperAsync(this OnLineStoreDbContext dbContext, Shipper entity)
             => await dbContext.Shippers.FirstOrDefaultAsync(item => item.ShipperID == entity.ShipperID);
 
-        public static IQueryable<OrderInfo> GetOrders(this OnLineStoreDbContext dbContext, short? currencyID = null, int? customerID = null, int? employeeID = null, short? orderStatusID = null, Guid? paymentMethodID = null, int? shipperID = null)
+        public static IQueryable<OrderInfo> GetOrders(this OnLineStoreDbContext dbContext, short? orderStatusID = null, int? customerID = null, int? employeeID = null, int? shipperID = null, short? currencyID = null, Guid? paymentMethodID = null)
         {
             var query = from order in dbContext.Orders
                         join currencyJoin in dbContext.Currencies on order.CurrencyID equals currencyJoin.CurrencyID into currencyTemp

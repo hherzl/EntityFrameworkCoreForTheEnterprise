@@ -17,7 +17,7 @@ namespace OnLineStore.Core.EntityLayer.Warehouse
 
         public int? ProductID { get; set; }
 
-        public string WarehouseID { get; set; }
+        public string LocationID { get; set; }
 
         public int? Quantity { get; set; }
 

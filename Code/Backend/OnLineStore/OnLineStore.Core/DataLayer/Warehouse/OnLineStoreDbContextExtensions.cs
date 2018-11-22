@@ -26,15 +26,15 @@ namespace OnLineStore.Core.DataLayer.Warehouse
         public static async Task<ProductCategory> GetProductCategoryAsync(this OnLineStoreDbContext dbContext, ProductCategory entity)
             => await dbContext.ProductCategories.FirstOrDefaultAsync(item => item.ProductCategoryID == entity.ProductCategoryID);
 
-        public static IQueryable<ProductInventory> GetProductInventories(this OnLineStoreDbContext dbContext, int? productID = null, string warehouseID = null)
+        public static IQueryable<ProductInventory> GetProductInventories(this OnLineStoreDbContext dbContext, int? productID = null, string locationID = null)
         {
             var query = dbContext.ProductInventories.AsQueryable();
 
             if (productID.HasValue)
                 query = query.Where(item => item.ProductID == productID);
 
-            if (!string.IsNullOrEmpty(warehouseID))
-                query = query.Where(item => item.WarehouseID == warehouseID);
+            if (!string.IsNullOrEmpty(locationID))
+                query = query.Where(item => item.LocationID == locationID);
 
             return query;
         }

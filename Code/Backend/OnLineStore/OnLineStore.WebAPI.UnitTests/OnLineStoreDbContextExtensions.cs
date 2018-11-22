@@ -107,7 +107,7 @@ namespace OnLineStore.WebAPI.UnitTests
             var productInventory = new ProductInventory
             {
                 ProductID = product.ProductID,
-                WarehouseID = warehouse.LocationID,
+                LocationID = warehouse.LocationID,
                 Stocks = 1500,
                 Quantity = 1500,
                 CreationUser = creationUser,

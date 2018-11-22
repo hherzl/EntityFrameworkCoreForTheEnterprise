@@ -38,14 +38,14 @@ namespace OnLineStore.Core.DataLayer
             dbContext.Set<TEntity>().Update(entity);
         }
 
-        public static void Remove<TEntity>(this OnLineStoreDbContext DbContext, TEntity entity) where TEntity : class, IAuditableEntity
-            => DbContext.Set<TEntity>().Remove(entity);
+        public static void Remove<TEntity>(this OnLineStoreDbContext dbContext, TEntity entity) where TEntity : class, IAuditableEntity
+            => dbContext.Set<TEntity>().Remove(entity);
 
-        private static IEnumerable<ChangeLog> GetChanges(this OnLineStoreDbContext DbContext, IUserInfo userInfo)
+        private static IEnumerable<ChangeLog> GetChanges(this OnLineStoreDbContext dbContext, IUserInfo userInfo)
         {
-            var exclusions = DbContext.ChangeLogExclusions.ToList();
+            var exclusions = dbContext.ChangeLogExclusions.ToList();
 
-            foreach (var entry in DbContext.ChangeTracker.Entries())
+            foreach (var entry in dbContext.ChangeTracker.Entries())
             {
                 if (entry.State != EntityState.Modified)
                     continue;
