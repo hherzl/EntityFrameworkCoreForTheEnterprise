@@ -1,5 +1,6 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
+using OnLineStore.WebAPI.IntegrationTests.Helpers;
 using Xunit;
 
 namespace OnLineStore.WebAPI.IntegrationTests

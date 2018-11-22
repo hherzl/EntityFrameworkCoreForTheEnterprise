@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace OnLineStore.WebAPI.IntegrationTests
+namespace OnLineStore.WebAPI.IntegrationTests.Helpers
 {
     public class TestFixture<TStartup> : IDisposable
     {
