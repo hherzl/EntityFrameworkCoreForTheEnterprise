@@ -59,15 +59,15 @@ insert into [Production].[Warehouse]
     values ('W0002', 'Warehouse 0002', @userName, @creationDateTime, null, null, null)
 
 insert into [Production].[ProductInventory]
-    values (1, 'W0001', 150000, 150000, @userName, @creationDateTime, null, null, null)
+    values (1, 'W0001', null, 150000, @userName, @creationDateTime, null, null, null)
 insert into [Production].[ProductInventory]
-    values (2, 'W0002', 120000, 120000, @userName, @creationDateTime, null, null, null)
+    values (2, 'W0002', null, 120000, @userName, @creationDateTime, null, null, null)
 insert into [Production].[ProductInventory]
-    values (3, 'W0001', 100000, 100000, @userName, @creationDateTime, null, null, null)
+    values (3, 'W0001', null, 100000, @userName, @creationDateTime, null, null, null)
 insert into [Production].[ProductInventory]
-    values (4, 'W0002', 300000, 300000, @userName, @creationDateTime, null, null, null)
+    values (4, 'W0002', null, 300000, @userName, @creationDateTime, null, null, null)
 insert into [Production].[ProductInventory]
-    values (5, 'W0001', 400000, 400000, @userName, @creationDateTime, null, null, null)
+    values (5, 'W0001', null, 400000, @userName, @creationDateTime, null, null, null)
 
 insert into [Production].[ProductInventory]
     values (6, 'W0001', 1000, 1000, @userName, @creationDateTime, null, null, null)

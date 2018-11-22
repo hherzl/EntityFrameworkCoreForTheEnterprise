@@ -275,24 +275,14 @@ namespace OnLineStore.Core.BusinessLayer
 
                         await DbContext.SaveChangesAsync();
 
-                        // Get last inventory for product
-                        var lastInventory = DbContext
-                            .ProductInventories
-                            .Where(item => item.ProductID == detail.ProductID)
-                            .OrderByDescending(item => item.CreationDateTime)
-                            .FirstOrDefault();
-
-                        // Calculate stocks for product
-                        var stocks = lastInventory == null ? 0 : lastInventory.Stocks - detail.Quantity;
-
                         // Create product inventory instance
                         var productInventory = new ProductInventory
                         {
                             ProductID = detail.ProductID,
                             LocationID = warehouses.First().LocationID,
-                            CreationDateTime = DateTime.Now,
+                            OrderDetailID = detail.OrderDetailID,
                             Quantity = detail.Quantity * -1,
-                            Stocks = 0,
+                            CreationDateTime = DateTime.Now,
                             CreationUser = header.CreationUser
                         };
 

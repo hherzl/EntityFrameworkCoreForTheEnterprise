@@ -19,9 +19,9 @@ namespace OnLineStore.Core.EntityLayer.Warehouse
 
         public string LocationID { get; set; }
 
-        public int? Quantity { get; set; }
+        public long? OrderDetailID { get; set; }
 
-        public int? Stocks { get; set; }
+        public int? Quantity { get; set; }
 
         public string CreationUser { get; set; }
 

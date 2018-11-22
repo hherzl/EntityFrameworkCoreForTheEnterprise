@@ -3,7 +3,7 @@ create function [Production].[ufnGetStock](@productID int)
 as
     begin
         declare @value int
-        select @value = sum([Stocks]) from [Production].[ProductInventory] where [ProductID] = @productID
+        select @value = sum([Quantity]) from [Production].[ProductInventory] where [ProductID] = @productID
         if (@value is null)
             set @value = 0
         

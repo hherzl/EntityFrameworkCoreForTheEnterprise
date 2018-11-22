@@ -2,8 +2,8 @@
 using OnLineStore.Core.DataLayer;
 using OnLineStore.Core.EntityLayer.Dbo;
 using OnLineStore.Core.EntityLayer.HumanResources;
-using OnLineStore.Core.EntityLayer.Warehouse;
 using OnLineStore.Core.EntityLayer.Sales;
+using OnLineStore.Core.EntityLayer.Warehouse;
 
 namespace OnLineStore.WebAPI.UnitTests
 {
@@ -108,7 +108,7 @@ namespace OnLineStore.WebAPI.UnitTests
             {
                 ProductID = product.ProductID,
                 LocationID = warehouse.LocationID,
-                Stocks = 1500,
+                OrderDetailID = 1,
                 Quantity = 1500,
                 CreationUser = creationUser,
                 CreationDateTime = creationDateTime

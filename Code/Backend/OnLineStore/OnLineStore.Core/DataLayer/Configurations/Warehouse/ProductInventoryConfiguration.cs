@@ -21,8 +21,8 @@ namespace OnLineStore.Core.DataLayer.Configurations.Warehouse
             builder.Property(p => p.ProductInventoryID).HasColumnType("int").IsRequired();
             builder.Property(p => p.ProductID).HasColumnType("int").IsRequired();
             builder.Property(p => p.LocationID).HasColumnName("WarehouseID").HasColumnType("varchar(5)").IsRequired();
+            builder.Property(p => p.OrderDetailID).HasColumnType("bigint");
             builder.Property(p => p.Quantity).HasColumnType("int").IsRequired();
-            builder.Property(p => p.Stocks).HasColumnType("int").IsRequired();
             builder.Property(p => p.CreationUser).HasColumnType("varchar(25)").IsRequired();
             builder.Property(p => p.CreationDateTime).HasColumnType("datetime").IsRequired();
             builder.Property(p => p.LastUpdateUser).HasColumnType("varchar(25)");
