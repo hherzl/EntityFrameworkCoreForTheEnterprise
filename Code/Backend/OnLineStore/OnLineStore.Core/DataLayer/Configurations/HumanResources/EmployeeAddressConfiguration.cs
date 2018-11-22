@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OnLineStore.Core.EntityLayer.HumanResources;
 
-namespace OnLineStore.Core.DataLayer.Mapping.HumanResources
+namespace OnLineStore.Core.DataLayer.Configurations.HumanResources
 {
     public class EmployeeAddressConfiguration : IEntityTypeConfiguration<EmployeeAddress>
     {

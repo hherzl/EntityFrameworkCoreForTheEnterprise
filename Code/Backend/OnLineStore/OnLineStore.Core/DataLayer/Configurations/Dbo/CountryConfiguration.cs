@@ -2,20 +2,20 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OnLineStore.Core.EntityLayer.Dbo;
 
-namespace OnLineStore.Core.DataLayer.Mapping.Dbo
+namespace OnLineStore.Core.DataLayer.Configurations.Dbo
 {
-    public class CountryCurrencyConfiguration : IEntityTypeConfiguration<CountryCurrency>
+    public class CountryConfiguration : IEntityTypeConfiguration<Country>
     {
-        public void Configure(EntityTypeBuilder<CountryCurrency> builder)
+        public void Configure(EntityTypeBuilder<Country> builder)
         {
             // Mapping for table
-            builder.ToTable("CountryCurrency", "dbo");
+            builder.ToTable("Country", "dbo");
 
             // Set key for entity
-            builder.HasKey(p => p.CountryCurrencyID);
+            builder.HasKey(p => p.CountryID);
 
             // Set identity for entity (auto increment)
-            builder.Property(p => p.CountryCurrencyID).UseSqlServerIdentityColumn();
+            builder.Property(p => p.CountryID).UseSqlServerIdentityColumn();
 
             // Set mapping for columns
             builder.Property(p => p.CreationUser).HasColumnType("varchar(25)").IsRequired();

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OnLineStore.Core.EntityLayer.Dbo;
 
-namespace OnLineStore.Core.DataLayer.Mapping.Dbo
+namespace OnLineStore.Core.DataLayer.Configurations.Dbo
 {
     public class ChangeLogConfiguration : IEntityTypeConfiguration<ChangeLog>
     {

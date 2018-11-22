@@ -2,24 +2,19 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OnLineStore.Core.EntityLayer.Sales;
 
-namespace OnLineStore.Core.DataLayer.Mapping.Sales
+namespace OnLineStore.Core.DataLayer.Configurations.Sales
 {
-    public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
+    public class PaymentMethodConfiguration : IEntityTypeConfiguration<PaymentMethod>
     {
-        public void Configure(EntityTypeBuilder<Customer> builder)
+        public void Configure(EntityTypeBuilder<PaymentMethod> builder)
         {
             // Mapping for table
-            builder.ToTable("Customer", "Sales");
+            builder.ToTable("PaymentMethod", "Sales");
 
             // Set key for entity
-            builder.HasKey(p => p.CustomerID);
-
-            // Set identity for entity (auto increment)
-            builder.Property(p => p.CustomerID).UseSqlServerIdentityColumn();
+            builder.HasKey(p => p.PaymentMethodID);
 
             // Set mapping for columns
-            builder.Property(p => p.CompanyName).HasColumnType("varchar(100)");
-            builder.Property(p => p.ContactName).HasColumnType("varchar(100)");
             builder.Property(p => p.CreationUser).HasColumnType("varchar(25)").IsRequired();
             builder.Property(p => p.CreationDateTime).HasColumnType("datetime").IsRequired();
             builder.Property(p => p.LastUpdateUser).HasColumnType("varchar(25)");
@@ -27,11 +22,6 @@ namespace OnLineStore.Core.DataLayer.Mapping.Sales
 
             // Set concurrency token for entity
             builder.Property(p => p.Timestamp).ValueGeneratedOnAddOrUpdate().IsConcurrencyToken();
-
-            // Add configuration for uniques
-            builder
-                .HasAlternateKey(p => new { p.CompanyName })
-                .HasName("U_CompanyName");
         }
     }
 }

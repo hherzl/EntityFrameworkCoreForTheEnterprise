@@ -1,25 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OnLineStore.Core.EntityLayer.Sales;
+using OnLineStore.Core.EntityLayer.Dbo;
 
-namespace OnLineStore.Core.DataLayer.Mapping.Sales
+namespace OnLineStore.Core.DataLayer.Configurations.Dbo
 {
-    public class ShipperConfiguration : IEntityTypeConfiguration<Shipper>
+    public class CurrencyConfiguration : IEntityTypeConfiguration<Currency>
     {
-        public void Configure(EntityTypeBuilder<Shipper> builder)
+        public void Configure(EntityTypeBuilder<Currency> builder)
         {
             // Mapping for table
-            builder.ToTable("Shipper", "Sales");
+            builder.ToTable("Currency", "dbo");
 
             // Set key for entity
-            builder.HasKey(p => p.ShipperID);
+            builder.HasKey(p => p.CurrencyID);
 
             // Set identity for entity (auto increment)
-            builder.Property(p => p.ShipperID).UseSqlServerIdentityColumn();
+            builder.Property(p => p.CurrencyID).UseSqlServerIdentityColumn();
 
             // Set mapping for columns
-            builder.Property(p => p.CompanyName).HasColumnType("varchar(100)");
-            builder.Property(p => p.ContactName).HasColumnType("varchar(100)");
             builder.Property(p => p.CreationUser).HasColumnType("varchar(25)").IsRequired();
             builder.Property(p => p.CreationDateTime).HasColumnType("datetime").IsRequired();
             builder.Property(p => p.LastUpdateUser).HasColumnType("varchar(25)");
@@ -27,11 +25,6 @@ namespace OnLineStore.Core.DataLayer.Mapping.Sales
 
             // Set concurrency token for entity
             builder.Property(p => p.Timestamp).ValueGeneratedOnAddOrUpdate().IsConcurrencyToken();
-
-            // Add configuration for uniques
-            builder
-                .HasAlternateKey(p => new { p.CompanyName })
-                .HasName("U_CompanyName");
         }
     }
 }

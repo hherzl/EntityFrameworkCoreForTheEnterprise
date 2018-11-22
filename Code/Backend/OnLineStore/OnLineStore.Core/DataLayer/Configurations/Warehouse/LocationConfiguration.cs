@@ -1,21 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OnLineStore.Core.EntityLayer.Sales;
+using OnLineStore.Core.EntityLayer.Warehouse;
 
-namespace OnLineStore.Core.DataLayer.Mapping.Sales
+namespace OnLineStore.Core.DataLayer.Configurations.Warehouse
 {
-    public class OrderStatusConfiguration : IEntityTypeConfiguration<OrderStatus>
+    public class LocationConfiguration : IEntityTypeConfiguration<Location>
     {
-        public void Configure(EntityTypeBuilder<OrderStatus> builder)
+        public void Configure(EntityTypeBuilder<Location> builder)
         {
             // Mapping for table
-            builder.ToTable("OrderStatus", "Sales");
+            builder.ToTable("Warehouse", "Production");
 
             // Set key for entity
-            builder.HasKey(p => p.OrderStatusID);
+            builder.HasKey(p => p.LocationID);
 
             // Set mapping for columns
-            builder.Property(p => p.Description).HasColumnType("varchar(100)");
+            builder.Property(p => p.LocationID).HasColumnName("WarehouseID").HasColumnType("varchar(5)").IsRequired();
+            builder.Property(p => p.LocationName).HasColumnName("WarehouseName").HasColumnType("varchar(100)").IsRequired();
             builder.Property(p => p.CreationUser).HasColumnType("varchar(25)").IsRequired();
             builder.Property(p => p.CreationDateTime).HasColumnType("datetime").IsRequired();
             builder.Property(p => p.LastUpdateUser).HasColumnType("varchar(25)");

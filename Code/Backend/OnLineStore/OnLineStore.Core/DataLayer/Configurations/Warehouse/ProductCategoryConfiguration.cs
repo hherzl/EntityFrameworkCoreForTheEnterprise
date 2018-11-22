@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OnLineStore.Core.EntityLayer.Warehouse;
 
-namespace OnLineStore.Core.DataLayer.Mapping.Warehouse
+namespace OnLineStore.Core.DataLayer.Configurations.Warehouse
 {
     public class ProductCategoryConfiguration : IEntityTypeConfiguration<ProductCategory>
     {

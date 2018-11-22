@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OnLineStore.Core.EntityLayer.Dbo;
 
-namespace OnLineStore.Core.DataLayer.Mapping
+namespace OnLineStore.Core.DataLayer.Configurations
 {
     public class EventLogConfiguration : IEntityTypeConfiguration<EventLog>
     {
