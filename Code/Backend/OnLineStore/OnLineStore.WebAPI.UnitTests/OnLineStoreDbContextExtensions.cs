@@ -35,8 +35,6 @@ namespace OnLineStore.WebAPI.UnitTests
 
             dbContext.Currencies.Add(currency);
 
-            dbContext.SaveChanges();
-
             var countryCurrency = new CountryCurrency
             {
                 CountryID = country.CountryID,
@@ -73,8 +71,6 @@ namespace OnLineStore.WebAPI.UnitTests
 
             dbContext.ProductCategories.Add(productCategory);
 
-            dbContext.SaveChanges();
-
             var product = new Product
             {
                 ProductID = 1,
@@ -90,9 +86,7 @@ namespace OnLineStore.WebAPI.UnitTests
 
             dbContext.Products.Add(product);
 
-            dbContext.SaveChanges();
-
-            var warehouse = new Location
+            var location = new Location
             {
                 LocationID = "W0001",
                 LocationName = "Warehouse 001",
@@ -100,14 +94,12 @@ namespace OnLineStore.WebAPI.UnitTests
                 CreationDateTime = creationDateTime
             };
 
-            dbContext.Warehouses.Add(warehouse);
-
-            dbContext.SaveChanges();
+            dbContext.Warehouses.Add(location);
 
             var productInventory = new ProductInventory
             {
                 ProductID = product.ProductID,
-                LocationID = warehouse.LocationID,
+                LocationID = location.LocationID,
                 OrderDetailID = 1,
                 Quantity = 1500,
                 CreationUser = creationUser,
@@ -128,8 +120,6 @@ namespace OnLineStore.WebAPI.UnitTests
 
             dbContext.OrderStatuses.Add(orderStatus);
 
-            dbContext.SaveChanges();
-
             var paymentMethod = new PaymentMethod
             {
                 PaymentMethodID = Guid.NewGuid(),
@@ -139,8 +129,6 @@ namespace OnLineStore.WebAPI.UnitTests
             };
 
             dbContext.PaymentMethods.Add(paymentMethod);
-
-            dbContext.SaveChanges();
 
             var customer = new Customer
             {
@@ -153,8 +141,6 @@ namespace OnLineStore.WebAPI.UnitTests
 
             dbContext.Customers.Add(customer);
 
-            dbContext.SaveChanges();
-
             var shipper = new Shipper
             {
                 ShipperID = 1,
@@ -166,14 +152,11 @@ namespace OnLineStore.WebAPI.UnitTests
 
             dbContext.Shippers.Add(shipper);
 
-            dbContext.SaveChanges();
-
             var order = new Order
             {
-                OrderStatusID = 100,
-                CustomerID = 1,
-                EmployeeID = 1,
-                ShipperID = 1,
+                OrderStatusID = orderStatus.OrderStatusID,
+                CustomerID = customer.CustomerID,
+                EmployeeID = employee.EmployeeID,
                 OrderDate = DateTime.Now,
                 Total = 29.99m,
                 CurrencyID = 1000,
@@ -185,13 +168,11 @@ namespace OnLineStore.WebAPI.UnitTests
 
             dbContext.Orders.Add(order);
 
-            dbContext.SaveChanges();
-
             var orderDetail = new OrderDetail
             {
                 OrderID = order.OrderID,
-                ProductID = 1,
-                ProductName = "The King of Fighters XIV",
+                ProductID = product.ProductID,
+                ProductName = product.ProductName,
                 UnitPrice = 29.99m,
                 Quantity = 1,
                 Total = 29.99m,

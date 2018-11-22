@@ -8,6 +8,9 @@ namespace OnLineStore.WebAPI.UnitTests
     {
         public static OnLineStoreDbContext GetOnLineStoreDbContextInMemory(string dbName)
         {
+            // Create options for DbContext
+            // Use in memory provider
+            // Disable transactions because in memory database doesn't support txns
             var options = new DbContextOptionsBuilder<OnLineStoreDbContext>()
                 .UseInMemoryDatabase(databaseName: dbName)
                 .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
@@ -15,6 +18,7 @@ namespace OnLineStore.WebAPI.UnitTests
 
             var dbContext = new OnLineStoreDbContext(options);
 
+            // Seed data for DbContext instance
             dbContext.SeedInMemory();
 
             return dbContext;
