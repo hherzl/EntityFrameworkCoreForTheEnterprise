@@ -72,7 +72,7 @@ namespace OnLineStore.Mocker
 
             for (var i = 0; i < ordersLimitPerDay; i++)
             {
-                var header = new Order
+                var header = new OrderHeader
                 {
                     OrderDate = date,
                     CreationDateTime = date

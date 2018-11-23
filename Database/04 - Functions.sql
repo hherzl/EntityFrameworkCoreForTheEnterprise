@@ -3,8 +3,8 @@ create function [Warehouse].[ufnGetStock](@productID int)
 as
     begin
         declare @value int
-        select @value = sum
-        ([Quantity]) from [Warehouse].[ProductInventory] where [ProductID] = @productID
+        select @value = sum([Quantity]) from [Warehouse].[ProductInventory] where [ProductID] = @productID
+        
         if (@value is null)
             set @value = 0
         
@@ -19,7 +19,7 @@ as
         declare @value varchar(75)
 
         select
-            @value = [FirstName] + isnull(MiddleName + ' ', '') + [LastName]
+            @value = [FirstName] + isnull([MiddleName] + ' ', '') + [LastName]
         from
             [HumanResources].[Employee]
         where

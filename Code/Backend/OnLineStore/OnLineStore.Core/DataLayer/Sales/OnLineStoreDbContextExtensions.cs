@@ -33,7 +33,7 @@ namespace OnLineStore.Core.DataLayer.Sales
                         from shipper in shipperTemp.DefaultIfEmpty()
                         select new OrderInfo
                         {
-                            OrderID = order.OrderID,
+                            OrderID = order.OrderHeaderID,
                             OrderStatusID = order.OrderStatusID,
                             CustomerID = order.CustomerID,
                             EmployeeID = order.EmployeeID,
@@ -86,7 +86,7 @@ namespace OnLineStore.Core.DataLayer.Sales
             return query;
         }
 
-        public static async Task<Order> GetOrderAsync(this OnLineStoreDbContext dbContext, Order entity)
-            => await dbContext.Orders.Include(p => p.OrderDetails).FirstOrDefaultAsync(item => item.OrderID == entity.OrderID);
+        public static async Task<OrderHeader> GetOrderAsync(this OnLineStoreDbContext dbContext, OrderHeader entity)
+            => await dbContext.Orders.Include(p => p.OrderDetails).FirstOrDefaultAsync(item => item.OrderHeaderID == entity.OrderHeaderID);
     }
 }

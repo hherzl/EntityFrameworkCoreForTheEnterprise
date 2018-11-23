@@ -77,8 +77,8 @@ alter table [Sales].[PaymentMethod]
 	add constraint [PK_Sales_PaymentMethod] primary key ([PaymentMethodID])
 go
 
-alter table [Sales].[Order]
-	add constraint [PK_Sales_Order] primary key ([OrderID])
+alter table [Sales].[OrderHeader]
+	add constraint [PK_Sales_OrderHeader] primary key ([OrderHeaderID])
 go
 
 alter table [Sales].[OrderDetail]
@@ -90,11 +90,11 @@ alter table [dbo].[CountryCurrency]
 go
 
 alter table [Sales].[OrderDetail]
-	add constraint [U_Sales_OrderDetail] unique (OrderID, ProductID)
+	add constraint [U_Sales_OrderDetail] unique ([OrderHeaderID], [ProductID])
 go
 
 alter table [ChangeLogExclusion]
-	add constraint [U_ChangeLogExclusion] unique(EntityName, PropertyName)
+	add constraint [U_ChangeLogExclusion] unique([EntityName], [PropertyName])
 go
 
 alter table [dbo].[CountryCurrency]
@@ -147,39 +147,39 @@ alter table [Sales].[CustomerEmail]
 		references [Sales].[Customer]
 go
 
-alter table [Sales].[Order]
-	add constraint [FK_Sales_Order_OrderStatus] foreign key ([OrderStatusID])
+alter table [Sales].[OrderHeader]
+	add constraint [FK_Sales_OrderHeader_OrderStatus] foreign key ([OrderStatusID])
 		references [Sales].[OrderStatus]
 go
 
-alter table [Sales].[Order]
-	add constraint [FK_Sales_Order_Customer] foreign key ([CustomerID])
+alter table [Sales].[OrderHeader]
+	add constraint [FK_Sales_OrderHeader_Customer] foreign key ([CustomerID])
 		references [Sales].[Customer]
 go
 
-alter table [Sales].[Order]
-	add constraint [FK_Sales_Order_Employee] foreign key ([EmployeeID])
+alter table [Sales].[OrderHeader]
+	add constraint [FK_Sales_OrderHeader_Employee] foreign key ([EmployeeID])
 		references [HumanResources].[Employee]
 go
 
-alter table [Sales].[Order]
-	add constraint [FK_Sales_Order_Shipper] foreign key ([ShipperID])
+alter table [Sales].[OrderHeader]
+	add constraint [FK_Sales_OrderHeader_Shipper] foreign key ([ShipperID])
 		references [Sales].[Shipper]
 go
 
-alter table [Sales].[Order]
-	add constraint [FK_Sales_Order_Currency] foreign key ([CurrencyID])
+alter table [Sales].[OrderHeader]
+	add constraint [FK_Sales_OrderHeader_Currency] foreign key ([CurrencyID])
 		references [dbo].[Currency]
 go
 
-alter table [Sales].[Order]
-	add constraint [FK_Sales_Order_PaymentMethod] foreign key ([PaymentMethodID])
+alter table [Sales].[OrderHeader]
+	add constraint [FK_Sales_OrderHeader_PaymentMethod] foreign key ([PaymentMethodID])
 		references [Sales].[PaymentMethod]
 go
 
 alter table [Sales].[OrderDetail]
-	add constraint [FK_Sales_OrderDetail_Order] foreign key ([OrderID])
-		references [Sales].[Order]
+	add constraint [FK_Sales_OrderDetail_Order] foreign key ([OrderHeaderID])
+		references [Sales].[OrderHeader]
 go
 
 alter table [Sales].[OrderDetail]

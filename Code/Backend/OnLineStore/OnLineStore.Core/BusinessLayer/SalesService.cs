@@ -172,16 +172,16 @@ namespace OnLineStore.Core.BusinessLayer
             return response;
         }
 
-        public async Task<ISingleResponse<Order>> GetOrderAsync(long id)
+        public async Task<ISingleResponse<OrderHeader>> GetOrderAsync(long id)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetOrderAsync));
 
-            var response = new SingleResponse<Order>();
+            var response = new SingleResponse<OrderHeader>();
 
             try
             {
                 // Retrieve order by id
-                response.Model = await DbContext.GetOrderAsync(new Order(id));
+                response.Model = await DbContext.GetOrderAsync(new OrderHeader(id));
             }
             catch (Exception ex)
             {
@@ -213,11 +213,11 @@ namespace OnLineStore.Core.BusinessLayer
             return response;
         }
 
-        public async Task<ISingleResponse<Order>> CreateOrderAsync(Order header, OrderDetail[] details)
+        public async Task<ISingleResponse<OrderHeader>> CreateOrderAsync(OrderHeader header, OrderDetail[] details)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(CreateOrderAsync));
 
-            var response = new SingleResponse<Order>();
+            var response = new SingleResponse<OrderHeader>();
 
             // Begin transaction
             using (var transaction = await DbContext.Database.BeginTransactionAsync())
@@ -268,7 +268,7 @@ namespace OnLineStore.Core.BusinessLayer
                     foreach (var detail in details)
                     {
                         // Set order id for order detail
-                        detail.OrderID = header.OrderID;
+                        detail.OrderHeaderID = header.OrderHeaderID;
 
                         // Add order detail
                         DbContext.Add(detail, UserInfo);
@@ -308,23 +308,23 @@ namespace OnLineStore.Core.BusinessLayer
             return response;
         }
 
-        public async Task<ISingleResponse<Order>> CloneOrderAsync(long id)
+        public async Task<ISingleResponse<OrderHeader>> CloneOrderAsync(long id)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(CloneOrderAsync));
 
-            var response = new SingleResponse<Order>();
+            var response = new SingleResponse<OrderHeader>();
 
             try
             {
                 // Retrieve order by id
-                var entity = await DbContext.GetOrderAsync(new Order(id));
+                var entity = await DbContext.GetOrderAsync(new OrderHeader(id));
 
                 if (entity != null)
                 {
                     // Create a new instance for order and set values from existing order
-                    response.Model = new Order
+                    response.Model = new OrderHeader
                     {
-                        OrderID = entity.OrderID,
+                        OrderHeaderID = entity.OrderHeaderID,
                         OrderDate = entity.OrderDate,
                         CustomerID = entity.CustomerID,
                         EmployeeID = entity.EmployeeID,
@@ -367,7 +367,7 @@ namespace OnLineStore.Core.BusinessLayer
             try
             {
                 // Retrieve order by id
-                var entity = await DbContext.GetOrderAsync(new Order(id));
+                var entity = await DbContext.GetOrderAsync(new OrderHeader(id));
 
                 if (entity != null)
                 {

@@ -6,9 +6,9 @@ namespace OnLineStore.WebAPI.Requests
 #pragma warning disable CS1591
     public static class Extensions
     {
-        public static Order GetOrder(this OrderRequest request)
+        public static OrderHeader GetOrder(this OrderHeaderRequest request)
         {
-            return new Order
+            return new OrderHeader
             {
                 OrderDate = request.OrderDate,
                 CustomerID = request.CustomerID,
@@ -20,7 +20,7 @@ namespace OnLineStore.WebAPI.Requests
             };
         }
 
-        public static IEnumerable<OrderDetail> GetOrderDetails(this OrderRequest request)
+        public static IEnumerable<OrderDetail> GetOrderDetails(this OrderHeaderRequest request)
         {
             foreach (var item in request.Details)
             {

@@ -107,7 +107,7 @@ namespace OnLineStore.WebAPI.UnitTests
 
             // Act
             var response = await controller.GetOrderAsync(id) as ObjectResult;
-            var value = response.Value as ISingleResponse<Order>;
+            var value = response.Value as ISingleResponse<OrderHeader>;
 
             service.Dispose();
 
@@ -126,7 +126,7 @@ namespace OnLineStore.WebAPI.UnitTests
 
             // Act
             var response = await controller.GetOrderAsync(id) as ObjectResult;
-            var value = response.Value as ISingleResponse<Order>;
+            var value = response.Value as ISingleResponse<OrderHeader>;
 
             service.Dispose();
 
@@ -161,7 +161,7 @@ namespace OnLineStore.WebAPI.UnitTests
             var logger = LoggingHelper.GetLogger<SalesController>();
             var service = ServiceMocker.GetSalesService(nameof(TestCreateOrderAsync));
             var controller = new SalesController(logger, service);
-            var model = new OrderRequest
+            var model = new OrderHeaderRequest
             {
                 CustomerID = 1,
                 PaymentMethodID = new Guid("7671A4F7-A735-4CB7-AAB4-CF47AE20171D"),
@@ -181,13 +181,13 @@ namespace OnLineStore.WebAPI.UnitTests
 
             // Act
             var response = await controller.CreateOrderAsync(model) as ObjectResult;
-            var value = response.Value as ISingleResponse<Order>;
+            var value = response.Value as ISingleResponse<OrderHeader>;
 
             service.Dispose();
 
             // Assert
             Assert.False(value.DidError);
-            Assert.True(value.Model.OrderID.HasValue);
+            Assert.True(value.Model.OrderHeaderID.HasValue);
         }
 
         [Fact]
@@ -201,7 +201,7 @@ namespace OnLineStore.WebAPI.UnitTests
 
             // Act
             var response = await controller.CloneOrderAsync(id) as ObjectResult;
-            var value = response.Value as ISingleResponse<Order>;
+            var value = response.Value as ISingleResponse<OrderHeader>;
 
             service.Dispose();
 

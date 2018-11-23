@@ -6,12 +6,12 @@ namespace OnLineStore.WebAPI.Requests
     /// <summary>
     /// 
     /// </summary>
-    public class OrderRequest
+    public class OrderHeaderRequest
     {
         /// <summary>
         /// 
         /// </summary>
-        public int? OrderID { get; set; }
+        public int? OrderHeaderID { get; set; }
 
         /// <summary>
         /// 

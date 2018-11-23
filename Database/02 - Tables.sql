@@ -234,9 +234,9 @@ create table [Sales].[Shipper]
 	[Timestamp] rowversion null
 )
 
-create table [Sales].[Order]
+create table [Sales].[OrderHeader]
 (
-	[OrderID] bigint not null identity(1, 1),
+	[OrderHeaderID] bigint not null identity(1, 1),
 	[OrderStatusID] smallint not null,
 	[CustomerID] int not null,
 	[EmployeeID] int null,
@@ -258,7 +258,7 @@ create table [Sales].[Order]
 create table [Sales].[OrderDetail]
 (
 	[OrderDetailID] bigint not null identity(1, 1),
-	[OrderID] bigint not null,
+	[OrderHeaderID] bigint not null,
 	[ProductID] int not null,
 	[ProductName] varchar(255) not null,
 	[UnitPrice] decimal(8, 4) not null,

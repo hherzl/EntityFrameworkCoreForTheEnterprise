@@ -152,7 +152,7 @@ namespace OnLineStore.WebAPI.UnitTests.Mocks
 
             dbContext.Shippers.Add(shipper);
 
-            var order = new Order
+            var order = new OrderHeader
             {
                 OrderStatusID = orderStatus.OrderStatusID,
                 CustomerID = customer.CustomerID,
@@ -170,7 +170,7 @@ namespace OnLineStore.WebAPI.UnitTests.Mocks
 
             var orderDetail = new OrderDetail
             {
-                OrderID = order.OrderID,
+                OrderHeaderID = order.OrderHeaderID,
                 ProductID = product.ProductID,
                 ProductName = product.ProductName,
                 UnitPrice = 29.99m,

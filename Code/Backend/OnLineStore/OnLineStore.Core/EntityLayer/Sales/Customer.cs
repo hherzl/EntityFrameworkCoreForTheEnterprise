@@ -30,6 +30,6 @@ namespace OnLineStore.Core.EntityLayer.Sales
 
         public byte[] Timestamp { get; set; }
 
-        public virtual Collection<Order> Orders { get; set; }
+        public virtual Collection<OrderHeader> Orders { get; set; }
     }
 }

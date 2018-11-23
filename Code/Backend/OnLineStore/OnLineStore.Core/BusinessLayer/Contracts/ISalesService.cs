@@ -20,13 +20,13 @@ namespace OnLineStore.Core.BusinessLayer.Contracts
 
         Task<IPagedResponse<OrderInfo>> GetOrdersAsync(int pageSize = 10, int pageNumber = 1, short? orderStatusID = null, int? customerID = null, int? employeeID = null, int? shipperID = null, short? currencyID = null, Guid? paymentMethodID = null);
 
-        Task<ISingleResponse<Order>> GetOrderAsync(long id);
+        Task<ISingleResponse<OrderHeader>> GetOrderAsync(long id);
 
         Task<ISingleResponse<CreateOrderRequest>> GetCreateOrderRequestAsync();
 
-        Task<ISingleResponse<Order>> CreateOrderAsync(Order header, OrderDetail[] details);
+        Task<ISingleResponse<OrderHeader>> CreateOrderAsync(OrderHeader header, OrderDetail[] details);
 
-        Task<ISingleResponse<Order>> CloneOrderAsync(long id);
+        Task<ISingleResponse<OrderHeader>> CloneOrderAsync(long id);
 
         Task<IResponse> RemoveOrderAsync(long id);
     }
