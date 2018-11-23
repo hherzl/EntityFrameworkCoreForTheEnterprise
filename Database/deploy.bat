@@ -1,6 +1,6 @@
 cls
 set server=(local)
-set database=Store
+set database=OnLineStore
 sqlcmd -S %server% -i "00 - Database.sql"
 sqlcmd -S %server% -d %database% -i "01 - Schemas.sql"
 sqlcmd -S %server% -d %database% -i "02 - Tables.sql"

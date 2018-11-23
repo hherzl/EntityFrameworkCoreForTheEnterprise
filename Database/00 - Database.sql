@@ -1,8 +1,8 @@
 use master
 go
 
-drop database [Store]
+drop database [OnLineStore]
 go
 
-create database [Store]
+create database [OnLineStore]
 go
