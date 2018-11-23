@@ -37,26 +37,33 @@ namespace OnLineStore.WebAPI
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
 
+            // Setting dependency injection
+
+            // For DbContext
             services.AddDbContext<OnLineStoreDbContext>(options => options.UseSqlServer(Configuration["AppSettings:ConnectionString"]));
 
+            // User info
             services.AddScoped<IUserInfo, UserInfo>();
 
+            // Logger for services
             services.AddScoped<ILogger, Logger<Service>>();
 
+            // Services
             services.AddScoped<IHumanResourcesService, HumanResourcesService>();
             services.AddScoped<IWarehouseService, WarehouseService>();
             services.AddScoped<ISalesService, SalesService>();
 
-            services.AddSwaggerGen(c =>
+            // Configuration for Help page
+            services.AddSwaggerGen(options =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "OnLine Store API", Version = "v1" });
+                options.SwaggerDoc("v1", new Info { Title = "OnLine Store API", Version = "v1" });
 
-                // Set the comments path for the Swagger JSON and UI.
-
+                // Get xml comments path
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
 
-                c.IncludeXmlComments(xmlPath);
+                // Set xml path
+                options.IncludeXmlComments(xmlPath);
             });
         }
 
@@ -75,6 +82,7 @@ namespace OnLineStore.WebAPI
                 policy.AllowAnyMethod();
             });
 
+            // Configuration for Swagger
             app.UseSwagger();
 
             app.UseSwaggerUI(c =>
