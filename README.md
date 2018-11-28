@@ -40,7 +40,9 @@ Architecture: Big Picture
 |PRESENTATION LAYER|UI Frameworks (AngularJS or ReactJS or Vue.js or Anothers)|Frontend|
 |USER||Clients|
 
-## Skills Prerequisites
+## Prerequisites
+
+### Skills
 
 Before to continuing, keep in mind we need to have the folllowing skills in order to understand this guide:
 
@@ -49,7 +51,7 @@ Before to continuing, keep in mind we need to have the folllowing skills in orde
 * ORM (Object Relational Mapping)
 * Design Patterns: Domain Driven Design, Repository & Unit of Work and IoC
 
-## Software Prerequisites
+### Software
 
 * .Net Core
 * Visual Studio 2017
@@ -279,7 +281,47 @@ For Web API project, these are the routes for controllers:
 
 As we can see there is a v1 in each route, this is because the version for Web API is 1 and that value is defined in Route attribute for controllers in Web API project.
 
-### Chapter 06 - Unit Tests for Web API
+### Chapter 06 - Help Page for Web API
+
+Web API uses Swagger to show a help page.
+
+The following package is required to show a help page with Swagger:
+
+    Swashbuckle.AspNetCore
+
+The configuration for Swagger is located in Startup class, addition for Swagger is in ConfigureServices method:
+Hide   Copy Code
+
+```csharp
+// Configuration for Help page
+services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new Info { Title = "OnLine Store API", Version = "v1" });
+
+    // Get xml comments path
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
+    // Set xml path
+    options.IncludeXmlComments(xmlPath);
+});
+```
+
+The configuration for endpoint is in Configure method:
+
+```csharp
+// Configuration for Swagger
+app.UseSwagger();
+
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "OnLine Store API");
+});
+```
+
+Swagger allows to show description for actions in controllers, these descriptions are taken from xml comments.
+
+### Chapter 07 - Unit Tests for Web API
 
 Now we proceed to add unit tests for Web API project, these tests work with in memory database, what is the difference between unit tests and integration tests? for unit tests we simulate all dependencies for Web API project and for integration tests we run a process that simulates Web API execution. I mean a simulation of Web API (accept Http requests), obviously there is more information about unit tests and integration tests but at this point this basic idea is enough.
 
@@ -289,7 +331,7 @@ As we can see those methods perform tests for Urls in Web API project, please ta
 
 Don't forget we can have more tests, we have class with name ProductionTests to perform requests for ProductionController.
 
-### Chapter 07 - Integration Tests for Web API
+### Chapter 08 - Integration Tests for Web API
 
 In order to work with integration tests, we need to create a class to provide a Web Host to performing Http behavior, this class it will be TestFixture and to represent Http requests for Web API, there is a class with name SalesTests, this class will contains all requests for defined actions in SalesController class, but using a mocked Http client.
 
