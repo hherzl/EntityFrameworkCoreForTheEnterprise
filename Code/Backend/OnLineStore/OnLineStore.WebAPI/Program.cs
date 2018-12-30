@@ -12,7 +12,9 @@ namespace OnLineStore.WebAPI
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+            WebHost
+                .CreateDefaultBuilder(args)
+                .UseUrls("http://localhost:57000")
                 .UseStartup<Startup>();
     }
 #pragma warning restore CS1591
