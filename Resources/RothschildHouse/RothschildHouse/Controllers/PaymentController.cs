@@ -4,7 +4,7 @@ using RothschildHouse.Requests;
 
 namespace RothschildHouse.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class PaymentController : ControllerBase
     {
@@ -12,7 +12,7 @@ namespace RothschildHouse.Controllers
         {
         }
 
-        public async Task<IActionResult> PostPayment(PostPaymentRequest request)
+        public async Task<IActionResult> PostPayment([FromBody]PostPaymentRequest request)
         {
             return Ok();
         }
