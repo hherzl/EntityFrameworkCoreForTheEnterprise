@@ -13,6 +13,7 @@ using OnLineStore.Core;
 using OnLineStore.Core.BusinessLayer;
 using OnLineStore.Core.BusinessLayer.Contracts;
 using OnLineStore.Core.DataLayer;
+using OnLineStore.WebAPI.PolicyRequirements;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace OnLineStore.WebAPI
@@ -30,14 +31,7 @@ namespace OnLineStore.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
-            services.AddMvc().AddJsonOptions(options =>
-            {
-                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            });
-
-            // Setting dependency injection
+            /* Setting dependency injection */
 
             // For DbContext
             services.AddDbContext<OnLineStoreDbContext>(options => options.UseSqlServer(Configuration["AppSettings:ConnectionString"]));
@@ -53,7 +47,41 @@ namespace OnLineStore.WebAPI
             services.AddScoped<IWarehouseService, WarehouseService>();
             services.AddScoped<ISalesService, SalesService>();
 
-            // Configuration for Help page
+            /* Configuration for MVC */
+
+            services
+                .AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                });
+
+            /* Configuration for authentication */
+
+            services
+                .AddMvcCore()
+                .AddAuthorization(options =>
+                {
+                    options.AddPolicy("AdministratorPolicy", builder => builder.Requirements.Add(new AdministratorPolicyRequirement()));
+                    options.AddPolicy("CustomerPolicy", builder => builder.Requirements.Add(new CustomerPolicyRequirement()));
+                });
+
+            /* Configuration for IdentityServer authentication */
+
+            services
+                .AddAuthentication("Bearer")
+                .AddIdentityServerAuthentication(options =>
+                {
+                    // todo: Set values from appsettings file
+
+                    options.Authority = "http://localhost:56000";
+                    options.RequireHttpsMetadata = false;
+                    options.ApiName = "OnLineStoreApi";
+                });
+
+            /* Configuration for Help page */
+
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new Info { Title = "OnLine Store API", Version = "v1" });
@@ -73,16 +101,23 @@ namespace OnLineStore.WebAPI
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
-            // todo: Set port number for client app
             app.UseCors(policy =>
             {
                 // Add client origin in CORS policy
+
+                // todo: Set port number for client app from appsettings file
+
                 policy.WithOrigins("http://localhost:4200");
                 policy.AllowAnyHeader();
                 policy.AllowAnyMethod();
             });
 
-            // Configuration for Swagger
+            /* Use authentication for Web API */
+
+            app.UseAuthentication();
+
+            /* Configuration for Swagger */
+
             app.UseSwagger();
 
             app.UseSwaggerUI(c =>

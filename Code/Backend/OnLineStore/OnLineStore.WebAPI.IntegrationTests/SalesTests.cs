@@ -9,11 +9,11 @@ namespace OnLineStore.WebAPI.IntegrationTests
 {
     public class SalesTests : IClassFixture<TestFixture<Startup>>
     {
-        private HttpClient Client;
+        private HttpClient HttpClient;
 
         public SalesTests(TestFixture<Startup> fixture)
         {
-            Client = fixture.Client;
+            HttpClient = fixture.Client;
         }
 
         [Fact]
@@ -23,7 +23,7 @@ namespace OnLineStore.WebAPI.IntegrationTests
             var request = "/api/v1/Sales/Order";
 
             // Act
-            var response = await Client.GetAsync(request);
+            var response = await HttpClient.GetAsync(request);
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -37,7 +37,7 @@ namespace OnLineStore.WebAPI.IntegrationTests
             var request = string.Format("/api/v1/Sales/Order?currencyID={0}", currencyID);
 
             // Act
-            var response = await Client.GetAsync(request);
+            var response = await HttpClient.GetAsync(request);
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -51,7 +51,7 @@ namespace OnLineStore.WebAPI.IntegrationTests
             var request = string.Format("/api/v1/Sales/Order?customerID={0}", customerID);
 
             // Act
-            var response = await Client.GetAsync(request);
+            var response = await HttpClient.GetAsync(request);
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -65,7 +65,7 @@ namespace OnLineStore.WebAPI.IntegrationTests
             var request = string.Format("/api/v1/Sales/Order?employeeID={0}", employeeID);
 
             // Act
-            var response = await Client.GetAsync(request);
+            var response = await HttpClient.GetAsync(request);
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -79,7 +79,7 @@ namespace OnLineStore.WebAPI.IntegrationTests
             var request = string.Format("/api/v1/Sales/Order/{0}", id);
 
             // Act
-            var response = await Client.GetAsync(request);
+            var response = await HttpClient.GetAsync(request);
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -93,7 +93,7 @@ namespace OnLineStore.WebAPI.IntegrationTests
             var request = string.Format("/api/v1/Sales/Order/{0}", id);
 
             // Act
-            var response = await Client.GetAsync(request);
+            var response = await HttpClient.GetAsync(request);
 
             // Assert
             Assert.True(response.StatusCode == HttpStatusCode.NotFound);
@@ -106,7 +106,7 @@ namespace OnLineStore.WebAPI.IntegrationTests
             var request = "/api/v1/Sales/CreateOrderRequest";
 
             // Act
-            var response = await Client.GetAsync(request);
+            var response = await HttpClient.GetAsync(request);
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -134,7 +134,7 @@ namespace OnLineStore.WebAPI.IntegrationTests
             };
 
             // Act
-            var response = await Client.PostAsync(request, ContentHelper.GetStringContent(model));
+            var response = await HttpClient.PostAsync(request, ContentHelper.GetStringContent(model));
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -148,7 +148,7 @@ namespace OnLineStore.WebAPI.IntegrationTests
             var request = string.Format("/api/v1/Sales/CloneOrder/{0}", id);
 
             // Act
-            var response = await Client.GetAsync(request);
+            var response = await HttpClient.GetAsync(request);
 
             // Assert
             response.EnsureSuccessStatusCode();

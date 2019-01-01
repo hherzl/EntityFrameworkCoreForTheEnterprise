@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OnLineStore.Core.BusinessLayer.Contracts;
@@ -10,6 +11,7 @@ using OnLineStore.WebAPI.Responses;
 namespace OnLineStore.WebAPI.Controllers
 {
 #pragma warning disable CS1591
+    [Authorize]
     [ApiController]
     [Route("api/v1/[controller]")]
     public class SalesController : ControllerBase

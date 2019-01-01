@@ -7,11 +7,11 @@ namespace OnLineStore.WebAPI.IntegrationTests
 {
     public class WarehouseTests : IClassFixture<TestFixture<Startup>>
     {
-        private HttpClient Client;
+        private HttpClient HttpClient;
 
         public WarehouseTests(TestFixture<Startup> fixture)
         {
-            Client = fixture.Client;
+            HttpClient = fixture.Client;
         }
 
         [Fact]
@@ -21,7 +21,7 @@ namespace OnLineStore.WebAPI.IntegrationTests
             var request = "/api/v1/Warehouse/Product";
 
             // Act
-            var response = await Client.GetAsync(request);
+            var response = await HttpClient.GetAsync(request);
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -34,7 +34,7 @@ namespace OnLineStore.WebAPI.IntegrationTests
             var request = string.Format("/api/v1/Warehouse/ProductInventory");
 
             // Act
-            var response = await Client.GetAsync(request);
+            var response = await HttpClient.GetAsync(request);
 
             // Assert
             response.EnsureSuccessStatusCode();
