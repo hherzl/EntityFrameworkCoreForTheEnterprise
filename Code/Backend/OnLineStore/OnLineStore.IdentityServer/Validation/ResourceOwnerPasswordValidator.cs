@@ -17,13 +17,9 @@ namespace OnLineStore.IdentityServer.Validation
         public Task ValidateAsync(ResourceOwnerPasswordValidationContext context)
         {
             if (DbContext.ValidatePassword(context.UserName, context.Password))
-            {
                 context.Result = new GrantValidationResult(DbContext.GetUserByUserName(context.UserName).UserID, "password", null, "local", null);
-
-                return Task.FromResult(context.Result);
-            }
-
-            context.Result = new GrantValidationResult(TokenRequestErrors.InvalidGrant, "The user name and password do not match.", null);
+            else
+                context.Result = new GrantValidationResult(TokenRequestErrors.InvalidGrant, "The user name and password do not match.", null);
 
             return Task.FromResult(context.Result);
         }
