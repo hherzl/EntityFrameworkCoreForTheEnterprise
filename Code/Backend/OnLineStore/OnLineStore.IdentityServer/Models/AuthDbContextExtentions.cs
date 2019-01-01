@@ -14,7 +14,7 @@ namespace OnLineStore.IdentityServer.Models
             if (user == null)
                 return false;
 
-            if (user.Password == password)
+            if (user.Password == password.ToSha256())
                 return true;
 
             return false;
@@ -31,26 +31,26 @@ namespace OnLineStore.IdentityServer.Models
 
         public static void SeedInMemory(this AuthDbContext dbContext)
         {
-            dbContext.Users.Add(new User { UserID = "1000", Email = "carloshdez@outlook.com", Password = "password1", IsActive = true });
+            dbContext.Users.Add(new User("1000", "carloshdez@outlook.com", "password1".ToSha256(), true));
 
             dbContext.UserClaims.AddRange(
-                new UserClaim { UserClaimID = Guid.NewGuid(), UserID = "1000", ClaimType = JwtClaimTypes.Subject, ClaimValue = "1000" },
-                new UserClaim { UserClaimID = Guid.NewGuid(), UserID = "1000", ClaimType = JwtClaimTypes.Role, ClaimValue = "Administrator" },
-                new UserClaim { UserClaimID = Guid.NewGuid(), UserID = "1000", ClaimType = JwtClaimTypes.PreferredUserName, ClaimValue = "carlosfdez" },
-                new UserClaim { UserClaimID = Guid.NewGuid(), UserID = "1000", ClaimType = JwtClaimTypes.GivenName, ClaimValue = "Carlos" },
-                new UserClaim { UserClaimID = Guid.NewGuid(), UserID = "1000", ClaimType = JwtClaimTypes.MiddleName, ClaimValue = "A" },
-                new UserClaim { UserClaimID = Guid.NewGuid(), UserID = "1000", ClaimType = JwtClaimTypes.FamilyName, ClaimValue = "Hernandez" }
+                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.Subject, "1000"),
+                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.Role, "Administrator"),
+                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.PreferredUserName, "carlosfdez"),
+                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.GivenName, "Carlos"),
+                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.MiddleName, "A"),
+                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.FamilyName, "Hernandez")
                 );
 
-            dbContext.Users.Add(new User { UserID = "20000", Email = "juanperez@gmail.com", Password = "password1", IsActive = true });
+            dbContext.Users.Add(new User("2000", "juanperez@gmail.com", "password1".ToSha256(), true));
 
             dbContext.UserClaims.AddRange(
-                new UserClaim { UserClaimID = Guid.NewGuid(), UserID = "20000", ClaimType = JwtClaimTypes.Subject, ClaimValue = "20000" },
-                new UserClaim { UserClaimID = Guid.NewGuid(), UserID = "20000", ClaimType = JwtClaimTypes.Role, ClaimValue = "Customer" },
-                new UserClaim { UserClaimID = Guid.NewGuid(), UserID = "20000", ClaimType = JwtClaimTypes.PreferredUserName, ClaimValue = "juanperez" },
-                new UserClaim { UserClaimID = Guid.NewGuid(), UserID = "20000", ClaimType = JwtClaimTypes.GivenName, ClaimValue = "Juan" },
-                new UserClaim { UserClaimID = Guid.NewGuid(), UserID = "20000", ClaimType = JwtClaimTypes.MiddleName, ClaimValue = "M" },
-                new UserClaim { UserClaimID = Guid.NewGuid(), UserID = "20000", ClaimType = JwtClaimTypes.FamilyName, ClaimValue = "Perez" }
+                new UserClaim(Guid.NewGuid(), "2000", JwtClaimTypes.Subject, "2000"),
+                new UserClaim(Guid.NewGuid(), "2000", JwtClaimTypes.Role, "Customer"),
+                new UserClaim(Guid.NewGuid(), "2000", JwtClaimTypes.PreferredUserName, "juanperez"),
+                new UserClaim(Guid.NewGuid(), "2000", JwtClaimTypes.GivenName, "Juan"),
+                new UserClaim(Guid.NewGuid(), "2000", JwtClaimTypes.MiddleName, "M"),
+                new UserClaim(Guid.NewGuid(), "2000", JwtClaimTypes.FamilyName, "Perez")
             );
 
             dbContext.SaveChanges();

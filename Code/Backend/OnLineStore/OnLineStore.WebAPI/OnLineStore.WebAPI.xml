@@ -64,7 +64,7 @@
             <summary>
             Gets the inventory for product by warehouse
             </summary>
-            <param name="productID">Product</param>
+            <param name="id">Product</param>
             <param name="warehouseID">Warehouse</param>
             <returns>A sequence of inventory transactions by product and warehouse</returns>
         </member>

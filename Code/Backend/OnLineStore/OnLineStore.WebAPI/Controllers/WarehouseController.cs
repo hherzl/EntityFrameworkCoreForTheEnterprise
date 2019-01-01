@@ -46,18 +46,18 @@ namespace OnLineStore.WebAPI.Controllers
         /// <summary>
         /// Gets the inventory for product by warehouse
         /// </summary>
-        /// <param name="productID">Product</param>
+        /// <param name="id">Product</param>
         /// <param name="warehouseID">Warehouse</param>
         /// <returns>A sequence of inventory transactions by product and warehouse</returns>
-        [HttpGet("ProductInventory")]
+        [HttpGet("ProductInventory/{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> GetProductInventoryAsync(int? productID, string warehouseID)
+        public async Task<IActionResult> GetProductInventoryAsync(int? id, string warehouseID)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetProductInventoryAsync));
 
             // Get response from business logic
-            var response = await Service.GetProductInventories(productID, warehouseID);
+            var response = await Service.GetProductInventories(id, warehouseID);
 
             // Return as http response
             return response.ToHttpResponse();
