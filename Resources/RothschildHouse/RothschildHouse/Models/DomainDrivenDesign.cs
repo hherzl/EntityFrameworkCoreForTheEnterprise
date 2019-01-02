@@ -68,6 +68,10 @@ namespace RothschildHouse.Models
             builder.HasKey(p => p.PersonID);
 
             builder.Property(p => p.PersonID).IsRequired();
+            builder.Property(p => p.GivenName).IsRequired();
+            builder.Property(p => p.FamilyName).IsRequired();
+            builder.Property(p => p.FullName).IsRequired();
+            builder.Property(p => p.BirthDate).IsRequired();
         }
     }
 
@@ -79,6 +83,11 @@ namespace RothschildHouse.Models
 
             builder.Property(p => p.CreditCardID).IsRequired();
             builder.Property(p => p.PersonID).IsRequired();
+            builder.Property(p => p.CardType).IsRequired();
+            builder.Property(p => p.CardNumber).IsRequired();
+            builder.Property(p => p.Last4Digits).IsRequired();
+            builder.Property(p => p.ExpirationDate).IsRequired();
+            builder.Property(p => p.Cvv).IsRequired();
         }
     }
 
@@ -90,6 +99,9 @@ namespace RothschildHouse.Models
 
             builder.Property(p => p.PaymentTransactionID).IsRequired();
             builder.Property(p => p.CreditCardID).IsRequired();
+            builder.Property(p => p.ConfirmationID).IsRequired();
+            builder.Property(p => p.PaymentDateTime).IsRequired();
+            builder.Property(p => p.PaymentDateTime).IsRequired();
         }
     }
 
@@ -103,6 +115,8 @@ namespace RothschildHouse.Models
         public DbSet<Person> People { get; set; }
 
         public DbSet<CreditCard> CreditCards { get; set; }
+
+        public DbSet<PaymentTransaction> PaymentTransactions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
