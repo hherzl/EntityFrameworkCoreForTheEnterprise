@@ -13,7 +13,7 @@ namespace RothschildHouse.IdentityServer
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost
                 .CreateDefaultBuilder(args)
-                .UseUrls("http://localhost:1800")
+                .UseUrls("http://localhost:18000")
                 .UseStartup<Startup>();
     }
 }
