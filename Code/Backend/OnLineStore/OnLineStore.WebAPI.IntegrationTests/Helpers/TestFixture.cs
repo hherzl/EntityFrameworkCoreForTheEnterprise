@@ -64,7 +64,7 @@ namespace OnLineStore.WebAPI.IntegrationTests.Helpers
             Server = new TestServer(webHostBuilder);
 
             Client = Server.CreateClient();
-            Client.BaseAddress = new Uri("http://localhost:1234");
+            Client.BaseAddress = new Uri("http://localhost:10000");
             Client.DefaultRequestHeaders.Accept.Clear();
             Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }

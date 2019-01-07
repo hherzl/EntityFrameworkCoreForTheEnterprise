@@ -7,34 +7,40 @@ namespace OnLineStore.WebAPI.IntegrationTests
 {
     public class WarehouseTests : IClassFixture<TestFixture<Startup>>
     {
-        private HttpClient HttpClient;
+        private HttpClient apiClient;
 
         public WarehouseTests(TestFixture<Startup> fixture)
         {
-            HttpClient = fixture.Client;
+            apiClient = fixture.Client;
         }
 
         [Fact]
-        public async Task GetProductsTestAsync()
+        public async Task GetProductsAsCustomerTestAsync()
         {
             // Arrange
             var request = "/api/v1/Warehouse/Product";
+            var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
 
             // Act
-            var response = await HttpClient.GetAsync(request);
+            apiClient.SetBearerToken(customerToken.AccessToken);
+
+            var response = await apiClient.GetAsync(request);
 
             // Assert
             response.EnsureSuccessStatusCode();
         }
 
         [Fact]
-        public async Task GetProductInventoriesAsync()
+        public async Task GetProductInventoriesAsCustomerAsync()
         {
             // Arrange
-            var request = string.Format("/api/v1/Warehouse/ProductInventory");
+            var request = string.Format("/api/v1/Warehouse/ProductInventory/1");
+            var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
 
             // Act
-            var response = await HttpClient.GetAsync(request);
+            apiClient.SetBearerToken(customerToken.AccessToken);
+
+            var response = await apiClient.GetAsync(request);
 
             // Assert
             response.EnsureSuccessStatusCode();

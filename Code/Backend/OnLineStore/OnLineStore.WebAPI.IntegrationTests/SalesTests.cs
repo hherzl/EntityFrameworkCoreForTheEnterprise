@@ -9,114 +9,136 @@ namespace OnLineStore.WebAPI.IntegrationTests
 {
     public class SalesTests : IClassFixture<TestFixture<Startup>>
     {
-        private HttpClient HttpClient;
+        private HttpClient apiClient;
 
         public SalesTests(TestFixture<Startup> fixture)
         {
-            HttpClient = fixture.Client;
+            apiClient = fixture.Client;
         }
 
         [Fact]
-        public async Task TestGetOrdersAsync()
+        public async Task TestGetOrdersAsCustomerAsync()
         {
             // Arrange
             var request = "/api/v1/Sales/Order";
+            var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
 
             // Act
-            var response = await HttpClient.GetAsync(request);
+            apiClient.SetBearerToken(customerToken.AccessToken);
+
+            var response = await apiClient.GetAsync(request);
 
             // Assert
             response.EnsureSuccessStatusCode();
         }
 
         [Fact]
-        public async Task TestGetOrdersByCurrencyAsync()
+        public async Task TestGetOrdersByCurrencyAsCustomerAsync()
         {
             // Arrange
             var currencyID = (short)1;
             var request = string.Format("/api/v1/Sales/Order?currencyID={0}", currencyID);
+            var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
 
             // Act
-            var response = await HttpClient.GetAsync(request);
+            apiClient.SetBearerToken(customerToken.AccessToken);
+
+            var response = await apiClient.GetAsync(request);
 
             // Assert
             response.EnsureSuccessStatusCode();
         }
 
         [Fact]
-        public async Task TestGetOrdersByCustomerAsync()
+        public async Task TestGetOrdersByCustomerAsCustomerAsync()
         {
             // Arrange
             var customerID = 1;
             var request = string.Format("/api/v1/Sales/Order?customerID={0}", customerID);
+            var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
 
             // Act
-            var response = await HttpClient.GetAsync(request);
+            apiClient.SetBearerToken(customerToken.AccessToken);
+
+            var response = await apiClient.GetAsync(request);
 
             // Assert
             response.EnsureSuccessStatusCode();
         }
 
         [Fact]
-        public async Task TestGetOrdersByEmployeeAsync()
+        public async Task TestGetOrdersByEmployeeAsCustomerAsync()
         {
             // Arrange
             var employeeID = 1;
             var request = string.Format("/api/v1/Sales/Order?employeeID={0}", employeeID);
+            var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
 
             // Act
-            var response = await HttpClient.GetAsync(request);
+            apiClient.SetBearerToken(customerToken.AccessToken);
+
+            var response = await apiClient.GetAsync(request);
 
             // Assert
             response.EnsureSuccessStatusCode();
         }
 
         [Fact]
-        public async Task TestGetOrderByIdAsync()
+        public async Task TestGetOrderByIdAsCustomerAsync()
         {
             // Arrange
             var id = 1;
             var request = string.Format("/api/v1/Sales/Order/{0}", id);
+            var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
 
             // Act
-            var response = await HttpClient.GetAsync(request);
+            apiClient.SetBearerToken(customerToken.AccessToken);
+
+            var response = await apiClient.GetAsync(request);
 
             // Assert
             response.EnsureSuccessStatusCode();
         }
 
         [Fact]
-        public async Task TestGetOrderByNonExistingIdAsync()
+        public async Task TestGetOrderByNonExistingIdAsCustomerAsync()
         {
             // Arrange
             var id = 0;
             var request = string.Format("/api/v1/Sales/Order/{0}", id);
+            var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
 
             // Act
-            var response = await HttpClient.GetAsync(request);
+            apiClient.SetBearerToken(customerToken.AccessToken);
+
+            var response = await apiClient.GetAsync(request);
 
             // Assert
             Assert.True(response.StatusCode == HttpStatusCode.NotFound);
         }
 
         [Fact]
-        public async Task TestGetCreateOrderRequestAsync()
+        public async Task TestGetCreateOrderRequestAsCustomerAsync()
         {
             // Arrange
             var request = "/api/v1/Sales/CreateOrderRequest";
+            var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
 
             // Act
-            var response = await HttpClient.GetAsync(request);
+            apiClient.SetBearerToken(customerToken.AccessToken);
+
+            var response = await apiClient.GetAsync(request);
 
             // Assert
             response.EnsureSuccessStatusCode();
         }
 
         [Fact]
-        public async Task TestCreateOrderAsync()
+        public async Task TestCreateOrderAsCustomerAsync()
         {
             // Arrange
             var request = "/api/v1/Sales/Order";
+            var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
             var model = new
             {
                 CustomerID = 1,
@@ -134,21 +156,26 @@ namespace OnLineStore.WebAPI.IntegrationTests
             };
 
             // Act
-            var response = await HttpClient.PostAsync(request, ContentHelper.GetStringContent(model));
+            apiClient.SetBearerToken(customerToken.AccessToken);
+
+            var response = await apiClient.PostAsync(request, ContentHelper.GetStringContent(model));
 
             // Assert
             response.EnsureSuccessStatusCode();
         }
 
         [Fact]
-        public async Task TestCloneOrderAsync()
+        public async Task TestCloneOrderAsCustomerAsync()
         {
             // Arrange
             var id = 1;
             var request = string.Format("/api/v1/Sales/CloneOrder/{0}", id);
+            var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
 
             // Act
-            var response = await HttpClient.GetAsync(request);
+            apiClient.SetBearerToken(customerToken.AccessToken);
+
+            var response = await apiClient.GetAsync(request);
 
             // Assert
             response.EnsureSuccessStatusCode();
