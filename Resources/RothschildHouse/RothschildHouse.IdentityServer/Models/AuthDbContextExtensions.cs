@@ -39,8 +39,20 @@ namespace RothschildHouse.IdentityServer.Models
                 new UserClaim(Guid.NewGuid(), "100", JwtClaimTypes.Id, "45783940-5124-46F9-B54F-5A2149F35117"),
                 new UserClaim(Guid.NewGuid(), "100", JwtClaimTypes.Email, "charlesxavier@gmail.com"),
                 new UserClaim(Guid.NewGuid(), "100", JwtClaimTypes.GivenName, "Charles"),
-                new UserClaim(Guid.NewGuid(), "100", JwtClaimTypes.MiddleName, "F"),
+                new UserClaim(Guid.NewGuid(), "100", JwtClaimTypes.MiddleName, "Francis"),
                 new UserClaim(Guid.NewGuid(), "100", JwtClaimTypes.FamilyName, "Xavier")
+            );
+
+            dbContext.Users.Add(new User("200", "erik.lehnsherr@outlook.com", "magneto".ToSha256(), true));
+
+            dbContext.UserClaims.AddRange(
+                new UserClaim(Guid.NewGuid(), "200", JwtClaimTypes.Subject, "200"),
+                new UserClaim(Guid.NewGuid(), "200", JwtClaimTypes.Role, "Customer"),
+                new UserClaim(Guid.NewGuid(), "200", JwtClaimTypes.Id, "F393026E-423A-4A1F-A343-4DB66C1FC8DA"),
+                new UserClaim(Guid.NewGuid(), "200", JwtClaimTypes.Email, "erik.lehnsherr@outlook.com"),
+                new UserClaim(Guid.NewGuid(), "200", JwtClaimTypes.GivenName, "Erik"),
+                new UserClaim(Guid.NewGuid(), "200", JwtClaimTypes.MiddleName, "Magnus"),
+                new UserClaim(Guid.NewGuid(), "200", JwtClaimTypes.FamilyName, "Lehnsherr")
             );
 
             dbContext.SaveChanges();

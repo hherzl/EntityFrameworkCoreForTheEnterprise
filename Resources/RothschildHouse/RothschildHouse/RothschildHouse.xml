@@ -4,5 +4,17 @@
         <name>RothschildHouse</name>
     </assembly>
     <members>
+        <member name="T:RothschildHouse.Controllers.PaymentController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:RothschildHouse.Controllers.PaymentController.PostPayment(RothschildHouse.Requests.PostPaymentRequest)">
+            <summary>
+            
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

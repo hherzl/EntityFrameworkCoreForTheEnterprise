@@ -16,7 +16,7 @@ namespace RothschildHouse.Client
 
         static async Task MainAsync(string[] args)
         {
-            // discover endpoints from metadata
+            // Discover endpoints from metadata
             var client = new HttpClient();
             var disco = await client.GetDiscoveryDocumentAsync("http://localhost:18000");
 
@@ -30,8 +30,8 @@ namespace RothschildHouse.Client
                 Address = disco.TokenEndpoint,
                 ClientId = "rothschildhousecustomerclient",
                 ClientSecret = "rothschildhousesecret1",
-                UserName = "charlesx@gmail.com",
-                Password = "password1"
+                UserName = "charlesxavier@gmail.com",
+                Password = "professorx"
             });
 
             if (userResponse.IsError)
