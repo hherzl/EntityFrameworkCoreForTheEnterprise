@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using RothschildHouse.Models;
 using RothschildHouse.Requests;
 
 namespace RothschildHouse.Controllers
@@ -8,8 +9,11 @@ namespace RothschildHouse.Controllers
     [ApiController]
     public class PaymentController : ControllerBase
     {
-        public PaymentController()
+        private PaymentDbContext DbContext;
+
+        public PaymentController(PaymentDbContext dbContext)
         {
+            DbContext = dbContext;
         }
 
         public async Task<IActionResult> PostPayment([FromBody]PostPaymentRequest request)

@@ -31,12 +31,13 @@ namespace RothschildHouse.IdentityServer.Models
 
         public static void SeedInMemory(this AuthDbContext dbContext)
         {
-            dbContext.Users.Add(new User("100", "charlesx@gmail.com", "password1".ToSha256(), true));
+            dbContext.Users.Add(new User("100", "charlesxavier@gmail.com", "professorx".ToSha256(), true));
 
             dbContext.UserClaims.AddRange(
                 new UserClaim(Guid.NewGuid(), "100", JwtClaimTypes.Subject, "100"),
                 new UserClaim(Guid.NewGuid(), "100", JwtClaimTypes.Role, "Customer"),
-                new UserClaim(Guid.NewGuid(), "100", JwtClaimTypes.PreferredUserName, "charlesxavier"),
+                new UserClaim(Guid.NewGuid(), "100", JwtClaimTypes.Id, "45783940-5124-46F9-B54F-5A2149F35117"),
+                new UserClaim(Guid.NewGuid(), "100", JwtClaimTypes.Email, "charlesxavier@gmail.com"),
                 new UserClaim(Guid.NewGuid(), "100", JwtClaimTypes.GivenName, "Charles"),
                 new UserClaim(Guid.NewGuid(), "100", JwtClaimTypes.MiddleName, "F"),
                 new UserClaim(Guid.NewGuid(), "100", JwtClaimTypes.FamilyName, "Xavier")

@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RothschildHouse.Models;
 
 namespace RothschildHouse
 {
+#pragma warning disable CS1591
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -19,6 +22,8 @@ namespace RothschildHouse
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddDbContext<PaymentDbContext>(options => options.UseInMemoryDatabase("Payment"));
 
             services
                 .AddAuthentication("Bearer")
@@ -38,9 +43,18 @@ namespace RothschildHouse
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
+            var paymentDbContext = app
+                .ApplicationServices
+                .CreateScope()
+                .ServiceProvider
+                .GetService<PaymentDbContext>();
+
+            paymentDbContext.SeedInMemory();
+
             app.UseAuthentication();
 
             app.UseMvc();
         }
     }
+#pragma warning restore CS1591
 }

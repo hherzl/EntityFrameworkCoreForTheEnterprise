@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace RothschildHouse.Models
 {
+#pragma warning disable CS1591
     public class Person
     {
         public Person()
@@ -33,7 +34,7 @@ namespace RothschildHouse.Models
 
         public Guid? PersonID { get; set; }
 
-        public string CardType { get; set; }
+        public string IssuingNetwork { get; set; }
 
         public string CardNumber { get; set; }
 
@@ -83,7 +84,7 @@ namespace RothschildHouse.Models
 
             builder.Property(p => p.CreditCardID).IsRequired();
             builder.Property(p => p.PersonID).IsRequired();
-            builder.Property(p => p.CardType).IsRequired();
+            builder.Property(p => p.IssuingNetwork).IsRequired();
             builder.Property(p => p.CardNumber).IsRequired();
             builder.Property(p => p.Last4Digits).IsRequired();
             builder.Property(p => p.ExpirationDate).IsRequired();
@@ -127,4 +128,5 @@ namespace RothschildHouse.Models
             base.OnModelCreating(modelBuilder);
         }
     }
+#pragma warning restore CS1591
 }

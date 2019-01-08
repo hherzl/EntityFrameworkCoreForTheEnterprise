@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace RothschildHouse
 {
+#pragma warning disable CS1591
     public class Program
     {
         public static void Main(string[] args)
@@ -16,4 +17,5 @@ namespace RothschildHouse
                 .UseUrls("http://localhost:19000")
                 .UseStartup<Startup>();
     }
+#pragma warning restore CS1591
 }
