@@ -39,7 +39,7 @@ create table [dbo].[Country]
 
 create table [dbo].[Currency]
 (
-	[CurrencyID] smallint not null identity(1000, 1000),
+	[CurrencyID] varchar(10) not null,
 	[CurrencyName] varchar(50) not null,
 	[CurrencySymbol] varchar(1) not null,
 	[CreationUser] varchar(25) not null,
@@ -53,7 +53,7 @@ create table [dbo].[CountryCurrency]
 (
 	[CountryCurrencyID] int not null identity(1, 1),
 	[CountryID] int not null,
-	[CurrencyID] smallint not null,
+	[CurrencyID] varchar(10) not null,
 	[CreationUser] varchar(25) not null,
 	[CreationDateTime] datetime not null,
 	[LastUpdateUser] varchar(25) null,
@@ -243,7 +243,7 @@ create table [Sales].[OrderHeader]
 	[ShipperID] int null,
 	[OrderDate] datetime not null,
 	[Total] decimal(12, 4) not null,
-	[CurrencyID] smallint null,
+	[CurrencyID] varchar(10) null,
 	[PaymentMethodID] uniqueidentifier null,
 	[DetailsCount] int not null,
 	[ReferenceOrderID] bigint null,

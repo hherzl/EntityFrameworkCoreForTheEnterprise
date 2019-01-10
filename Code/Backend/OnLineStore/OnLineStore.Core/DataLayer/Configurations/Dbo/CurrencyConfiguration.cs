@@ -14,9 +14,6 @@ namespace OnLineStore.Core.DataLayer.Configurations.Dbo
             // Set key for entity
             builder.HasKey(p => p.CurrencyID);
 
-            // Set identity for entity (auto increment)
-            builder.Property(p => p.CurrencyID).UseSqlServerIdentityColumn();
-
             // Set mapping for columns
             builder.Property(p => p.CreationUser).HasColumnType("varchar(25)").IsRequired();
             builder.Property(p => p.CreationDateTime).HasColumnType("datetime").IsRequired();

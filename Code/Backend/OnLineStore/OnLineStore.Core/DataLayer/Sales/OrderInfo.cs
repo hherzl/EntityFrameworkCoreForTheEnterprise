@@ -22,7 +22,7 @@ namespace OnLineStore.Core.DataLayer.Sales
 
         public decimal? Total { get; set; }
 
-        public short? CurrencyID { get; set; }
+        public string CurrencyID { get; set; }
 
         public Guid? PaymentMethodID { get; set; }
 

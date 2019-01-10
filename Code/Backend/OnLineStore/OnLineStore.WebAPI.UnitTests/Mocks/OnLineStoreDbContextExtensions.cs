@@ -26,7 +26,7 @@ namespace OnLineStore.WebAPI.UnitTests.Mocks
 
             var currency = new Currency
             {
-                CurrencyID = 1000,
+                CurrencyID = "USD",
                 CurrencyName = "US Dollar",
                 CurrencySymbol = "$",
                 CreationUser = creationUser,
@@ -159,7 +159,7 @@ namespace OnLineStore.WebAPI.UnitTests.Mocks
                 EmployeeID = employee.EmployeeID,
                 OrderDate = DateTime.Now,
                 Total = 29.99m,
-                CurrencyID = 1000,
+                CurrencyID = "USD",
                 PaymentMethodID = paymentMethod.PaymentMethodID,
                 Comments = "Order from mocks",
                 CreationUser = creationUser,

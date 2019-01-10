@@ -12,13 +12,13 @@ namespace OnLineStore.Core.EntityLayer.Dbo
 
         public int? CountryID { get; set; }
 
-        public short? CurrencyID { get; set; }
+        public string CurrencyID { get; set; }
 
-        public string  CreationUser { get; set; }
+        public string CreationUser { get; set; }
 
         public DateTime? CreationDateTime { get; set; }
 
-        public string  LastUpdateUser { get; set; }
+        public string LastUpdateUser { get; set; }
 
         public DateTime? LastUpdateDateTime { get; set; }
 

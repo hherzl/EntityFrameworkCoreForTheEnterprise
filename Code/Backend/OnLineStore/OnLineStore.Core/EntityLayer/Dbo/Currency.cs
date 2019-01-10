@@ -8,7 +8,7 @@ namespace OnLineStore.Core.EntityLayer.Dbo
         {
         }
 
-        public short? CurrencyID { get; set; }
+        public string CurrencyID { get; set; }
 
         public string CurrencyName { get; set; }
 

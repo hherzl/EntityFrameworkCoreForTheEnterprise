@@ -42,7 +42,7 @@ namespace OnLineStore.WebAPI.UnitTests
             var logger = LoggingHelper.GetLogger<SalesController>();
             var service = ServiceMocker.GetSalesService(nameof(TestGetOrdersByCurrencyAsync));
             var controller = new SalesController(logger, service);
-            var currencyID = (short?)1000;
+            var currencyID = "USD";
 
             // Act
             var response = await controller.GetOrdersAsync(currencyID: currencyID) as ObjectResult;

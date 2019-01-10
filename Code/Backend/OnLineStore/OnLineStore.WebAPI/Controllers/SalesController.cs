@@ -43,7 +43,7 @@ namespace OnLineStore.WebAPI.Controllers
         [HttpGet("Order")]
         [ProducesResponseType(200)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> GetOrdersAsync(int? pageSize = 50, int? pageNumber = 1, short? orderStatusID = null, int? customerID = null, int? employeeID = null, int? shipperID = null, short? currencyID = null, Guid? paymentMethodID = null)
+        public async Task<IActionResult> GetOrdersAsync(int? pageSize = 50, int? pageNumber = 1, short? orderStatusID = null, int? customerID = null, int? employeeID = null, int? shipperID = null, string currencyID = null, Guid? paymentMethodID = null)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetOrdersAsync));
 

@@ -70,7 +70,7 @@ namespace OnLineStore.WebAPI.Requests
         /// <summary>
         /// 
         /// </summary>
-        public short? CurrencyID { get; set; }
+        public string CurrencyID { get; set; }
 
         /// <summary>
         /// 

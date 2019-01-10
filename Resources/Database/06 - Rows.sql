@@ -10,10 +10,10 @@ insert into [dbo].[Country]
     values (1, 'USA', @userName, @creationDateTime, null, null, null)
 
 insert into [dbo].[Currency]
-    values ('US Dollar', '$', @userName, @creationDateTime, null, null, null)
+    values ('USD', 'US Dollar', '$', @userName, @creationDateTime, null, null, null)
 
 insert into [dbo].[CountryCurrency]
-    values (1, 1000, @userName, @creationDateTime, null, null, null)
+    values ('1', 'USD', @userName, @creationDateTime, null, null, null)
 
 insert into [HumanResources].[Employee]
     values ('John', null, 'Doe', getdate(), @userName, @creationDateTime, null, null, null)
