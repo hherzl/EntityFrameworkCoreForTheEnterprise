@@ -1,22 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnLineStore.WebAPI.Requests
 {
     /// <summary>
     /// 
     /// </summary>
-    public class OrderHeaderRequest
+    public class CreateOrderRequest
     {
         /// <summary>
         /// 
         /// </summary>
-        public int? OrderHeaderID { get; set; }
+        [Required]
+        [StringLength(30)]
+        public string UserName { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public DateTime? OrderDate { get; set; }
+        [Required]
+        [StringLength(30)]
+        public string Password { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Required]
+        [StringLength(30)]
+        public string CardHolderName { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Required]
+        [StringLength(20)]
+        public string IssuingNetwork { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Required]
+        [StringLength(20)]
+        public string CardNumber { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Required]
+        public DateTime? ExpirationDate { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Required]
+        [StringLength(4)]
+        public string Cvv { get; set; }
 
         /// <summary>
         /// 
@@ -42,26 +81,6 @@ namespace OnLineStore.WebAPI.Requests
         /// 
         /// </summary>
         public string Comments { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string CreationUser { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public DateTime? CreationDateTime { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string LastUpdateUser { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public DateTime? LastUpdateDateTime { get; set; }
 
         /// <summary>
         /// 

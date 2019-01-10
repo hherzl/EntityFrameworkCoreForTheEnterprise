@@ -10,12 +10,12 @@ namespace RothschildHouse.Controllers
     /// </summary>
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class PaymentController : ControllerBase
+    public class TransactionController : ControllerBase
     {
 #pragma warning disable CS1591
         private readonly PaymentDbContext DbContext;
 
-        public PaymentController(PaymentDbContext dbContext)
+        public TransactionController(PaymentDbContext dbContext)
         {
             DbContext = dbContext;
         }
@@ -29,6 +29,12 @@ namespace RothschildHouse.Controllers
         [HttpPost("Payment")]
         public async Task<IActionResult> PostPayment([FromBody]PostPaymentRequest request)
         {
+            // todo: check if customer exists in database
+
+            // todo: check credit card info in database
+
+            // todo: check if customer has available credit (limit)
+
             return Ok();
         }
     }

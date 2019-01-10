@@ -141,10 +141,19 @@ namespace OnLineStore.WebAPI.IntegrationTests
             var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
             var model = new
             {
+                UserName = "charlesxavier@gmail.com",
+                Password = "professorx",
+                CardHolderName = "Charles F Xavier",
+                IssuingNetwork = "Visa",
+                CardNumber = "4024007164051145",
+                Last4Digits = "1145",
+                ExpirationDate = new DateTime(DateTime.Now.Year + 5, DateTime.Now.Month, 1),
+                Cvv = "987",
+                Total = 29.99m,
                 CustomerID = 1,
+                CurrencyID = 1000,
                 PaymentMethodID = new Guid("7671A4F7-A735-4CB7-AAB4-CF47AE20171D"),
                 Comments = "Order from integration tests",
-                CreationUser = "integrationtests",
                 Details = new[]
                 {
                     new

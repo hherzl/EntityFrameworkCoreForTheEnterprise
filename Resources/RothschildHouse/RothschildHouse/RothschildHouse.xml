@@ -4,12 +4,12 @@
         <name>RothschildHouse</name>
     </assembly>
     <members>
-        <member name="T:RothschildHouse.Controllers.PaymentController">
+        <member name="T:RothschildHouse.Controllers.TransactionController">
             <summary>
             
             </summary>
         </member>
-        <member name="M:RothschildHouse.Controllers.PaymentController.PostPayment(RothschildHouse.Requests.PostPaymentRequest)">
+        <member name="M:RothschildHouse.Controllers.TransactionController.PostPayment(RothschildHouse.Requests.PostPaymentRequest)">
             <summary>
             
             </summary>

@@ -64,28 +64,35 @@ namespace OnLineStore.WebAPI.IntegrationTests.Helpers
             Server = new TestServer(webHostBuilder);
 
             Client = Server.CreateClient();
-            Client.BaseAddress = new Uri("http://localhost:10000");
+            Client.BaseAddress = new Uri("http://localhost:57000");
             Client.DefaultRequestHeaders.Accept.Clear();
             Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
+        public HttpClient Client { get; }
+
         public void Dispose()
         {
-            Client.Dispose();
             Server.Dispose();
+            Client.Dispose();
         }
-
-        public HttpClient Client { get; }
 
         protected virtual void InitializeServices(IServiceCollection services)
         {
             var startupAssembly = typeof(TStartup).GetTypeInfo().Assembly;
 
-            var manager = new ApplicationPartManager();
-
-            manager.ApplicationParts.Add(new AssemblyPart(startupAssembly));
-            manager.FeatureProviders.Add(new ControllerFeatureProvider());
-            manager.FeatureProviders.Add(new ViewComponentFeatureProvider());
+            var manager = new ApplicationPartManager
+            {
+                ApplicationParts =
+                {
+                    new AssemblyPart(startupAssembly)
+                },
+                FeatureProviders =
+                {
+                    new ControllerFeatureProvider(),
+                    new ViewComponentFeatureProvider()
+                }
+            };
 
             services.AddSingleton(manager);
         }

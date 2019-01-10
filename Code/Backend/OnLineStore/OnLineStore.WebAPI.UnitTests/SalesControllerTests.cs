@@ -144,7 +144,7 @@ namespace OnLineStore.WebAPI.UnitTests
 
             // Act
             var response = await controller.GetCreateOrderRequestAsync() as ObjectResult;
-            var value = response.Value as ISingleResponse<CreateOrderRequest>;
+            var value = response.Value as ISingleResponse<Core.BusinessLayer.Requests.CreateOrderRequest>;
 
             service.Dispose();
 
@@ -161,20 +161,17 @@ namespace OnLineStore.WebAPI.UnitTests
             var logger = LoggingHelper.GetLogger<SalesController>();
             var service = ServiceMocker.GetSalesService(nameof(TestCreateOrderAsync));
             var controller = new SalesController(logger, service);
-            var model = new OrderHeaderRequest
+            var model = new Requests.CreateOrderRequest
             {
                 CustomerID = 1,
                 PaymentMethodID = new Guid("7671A4F7-A735-4CB7-AAB4-CF47AE20171D"),
                 Comments = "Order from unit tests",
-                CreationUser = "unitests",
-                CreationDateTime = DateTime.Now,
                 Details = new List<OrderDetailRequest>
                 {
                     new OrderDetailRequest
                     {
                         ProductID = 1,
-                        ProductName = "The King of Fighters XIV",
-                        Quantity = 1,
+                        Quantity = 1
                     }
                 }
             };

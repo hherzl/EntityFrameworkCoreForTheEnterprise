@@ -269,6 +269,7 @@ namespace OnLineStore.Core.BusinessLayer
                     {
                         // Set order id for order detail
                         detail.OrderHeaderID = header.OrderHeaderID;
+                        detail.CreationUser = header.CreationUser;
 
                         // Add order detail
                         DbContext.Add(detail, UserInfo);
@@ -282,8 +283,8 @@ namespace OnLineStore.Core.BusinessLayer
                             LocationID = warehouses.First().LocationID,
                             OrderDetailID = detail.OrderDetailID,
                             Quantity = detail.Quantity * -1,
-                            CreationDateTime = DateTime.Now,
-                            CreationUser = header.CreationUser
+                            CreationUser = header.CreationUser,
+                            CreationDateTime = DateTime.Now
                         };
 
                         // Save product inventory
