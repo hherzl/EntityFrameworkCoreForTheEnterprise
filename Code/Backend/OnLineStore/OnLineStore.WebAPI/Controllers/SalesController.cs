@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using OnLineStore.Core;
 using OnLineStore.Core.BusinessLayer.Contracts;
 using OnLineStore.WebAPI.Clients;
 using OnLineStore.WebAPI.Filters;
@@ -14,11 +13,6 @@ using OnLineStore.WebAPI.Responses;
 namespace OnLineStore.WebAPI.Controllers
 {
 #pragma warning disable CS1591
-    public class OnLineStoreController : ControllerBase
-    {
-        public IUserInfo UserInfo { get; set; }
-    }
-
     [Authorize]
     [ApiController]
     [Route("api/v1/[controller]")]
