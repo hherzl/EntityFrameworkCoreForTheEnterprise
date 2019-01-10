@@ -1,43 +1,19 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using IdentityModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 using OnLineStore.Core;
 using OnLineStore.Core.BusinessLayer.Contracts;
 using OnLineStore.WebAPI.Clients;
+using OnLineStore.WebAPI.Filters;
 using OnLineStore.WebAPI.Requests;
 using OnLineStore.WebAPI.Responses;
 
 namespace OnLineStore.WebAPI.Controllers
 {
 #pragma warning disable CS1591
-
-    public class OnLineStoreActionFilter : Attribute, IActionFilter
-    {
-        public void OnActionExecuting(ActionExecutingContext context)
-        {
-            var controller = context.Controller as OnLineStoreController;
-
-            controller.UserInfo = new UserInfo();
-
-            foreach (var claim in controller.User.Claims)
-            {
-                if (claim.Type == JwtClaimTypes.PreferredUserName)
-                {
-                    controller.UserInfo.Name = claim.Value;
-                }
-            }
-        }
-
-        public void OnActionExecuted(ActionExecutedContext context)
-        {
-        }
-    }
-
     public class OnLineStoreController : ControllerBase
     {
         public IUserInfo UserInfo { get; set; }
@@ -133,8 +109,6 @@ namespace OnLineStore.WebAPI.Controllers
         public async Task<IActionResult> CreateOrderAsync([FromBody] CreateOrderRequest request)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(CreateOrderAsync));
-
-            // todo: Add payment logic through RothschildHouse client
 
             using (var httpClient = RothschildHouseClient.GetHttpClient())
             {
