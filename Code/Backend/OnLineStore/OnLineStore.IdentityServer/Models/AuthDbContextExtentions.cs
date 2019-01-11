@@ -31,26 +31,15 @@ namespace OnLineStore.IdentityServer.Models
 
         public static void SeedInMemory(this AuthDbContext dbContext)
         {
-            dbContext.Users.Add(new User("1000", "carloshdez@outlook.com", "password1".ToSha256(), true));
+            dbContext.Users.Add(new User("1000", "charlesxavier@gmail.com", "professorx".ToSha256(), true));
 
             dbContext.UserClaims.AddRange(
                 new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.Subject, "1000"),
-                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.Role, "Administrator"),
-                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.PreferredUserName, "carlosfdez"),
-                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.GivenName, "Carlos"),
-                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.MiddleName, "A"),
-                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.FamilyName, "Hernandez")
-                );
-
-            dbContext.Users.Add(new User("2000", "juanperez@gmail.com", "password1".ToSha256(), true));
-
-            dbContext.UserClaims.AddRange(
-                new UserClaim(Guid.NewGuid(), "2000", JwtClaimTypes.Subject, "2000"),
-                new UserClaim(Guid.NewGuid(), "2000", JwtClaimTypes.Role, "Customer"),
-                new UserClaim(Guid.NewGuid(), "2000", JwtClaimTypes.PreferredUserName, "juanperez"),
-                new UserClaim(Guid.NewGuid(), "2000", JwtClaimTypes.GivenName, "Juan"),
-                new UserClaim(Guid.NewGuid(), "2000", JwtClaimTypes.MiddleName, "M"),
-                new UserClaim(Guid.NewGuid(), "2000", JwtClaimTypes.FamilyName, "Perez")
+                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.Role, "Customer"),
+                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.PreferredUserName, "charlesxavier"),
+                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.GivenName, "Charles"),
+                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.MiddleName, "F"),
+                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.FamilyName, "Xavier")
             );
 
             dbContext.SaveChanges();

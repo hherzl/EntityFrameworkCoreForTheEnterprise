@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OnLineStore.Common;
-using OnLineStore.Core.BusinessLayer.Requests;
 using OnLineStore.Core.BusinessLayer.Responses;
 using OnLineStore.Core.DataLayer.Sales;
 using OnLineStore.Core.EntityLayer.Sales;
@@ -165,6 +164,7 @@ namespace OnLineStore.WebAPI.UnitTests
             {
                 CustomerID = 1,
                 PaymentMethodID = new Guid("7671A4F7-A735-4CB7-AAB4-CF47AE20171D"),
+                CurrencyID = "USD",
                 Comments = "Order from unit tests",
                 Details = new List<OrderDetailRequest>
                 {

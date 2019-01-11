@@ -146,12 +146,11 @@ namespace OnLineStore.WebAPI.IntegrationTests
                 CardHolderName = "Charles F Xavier",
                 IssuingNetwork = "Visa",
                 CardNumber = "4024007164051145",
-                Last4Digits = "1145",
                 ExpirationDate = new DateTime(DateTime.Now.Year + 5, DateTime.Now.Month, 1),
                 Cvv = "987",
                 Total = 29.99m,
                 CustomerID = 1,
-                CurrencyID = 1000,
+                CurrencyID = "USD",
                 PaymentMethodID = new Guid("7671A4F7-A735-4CB7-AAB4-CF47AE20171D"),
                 Comments = "Order from integration tests",
                 Details = new[]

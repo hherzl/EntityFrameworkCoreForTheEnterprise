@@ -19,8 +19,8 @@ namespace OnLineStore.WebAPI.IntegrationTests.Helpers
                 Address = disco.TokenEndpoint,
                 ClientId = "onlinestoreclient",
                 ClientSecret = "onlinestoresecret1",
-                UserName = "juanperez@gmail.com",
-                Password = "password1"
+                UserName = "charlesxavier@gmail.com",
+                Password = "professorx"
             });
         }
     }

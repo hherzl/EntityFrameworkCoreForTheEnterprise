@@ -34,6 +34,8 @@ namespace RothschildHouse.Models
 
         public Guid? PersonID { get; set; }
 
+        public string CardHolderName { get; set; }
+
         public string IssuingNetwork { get; set; }
 
         public string CardNumber { get; set; }
@@ -43,6 +45,10 @@ namespace RothschildHouse.Models
         public DateTime? ExpirationDate { get; set; }
 
         public string Cvv { get; set; }
+
+        public decimal? Limit { get; set; }
+
+        public decimal? AvailableFounds { get; set; }
     }
 
     public class PaymentTransaction
@@ -84,11 +90,14 @@ namespace RothschildHouse.Models
 
             builder.Property(p => p.CreditCardID).IsRequired();
             builder.Property(p => p.PersonID).IsRequired();
+            builder.Property(p => p.CardHolderName).IsRequired();
             builder.Property(p => p.IssuingNetwork).IsRequired();
             builder.Property(p => p.CardNumber).IsRequired();
             builder.Property(p => p.Last4Digits).IsRequired();
             builder.Property(p => p.ExpirationDate).IsRequired();
             builder.Property(p => p.Cvv).IsRequired();
+            builder.Property(p => p.Limit).IsRequired();
+            builder.Property(p => p.AvailableFounds).IsRequired();
         }
     }
 
