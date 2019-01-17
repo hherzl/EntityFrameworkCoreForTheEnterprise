@@ -141,9 +141,9 @@ namespace OnLineStore.WebAPI.IntegrationTests
             var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
             var model = new
             {
-                UserName = "charlesxavier@gmail.com",
-                Password = "professorx",
-                CardHolderName = "Charles F Xavier",
+                UserName = "jameslogan@walla.com",
+                Password = "wolverine",
+                CardHolderName = "James Logan",
                 IssuingNetwork = "Visa",
                 CardNumber = "4024007164051145",
                 ExpirationDate = new DateTime(DateTime.Now.Year + 5, DateTime.Now.Month, 1),

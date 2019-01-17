@@ -78,7 +78,6 @@ namespace RothschildHouse.Models
             builder.Property(p => p.GivenName).IsRequired();
             builder.Property(p => p.FamilyName).IsRequired();
             builder.Property(p => p.FullName).IsRequired();
-            builder.Property(p => p.BirthDate).IsRequired();
         }
     }
 

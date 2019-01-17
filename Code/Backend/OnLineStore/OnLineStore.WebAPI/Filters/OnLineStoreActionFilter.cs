@@ -1,7 +1,6 @@
 ﻿using System;
 using IdentityModel;
 using Microsoft.AspNetCore.Mvc.Filters;
-using OnLineStore.Core;
 using OnLineStore.WebAPI.Controllers;
 
 namespace OnLineStore.WebAPI.Filters
@@ -13,14 +12,20 @@ namespace OnLineStore.WebAPI.Filters
         {
             var controller = context.Controller as OnLineStoreController;
 
-            controller.UserInfo = new UserInfo();
-
             foreach (var claim in controller.User.Claims)
             {
-                if (claim.Type == JwtClaimTypes.PreferredUserName)
-                {
-                    controller.UserInfo.Name = claim.Value;
-                }
+                if (claim.Type == JwtClaimTypes.Email)
+                    controller.UserInfo.Email = claim.Value;
+                else if (claim.Type == JwtClaimTypes.PreferredUserName)
+                    controller.UserInfo.UserName = claim.Value;
+                else if (claim.Type == JwtClaimTypes.Role)
+                    controller.UserInfo.Role = claim.Value;
+                else if (claim.Type == JwtClaimTypes.GivenName)
+                    controller.UserInfo.GivenName = claim.Value;
+                else if (claim.Type == JwtClaimTypes.MiddleName)
+                    controller.UserInfo.MiddleName = claim.Value;
+                else if (claim.Type == JwtClaimTypes.FamilyName)
+                    controller.UserInfo.FamilyName = claim.Value;
             }
         }
 

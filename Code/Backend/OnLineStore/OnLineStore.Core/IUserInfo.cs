@@ -2,10 +2,16 @@
 {
     public interface IUserInfo
     {
-        string Domain { get; set; }
+        string UserName { get; set; }
 
-        string Name { get; set; }
+        string Email { get; set; }
 
-        string[] Roles { get; set; }
+        string Role { get; set; }
+
+        string GivenName { get; set; }
+
+        string MiddleName { get; set; }
+
+        string FamilyName { get; set; }
     }
 }

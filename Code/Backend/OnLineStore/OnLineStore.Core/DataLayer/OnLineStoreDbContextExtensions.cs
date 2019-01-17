@@ -15,7 +15,7 @@ namespace OnLineStore.Core.DataLayer
             if (entity is IAuditableEntity cast)
             {
                 if (string.IsNullOrEmpty(cast.CreationUser))
-                    cast.CreationUser = userInfo.Name;
+                    cast.CreationUser = userInfo.UserName;
 
                 if (!cast.CreationDateTime.HasValue)
                     cast.CreationDateTime = DateTime.Now;
@@ -29,7 +29,7 @@ namespace OnLineStore.Core.DataLayer
             if (entity is IAuditableEntity cast)
             {
                 if (string.IsNullOrEmpty(cast.LastUpdateUser))
-                    cast.LastUpdateUser = userInfo.Name;
+                    cast.LastUpdateUser = userInfo.UserName;
 
                 if (!cast.LastUpdateDateTime.HasValue)
                     cast.LastUpdateDateTime = DateTime.Now;
@@ -72,6 +72,7 @@ namespace OnLineStore.Core.DataLayer
                         continue;
 
                     // todo: improve the way to retrieve primary key value from entity instance
+
                     var key = entry.Entity.GetType().GetProperties().First().GetValue(entry.Entity, null).ToString();
 
                     yield return new ChangeLog
@@ -81,7 +82,7 @@ namespace OnLineStore.Core.DataLayer
                         Key = key,
                         OriginalValue = originalValue == null ? string.Empty : originalValue.ToString(),
                         CurrentValue = currentValue == null ? string.Empty : currentValue.ToString(),
-                        UserName = userInfo.Name,
+                        UserName = userInfo.UserName,
                         ChangeDate = DateTime.Now
                     };
                 }

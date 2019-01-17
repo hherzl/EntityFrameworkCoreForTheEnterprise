@@ -11,7 +11,7 @@ namespace OnLineStore.WebAPI.UnitTests.Mocks
     {
         public static void SeedInMemory(this OnLineStoreDbContext dbContext)
         {
-            var creationUser = "seed";
+            var creationUser = "unittests";
             var creationDateTime = DateTime.Now;
 
             var country = new Country
@@ -154,6 +154,7 @@ namespace OnLineStore.WebAPI.UnitTests.Mocks
 
             var order = new OrderHeader
             {
+                OrderHeaderID = 1,
                 OrderStatusID = orderStatus.OrderStatusID,
                 CustomerID = customer.CustomerID,
                 EmployeeID = employee.EmployeeID,
@@ -161,7 +162,7 @@ namespace OnLineStore.WebAPI.UnitTests.Mocks
                 Total = 29.99m,
                 CurrencyID = "USD",
                 PaymentMethodID = paymentMethod.PaymentMethodID,
-                Comments = "Order from mocks",
+                Comments = "Order from unit tests",
                 CreationUser = creationUser,
                 CreationDateTime = creationDateTime
             };
@@ -170,6 +171,7 @@ namespace OnLineStore.WebAPI.UnitTests.Mocks
 
             var orderDetail = new OrderDetail
             {
+                OrderDetailID = 1,
                 OrderHeaderID = order.OrderHeaderID,
                 ProductID = product.ProductID,
                 ProductName = product.ProductName,

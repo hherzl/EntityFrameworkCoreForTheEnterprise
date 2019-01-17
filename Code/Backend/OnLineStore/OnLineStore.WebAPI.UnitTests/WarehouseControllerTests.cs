@@ -16,9 +16,9 @@ namespace OnLineStore.WebAPI.UnitTests
         public async Task TestGetProductsTestAsync()
         {
             // Arrange
-            var logger = LoggingHelper.GetLogger<WarehouseController>();
-            var service = ServiceMocker.GetWarehouseService(nameof(TestGetProductsTestAsync));
-            var controller = new WarehouseController(logger, service);
+            var userInfo = IdentityMocker.GetCustomerIdentity().GetUserInfo();
+            var service = ServiceMocker.GetWarehouseService(userInfo, nameof(TestGetProductsTestAsync));
+            var controller = new WarehouseController(LoggingHelper.GetLogger<WarehouseController>(), service);
 
             // Act
             var response = await controller.GetProductsAsync() as ObjectResult;
@@ -35,9 +35,9 @@ namespace OnLineStore.WebAPI.UnitTests
         public async Task TestGetInventoryByProductTestAsync()
         {
             // Arrange
-            var logger = LoggingHelper.GetLogger<WarehouseController>();
-            var service = ServiceMocker.GetWarehouseService(nameof(TestGetInventoryByProductTestAsync));
-            var controller = new WarehouseController(logger, service);
+            var userInfo = IdentityMocker.GetCustomerIdentity().GetUserInfo();
+            var service = ServiceMocker.GetWarehouseService(userInfo, nameof(TestGetInventoryByProductTestAsync));
+            var controller = new WarehouseController(LoggingHelper.GetLogger<WarehouseController>(), service);
             var productID = 1;
             var warehouseID = "W0001";
 
