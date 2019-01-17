@@ -20,13 +20,16 @@ namespace OnLineStore.WebAPI.IntegrationTests
         public async Task TestGetOrdersAsCustomerAsync()
         {
             // Arrange
-            var request = "/api/v1/Sales/Order";
             var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
+            var request = new
+            {
+                Url = "/api/v1/Sales/Order"
+            };
 
             // Act
             apiClient.SetBearerToken(customerToken.AccessToken);
 
-            var response = await apiClient.GetAsync(request);
+            var response = await apiClient.GetAsync(request.Url);
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -36,14 +39,16 @@ namespace OnLineStore.WebAPI.IntegrationTests
         public async Task TestGetOrdersByCurrencyAsCustomerAsync()
         {
             // Arrange
-            var currencyID = (short)1;
-            var request = string.Format("/api/v1/Sales/Order?currencyID={0}", currencyID);
             var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
+            var request = new
+            {
+                Url = string.Format("/api/v1/Sales/Order?currencyID={0}", 1)
+            };
 
             // Act
             apiClient.SetBearerToken(customerToken.AccessToken);
 
-            var response = await apiClient.GetAsync(request);
+            var response = await apiClient.GetAsync(request.Url);
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -53,14 +58,16 @@ namespace OnLineStore.WebAPI.IntegrationTests
         public async Task TestGetOrdersByCustomerAsCustomerAsync()
         {
             // Arrange
-            var customerID = 1;
-            var request = string.Format("/api/v1/Sales/Order?customerID={0}", customerID);
             var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
+            var request = new
+            {
+                Url = string.Format("/api/v1/Sales/Order?customerID={0}", 1)
+            };
 
             // Act
             apiClient.SetBearerToken(customerToken.AccessToken);
 
-            var response = await apiClient.GetAsync(request);
+            var response = await apiClient.GetAsync(request.Url);
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -70,14 +77,16 @@ namespace OnLineStore.WebAPI.IntegrationTests
         public async Task TestGetOrdersByEmployeeAsCustomerAsync()
         {
             // Arrange
-            var employeeID = 1;
-            var request = string.Format("/api/v1/Sales/Order?employeeID={0}", employeeID);
             var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
+            var request = new
+            {
+                Url = string.Format("/api/v1/Sales/Order?employeeID={0}", 1)
+            };
 
             // Act
             apiClient.SetBearerToken(customerToken.AccessToken);
 
-            var response = await apiClient.GetAsync(request);
+            var response = await apiClient.GetAsync(request.Url);
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -87,14 +96,16 @@ namespace OnLineStore.WebAPI.IntegrationTests
         public async Task TestGetOrderByIdAsCustomerAsync()
         {
             // Arrange
-            var id = 1;
-            var request = string.Format("/api/v1/Sales/Order/{0}", id);
             var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
+            var request = new
+            {
+                Url = string.Format("/api/v1/Sales/Order/{0}", 1)
+            };
 
             // Act
             apiClient.SetBearerToken(customerToken.AccessToken);
 
-            var response = await apiClient.GetAsync(request);
+            var response = await apiClient.GetAsync(request.Url);
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -104,14 +115,16 @@ namespace OnLineStore.WebAPI.IntegrationTests
         public async Task TestGetOrderByNonExistingIdAsCustomerAsync()
         {
             // Arrange
-            var id = 0;
-            var request = string.Format("/api/v1/Sales/Order/{0}", id);
             var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
+            var request = new
+            {
+                Url = string.Format("/api/v1/Sales/Order/{0}", 0)
+            };
 
             // Act
             apiClient.SetBearerToken(customerToken.AccessToken);
 
-            var response = await apiClient.GetAsync(request);
+            var response = await apiClient.GetAsync(request.Url);
 
             // Assert
             Assert.True(response.StatusCode == HttpStatusCode.NotFound);
@@ -121,13 +134,16 @@ namespace OnLineStore.WebAPI.IntegrationTests
         public async Task TestGetCreateOrderRequestAsCustomerAsync()
         {
             // Arrange
-            var request = "/api/v1/Sales/CreateOrderRequest";
             var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
+            var request = new
+            {
+                Url = "/api/v1/Sales/CreateOrderRequest"
+            };
 
             // Act
             apiClient.SetBearerToken(customerToken.AccessToken);
 
-            var response = await apiClient.GetAsync(request);
+            var response = await apiClient.GetAsync(request.Url);
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -137,28 +153,31 @@ namespace OnLineStore.WebAPI.IntegrationTests
         public async Task TestCreateOrderAsCustomerAsync()
         {
             // Arrange
-            var request = "/api/v1/Sales/Order";
             var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
-            var model = new
+            var request = new
             {
-                UserName = "jameslogan@walla.com",
-                Password = "wolverine",
-                CardHolderName = "James Logan",
-                IssuingNetwork = "Visa",
-                CardNumber = "4024007164051145",
-                ExpirationDate = new DateTime(DateTime.Now.Year + 5, DateTime.Now.Month, 1),
-                Cvv = "987",
-                Total = 29.99m,
-                CustomerID = 1,
-                CurrencyID = "USD",
-                PaymentMethodID = new Guid("7671A4F7-A735-4CB7-AAB4-CF47AE20171D"),
-                Comments = "Order from integration tests",
-                Details = new[]
+                Url = "/api/v1/Sales/Order",
+                Body = new
                 {
-                    new
+                    UserName = "jameslogan@walla.com",
+                    Password = "wolverine",
+                    CardHolderName = "James Logan",
+                    IssuingNetwork = "Visa",
+                    CardNumber = "4024007164051145",
+                    ExpirationDate = new DateTime(DateTime.Now.Year + 5, DateTime.Now.Month, 1),
+                    Cvv = "987",
+                    Total = 29.99m,
+                    CustomerID = 1,
+                    CurrencyID = "USD",
+                    PaymentMethodID = new Guid("7671A4F7-A735-4CB7-AAB4-CF47AE20171D"),
+                    Comments = "Order from integration tests",
+                    Details = new[]
                     {
-                        ProductID = 1,
-                        Quantity = 1
+                        new
+                        {
+                            ProductID = 1,
+                            Quantity = 1
+                        }
                     }
                 }
             };
@@ -166,7 +185,7 @@ namespace OnLineStore.WebAPI.IntegrationTests
             // Act
             apiClient.SetBearerToken(customerToken.AccessToken);
 
-            var response = await apiClient.PostAsync(request, ContentHelper.GetStringContent(model));
+            var response = await apiClient.PostAsync(request.Url, ContentHelper.GetStringContent(request.Body));
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -176,14 +195,16 @@ namespace OnLineStore.WebAPI.IntegrationTests
         public async Task TestCloneOrderAsCustomerAsync()
         {
             // Arrange
-            var id = 1;
-            var request = string.Format("/api/v1/Sales/CloneOrder/{0}", id);
             var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
+            var request = new
+            {
+                Url = string.Format("/api/v1/Sales/CloneOrder/{0}", 1)
+            };
 
             // Act
             apiClient.SetBearerToken(customerToken.AccessToken);
 
-            var response = await apiClient.GetAsync(request);
+            var response = await apiClient.GetAsync(request.Url);
 
             // Assert
             response.EnsureSuccessStatusCode();

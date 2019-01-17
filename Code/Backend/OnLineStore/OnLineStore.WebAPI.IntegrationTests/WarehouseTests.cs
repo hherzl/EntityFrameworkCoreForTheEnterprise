@@ -18,13 +18,16 @@ namespace OnLineStore.WebAPI.IntegrationTests
         public async Task GetProductsAsCustomerTestAsync()
         {
             // Arrange
-            var request = "/api/v1/Warehouse/Product";
             var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
+            var request = new
+            {
+                Url = "/api/v1/Warehouse/Product"
+            };
 
             // Act
             apiClient.SetBearerToken(customerToken.AccessToken);
 
-            var response = await apiClient.GetAsync(request);
+            var response = await apiClient.GetAsync(request.Url);
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -34,13 +37,16 @@ namespace OnLineStore.WebAPI.IntegrationTests
         public async Task GetProductInventoriesAsCustomerAsync()
         {
             // Arrange
-            var request = string.Format("/api/v1/Warehouse/ProductInventory/1");
             var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
+            var request = new
+            {
+                Url = string.Format("/api/v1/Warehouse/ProductInventory/1")
+            };
 
             // Act
             apiClient.SetBearerToken(customerToken.AccessToken);
 
-            var response = await apiClient.GetAsync(request);
+            var response = await apiClient.GetAsync(request.Url);
 
             // Assert
             response.EnsureSuccessStatusCode();
