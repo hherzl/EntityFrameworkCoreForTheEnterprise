@@ -31,18 +31,6 @@ namespace OnLineStore.IdentityServer.Models
 
         public static void SeedInMemory(this AuthDbContext dbContext)
         {
-            dbContext.Users.Add(new User("1000", "charlesxavier@gmail.com", "professorx".ToSha256(), true));
-
-            dbContext.UserClaims.AddRange(
-                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.Subject, "1000"),
-                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.PreferredUserName, "charlesxavier"),
-                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.Email, "charlesxavier@gmail.com"),
-                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.Role, "Administrator"),
-                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.GivenName, "Charles"),
-                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.MiddleName, "F"),
-                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.FamilyName, "Xavier")
-            );
-
             dbContext.Users.Add(new User("10000", "jameslogan@walla.com", "wolverine".ToSha256(), true));
 
             dbContext.UserClaims.AddRange(

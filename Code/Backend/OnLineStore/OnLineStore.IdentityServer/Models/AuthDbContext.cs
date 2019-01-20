@@ -15,6 +15,8 @@ namespace OnLineStore.IdentityServer.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Set key for entities
+
             modelBuilder
                 .Entity<User>(builder => builder.HasKey(e => e.UserID));
 

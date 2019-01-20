@@ -16,11 +16,17 @@ namespace OnLineStore.IdentityServer
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            /* Setting dependency injection */
+
+            // Db Context
             services.AddDbContext<AuthDbContext>(options => options.UseInMemoryDatabase("Auth"));
 
+            // Password validator and profile
             services
                 .AddTransient<IResourceOwnerPasswordValidator, ResourceOwnerPasswordValidator>()
                 .AddTransient<IProfileService, ProfileService>();
+
+            /* Identity Server */
 
             services
                 .AddIdentityServer()
@@ -39,6 +45,7 @@ namespace OnLineStore.IdentityServer
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
+            /* Init DbContext */
             var authDbContext = app
                 .ApplicationServices
                 .CreateScope()

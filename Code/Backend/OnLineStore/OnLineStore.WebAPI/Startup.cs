@@ -34,7 +34,10 @@ namespace OnLineStore.WebAPI
             /* Setting dependency injection */
 
             // For DbContext
-            services.AddDbContext<OnLineStoreDbContext>(options => options.UseSqlServer(Configuration["AppSettings:ConnectionString"]));
+            services.AddDbContext<OnLineStoreDbContext>(builder =>
+            {
+                builder.UseSqlServer(Configuration["AppSettings:ConnectionString"]);
+            });
 
             // User info
             services.AddScoped<IUserInfo, UserInfo>();
@@ -101,15 +104,15 @@ namespace OnLineStore.WebAPI
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
-            app.UseCors(policy =>
+            app.UseCors(builder =>
             {
                 // Add client origin in CORS policy
 
                 // todo: Set port number for client app from appsettings file
 
-                policy.WithOrigins("http://localhost:4200");
-                policy.AllowAnyHeader();
-                policy.AllowAnyMethod();
+                builder.WithOrigins("http://localhost:4200");
+                builder.AllowAnyHeader();
+                builder.AllowAnyMethod();
             });
 
             /* Use authentication for Web API */
@@ -120,9 +123,9 @@ namespace OnLineStore.WebAPI
 
             app.UseSwagger();
 
-            app.UseSwaggerUI(c =>
+            app.UseSwaggerUI(options =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "OnLine Store API");
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "OnLine Store API");
             });
 
             app.UseMvc();

@@ -5,7 +5,7 @@ using IdentityServer4.Models;
 
 namespace OnLineStore.IdentityServer
 {
-    public class Config
+    public static class Config
     {
         public static IEnumerable<ApiResource> GetApiResources()
             => new List<ApiResource>

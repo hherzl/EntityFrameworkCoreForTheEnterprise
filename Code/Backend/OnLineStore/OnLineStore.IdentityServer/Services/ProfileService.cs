@@ -10,7 +10,7 @@ namespace OnLineStore.IdentityServer.Services
 {
     public class ProfileService : IProfileService
     {
-        private AuthDbContext DbContext;
+        private readonly AuthDbContext DbContext;
 
         public ProfileService(AuthDbContext dbContext)
         {
