@@ -10,7 +10,7 @@ namespace RothschildHouse.IdentityServer
         public static IEnumerable<ApiResource> GetApiResources()
             => new List<ApiResource>
             {
-                new ApiResource("RothschildHouseApi", "RothschildHouse API")
+                new ApiResource("RothschildHouseApi", "Rothschild House API")
             };
 
         public static IEnumerable<Client> GetClients()
@@ -18,24 +18,11 @@ namespace RothschildHouse.IdentityServer
             {
                 new Client
                 {
-                    ClientId = "rothschildhouseclient",
-                    AllowedGrantTypes = GrantTypes.ClientCredentials,
-                    ClientSecrets =
-                    {
-                        new Secret("rothschildhousesecret1".Sha256())
-                    },
-                    AllowedScopes =
-                    {
-                        "RothschildHouseApi"
-                    }
-                },
-                new Client
-                {
-                    ClientId = "rothschildhousecustomerclient",
+                    ClientId = "onlinestoreclient",
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                     ClientSecrets =
                     {
-                        new Secret("rothschildhousesecret1".Sha256())
+                        new Secret("onlinestoreclientsecret1".Sha256())
                     },
                     AllowedScopes =
                     {

@@ -4,17 +4,77 @@
         <name>RothschildHouse</name>
     </assembly>
     <members>
-        <member name="T:RothschildHouse.Controllers.TransactionController">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="M:RothschildHouse.Controllers.TransactionController.PostPayment(RothschildHouse.Requests.PostPaymentRequest)">
             <summary>
-            
+            Places a new payment
             </summary>
-            <param name="request"></param>
-            <returns></returns>
+            <param name="request">Payment request</param>
+            <returns>A payment response</returns>
+        </member>
+        <member name="T:RothschildHouse.Requests.PostPaymentRequest">
+            <summary>
+            Represents the model for payment request
+            </summary>
+        </member>
+        <member name="M:RothschildHouse.Requests.PostPaymentRequest.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:RothschildHouse.Requests.PostPaymentRequest"/>
+            </summary>
+        </member>
+        <member name="P:RothschildHouse.Requests.PostPaymentRequest.CardHolderName">
+            <summary>
+            Gets or sets the card holder's name
+            </summary>
+        </member>
+        <member name="P:RothschildHouse.Requests.PostPaymentRequest.IssuingNetwork">
+            <summary>
+            Gets or sets the issuing network
+            </summary>
+        </member>
+        <member name="P:RothschildHouse.Requests.PostPaymentRequest.CardNumber">
+            <summary>
+            Gets or sets the card number
+            </summary>
+        </member>
+        <member name="P:RothschildHouse.Requests.PostPaymentRequest.ExpirationDate">
+            <summary>
+            Gets or sets the expiration date
+            </summary>
+        </member>
+        <member name="P:RothschildHouse.Requests.PostPaymentRequest.Cvv">
+            <summary>
+            Gets or sets the CVV (Card Verification Value)
+            </summary>
+        </member>
+        <member name="P:RothschildHouse.Requests.PostPaymentRequest.Amount">
+            <summary>
+            Gets or sets the amount
+            </summary>
+        </member>
+        <member name="T:RothschildHouse.Responses.PaymentResponse">
+            <summary>
+            Represents the response for payment transaction
+            </summary>
+        </member>
+        <member name="M:RothschildHouse.Responses.PaymentResponse.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:RothschildHouse.Responses.PaymentResponse"/>
+            </summary>
+        </member>
+        <member name="P:RothschildHouse.Responses.PaymentResponse.ConfirmationID">
+            <summary>
+            Gets or sets the confirmation ID
+            </summary>
+        </member>
+        <member name="P:RothschildHouse.Responses.PaymentResponse.PaymentDateTime">
+            <summary>
+            Gets or sets the payment datetime
+            </summary>
+        </member>
+        <member name="P:RothschildHouse.Responses.PaymentResponse.Last4Digits">
+            <summary>
+            Gets or sets the last 4 digits for credit card
+            </summary>
         </member>
     </members>
 </doc>

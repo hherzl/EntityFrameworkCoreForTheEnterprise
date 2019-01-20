@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RothschildHouse.Models;
 using RothschildHouse.Requests;
+using RothschildHouse.Responses;
 
 namespace RothschildHouse.Controllers
 {
-    /// <summary>
-    /// 
-    /// </summary>
+#pragma warning disable CS1591
     [Route("api/v1/[controller]")]
     [ApiController]
     public class TransactionController : ControllerBase
     {
-#pragma warning disable CS1591
         private readonly PaymentDbContext DbContext;
 
         public TransactionController(PaymentDbContext dbContext)
@@ -25,25 +24,25 @@ namespace RothschildHouse.Controllers
 #pragma warning restore CS1591
 
         /// <summary>
-        /// 
+        /// Places a new payment
         /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
+        /// <param name="request">Payment request</param>
+        /// <returns>A payment response</returns>
         [HttpPost("Payment")]
         public async Task<IActionResult> PostPayment([FromBody]PostPaymentRequest request)
         {
-            // todo: check if customer exists in database
-
             var creditCards = await DbContext.GetCreditCardByCardHolderName(request.CardHolderName).ToListAsync();
 
             var creditCard = default(CreditCard);
+
+            var last4Digits = request.CardNumber.Substring(request.CardNumber.Length - 4);
 
             if (creditCards.Count > 1)
             {
                 creditCard = creditCards.FirstOrDefault(item => item.CardNumber == request.CardNumber);
 
                 if (creditCard == null)
-                    return BadRequest(string.Format("There isn't record for credit card with last 4 digits: {0}.", request.CardNumber));
+                    return BadRequest(string.Format("There isn't record for credit card with last 4 digits: {0}.", last4Digits));
             }
             else if (creditCards.Count == 1)
             {
@@ -54,32 +53,54 @@ namespace RothschildHouse.Controllers
                 return BadRequest(string.Format("There isn't record for credit card with last 4 digits: {0}.", request.CardNumber));
             }
 
-            // todo: check credit card info in database
+            /* Check credit card information */
 
             if (!creditCard.IsValid(request))
                 return BadRequest(string.Format("There is invalid data for credit card in this transaction."));
 
-            // todo: check if customer has available credit (limit)
+            /* Check if customer has available credit (limit) */
 
             if (!creditCard.HasFounds(request))
                 return BadRequest(string.Format("There isn't founds to approve this transaction."));
 
-            var txn = new PaymentTransaction
+            using (var txn = await DbContext.Database.BeginTransactionAsync())
             {
-                PaymentTransactionID = Guid.NewGuid(),
-                CreditCardID = creditCard.CreditCardID,
-                ConfirmationID = Guid.NewGuid(),
-                Amount = request.Amount,
-                PaymentDateTime = DateTime.Now
-            };
+                try
+                {
+                    var paymentTxn = new PaymentTransaction
+                    {
+                        PaymentTransactionID = Guid.NewGuid(),
+                        CreditCardID = creditCard.CreditCardID,
+                        ConfirmationID = Guid.NewGuid(),
+                        Amount = request.Amount,
+                        PaymentDateTime = DateTime.Now
+                    };
 
-            DbContext.PaymentTransactions.Add(txn);
+                    DbContext.PaymentTransactions.Add(paymentTxn);
 
-            creditCard.AvailableFounds -= request.Amount;
+                    creditCard.AvailableFounds -= request.Amount;
 
-            await DbContext.SaveChangesAsync();
+                    await DbContext.SaveChangesAsync();
 
-            return Ok(new { txn.ConfirmationID, creditCard.Last4Digits });
+                    var response = new PaymentResponse
+                    {
+                        ConfirmationID = paymentTxn.ConfirmationID,
+                        PaymentDateTime = paymentTxn.PaymentDateTime,
+                        Last4Digits = creditCard.Last4Digits
+                    };
+
+                    return Ok(response);
+                }
+                catch (Exception ex)
+                {
+                    txn.Rollback();
+
+                    return new ObjectResult(ex.Message)
+                    {
+                        StatusCode = (int)HttpStatusCode.InternalServerError
+                    };
+                }
+            }
         }
     }
 }

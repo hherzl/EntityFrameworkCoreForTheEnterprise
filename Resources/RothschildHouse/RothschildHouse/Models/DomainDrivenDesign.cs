@@ -129,9 +129,10 @@ namespace RothschildHouse.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new PersonConfiguration());
-            modelBuilder.ApplyConfiguration(new CreditCardConfiguration());
-            modelBuilder.ApplyConfiguration(new PaymentTransactionConfiguration());
+            modelBuilder
+                .ApplyConfiguration(new PersonConfiguration())
+                .ApplyConfiguration(new CreditCardConfiguration())
+                .ApplyConfiguration(new PaymentTransactionConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

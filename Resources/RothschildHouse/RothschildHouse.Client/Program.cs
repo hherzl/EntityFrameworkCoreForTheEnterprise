@@ -16,28 +16,33 @@ namespace RothschildHouse.Client
 
         static async Task MainAsync(string[] args)
         {
-            // Discover endpoints from metadata
+            /* Discover endpoints from metadata */
+
             var client = new HttpClient();
             var disco = await client.GetDiscoveryDocumentAsync("http://localhost:18000");
 
             if (disco.IsError)
                 Console.WriteLine(disco.Error);
             else
-                Console.WriteLine("Success!!!");
-            
-            var userResponse = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
+                Console.WriteLine("Discovery document it was successfully.");
+
+            /* Create request */
+
+            var request = new PasswordTokenRequest
             {
                 Address = disco.TokenEndpoint,
-                ClientId = "rothschildhousecustomerclient",
-                ClientSecret = "rothschildhousesecret1",
-                UserName = "charlesxavier@gmail.com",
-                Password = "professorx"
-            });
+                ClientId = "onlinestoreclient",
+                ClientSecret = "onlinestoreclientsecret1",
+                UserName = "administrator@onlinestore.com",
+                Password = "onlinestore1"
+            };
+
+            var userResponse = await client.RequestPasswordTokenAsync(request);
 
             if (userResponse.IsError)
                 Console.WriteLine(userResponse.Error);
             else
-                Console.WriteLine("Success user!!!");
+                Console.WriteLine("Connection for '{0}' user was successfully.", request.UserName);
         }
     }
 }

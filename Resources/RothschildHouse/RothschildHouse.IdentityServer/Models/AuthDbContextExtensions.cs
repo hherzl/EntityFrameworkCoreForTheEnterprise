@@ -26,20 +26,17 @@ namespace RothschildHouse.IdentityServer.Models
         public static User GetUserByID(this AuthDbContext dbContext, string id)
             => dbContext.Users.FirstOrDefault(item => item.UserID == id);
 
-        public static IEnumerable<UserClaim> GetUserClaimsByUserID(this AuthDbContext dbContext, string userId)
-            => dbContext.UserClaims.Where(item => item.UserID == userId);
+        public static IEnumerable<UserClaim> GetUserClaimsByUserID(this AuthDbContext dbContext, string userID)
+            => dbContext.UserClaims.Where(item => item.UserID == userID);
 
         public static void SeedInMemory(this AuthDbContext dbContext)
         {
-            dbContext.Users.Add(new User("100", "jameslogan@walla.com", "wolverine".ToSha256(), true));
+            dbContext.Users.Add(new User("100", "administrator@onlinestore.com", "onlinestore1".ToSha256(), true));
 
             dbContext.UserClaims.AddRange(
                 new UserClaim(Guid.NewGuid(), "100", JwtClaimTypes.Subject, "100"),
                 new UserClaim(Guid.NewGuid(), "100", JwtClaimTypes.Role, "Customer"),
-                new UserClaim(Guid.NewGuid(), "100", JwtClaimTypes.Email, "jameslogan@walla.com"),
-                new UserClaim(Guid.NewGuid(), "100", JwtClaimTypes.GivenName, "James"),
-                new UserClaim(Guid.NewGuid(), "100", JwtClaimTypes.MiddleName, ""),
-                new UserClaim(Guid.NewGuid(), "100", JwtClaimTypes.FamilyName, "Logan")
+                new UserClaim(Guid.NewGuid(), "100", JwtClaimTypes.Email, "administrator@onlinestore.com")
             );
 
             dbContext.SaveChanges();
