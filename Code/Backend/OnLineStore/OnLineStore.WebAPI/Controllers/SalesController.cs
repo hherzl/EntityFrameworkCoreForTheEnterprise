@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,13 +19,15 @@ namespace OnLineStore.WebAPI.Controllers
     [Route("api/v1/[controller]")]
     public class SalesController : OnLineStoreController
     {
-        protected ILogger Logger;
-        protected ISalesService SalesService;
+        protected readonly ILogger Logger;
+        protected readonly IRothschildHouseClient RothschildHouseClient;
+        protected readonly ISalesService SalesService;
 
-        public SalesController(ILogger<SalesController> logger, ISalesService salesService)
+        public SalesController(ILogger<SalesController> logger, IRothschildHouseClient rothschildHouseClient, ISalesService salesService)
             : base()
         {
             Logger = logger;
+            RothschildHouseClient = rothschildHouseClient;
             SalesService = salesService;
         }
 #pragma warning restore CS1591
@@ -41,10 +44,10 @@ namespace OnLineStore.WebAPI.Controllers
         /// <param name="currencyID">Currency</param>
         /// <param name="paymentMethodID">Payment method</param>
         /// <returns>A sequence of orders</returns>
-        /// <response code="200"></response>
-        /// <response code="401"></response>
-        /// <response code="403"></response>
-        /// <response code="500"></response>
+        /// <response code="200">Returns a list of orders</response>
+        /// <response code="401">If client is not authenticated</response>
+        /// <response code="403">If client is not autorized</response>
+        /// <response code="500">If there was an internal error</response>
         [HttpGet("Order")]
         [ProducesResponseType(200)]
         [ProducesResponseType(401)]
@@ -132,33 +135,26 @@ namespace OnLineStore.WebAPI.Controllers
         [ProducesResponseType(403)]
         [ProducesResponseType(500)]
         [OnLineStoreActionFilter]
-        public async Task<IActionResult> CreateOrderAsync([FromBody] CreateOrderRequest request)
+        public async Task<IActionResult> PostOrderAsync([FromBody]PostOrderRequest request)
         {
-            Logger?.LogDebug("{0} has been invoked", nameof(CreateOrderAsync));
+            Logger?.LogDebug("{0} has been invoked", nameof(PostOrderAsync));
 
-            using (var httpClient = RothschildHouseClient.GetHttpClient())
-            {
-                var paymentRequest = request.GetPostPaymentRequest();
+            var paymentRequest = request.GetPostPaymentRequest();
 
-                var paymentResponse = await httpClient.PostPaymentAsync(paymentRequest);
+            var paymentResponse = await RothschildHouseClient.PostPaymentAsync(paymentRequest);
 
-                if (paymentResponse.IsSuccessStatusCode)
-                {
-                    var entity = request.GetOrderHeader();
+            if (paymentResponse.StatusCode == HttpStatusCode.BadRequest)
+                return BadRequest();
 
-                    entity.CreationUser = UserInfo.UserName;
+            var entity = request.GetOrderHeader();
 
-                    // Get response from business logic
-                    var response = await SalesService.CreateOrderAsync(entity, request.GetOrderDetails().ToArray());
+            entity.CreationUser = UserInfo.UserName;
 
-                    // Return as http response
-                    return response.ToHttpResponse();
-                }
-                else
-                {
-                    return BadRequest();
-                }
-            }
+            // Get response from business logic
+            var response = await SalesService.CreateOrderAsync(entity, request.GetOrderDetails().ToArray());
+
+            // Return as http response
+            return response.ToHttpResponse();
         }
 
         /// <summary>

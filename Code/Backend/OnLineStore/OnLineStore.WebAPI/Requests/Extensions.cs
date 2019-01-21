@@ -7,7 +7,7 @@ namespace OnLineStore.WebAPI.Requests
 #pragma warning disable CS1591
     public static class Extensions
     {
-        public static OrderHeader GetOrderHeader(this CreateOrderRequest request)
+        public static OrderHeader GetOrderHeader(this PostOrderRequest request)
             => new OrderHeader
             {
                 CustomerID = request.CustomerID,
@@ -16,7 +16,7 @@ namespace OnLineStore.WebAPI.Requests
                 Comments = request.Comments
             };
 
-        public static IEnumerable<OrderDetail> GetOrderDetails(this CreateOrderRequest request)
+        public static IEnumerable<OrderDetail> GetOrderDetails(this PostOrderRequest request)
         {
             foreach (var item in request.Details)
             {
@@ -29,7 +29,7 @@ namespace OnLineStore.WebAPI.Requests
             }
         }
 
-        public static PostPaymentRequest GetPostPaymentRequest(this CreateOrderRequest request)
+        public static PostPaymentRequest GetPostPaymentRequest(this PostOrderRequest request)
             => new PostPaymentRequest
             {
                 CardHolderName = request.CardHolderName,

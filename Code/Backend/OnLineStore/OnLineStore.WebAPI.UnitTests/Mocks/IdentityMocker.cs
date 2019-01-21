@@ -1,20 +1,19 @@
 ﻿using System.Security.Claims;
+using IdentityModel;
 
 namespace OnLineStore.WebAPI.UnitTests.Mocks
 {
     public static class IdentityMocker
     {
         public static ClaimsPrincipal GetCustomerIdentity()
-        {
-            return new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
+            => new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
             {
-                new Claim("preferred_username", "jameslogan"),
-                new Claim("email", "jameslogan@walla.com"),
-                new Claim("role", "Customer"),
-                new Claim("given_name", "James"),
-                new Claim("middle_name", ""),
-                new Claim("family_name", "Logan")
+                new Claim(JwtClaimTypes.PreferredUserName, "jameslogan"),
+                new Claim(JwtClaimTypes.Email, "jameslogan@walla.com"),
+                new Claim(JwtClaimTypes.Role, "Customer"),
+                new Claim(JwtClaimTypes.GivenName, "James"),
+                new Claim(JwtClaimTypes.MiddleName, ""),
+                new Claim(JwtClaimTypes.FamilyName, "Logan")
             }));
-        }
     }
 }

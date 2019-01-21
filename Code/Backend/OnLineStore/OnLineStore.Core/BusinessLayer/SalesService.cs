@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -334,8 +335,10 @@ namespace OnLineStore.Core.BusinessLayer
                         Comments = entity.Comments
                     };
 
-                    if (entity.OrderDetails != null && entity.OrderDetails.Count > 0)
+                    if (entity.OrderDetails?.Count > 0)
                     {
+                        response.Model.OrderDetails = new Collection<OrderDetail>();
+
                         foreach (var detail in entity.OrderDetails)
                         {
                             // Add order detail clone to collection
@@ -370,19 +373,19 @@ namespace OnLineStore.Core.BusinessLayer
                 // Retrieve order by id
                 var entity = await DbContext.GetOrderAsync(new OrderHeader(id));
 
-                if (entity != null)
-                {
-                    // Restrict remove operation for orders with details
-                    if (entity.OrderDetails.Count > 0)
-                        throw new ForeignKeyDependencyException(string.Format(SalesDisplays.RemoveOrderExceptionMessage, id));
+                if (entity == null)
+                    return response;
 
-                    // Delete order
-                    DbContext.Remove(entity);
+                // Restrict remove operation for orders with details
+                if (entity.OrderDetails.Count > 0)
+                    throw new ForeignKeyDependencyException(string.Format(SalesDisplays.RemoveOrderExceptionMessage, id));
 
-                    await DbContext.SaveChangesAsync();
+                // Delete order
+                DbContext.Remove(entity);
 
-                    Logger?.LogInformation(SalesDisplays.DeleteOrderMessage);
-                }
+                await DbContext.SaveChangesAsync();
+
+                Logger?.LogInformation(SalesDisplays.DeleteOrderMessage);
             }
             catch (Exception ex)
             {
