@@ -13,6 +13,7 @@ using OnLineStore.Core;
 using OnLineStore.Core.BusinessLayer;
 using OnLineStore.Core.BusinessLayer.Contracts;
 using OnLineStore.Core.DataLayer;
+using OnLineStore.WebAPI.Clients;
 using OnLineStore.WebAPI.PolicyRequirements;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -45,6 +46,9 @@ namespace OnLineStore.WebAPI
             // Logger for services
             services.AddScoped<ILogger, Logger<Service>>();
 
+            // Payment gateway
+            services.AddScoped<IRothschildHouseClient, RothschildHouseClient>();
+
             // Services
             services.AddScoped<IHumanResourcesService, HumanResourcesService>();
             services.AddScoped<IWarehouseService, WarehouseService>();
@@ -60,7 +64,7 @@ namespace OnLineStore.WebAPI
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 });
 
-            /* Configuration for authentication */
+            /* Configuration for authorization */
 
             services
                 .AddMvcCore()

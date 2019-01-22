@@ -17,9 +17,7 @@ namespace OnLineStore.WebAPI.Clients
         }
 
         public async Task<HttpResponseMessage> PostPaymentAsync(PostPaymentRequest request)
-        {
-            return await client.PostAsync(apiUrl.Controller("Transaction").Action("Payment").ToString(), request.GetStringContent());
-        }
+            => await client.PostAsync(apiUrl.Controller("Transaction").Action("Payment").ToString(), request.GetStringContent());
     }
 #pragma warning restore CS1591
 }

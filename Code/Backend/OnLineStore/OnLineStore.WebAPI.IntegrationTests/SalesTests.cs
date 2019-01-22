@@ -150,7 +150,7 @@ namespace OnLineStore.WebAPI.IntegrationTests
         }
 
         [Fact]
-        public async Task TestCreateOrderAsCustomerAsync()
+        public async Task TestPostOrderAsCustomerAsync()
         {
             // Arrange
             var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();

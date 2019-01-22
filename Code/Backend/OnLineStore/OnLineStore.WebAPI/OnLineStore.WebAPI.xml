@@ -4,6 +4,18 @@
         <name>OnLineStore.WebAPI</name>
     </assembly>
     <members>
+        <member name="T:OnLineStore.WebAPI.Clients.Models.HttpResponseMessageExtensions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:OnLineStore.WebAPI.Clients.Models.HttpResponseMessageExtensions.GetPaymentResponseAsync(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            
+            </summary>
+            <param name="responseMessage"></param>
+            <returns></returns>
+        </member>
         <member name="T:OnLineStore.WebAPI.Clients.Models.PostPaymentRequest">
             <summary>
             Represents post payment model

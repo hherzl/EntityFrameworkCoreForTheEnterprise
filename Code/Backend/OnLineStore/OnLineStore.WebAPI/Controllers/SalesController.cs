@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OnLineStore.Core.BusinessLayer.Contracts;
 using OnLineStore.WebAPI.Clients;
+using OnLineStore.WebAPI.Clients.Models;
 using OnLineStore.WebAPI.Filters;
 using OnLineStore.WebAPI.Requests;
 using OnLineStore.WebAPI.Responses;
@@ -141,10 +141,12 @@ namespace OnLineStore.WebAPI.Controllers
 
             var paymentRequest = request.GetPostPaymentRequest();
 
-            var paymentResponse = await RothschildHouseClient.PostPaymentAsync(paymentRequest);
+            var paymentHttpResponse = await RothschildHouseClient.PostPaymentAsync(paymentRequest);
 
-            if (paymentResponse.StatusCode == HttpStatusCode.BadRequest)
+            if (!paymentHttpResponse.IsSuccessStatusCode)
                 return BadRequest();
+
+            var paymentResponse = await paymentHttpResponse.GetPaymentResponseAsync();
 
             var entity = request.GetOrderHeader();
 

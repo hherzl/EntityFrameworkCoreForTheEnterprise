@@ -42,7 +42,7 @@ namespace OnLineStore.WebAPI.Clients
             };
 
             if (!string.IsNullOrEmpty(ApiSufix))
-                output.Add(string.Format(":{0}", Port));
+                output.Add(ApiSufix);
 
             if (!string.IsNullOrEmpty(ApiVersion))
                 output.Add(ApiVersion);
