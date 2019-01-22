@@ -5,8 +5,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using RothschildHouse.Controllers;
 using RothschildHouse.Models;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -25,10 +28,21 @@ namespace RothschildHouse
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            /* Setting up dependency injection */
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddDbContext<PaymentDbContext>(options => options.UseInMemoryDatabase("Payment"));
+            services.AddTransient<ILogger<TransactionController>, Logger<TransactionController>>();
 
+            // In-memory DbContext
+            services.AddDbContext<PaymentDbContext>(options =>
+            {
+                options
+                    .UseInMemoryDatabase("Payment")
+                    .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning));
+            });
+
+            // Identity Server
             services
                 .AddAuthentication("Bearer")
                 .AddIdentityServerAuthentication(options =>
@@ -60,6 +74,7 @@ namespace RothschildHouse
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
+            // Seed initial data in-memory for DbContext
             var paymentDbContext = app
                 .ApplicationServices
                 .CreateScope()

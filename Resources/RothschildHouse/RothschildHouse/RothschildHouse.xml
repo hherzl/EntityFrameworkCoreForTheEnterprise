@@ -4,7 +4,7 @@
         <name>RothschildHouse</name>
     </assembly>
     <members>
-        <member name="M:RothschildHouse.Controllers.TransactionController.PostPayment(RothschildHouse.Requests.PostPaymentRequest)">
+        <member name="M:RothschildHouse.Controllers.TransactionController.PostPaymentAsync(RothschildHouse.Requests.PostPaymentRequest)">
             <summary>
             Places a new payment
             </summary>

@@ -28,7 +28,7 @@ namespace RothschildHouse.Client
 
             /* Create request */
 
-            var request = new PasswordTokenRequest
+            var tokenRequest = new PasswordTokenRequest
             {
                 Address = disco.TokenEndpoint,
                 ClientId = "onlinestoreclient",
@@ -37,12 +37,12 @@ namespace RothschildHouse.Client
                 Password = "onlinestore1"
             };
 
-            var userResponse = await client.RequestPasswordTokenAsync(request);
+            var tokenResponse = await client.RequestPasswordTokenAsync(tokenRequest);
 
-            if (userResponse.IsError)
-                Console.WriteLine(userResponse.Error);
+            if (tokenResponse.IsError)
+                Console.WriteLine(tokenResponse.Error);
             else
-                Console.WriteLine("Connection for '{0}' user was successfully.", request.UserName);
+                Console.WriteLine("Connection for '{0}' user was successfully.", tokenRequest.UserName);
         }
     }
 }
