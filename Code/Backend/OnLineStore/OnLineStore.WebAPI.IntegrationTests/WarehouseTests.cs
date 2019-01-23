@@ -18,7 +18,7 @@ namespace OnLineStore.WebAPI.IntegrationTests
         public async Task GetProductsAsCustomerTestAsync()
         {
             // Arrange
-            var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
+            var customerToken = await TokenHelper.GetCustomerTokenAsync();
             var request = new
             {
                 Url = "/api/v1/Warehouse/Product"
@@ -37,7 +37,7 @@ namespace OnLineStore.WebAPI.IntegrationTests
         public async Task GetProductInventoriesAsCustomerAsync()
         {
             // Arrange
-            var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
+            var customerToken = await TokenHelper.GetCustomerTokenAsync();
             var request = new
             {
                 Url = string.Format("/api/v1/Warehouse/ProductInventory/1")

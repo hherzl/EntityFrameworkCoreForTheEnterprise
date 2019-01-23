@@ -4,16 +4,18 @@ using IdentityModel.Client;
 
 namespace OnLineStore.WebAPI.IntegrationTests.Helpers
 {
-    public static class IdentityServerHelper
+    public static class TokenHelper
     {
-        public static async Task<TokenResponse> GetValidCustomerTokenAsync()
+        public static async Task<TokenResponse> GetCustomerTokenAsync()
         {
             var client = new HttpClient();
 
-            // todo: get identity server url from config file
-            var disco = client.GetDiscoveryDocumentAsync("http://localhost:56000").GetAwaiter().GetResult();
+            // todo: Get identity server url from config file
 
-            // todo: get token request from config file
+            var disco = await client.GetDiscoveryDocumentAsync("http://localhost:56000");
+
+            // todo: Get token request from config file
+
             return await client.RequestPasswordTokenAsync(new PasswordTokenRequest
             {
                 Address = disco.TokenEndpoint,

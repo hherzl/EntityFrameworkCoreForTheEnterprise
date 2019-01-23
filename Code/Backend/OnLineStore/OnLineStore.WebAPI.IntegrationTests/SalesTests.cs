@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using OnLineStore.WebAPI.Clients;
 using OnLineStore.WebAPI.IntegrationTests.Helpers;
 using Xunit;
 
@@ -20,7 +21,7 @@ namespace OnLineStore.WebAPI.IntegrationTests
         public async Task TestGetOrdersAsCustomerAsync()
         {
             // Arrange
-            var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
+            var customerToken = await TokenHelper.GetCustomerTokenAsync();
             var request = new
             {
                 Url = "/api/v1/Sales/Order"
@@ -39,7 +40,7 @@ namespace OnLineStore.WebAPI.IntegrationTests
         public async Task TestGetOrdersByCurrencyAsCustomerAsync()
         {
             // Arrange
-            var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
+            var customerToken = await TokenHelper.GetCustomerTokenAsync();
             var request = new
             {
                 Url = string.Format("/api/v1/Sales/Order?currencyID={0}", 1)
@@ -58,7 +59,7 @@ namespace OnLineStore.WebAPI.IntegrationTests
         public async Task TestGetOrdersByCustomerAsCustomerAsync()
         {
             // Arrange
-            var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
+            var customerToken = await TokenHelper.GetCustomerTokenAsync();
             var request = new
             {
                 Url = string.Format("/api/v1/Sales/Order?customerID={0}", 1)
@@ -77,7 +78,7 @@ namespace OnLineStore.WebAPI.IntegrationTests
         public async Task TestGetOrdersByEmployeeAsCustomerAsync()
         {
             // Arrange
-            var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
+            var customerToken = await TokenHelper.GetCustomerTokenAsync();
             var request = new
             {
                 Url = string.Format("/api/v1/Sales/Order?employeeID={0}", 1)
@@ -96,7 +97,7 @@ namespace OnLineStore.WebAPI.IntegrationTests
         public async Task TestGetOrderByIdAsCustomerAsync()
         {
             // Arrange
-            var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
+            var customerToken = await TokenHelper.GetCustomerTokenAsync();
             var request = new
             {
                 Url = string.Format("/api/v1/Sales/Order/{0}", 1)
@@ -115,7 +116,7 @@ namespace OnLineStore.WebAPI.IntegrationTests
         public async Task TestGetOrderByNonExistingIdAsCustomerAsync()
         {
             // Arrange
-            var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
+            var customerToken = await TokenHelper.GetCustomerTokenAsync();
             var request = new
             {
                 Url = string.Format("/api/v1/Sales/Order/{0}", 0)
@@ -134,7 +135,7 @@ namespace OnLineStore.WebAPI.IntegrationTests
         public async Task TestGetCreateOrderRequestAsCustomerAsync()
         {
             // Arrange
-            var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
+            var customerToken = await TokenHelper.GetCustomerTokenAsync();
             var request = new
             {
                 Url = "/api/v1/Sales/CreateOrderRequest"
@@ -153,7 +154,6 @@ namespace OnLineStore.WebAPI.IntegrationTests
         public async Task TestPostOrderAsCustomerAsync()
         {
             // Arrange
-            var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
             var request = new
             {
                 Url = "/api/v1/Sales/Order",
@@ -182,6 +182,8 @@ namespace OnLineStore.WebAPI.IntegrationTests
                 }
             };
 
+            var customerToken = await IdentityServerHelper.GetCustomerTokenAsync(request.Body.UserName, request.Body.Password);
+
             // Act
             apiClient.SetBearerToken(customerToken.AccessToken);
 
@@ -195,7 +197,7 @@ namespace OnLineStore.WebAPI.IntegrationTests
         public async Task TestCloneOrderAsCustomerAsync()
         {
             // Arrange
-            var customerToken = await IdentityServerHelper.GetValidCustomerTokenAsync();
+            var customerToken = await TokenHelper.GetCustomerTokenAsync();
             var request = new
             {
                 Url = string.Format("/api/v1/Sales/CloneOrder/{0}", 1)

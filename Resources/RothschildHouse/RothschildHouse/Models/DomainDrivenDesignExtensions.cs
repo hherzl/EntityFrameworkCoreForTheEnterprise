@@ -31,6 +31,14 @@ namespace RothschildHouse.Models
 
         public static void SeedInMemory(this PaymentDbContext dbContext)
         {
+            dbContext.PaymentMethods.Add(new PaymentMethod
+            {
+                PaymentMethodID = Guid.Parse("7671A4F7-A735-4CB7-AAB4-CF47AE20171D"),
+                PaymentMethodName = "Credit Card"
+            });
+
+            /* Get more credit card numbers: http://www.getcreditcardnumbers.com/ */
+
             var jamesLogan = new Person
             {
                 PersonID = Guid.NewGuid(),
@@ -50,10 +58,35 @@ namespace RothschildHouse.Models
                 IssuingNetwork = "Visa",
                 CardNumber = "4024007164051145",
                 Last4Digits = "1145",
-                ExpirationDate = new DateTime(DateTime.Now.Year + 5, DateTime.Now.Month, 1),
+                ExpirationDate = new DateTime(DateTime.Now.AddYears(5).Year, DateTime.Now.Month, 1),
                 Cvv = "987",
                 Limit = 10000,
                 AvailableFounds = 10000
+            });
+
+            var ororoMunroe = new Person
+            {
+                PersonID = Guid.NewGuid(),
+                GivenName = "Ororo",
+                MiddleName = "",
+                FamilyName = "Munroe",
+                FullName = "Ororo Munroe"
+            };
+
+            dbContext.People.Add(ororoMunroe);
+
+            dbContext.CreditCards.Add(new CreditCard
+            {
+                CreditCardID = Guid.NewGuid(),
+                PersonID = ororoMunroe.PersonID,
+                CardHolderName = "Ororo Munroe",
+                IssuingNetwork = "MasterCard",
+                CardNumber = "5473913699329307",
+                Last4Digits = "9307",
+                ExpirationDate = new DateTime(DateTime.Now.AddYears(4).Year, DateTime.Now.Month, 1),
+                Cvv = "987",
+                Limit = 5000,
+                AvailableFounds = 5000
             });
 
             dbContext.SaveChanges();

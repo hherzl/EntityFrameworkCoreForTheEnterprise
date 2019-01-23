@@ -7,8 +7,8 @@ namespace OnLineStore.WebAPI.Clients
 #pragma warning disable CS1591
     public class RothschildHouseClient : IRothschildHouseClient
     {
-        private HttpClient client;
-        private ApiUrl apiUrl;
+        private readonly HttpClient client;
+        private readonly ApiUrl apiUrl;
 
         public RothschildHouseClient()
         {
@@ -17,7 +17,13 @@ namespace OnLineStore.WebAPI.Clients
         }
 
         public async Task<HttpResponseMessage> PostPaymentAsync(PostPaymentRequest request)
-            => await client.PostAsync(apiUrl.Controller("Transaction").Action("Payment").ToString(), request.GetStringContent());
+        {
+            var token = await IdentityServerHelper.GetRothschildHouseTokenAsync();
+
+            client.SetBearerToken(token.AccessToken);
+
+            return await client.PostAsync(apiUrl.Controller("Transaction").Action("Payment").ToString(), request.GetStringContent());
+        }
     }
 #pragma warning restore CS1591
 }

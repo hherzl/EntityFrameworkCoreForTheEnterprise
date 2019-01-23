@@ -51,6 +51,17 @@ namespace RothschildHouse.Models
         public decimal? AvailableFounds { get; set; }
     }
 
+    public class PaymentMethod
+    {
+        public PaymentMethod()
+        {
+        }
+
+        public Guid? PaymentMethodID { get; set; }
+
+        public string PaymentMethodName { get; set; }
+    }
+
     public class PaymentTransaction
     {
         public PaymentTransaction()
@@ -100,6 +111,14 @@ namespace RothschildHouse.Models
         }
     }
 
+    public class PaymentMethodConfiguration : IEntityTypeConfiguration<PaymentMethod>
+    {
+        public void Configure(EntityTypeBuilder<PaymentMethod> builder)
+        {
+            builder.HasKey(p => p.PaymentMethodID);
+        }
+    }
+
     public class PaymentTransactionConfiguration : IEntityTypeConfiguration<PaymentTransaction>
     {
         public void Configure(EntityTypeBuilder<PaymentTransaction> builder)
@@ -125,6 +144,8 @@ namespace RothschildHouse.Models
 
         public DbSet<CreditCard> CreditCards { get; set; }
 
+        public DbSet<PaymentMethod> PaymentMethods { get; set; }
+
         public DbSet<PaymentTransaction> PaymentTransactions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -132,6 +153,7 @@ namespace RothschildHouse.Models
             modelBuilder
                 .ApplyConfiguration(new PersonConfiguration())
                 .ApplyConfiguration(new CreditCardConfiguration())
+                .ApplyConfiguration(new PaymentMethodConfiguration())
                 .ApplyConfiguration(new PaymentTransactionConfiguration());
 
             base.OnModelCreating(modelBuilder);

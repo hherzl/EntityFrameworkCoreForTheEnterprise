@@ -154,7 +154,6 @@ namespace OnLineStore.WebAPI.UnitTests.Mocks
 
             var order = new OrderHeader
             {
-                OrderHeaderID = 1,
                 OrderStatusID = orderStatus.OrderStatusID,
                 CustomerID = customer.CustomerID,
                 EmployeeID = employee.EmployeeID,
@@ -171,7 +170,6 @@ namespace OnLineStore.WebAPI.UnitTests.Mocks
 
             var orderDetail = new OrderDetail
             {
-                OrderDetailID = 1,
                 OrderHeaderID = order.OrderHeaderID,
                 ProductID = product.ProductID,
                 ProductName = product.ProductName,
