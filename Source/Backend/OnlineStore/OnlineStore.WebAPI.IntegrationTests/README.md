@@ -8,9 +8,9 @@ Execute *dotnet test* command to run integration tests for *Online Store Web API
 
 In order to run integration tests for *Online Store Web API*, You need to start these Web APIS:
 
-    * *Rothschild House Identity Server*
-    * *Rothschild House Web API*
-    * *Online Store Identity Server*
+    *Rothschild House Identity Server*
+    *Rothschild House Web API*
+    *Online Store Identity Server*
 
 These Web APIS can be started from command line with *dotnet run* command.
 
