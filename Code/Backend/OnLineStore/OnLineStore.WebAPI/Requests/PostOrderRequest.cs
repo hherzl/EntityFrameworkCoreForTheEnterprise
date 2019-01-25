@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace OnLineStore.WebAPI.Requests
+namespace OnlineStore.WebAPI.Requests
 {
     /// <summary>
     /// Represents the model to post order

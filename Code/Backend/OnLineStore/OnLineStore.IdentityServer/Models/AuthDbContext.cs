@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace OnLineStore.IdentityServer.Models
+namespace OnlineStore.IdentityServer.Models
 {
     public class AuthDbContext : DbContext
     {

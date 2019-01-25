@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using OnLineStore.Core.BusinessLayer.Responses;
-using OnLineStore.Core.DataLayer.Sales;
-using OnLineStore.Core.EntityLayer.Sales;
-using OnLineStore.WebAPI.Requests;
-using OnLineStore.WebAPI.UnitTests.Mocks;
+using OnlineStore.Core.BusinessLayer.Responses;
+using OnlineStore.Core.DataLayer.Sales;
+using OnlineStore.Core.EntityLayer.Sales;
+using OnlineStore.WebAPI.Requests;
+using OnlineStore.WebAPI.UnitTests.Mocks;
 using Xunit;
 
-namespace OnLineStore.WebAPI.UnitTests
+namespace OnlineStore.WebAPI.UnitTests
 {
     public class SalesControllerTests
     {

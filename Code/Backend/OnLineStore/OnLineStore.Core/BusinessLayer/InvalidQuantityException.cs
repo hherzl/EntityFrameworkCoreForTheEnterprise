@@ -1,6 +1,6 @@
-﻿namespace OnLineStore.Core.BusinessLayer
+﻿namespace OnlineStore.Core.BusinessLayer
 {
-    public class InvalidQuantityException : OnLineStoreException
+    public class InvalidQuantityException : OnlineStoreException
     {
         public InvalidQuantityException()
             : base()

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using OnLineStore.Core.EntityLayer.Sales;
-using OnLineStore.WebAPI.Clients.Models;
+using OnlineStore.Core.EntityLayer.Sales;
+using OnlineStore.WebAPI.Clients.Models;
 
-namespace OnLineStore.WebAPI.Requests
+namespace OnlineStore.WebAPI.Requests
 {
 #pragma warning disable CS1591
     public static class Extensions

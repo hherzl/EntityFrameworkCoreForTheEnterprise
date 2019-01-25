@@ -1,4 +1,4 @@
-﻿namespace OnLineStore.WebAPI.Requests
+﻿namespace OnlineStore.WebAPI.Requests
 {
     /// <summary>
     /// Represents one line for Order

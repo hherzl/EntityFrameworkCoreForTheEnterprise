@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using OnLineStore.IdentityServer.Models;
-using OnLineStore.IdentityServer.Services;
-using OnLineStore.IdentityServer.Validation;
+using OnlineStore.IdentityServer.Models;
+using OnlineStore.IdentityServer.Services;
+using OnlineStore.IdentityServer.Validation;
 
-namespace OnLineStore.IdentityServer
+namespace OnlineStore.IdentityServer
 {
     public class Startup
     {
@@ -45,7 +45,8 @@ namespace OnLineStore.IdentityServer
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
-            /* Init DbContext */
+            /* Seed in-memory DbContext */
+
             var authDbContext = app
                 .ApplicationServices
                 .CreateScope()

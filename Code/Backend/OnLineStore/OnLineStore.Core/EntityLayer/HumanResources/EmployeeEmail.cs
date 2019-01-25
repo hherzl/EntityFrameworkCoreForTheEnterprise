@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OnLineStore.Core.EntityLayer.HumanResources
+namespace OnlineStore.Core.EntityLayer.HumanResources
 {
     public class EmployeeEmail : IAuditableEntity
     {

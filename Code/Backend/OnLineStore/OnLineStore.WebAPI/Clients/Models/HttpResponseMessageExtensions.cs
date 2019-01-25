@@ -2,23 +2,17 @@
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace OnLineStore.WebAPI.Clients.Models
+namespace OnlineStore.WebAPI.Clients.Models
 {
-    /// <summary>
-    /// 
-    /// </summary>
+#pragma warning disable CS1591
     public static class HttpResponseMessageExtensions
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="responseMessage"></param>
-        /// <returns></returns>
         public static async Task<PaymentResponse> GetPaymentResponseAsync(this HttpResponseMessage responseMessage)
         {
             var json = await responseMessage.Content.ReadAsStringAsync();
 
             return JsonConvert.DeserializeObject<PaymentResponse>(json);
         }
+#pragma warning restore CS1591
     }
 }

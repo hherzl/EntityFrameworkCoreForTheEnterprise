@@ -1,16 +1,16 @@
 ﻿using System;
 using IdentityModel;
 using Microsoft.AspNetCore.Mvc.Filters;
-using OnLineStore.WebAPI.Controllers;
+using OnlineStore.WebAPI.Controllers;
 
-namespace OnLineStore.WebAPI.Filters
+namespace OnlineStore.WebAPI.Filters
 {
 #pragma warning disable CS1591
-    public class OnLineStoreActionFilter : Attribute, IActionFilter
+    public class OnlineStoreActionFilter : Attribute, IActionFilter
     {
         public void OnActionExecuting(ActionExecutingContext context)
         {
-            var controller = context.Controller as OnLineStoreController;
+            var controller = context.Controller as OnlineStoreController;
 
             foreach (var claim in controller.User.Claims)
             {

@@ -2,7 +2,7 @@
 using System.Text;
 using Newtonsoft.Json;
 
-namespace OnLineStore.WebAPI.Clients.Models
+namespace OnlineStore.WebAPI.Clients.Models
 {
 #pragma warning disable CS1591
     public static class RequestExtensions

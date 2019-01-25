@@ -9,15 +9,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using OnLineStore.Core;
-using OnLineStore.Core.BusinessLayer;
-using OnLineStore.Core.BusinessLayer.Contracts;
-using OnLineStore.Core.DataLayer;
-using OnLineStore.WebAPI.Clients;
-using OnLineStore.WebAPI.PolicyRequirements;
+using OnlineStore.Core;
+using OnlineStore.Core.BusinessLayer;
+using OnlineStore.Core.BusinessLayer.Contracts;
+using OnlineStore.Core.DataLayer;
+using OnlineStore.WebAPI.Clients;
+using OnlineStore.WebAPI.PolicyRequirements;
 using Swashbuckle.AspNetCore.Swagger;
 
-namespace OnLineStore.WebAPI
+namespace OnlineStore.WebAPI
 {
 #pragma warning disable CS1591
     public class Startup
@@ -35,7 +35,7 @@ namespace OnLineStore.WebAPI
             /* Setting dependency injection */
 
             // For DbContext
-            services.AddDbContext<OnLineStoreDbContext>(builder =>
+            services.AddDbContext<OnlineStoreDbContext>(builder =>
             {
                 builder.UseSqlServer(Configuration["AppSettings:ConnectionString"]);
             });
@@ -58,7 +58,7 @@ namespace OnLineStore.WebAPI
 
             services
                 .AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddJsonOptions(options =>
                 {
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;

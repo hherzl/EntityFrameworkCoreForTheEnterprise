@@ -1,4 +1,4 @@
-﻿namespace OnLineStore.Core.EntityLayer.Dbo
+﻿namespace OnlineStore.Core.EntityLayer.Dbo
 {
     public class ChangeLogExclusion : IEntity
     {

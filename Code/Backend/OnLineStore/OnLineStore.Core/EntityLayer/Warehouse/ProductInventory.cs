@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OnLineStore.Core.EntityLayer.Warehouse
+namespace OnlineStore.Core.EntityLayer.Warehouse
 {
     public class ProductInventory : IAuditableEntity
     {

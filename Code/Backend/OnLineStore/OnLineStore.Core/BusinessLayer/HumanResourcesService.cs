@@ -2,18 +2,18 @@
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using OnLineStore.Core.BusinessLayer.Contracts;
-using OnLineStore.Core.BusinessLayer.Responses;
-using OnLineStore.Core.DataLayer;
-using OnLineStore.Core.DataLayer.HumanResources;
-using OnLineStore.Core.DataLayer.Repositories;
-using OnLineStore.Core.EntityLayer.HumanResources;
+using OnlineStore.Core.BusinessLayer.Contracts;
+using OnlineStore.Core.BusinessLayer.Responses;
+using OnlineStore.Core.DataLayer;
+using OnlineStore.Core.DataLayer.HumanResources;
+using OnlineStore.Core.DataLayer.Repositories;
+using OnlineStore.Core.EntityLayer.HumanResources;
 
-namespace OnLineStore.Core.BusinessLayer
+namespace OnlineStore.Core.BusinessLayer
 {
     public class HumanResourcesService : Service, IHumanResourcesService
     {
-        public HumanResourcesService(ILogger<HumanResourcesService> logger, IUserInfo userInfo, OnLineStoreDbContext dbContext)
+        public HumanResourcesService(ILogger<HumanResourcesService> logger, IUserInfo userInfo, OnlineStoreDbContext dbContext)
             : base(logger, userInfo, dbContext)
         {
         }

@@ -1,4 +1,4 @@
-﻿namespace OnLineStore.Core.EntityLayer
+﻿namespace OnlineStore.Core.EntityLayer
 {
     public interface IEntity
     {

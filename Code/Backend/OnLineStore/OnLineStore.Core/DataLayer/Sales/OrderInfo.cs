@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OnLineStore.Core.DataLayer.Sales
+namespace OnlineStore.Core.DataLayer.Sales
 {
     public class OrderInfo
     {

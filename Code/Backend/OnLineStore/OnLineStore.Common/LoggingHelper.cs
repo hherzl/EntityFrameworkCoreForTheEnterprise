@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace OnLineStore.Common
+namespace OnlineStore.Common
 {
     public static class LoggingHelper
     {

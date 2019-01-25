@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using IdentityServer4.Models;
 using IdentityServer4.Validation;
-using OnLineStore.IdentityServer.Models;
+using OnlineStore.IdentityServer.Models;
 
-namespace OnLineStore.IdentityServer.Validation
+namespace OnlineStore.IdentityServer.Validation
 {
     public class ResourceOwnerPasswordValidator : IResourceOwnerPasswordValidator
     {

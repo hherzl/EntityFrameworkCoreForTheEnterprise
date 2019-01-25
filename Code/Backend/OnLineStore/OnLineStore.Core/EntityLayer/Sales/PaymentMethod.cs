@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OnLineStore.Core.EntityLayer.Sales
+namespace OnlineStore.Core.EntityLayer.Sales
 {
     public class PaymentMethod : IAuditableEntity
     {

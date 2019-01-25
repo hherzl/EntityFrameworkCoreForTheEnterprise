@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OnLineStore.IdentityServer.Models
+namespace OnlineStore.IdentityServer.Models
 {
     public class UserClaim
     {

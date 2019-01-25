@@ -16,11 +16,19 @@ namespace RothschildHouse.IdentityServer
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            /* Setting up dependency injection */
+
+            // For DbContext
             services.AddDbContext<AuthDbContext>(options => options.UseInMemoryDatabase("Auth"));
 
+            // Password validator and profile
             services
                 .AddTransient<IResourceOwnerPasswordValidator, ResourceOwnerPasswordValidator>()
                 .AddTransient<IProfileService, ProfileService>();
+
+            /* Identity Server */
+
+            // Use in-memory configurations
 
             services
                 .AddIdentityServer()
@@ -28,6 +36,7 @@ namespace RothschildHouse.IdentityServer
                 .AddInMemoryApiResources(Config.GetApiResources())
                 .AddInMemoryClients(Config.GetClients());
 
+            // Add authentication
             services
                 .AddAuthentication()
                 .AddIdentityServerAuthentication();
@@ -38,6 +47,8 @@ namespace RothschildHouse.IdentityServer
         {
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
+
+            /* Seed AuthDbContext in-memory */
 
             var authDbContext = app
                 .ApplicationServices

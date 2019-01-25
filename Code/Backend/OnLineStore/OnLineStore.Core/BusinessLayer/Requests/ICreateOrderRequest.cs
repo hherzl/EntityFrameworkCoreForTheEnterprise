@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using OnLineStore.Core.EntityLayer.Warehouse;
-using OnLineStore.Core.EntityLayer.Sales;
+using OnlineStore.Core.EntityLayer.Warehouse;
+using OnlineStore.Core.EntityLayer.Sales;
 
-namespace OnLineStore.Core.BusinessLayer.Requests
+namespace OnlineStore.Core.BusinessLayer.Requests
 {
     public interface ICreateOrderRequest : IRequest
     {

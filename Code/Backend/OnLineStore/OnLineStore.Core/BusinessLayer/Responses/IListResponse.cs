@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace OnLineStore.Core.BusinessLayer.Responses
+namespace OnlineStore.Core.BusinessLayer.Responses
 {
     public interface IListResponse<TModel> : IResponse
     {

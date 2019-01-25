@@ -1,9 +1,9 @@
-﻿using OnLineStore.Common;
-using OnLineStore.Core;
-using OnLineStore.Core.BusinessLayer;
-using OnLineStore.Core.BusinessLayer.Contracts;
+﻿using OnlineStore.Common;
+using OnlineStore.Core;
+using OnlineStore.Core.BusinessLayer;
+using OnlineStore.Core.BusinessLayer.Contracts;
 
-namespace OnLineStore.WebAPI.UnitTests.Mocks
+namespace OnlineStore.WebAPI.UnitTests.Mocks
 {
     public static class ServiceMocker
     {
@@ -11,21 +11,21 @@ namespace OnLineStore.WebAPI.UnitTests.Mocks
             => new HumanResourcesService(
                 LoggingHelper.GetLogger<HumanResourcesService>(),
                 userInfo,
-                DbContextMocker.GetOnLineStoreDbContextInMemory(dbName)
+                DbContextMocker.GetOnlineStoreDbContextInMemory(dbName)
             );
 
         public static ISalesService GetSalesService(IUserInfo userInfo, string dbName)
             => new SalesService(
                 LoggingHelper.GetLogger<SalesService>(),
                 userInfo,
-                DbContextMocker.GetOnLineStoreDbContextInMemory(dbName)
+                DbContextMocker.GetOnlineStoreDbContextInMemory(dbName)
             );
 
         public static IWarehouseService GetWarehouseService(IUserInfo userInfo, string dbName)
             => new WarehouseService(
                 LoggingHelper.GetLogger<WarehouseService>(),
                 userInfo,
-                DbContextMocker.GetOnLineStoreDbContextInMemory(dbName)
+                DbContextMocker.GetOnlineStoreDbContextInMemory(dbName)
                 );
     }
 }

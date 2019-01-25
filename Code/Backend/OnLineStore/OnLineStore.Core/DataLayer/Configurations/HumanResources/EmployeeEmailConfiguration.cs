@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OnLineStore.Core.EntityLayer.HumanResources;
+using OnlineStore.Core.EntityLayer.HumanResources;
 
-namespace OnLineStore.Core.DataLayer.Configurations.HumanResources
+namespace OnlineStore.Core.DataLayer.Configurations.HumanResources
 {
     public class EmployeeEmailConfiguration : IEntityTypeConfiguration<EmployeeEmail>
     {

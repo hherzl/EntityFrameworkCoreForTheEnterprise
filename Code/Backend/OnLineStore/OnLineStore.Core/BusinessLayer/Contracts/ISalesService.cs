@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
-using OnLineStore.Core.BusinessLayer.Requests;
-using OnLineStore.Core.BusinessLayer.Responses;
-using OnLineStore.Core.DataLayer.Sales;
-using OnLineStore.Core.EntityLayer.Dbo;
-using OnLineStore.Core.EntityLayer.Sales;
+using OnlineStore.Core.BusinessLayer.Requests;
+using OnlineStore.Core.BusinessLayer.Responses;
+using OnlineStore.Core.DataLayer.Sales;
+using OnlineStore.Core.EntityLayer.Dbo;
+using OnlineStore.Core.EntityLayer.Sales;
 
-namespace OnLineStore.Core.BusinessLayer.Contracts
+namespace OnlineStore.Core.BusinessLayer.Contracts
 {
     public interface ISalesService : IService
     {

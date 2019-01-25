@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using OnLineStore.Common;
-using OnLineStore.Core.EntityLayer.Sales;
+using OnlineStore.Common;
+using OnlineStore.Core.EntityLayer.Sales;
 
-namespace OnLineStore.Mocker
+namespace OnlineStore.Mocker
 {
     public class Program
     {

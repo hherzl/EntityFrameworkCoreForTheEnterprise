@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using IdentityModel.Client;
 
-namespace OnLineStore.WebAPI.IntegrationTests.Helpers
+namespace OnlineStore.WebAPI.IntegrationTests.Helpers
 {
     public static class TokenHelper
     {

@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
-using OnLineStore.Core.BusinessLayer.Contracts;
-using OnLineStore.Core.DataLayer;
+using OnlineStore.Core.BusinessLayer.Contracts;
+using OnlineStore.Core.DataLayer;
 
-namespace OnLineStore.Core.BusinessLayer
+namespace OnlineStore.Core.BusinessLayer
 {
     public abstract class Service : IService
     {
@@ -10,7 +10,7 @@ namespace OnLineStore.Core.BusinessLayer
         protected ILogger Logger;
         protected IUserInfo UserInfo;
 
-        public Service(ILogger logger, IUserInfo userInfo, OnLineStoreDbContext dbContext)
+        public Service(ILogger logger, IUserInfo userInfo, OnlineStoreDbContext dbContext)
         {
             Logger = logger;
             UserInfo = userInfo;
@@ -27,6 +27,6 @@ namespace OnLineStore.Core.BusinessLayer
             }
         }
 
-        public OnLineStoreDbContext DbContext { get; }
+        public OnlineStoreDbContext DbContext { get; }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OnLineStore.Core.EntityLayer.Dbo;
+using OnlineStore.Core.EntityLayer.Dbo;
 
-namespace OnLineStore.Core.DataLayer.Configurations.Dbo
+namespace OnlineStore.Core.DataLayer.Configurations.Dbo
 {
     public class CurrencyConfiguration : IEntityTypeConfiguration<Currency>
     {

@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using IdentityServer4.Extensions;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
-using OnLineStore.IdentityServer.Models;
+using OnlineStore.IdentityServer.Models;
 
-namespace OnLineStore.IdentityServer.Services
+namespace OnlineStore.IdentityServer.Services
 {
     public class ProfileService : IProfileService
     {

@@ -1,8 +1,8 @@
 ﻿using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using OnLineStore.Core.BusinessLayer.Responses;
+using OnlineStore.Core.BusinessLayer.Responses;
 
-namespace OnLineStore.WebAPI.Responses
+namespace OnlineStore.WebAPI.Responses
 {
 #pragma warning disable CS1591
     public static class Extensions

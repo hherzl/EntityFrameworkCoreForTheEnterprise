@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using OnLineStore.Core.DataLayer;
+using OnlineStore.Core.DataLayer;
 
-namespace OnLineStore.Mocker
+namespace OnlineStore.Mocker
 {
     public static class DbContextMocker
     {
@@ -15,7 +15,7 @@ namespace OnLineStore.Mocker
             ConnectionString = configuration.GetSection("ConnectionStrings")["OnLineStore"];
         }
 
-        public static OnLineStoreDbContext GetOnLineStoreDbContext()
-            => new OnLineStoreDbContext(new DbContextOptionsBuilder<OnLineStoreDbContext>().UseSqlServer(ConnectionString).Options);
+        public static OnlineStoreDbContext GetOnlineStoreDbContext()
+            => new OnlineStoreDbContext(new DbContextOptionsBuilder<OnlineStoreDbContext>().UseSqlServer(ConnectionString).Options);
     }
 }

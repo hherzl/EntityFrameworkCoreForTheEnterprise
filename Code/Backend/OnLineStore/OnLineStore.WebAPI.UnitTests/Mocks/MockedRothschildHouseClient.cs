@@ -2,10 +2,10 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using OnLineStore.WebAPI.Clients;
-using OnLineStore.WebAPI.Clients.Models;
+using OnlineStore.WebAPI.Clients;
+using OnlineStore.WebAPI.Clients.Models;
 
-namespace OnLineStore.WebAPI.UnitTests.Mocks
+namespace OnlineStore.WebAPI.UnitTests.Mocks
 {
 #pragma warning disable CS1998
     public class MockedRothschildHouseClient : IRothschildHouseClient

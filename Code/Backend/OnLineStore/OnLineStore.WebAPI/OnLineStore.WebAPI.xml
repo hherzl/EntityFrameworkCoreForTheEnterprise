@@ -1,62 +1,50 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>OnLineStore.WebAPI</name>
+        <name>OnlineStore.WebAPI</name>
     </assembly>
     <members>
-        <member name="T:OnLineStore.WebAPI.Clients.Models.HttpResponseMessageExtensions">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:OnLineStore.WebAPI.Clients.Models.HttpResponseMessageExtensions.GetPaymentResponseAsync(System.Net.Http.HttpResponseMessage)">
-            <summary>
-            
-            </summary>
-            <param name="responseMessage"></param>
-            <returns></returns>
-        </member>
-        <member name="T:OnLineStore.WebAPI.Clients.Models.PostPaymentRequest">
+        <member name="T:OnlineStore.WebAPI.Clients.Models.PostPaymentRequest">
             <summary>
             Represents post payment model
             </summary>
         </member>
-        <member name="M:OnLineStore.WebAPI.Clients.Models.PostPaymentRequest.#ctor">
+        <member name="M:OnlineStore.WebAPI.Clients.Models.PostPaymentRequest.#ctor">
             <summary>
-            Initializes a new instance of <see cref="T:OnLineStore.WebAPI.Clients.Models.PostPaymentRequest"/>
+            Initializes a new instance of <see cref="T:OnlineStore.WebAPI.Clients.Models.PostPaymentRequest"/>
             </summary>
         </member>
-        <member name="P:OnLineStore.WebAPI.Clients.Models.PostPaymentRequest.CardHolderName">
+        <member name="P:OnlineStore.WebAPI.Clients.Models.PostPaymentRequest.CardHolderName">
             <summary>
             Card holder name
             </summary>
         </member>
-        <member name="P:OnLineStore.WebAPI.Clients.Models.PostPaymentRequest.IssuingNetwork">
+        <member name="P:OnlineStore.WebAPI.Clients.Models.PostPaymentRequest.IssuingNetwork">
             <summary>
             Issuing network
             </summary>
         </member>
-        <member name="P:OnLineStore.WebAPI.Clients.Models.PostPaymentRequest.CardNumber">
+        <member name="P:OnlineStore.WebAPI.Clients.Models.PostPaymentRequest.CardNumber">
             <summary>
             Card number
             </summary>
         </member>
-        <member name="P:OnLineStore.WebAPI.Clients.Models.PostPaymentRequest.ExpirationDate">
+        <member name="P:OnlineStore.WebAPI.Clients.Models.PostPaymentRequest.ExpirationDate">
             <summary>
             Expiration date
             </summary>
         </member>
-        <member name="P:OnLineStore.WebAPI.Clients.Models.PostPaymentRequest.Cvv">
+        <member name="P:OnlineStore.WebAPI.Clients.Models.PostPaymentRequest.Cvv">
             <summary>
             Cvv (Card Verification Value)
             </summary>
         </member>
-        <member name="P:OnLineStore.WebAPI.Clients.Models.PostPaymentRequest.Amount">
+        <member name="P:OnlineStore.WebAPI.Clients.Models.PostPaymentRequest.Amount">
             <summary>
             Amount
             </summary>
         </member>
-        <member name="M:OnLineStore.WebAPI.Controllers.SalesController.GetOrdersAsync(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int16},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Guid})">
+        <member name="M:OnlineStore.WebAPI.Controllers.SalesController.GetOrdersAsync(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int16},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Guid})">
             <summary>
             Retrieves the orders placed by customers
             </summary>
@@ -74,7 +62,7 @@
             <response code="403">If client is not autorized</response>
             <response code="500">If there was an internal error</response>
         </member>
-        <member name="M:OnLineStore.WebAPI.Controllers.SalesController.GetOrderAsync(System.Int64)">
+        <member name="M:OnlineStore.WebAPI.Controllers.SalesController.GetOrderAsync(System.Int64)">
             <summary>
             Retrieves an existing order by id
             </summary>
@@ -86,7 +74,7 @@
             <response code="404">If id is not exists</response>
             <response code="500">If there was an internal error</response>
         </member>
-        <member name="M:OnLineStore.WebAPI.Controllers.SalesController.GetCreateOrderRequestAsync">
+        <member name="M:OnlineStore.WebAPI.Controllers.SalesController.GetCreateOrderRequestAsync">
             <summary>
             Retrieves the request model to create a new order
             </summary>
@@ -96,7 +84,7 @@
             <response code="403">If client is not autorized</response>
             <response code="500">If there was an internal error</response>
         </member>
-        <member name="M:OnLineStore.WebAPI.Controllers.SalesController.PostOrderAsync(OnLineStore.WebAPI.Requests.PostOrderRequest)">
+        <member name="M:OnlineStore.WebAPI.Controllers.SalesController.PostOrderAsync(OnlineStore.WebAPI.Requests.PostOrderRequest)">
             <summary>
             Creates a new order
             </summary>
@@ -108,7 +96,7 @@
             <response code="403">If client is not autorized</response>
             <response code="500">If there was an internal error</response>
         </member>
-        <member name="M:OnLineStore.WebAPI.Controllers.SalesController.CloneOrderAsync(System.Int32)">
+        <member name="M:OnlineStore.WebAPI.Controllers.SalesController.CloneOrderAsync(System.Int32)">
             <summary>
             Creates a new order model from existing order
             </summary>
@@ -120,7 +108,7 @@
             <response code="404">If id is not exists</response>
             <response code="500">If there was an internal error</response>
         </member>
-        <member name="M:OnLineStore.WebAPI.Controllers.SalesController.DeleteOrderAsync(System.Int32)">
+        <member name="M:OnlineStore.WebAPI.Controllers.SalesController.DeleteOrderAsync(System.Int32)">
             <summary>
             Deletes an existing order
             </summary>
@@ -132,7 +120,7 @@
             <response code="404">If id is not exists</response>
             <response code="500">If there was an internal error</response>
         </member>
-        <member name="M:OnLineStore.WebAPI.Controllers.WarehouseController.GetProductsAsync(System.Nullable{System.Int32},System.Nullable{System.Int32})">
+        <member name="M:OnlineStore.WebAPI.Controllers.WarehouseController.GetProductsAsync(System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
             Retrieves the products
             </summary>
@@ -144,7 +132,7 @@
             <response code="403">If client is not autorized</response>
             <response code="500">If there was an internal error</response>
         </member>
-        <member name="M:OnLineStore.WebAPI.Controllers.WarehouseController.GetProductInventoryAsync(System.Nullable{System.Int32},System.String)">
+        <member name="M:OnlineStore.WebAPI.Controllers.WarehouseController.GetProductInventoryAsync(System.Nullable{System.Int32},System.String)">
             <summary>
             Gets the inventory for product by warehouse
             </summary>
@@ -157,92 +145,92 @@
             <response code="404">If id is not exists</response>
             <response code="500">If there was an internal error</response>
         </member>
-        <member name="T:OnLineStore.WebAPI.Requests.OrderDetailRequest">
+        <member name="T:OnlineStore.WebAPI.Requests.OrderDetailRequest">
             <summary>
             Represents one line for Order
             </summary>
         </member>
-        <member name="P:OnLineStore.WebAPI.Requests.OrderDetailRequest.ProductID">
+        <member name="P:OnlineStore.WebAPI.Requests.OrderDetailRequest.ProductID">
             <summary>
             Product ID
             </summary>
         </member>
-        <member name="P:OnLineStore.WebAPI.Requests.OrderDetailRequest.UnitPrice">
+        <member name="P:OnlineStore.WebAPI.Requests.OrderDetailRequest.UnitPrice">
             <summary>
             Unit price
             </summary>
         </member>
-        <member name="P:OnLineStore.WebAPI.Requests.OrderDetailRequest.Quantity">
+        <member name="P:OnlineStore.WebAPI.Requests.OrderDetailRequest.Quantity">
             <summary>
             Quantity
             </summary>
         </member>
-        <member name="T:OnLineStore.WebAPI.Requests.PostOrderRequest">
+        <member name="T:OnlineStore.WebAPI.Requests.PostOrderRequest">
             <summary>
             Represents the model to post order
             </summary>
         </member>
-        <member name="P:OnLineStore.WebAPI.Requests.PostOrderRequest.UserName">
+        <member name="P:OnlineStore.WebAPI.Requests.PostOrderRequest.UserName">
             <summary>
             User name
             </summary>
         </member>
-        <member name="P:OnLineStore.WebAPI.Requests.PostOrderRequest.Password">
+        <member name="P:OnlineStore.WebAPI.Requests.PostOrderRequest.Password">
             <summary>
             Password
             </summary>
         </member>
-        <member name="P:OnLineStore.WebAPI.Requests.PostOrderRequest.CardHolderName">
+        <member name="P:OnlineStore.WebAPI.Requests.PostOrderRequest.CardHolderName">
             <summary>
             Card holder name
             </summary>
         </member>
-        <member name="P:OnLineStore.WebAPI.Requests.PostOrderRequest.IssuingNetwork">
+        <member name="P:OnlineStore.WebAPI.Requests.PostOrderRequest.IssuingNetwork">
             <summary>
             Issuing network
             </summary>
         </member>
-        <member name="P:OnLineStore.WebAPI.Requests.PostOrderRequest.CardNumber">
+        <member name="P:OnlineStore.WebAPI.Requests.PostOrderRequest.CardNumber">
             <summary>
             Card number
             </summary>
         </member>
-        <member name="P:OnLineStore.WebAPI.Requests.PostOrderRequest.ExpirationDate">
+        <member name="P:OnlineStore.WebAPI.Requests.PostOrderRequest.ExpirationDate">
             <summary>
             Expiration date
             </summary>
         </member>
-        <member name="P:OnLineStore.WebAPI.Requests.PostOrderRequest.Cvv">
+        <member name="P:OnlineStore.WebAPI.Requests.PostOrderRequest.Cvv">
             <summary>
             CVV (Card Verification Value)
             </summary>
         </member>
-        <member name="P:OnLineStore.WebAPI.Requests.PostOrderRequest.CustomerID">
+        <member name="P:OnlineStore.WebAPI.Requests.PostOrderRequest.CustomerID">
             <summary>
             Customer ID
             </summary>
         </member>
-        <member name="P:OnLineStore.WebAPI.Requests.PostOrderRequest.Total">
+        <member name="P:OnlineStore.WebAPI.Requests.PostOrderRequest.Total">
             <summary>
             Total
             </summary>
         </member>
-        <member name="P:OnLineStore.WebAPI.Requests.PostOrderRequest.CurrencyID">
+        <member name="P:OnlineStore.WebAPI.Requests.PostOrderRequest.CurrencyID">
             <summary>
             Currency ID
             </summary>
         </member>
-        <member name="P:OnLineStore.WebAPI.Requests.PostOrderRequest.PaymentMethodID">
+        <member name="P:OnlineStore.WebAPI.Requests.PostOrderRequest.PaymentMethodID">
             <summary>
             Payment Method ID
             </summary>
         </member>
-        <member name="P:OnLineStore.WebAPI.Requests.PostOrderRequest.Comments">
+        <member name="P:OnlineStore.WebAPI.Requests.PostOrderRequest.Comments">
             <summary>
             Comments
             </summary>
         </member>
-        <member name="P:OnLineStore.WebAPI.Requests.PostOrderRequest.Details">
+        <member name="P:OnlineStore.WebAPI.Requests.PostOrderRequest.Details">
             <summary>
             Order details (lines)
             </summary>

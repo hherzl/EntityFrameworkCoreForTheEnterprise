@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OnLineStore.Core.EntityLayer.Warehouse;
+using OnlineStore.Core.EntityLayer.Warehouse;
 
-namespace OnLineStore.Core.DataLayer.Configurations.Warehouse
+namespace OnlineStore.Core.DataLayer.Configurations.Warehouse
 {
     public class LocationConfiguration : IEntityTypeConfiguration<Location>
     {

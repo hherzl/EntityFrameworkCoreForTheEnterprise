@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OnLineStore.Core.EntityLayer.Dbo
+namespace OnlineStore.Core.EntityLayer.Dbo
 {
     public class CountryCurrency : IAuditableEntity
     {

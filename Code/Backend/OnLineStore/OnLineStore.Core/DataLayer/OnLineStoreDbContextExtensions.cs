@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
-using OnLineStore.Core.EntityLayer;
-using OnLineStore.Core.EntityLayer.Dbo;
+using OnlineStore.Core.EntityLayer;
+using OnlineStore.Core.EntityLayer.Dbo;
 
-namespace OnLineStore.Core.DataLayer
+namespace OnlineStore.Core.DataLayer
 {
-    public static class OnLineStoreDbContextExtensions
+    public static class OnlineStoreDbContextExtensions
     {
-        public static void Add<TEntity>(this OnLineStoreDbContext dbContext, TEntity entity, IUserInfo userInfo) where TEntity : class, IAuditableEntity
+        public static void Add<TEntity>(this OnlineStoreDbContext dbContext, TEntity entity, IUserInfo userInfo) where TEntity : class, IAuditableEntity
         {
             if (entity is IAuditableEntity cast)
             {
@@ -24,7 +24,7 @@ namespace OnLineStore.Core.DataLayer
             dbContext.Set<TEntity>().Add(entity);
         }
 
-        public static void Update<TEntity>(this OnLineStoreDbContext dbContext, TEntity entity, IUserInfo userInfo) where TEntity : class, IAuditableEntity
+        public static void Update<TEntity>(this OnlineStoreDbContext dbContext, TEntity entity, IUserInfo userInfo) where TEntity : class, IAuditableEntity
         {
             if (entity is IAuditableEntity cast)
             {
@@ -38,10 +38,10 @@ namespace OnLineStore.Core.DataLayer
             dbContext.Set<TEntity>().Update(entity);
         }
 
-        public static void Remove<TEntity>(this OnLineStoreDbContext dbContext, TEntity entity) where TEntity : class, IAuditableEntity
+        public static void Remove<TEntity>(this OnlineStoreDbContext dbContext, TEntity entity) where TEntity : class, IAuditableEntity
             => dbContext.Set<TEntity>().Remove(entity);
 
-        private static IEnumerable<ChangeLog> GetChanges(this OnLineStoreDbContext dbContext, IUserInfo userInfo)
+        private static IEnumerable<ChangeLog> GetChanges(this OnlineStoreDbContext dbContext, IUserInfo userInfo)
         {
             var exclusions = dbContext.ChangeLogExclusions.ToList();
 

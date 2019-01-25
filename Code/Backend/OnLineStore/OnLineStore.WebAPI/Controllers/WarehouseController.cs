@@ -2,17 +2,17 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using OnLineStore.Core.BusinessLayer.Contracts;
-using OnLineStore.WebAPI.Filters;
-using OnLineStore.WebAPI.Responses;
+using OnlineStore.Core.BusinessLayer.Contracts;
+using OnlineStore.WebAPI.Filters;
+using OnlineStore.WebAPI.Responses;
 
-namespace OnLineStore.WebAPI.Controllers
+namespace OnlineStore.WebAPI.Controllers
 {
 #pragma warning disable CS1591
     [Authorize]
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class WarehouseController : OnLineStoreController
+    public class WarehouseController : OnlineStoreController
     {
         protected ILogger Logger;
         protected IWarehouseService Service;
@@ -40,7 +40,7 @@ namespace OnLineStore.WebAPI.Controllers
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
         [ProducesResponseType(500)]
-        [OnLineStoreActionFilter]
+        [OnlineStoreActionFilter]
         public async Task<IActionResult> GetProductsAsync(int? pageSize = 10, int? pageNumber = 1)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetProductsAsync));
@@ -69,7 +69,7 @@ namespace OnLineStore.WebAPI.Controllers
         [ProducesResponseType(403)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        [OnLineStoreActionFilter]
+        [OnlineStoreActionFilter]
         public async Task<IActionResult> GetProductInventoryAsync(int? id, string warehouseID)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetProductInventoryAsync));

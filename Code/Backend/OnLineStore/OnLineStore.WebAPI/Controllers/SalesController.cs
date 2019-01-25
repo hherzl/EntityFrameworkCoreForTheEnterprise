@@ -4,20 +4,20 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using OnLineStore.Core.BusinessLayer.Contracts;
-using OnLineStore.WebAPI.Clients;
-using OnLineStore.WebAPI.Clients.Models;
-using OnLineStore.WebAPI.Filters;
-using OnLineStore.WebAPI.Requests;
-using OnLineStore.WebAPI.Responses;
+using OnlineStore.Core.BusinessLayer.Contracts;
+using OnlineStore.WebAPI.Clients;
+using OnlineStore.WebAPI.Clients.Models;
+using OnlineStore.WebAPI.Filters;
+using OnlineStore.WebAPI.Requests;
+using OnlineStore.WebAPI.Responses;
 
-namespace OnLineStore.WebAPI.Controllers
+namespace OnlineStore.WebAPI.Controllers
 {
 #pragma warning disable CS1591
     [Authorize]
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class SalesController : OnLineStoreController
+    public class SalesController : OnlineStoreController
     {
         protected readonly ILogger Logger;
         protected readonly IRothschildHouseClient RothschildHouseClient;
@@ -53,7 +53,7 @@ namespace OnLineStore.WebAPI.Controllers
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
         [ProducesResponseType(500)]
-        [OnLineStoreActionFilter]
+        [OnlineStoreActionFilter]
         public async Task<IActionResult> GetOrdersAsync(int? pageSize = 50, int? pageNumber = 1, short? orderStatusID = null, int? customerID = null, int? employeeID = null, int? shipperID = null, string currencyID = null, Guid? paymentMethodID = null)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetOrdersAsync));
@@ -81,7 +81,7 @@ namespace OnLineStore.WebAPI.Controllers
         [ProducesResponseType(403)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        [OnLineStoreActionFilter]
+        [OnlineStoreActionFilter]
         public async Task<IActionResult> GetOrderAsync(long id)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetOrderAsync));
@@ -106,7 +106,7 @@ namespace OnLineStore.WebAPI.Controllers
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
         [ProducesResponseType(500)]
-        [OnLineStoreActionFilter]
+        [OnlineStoreActionFilter]
         public async Task<IActionResult> GetCreateOrderRequestAsync()
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetCreateOrderRequestAsync));
@@ -134,7 +134,7 @@ namespace OnLineStore.WebAPI.Controllers
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
         [ProducesResponseType(500)]
-        [OnLineStoreActionFilter]
+        [OnlineStoreActionFilter]
         public async Task<IActionResult> PostOrderAsync([FromBody]PostOrderRequest request)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(PostOrderAsync));
@@ -174,7 +174,7 @@ namespace OnLineStore.WebAPI.Controllers
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
         [ProducesResponseType(500)]
-        [OnLineStoreActionFilter]
+        [OnlineStoreActionFilter]
         public async Task<IActionResult> CloneOrderAsync(int id)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(CloneOrderAsync));
@@ -202,7 +202,7 @@ namespace OnLineStore.WebAPI.Controllers
         [ProducesResponseType(403)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        [OnLineStoreActionFilter]
+        [OnlineStoreActionFilter]
         public async Task<IActionResult> DeleteOrderAsync(int id)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(DeleteOrderAsync));

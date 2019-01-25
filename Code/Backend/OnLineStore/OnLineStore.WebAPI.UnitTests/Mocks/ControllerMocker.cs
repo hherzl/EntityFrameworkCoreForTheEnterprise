@@ -1,7 +1,7 @@
-﻿using OnLineStore.Common;
-using OnLineStore.WebAPI.Controllers;
+﻿using OnlineStore.Common;
+using OnlineStore.WebAPI.Controllers;
 
-namespace OnLineStore.WebAPI.UnitTests.Mocks
+namespace OnlineStore.WebAPI.UnitTests.Mocks
 {
     public static class ControllerMocker
     {

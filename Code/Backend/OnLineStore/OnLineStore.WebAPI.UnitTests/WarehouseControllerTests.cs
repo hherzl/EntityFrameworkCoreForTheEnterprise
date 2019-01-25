@@ -1,14 +1,14 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using OnLineStore.Common;
-using OnLineStore.Core.BusinessLayer.Responses;
-using OnLineStore.Core.EntityLayer.Warehouse;
-using OnLineStore.WebAPI.Controllers;
-using OnLineStore.WebAPI.UnitTests.Mocks;
+using OnlineStore.Common;
+using OnlineStore.Core.BusinessLayer.Responses;
+using OnlineStore.Core.EntityLayer.Warehouse;
+using OnlineStore.WebAPI.Controllers;
+using OnlineStore.WebAPI.UnitTests.Mocks;
 using Xunit;
 
-namespace OnLineStore.WebAPI.UnitTests
+namespace OnlineStore.WebAPI.UnitTests
 {
     public class WarehouseControllerTests
     {

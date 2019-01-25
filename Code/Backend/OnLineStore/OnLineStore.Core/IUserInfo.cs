@@ -1,4 +1,4 @@
-﻿namespace OnLineStore.Core
+﻿namespace OnlineStore.Core
 {
     public interface IUserInfo
     {

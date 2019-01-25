@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 
-namespace OnLineStore.Core.EntityLayer.Sales
+namespace OnlineStore.Core.EntityLayer.Sales
 {
     public class Shipper : IAuditableEntity
     {

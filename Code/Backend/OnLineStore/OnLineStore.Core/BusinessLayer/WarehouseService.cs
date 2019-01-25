@@ -3,18 +3,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using OnLineStore.Core.BusinessLayer.Contracts;
-using OnLineStore.Core.BusinessLayer.Responses;
-using OnLineStore.Core.DataLayer;
-using OnLineStore.Core.DataLayer.Repositories;
-using OnLineStore.Core.DataLayer.Warehouse;
-using OnLineStore.Core.EntityLayer.Warehouse;
+using OnlineStore.Core.BusinessLayer.Contracts;
+using OnlineStore.Core.BusinessLayer.Responses;
+using OnlineStore.Core.DataLayer;
+using OnlineStore.Core.DataLayer.Repositories;
+using OnlineStore.Core.DataLayer.Warehouse;
+using OnlineStore.Core.EntityLayer.Warehouse;
 
-namespace OnLineStore.Core.BusinessLayer
+namespace OnlineStore.Core.BusinessLayer
 {
     public class WarehouseService : Service, IWarehouseService
     {
-        public WarehouseService(ILogger<WarehouseService> logger, IUserInfo userInfo, OnLineStoreDbContext dbContext)
+        public WarehouseService(ILogger<WarehouseService> logger, IUserInfo userInfo, OnlineStoreDbContext dbContext)
             : base(logger, userInfo, dbContext)
         {
         }

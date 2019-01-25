@@ -1,4 +1,4 @@
-﻿namespace OnLineStore.WebAPI.Clients
+﻿namespace OnlineStore.WebAPI.Clients
 {
 #pragma warning disable CS1591
     public static class ApiUrlExtensions

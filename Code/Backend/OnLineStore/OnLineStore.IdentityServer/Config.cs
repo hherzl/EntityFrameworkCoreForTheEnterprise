@@ -3,7 +3,7 @@ using System.Security.Claims;
 using IdentityModel;
 using IdentityServer4.Models;
 
-namespace OnLineStore.IdentityServer
+namespace OnlineStore.IdentityServer
 {
     public static class Config
     {

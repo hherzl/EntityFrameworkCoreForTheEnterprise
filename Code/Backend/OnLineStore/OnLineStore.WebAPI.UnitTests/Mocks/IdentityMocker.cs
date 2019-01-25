@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using IdentityModel;
 
-namespace OnLineStore.WebAPI.UnitTests.Mocks
+namespace OnlineStore.WebAPI.UnitTests.Mocks
 {
     public static class IdentityMocker
     {

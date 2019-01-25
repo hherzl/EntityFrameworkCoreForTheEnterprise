@@ -1,7 +1,7 @@
 ﻿using System;
-using OnLineStore.WebAPI.Clients.Models;
+using OnlineStore.WebAPI.Clients.Models;
 
-namespace OnLineStore.WebAPI.UnitTests.Mocks
+namespace OnlineStore.WebAPI.UnitTests.Mocks
 {
     public static class PaymentMocks
     {

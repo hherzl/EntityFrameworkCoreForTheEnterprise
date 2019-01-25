@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace OnLineStore.IdentityServer
+namespace OnlineStore.IdentityServer
 {
     public class Program
     {

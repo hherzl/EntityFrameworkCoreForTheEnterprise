@@ -1,15 +1,15 @@
 ﻿using System;
 
-namespace OnLineStore.Core.BusinessLayer
+namespace OnlineStore.Core.BusinessLayer
 {
-    public class OnLineStoreException : Exception
+    public class OnlineStoreException : Exception
     {
-        public OnLineStoreException()
+        public OnlineStoreException()
             : base()
         {
         }
 
-        public OnLineStoreException(string message)
+        public OnlineStoreException(string message)
             : base(message)
         {
         }

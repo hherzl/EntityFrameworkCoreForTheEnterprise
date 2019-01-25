@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using IdentityModel.Client;
 
-namespace OnLineStore.WebAPI.Clients
+namespace OnlineStore.WebAPI.Clients
 {
 #pragma warning disable CS1591
     public static class IdentityServerHelper

@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnLineStore.Core;
+using OnlineStore.Core;
 
-namespace OnLineStore.WebAPI.Controllers
+namespace OnlineStore.WebAPI.Controllers
 {
 #pragma warning disable CS1591
-    public class OnLineStoreController : ControllerBase
+    public class OnlineStoreController : ControllerBase
     {
-        public OnLineStoreController()
+        public OnlineStoreController()
         {
         }
 

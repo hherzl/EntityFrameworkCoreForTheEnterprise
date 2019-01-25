@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using IdentityModel;
 
-namespace OnLineStore.IdentityServer.Models
+namespace OnlineStore.IdentityServer.Models
 {
     public static class AuthDbContextExtentions
     {

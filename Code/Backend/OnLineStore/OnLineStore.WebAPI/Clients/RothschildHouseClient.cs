@@ -1,8 +1,8 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
-using OnLineStore.WebAPI.Clients.Models;
+using OnlineStore.WebAPI.Clients.Models;
 
-namespace OnLineStore.WebAPI.Clients
+namespace OnlineStore.WebAPI.Clients
 {
 #pragma warning disable CS1591
     public class RothschildHouseClient : IRothschildHouseClient

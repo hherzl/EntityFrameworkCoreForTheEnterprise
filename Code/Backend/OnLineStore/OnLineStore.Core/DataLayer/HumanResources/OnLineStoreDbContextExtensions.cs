@@ -1,12 +1,12 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using OnLineStore.Core.EntityLayer.HumanResources;
+using OnlineStore.Core.EntityLayer.HumanResources;
 
-namespace OnLineStore.Core.DataLayer.HumanResources
+namespace OnlineStore.Core.DataLayer.HumanResources
 {
-    public static class OnLineStoreDbContextExtensions
+    public static class OnlineStoreDbContextExtensions
     {
-        public static async Task<Employee> GetEmployeeAsync(this OnLineStoreDbContext dbContext, Employee entity)
+        public static async Task<Employee> GetEmployeeAsync(this OnlineStoreDbContext dbContext, Employee entity)
             => await dbContext.Employees.FirstOrDefaultAsync(item => item.EmployeeID == entity.EmployeeID);
     }
 }

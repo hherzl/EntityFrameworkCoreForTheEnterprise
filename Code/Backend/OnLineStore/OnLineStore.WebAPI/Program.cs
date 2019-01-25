@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace OnLineStore.WebAPI
+namespace OnlineStore.WebAPI
 {
 #pragma warning disable CS1591
     public class Program

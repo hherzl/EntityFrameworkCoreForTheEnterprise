@@ -1,4 +1,4 @@
-﻿namespace OnLineStore.Core.BusinessLayer.Responses
+﻿namespace OnlineStore.Core.BusinessLayer.Responses
 {
     public interface IPagedResponse<TModel> : IListResponse<TModel>
     {

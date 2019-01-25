@@ -1,4 +1,4 @@
-﻿namespace OnLineStore.Core.BusinessLayer.Requests
+﻿namespace OnlineStore.Core.BusinessLayer.Requests
 {
     public interface IRequest
     {

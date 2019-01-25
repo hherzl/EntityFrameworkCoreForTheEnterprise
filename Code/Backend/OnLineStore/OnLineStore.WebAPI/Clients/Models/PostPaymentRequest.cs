@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace OnLineStore.WebAPI.Clients.Models
+namespace OnlineStore.WebAPI.Clients.Models
 {
     /// <summary>
     /// Represents post payment model

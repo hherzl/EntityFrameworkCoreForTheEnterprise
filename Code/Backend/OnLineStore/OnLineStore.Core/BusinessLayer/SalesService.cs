@@ -4,22 +4,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using OnLineStore.Core.BusinessLayer.Contracts;
-using OnLineStore.Core.BusinessLayer.Requests;
-using OnLineStore.Core.BusinessLayer.Responses;
-using OnLineStore.Core.DataLayer;
-using OnLineStore.Core.DataLayer.Repositories;
-using OnLineStore.Core.DataLayer.Sales;
-using OnLineStore.Core.DataLayer.Warehouse;
-using OnLineStore.Core.EntityLayer.Dbo;
-using OnLineStore.Core.EntityLayer.Sales;
-using OnLineStore.Core.EntityLayer.Warehouse;
+using OnlineStore.Core.BusinessLayer.Contracts;
+using OnlineStore.Core.BusinessLayer.Requests;
+using OnlineStore.Core.BusinessLayer.Responses;
+using OnlineStore.Core.DataLayer;
+using OnlineStore.Core.DataLayer.Repositories;
+using OnlineStore.Core.DataLayer.Sales;
+using OnlineStore.Core.DataLayer.Warehouse;
+using OnlineStore.Core.EntityLayer.Dbo;
+using OnlineStore.Core.EntityLayer.Sales;
+using OnlineStore.Core.EntityLayer.Warehouse;
 
-namespace OnLineStore.Core.BusinessLayer
+namespace OnlineStore.Core.BusinessLayer
 {
     public class SalesService : Service, ISalesService
     {
-        public SalesService(ILogger<SalesService> logger, IUserInfo userInfo, OnLineStoreDbContext dbContext)
+        public SalesService(ILogger<SalesService> logger, IUserInfo userInfo, OnlineStoreDbContext dbContext)
             : base(logger, userInfo, dbContext)
         {
         }

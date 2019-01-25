@@ -1,4 +1,4 @@
-﻿namespace OnLineStore.Core.BusinessLayer
+﻿namespace OnlineStore.Core.BusinessLayer
 {
     public static class SalesDisplays
     {

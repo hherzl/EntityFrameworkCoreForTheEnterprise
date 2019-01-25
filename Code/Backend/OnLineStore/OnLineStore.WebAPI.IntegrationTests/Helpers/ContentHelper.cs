@@ -2,7 +2,7 @@
 using System.Text;
 using Newtonsoft.Json;
 
-namespace OnLineStore.WebAPI.IntegrationTests.Helpers
+namespace OnlineStore.WebAPI.IntegrationTests.Helpers
 {
     public static class ContentHelper
     {

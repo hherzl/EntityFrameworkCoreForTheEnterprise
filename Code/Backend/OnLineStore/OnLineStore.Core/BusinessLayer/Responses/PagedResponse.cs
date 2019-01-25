@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace OnLineStore.Core.BusinessLayer.Responses
+namespace OnlineStore.Core.BusinessLayer.Responses
 {
     public class PagedResponse<TModel> : IPagedResponse<TModel>
     {

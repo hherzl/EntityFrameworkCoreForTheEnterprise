@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using OnLineStore.Core.EntityLayer.Sales;
+using OnlineStore.Core.EntityLayer.Sales;
 
-namespace OnLineStore.Core.DataLayer.Sales
+namespace OnlineStore.Core.DataLayer.Sales
 {
-    public static class OnLineStoreDbContextExtensions
+    public static class OnlineStoreDbContextExtensions
     {
-        public static async Task<OrderStatus> GetOrderStatusAsync(this OnLineStoreDbContext dbContext, OrderStatus entity)
+        public static async Task<OrderStatus> GetOrderStatusAsync(this OnlineStoreDbContext dbContext, OrderStatus entity)
             => await dbContext.OrderStatuses.FirstOrDefaultAsync(item => item.OrderStatusID == entity.OrderStatusID);
 
-        public static async Task<Customer> GetCustomerAsync(this OnLineStoreDbContext dbContext, Customer entity)
+        public static async Task<Customer> GetCustomerAsync(this OnlineStoreDbContext dbContext, Customer entity)
             => await dbContext.Customers.FirstOrDefaultAsync(item => item.CustomerID == entity.CustomerID);
 
-        public static async Task<Shipper> GetShipperAsync(this OnLineStoreDbContext dbContext, Shipper entity)
+        public static async Task<Shipper> GetShipperAsync(this OnlineStoreDbContext dbContext, Shipper entity)
             => await dbContext.Shippers.FirstOrDefaultAsync(item => item.ShipperID == entity.ShipperID);
 
-        public static IQueryable<OrderInfo> GetOrders(this OnLineStoreDbContext dbContext, short? orderStatusID = null, int? customerID = null, int? employeeID = null, int? shipperID = null, string currencyID = null, Guid? paymentMethodID = null)
+        public static IQueryable<OrderInfo> GetOrders(this OnlineStoreDbContext dbContext, short? orderStatusID = null, int? customerID = null, int? employeeID = null, int? shipperID = null, string currencyID = null, Guid? paymentMethodID = null)
         {
             var query = from order in dbContext.Orders
                         join currencyJoin in dbContext.Currencies on order.CurrencyID equals currencyJoin.CurrencyID into currencyTemp
@@ -86,7 +86,7 @@ namespace OnLineStore.Core.DataLayer.Sales
             return query;
         }
 
-        public static async Task<OrderHeader> GetOrderAsync(this OnLineStoreDbContext dbContext, OrderHeader entity)
+        public static async Task<OrderHeader> GetOrderAsync(this OnlineStoreDbContext dbContext, OrderHeader entity)
             => await dbContext.Orders.Include(p => p.OrderDetails).FirstOrDefaultAsync(item => item.OrderHeaderID == entity.OrderHeaderID);
     }
 }

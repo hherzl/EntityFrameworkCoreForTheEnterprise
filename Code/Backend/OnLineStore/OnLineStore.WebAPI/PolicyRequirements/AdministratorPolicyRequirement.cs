@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 
-namespace OnLineStore.WebAPI.PolicyRequirements
+namespace OnlineStore.WebAPI.PolicyRequirements
 {
 #pragma warning disable CS1591
     public class AdministratorPolicyRequirement : AuthorizationHandler<AdministratorPolicyRequirement>, IAuthorizationRequirement

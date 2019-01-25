@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.Logging;
 
-namespace OnLineStore.Core.BusinessLayer.Responses
+namespace OnlineStore.Core.BusinessLayer.Responses
 {
     public static class ResponseExtensions
     {
@@ -11,7 +11,7 @@ namespace OnLineStore.Core.BusinessLayer.Responses
 
             response.DidError = true;
 
-            if (ex is OnLineStoreException cast)
+            if (ex is OnlineStoreException cast)
             {
                 logger?.LogError("There was an error on '{0}': {1}", actionName, ex);
 

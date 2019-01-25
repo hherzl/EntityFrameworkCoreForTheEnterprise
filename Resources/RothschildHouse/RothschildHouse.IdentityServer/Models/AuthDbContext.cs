@@ -15,6 +15,8 @@ namespace RothschildHouse.IdentityServer.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Add configuration for keys
+
             modelBuilder
                 .Entity<User>(builder => builder.HasKey(p => p.UserID));
 

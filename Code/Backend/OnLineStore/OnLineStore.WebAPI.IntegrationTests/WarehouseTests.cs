@@ -1,9 +1,9 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
-using OnLineStore.WebAPI.IntegrationTests.Helpers;
+using OnlineStore.WebAPI.IntegrationTests.Helpers;
 using Xunit;
 
-namespace OnLineStore.WebAPI.IntegrationTests
+namespace OnlineStore.WebAPI.IntegrationTests
 {
     public class WarehouseTests : IClassFixture<TestFixture<Startup>>
     {

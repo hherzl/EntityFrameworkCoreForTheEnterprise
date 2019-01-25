@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace OnLineStore.Core.DataLayer.Repositories
+namespace OnlineStore.Core.DataLayer.Repositories
 {
     public static class IQueryableExtensions
     {

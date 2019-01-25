@@ -1,15 +1,15 @@
 ﻿using System;
-using OnLineStore.Core.DataLayer;
-using OnLineStore.Core.EntityLayer.Dbo;
-using OnLineStore.Core.EntityLayer.HumanResources;
-using OnLineStore.Core.EntityLayer.Sales;
-using OnLineStore.Core.EntityLayer.Warehouse;
+using OnlineStore.Core.DataLayer;
+using OnlineStore.Core.EntityLayer.Dbo;
+using OnlineStore.Core.EntityLayer.HumanResources;
+using OnlineStore.Core.EntityLayer.Sales;
+using OnlineStore.Core.EntityLayer.Warehouse;
 
-namespace OnLineStore.WebAPI.UnitTests.Mocks
+namespace OnlineStore.WebAPI.UnitTests.Mocks
 {
-    public static class OnLineStoreDbContextExtensions
+    public static class OnlineStoreDbContextExtensions
     {
-        public static void SeedInMemory(this OnLineStoreDbContext dbContext)
+        public static void SeedInMemory(this OnlineStoreDbContext dbContext)
         {
             var creationUser = "unittests";
             var creationDateTime = DateTime.Now;
