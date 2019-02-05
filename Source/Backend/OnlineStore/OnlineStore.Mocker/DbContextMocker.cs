@@ -12,7 +12,7 @@ namespace OnlineStore.Mocker
         {
             var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 
-            ConnectionString = configuration.GetSection("ConnectionStrings")["OnLineStore"];
+            ConnectionString = configuration.GetSection("ConnectionStrings")["OnlineStore"];
         }
 
         public static OnlineStoreDbContext GetOnlineStoreDbContext()

@@ -1,6 +1,6 @@
 # Database
 
-*OnLineStore* database is a model for an online store.
+*OnlineStore* database is a model for an online store.
 
 To create database in SQL Server instance, run *deploy.bat* script.
 

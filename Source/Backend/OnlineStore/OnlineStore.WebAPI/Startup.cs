@@ -37,7 +37,7 @@ namespace OnlineStore.WebAPI
             // For DbContext
             services.AddDbContext<OnlineStoreDbContext>(builder =>
             {
-                builder.UseSqlServer(Configuration["AppSettings:ConnectionString"]);
+                builder.UseSqlServer(Configuration["ConnectionStrings:OnlineStore"]);
             });
 
             // User info
