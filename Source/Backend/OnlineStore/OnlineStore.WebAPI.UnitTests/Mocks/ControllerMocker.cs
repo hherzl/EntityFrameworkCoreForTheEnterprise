@@ -1,5 +1,7 @@
 ﻿using OnlineStore.Common;
 using OnlineStore.WebAPI.Controllers;
+using OnlineStore.WebAPI.UnitTests.Mocks.Identity;
+using OnlineStore.WebAPI.UnitTests.Mocks.PaymentGateway;
 
 namespace OnlineStore.WebAPI.UnitTests.Mocks
 {
@@ -8,11 +10,12 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
         public static SalesController GetSalesController(string name)
         {
             var logger = LoggingHelper.GetLogger<SalesController>();
-            var paymentClient = new MockedRothschildHouseClient();
+            var identityClient = new MockedRothschildHouseIdentityClient();
+            var paymentClient = new MockedRothschildHousePaymentClient();
             var userInfo = IdentityMocker.GetCustomerIdentity().GetUserInfo();
             var service = ServiceMocker.GetSalesService(userInfo, name);
 
-            return new SalesController(logger, paymentClient, service);
+            return new SalesController(logger, identityClient, paymentClient, service);
         }
     }
 }

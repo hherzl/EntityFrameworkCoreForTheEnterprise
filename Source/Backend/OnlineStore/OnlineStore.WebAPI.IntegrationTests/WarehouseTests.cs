@@ -18,7 +18,7 @@ namespace OnlineStore.WebAPI.IntegrationTests
         public async Task GetProductsAsCustomerTestAsync()
         {
             // Arrange
-            var customerToken = await TokenHelper.GetCustomerTokenAsync();
+            var customerToken = await TokenHelper.GetOnlineStoreCustomerTokenForWolverineAsync();
             var request = new
             {
                 Url = "/api/v1/Warehouse/Product"
@@ -37,7 +37,7 @@ namespace OnlineStore.WebAPI.IntegrationTests
         public async Task GetProductInventoriesAsCustomerAsync()
         {
             // Arrange
-            var customerToken = await TokenHelper.GetCustomerTokenAsync();
+            var customerToken = await TokenHelper.GetOnlineStoreCustomerTokenForWolverineAsync();
             var request = new
             {
                 Url = string.Format("/api/v1/Warehouse/ProductInventory/1")

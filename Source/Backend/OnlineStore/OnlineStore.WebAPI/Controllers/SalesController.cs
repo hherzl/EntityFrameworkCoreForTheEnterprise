@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OnlineStore.Core.BusinessLayer.Contracts;
-using OnlineStore.WebAPI.Clients;
+using OnlineStore.WebAPI.Clients.Contracts;
 using OnlineStore.WebAPI.Clients.Models;
 using OnlineStore.WebAPI.Filters;
 using OnlineStore.WebAPI.Requests;
@@ -20,14 +20,21 @@ namespace OnlineStore.WebAPI.Controllers
     public class SalesController : OnlineStoreController
     {
         protected readonly ILogger Logger;
-        protected readonly IRothschildHouseClient RothschildHouseClient;
+        protected readonly IRothschildHouseIdentityClient RothschildHouseIdentityClient;
+        protected readonly IRothschildHousePaymentClient RothschildHousePaymentClient;
         protected readonly ISalesService SalesService;
 
-        public SalesController(ILogger<SalesController> logger, IRothschildHouseClient rothschildHouseClient, ISalesService salesService)
+        public SalesController(
+            ILogger<SalesController> logger,
+            IRothschildHouseIdentityClient rothschildHouseIdentityClient,
+            IRothschildHousePaymentClient rothschildHousePaymentClient,
+            ISalesService salesService
+            )
             : base()
         {
             Logger = logger;
-            RothschildHouseClient = rothschildHouseClient;
+            RothschildHouseIdentityClient = rothschildHouseIdentityClient;
+            RothschildHousePaymentClient = rothschildHousePaymentClient;
             SalesService = salesService;
         }
 #pragma warning restore CS1591
@@ -139,9 +146,14 @@ namespace OnlineStore.WebAPI.Controllers
         {
             Logger?.LogDebug("{0} has been invoked", nameof(PostOrderAsync));
 
+            var token = await RothschildHouseIdentityClient.GetRothschildHouseTokenAsync();
+
+            if (token.IsError)
+                return Unauthorized();
+
             var paymentRequest = request.GetPostPaymentRequest();
 
-            var paymentHttpResponse = await RothschildHouseClient.PostPaymentAsync(paymentRequest);
+            var paymentHttpResponse = await RothschildHousePaymentClient.PostPaymentAsync(token, paymentRequest);
 
             if (!paymentHttpResponse.IsSuccessStatusCode)
                 return BadRequest();

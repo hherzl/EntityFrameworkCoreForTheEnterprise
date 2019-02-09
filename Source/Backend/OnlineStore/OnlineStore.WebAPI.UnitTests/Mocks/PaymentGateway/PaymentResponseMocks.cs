@@ -1,9 +1,9 @@
 ﻿using System;
 using OnlineStore.WebAPI.Clients.Models;
 
-namespace OnlineStore.WebAPI.UnitTests.Mocks
+namespace OnlineStore.WebAPI.UnitTests.Mocks.PaymentGateway
 {
-    public static class PaymentMocks
+    public static class PaymentResponseMocks
     {
         public static PaymentResponse SuccessPayment
             => new PaymentResponse

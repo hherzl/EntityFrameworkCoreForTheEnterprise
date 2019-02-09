@@ -9,20 +9,14 @@ namespace OnlineStore.WebAPI.Clients
         {
         }
 
-        public ApiUrl(string protocol = "http", string host = "localhost", int port = 0, string apiSufix = "api", string apiVersion = "v1")
+        public ApiUrl(string baseUrl = "http://localhost", string apiSufix = "api", string apiVersion = "v1")
         {
-            Protocol = protocol;
-            Host = host;
-            Port = port;
+            BaseUrl = baseUrl;
             ApiSufix = apiSufix;
             ApiVersion = apiVersion;
         }
 
-        public string Protocol { get; set; }
-
-        public string Host { get; set; }
-
-        public int Port { get; set; }
+        public string BaseUrl { get; set; }
 
         public string ApiSufix { get; set; }
 
@@ -38,7 +32,8 @@ namespace OnlineStore.WebAPI.Clients
         {
             var output = new List<string>
             {
-                string.Format("{0}://{1}{2}", Protocol, Host, Port > 0 ? string.Format(":{0}", Port) : string.Empty)
+                
+                BaseUrl
             };
 
             if (!string.IsNullOrEmpty(ApiSufix))

@@ -6,6 +6,7 @@ using OnlineStore.Core.BusinessLayer.Responses;
 using OnlineStore.Core.EntityLayer.Warehouse;
 using OnlineStore.WebAPI.Controllers;
 using OnlineStore.WebAPI.UnitTests.Mocks;
+using OnlineStore.WebAPI.UnitTests.Mocks.Identity;
 using Xunit;
 
 namespace OnlineStore.WebAPI.UnitTests

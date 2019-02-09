@@ -7,7 +7,7 @@ using OnlineStore.Core.EntityLayer.Warehouse;
 
 namespace OnlineStore.WebAPI.UnitTests.Mocks
 {
-    public static class OnlineStoreDbContextExtensions
+    public static class DbContextExtensions
     {
         public static void SeedInMemory(this OnlineStoreDbContext dbContext)
         {

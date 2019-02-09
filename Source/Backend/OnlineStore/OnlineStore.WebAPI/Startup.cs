@@ -14,6 +14,7 @@ using OnlineStore.Core.BusinessLayer;
 using OnlineStore.Core.BusinessLayer.Contracts;
 using OnlineStore.Core.DataLayer;
 using OnlineStore.WebAPI.Clients;
+using OnlineStore.WebAPI.Clients.Contracts;
 using OnlineStore.WebAPI.PolicyRequirements;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -46,10 +47,20 @@ namespace OnlineStore.WebAPI
             // Logger for services
             services.AddScoped<ILogger, Logger<Service>>();
 
-            // Payment gateway
-            services.AddScoped<IRothschildHouseClient, RothschildHouseClient>();
+            services.Configure<OnlineStoreIdentityClientSettings>(Configuration.GetSection("OnlineStoreIdentityClientSettings"));
+            services.AddSingleton<OnlineStoreIdentityClientSettings>();
 
-            // Services
+            // Rothschild House Payment gateway
+            services.Configure<RothschildHouseIdentitySettings>(Configuration.GetSection("RothschildHouseIdentitySettings"));
+            services.AddSingleton<RothschildHouseIdentitySettings>();
+
+            services.Configure<RothschildHousePaymentSettings>(Configuration.GetSection("RothschildHousePaymentSettings"));
+            services.AddSingleton<RothschildHousePaymentSettings>();
+
+            services.AddScoped<IRothschildHouseIdentityClient, RothschildHouseIdentityClient>();
+            services.AddScoped<IRothschildHousePaymentClient, RothschildHousePaymentClient>();
+
+            // Online Store Services
             services.AddScoped<IHumanResourcesService, HumanResourcesService>();
             services.AddScoped<IWarehouseService, WarehouseService>();
             services.AddScoped<ISalesService, SalesService>();
@@ -70,8 +81,15 @@ namespace OnlineStore.WebAPI
                 .AddMvcCore()
                 .AddAuthorization(options =>
                 {
-                    options.AddPolicy("AdministratorPolicy", builder => builder.Requirements.Add(new AdministratorPolicyRequirement()));
-                    options.AddPolicy("CustomerPolicy", builder => builder.Requirements.Add(new CustomerPolicyRequirement()));
+                    options.AddPolicy("AdministratorPolicy", builder =>
+                    {
+                        builder.Requirements.Add(new AdministratorPolicyRequirement());
+                    });
+
+                    options.AddPolicy("CustomerPolicy", builder =>
+                    {
+                        builder.Requirements.Add(new CustomerPolicyRequirement());
+                    });
                 });
 
             /* Configuration for IdentityServer authentication */
@@ -80,11 +98,13 @@ namespace OnlineStore.WebAPI
                 .AddAuthentication("Bearer")
                 .AddIdentityServerAuthentication(options =>
                 {
-                    // todo: Set values from appsettings file
+                    var settings = new IdentityServerSettings();
 
-                    options.Authority = "http://localhost:56000";
-                    options.RequireHttpsMetadata = false;
-                    options.ApiName = "OnLineStoreApi";
+                    Configuration.Bind("IdentityServerSettings", settings);
+
+                    options.Authority = settings.Authority;
+                    options.RequireHttpsMetadata = settings.RequireHttpsMetadata;
+                    options.ApiName = settings.ApiName;
                 });
 
             /* Configuration for Help page */
