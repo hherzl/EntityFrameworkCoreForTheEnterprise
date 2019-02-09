@@ -12,7 +12,7 @@ namespace OnlineStore.WebAPI.IntegrationTests.Mocks
             {
                 Url = "http://localhost:56000",
                 ClientId = "onlinestoreclient",
-                ClientSecret = "onlinestoresecret1",
+                ClientSecret = "onlinestoreclientsecret1",
                 UserName = userName,
                 Password = password
             };

@@ -16,9 +16,9 @@ namespace OnlineStore.IdentityServer
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            /* Setting dependency injection */
+            /* Setting up dependency injection */
 
-            // Db Context
+            // DbContext
             services.AddDbContext<AuthDbContext>(options => options.UseInMemoryDatabase("Auth"));
 
             // Password validator and profile

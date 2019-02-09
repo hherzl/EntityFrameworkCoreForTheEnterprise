@@ -51,7 +51,7 @@ namespace RothschildHouse
 
                     options.Authority = "http://localhost:18000";
                     options.RequireHttpsMetadata = false;
-                    options.ApiName = "RothschildHouseApi";
+                    options.ApiName = "RothschildHouseWebAPI";
                 });
 
             // Register the Swagger generator, defining 1 or more Swagger documents

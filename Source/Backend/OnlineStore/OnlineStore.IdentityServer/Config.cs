@@ -10,7 +10,7 @@ namespace OnlineStore.IdentityServer
         public static IEnumerable<ApiResource> GetApiResources()
             => new List<ApiResource>
             {
-                new ApiResource("OnLineStoreApi", "OnLine Store API")
+                new ApiResource("OnlineStoreWebAPI", "Online Store Web API")
             };
 
         public static IEnumerable<Client> GetClients()
@@ -22,11 +22,11 @@ namespace OnlineStore.IdentityServer
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                     ClientSecrets =
                     {
-                        new Secret("onlinestoresecret1".Sha256())
+                        new Secret("onlinestoreclientsecret1".Sha256())
                     },
                     AllowedScopes =
                     {
-                        "OnLineStoreApi"
+                        "OnlineStoreWebAPI"
                     },
                     Claims =
                     {
