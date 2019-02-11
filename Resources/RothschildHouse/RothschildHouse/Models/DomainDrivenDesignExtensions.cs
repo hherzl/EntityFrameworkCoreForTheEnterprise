@@ -39,7 +39,7 @@ namespace RothschildHouse.Models
 
             /* Get more credit card numbers: http://www.getcreditcardnumbers.com/ */
 
-            var jamesLogan = new Person
+            var wolverine = new Person
             {
                 PersonID = Guid.NewGuid(),
                 GivenName = "James",
@@ -48,23 +48,23 @@ namespace RothschildHouse.Models
                 FullName = "James Logan"
             };
 
-            dbContext.People.Add(jamesLogan);
+            dbContext.People.Add(wolverine);
 
             dbContext.CreditCards.Add(new CreditCard
             {
                 CreditCardID = Guid.NewGuid(),
-                PersonID = jamesLogan.PersonID,
+                PersonID = wolverine.PersonID,
                 CardHolderName = "James Logan",
                 IssuingNetwork = "Visa",
                 CardNumber = "4024007164051145",
                 Last4Digits = "1145",
-                ExpirationDate = new DateTime(DateTime.Now.AddYears(5).Year, DateTime.Now.Month, 1),
+                ExpirationDate = new DateTime(2024, 6, 1),
                 Cvv = "987",
                 Limit = 10000,
                 AvailableFounds = 10000
             });
 
-            var ororoMunroe = new Person
+            var storm = new Person
             {
                 PersonID = Guid.NewGuid(),
                 GivenName = "Ororo",
@@ -73,17 +73,17 @@ namespace RothschildHouse.Models
                 FullName = "Ororo Munroe"
             };
 
-            dbContext.People.Add(ororoMunroe);
+            dbContext.People.Add(storm);
 
             dbContext.CreditCards.Add(new CreditCard
             {
                 CreditCardID = Guid.NewGuid(),
-                PersonID = ororoMunroe.PersonID,
+                PersonID = storm.PersonID,
                 CardHolderName = "Ororo Munroe",
                 IssuingNetwork = "MasterCard",
                 CardNumber = "5473913699329307",
                 Last4Digits = "9307",
-                ExpirationDate = new DateTime(DateTime.Now.AddYears(4).Year, DateTime.Now.Month, 1),
+                ExpirationDate = new DateTime(2023, 1, 1),
                 Cvv = "987",
                 Limit = 5000,
                 AvailableFounds = 5000

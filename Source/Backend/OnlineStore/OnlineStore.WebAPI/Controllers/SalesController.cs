@@ -29,8 +29,7 @@ namespace OnlineStore.WebAPI.Controllers
             IRothschildHouseIdentityClient rothschildHouseIdentityClient,
             IRothschildHousePaymentClient rothschildHousePaymentClient,
             ISalesService salesService
-            )
-            : base()
+        ) : base()
         {
             Logger = logger;
             RothschildHouseIdentityClient = rothschildHouseIdentityClient;

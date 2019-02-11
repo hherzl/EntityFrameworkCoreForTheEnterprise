@@ -163,7 +163,7 @@ namespace OnlineStore.WebAPI.IntegrationTests
                     CardHolderName = "James Logan",
                     IssuingNetwork = "Visa",
                     CardNumber = "4024007164051145",
-                    ExpirationDate = new DateTime(DateTime.Now.Year + 5, DateTime.Now.Month, 1),
+                    ExpirationDate = new DateTime(2024, 6, 1),
                     Cvv = "987",
                     Total = 29.99m,
                     CustomerID = 1,
