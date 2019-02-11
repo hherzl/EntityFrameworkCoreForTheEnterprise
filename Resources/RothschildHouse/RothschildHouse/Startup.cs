@@ -47,11 +47,13 @@ namespace RothschildHouse
                 .AddAuthentication("Bearer")
                 .AddIdentityServerAuthentication(options =>
                 {
-                    // todo: Set values from appsettings file
+                    var settings = new IdentityServerSettings();
 
-                    options.Authority = "http://localhost:18000";
-                    options.RequireHttpsMetadata = false;
-                    options.ApiName = "RothschildHouseWebAPI";
+                    Configuration.Bind("IdentityServerSettings", settings);
+
+                    options.Authority = settings.Authority;
+                    options.RequireHttpsMetadata = settings.RequireHttpsMetadata;
+                    options.ApiName = settings.ApiName;
                 });
 
             // Register the Swagger generator, defining 1 or more Swagger documents
