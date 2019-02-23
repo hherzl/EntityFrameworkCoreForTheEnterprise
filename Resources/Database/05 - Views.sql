@@ -1,9 +1,10 @@
 create view [HumanResources].[EmployeeInfo]
 as
 	select
-		Employee.FirstName + ' ' + isnull(Employee.MiddleName + ' ', '') + Employee.LastName as EmployeeName,
-		(select count(EmployeeID) from HumanResources.EmployeeAddress where EmployeeID = Employee.EmployeeID) as EmployeeAddresses,
-		(select count(EmployeeID) from HumanResources.EmployeeEmail where EmployeeID = Employee.EmployeeID) as EmployeeEmails
+		Employee.EmployeeID,
+		HumanResources.ufnGetEmployeeFullName(Employee.EmployeeID) as EmployeeName,
+		(select count(EmployeeID) from HumanResources.EmployeeAddress EAddress where EAddress.EmployeeID = Employee.EmployeeID) as EmployeeAddresses,
+		(select count(EmployeeID) from HumanResources.EmployeeEmail EEmail where EEmail.EmployeeID = Employee.EmployeeID) as EmployeeEmails
 	from
 		HumanResources.Employee Employee
 go
@@ -12,8 +13,12 @@ create view [Sales].[OrderSummary]
 as
 	select
 		OrderHeader.OrderHeaderID,
+		OrderHeader.OrderStatusID,
+		Customer.CustomerID as CustomerID,
 		Customer.CompanyName as CustomerName,
+		Employee.EmployeeID as EmployeeID,
 		HumanResources.ufnGetEmployeeFullName(OrderHeader.EmployeeID) as EmployeeName,
+		Shipper.ShipperID as ShipperID,
 		Shipper.CompanyName as ShipperName,
 		OrderHeader.OrderDate,
 		OrderHeader.Total,
@@ -22,6 +27,8 @@ as
 		OrderHeader.DetailsCount
 	from
 		Sales.OrderHeader OrderHeader
+		inner join Sales.OrderStatus OrderStatus
+			on OrderHeader.OrderStatusID = OrderStatus.OrderStatusID
 		inner join Sales.Customer Customer
 			on OrderHeader.CustomerID = Customer.CustomerID
 		inner join HumanResources.Employee Employee
