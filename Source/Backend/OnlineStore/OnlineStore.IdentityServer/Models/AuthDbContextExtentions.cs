@@ -31,28 +31,52 @@ namespace OnlineStore.IdentityServer.Models
 
         public static void SeedInMemory(this AuthDbContext dbContext)
         {
-            dbContext.Users.Add(new User("1000", "jameslogan@walla.com", "wolverine".ToSha256(), true));
+            dbContext.Users.Add(new User("1000", "erik.lehnsherr@outlook.com", "magneto".ToSha256(), true));
 
             dbContext.UserClaims.AddRange(
                 new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.Subject, "1000"),
-                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.PreferredUserName, "jameslogan"),
-                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.Email, "jameslogan@walla.com"),
-                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.Role, "Customer"),
-                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.GivenName, "James"),
-                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.MiddleName, ""),
-                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.FamilyName, "Logan")
+                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.PreferredUserName, "eriklehnsherr"),
+                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.Role, "Administrator"),
+                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.Email, "erik.lehnsherr@outlook.com"),
+                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.GivenName, "Erik"),
+                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.MiddleName, "Magnus"),
+                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.FamilyName, "Lehnsherr")
             );
 
-            dbContext.Users.Add(new User("2000", "ororo_munroe@yahoo.com", "storm".ToSha256(), true));
+            dbContext.Users.Add(new User("2000", "charlesxavier@gmail.com", "professorx".ToSha256(), true));
 
             dbContext.UserClaims.AddRange(
                 new UserClaim(Guid.NewGuid(), "2000", JwtClaimTypes.Subject, "2000"),
-                new UserClaim(Guid.NewGuid(), "2000", JwtClaimTypes.PreferredUserName, "ororo_munroe"),
-                new UserClaim(Guid.NewGuid(), "2000", JwtClaimTypes.Email, "ororo_munroe@yahoo.com"),
-                new UserClaim(Guid.NewGuid(), "2000", JwtClaimTypes.Role, "Customer"),
-                new UserClaim(Guid.NewGuid(), "2000", JwtClaimTypes.GivenName, "Ororo"),
-                new UserClaim(Guid.NewGuid(), "2000", JwtClaimTypes.MiddleName, ""),
-                new UserClaim(Guid.NewGuid(), "2000", JwtClaimTypes.FamilyName, "Munroe")
+                new UserClaim(Guid.NewGuid(), "2000", JwtClaimTypes.PreferredUserName, "charlesxavier"),
+                new UserClaim(Guid.NewGuid(), "2000", JwtClaimTypes.Role, "Administrator"),
+                new UserClaim(Guid.NewGuid(), "2000", JwtClaimTypes.Email, "charlesxavier@gmail.com"),
+                new UserClaim(Guid.NewGuid(), "2000", JwtClaimTypes.GivenName, "Charles"),
+                new UserClaim(Guid.NewGuid(), "2000", JwtClaimTypes.MiddleName, "F"),
+                new UserClaim(Guid.NewGuid(), "2000", JwtClaimTypes.FamilyName, "Xavier")
+            );
+
+            dbContext.Users.Add(new User("3000", "jameslogan@walla.com", "wolverine".ToSha256(), true));
+
+            dbContext.UserClaims.AddRange(
+                new UserClaim(Guid.NewGuid(), "3000", JwtClaimTypes.Subject, "3000"),
+                new UserClaim(Guid.NewGuid(), "3000", JwtClaimTypes.PreferredUserName, "jameslogan"),
+                new UserClaim(Guid.NewGuid(), "3000", JwtClaimTypes.Role, "Customer"),
+                new UserClaim(Guid.NewGuid(), "3000", JwtClaimTypes.Email, "jameslogan@walla.com"),
+                new UserClaim(Guid.NewGuid(), "3000", JwtClaimTypes.GivenName, "James"),
+                new UserClaim(Guid.NewGuid(), "3000", JwtClaimTypes.MiddleName, ""),
+                new UserClaim(Guid.NewGuid(), "3000", JwtClaimTypes.FamilyName, "Logan")
+            );
+
+            dbContext.Users.Add(new User("4000", "ororo_munroe@yahoo.com", "storm".ToSha256(), true));
+
+            dbContext.UserClaims.AddRange(
+                new UserClaim(Guid.NewGuid(), "4000", JwtClaimTypes.Subject, "4000"),
+                new UserClaim(Guid.NewGuid(), "4000", JwtClaimTypes.PreferredUserName, "ororo_munroe"),
+                new UserClaim(Guid.NewGuid(), "4000", JwtClaimTypes.Role, "Customer"),
+                new UserClaim(Guid.NewGuid(), "4000", JwtClaimTypes.Email, "ororo_munroe@yahoo.com"),
+                new UserClaim(Guid.NewGuid(), "4000", JwtClaimTypes.GivenName, "Ororo"),
+                new UserClaim(Guid.NewGuid(), "4000", JwtClaimTypes.MiddleName, ""),
+                new UserClaim(Guid.NewGuid(), "4000", JwtClaimTypes.FamilyName, "Munroe")
             );
 
             dbContext.SaveChanges();
