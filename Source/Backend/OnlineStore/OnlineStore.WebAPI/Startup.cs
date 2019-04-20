@@ -33,6 +33,16 @@ namespace OnlineStore.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            /* Configuration for MVC */
+
+            services
+                .AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                });
+
             /* Setting dependency injection */
 
             // For DbContext
@@ -47,10 +57,12 @@ namespace OnlineStore.WebAPI
             // Logger for services
             services.AddScoped<ILogger, Logger<Service>>();
 
+            /* Identity Server for Online Store */
+
             services.Configure<OnlineStoreIdentityClientSettings>(Configuration.GetSection("OnlineStoreIdentityClientSettings"));
             services.AddSingleton<OnlineStoreIdentityClientSettings>();
 
-            // Rothschild House Payment gateway
+            /* Rothschild House Payment gateway */
             services.Configure<RothschildHouseIdentitySettings>(Configuration.GetSection("RothschildHouseIdentitySettings"));
             services.AddSingleton<RothschildHouseIdentitySettings>();
 
@@ -60,20 +72,10 @@ namespace OnlineStore.WebAPI
             services.AddScoped<IRothschildHouseIdentityClient, RothschildHouseIdentityClient>();
             services.AddScoped<IRothschildHousePaymentClient, RothschildHousePaymentClient>();
 
-            // Online Store Services
+            /* Online Store Services */
             services.AddScoped<IHumanResourcesService, HumanResourcesService>();
             services.AddScoped<IWarehouseService, WarehouseService>();
             services.AddScoped<ISalesService, SalesService>();
-
-            /* Configuration for MVC */
-
-            services
-                .AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddJsonOptions(options =>
-                {
-                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                });
 
             /* Configuration for authorization */
 
@@ -81,18 +83,16 @@ namespace OnlineStore.WebAPI
                 .AddMvcCore()
                 .AddAuthorization(options =>
                 {
-                    options.AddPolicy("AdministratorPolicy", builder =>
-                    {
-                        builder.Requirements.Add(new AdministratorPolicyRequirement());
-                    });
+                    options.AddPolicy("AdministratorPolicy", builder => builder.Requirements.Add(new AdministratorPolicyRequirement()));
 
-                    options.AddPolicy("CustomerPolicy", builder =>
-                    {
-                        builder.Requirements.Add(new CustomerPolicyRequirement());
-                    });
+                    options.AddPolicy("CustomerPolicy", builder => builder.Requirements.Add(new CustomerPolicyRequirement()));
+
+                    options.AddPolicy("WarehouseManagerPolicy", builder => builder.Requirements.Add(new WarehouseManagerPolicyRequirement()));
+
+                    options.AddPolicy("WarehouseOperatorPolicy", builder => builder.Requirements.Add(new WarehouseOperatorPolicyRequirement()));
                 });
 
-            /* Configuration for IdentityServer authentication */
+            /* Configuration for Identity Server authentication */
 
             services
                 .AddAuthentication("Bearer")
@@ -111,7 +111,7 @@ namespace OnlineStore.WebAPI
 
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new Info { Title = "OnLine Store API", Version = "v1" });
+                options.SwaggerDoc("v1", new Info { Title = "Online Store API", Version = "v1" });
 
                 // Get xml comments path
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
@@ -147,10 +147,7 @@ namespace OnlineStore.WebAPI
 
             app.UseSwagger();
 
-            app.UseSwaggerUI(options =>
-            {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "OnLine Store API");
-            });
+            app.UseSwaggerUI(options => options.SwaggerEndpoint("/swagger/v1/swagger.json", "Online Store API"));
 
             app.UseMvc();
         }

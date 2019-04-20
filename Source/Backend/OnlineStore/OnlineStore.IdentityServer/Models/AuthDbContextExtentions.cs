@@ -39,7 +39,7 @@ namespace OnlineStore.IdentityServer.Models
                 new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.Role, "Administrator"),
                 new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.Email, "erik.lehnsherr@outlook.com"),
                 new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.GivenName, "Erik"),
-                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.MiddleName, "Magnus"),
+                new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.MiddleName, "M"),
                 new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.FamilyName, "Lehnsherr")
             );
 

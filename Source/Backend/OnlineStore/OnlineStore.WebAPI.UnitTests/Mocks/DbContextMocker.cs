@@ -13,13 +13,32 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
             // Disable transactions because in memory database doesn't support txns
             var options = new DbContextOptionsBuilder<OnlineStoreDbContext>()
                 .UseInMemoryDatabase(databaseName: dbName)
-                .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
+                .ConfigureWarnings(builder => builder.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                 .Options;
 
             var dbContext = new OnlineStoreDbContext(options);
 
             // Seed data for DbContext instance
-            dbContext.SeedInMemory();
+
+            dbContext
+                .SeedCountries()
+                .SeedCurrencies()
+                .SeedCountryCurrencies()
+                ;
+
+            dbContext
+                .SeedProductCategories()
+                .SeedProducts()
+                .SeedLocations()
+                .SeedProductInventories();
+
+            dbContext
+                .SeedOrderStatuses()
+                .SeedCustomers()
+                .SeedEmployees()
+                .SeedShippers()
+                .SeedOrders()
+                ;
 
             return dbContext;
         }

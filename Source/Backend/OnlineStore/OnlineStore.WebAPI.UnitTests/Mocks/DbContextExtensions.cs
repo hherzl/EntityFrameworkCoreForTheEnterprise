@@ -9,11 +9,17 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
 {
     public static class DbContextExtensions
     {
-        public static void SeedInMemory(this OnlineStoreDbContext dbContext)
-        {
-            var creationUser = "unittests";
-            var creationDateTime = DateTime.Now;
+        static string creationUser;
+        static DateTime creationDateTime;
 
+        static DbContextExtensions()
+        {
+            creationUser = "unittests";
+            creationDateTime = DateTime.Now;
+        }
+
+        public static OnlineStoreDbContext SeedCountries(this OnlineStoreDbContext dbContext)
+        {
             var country = new Country
             {
                 CountryID = 1,
@@ -24,6 +30,13 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
 
             dbContext.Countries.Add(country);
 
+            dbContext.SaveChanges();
+
+            return dbContext;
+        }
+
+        public static OnlineStoreDbContext SeedCurrencies(this OnlineStoreDbContext dbContext)
+        {
             var currency = new Currency
             {
                 CurrencyID = "USD",
@@ -35,10 +48,17 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
 
             dbContext.Currencies.Add(currency);
 
+            dbContext.SaveChanges();
+
+            return dbContext;
+        }
+
+        public static OnlineStoreDbContext SeedCountryCurrencies(this OnlineStoreDbContext dbContext)
+        {
             var countryCurrency = new CountryCurrency
             {
-                CountryID = country.CountryID,
-                CurrencyID = currency.CurrencyID,
+                CountryID = 1,
+                CurrencyID = "USD",
                 CreationUser = creationUser,
                 CreationDateTime = creationDateTime
             };
@@ -47,6 +67,11 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
 
             dbContext.SaveChanges();
 
+            return dbContext;
+        }
+
+        public static OnlineStoreDbContext SeedEmployees(this OnlineStoreDbContext dbContext)
+        {
             var employee = new Employee
             {
                 EmployeeID = 1,
@@ -61,6 +86,11 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
 
             dbContext.SaveChanges();
 
+            return dbContext;
+        }
+
+        public static OnlineStoreDbContext SeedProductCategories(this OnlineStoreDbContext dbContext)
+        {
             var productCategory = new ProductCategory
             {
                 ProductCategoryID = 1,
@@ -71,6 +101,13 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
 
             dbContext.ProductCategories.Add(productCategory);
 
+            dbContext.SaveChanges();
+
+            return dbContext;
+        }
+
+        public static OnlineStoreDbContext SeedProducts(this OnlineStoreDbContext dbContext)
+        {
             var product = new Product
             {
                 ProductID = 1,
@@ -86,20 +123,34 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
 
             dbContext.Products.Add(product);
 
+            dbContext.SaveChanges();
+
+            return dbContext;
+        }
+
+        public static OnlineStoreDbContext SeedLocations(this OnlineStoreDbContext dbContext)
+        {
             var location = new Location
             {
-                LocationID = "W0001",
-                LocationName = "Warehouse 001",
+                LocationID = "W01",
+                LocationName = "Warehouse 01",
                 CreationUser = creationUser,
                 CreationDateTime = creationDateTime
             };
 
             dbContext.Warehouses.Add(location);
 
+            dbContext.SaveChanges();
+
+            return dbContext;
+        }
+
+        public static OnlineStoreDbContext SeedProductInventories(this OnlineStoreDbContext dbContext)
+        {
             var productInventory = new ProductInventory
             {
-                ProductID = product.ProductID,
-                LocationID = location.LocationID,
+                ProductID = 1000,
+                LocationID = "W01",
                 OrderDetailID = 1,
                 Quantity = 1500,
                 CreationUser = creationUser,
@@ -110,6 +161,11 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
 
             dbContext.SaveChanges();
 
+            return dbContext;
+        }
+
+        public static OnlineStoreDbContext SeedOrderStatuses(this OnlineStoreDbContext dbContext)
+        {
             var orderStatus = new OrderStatus
             {
                 OrderStatusID = 100,
@@ -120,9 +176,16 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
 
             dbContext.OrderStatuses.Add(orderStatus);
 
+            dbContext.SaveChanges();
+
+            return dbContext;
+        }
+
+        public static OnlineStoreDbContext SeedPaymentMethods(this OnlineStoreDbContext dbContext)
+        {
             var paymentMethod = new PaymentMethod
             {
-                PaymentMethodID = Guid.NewGuid(),
+                PaymentMethodID = Guid.Parse("44C3737C-9993-448A-82F7-75C0E37E5A7F"),
                 PaymentMethodDescription = "Credit Card",
                 CreationUser = creationUser,
                 CreationDateTime = creationDateTime
@@ -130,6 +193,13 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
 
             dbContext.PaymentMethods.Add(paymentMethod);
 
+            dbContext.SaveChanges();
+
+            return dbContext;
+        }
+
+        public static OnlineStoreDbContext SeedCustomers(this OnlineStoreDbContext dbContext)
+        {
             var customer = new Customer
             {
                 CustomerID = 1,
@@ -141,6 +211,13 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
 
             dbContext.Customers.Add(customer);
 
+            dbContext.SaveChanges();
+
+            return dbContext;
+        }
+
+        public static OnlineStoreDbContext SeedShippers(this OnlineStoreDbContext dbContext)
+        {
             var shipper = new Shipper
             {
                 ShipperID = 1,
@@ -152,15 +229,23 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
 
             dbContext.Shippers.Add(shipper);
 
+            dbContext.SaveChanges();
+
+            return dbContext;
+        }
+
+        public static OnlineStoreDbContext SeedOrders(this OnlineStoreDbContext dbContext)
+        {
             var order = new OrderHeader
             {
-                OrderStatusID = orderStatus.OrderStatusID,
-                CustomerID = customer.CustomerID,
-                EmployeeID = employee.EmployeeID,
+                OrderHeaderID = 1,
+                OrderStatusID = 100,
+                CustomerID = 1000,
+                EmployeeID = 1,
                 OrderDate = DateTime.Now,
                 Total = 29.99m,
                 CurrencyID = "USD",
-                PaymentMethodID = paymentMethod.PaymentMethodID,
+                PaymentMethodID = Guid.Parse("44C3737C-9993-448A-82F7-75C0E37E5A7F"),
                 Comments = "Order from unit tests",
                 CreationUser = creationUser,
                 CreationDateTime = creationDateTime
@@ -171,8 +256,8 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
             var orderDetail = new OrderDetail
             {
                 OrderHeaderID = order.OrderHeaderID,
-                ProductID = product.ProductID,
-                ProductName = product.ProductName,
+                ProductID = 1000,
+                ProductName = "The King of Fighters XIV",
                 UnitPrice = 29.99m,
                 Quantity = 1,
                 Total = 29.99m,
@@ -183,6 +268,8 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
             dbContext.OrderDetails.Add(orderDetail);
 
             dbContext.SaveChanges();
+
+            return dbContext;
         }
     }
 }
