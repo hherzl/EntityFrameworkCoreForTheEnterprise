@@ -16,8 +16,5 @@ namespace OnlineStore.WebAPI.IntegrationTests.Mocks
                 UserName = userName,
                 Password = password
             };
-
-        public static OnlineStoreIdentityClientSettings GetOnlineStoreIdentityClientSettingsWithNoUserAndPassword()
-            => GetOnlineStoreIdentityClientSettings("", "");
     }
 }

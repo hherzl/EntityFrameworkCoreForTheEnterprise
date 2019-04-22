@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
+using IdentityModel;
 using Microsoft.AspNetCore.Authorization;
+using OnlineStore.Common;
 
 namespace OnlineStore.WebAPI.PolicyRequirements
 {
@@ -8,7 +10,7 @@ namespace OnlineStore.WebAPI.PolicyRequirements
     {
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, WarehouseManagerPolicyRequirement requirement)
         {
-            if (context.User.HasClaim(claim => claim.Type == "role" && claim.Value == "WarehouseManager"))
+            if (context.User.HasClaim(claim => claim.Type == JwtClaimTypes.Role && claim.Value == Roles.WarehouseManager))
                 context.Succeed(requirement);
             else
                 context.Fail();

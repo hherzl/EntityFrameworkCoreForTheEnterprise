@@ -85,11 +85,11 @@ namespace OnlineStore.WebAPI
                 {
                     options.AddPolicy("AdministratorPolicy", builder => builder.Requirements.Add(new AdministratorPolicyRequirement()));
 
-                    options.AddPolicy("CustomerPolicy", builder => builder.Requirements.Add(new CustomerPolicyRequirement()));
-
                     options.AddPolicy("WarehouseManagerPolicy", builder => builder.Requirements.Add(new WarehouseManagerPolicyRequirement()));
 
                     options.AddPolicy("WarehouseOperatorPolicy", builder => builder.Requirements.Add(new WarehouseOperatorPolicyRequirement()));
+
+                    options.AddPolicy("CustomerPolicy", builder => builder.Requirements.Add(new CustomerPolicyRequirement()));
                 });
 
             /* Configuration for Identity Server authentication */
