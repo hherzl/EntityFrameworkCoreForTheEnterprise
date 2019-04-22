@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using OnlineStore.Core.BusinessLayer.Contracts;
 using OnlineStore.Core.BusinessLayer.Responses;
-using OnlineStore.Core.DataLayer;
-using OnlineStore.Core.DataLayer.HumanResources;
-using OnlineStore.Core.DataLayer.Repositories;
-using OnlineStore.Core.EntityLayer.HumanResources;
+using OnlineStore.Core.DomainDrivenDesign;
+using OnlineStore.Core.DomainDrivenDesign.HumanResources;
+using OnlineStore.Core.DomainDrivenDesign.Repositories;
+using OnlineStore.Core.DomainDrivenDesign.HumanResources;
 
 namespace OnlineStore.Core.BusinessLayer
 {

@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OnlineStore.Core.BusinessLayer.Responses;
-using OnlineStore.Core.DataLayer.Sales;
-using OnlineStore.Core.EntityLayer.Sales;
+using OnlineStore.Core.DomainDrivenDesign.Sales;
+using OnlineStore.Core.DomainDrivenDesign.Sales;
 using OnlineStore.WebAPI.Requests;
 using OnlineStore.WebAPI.UnitTests.Mocks;
 using Xunit;
@@ -41,7 +41,6 @@ namespace OnlineStore.WebAPI.UnitTests
 
             // Assert
             Assert.False(value.DidError);
-            Assert.True(value.Model.Count() > 0);
             Assert.True(value.Model.Count(item => item.CurrencyID == currencyID) == value.Model.Count());
         }
 
@@ -130,6 +129,7 @@ namespace OnlineStore.WebAPI.UnitTests
             var controller = ControllerMocker.GetSalesController(nameof(TestPostOrderAsync));
             var request = new PostOrderRequest
             {
+                ID = 2,
                 CustomerID = 1,
                 PaymentMethodID = new Guid("7671A4F7-A735-4CB7-AAB4-CF47AE20171D"),
                 CurrencyID = "USD",
@@ -138,6 +138,7 @@ namespace OnlineStore.WebAPI.UnitTests
                 {
                     new OrderDetailRequest
                     {
+                        ID = 2,
                         ProductID = 1,
                         Quantity = 1
                     }

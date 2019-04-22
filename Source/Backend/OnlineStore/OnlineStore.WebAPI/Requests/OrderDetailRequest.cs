@@ -6,6 +6,11 @@
     public class OrderDetailRequest
     {
         /// <summary>
+        /// Gets or sets the ID
+        /// </summary>
+        public long? ID { get; set; }
+
+        /// <summary>
         /// Product ID
         /// </summary>
         public int? ProductID { get; set; }

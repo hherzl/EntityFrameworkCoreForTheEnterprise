@@ -1,9 +1,9 @@
 ﻿using System;
-using OnlineStore.Core.DataLayer;
-using OnlineStore.Core.EntityLayer.Dbo;
-using OnlineStore.Core.EntityLayer.HumanResources;
-using OnlineStore.Core.EntityLayer.Sales;
-using OnlineStore.Core.EntityLayer.Warehouse;
+using OnlineStore.Core.DomainDrivenDesign;
+using OnlineStore.Core.DomainDrivenDesign.Dbo;
+using OnlineStore.Core.DomainDrivenDesign.HumanResources;
+using OnlineStore.Core.DomainDrivenDesign.Sales;
+using OnlineStore.Core.DomainDrivenDesign.Warehouse;
 
 namespace OnlineStore.WebAPI.UnitTests.Mocks
 {
@@ -57,6 +57,7 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
         {
             var countryCurrency = new CountryCurrency
             {
+                CountryCurrencyID = 1,
                 CountryID = 1,
                 CurrencyID = "USD",
                 CreationUser = creationUser,
@@ -138,7 +139,7 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
                 CreationDateTime = creationDateTime
             };
 
-            dbContext.Warehouses.Add(location);
+            dbContext.Locations.Add(location);
 
             dbContext.SaveChanges();
 
@@ -149,7 +150,7 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
         {
             var productInventory = new ProductInventory
             {
-                ProductID = 1000,
+                ProductID = 1,
                 LocationID = "W01",
                 OrderDetailID = 1,
                 Quantity = 1500,
@@ -236,7 +237,7 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
 
         public static OnlineStoreDbContext SeedOrders(this OnlineStoreDbContext dbContext)
         {
-            var order = new OrderHeader
+            var orderHeader = new OrderHeader
             {
                 OrderHeaderID = 1,
                 OrderStatusID = 100,
@@ -251,12 +252,14 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
                 CreationDateTime = creationDateTime
             };
 
-            dbContext.Orders.Add(order);
+            dbContext.OrderHeaders.Add(orderHeader);
+
+            dbContext.SaveChanges();
 
             var orderDetail = new OrderDetail
             {
-                OrderHeaderID = order.OrderHeaderID,
-                ProductID = 1000,
+                OrderHeaderID = orderHeader.OrderHeaderID,
+                ProductID = 1,
                 ProductName = "The King of Fighters XIV",
                 UnitPrice = 29.99m,
                 Quantity = 1,

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using OnlineStore.Core.DataLayer;
+using OnlineStore.Core.DomainDrivenDesign;
 
 namespace OnlineStore.Mocker
 {

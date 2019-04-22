@@ -24,6 +24,11 @@ namespace OnlineStore.WebAPI.Requests
         public string Password { get; set; }
 
         /// <summary>
+        /// Gets or sets the ID for unit tests
+        /// </summary>
+        public long? ID { get; set; }
+
+        /// <summary>
         /// Card holder name
         /// </summary>
         [Required]

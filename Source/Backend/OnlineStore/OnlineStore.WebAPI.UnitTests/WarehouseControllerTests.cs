@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OnlineStore.Common;
 using OnlineStore.Core.BusinessLayer.Responses;
-using OnlineStore.Core.EntityLayer.Warehouse;
+using OnlineStore.Core.DomainDrivenDesign.Warehouse;
 using OnlineStore.WebAPI.Controllers;
 using OnlineStore.WebAPI.UnitTests.Mocks;
 using OnlineStore.WebAPI.UnitTests.Mocks.Identity;
@@ -40,10 +40,10 @@ namespace OnlineStore.WebAPI.UnitTests
             var service = ServiceMocker.GetWarehouseService(userInfo, nameof(TestGetInventoryByProductTestAsync));
             var controller = new WarehouseController(LoggingHelper.GetLogger<WarehouseController>(), service);
             var productID = 1;
-            var warehouseID = "W0001";
+            var locationID = "W01";
 
             // Act
-            var response = await controller.GetProductInventoryAsync(productID, warehouseID) as ObjectResult;
+            var response = await controller.GetProductInventoryAsync(productID, locationID) as ObjectResult;
             var value = response.Value as IListResponse<ProductInventory>;
 
             service.Dispose();

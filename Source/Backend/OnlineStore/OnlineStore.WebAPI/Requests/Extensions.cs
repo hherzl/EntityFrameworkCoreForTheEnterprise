@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using OnlineStore.Core.EntityLayer.Sales;
+using OnlineStore.Core.DomainDrivenDesign.Sales;
 using OnlineStore.WebAPI.Clients.Models;
 
 namespace OnlineStore.WebAPI.Requests
@@ -10,6 +10,7 @@ namespace OnlineStore.WebAPI.Requests
         public static OrderHeader GetOrderHeader(this PostOrderRequest request)
             => new OrderHeader
             {
+                OrderHeaderID = request.ID,
                 CustomerID = request.CustomerID,
                 CurrencyID = request.CurrencyID,
                 PaymentMethodID = request.PaymentMethodID,
@@ -22,6 +23,7 @@ namespace OnlineStore.WebAPI.Requests
             {
                 yield return new OrderDetail
                 {
+                    OrderDetailID = item.ID,
                     ProductID = item.ProductID,
                     UnitPrice = item.UnitPrice,
                     Quantity = item.Quantity

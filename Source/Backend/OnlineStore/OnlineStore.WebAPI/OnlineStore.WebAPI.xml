@@ -150,6 +150,11 @@
             Represents one line for Order
             </summary>
         </member>
+        <member name="P:OnlineStore.WebAPI.Requests.OrderDetailRequest.ID">
+            <summary>
+            Gets or sets the ID
+            </summary>
+        </member>
         <member name="P:OnlineStore.WebAPI.Requests.OrderDetailRequest.ProductID">
             <summary>
             Product ID
@@ -178,6 +183,11 @@
         <member name="P:OnlineStore.WebAPI.Requests.PostOrderRequest.Password">
             <summary>
             Password
+            </summary>
+        </member>
+        <member name="P:OnlineStore.WebAPI.Requests.PostOrderRequest.ID">
+            <summary>
+            Gets or sets the ID for unit tests
             </summary>
         </member>
         <member name="P:OnlineStore.WebAPI.Requests.PostOrderRequest.CardHolderName">

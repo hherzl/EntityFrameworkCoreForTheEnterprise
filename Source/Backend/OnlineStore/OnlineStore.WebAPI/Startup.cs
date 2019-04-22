@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 using OnlineStore.Core;
 using OnlineStore.Core.BusinessLayer;
 using OnlineStore.Core.BusinessLayer.Contracts;
-using OnlineStore.Core.DataLayer;
+using OnlineStore.Core.DomainDrivenDesign;
 using OnlineStore.WebAPI.Clients;
 using OnlineStore.WebAPI.Clients.Contracts;
 using OnlineStore.WebAPI.PolicyRequirements;

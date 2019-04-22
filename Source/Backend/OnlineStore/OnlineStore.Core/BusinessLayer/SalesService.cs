@@ -7,13 +7,13 @@ using Microsoft.Extensions.Logging;
 using OnlineStore.Core.BusinessLayer.Contracts;
 using OnlineStore.Core.BusinessLayer.Requests;
 using OnlineStore.Core.BusinessLayer.Responses;
-using OnlineStore.Core.DataLayer;
-using OnlineStore.Core.DataLayer.Repositories;
-using OnlineStore.Core.DataLayer.Sales;
-using OnlineStore.Core.DataLayer.Warehouse;
-using OnlineStore.Core.EntityLayer.Dbo;
-using OnlineStore.Core.EntityLayer.Sales;
-using OnlineStore.Core.EntityLayer.Warehouse;
+using OnlineStore.Core.DomainDrivenDesign;
+using OnlineStore.Core.DomainDrivenDesign.Repositories;
+using OnlineStore.Core.DomainDrivenDesign.Sales;
+using OnlineStore.Core.DomainDrivenDesign.Warehouse;
+using OnlineStore.Core.DomainDrivenDesign.Dbo;
+using OnlineStore.Core.DomainDrivenDesign.Sales;
+using OnlineStore.Core.DomainDrivenDesign.Warehouse;
 
 namespace OnlineStore.Core.BusinessLayer
 {
@@ -226,7 +226,7 @@ namespace OnlineStore.Core.BusinessLayer
                 try
                 {
                     // todo: Retrieve available warehouse to dispatch products
-                    var warehouses = await DbContext.Warehouses.ToListAsync();
+                    var warehouses = await DbContext.Locations.ToListAsync();
 
                     foreach (var detail in details)
                     {

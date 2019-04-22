@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using OnlineStore.Core.BusinessLayer.Responses;
-using OnlineStore.Core.EntityLayer.Warehouse;
+using OnlineStore.Core.DomainDrivenDesign.Warehouse;
 
 namespace OnlineStore.Core.BusinessLayer.Contracts
 {

@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using OnlineStore.Core.BusinessLayer.Contracts;
 using OnlineStore.Core.BusinessLayer.Responses;
-using OnlineStore.Core.DataLayer;
-using OnlineStore.Core.DataLayer.Repositories;
-using OnlineStore.Core.DataLayer.Warehouse;
-using OnlineStore.Core.EntityLayer.Warehouse;
+using OnlineStore.Core.DomainDrivenDesign;
+using OnlineStore.Core.DomainDrivenDesign.Repositories;
+using OnlineStore.Core.DomainDrivenDesign.Warehouse;
+using OnlineStore.Core.DomainDrivenDesign.Warehouse;
 
 namespace OnlineStore.Core.BusinessLayer
 {
@@ -46,16 +46,16 @@ namespace OnlineStore.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IPagedResponse<EntityLayer.Warehouse.Location>> GetWarehousesAsync(int pageSize = 10, int pageNumber = 1)
+        public async Task<IPagedResponse<Location>> GetWarehousesAsync(int pageSize = 10, int pageNumber = 1)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetWarehousesAsync));
 
-            var response = new PagedResponse<EntityLayer.Warehouse.Location>();
+            var response = new PagedResponse<Location>();
 
             try
             {
                 // Get query
-                var query = DbContext.Warehouses;
+                var query = DbContext.Locations;
 
                 // Set information for paging
                 response.PageSize = pageSize;
@@ -73,7 +73,7 @@ namespace OnlineStore.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IListResponse<ProductInventory>> GetProductInventories(int? productID = null, string warehouseID = null)
+        public async Task<IListResponse<ProductInventory>> GetProductInventories(int? productID = null, string locationID = null)
         {
             Logger?.LogInformation("{0} has been invoked", nameof(GetProductInventories));
 
@@ -82,7 +82,7 @@ namespace OnlineStore.Core.BusinessLayer
             try
             {
                 // Get query
-                var query = DbContext.GetProductInventories(productID, warehouseID);
+                var query = DbContext.GetProductInventories(productID, locationID);
 
                 // Retrieve items, set model for response
                 var list = await query.ToListAsync();

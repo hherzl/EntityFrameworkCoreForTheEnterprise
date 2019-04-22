@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using OnlineStore.Core.DataLayer;
+using OnlineStore.Core.DomainDrivenDesign;
 
 namespace OnlineStore.WebAPI.UnitTests.Mocks
 {
@@ -37,6 +37,7 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
                 .SeedCustomers()
                 .SeedEmployees()
                 .SeedShippers()
+                .SeedPaymentMethods()
                 .SeedOrders()
                 ;
 
