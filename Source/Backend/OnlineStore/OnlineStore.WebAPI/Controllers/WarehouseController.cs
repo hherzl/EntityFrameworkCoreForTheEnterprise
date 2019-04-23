@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using OnlineStore.Common;
 using OnlineStore.Core.BusinessLayer.Contracts;
 using OnlineStore.WebAPI.Filters;
 using OnlineStore.WebAPI.Responses;
@@ -70,6 +71,7 @@ namespace OnlineStore.WebAPI.Controllers
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         [OnlineStoreActionFilter]
+        [Authorize(Policy = Policies.WarehouseOperatorPolicy)]
         public async Task<IActionResult> GetProductInventoryAsync(int? id, string warehouseID)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetProductInventoryAsync));

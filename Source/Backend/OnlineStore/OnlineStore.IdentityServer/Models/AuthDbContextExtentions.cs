@@ -79,6 +79,24 @@ namespace OnlineStore.IdentityServer.Models
                 new UserClaim(Guid.NewGuid(), "4000", JwtClaimTypes.FamilyName, "Munroe")
             );
 
+            dbContext.Users.Add(new User("5000", "warehousemanager1@onlinestore.com", "password1".ToSha256(), true));
+
+            dbContext.UserClaims.AddRange(
+                new UserClaim(Guid.NewGuid(), "5000", JwtClaimTypes.Subject, "5000"),
+                new UserClaim(Guid.NewGuid(), "5000", JwtClaimTypes.PreferredUserName, "warehousemanager1"),
+                new UserClaim(Guid.NewGuid(), "5000", JwtClaimTypes.Role, "WarehouseManager"),
+                new UserClaim(Guid.NewGuid(), "5000", JwtClaimTypes.Email, "warehousemanager1@onlinestore.com")
+            );
+
+            dbContext.Users.Add(new User("6000", "warehouseoperator1@onlinestore.com", "password1".ToSha256(), true));
+
+            dbContext.UserClaims.AddRange(
+                new UserClaim(Guid.NewGuid(), "6000", JwtClaimTypes.Subject, "6000"),
+                new UserClaim(Guid.NewGuid(), "6000", JwtClaimTypes.PreferredUserName, "warehouseoperator1"),
+                new UserClaim(Guid.NewGuid(), "6000", JwtClaimTypes.Role, "WarehouseOperator"),
+                new UserClaim(Guid.NewGuid(), "6000", JwtClaimTypes.Email, "warehouseoperator1@onlinestore.com")
+            );
+
             dbContext.SaveChanges();
         }
     }

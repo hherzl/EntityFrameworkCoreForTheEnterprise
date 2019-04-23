@@ -36,7 +36,7 @@ namespace OnlineStore.WebAPI.UnitTests
         public async Task TestGetInventoryByProductTestAsync()
         {
             // Arrange
-            var userInfo = IdentityMocker.GetCustomerIdentity().GetUserInfo();
+            var userInfo = IdentityMocker.GetWarehouseOperatorIdentity().GetUserInfo();
             var service = ServiceMocker.GetWarehouseService(userInfo, nameof(TestGetInventoryByProductTestAsync));
             var controller = new WarehouseController(LoggingHelper.GetLogger<WarehouseController>(), service);
             var productID = 1;

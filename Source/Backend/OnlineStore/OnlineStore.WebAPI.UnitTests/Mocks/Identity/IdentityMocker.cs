@@ -15,5 +15,13 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks.Identity
                 new Claim(JwtClaimTypes.MiddleName, ""),
                 new Claim(JwtClaimTypes.FamilyName, "Logan")
             }));
+
+        public static ClaimsPrincipal GetWarehouseOperatorIdentity()
+            => new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
+            {
+                new Claim(JwtClaimTypes.PreferredUserName, "warehouseoperator1"),
+                new Claim(JwtClaimTypes.Email, "warehouseoperator1@onlinestore.com"),
+                new Claim(JwtClaimTypes.Role, "WarehouseOperator")
+            }));
     }
 }

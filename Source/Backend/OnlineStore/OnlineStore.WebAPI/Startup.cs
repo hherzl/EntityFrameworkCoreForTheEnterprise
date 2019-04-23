@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using OnlineStore.Common;
 using OnlineStore.Core;
 using OnlineStore.Core.BusinessLayer;
 using OnlineStore.Core.BusinessLayer.Contracts;
@@ -83,13 +84,13 @@ namespace OnlineStore.WebAPI
                 .AddMvcCore()
                 .AddAuthorization(options =>
                 {
-                    options.AddPolicy("AdministratorPolicy", builder => builder.Requirements.Add(new AdministratorPolicyRequirement()));
+                    options.AddPolicy(Policies.AdministratorPolicy, builder => builder.Requirements.Add(new AdministratorPolicyRequirement()));
 
-                    options.AddPolicy("WarehouseManagerPolicy", builder => builder.Requirements.Add(new WarehouseManagerPolicyRequirement()));
+                    options.AddPolicy(Policies.WarehouseManagerPolicy, builder => builder.Requirements.Add(new WarehouseManagerPolicyRequirement()));
 
-                    options.AddPolicy("WarehouseOperatorPolicy", builder => builder.Requirements.Add(new WarehouseOperatorPolicyRequirement()));
+                    options.AddPolicy(Policies.WarehouseOperatorPolicy, builder => builder.Requirements.Add(new WarehouseOperatorPolicyRequirement()));
 
-                    options.AddPolicy("CustomerPolicy", builder => builder.Requirements.Add(new CustomerPolicyRequirement()));
+                    options.AddPolicy(Policies.CustomerPolicy, builder => builder.Requirements.Add(new CustomerPolicyRequirement()));
                 });
 
             /* Configuration for Identity Server authentication */

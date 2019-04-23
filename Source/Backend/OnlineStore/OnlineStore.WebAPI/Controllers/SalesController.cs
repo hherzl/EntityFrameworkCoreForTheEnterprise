@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using OnlineStore.Common;
 using OnlineStore.Core.BusinessLayer.Contracts;
 using OnlineStore.WebAPI.Clients.Contracts;
 using OnlineStore.WebAPI.Clients.Models;
@@ -113,6 +114,7 @@ namespace OnlineStore.WebAPI.Controllers
         [ProducesResponseType(403)]
         [ProducesResponseType(500)]
         [OnlineStoreActionFilter]
+        [Authorize(Policy = Policies.CustomerPolicy)]
         public async Task<IActionResult> GetCreateOrderRequestAsync()
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetCreateOrderRequestAsync));
@@ -141,6 +143,7 @@ namespace OnlineStore.WebAPI.Controllers
         [ProducesResponseType(403)]
         [ProducesResponseType(500)]
         [OnlineStoreActionFilter]
+        [Authorize(Policy = Policies.CustomerPolicy)]
         public async Task<IActionResult> PostOrderAsync([FromBody]PostOrderRequest request)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(PostOrderAsync));
@@ -186,6 +189,7 @@ namespace OnlineStore.WebAPI.Controllers
         [ProducesResponseType(403)]
         [ProducesResponseType(500)]
         [OnlineStoreActionFilter]
+        [Authorize(Policy = Policies.CustomerPolicy)]
         public async Task<IActionResult> CloneOrderAsync(int id)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(CloneOrderAsync));
@@ -214,6 +218,7 @@ namespace OnlineStore.WebAPI.Controllers
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         [OnlineStoreActionFilter]
+        [Authorize(Policy = Policies.CustomerPolicy)]
         public async Task<IActionResult> DeleteOrderAsync(int id)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(DeleteOrderAsync));
