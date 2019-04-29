@@ -1,10 +1,11 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using OnlineStore.Common;
+using OnlineStore.Common.Helpers;
 using OnlineStore.Core.BusinessLayer.Responses;
 using OnlineStore.Core.DomainDrivenDesign.Warehouse;
 using OnlineStore.WebAPI.Controllers;
+using OnlineStore.WebAPI.Requests;
 using OnlineStore.WebAPI.UnitTests.Mocks;
 using OnlineStore.WebAPI.UnitTests.Mocks.Identity;
 using Xunit;
@@ -18,7 +19,7 @@ namespace OnlineStore.WebAPI.UnitTests
         {
             // Arrange
             var userInfo = IdentityMocker.GetCustomerIdentity().GetUserInfo();
-            var service = ServiceMocker.GetWarehouseService(userInfo, nameof(TestGetProductsTestAsync));
+            var service = ServiceMocker.GetWarehouseService(userInfo, nameof(TestGetProductsTestAsync), true);
             var controller = new WarehouseController(LoggingHelper.GetLogger<WarehouseController>(), service);
 
             // Act
@@ -37,7 +38,7 @@ namespace OnlineStore.WebAPI.UnitTests
         {
             // Arrange
             var userInfo = IdentityMocker.GetWarehouseOperatorIdentity().GetUserInfo();
-            var service = ServiceMocker.GetWarehouseService(userInfo, nameof(TestGetInventoryByProductTestAsync));
+            var service = ServiceMocker.GetWarehouseService(userInfo, nameof(TestGetInventoryByProductTestAsync), true);
             var controller = new WarehouseController(LoggingHelper.GetLogger<WarehouseController>(), service);
             var productID = 1;
             var locationID = "W01";
@@ -51,6 +52,32 @@ namespace OnlineStore.WebAPI.UnitTests
             // Assert
             Assert.False(value.DidError);
             Assert.True(value.Model.Count() > 0);
+        }
+
+        [Fact]
+        public async Task TestCreateProductTestAsync()
+        {
+            // Arrange
+            var userInfo = IdentityMocker.GetWarehouseOperatorIdentity().GetUserInfo();
+            var service = ServiceMocker.GetWarehouseService(userInfo, nameof(TestCreateProductTestAsync));
+            var controller = new WarehouseController(LoggingHelper.GetLogger<WarehouseController>(), service);
+            var request = new PostProductRequest
+            {
+                
+                ProductName = "Test product",
+                ProductCategoryID = 100,
+                UnitPrice = 9.99m,
+                Description = "unit tests"
+            };
+
+            // Act
+            var response = await controller.PostProductAsync(request) as ObjectResult;
+            var value = response.Value as ISingleResponse<Product>;
+
+            service.Dispose();
+
+            // Assert
+            Assert.False(value.DidError);
         }
     }
 }

@@ -145,6 +145,17 @@
             <response code="404">If id is not exists</response>
             <response code="500">If there was an internal error</response>
         </member>
+        <member name="M:OnlineStore.WebAPI.Controllers.WarehouseController.PostProductAsync(OnlineStore.WebAPI.Requests.PostProductRequest)">
+            <summary>
+            Posts a new product
+            </summary>
+            <returns>A sequence of inventory transactions by product and warehouse</returns>
+            <response code="200">Returns the inventory for product</response>
+            <response code="401">If client is not authenticated</response>
+            <response code="403">If client is not autorized</response>
+            <response code="404">If id is not exists</response>
+            <response code="500">If there was an internal error</response>
+        </member>
         <member name="T:OnlineStore.WebAPI.Requests.OrderDetailRequest">
             <summary>
             Represents one line for Order
@@ -243,6 +254,36 @@
         <member name="P:OnlineStore.WebAPI.Requests.PostOrderRequest.Details">
             <summary>
             Order details (lines)
+            </summary>
+        </member>
+        <member name="T:OnlineStore.WebAPI.Requests.PostProductRequest">
+            <summary>
+            Represents the model to create a new product
+            </summary>
+        </member>
+        <member name="P:OnlineStore.WebAPI.Requests.PostProductRequest.ID">
+            <summary>
+            Gets or sets the ID
+            </summary>
+        </member>
+        <member name="P:OnlineStore.WebAPI.Requests.PostProductRequest.ProductName">
+            <summary>
+            Gets or sets the product name
+            </summary>
+        </member>
+        <member name="P:OnlineStore.WebAPI.Requests.PostProductRequest.ProductCategoryID">
+            <summary>
+            Gets or sets the product category ID
+            </summary>
+        </member>
+        <member name="P:OnlineStore.WebAPI.Requests.PostProductRequest.UnitPrice">
+            <summary>
+            Gets or sets the unit price
+            </summary>
+        </member>
+        <member name="P:OnlineStore.WebAPI.Requests.PostProductRequest.Description">
+            <summary>
+            Gets or sets the description
             </summary>
         </member>
     </members>

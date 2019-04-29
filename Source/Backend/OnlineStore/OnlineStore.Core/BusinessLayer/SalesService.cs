@@ -8,10 +8,8 @@ using OnlineStore.Core.BusinessLayer.Contracts;
 using OnlineStore.Core.BusinessLayer.Requests;
 using OnlineStore.Core.BusinessLayer.Responses;
 using OnlineStore.Core.DomainDrivenDesign;
-using OnlineStore.Core.DomainDrivenDesign.Repositories;
-using OnlineStore.Core.DomainDrivenDesign.Sales;
-using OnlineStore.Core.DomainDrivenDesign.Warehouse;
 using OnlineStore.Core.DomainDrivenDesign.Dbo;
+using OnlineStore.Core.DomainDrivenDesign.Repositories;
 using OnlineStore.Core.DomainDrivenDesign.Sales;
 using OnlineStore.Core.DomainDrivenDesign.Warehouse;
 

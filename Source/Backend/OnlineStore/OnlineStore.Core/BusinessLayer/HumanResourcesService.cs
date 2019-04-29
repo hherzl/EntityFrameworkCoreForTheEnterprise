@@ -7,7 +7,6 @@ using OnlineStore.Core.BusinessLayer.Responses;
 using OnlineStore.Core.DomainDrivenDesign;
 using OnlineStore.Core.DomainDrivenDesign.HumanResources;
 using OnlineStore.Core.DomainDrivenDesign.Repositories;
-using OnlineStore.Core.DomainDrivenDesign.HumanResources;
 
 namespace OnlineStore.Core.BusinessLayer
 {

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using OnlineStore.Common;
+using OnlineStore.Common.Security;
 using OnlineStore.Core.BusinessLayer.Contracts;
 using OnlineStore.WebAPI.Clients.Contracts;
 using OnlineStore.WebAPI.Clients.Models;

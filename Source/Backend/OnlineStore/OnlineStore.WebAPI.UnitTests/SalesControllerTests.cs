@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using OnlineStore.Common.Helpers;
 using OnlineStore.Core.BusinessLayer.Responses;
 using OnlineStore.Core.DomainDrivenDesign.Sales;
-using OnlineStore.Core.DomainDrivenDesign.Sales;
+using OnlineStore.WebAPI.Controllers;
 using OnlineStore.WebAPI.Requests;
 using OnlineStore.WebAPI.UnitTests.Mocks;
+using OnlineStore.WebAPI.UnitTests.Mocks.Identity;
+using OnlineStore.WebAPI.UnitTests.Mocks.PaymentGateway;
 using Xunit;
 
 namespace OnlineStore.WebAPI.UnitTests
@@ -118,15 +121,20 @@ namespace OnlineStore.WebAPI.UnitTests
 
             // Assert
             Assert.False(value.DidError);
-            Assert.True(value.Model.Products.Count() > 0);
-            Assert.True(value.Model.Customers.Count() > 0);
         }
 
         [Fact]
         public async Task TestPostOrderAsync()
         {
             // Arrange
-            var controller = ControllerMocker.GetSalesController(nameof(TestPostOrderAsync));
+            //var controller = ControllerMocker.GetSalesController(nameof(TestPostOrderAsync));
+
+            var identityClient = new MockedRothschildHouseIdentityClient();
+            var paymentClient = new MockedRothschildHousePaymentClient();
+
+            var userInfo = IdentityMocker.GetCustomerIdentity().GetUserInfo();
+            var service = ServiceMocker.GetSalesService(userInfo, nameof(TestPostOrderAsync), true);
+            var controller = new SalesController(LoggingHelper.GetLogger<SalesController>(), identityClient, paymentClient, service);
             var request = new PostOrderRequest
             {
                 ID = 2,

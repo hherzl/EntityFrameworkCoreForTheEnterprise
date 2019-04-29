@@ -6,7 +6,7 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
 {
     public static class DbContextMocker
     {
-        public static OnlineStoreDbContext GetOnlineStoreDbContextInMemory(string dbName)
+        public static OnlineStoreDbContext GetOnlineStoreDbContextInMemory(string dbName, bool seedWarehouseSchema = false)
         {
             // Create options for DbContext
             // Use in memory provider
@@ -26,11 +26,14 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
                 .SeedCountryCurrencies()
                 ;
 
-            dbContext
-                .SeedProductCategories()
-                .SeedProducts()
-                .SeedLocations()
-                .SeedProductInventories();
+            if (seedWarehouseSchema)
+            {
+                dbContext
+                    .SeedProductCategories()
+                    .SeedProducts()
+                    .SeedLocations()
+                    .SeedProductInventories();
+            }
 
             dbContext
                 .SeedOrderStatuses()

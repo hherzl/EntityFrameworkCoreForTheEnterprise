@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using OnlineStore.Core.DomainDrivenDesign.Sales;
+using OnlineStore.Core.DomainDrivenDesign.Warehouse;
 using OnlineStore.WebAPI.Clients.Models;
 
 namespace OnlineStore.WebAPI.Requests
@@ -7,6 +8,16 @@ namespace OnlineStore.WebAPI.Requests
 #pragma warning disable CS1591
     public static class Extensions
     {
+        public static Product GetProduct(this PostProductRequest request)
+            => new Product
+            {
+                ProductID = request.ID,
+                ProductName = request.ProductName,
+                ProductCategoryID = request.ProductCategoryID,
+                UnitPrice = request.UnitPrice,
+                Description = request.Description
+            };
+
         public static OrderHeader GetOrderHeader(this PostOrderRequest request)
             => new OrderHeader
             {

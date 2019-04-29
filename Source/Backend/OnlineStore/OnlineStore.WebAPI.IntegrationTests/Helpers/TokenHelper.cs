@@ -29,6 +29,9 @@ namespace OnlineStore.WebAPI.IntegrationTests.Helpers
         public static async Task<TokenResponse> GetOnlineStoreTokenForWarehouseOperatorAsync()
             => await GetOnlineStoreCustomerTokenAsync("warehouseoperator1@onlinestore.com", "password1");
 
+        public static async Task<TokenResponse> GetOnlineStoreTokenForWarehouseManagerAsync()
+            => await GetOnlineStoreCustomerTokenAsync("warehousemanager1@onlinestore.com", "password1");
+
         public static async Task<TokenResponse> GetOnlineStoreTokenForWolverineAsync()
             => await GetOnlineStoreCustomerTokenAsync("jameslogan@walla.com", "wolverine");
     }

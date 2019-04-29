@@ -1,4 +1,4 @@
-﻿namespace OnlineStore.Common
+﻿namespace OnlineStore.Common.Security
 {
     public static class Policies
     {

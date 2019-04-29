@@ -1,17 +1,15 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace OnlineStore.Common
+namespace OnlineStore.Common.Helpers
 {
     public static class LoggingHelper
     {
-        public static ILogger<T> GetLogger<T>(bool addTrace = true, bool addDebug = true, bool addInformation = true, bool addWarning = true, bool addError = true, bool addCritical = true)
-        {
-            return new ServiceCollection()
+        public static ILogger<T> GetLogger<T>()
+            => new ServiceCollection()
                 .AddLogging()
                 .BuildServiceProvider()
                 .GetService<ILoggerFactory>()
                 .CreateLogger<T>();
-        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using OnlineStore.Common;
+﻿using OnlineStore.Common.Helpers;
 using OnlineStore.Core;
 using OnlineStore.Core.BusinessLayer;
 using OnlineStore.Core.BusinessLayer.Contracts;
@@ -14,18 +14,18 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
                 DbContextMocker.GetOnlineStoreDbContextInMemory(dbName)
             );
 
-        public static ISalesService GetSalesService(IUserInfo userInfo, string dbName)
+        public static ISalesService GetSalesService(IUserInfo userInfo, string dbName, bool seedWarehouseSchema = false)
             => new SalesService(
                 LoggingHelper.GetLogger<SalesService>(),
                 userInfo,
-                DbContextMocker.GetOnlineStoreDbContextInMemory(dbName)
+                DbContextMocker.GetOnlineStoreDbContextInMemory(dbName, seedWarehouseSchema)
             );
 
-        public static IWarehouseService GetWarehouseService(IUserInfo userInfo, string dbName)
+        public static IWarehouseService GetWarehouseService(IUserInfo userInfo, string dbName, bool seedWarehouseSchema = false)
             => new WarehouseService(
                 LoggingHelper.GetLogger<WarehouseService>(),
                 userInfo,
-                DbContextMocker.GetOnlineStoreDbContextInMemory(dbName)
+                DbContextMocker.GetOnlineStoreDbContextInMemory(dbName, seedWarehouseSchema)
                 );
     }
 }

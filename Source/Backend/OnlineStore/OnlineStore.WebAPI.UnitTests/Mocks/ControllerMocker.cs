@@ -1,4 +1,4 @@
-﻿using OnlineStore.Common;
+﻿using OnlineStore.Common.Helpers;
 using OnlineStore.WebAPI.Controllers;
 using OnlineStore.WebAPI.UnitTests.Mocks.Identity;
 using OnlineStore.WebAPI.UnitTests.Mocks.PaymentGateway;

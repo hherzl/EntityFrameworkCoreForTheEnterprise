@@ -8,7 +8,6 @@ using OnlineStore.Core.BusinessLayer.Responses;
 using OnlineStore.Core.DomainDrivenDesign;
 using OnlineStore.Core.DomainDrivenDesign.Repositories;
 using OnlineStore.Core.DomainDrivenDesign.Warehouse;
-using OnlineStore.Core.DomainDrivenDesign.Warehouse;
 
 namespace OnlineStore.Core.BusinessLayer
 {
@@ -93,6 +92,34 @@ namespace OnlineStore.Core.BusinessLayer
             catch (Exception ex)
             {
                 response.SetError(Logger, nameof(GetProductInventories), ex);
+            }
+
+            return response;
+        }
+
+        public async Task<SingleResponse<Product>> CreateProductAsync(Product entity)
+        {
+            Logger?.LogInformation("{0} has been invoked", nameof(CreateProductAsync));
+
+            var response = new SingleResponse<Product>();
+
+            try
+            {
+                // Set default values
+                entity.Stocks = 0;
+                entity.Discontinued = false;
+
+                // Set creation info
+                DbContext.Add(entity, UserInfo);
+
+                // Save product
+                await DbContext.SaveChangesAsync();
+
+                response.Model = entity;
+            }
+            catch (Exception ex)
+            {
+                response.SetError(Logger, nameof(CreateProductAsync), ex);
             }
 
             return response;

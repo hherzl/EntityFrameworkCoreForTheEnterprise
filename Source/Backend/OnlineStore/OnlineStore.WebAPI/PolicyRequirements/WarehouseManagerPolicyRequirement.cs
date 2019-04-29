@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using IdentityModel;
 using Microsoft.AspNetCore.Authorization;
-using OnlineStore.Common;
+using OnlineStore.Common.Security;
 
 namespace OnlineStore.WebAPI.PolicyRequirements
 {
