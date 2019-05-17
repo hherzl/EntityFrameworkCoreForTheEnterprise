@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -103,13 +104,14 @@ namespace OnlineStore.WebAPI
                 .AddAuthentication("Bearer")
                 .AddIdentityServerAuthentication(options =>
                 {
-                    var settings = new IdentityServerSettings();
+                    var settings = new IdentityServerAuthenticationOptions();
 
                     Configuration.Bind("IdentityServerSettings", settings);
 
                     options.Authority = settings.Authority;
                     options.RequireHttpsMetadata = settings.RequireHttpsMetadata;
                     options.ApiName = settings.ApiName;
+                    options.ApiSecret = settings.ApiSecret;
                 });
 
             /* Configuration for Help page */
@@ -139,9 +141,10 @@ namespace OnlineStore.WebAPI
 
                 // todo: Set port number for client app from appsettings file
 
-                builder.WithOrigins("http://localhost:4200");
-                builder.AllowAnyHeader();
-                builder.AllowAnyMethod();
+                builder
+                    .WithOrigins("http://localhost:4200")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
             });
 
             /* Use authentication for Web API */
