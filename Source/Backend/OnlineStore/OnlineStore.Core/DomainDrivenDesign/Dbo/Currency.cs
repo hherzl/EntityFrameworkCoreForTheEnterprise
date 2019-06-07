@@ -8,7 +8,7 @@ namespace OnlineStore.Core.DomainDrivenDesign.Dbo
         {
         }
 
-        public string CurrencyID { get; set; }
+        public string ID { get; set; }
 
         public string CurrencyName { get; set; }
 

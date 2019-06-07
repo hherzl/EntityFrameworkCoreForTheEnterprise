@@ -12,7 +12,7 @@ namespace OnlineStore.Core.DomainDrivenDesign.Configurations.Sales
             builder.ToTable("PaymentMethod", "Sales");
 
             // Set key for entity
-            builder.HasKey(p => p.PaymentMethodID);
+            builder.HasKey(p => p.ID);
 
             // Set mapping for columns
             builder.Property(p => p.CreationUser).HasColumnType("varchar(25)").IsRequired();

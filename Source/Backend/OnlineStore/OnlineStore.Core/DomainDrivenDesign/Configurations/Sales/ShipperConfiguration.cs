@@ -12,10 +12,10 @@ namespace OnlineStore.Core.DomainDrivenDesign.Configurations.Sales
             builder.ToTable("Shipper", "Sales");
 
             // Set key for entity
-            builder.HasKey(p => p.ShipperID);
+            builder.HasKey(p => p.ID);
 
             // Set identity for entity (auto increment)
-            builder.Property(p => p.ShipperID).UseSqlServerIdentityColumn();
+            builder.Property(p => p.ID).UseSqlServerIdentityColumn();
 
             // Set mapping for columns
             builder.Property(p => p.CompanyName).HasColumnType("varchar(100)");

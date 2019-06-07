@@ -12,7 +12,7 @@ namespace OnlineStore.Core.DomainDrivenDesign.Configurations
             builder.ToTable("EventLog", "dbo");
 
             // Set key for entity
-            builder.HasKey(p => p.EventLogID);
+            builder.HasKey(p => p.ID);
 
             // Set mapping for columns
             builder.Property(p => p.EventType).HasColumnType("int").IsRequired();

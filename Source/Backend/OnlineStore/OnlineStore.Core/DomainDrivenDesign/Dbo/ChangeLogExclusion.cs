@@ -6,7 +6,7 @@
         {
         }
 
-        public int? ChangeLogExclusionID { get; set; }
+        public int? ID { get; set; }
 
         public string EntityName { get; set; }
 

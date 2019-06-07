@@ -8,7 +8,7 @@ namespace OnlineStore.Core.DomainDrivenDesign.Dbo
         {
         }
 
-        public int? EventLogID { get; set; }
+        public int? ID { get; set; }
 
         public int? EventType { get; set; }
 

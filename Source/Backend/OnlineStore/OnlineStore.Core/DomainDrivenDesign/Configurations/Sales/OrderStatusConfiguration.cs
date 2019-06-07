@@ -12,7 +12,7 @@ namespace OnlineStore.Core.DomainDrivenDesign.Configurations.Sales
             builder.ToTable("OrderStatus", "Sales");
 
             // Set key for entity
-            builder.HasKey(p => p.OrderStatusID);
+            builder.HasKey(p => p.ID);
 
             // Set mapping for columns
             builder.Property(p => p.Description).HasColumnType("varchar(100)");

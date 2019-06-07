@@ -9,12 +9,12 @@ namespace OnlineStore.Core.DomainDrivenDesign.Sales
         {
         }
 
-        public OrderStatus(short? orderStatusID)
+        public OrderStatus(short? id)
         {
-            OrderStatusID = orderStatusID;
+            ID = id;
         }
 
-        public short? OrderStatusID { get; set; }
+        public short? ID { get; set; }
 
         public string Description { get; set; }
 

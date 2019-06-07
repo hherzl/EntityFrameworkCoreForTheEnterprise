@@ -22,7 +22,7 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
         {
             var country = new Country
             {
-                CountryID = 1,
+                ID = 1,
                 CountryName = "USA",
                 CreationUser = creationUser,
                 CreationDateTime = creationDateTime
@@ -39,7 +39,7 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
         {
             var currency = new Currency
             {
-                CurrencyID = "USD",
+                ID = "USD",
                 CurrencyName = "US Dollar",
                 CurrencySymbol = "$",
                 CreationUser = creationUser,
@@ -57,7 +57,7 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
         {
             var countryCurrency = new CountryCurrency
             {
-                CountryCurrencyID = 1,
+                ID = 1,
                 CountryID = 1,
                 CurrencyID = "USD",
                 CreationUser = creationUser,
@@ -75,7 +75,7 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
         {
             var employee = new Employee
             {
-                EmployeeID = 1,
+                ID = 1,
                 FirstName = "John",
                 LastName = "Doe",
                 BirthDate = DateTime.Now.AddYears(-25),
@@ -94,7 +94,7 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
         {
             var productCategory = new ProductCategory
             {
-                ProductCategoryID = 1,
+                ID = 1,
                 ProductCategoryName = "PS4 Games",
                 CreationUser = creationUser,
                 CreationDateTime = creationDateTime
@@ -111,7 +111,7 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
         {
             var product = new Product
             {
-                ProductID = 1,
+                ID = 1,
                 ProductName = "The King of Fighters XIV",
                 ProductCategoryID = 1,
                 UnitPrice = 29.99m,
@@ -133,7 +133,7 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
         {
             var location = new Location
             {
-                LocationID = "W01",
+                ID = "W01",
                 LocationName = "Warehouse 01",
                 CreationUser = creationUser,
                 CreationDateTime = creationDateTime
@@ -169,7 +169,7 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
         {
             var orderStatus = new OrderStatus
             {
-                OrderStatusID = 100,
+                ID = 100,
                 Description = "Created",
                 CreationUser = creationUser,
                 CreationDateTime = creationDateTime
@@ -186,7 +186,7 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
         {
             var paymentMethod = new PaymentMethod
             {
-                PaymentMethodID = Guid.Parse("44C3737C-9993-448A-82F7-75C0E37E5A7F"),
+                ID = Guid.Parse("44C3737C-9993-448A-82F7-75C0E37E5A7F"),
                 PaymentMethodDescription = "Credit Card",
                 CreationUser = creationUser,
                 CreationDateTime = creationDateTime
@@ -203,7 +203,7 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
         {
             var customer = new Customer
             {
-                CustomerID = 1,
+                ID = 1,
                 CompanyName = "Best Buy",
                 ContactName = "Colleen Dunn",
                 CreationUser = creationUser,
@@ -221,7 +221,7 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
         {
             var shipper = new Shipper
             {
-                ShipperID = 1,
+                ID = 1,
                 CompanyName = "DHL",
                 ContactName = "Ricardo A. Bartra",
                 CreationUser = creationUser,
@@ -239,7 +239,7 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
         {
             var orderHeader = new OrderHeader
             {
-                OrderHeaderID = 1,
+                ID = 1,
                 OrderStatusID = 100,
                 CustomerID = 1000,
                 EmployeeID = 1,
@@ -258,7 +258,7 @@ namespace OnlineStore.WebAPI.UnitTests.Mocks
 
             var orderDetail = new OrderDetail
             {
-                OrderHeaderID = orderHeader.OrderHeaderID,
+                OrderHeaderID = orderHeader.ID,
                 ProductID = 1,
                 ProductName = "The King of Fighters XIV",
                 UnitPrice = 29.99m,

@@ -8,12 +8,12 @@ namespace OnlineStore.Core.DomainDrivenDesign.Warehouse
         {
         }
 
-        public ProductInventory(int? productInventoryID)
+        public ProductInventory(int? id)
         {
-            ProductInventoryID = productInventoryID;
+            ID = id;
         }
 
-        public int? ProductInventoryID { get; set; }
+        public int? ID { get; set; }
 
         public int? ProductID { get; set; }
 

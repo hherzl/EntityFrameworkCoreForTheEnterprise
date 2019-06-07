@@ -12,7 +12,7 @@ namespace OnlineStore.Core.DomainDrivenDesign.Configurations.Dbo
             builder.ToTable("Currency", "dbo");
 
             // Set key for entity
-            builder.HasKey(p => p.CurrencyID);
+            builder.HasKey(p => p.ID);
 
             // Set mapping for columns
             builder.Property(p => p.CreationUser).HasColumnType("varchar(25)").IsRequired();

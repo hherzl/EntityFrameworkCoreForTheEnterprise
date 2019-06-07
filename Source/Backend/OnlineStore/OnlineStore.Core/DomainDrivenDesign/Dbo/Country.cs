@@ -8,7 +8,7 @@ namespace OnlineStore.Core.DomainDrivenDesign.Dbo
         {
         }
 
-        public int? CountryID { get; set; }
+        public int? ID { get; set; }
 
         public string  CountryName { get; set; }
 

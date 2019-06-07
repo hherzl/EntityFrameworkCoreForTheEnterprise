@@ -8,7 +8,7 @@ namespace OnlineStore.Core.DomainDrivenDesign.HumanResources
         {
         }
 
-        public int? EmployeeEmailID { get; set; }
+        public int? ID { get; set; }
 
         public int? EmployeeID { get; set; }
 

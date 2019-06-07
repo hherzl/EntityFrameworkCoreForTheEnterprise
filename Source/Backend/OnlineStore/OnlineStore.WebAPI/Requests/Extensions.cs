@@ -11,7 +11,7 @@ namespace OnlineStore.WebAPI.Requests
         public static Product GetProduct(this PostProductRequest request)
             => new Product
             {
-                ProductID = request.ID,
+                ID = request.ID,
                 ProductName = request.ProductName,
                 ProductCategoryID = request.ProductCategoryID,
                 UnitPrice = request.UnitPrice,
@@ -21,7 +21,7 @@ namespace OnlineStore.WebAPI.Requests
         public static OrderHeader GetOrderHeader(this PostOrderRequest request)
             => new OrderHeader
             {
-                OrderHeaderID = request.ID,
+                ID = request.ID,
                 CustomerID = request.CustomerID,
                 CurrencyID = request.CurrencyID,
                 PaymentMethodID = request.PaymentMethodID,
@@ -34,7 +34,7 @@ namespace OnlineStore.WebAPI.Requests
             {
                 yield return new OrderDetail
                 {
-                    OrderDetailID = item.ID,
+                    ID = item.ID,
                     ProductID = item.ProductID,
                     UnitPrice = item.UnitPrice,
                     Quantity = item.Quantity

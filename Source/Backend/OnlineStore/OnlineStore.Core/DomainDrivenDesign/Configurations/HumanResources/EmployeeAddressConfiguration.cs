@@ -12,13 +12,13 @@ namespace OnlineStore.Core.DomainDrivenDesign.Configurations.HumanResources
             builder.ToTable("EmployeeAddress", "HumanResources");
 
             // Set key for entity
-            builder.HasKey(p => p.EmployeeAddressID);
+            builder.HasKey(p => p.ID);
 
             // Set identity for entity (auto increment)
-            builder.Property(p => p.EmployeeAddressID).UseSqlServerIdentityColumn();
+            builder.Property(p => p.ID).UseSqlServerIdentityColumn();
 
             // Set configuration for columns
-            builder.Property(p => p.EmployeeAddressID).HasColumnType("int").IsRequired();
+            builder.Property(p => p.ID).HasColumnType("int").IsRequired();
             builder.Property(p => p.EmployeeID).HasColumnType("int").IsRequired();
             builder.Property(p => p.AddressLine1).HasColumnType("varchar(50)").IsRequired();
             builder.Property(p => p.AddressLine2).HasColumnType("varchar(50)");

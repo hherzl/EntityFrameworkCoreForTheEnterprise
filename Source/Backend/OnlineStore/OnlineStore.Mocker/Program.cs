@@ -82,9 +82,9 @@ namespace OnlineStore.Mocker
                 var selectedCurrency = random.Next(0, currencies.Count - 1);
                 var selectedPaymentMethod = random.Next(0, paymentMethods.Count - 1);
 
-                header.CustomerID = customers[selectedCustomer].CustomerID;
-                header.CurrencyID = currencies[selectedCurrency].CurrencyID;
-                header.PaymentMethodID = paymentMethods[selectedPaymentMethod].PaymentMethodID;
+                header.CustomerID = customers[selectedCustomer].ID;
+                header.CurrencyID = currencies[selectedCurrency].ID;
+                header.PaymentMethodID = paymentMethods[selectedPaymentMethod].ID;
 
                 var details = new List<OrderDetail>();
 
@@ -94,7 +94,7 @@ namespace OnlineStore.Mocker
                 {
                     var detail = new OrderDetail
                     {
-                        ProductID = products[random.Next(0, products.Count - 1)].ProductID,
+                        ProductID = products[random.Next(0, products.Count - 1)].ID,
                         Quantity = (short)random.Next(1, 5)
                     };
 

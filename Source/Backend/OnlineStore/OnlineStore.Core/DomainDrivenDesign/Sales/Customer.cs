@@ -9,12 +9,12 @@ namespace OnlineStore.Core.DomainDrivenDesign.Sales
         {
         }
 
-        public Customer(int? customerID)
+        public Customer(int? id)
         {
-            CustomerID = customerID;
+            ID = id;
         }
 
-        public int? CustomerID { get; set; }
+        public int? ID { get; set; }
 
         public string CompanyName { get; set; }
 

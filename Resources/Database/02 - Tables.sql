@@ -1,6 +1,6 @@
 create table [dbo].[EventLog]
 (
-	[EventLogID] uniqueidentifier not null,
+	[ID] uniqueidentifier not null,
 	[EventType] int not null,
 	[Key] varchar(255) not null,
 	[Message] varchar(max) not null,
@@ -9,7 +9,7 @@ create table [dbo].[EventLog]
 
 create table [dbo].[ChangeLog]
 (
-	[ChangeLogID] int not null identity(1, 1),
+	[ID] int not null identity(1, 1),
 	[ClassName] varchar(255) not null,
 	[PropertyName] varchar(255) not null,
 	[Key] varchar(255) not null,
@@ -21,14 +21,14 @@ create table [dbo].[ChangeLog]
 
 create table [dbo].[ChangeLogExclusion]
 (
-	[ChangeLogExclusionID] int not null identity(1, 1),
+	[ID] int not null identity(1, 1),
 	[EntityName] varchar(128) not null,
 	[PropertyName] varchar(128) not null
 )
 
 create table [dbo].[Country]
 (
-	[CountryID] int not null,
+	[ID] int not null,
 	[CountryName] varchar(100) not null,
 	[CreationUser] varchar(25) not null,
 	[CreationDateTime] datetime not null,
@@ -39,7 +39,7 @@ create table [dbo].[Country]
 
 create table [dbo].[Currency]
 (
-	[CurrencyID] varchar(10) not null,
+	[ID] varchar(10) not null,
 	[CurrencyName] varchar(50) not null,
 	[CurrencySymbol] varchar(1) not null,
 	[CreationUser] varchar(25) not null,
@@ -51,7 +51,7 @@ create table [dbo].[Currency]
 
 create table [dbo].[CountryCurrency]
 (
-	[CountryCurrencyID] int not null identity(1, 1),
+	[ID] int not null identity(1, 1),
 	[CountryID] int not null,
 	[CurrencyID] varchar(10) not null,
 	[CreationUser] varchar(25) not null,
@@ -63,7 +63,7 @@ create table [dbo].[CountryCurrency]
 
 create table [HumanResources].[Employee]
 (
-	[EmployeeID] int not null identity(1, 1),
+	[ID] int not null identity(1, 1),
 	[FirstName] varchar(25) not null,
 	[MiddleName] varchar(25) null,
 	[LastName] varchar(25) not null,
@@ -77,7 +77,7 @@ create table [HumanResources].[Employee]
 
 create table [HumanResources].[EmployeeAddress]
 (
-	[EmployeeAddressID] int not null identity(1, 1),
+	[ID] int not null identity(1, 1),
 	[EmployeeID] int not null,
 	[AddressLine1] varchar(50) not null,
 	[AddressLine2] varchar(50) null,
@@ -95,7 +95,7 @@ create table [HumanResources].[EmployeeAddress]
 
 create table [HumanResources].[EmployeeEmail]
 (
-	[EmployeeEmailID] int not null identity(1, 1),
+	[ID] int not null identity(1, 1),
 	[EmployeeID] int not null,
 	[Email] varchar(50) not null,
 	[CreationUser] varchar(25) not null,
@@ -107,7 +107,7 @@ create table [HumanResources].[EmployeeEmail]
 
 create table [Warehouse].[ProductCategory]
 (
-	[ProductCategoryID] int not null identity(1, 1),
+	[ID] int not null identity(1, 1),
 	[ProductCategoryName] varchar(100) not null,
 	[CreationUser] varchar(25) not null,
 	[CreationDateTime] datetime not null,
@@ -118,7 +118,7 @@ create table [Warehouse].[ProductCategory]
 
 create table [Warehouse].[Product]
 (
-	[ProductID] int not null identity(1, 1),
+	[ID] int not null identity(1, 1),
 	[ProductName] varchar(100) not null,
 	[ProductCategoryID] int not null,
 	[UnitPrice] decimal(8, 4) not null,
@@ -134,7 +134,7 @@ create table [Warehouse].[Product]
 
 create table [Warehouse].[Location]
 (
-	[LocationID] varchar(5) not null,
+	[ID] varchar(5) not null,
 	[LocationName] varchar(100) not null,
 	[CreationUser] varchar(25) not null,
 	[CreationDateTime] datetime not null,
@@ -145,7 +145,7 @@ create table [Warehouse].[Location]
 
 create table [Warehouse].[ProductInventory]
 (
-	[ProductInventoryID] int not null identity(1, 1),
+	[ID] int not null identity(1, 1),
 	[ProductID] int not null,
 	[LocationID] varchar(5) not null,
 	[OrderDetailID] bigint null,
@@ -159,7 +159,7 @@ create table [Warehouse].[ProductInventory]
 
 create table [Sales].[OrderStatus]
 (
-	[OrderStatusID] smallint not null,
+	[ID] smallint not null,
 	[Description] varchar(100) not null,
 	[CreationUser] varchar(25) not null,
 	[CreationDateTime] datetime not null,
@@ -170,7 +170,7 @@ create table [Sales].[OrderStatus]
 
 create table [Sales].[PaymentMethod]
 (
-	[PaymentMethodID] uniqueidentifier not null,
+	[ID] uniqueidentifier not null,
 	[PaymentMethodName] varchar(50) not null,
 	[PaymentMethodDescription] varchar(255) not null,
 	[CreationUser] varchar(25) not null,
@@ -182,7 +182,7 @@ create table [Sales].[PaymentMethod]
 
 create table [Sales].[Customer]
 (
-	[CustomerID] int not null identity(1, 1),
+	[ID] int not null identity(1, 1),
 	[CompanyName] varchar(100) null,
 	[ContactName] varchar(100) null,
 	[CreationUser] varchar(25) not null,
@@ -194,7 +194,7 @@ create table [Sales].[Customer]
 
 create table [Sales].[CustomerAddress]
 (
-	[CustomerAddressID] int not null identity(1, 1),
+	[ID] int not null identity(1, 1),
 	[CustomerID] int not null,
 	[AddressLine1] varchar(50) not null,
 	[AddressLine2] varchar(50) null,
@@ -212,7 +212,7 @@ create table [Sales].[CustomerAddress]
 
 create table [Sales].[CustomerEmail]
 (
-	[CustomerEmailID] int not null identity(1, 1),
+	[ID] int not null identity(1, 1),
 	[CustomerID] int not null,
 	[Email] varchar(50) not null,
 	[CreationUser] varchar(25) not null,
@@ -224,7 +224,7 @@ create table [Sales].[CustomerEmail]
 
 create table [Sales].[Shipper]
 (
-	[ShipperID] int not null identity(1, 1),
+	[ID] int not null identity(1, 1),
 	[CompanyName] varchar(100) null,
 	[ContactName] varchar(100) null,
 	[CreationUser] varchar(25) not null,
@@ -236,7 +236,7 @@ create table [Sales].[Shipper]
 
 create table [Sales].[OrderHeader]
 (
-	[OrderHeaderID] bigint not null identity(1, 1),
+	[ID] bigint not null identity(1, 1),
 	[OrderStatusID] smallint not null,
 	[CustomerID] int not null,
 	[EmployeeID] int null,
@@ -257,7 +257,7 @@ create table [Sales].[OrderHeader]
 
 create table [Sales].[OrderDetail]
 (
-	[OrderDetailID] bigint not null identity(1, 1),
+	[ID] bigint not null identity(1, 1),
 	[OrderHeaderID] bigint not null,
 	[ProductID] int not null,
 	[ProductName] varchar(255) not null,

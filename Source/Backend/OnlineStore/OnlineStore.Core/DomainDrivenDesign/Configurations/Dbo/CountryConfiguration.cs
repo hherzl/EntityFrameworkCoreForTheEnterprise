@@ -12,10 +12,10 @@ namespace OnlineStore.Core.DomainDrivenDesign.Configurations.Dbo
             builder.ToTable("Country", "dbo");
 
             // Set key for entity
-            builder.HasKey(p => p.CountryID);
+            builder.HasKey(p => p.ID);
 
             // Set identity for entity (auto increment)
-            builder.Property(p => p.CountryID).UseSqlServerIdentityColumn();
+            builder.Property(p => p.ID).UseSqlServerIdentityColumn();
 
             // Set mapping for columns
             builder.Property(p => p.CreationUser).HasColumnType("varchar(25)").IsRequired();

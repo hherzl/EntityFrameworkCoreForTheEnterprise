@@ -8,7 +8,7 @@ namespace OnlineStore.Core.DomainDrivenDesign.Dbo
         {
         }
 
-        public int? ChangeLogID { get; set; }
+        public int? ID { get; set; }
 
         public string  ClassName { get; set; }
 

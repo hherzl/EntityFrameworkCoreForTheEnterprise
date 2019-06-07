@@ -237,11 +237,11 @@ namespace OnlineStore.Core.BusinessLayer
 
                         // Throw exception if product is discontinued
                         if (product.Discontinued == true)
-                            throw new AddOrderWithDiscontinuedProductException(string.Format(SalesDisplays.AddOrderWithDiscontinuedProductExceptionMessage, product.ProductID));
+                            throw new AddOrderWithDiscontinuedProductException(string.Format(SalesDisplays.AddOrderWithDiscontinuedProductExceptionMessage, product.ID));
 
                         // Throw exception if quantity for product is invalid
                         if (detail.Quantity <= 0)
-                            throw new InvalidQuantityException(string.Format(SalesDisplays.InvalidQuantityExceptionMessage, product.ProductID));
+                            throw new InvalidQuantityException(string.Format(SalesDisplays.InvalidQuantityExceptionMessage, product.ID));
 
                         // Set values for detail
                         detail.ProductName = product.ProductName;
@@ -267,7 +267,7 @@ namespace OnlineStore.Core.BusinessLayer
                     foreach (var detail in details)
                     {
                         // Set order id for order detail
-                        detail.OrderHeaderID = header.OrderHeaderID;
+                        detail.OrderHeaderID = header.ID;
                         detail.CreationUser = header.CreationUser;
 
                         // Add order detail
@@ -279,8 +279,8 @@ namespace OnlineStore.Core.BusinessLayer
                         var productInventory = new ProductInventory
                         {
                             ProductID = detail.ProductID,
-                            LocationID = warehouses.First().LocationID,
-                            OrderDetailID = detail.OrderDetailID,
+                            LocationID = warehouses.First().ID,
+                            OrderDetailID = detail.ID,
                             Quantity = detail.Quantity * -1,
                             CreationUser = header.CreationUser,
                             CreationDateTime = DateTime.Now
@@ -324,7 +324,7 @@ namespace OnlineStore.Core.BusinessLayer
                     // Create a new instance for order and set values from existing order
                     response.Model = new OrderHeader
                     {
-                        OrderHeaderID = entity.OrderHeaderID,
+                        ID = entity.ID,
                         OrderDate = entity.OrderDate,
                         CustomerID = entity.CustomerID,
                         EmployeeID = entity.EmployeeID,

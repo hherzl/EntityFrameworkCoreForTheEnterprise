@@ -1,44 +1,44 @@
 alter table [dbo].[EventLog]
-	add constraint [PK_EventLog] primary key ([EventLogID])
+	add constraint [PK_EventLog] primary key ([ID])
 go
 
 alter table [dbo].[ChangeLog]
-	add constraint [PK_ChangeLog] primary key ([ChangeLogID])
+	add constraint [PK_ChangeLog] primary key ([ID])
 go
 
 alter table [dbo].[ChangeLogExclusion]
-	add constraint [PK_ChangeLogExclusion] primary key([ChangeLogExclusionID])
+	add constraint [PK_ChangeLogExclusion] primary key([ID])
 
 alter table [dbo].[Country]
-	add constraint [PK_Country] primary key([CountryID])
+	add constraint [PK_Country] primary key([ID])
 go
 
 alter table [dbo].[Currency]
-	add constraint [PK_Currency] primary key([CurrencyID])
+	add constraint [PK_Currency] primary key([ID])
 go
 
 alter table [dbo].[CountryCurrency]
-	add constraint [PK_CountryCurrency] primary key([CountryCurrencyID])
+	add constraint [PK_CountryCurrency] primary key([ID])
 go
 
 alter table [HumanResources].[Employee]
-	add constraint [PK_HumanResources_Employee] primary key ([EmployeeID])
+	add constraint [PK_HumanResources_Employee] primary key ([ID])
 go
 
 alter table [HumanResources].[EmployeeAddress]
-	add constraint [PK_HumanResources_EmployeeAddress] primary key ([EmployeeAddressID])
+	add constraint [PK_HumanResources_EmployeeAddress] primary key ([ID])
 go
 
 alter table [HumanResources].[EmployeeEmail]
-	add constraint [PK_HumanResources_EmployeeEmail] primary key ([EmployeeEmailID])
+	add constraint [PK_HumanResources_EmployeeEmail] primary key ([ID])
 go
 
 alter table [Warehouse].[ProductCategory]
-	add constraint [PK_Production_ProductCategory] primary key ([ProductCategoryID])
+	add constraint [PK_Production_ProductCategory] primary key ([ID])
 go
 
 alter table [Warehouse].[Product]
-	add constraint [PK_Production_Product] primary key ([ProductID])
+	add constraint [PK_Production_Product] primary key ([ID])
 go
 
 alter table [Warehouse].[Product]
@@ -46,43 +46,43 @@ alter table [Warehouse].[Product]
 go
 
 alter table [Warehouse].[ProductInventory]
-	add constraint [PK_Production_ProductInventory] primary key ([ProductInventoryID])
+	add constraint [PK_Production_ProductInventory] primary key ([ID])
 go
 
 alter table [Warehouse].[Location]
-	add constraint [PK_Warehouse_Location] primary key ([LocationID])
+	add constraint [PK_Warehouse_Location] primary key ([ID])
 go
 
 alter table [Sales].[Customer]
-	add constraint [PK_Sales_Customer] primary key ([CustomerID])
+	add constraint [PK_Sales_Customer] primary key ([ID])
 go
 
 alter table [Sales].[CustomerAddress]
-	add constraint [PK_Sales_CustomerAddress] primary key ([CustomerAddressID])
+	add constraint [PK_Sales_CustomerAddress] primary key ([ID])
 go
 
 alter table [Sales].[CustomerEmail]
-	add constraint [PK_Sales_CustomerEmail] primary key ([CustomerEmailID])
+	add constraint [PK_Sales_CustomerEmail] primary key ([ID])
 go
 
 alter table [Sales].[Shipper]
-	add constraint [PK_Sales_Shipper] primary key ([ShipperID])
+	add constraint [PK_Sales_Shipper] primary key ([ID])
 go
 
 alter table [Sales].[OrderStatus]
-	add constraint [PK_Sales_OrderStatus] primary key ([OrderStatusID])
+	add constraint [PK_Sales_OrderStatus] primary key ([ID])
 go
 
 alter table [Sales].[PaymentMethod]
-	add constraint [PK_Sales_PaymentMethod] primary key ([PaymentMethodID])
+	add constraint [PK_Sales_PaymentMethod] primary key ([ID])
 go
 
 alter table [Sales].[OrderHeader]
-	add constraint [PK_Sales_OrderHeader] primary key ([OrderHeaderID])
+	add constraint [PK_Sales_OrderHeader] primary key ([ID])
 go
 
 alter table [Sales].[OrderDetail]
-	add constraint [PK_Sales_OrderDetail] primary key ([OrderDetailID])
+	add constraint [PK_Sales_OrderDetail] primary key ([ID])
 go
 
 alter table [dbo].[CountryCurrency]

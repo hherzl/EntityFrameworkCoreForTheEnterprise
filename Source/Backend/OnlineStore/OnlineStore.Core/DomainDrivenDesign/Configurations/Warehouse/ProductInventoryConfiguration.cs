@@ -12,13 +12,13 @@ namespace OnlineStore.Core.DomainDrivenDesign.Configurations.Warehouse
             builder.ToTable("ProductInventory", "Warehouse");
 
             // Set key for entity
-            builder.HasKey(p => p.ProductInventoryID);
+            builder.HasKey(p => p.ID);
 
             // Set identity for entity (auto increment)
-            builder.Property(p => p.ProductInventoryID).UseSqlServerIdentityColumn();
+            builder.Property(p => p.ID).UseSqlServerIdentityColumn();
 
             // Set mapping for columns
-            builder.Property(p => p.ProductInventoryID).HasColumnType("int").IsRequired();
+            builder.Property(p => p.ID).HasColumnType("int").IsRequired();
             builder.Property(p => p.ProductID).HasColumnType("int").IsRequired();
             builder.Property(p => p.LocationID).HasColumnType("varchar(5)").IsRequired();
             builder.Property(p => p.OrderDetailID).HasColumnType("bigint");

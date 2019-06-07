@@ -8,7 +8,7 @@ namespace OnlineStore.Core.DomainDrivenDesign.Dbo
         {
         }
 
-        public int? CountryCurrencyID { get; set; }
+        public int? ID { get; set; }
 
         public int? CountryID { get; set; }
 

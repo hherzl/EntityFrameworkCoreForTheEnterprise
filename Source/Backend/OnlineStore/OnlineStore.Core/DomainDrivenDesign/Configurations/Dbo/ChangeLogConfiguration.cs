@@ -12,10 +12,10 @@ namespace OnlineStore.Core.DomainDrivenDesign.Configurations.Dbo
             builder.ToTable("ChangeLog", "dbo");
 
             // Set key for entity
-            builder.HasKey(p => p.ChangeLogID);
+            builder.HasKey(p => p.ID);
 
             // Set identity for entity (auto increment)
-            builder.Property(p => p.ChangeLogID).UseSqlServerIdentityColumn();
+            builder.Property(p => p.ID).UseSqlServerIdentityColumn();
 
             // Set mapping for columns
             builder.Property(p => p.ClassName).HasColumnType("varchar(128)").IsRequired();

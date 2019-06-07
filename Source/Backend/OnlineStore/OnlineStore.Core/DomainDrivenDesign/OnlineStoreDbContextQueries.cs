@@ -12,7 +12,7 @@ namespace OnlineStore.Core.DomainDrivenDesign
     public static class OnlineStoreDbContextQueries
     {
         public static async Task<Employee> GetEmployeeAsync(this OnlineStoreDbContext dbContext, Employee entity)
-            => await dbContext.Employees.FirstOrDefaultAsync(item => item.EmployeeID == entity.EmployeeID);
+            => await dbContext.Employees.FirstOrDefaultAsync(item => item.ID == entity.ID);
 
         public static IQueryable<Product> GetProducts(this OnlineStoreDbContext dbContext, int? productCategoryID = null)
         {
@@ -25,13 +25,13 @@ namespace OnlineStore.Core.DomainDrivenDesign
         }
 
         public static async Task<Product> GetProductAsync(this OnlineStoreDbContext dbContext, Product entity)
-            => await dbContext.Products.FirstOrDefaultAsync(item => item.ProductID == entity.ProductID);
+            => await dbContext.Products.FirstOrDefaultAsync(item => item.ID == entity.ID);
 
         public static Product GetProductByName(this OnlineStoreDbContext dbContext, string productName)
             => dbContext.Products.FirstOrDefault(item => item.ProductName == productName);
 
         public static async Task<ProductCategory> GetProductCategoryAsync(this OnlineStoreDbContext dbContext, ProductCategory entity)
-            => await dbContext.ProductCategories.FirstOrDefaultAsync(item => item.ProductCategoryID == entity.ProductCategoryID);
+            => await dbContext.ProductCategories.FirstOrDefaultAsync(item => item.ID == entity.ID);
 
         public static IQueryable<ProductInventory> GetProductInventories(this OnlineStoreDbContext dbContext, int? productID = null, string locationID = null)
         {
@@ -47,41 +47,41 @@ namespace OnlineStore.Core.DomainDrivenDesign
         }
 
         public static async Task<ProductInventory> GetProductInventoryAsync(this OnlineStoreDbContext dbContext, ProductInventory entity)
-            => await dbContext.ProductInventories.FirstOrDefaultAsync(item => item.ProductInventoryID == entity.ProductInventoryID);
+            => await dbContext.ProductInventories.FirstOrDefaultAsync(item => item.ID == entity.ID);
 
         public static async Task<Location> GetLocationAsync(this OnlineStoreDbContext dbContext, Location entity)
-            => await dbContext.Locations.FirstOrDefaultAsync(item => item.LocationID == entity.LocationID);
+            => await dbContext.Locations.FirstOrDefaultAsync(item => item.ID == entity.ID);
 
         public static async Task<OrderStatus> GetOrderStatusAsync(this OnlineStoreDbContext dbContext, OrderStatus entity)
-           => await dbContext.OrderStatuses.FirstOrDefaultAsync(item => item.OrderStatusID == entity.OrderStatusID);
+           => await dbContext.OrderStatuses.FirstOrDefaultAsync(item => item.ID == entity.ID);
 
         public static async Task<Customer> GetCustomerAsync(this OnlineStoreDbContext dbContext, Customer entity)
-            => await dbContext.Customers.FirstOrDefaultAsync(item => item.CustomerID == entity.CustomerID);
+            => await dbContext.Customers.FirstOrDefaultAsync(item => item.ID == entity.ID);
 
         public static async Task<Shipper> GetShipperAsync(this OnlineStoreDbContext dbContext, Shipper entity)
-            => await dbContext.Shippers.FirstOrDefaultAsync(item => item.ShipperID == entity.ShipperID);
+            => await dbContext.Shippers.FirstOrDefaultAsync(item => item.ID == entity.ID);
 
         public static IQueryable<OrderInfo> GetOrders(this OnlineStoreDbContext dbContext, short? orderStatusID = null, int? customerID = null, int? employeeID = null, int? shipperID = null, string currencyID = null, Guid? paymentMethodID = null)
         {
             var query = from orderHeader in dbContext.OrderHeaders
-                        join orderStatus in dbContext.OrderStatuses on orderHeader.OrderStatusID equals orderStatus.OrderStatusID
+                        join orderStatus in dbContext.OrderStatuses on orderHeader.OrderStatusID equals orderStatus.ID
 
-                        join customer in dbContext.Customers on orderHeader.CustomerID equals customer.CustomerID
+                        join customer in dbContext.Customers on orderHeader.CustomerID equals customer.ID
 
-                        join employeeJoin in dbContext.Employees on orderHeader.EmployeeID equals employeeJoin.EmployeeID into employeeTemp
+                        join employeeJoin in dbContext.Employees on orderHeader.EmployeeID equals employeeJoin.ID into employeeTemp
                         from employee in employeeTemp.DefaultIfEmpty()
 
-                        join currency in dbContext.Currencies on orderHeader.CurrencyID equals currency.CurrencyID
+                        join currency in dbContext.Currencies on orderHeader.CurrencyID equals currency.ID
 
-                        join paymentMethodJoin in dbContext.PaymentMethods on orderHeader.PaymentMethodID equals paymentMethodJoin.PaymentMethodID into paymentMethodTemp
+                        join paymentMethodJoin in dbContext.PaymentMethods on orderHeader.PaymentMethodID equals paymentMethodJoin.ID into paymentMethodTemp
                         from paymentMethod in paymentMethodTemp.DefaultIfEmpty()
 
-                        join shipperJoin in dbContext.Shippers on orderHeader.ShipperID equals shipperJoin.ShipperID into shipperTemp
+                        join shipperJoin in dbContext.Shippers on orderHeader.ShipperID equals shipperJoin.ID into shipperTemp
                         from shipper in shipperTemp.DefaultIfEmpty()
 
                         select new OrderInfo
                         {
-                            OrderID = orderHeader.OrderHeaderID,
+                            OrderID = orderHeader.ID,
                             OrderStatusID = orderHeader.OrderStatusID,
                             CustomerID = orderHeader.CustomerID,
                             EmployeeID = orderHeader.EmployeeID,
@@ -141,6 +141,6 @@ namespace OnlineStore.Core.DomainDrivenDesign
         }
 
         public static async Task<OrderHeader> GetOrderAsync(this OnlineStoreDbContext dbContext, OrderHeader entity)
-            => await dbContext.OrderHeaders.Include(p => p.OrderDetails).FirstOrDefaultAsync(item => item.OrderHeaderID == entity.OrderHeaderID);
+            => await dbContext.OrderHeaders.Include(p => p.OrderDetails).FirstOrDefaultAsync(item => item.ID == entity.ID);
     }
 }

@@ -8,7 +8,7 @@ namespace OnlineStore.Core.DomainDrivenDesign.Sales
         {
         }
 
-        public Guid? PaymentMethodID { get; set; }
+        public Guid? ID { get; set; }
 
         public string PaymentMethodName { get; set; }
 

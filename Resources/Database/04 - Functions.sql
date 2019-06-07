@@ -3,7 +3,7 @@ create function [Warehouse].[ufnGetStock](@productID int)
 as
     begin
         declare @value int
-        select @value = sum([Quantity]) from [Warehouse].[ProductInventory] where [ProductID] = @productID
+        select @value = sum([Quantity]) from [Warehouse].[ProductInventory] where [ID] = @productID
         
         if (@value is null)
             set @value = 0
@@ -23,7 +23,7 @@ as
         from
             [HumanResources].[Employee]
         where
-            [employeeID] = @employeeID
+            [ID] = @employeeID
 
         return @value
     end
@@ -45,7 +45,7 @@ create function [Sales].[ufnGetCustomerContact](@customerID int)
             insert into
                 @retCustomerContactInformation
             select
-                [SalesCustomerAddress].[CustomerID],
+                [SalesCustomerAddress].[ID],
                 [SalesCustomerAddress].[AddressLine1],
                 [SalesCustomerAddress].[AddressLine2],
                 [SalesCustomerAddress].[City],
@@ -55,7 +55,7 @@ create function [Sales].[ufnGetCustomerContact](@customerID int)
             from
                 [Sales].[CustomerAddress] [SalesCustomerAddress]
             where
-                [SalesCustomerAddress].[CustomerID] = @customerID
+                [SalesCustomerAddress].[ID] = @customerID
 			return
         end
 go

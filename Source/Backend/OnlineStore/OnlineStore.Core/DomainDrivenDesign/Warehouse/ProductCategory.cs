@@ -9,12 +9,12 @@ namespace OnlineStore.Core.DomainDrivenDesign.Warehouse
         {
         }
 
-        public ProductCategory(int? productCategoryID)
+        public ProductCategory(int? id)
         {
-            ProductCategoryID = productCategoryID;
+            ID = id;
         }
 
-        public int? ProductCategoryID { get; set; }
+        public int? ID { get; set; }
 
         public string ProductCategoryName { get; set; }
 

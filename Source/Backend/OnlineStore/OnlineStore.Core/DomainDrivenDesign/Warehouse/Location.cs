@@ -9,7 +9,7 @@ namespace OnlineStore.Core.DomainDrivenDesign.Warehouse
         {
         }
 
-        public string LocationID { get; set; }
+        public string ID { get; set; }
 
         public string LocationName { get; set; }
 

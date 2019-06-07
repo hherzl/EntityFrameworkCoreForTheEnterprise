@@ -159,7 +159,7 @@ namespace OnlineStore.WebAPI.UnitTests
 
             // Assert
             Assert.False(value.DidError);
-            Assert.True(value.Model.OrderHeaderID.HasValue);
+            Assert.True(value.Model.ID.HasValue);
         }
 
         [Fact]

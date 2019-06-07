@@ -9,12 +9,12 @@ namespace OnlineStore.Core.DomainDrivenDesign.Sales
         {
         }
 
-        public Shipper(int? shipperID)
+        public Shipper(int? id)
         {
-            ShipperID = shipperID;
+            ID = id;
         }
 
-        public int? ShipperID { get; set; }
+        public int? ID { get; set; }
 
         public string CompanyName { get; set; }
 

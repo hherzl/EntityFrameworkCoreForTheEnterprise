@@ -12,10 +12,10 @@ namespace OnlineStore.Core.DomainDrivenDesign.Configurations.Warehouse
             builder.ToTable("Location", "Warehouse");
 
             // Set key for entity
-            builder.HasKey(p => p.LocationID);
+            builder.HasKey(p => p.ID);
 
             // Set mapping for columns
-            builder.Property(p => p.LocationID).HasColumnType("varchar(5)").IsRequired();
+            builder.Property(p => p.ID).HasColumnType("varchar(5)").IsRequired();
             builder.Property(p => p.LocationName).HasColumnType("varchar(100)").IsRequired();
             builder.Property(p => p.CreationUser).HasColumnType("varchar(25)").IsRequired();
             builder.Property(p => p.CreationDateTime).HasColumnType("datetime").IsRequired();
