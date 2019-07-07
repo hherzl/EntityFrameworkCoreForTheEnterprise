@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using OnlineStore.Core.BusinessLayer.Contracts;
-using OnlineStore.Core.DomainDrivenDesign;
+using OnlineStore.Core.Domain;
 
 namespace OnlineStore.Core.BusinessLayer
 {

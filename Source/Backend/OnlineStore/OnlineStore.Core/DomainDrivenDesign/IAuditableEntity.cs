@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OnlineStore.Core.DomainDrivenDesign
+namespace OnlineStore.Core.Domain
 {
     public interface IAuditableEntity : IEntity
     {

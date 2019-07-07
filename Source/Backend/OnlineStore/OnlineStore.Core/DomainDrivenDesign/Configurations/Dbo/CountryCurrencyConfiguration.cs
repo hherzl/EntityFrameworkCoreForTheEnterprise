@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OnlineStore.Core.DomainDrivenDesign.Dbo;
+using OnlineStore.Core.Domain.Dbo;
 
-namespace OnlineStore.Core.DomainDrivenDesign.Configurations.Dbo
+namespace OnlineStore.Core.Domain.Configurations.Dbo
 {
     public class CountryCurrencyConfiguration : IEntityTypeConfiguration<CountryCurrency>
     {

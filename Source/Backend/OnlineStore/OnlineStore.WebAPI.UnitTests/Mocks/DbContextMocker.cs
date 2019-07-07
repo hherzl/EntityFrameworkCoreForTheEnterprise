@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using OnlineStore.Core.DomainDrivenDesign;
+using OnlineStore.Core.Domain;
 
 namespace OnlineStore.WebAPI.UnitTests.Mocks
 {

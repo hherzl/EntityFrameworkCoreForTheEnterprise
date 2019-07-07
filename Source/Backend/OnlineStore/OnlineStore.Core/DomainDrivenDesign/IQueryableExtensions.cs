@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace OnlineStore.Core.DomainDrivenDesign.Repositories
+namespace OnlineStore.Core.Domain.Repositories
 {
     public static class IQueryableExtensions
     {

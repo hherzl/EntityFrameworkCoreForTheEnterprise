@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using OnlineStore.Core.BusinessLayer.Contracts;
 using OnlineStore.Core.BusinessLayer.Responses;
-using OnlineStore.Core.DomainDrivenDesign;
-using OnlineStore.Core.DomainDrivenDesign.Repositories;
-using OnlineStore.Core.DomainDrivenDesign.Warehouse;
+using OnlineStore.Core.Domain;
+using OnlineStore.Core.Domain.Repositories;
+using OnlineStore.Core.Domain.Warehouse;
 
 namespace OnlineStore.Core.BusinessLayer
 {

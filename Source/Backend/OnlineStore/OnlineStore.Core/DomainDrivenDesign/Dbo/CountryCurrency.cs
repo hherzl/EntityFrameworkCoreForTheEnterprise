@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OnlineStore.Core.DomainDrivenDesign.Dbo
+namespace OnlineStore.Core.Domain.Dbo
 {
     public class CountryCurrency : IAuditableEntity
     {

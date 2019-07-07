@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OnlineStore.Common.Helpers;
 using OnlineStore.Core.BusinessLayer.Responses;
-using OnlineStore.Core.DomainDrivenDesign.Sales;
+using OnlineStore.Core.Domain.Sales;
 using OnlineStore.WebAPI.Controllers;
 using OnlineStore.WebAPI.Requests;
 using OnlineStore.WebAPI.UnitTests.Mocks;

@@ -1,5 +1,5 @@
 ﻿using System;
-using OnlineStore.Core.DomainDrivenDesign;
+using OnlineStore.Core.Domain;
 
 namespace OnlineStore.Core.BusinessLayer.Contracts
 {

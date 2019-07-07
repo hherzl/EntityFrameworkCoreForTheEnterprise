@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OnlineStore.Core.DomainDrivenDesign.Warehouse
+namespace OnlineStore.Core.Domain.Warehouse
 {
     public class ProductInventory : IAuditableEntity
     {

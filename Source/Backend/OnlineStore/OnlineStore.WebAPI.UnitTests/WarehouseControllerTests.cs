@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OnlineStore.Common.Helpers;
 using OnlineStore.Core.BusinessLayer.Responses;
-using OnlineStore.Core.DomainDrivenDesign.Warehouse;
+using OnlineStore.Core.Domain.Warehouse;
 using OnlineStore.WebAPI.Controllers;
 using OnlineStore.WebAPI.Requests;
 using OnlineStore.WebAPI.UnitTests.Mocks;

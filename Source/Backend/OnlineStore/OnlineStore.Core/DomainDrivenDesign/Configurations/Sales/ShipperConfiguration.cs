@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OnlineStore.Core.DomainDrivenDesign.Sales;
+using OnlineStore.Core.Domain.Sales;
 
-namespace OnlineStore.Core.DomainDrivenDesign.Configurations.Sales
+namespace OnlineStore.Core.Domain.Configurations.Sales
 {
     public class ShipperConfiguration : IEntityTypeConfiguration<Shipper>
     {

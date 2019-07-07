@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using OnlineStore.Core.DomainDrivenDesign.Warehouse;
-using OnlineStore.Core.DomainDrivenDesign.Sales;
+using OnlineStore.Core.Domain.Warehouse;
+using OnlineStore.Core.Domain.Sales;
 
 namespace OnlineStore.Core.BusinessLayer.Requests
 {

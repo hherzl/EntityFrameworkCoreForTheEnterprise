@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OnlineStore.Core.DomainDrivenDesign.Dbo;
+using OnlineStore.Core.Domain.Dbo;
 
-namespace OnlineStore.Core.DomainDrivenDesign.Configurations
+namespace OnlineStore.Core.Domain.Configurations
 {
     public class EventLogConfiguration : IEntityTypeConfiguration<EventLog>
     {

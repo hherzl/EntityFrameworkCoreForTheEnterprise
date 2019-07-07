@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OnlineStore.Core.DomainDrivenDesign.Warehouse;
+using OnlineStore.Core.Domain.Warehouse;
 
-namespace OnlineStore.Core.DomainDrivenDesign.Configurations.Warehouse
+namespace OnlineStore.Core.Domain.Configurations.Warehouse
 {
     public class ProductInventoryConfiguration : IEntityTypeConfiguration<ProductInventory>
     {

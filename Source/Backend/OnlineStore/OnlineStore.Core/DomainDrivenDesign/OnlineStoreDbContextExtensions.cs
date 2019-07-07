@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
-using OnlineStore.Core.DomainDrivenDesign.Dbo;
+using OnlineStore.Core.Domain.Dbo;
 
-namespace OnlineStore.Core.DomainDrivenDesign
+namespace OnlineStore.Core.Domain
 {
     public static class OnlineStoreDbContextExtensions
     {

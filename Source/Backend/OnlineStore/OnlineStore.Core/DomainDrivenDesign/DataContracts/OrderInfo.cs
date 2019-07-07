@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OnlineStore.Core.DomainDrivenDesign.Sales
+namespace OnlineStore.Core.Domain.Sales
 {
     public class OrderInfo
     {

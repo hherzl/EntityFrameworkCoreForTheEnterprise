@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OnlineStore.Core.DomainDrivenDesign.HumanResources
+namespace OnlineStore.Core.Domain.HumanResources
 {
     public class EmployeeAddress : IAuditableEntity
     {

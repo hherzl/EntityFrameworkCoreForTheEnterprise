@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using OnlineStore.Core.BusinessLayer.Requests;
 using OnlineStore.Core.BusinessLayer.Responses;
-using OnlineStore.Core.DomainDrivenDesign.Dbo;
-using OnlineStore.Core.DomainDrivenDesign.Sales;
+using OnlineStore.Core.Domain.Dbo;
+using OnlineStore.Core.Domain.Sales;
 
 namespace OnlineStore.Core.BusinessLayer.Contracts
 {

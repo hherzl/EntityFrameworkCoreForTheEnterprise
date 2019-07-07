@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using OnlineStore.Common.Helpers;
-using OnlineStore.Core.DomainDrivenDesign.Sales;
+using OnlineStore.Core.Domain.Sales;
 
 namespace OnlineStore.Mocker
 {

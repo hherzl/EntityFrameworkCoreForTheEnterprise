@@ -14,7 +14,7 @@ using OnlineStore.Common.Security;
 using OnlineStore.Core;
 using OnlineStore.Core.BusinessLayer;
 using OnlineStore.Core.BusinessLayer.Contracts;
-using OnlineStore.Core.DomainDrivenDesign;
+using OnlineStore.Core.Domain;
 using OnlineStore.WebAPI.Clients;
 using OnlineStore.WebAPI.Clients.Contracts;
 using OnlineStore.WebAPI.PolicyRequirements;

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using OnlineStore.Core.DomainDrivenDesign.HumanResources;
-using OnlineStore.Core.DomainDrivenDesign.Sales;
-using OnlineStore.Core.DomainDrivenDesign.Warehouse;
+using OnlineStore.Core.Domain.HumanResources;
+using OnlineStore.Core.Domain.Sales;
+using OnlineStore.Core.Domain.Warehouse;
 
-namespace OnlineStore.Core.DomainDrivenDesign
+namespace OnlineStore.Core.Domain
 {
     public static class OnlineStoreDbContextQueries
     {

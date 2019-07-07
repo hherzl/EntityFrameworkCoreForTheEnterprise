@@ -1,4 +1,4 @@
-﻿namespace OnlineStore.Core.DomainDrivenDesign
+﻿namespace OnlineStore.Core.Domain
 {
     public interface IEntity
     {

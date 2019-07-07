@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using OnlineStore.Core.DomainDrivenDesign.Sales;
-using OnlineStore.Core.DomainDrivenDesign.Warehouse;
+using OnlineStore.Core.Domain.Sales;
+using OnlineStore.Core.Domain.Warehouse;
 using OnlineStore.WebAPI.Clients.Models;
 
 namespace OnlineStore.WebAPI.Requests

@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OnlineStore.Core.DomainDrivenDesign.HumanResources;
+using OnlineStore.Core.Domain.HumanResources;
 
-namespace OnlineStore.Core.DomainDrivenDesign.Configurations.HumanResources
+namespace OnlineStore.Core.Domain.Configurations.HumanResources
 {
     public class EmployeeAddressConfiguration : IEntityTypeConfiguration<EmployeeAddress>
     {
