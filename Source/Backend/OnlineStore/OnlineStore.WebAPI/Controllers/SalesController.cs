@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -42,31 +41,24 @@ namespace OnlineStore.WebAPI.Controllers
         /// <summary>
         /// Retrieves the orders placed by customers
         /// </summary>
-        /// <param name="pageSize">Page size</param>
-        /// <param name="pageNumber">Page number</param>
-        /// <param name="orderStatusID">Order status</param>
-        /// <param name="customerID">Customer</param>
-        /// <param name="employeeID">Employee</param>
-        /// <param name="shipperID">Shipper</param>
-        /// <param name="currencyID">Currency</param>
-        /// <param name="paymentMethodID">Payment method</param>
+        /// <param name="request">Search request</param>
         /// <returns>A sequence of orders</returns>
         /// <response code="200">Returns a list of orders</response>
         /// <response code="401">If client is not authenticated</response>
         /// <response code="403">If client is not autorized</response>
         /// <response code="500">If there was an internal error</response>
-        [HttpGet("Order")]
+        [HttpPost("SearchOrder")]
         [ProducesResponseType(200)]
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
         [ProducesResponseType(500)]
         [OnlineStoreActionFilter]
-        public async Task<IActionResult> GetOrdersAsync(int? pageSize = 50, int? pageNumber = 1, short? orderStatusID = null, int? customerID = null, int? employeeID = null, int? shipperID = null, string currencyID = null, Guid? paymentMethodID = null)
+        public async Task<IActionResult> SearchOrdersAsync([FromBody]SearchOrdersRequest request)
         {
-            Logger?.LogDebug("{0} has been invoked", nameof(GetOrdersAsync));
+            Logger?.LogDebug("{0} has been invoked", nameof(SearchOrdersAsync));
 
             // Get response from business logic
-            var response = await SalesService.GetOrdersAsync((int)pageSize, (int)pageNumber, orderStatusID, customerID, employeeID, shipperID, currencyID, paymentMethodID);
+            var response = await SalesService.GetOrdersAsync((int)request.PageSize, (int)request.PageNumber, request.OrderStatusID, request.CustomerID, request.EmployeeID, request.ShipperID, request.CurrencyID, request.PaymentMethodID);
 
             // Return as http response
             return response.ToHttpResponse();

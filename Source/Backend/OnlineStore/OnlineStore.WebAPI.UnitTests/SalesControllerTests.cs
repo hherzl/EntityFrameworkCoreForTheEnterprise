@@ -18,13 +18,14 @@ namespace OnlineStore.WebAPI.UnitTests
     public class SalesControllerTests
     {
         [Fact]
-        public async Task TestGetOrdersAsync()
+        public async Task TestSearchOrdersAsync()
         {
             // Arrange
-            var controller = ControllerMocker.GetSalesController(nameof(TestGetOrdersAsync));
+            var controller = ControllerMocker.GetSalesController(nameof(TestSearchOrdersAsync));
+            var request = new SearchOrdersRequest();
 
             // Act
-            var response = await controller.GetOrdersAsync() as ObjectResult;
+            var response = await controller.SearchOrdersAsync(request) as ObjectResult;
             var value = response.Value as IPagedResponse<OrderInfo>;
 
             // Assert
@@ -32,51 +33,60 @@ namespace OnlineStore.WebAPI.UnitTests
         }
 
         [Fact]
-        public async Task TestGetOrdersByCurrencyAsync()
+        public async Task TestSearchOrdersByCurrencyAsync()
         {
             // Arrange
-            var controller = ControllerMocker.GetSalesController(nameof(TestGetOrdersByCurrencyAsync));
-            var currencyID = "USD";
+            var controller = ControllerMocker.GetSalesController(nameof(TestSearchOrdersByCurrencyAsync));
+            var request = new SearchOrdersRequest
+            {
+                CurrencyID = "USD"
+            };
 
             // Act
-            var response = await controller.GetOrdersAsync(currencyID: currencyID) as ObjectResult;
+            var response = await controller.SearchOrdersAsync(request) as ObjectResult;
             var value = response.Value as IPagedResponse<OrderInfo>;
 
             // Assert
             Assert.False(value.DidError);
-            Assert.True(value.Model.Count(item => item.CurrencyID == currencyID) == value.Model.Count());
+            Assert.True(value.Model.Count(item => item.CurrencyID == request.CurrencyID) == value.Model.Count());
         }
 
         [Fact]
-        public async Task TestGetOrdersByCustomerAsync()
+        public async Task TestSearchOrdersByCustomerAsync()
         {
             // Arrange
-            var controller = ControllerMocker.GetSalesController(nameof(TestGetOrdersByCustomerAsync));
-            var customerID = 1;
+            var controller = ControllerMocker.GetSalesController(nameof(TestSearchOrdersByCustomerAsync));
+            var request = new SearchOrdersRequest
+            {
+                CustomerID = 1
+            };
 
             // Act
-            var response = await controller.GetOrdersAsync(customerID: customerID) as ObjectResult;
+            var response = await controller.SearchOrdersAsync(request) as ObjectResult;
             var value = response.Value as IPagedResponse<OrderInfo>;
 
             // Assert
             Assert.False(value.DidError);
-            Assert.True(value.Model.Count(item => item.CustomerID == customerID) == value.Model.Count());
+            Assert.True(value.Model.Count(item => item.CustomerID == request.CustomerID) == value.Model.Count());
         }
 
         [Fact]
-        public async Task TestGetOrdersByEmployeeAsync()
+        public async Task TestSearchOrdersByEmployeeAsync()
         {
             // Arrange
-            var controller = ControllerMocker.GetSalesController(nameof(TestGetOrdersByEmployeeAsync));
-            var employeeID = 1;
+            var controller = ControllerMocker.GetSalesController(nameof(TestSearchOrdersByEmployeeAsync));
+            var request = new SearchOrdersRequest
+            {
+                EmployeeID = 1
+            };
 
             // Act
-            var response = await controller.GetOrdersAsync(employeeID: employeeID) as ObjectResult;
+            var response = await controller.SearchOrdersAsync(request) as ObjectResult;
             var value = response.Value as IPagedResponse<OrderInfo>;
 
             // Assert
             Assert.False(value.DidError);
-            Assert.True(value.Model.Count(item => item.EmployeeID == employeeID) == value.Model.Count());
+            Assert.True(value.Model.Count(item => item.EmployeeID == request.EmployeeID) == value.Model.Count());
         }
 
         [Fact]

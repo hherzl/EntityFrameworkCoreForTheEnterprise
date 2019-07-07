@@ -8,6 +8,7 @@ namespace OnlineStore.Core.BusinessLayer.Responses
         public static void SetError(this IResponse response, ILogger logger, string actionName, Exception ex)
         {
             // todo: Save error in log file
+            // reference: https://andrewlock.net/creating-a-rolling-file-logging-provider-for-asp-net-core-2-0/
 
             response.DidError = true;
 
