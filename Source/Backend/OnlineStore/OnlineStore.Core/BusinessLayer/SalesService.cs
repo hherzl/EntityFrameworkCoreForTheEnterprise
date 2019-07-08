@@ -138,7 +138,7 @@ namespace OnlineStore.Core.BusinessLayer
             return response;
         }
 
-        public async Task<IPagedResponse<OrderInfo>> GetOrdersAsync(int pageSize = 10, int pageNumber = 1, short? orderStatusID = null, int? customerID = null, int? employeeID = null, int? shipperID = null, string currencyID = null, Guid? paymentMethodID = null)
+        public async Task<IPagedResponse<OrderInfo>> GetOrdersAsync(SearchOrdersRequest request)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetOrdersAsync));
 
@@ -147,16 +147,17 @@ namespace OnlineStore.Core.BusinessLayer
             try
             {
                 // Get query
-                var query = DbContext.GetOrders(orderStatusID, customerID, employeeID, shipperID, currencyID, paymentMethodID);
+                var query = DbContext
+                    .GetOrders(request.OrderStatusID, request.CustomerID, request.EmployeeID, request.ShipperID, request.CurrencyID, request.PaymentMethodID);
 
                 // Set information for paging
-                response.PageSize = pageSize;
-                response.PageNumber = pageNumber;
+                response.PageSize = (int)request.PageSize;
+                response.PageNumber = (int)request.PageNumber;
                 response.ItemsCount = await query.CountAsync();
 
                 // Retrieve items, set model for response
                 response.Model = await query
-                    .Paging(pageSize, pageNumber)
+                    .Paging((int)request.PageSize, (int)request.PageNumber)
                     .ToListAsync();
 
                 response.Message = string.Format("Page {0} of {1}, Total of rows: {2}", response.PageNumber, response.PageCount, response.ItemsCount);

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OnlineStore.Common.Security;
 using OnlineStore.Core.BusinessLayer.Contracts;
+using OnlineStore.Core.BusinessLayer.Requests;
 using OnlineStore.WebAPI.Clients.Contracts;
 using OnlineStore.WebAPI.Clients.Models;
 using OnlineStore.WebAPI.Filters;
@@ -58,7 +59,7 @@ namespace OnlineStore.WebAPI.Controllers
             Logger?.LogDebug("{0} has been invoked", nameof(SearchOrdersAsync));
 
             // Get response from business logic
-            var response = await SalesService.GetOrdersAsync((int)request.PageSize, (int)request.PageNumber, request.OrderStatusID, request.CustomerID, request.EmployeeID, request.ShipperID, request.CurrencyID, request.PaymentMethodID);
+            var response = await SalesService.GetOrdersAsync(request);
 
             // Return as http response
             return response.ToHttpResponse();
