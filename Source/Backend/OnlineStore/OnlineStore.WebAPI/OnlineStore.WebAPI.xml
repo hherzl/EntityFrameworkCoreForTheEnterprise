@@ -44,18 +44,11 @@
             Amount
             </summary>
         </member>
-        <member name="M:OnlineStore.WebAPI.Controllers.SalesController.GetOrdersAsync(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int16},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Guid})">
+        <member name="M:OnlineStore.WebAPI.Controllers.SalesController.SearchOrdersAsync(OnlineStore.Core.BusinessLayer.Requests.SearchOrdersRequest)">
             <summary>
             Retrieves the orders placed by customers
             </summary>
-            <param name="pageSize">Page size</param>
-            <param name="pageNumber">Page number</param>
-            <param name="orderStatusID">Order status</param>
-            <param name="customerID">Customer</param>
-            <param name="employeeID">Employee</param>
-            <param name="shipperID">Shipper</param>
-            <param name="currencyID">Currency</param>
-            <param name="paymentMethodID">Payment method</param>
+            <param name="request">Search request</param>
             <returns>A sequence of orders</returns>
             <response code="200">Returns a list of orders</response>
             <response code="401">If client is not authenticated</response>
@@ -134,7 +127,7 @@
         </member>
         <member name="M:OnlineStore.WebAPI.Controllers.WarehouseController.GetProductInventoryAsync(System.Nullable{System.Int32},System.String)">
             <summary>
-            Gets the inventory for product by warehouse
+            Gets the inventory for product by warehouse ID
             </summary>
             <param name="id">Product</param>
             <param name="warehouseID">Warehouse</param>
@@ -147,10 +140,21 @@
         </member>
         <member name="M:OnlineStore.WebAPI.Controllers.WarehouseController.PostProductAsync(OnlineStore.WebAPI.Requests.PostProductRequest)">
             <summary>
-            Posts a new product
+            Creates a new product
             </summary>
             <returns>A sequence of inventory transactions by product and warehouse</returns>
             <response code="200">Returns the inventory for product</response>
+            <response code="401">If client is not authenticated</response>
+            <response code="403">If client is not autorized</response>
+            <response code="404">If id is not exists</response>
+            <response code="500">If there was an internal error</response>
+        </member>
+        <member name="M:OnlineStore.WebAPI.Controllers.WarehouseController.PutProductUnitPriceAsync(System.Nullable{System.Int32},OnlineStore.Core.BusinessLayer.Requests.UpdateProductUnitPriceRequest)">
+            <summary>
+            Updates the unit price for an existing product
+            </summary>
+            <returns>A confirmation for product unit price modification</returns>
+            <response code="201">If unit price it was updated successfully</response>
             <response code="401">If client is not authenticated</response>
             <response code="403">If client is not autorized</response>
             <response code="404">If id is not exists</response>
