@@ -132,6 +132,18 @@ create table [Warehouse].[Product]
 	[Timestamp] rowversion null
 )
 
+create table [Warehouse].[ProductUnitPriceHistory]
+(
+	[ID] int not null identity(1, 1),
+	[ProductID] int not null,
+	[UnitPrice] decimal(8, 4) not null,
+	[CreationUser] varchar(25) not null,
+	[CreationDateTime] datetime not null,
+	[LastUpdateUser] varchar(25) null,
+	[LastUpdateDateTime] datetime null,
+	[Timestamp] rowversion null
+)
+
 create table [Warehouse].[Location]
 (
 	[ID] varchar(5) not null,

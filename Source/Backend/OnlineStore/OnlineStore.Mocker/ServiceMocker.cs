@@ -10,15 +10,15 @@ namespace OnlineStore.Mocker
         public static ISalesService GetSalesService()
             => new SalesService(
                 LoggingHelper.GetLogger<SalesService>(),
-                new UserInfo("mocker"),
-                DbContextMocker.GetOnlineStoreDbContext()
-                );
+                DbContextMocker.GetOnlineStoreDbContext(),
+                new UserInfo("mocker")
+            );
 
         public static IWarehouseService GetWarehouseService()
             => new WarehouseService(
                 LoggingHelper.GetLogger<WarehouseService>(),
-                new UserInfo("mocker"),
-                DbContextMocker.GetOnlineStoreDbContext()
+                DbContextMocker.GetOnlineStoreDbContext(),
+                new UserInfo("mocker")
             );
     }
 }

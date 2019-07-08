@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OnlineStore.Common.Security;
 using OnlineStore.Core.BusinessLayer.Contracts;
+using OnlineStore.Core.BusinessLayer.Requests;
 using OnlineStore.WebAPI.Filters;
 using OnlineStore.WebAPI.Requests;
 using OnlineStore.WebAPI.Responses;
@@ -55,7 +56,7 @@ namespace OnlineStore.WebAPI.Controllers
         }
 
         /// <summary>
-        /// Gets the inventory for product by warehouse
+        /// Gets the inventory for product by warehouse ID
         /// </summary>
         /// <param name="id">Product</param>
         /// <param name="warehouseID">Warehouse</param>
@@ -85,7 +86,7 @@ namespace OnlineStore.WebAPI.Controllers
         }
 
         /// <summary>
-        /// Posts a new product
+        /// Creates a new product
         /// </summary>
         /// <returns>A sequence of inventory transactions by product and warehouse</returns>
         /// <response code="200">Returns the inventory for product</response>
@@ -111,6 +112,36 @@ namespace OnlineStore.WebAPI.Controllers
 
             // Get response from business logic
             var response = await Service.CreateProductAsync(entity);
+
+            // Return as http response
+            return response.ToHttpResponse();
+        }
+
+        /// <summary>
+        /// Updates the unit price for an existing product
+        /// </summary>
+        /// <returns>A confirmation for product unit price modification</returns>
+        /// <response code="201">If unit price it was updated successfully</response>
+        /// <response code="401">If client is not authenticated</response>
+        /// <response code="403">If client is not autorized</response>
+        /// <response code="404">If id is not exists</response>
+        /// <response code="500">If there was an internal error</response>
+        [HttpPut("ProductUnitPrice/{id}")]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(403)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        [OnlineStoreActionFilter]
+        [Authorize(Policy = Policies.WarehouseManagerPolicy)]
+        public async Task<IActionResult> PutProductUnitPriceAsync(int? id, [FromBody]UpdateProductUnitPriceRequest request)
+        {
+            Logger?.LogDebug("{0} has been invoked", nameof(PutProductUnitPriceAsync));
+
+            // Get response from business logic
+            Service.UserInfo = UserInfo;
+
+            var response = await Service.UpdateProductUnitPriceAsync(id, request);
 
             // Return as http response
             return response.ToHttpResponse();

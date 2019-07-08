@@ -7,26 +7,27 @@ namespace OnlineStore.Core.BusinessLayer
     public abstract class Service : IService
     {
         protected bool Disposed;
-        protected ILogger Logger;
-        protected IUserInfo UserInfo;
+        protected readonly ILogger Logger;
 
-        public Service(ILogger logger, IUserInfo userInfo, OnlineStoreDbContext dbContext)
+        public Service(ILogger logger, OnlineStoreDbContext dbContext, IUserInfo userInfo)
         {
             Logger = logger;
-            UserInfo = userInfo;
             DbContext = dbContext;
+            UserInfo = userInfo;
         }
 
         public void Dispose()
         {
-            if (!Disposed)
-            {
-                DbContext?.Dispose();
+            if (Disposed)
+                return;
 
-                Disposed = true;
-            }
+            DbContext?.Dispose();
+
+            Disposed = true;
         }
 
         public OnlineStoreDbContext DbContext { get; }
+
+        public IUserInfo UserInfo { get; set; }
     }
 }

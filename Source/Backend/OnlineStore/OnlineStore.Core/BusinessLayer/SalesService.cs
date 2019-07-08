@@ -17,14 +17,14 @@ namespace OnlineStore.Core.BusinessLayer
 {
     public class SalesService : Service, ISalesService
     {
-        public SalesService(ILogger<SalesService> logger, IUserInfo userInfo, OnlineStoreDbContext dbContext)
-            : base(logger, userInfo, dbContext)
+        public SalesService(ILogger<SalesService> logger, OnlineStoreDbContext dbContext, IUserInfo userInfo)
+            : base(logger, dbContext, userInfo)
         {
         }
 
         public async Task<IPagedResponse<Customer>> GetCustomersAsync(int pageSize = 10, int pageNumber = 1)
         {
-            Logger?.LogDebug("{0} has been invoked", nameof(GetCustomersAsync));
+            Logger?.LogDebug("'{0}' has been invoked", nameof(GetCustomersAsync));
 
             var response = new PagedResponse<Customer>();
 
@@ -53,7 +53,7 @@ namespace OnlineStore.Core.BusinessLayer
 
         public async Task<IPagedResponse<Shipper>> GetShippersAsync(int pageSize = 10, int pageNumber = 1)
         {
-            Logger?.LogDebug("{0} has been invoked", nameof(GetShippersAsync));
+            Logger?.LogDebug("'{0}' has been invoked", nameof(GetShippersAsync));
 
             var response = new PagedResponse<Shipper>();
 
@@ -82,7 +82,7 @@ namespace OnlineStore.Core.BusinessLayer
 
         public async Task<IPagedResponse<Currency>> GetCurrenciesAsync(int pageSize = 10, int pageNumber = 1)
         {
-            Logger?.LogDebug("{0} has been invoked", nameof(GetCurrenciesAsync));
+            Logger?.LogDebug("'{0}' has been invoked", nameof(GetCurrenciesAsync));
 
             var response = new PagedResponse<Currency>();
 
@@ -111,7 +111,7 @@ namespace OnlineStore.Core.BusinessLayer
 
         public async Task<IPagedResponse<PaymentMethod>> GetPaymentMethodsAsync(int pageSize = 10, int pageNumber = 1)
         {
-            Logger?.LogDebug("{0} has been invoked", nameof(GetPaymentMethodsAsync));
+            Logger?.LogDebug("'{0}' has been invoked", nameof(GetPaymentMethodsAsync));
 
             var response = new PagedResponse<PaymentMethod>();
 
@@ -140,7 +140,7 @@ namespace OnlineStore.Core.BusinessLayer
 
         public async Task<IPagedResponse<OrderInfo>> GetOrdersAsync(SearchOrdersRequest request)
         {
-            Logger?.LogDebug("{0} has been invoked", nameof(GetOrdersAsync));
+            Logger?.LogDebug("'{0}' has been invoked", nameof(GetOrdersAsync));
 
             var response = new PagedResponse<OrderInfo>();
 
@@ -174,7 +174,7 @@ namespace OnlineStore.Core.BusinessLayer
 
         public async Task<ISingleResponse<OrderHeader>> GetOrderAsync(long id)
         {
-            Logger?.LogDebug("{0} has been invoked", nameof(GetOrderAsync));
+            Logger?.LogDebug("'{0}' has been invoked", nameof(GetOrderAsync));
 
             var response = new SingleResponse<OrderHeader>();
 
@@ -193,7 +193,7 @@ namespace OnlineStore.Core.BusinessLayer
 
         public async Task<ISingleResponse<CreateOrderRequest>> GetCreateOrderRequestAsync()
         {
-            Logger?.LogDebug("{0} has been invoked", nameof(GetCreateOrderRequestAsync));
+            Logger?.LogDebug("'{0}' has been invoked", nameof(GetCreateOrderRequestAsync));
 
             var response = new SingleResponse<CreateOrderRequest>();
 
@@ -215,7 +215,7 @@ namespace OnlineStore.Core.BusinessLayer
 
         public async Task<ISingleResponse<OrderHeader>> CreateOrderAsync(OrderHeader header, OrderDetail[] details)
         {
-            Logger?.LogDebug("{0} has been invoked", nameof(CreateOrderAsync));
+            Logger?.LogDebug("'{0}' has been invoked", nameof(CreateOrderAsync));
 
             var response = new SingleResponse<OrderHeader>();
 
@@ -311,7 +311,7 @@ namespace OnlineStore.Core.BusinessLayer
 
         public async Task<ISingleResponse<OrderHeader>> CloneOrderAsync(long id)
         {
-            Logger?.LogDebug("{0} has been invoked", nameof(CloneOrderAsync));
+            Logger?.LogDebug("'{0}' has been invoked", nameof(CloneOrderAsync));
 
             var response = new SingleResponse<OrderHeader>();
 
@@ -320,36 +320,36 @@ namespace OnlineStore.Core.BusinessLayer
                 // Retrieve order by id
                 var entity = await DbContext.GetOrderAsync(new OrderHeader(id));
 
-                if (entity != null)
+                if (entity == null)
+                    return response;
+
+                // Create a new instance for order and set values from existing order
+                response.Model = new OrderHeader
                 {
-                    // Create a new instance for order and set values from existing order
-                    response.Model = new OrderHeader
-                    {
-                        ID = entity.ID,
-                        OrderDate = entity.OrderDate,
-                        CustomerID = entity.CustomerID,
-                        EmployeeID = entity.EmployeeID,
-                        ShipperID = entity.ShipperID,
-                        Total = entity.Total,
-                        Comments = entity.Comments
-                    };
+                    ID = entity.ID,
+                    OrderDate = entity.OrderDate,
+                    CustomerID = entity.CustomerID,
+                    EmployeeID = entity.EmployeeID,
+                    ShipperID = entity.ShipperID,
+                    Total = entity.Total,
+                    Comments = entity.Comments
+                };
 
-                    if (entity.OrderDetails?.Count > 0)
-                    {
-                        response.Model.OrderDetails = new Collection<OrderDetail>();
+                if (entity.OrderDetails?.Count > 0)
+                {
+                    response.Model.OrderDetails = new Collection<OrderDetail>();
 
-                        foreach (var detail in entity.OrderDetails)
+                    foreach (var detail in entity.OrderDetails)
+                    {
+                        // Add order detail clone to collection
+                        response.Model.OrderDetails.Add(new OrderDetail
                         {
-                            // Add order detail clone to collection
-                            response.Model.OrderDetails.Add(new OrderDetail
-                            {
-                                ProductID = detail.ProductID,
-                                ProductName = detail.ProductName,
-                                UnitPrice = detail.UnitPrice,
-                                Quantity = detail.Quantity,
-                                Total = detail.Total
-                            });
-                        }
+                            ProductID = detail.ProductID,
+                            ProductName = detail.ProductName,
+                            UnitPrice = detail.UnitPrice,
+                            Quantity = detail.Quantity,
+                            Total = detail.Total
+                        });
                     }
                 }
             }
@@ -363,7 +363,7 @@ namespace OnlineStore.Core.BusinessLayer
 
         public async Task<IResponse> RemoveOrderAsync(long id)
         {
-            Logger?.LogDebug("{0} has been invoked", nameof(RemoveOrderAsync));
+            Logger?.LogDebug("'{0}' has been invoked", nameof(RemoveOrderAsync));
 
             var response = new Response();
 

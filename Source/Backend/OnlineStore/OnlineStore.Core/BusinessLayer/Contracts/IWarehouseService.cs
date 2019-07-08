@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using OnlineStore.Core.BusinessLayer.Requests;
 using OnlineStore.Core.BusinessLayer.Responses;
 using OnlineStore.Core.Domain.Warehouse;
 
@@ -12,6 +13,8 @@ namespace OnlineStore.Core.BusinessLayer.Contracts
 
         Task<IListResponse<ProductInventory>> GetProductInventories(int? productID = null, string warehouseID = null);
 
-        Task<SingleResponse<Product>> CreateProductAsync(Product entity);
+        Task<ISingleResponse<Product>> CreateProductAsync(Product entity);
+
+        Task<ISingleResponse<Product>> UpdateProductUnitPriceAsync(int? productID, UpdateProductUnitPriceRequest request);
     }
 }

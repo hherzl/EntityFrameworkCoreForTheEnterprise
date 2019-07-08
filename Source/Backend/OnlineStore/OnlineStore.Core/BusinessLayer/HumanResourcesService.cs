@@ -12,8 +12,8 @@ namespace OnlineStore.Core.BusinessLayer
 {
     public class HumanResourcesService : Service, IHumanResourcesService
     {
-        public HumanResourcesService(ILogger<HumanResourcesService> logger, IUserInfo userInfo, OnlineStoreDbContext dbContext)
-            : base(logger, userInfo, dbContext)
+        public HumanResourcesService(ILogger<HumanResourcesService> logger, OnlineStoreDbContext dbContext, IUserInfo userInfo)
+            : base(logger, dbContext, userInfo)
         {
         }
 

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OnlineStore.Common.Helpers;
+using OnlineStore.Core.BusinessLayer.Requests;
 using OnlineStore.Core.BusinessLayer.Responses;
 using OnlineStore.Core.Domain.Warehouse;
 using OnlineStore.WebAPI.Controllers;
@@ -63,7 +64,7 @@ namespace OnlineStore.WebAPI.UnitTests
             var controller = new WarehouseController(LoggingHelper.GetLogger<WarehouseController>(), service);
             var request = new PostProductRequest
             {
-                
+
                 ProductName = "Test product",
                 ProductCategoryID = 100,
                 UnitPrice = 9.99m,
@@ -75,6 +76,27 @@ namespace OnlineStore.WebAPI.UnitTests
             var value = response.Value as ISingleResponse<Product>;
 
             service.Dispose();
+
+            // Assert
+            Assert.False(value.DidError);
+        }
+
+        [Fact]
+        public async Task TestUpdateProductUnitPriceAsync()
+        {
+            // Arrange
+            var userInfo = IdentityMocker.GetWarehouseOperatorIdentity().GetUserInfo();
+            var service = ServiceMocker.GetWarehouseService(userInfo, nameof(TestUpdateProductUnitPriceAsync));
+            var controller = new WarehouseController(LoggingHelper.GetLogger<WarehouseController>(), service);
+            var id = 1;
+            var request = new UpdateProductUnitPriceRequest
+            {
+                UnitPrice = 14.99m
+            };
+
+            // Act
+            var response = await controller.PutProductUnitPriceAsync(id, request) as ObjectResult;
+            var value = response.Value as ISingleResponse<Product>;
 
             // Assert
             Assert.False(value.DidError);

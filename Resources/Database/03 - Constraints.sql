@@ -45,6 +45,10 @@ alter table [Warehouse].[Product]
 	add constraint [U_Production_Product_ProductName] unique ([ProductName])
 go
 
+alter table [Warehouse].[ProductUnitPriceHistory]
+	add constraint [U_Production_ProductUnitPriceHistory] unique ([ID])
+go
+
 alter table [Warehouse].[ProductInventory]
 	add constraint [PK_Production_ProductInventory] primary key ([ID])
 go
@@ -110,6 +114,11 @@ go
 alter table [Warehouse].[Product]
 	add constraint [FK_Warehouse_Product_ProductCategory] foreign key ([ProductCategoryID])
 		references [Warehouse].[ProductCategory]
+go
+
+alter table [Warehouse].[ProductUnitPriceHistory]
+	add constraint [FK_Warehouse_ProductUnitPriceHistory_Product] foreign key ([ProductID])
+		references [Warehouse].[Product]
 go
 
 alter table [Warehouse].[ProductInventory]

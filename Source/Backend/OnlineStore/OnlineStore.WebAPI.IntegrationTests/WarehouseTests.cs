@@ -98,5 +98,28 @@ namespace OnlineStore.WebAPI.IntegrationTests
             // Assert
             response.EnsureSuccessStatusCode();
         }
+
+        [Fact]
+        public async Task PutProductUnitPriceAsWarehouseManagerAsync()
+        {
+            // Arrange
+            var token = await TokenHelper.GetOnlineStoreTokenForWarehouseManagerAsync();
+            var request = new
+            {
+                Url = string.Format("/api/v1/Warehouse/ProductUnitPrice/{0}", 1),
+                Body = new
+                {
+                    UnitPrice = 14.99m
+                }
+            };
+
+            // Act
+            apiClient.SetBearerToken(token.AccessToken);
+
+            var response = await apiClient.PutAsync(request.Url, ContentHelper.GetStringContent(request.Body));
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+        }
     }
 }
