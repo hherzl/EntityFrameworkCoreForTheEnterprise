@@ -46,7 +46,7 @@ alter table [Warehouse].[Product]
 go
 
 alter table [Warehouse].[ProductUnitPriceHistory]
-	add constraint [U_Production_ProductUnitPriceHistory] unique ([ID])
+	add constraint [U_Production_ProductUnitPriceHistory] primary key ([ID])
 go
 
 alter table [Warehouse].[ProductInventory]
