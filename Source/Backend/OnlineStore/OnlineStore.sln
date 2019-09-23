@@ -3,19 +3,33 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.Common", "OnlineStore.Common\OnlineStore.Common.csproj", "{1587FAE7-DC72-4276-95D1-317E689B05EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore.Common", "OnlineStore.Common\OnlineStore.Common.csproj", "{1587FAE7-DC72-4276-95D1-317E689B05EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.WebAPI", "OnlineStore.WebAPI\OnlineStore.WebAPI.csproj", "{E328D805-80E6-4C48-B97F-814E249040E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore.WebAPI", "OnlineStore.WebAPI\OnlineStore.WebAPI.csproj", "{E328D805-80E6-4C48-B97F-814E249040E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.Core", "OnlineStore.Core\OnlineStore.Core.csproj", "{66B9F131-E564-4A3A-BEF4-5D7962F8A6D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore.Core", "OnlineStore.Core\OnlineStore.Core.csproj", "{66B9F131-E564-4A3A-BEF4-5D7962F8A6D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.Mocker", "OnlineStore.Mocker\OnlineStore.Mocker.csproj", "{AD37BC0C-CE52-4E88-9659-6709F4FA3726}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore.Mocker", "OnlineStore.Mocker\OnlineStore.Mocker.csproj", "{AD37BC0C-CE52-4E88-9659-6709F4FA3726}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.IdentityServer", "OnlineStore.IdentityServer\OnlineStore.IdentityServer.csproj", "{4E4E66D8-EC35-487E-A161-BECF7A790886}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore.IdentityServer", "OnlineStore.IdentityServer\OnlineStore.IdentityServer.csproj", "{4E4E66D8-EC35-487E-A161-BECF7A790886}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.WebAPI.UnitTests", "OnlineStore.WebAPI.UnitTests\OnlineStore.WebAPI.UnitTests.csproj", "{45C2C373-13A9-4628-A7C2-061E7564DFDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore.WebAPI.UnitTests", "OnlineStore.WebAPI.UnitTests\OnlineStore.WebAPI.UnitTests.csproj", "{45C2C373-13A9-4628-A7C2-061E7564DFDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.WebAPI.IntegrationTests", "OnlineStore.WebAPI.IntegrationTests\OnlineStore.WebAPI.IntegrationTests.csproj", "{A5B84EEE-2523-4A51-AAC7-A92EA582114C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore.WebAPI.IntegrationTests", "OnlineStore.WebAPI.IntegrationTests\OnlineStore.WebAPI.IntegrationTests.csproj", "{A5B84EEE-2523-4A51-AAC7-A92EA582114C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.API.Common", "OnlineStore.API.Common\OnlineStore.API.Common.csproj", "{A91E8284-128B-4B08-9685-59B018E7429E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.API.Identity", "OnlineStore.API.Identity\OnlineStore.API.Identity.csproj", "{AF7206A7-AE23-4213-925B-F32ECD99DF08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.API.Warehouse", "OnlineStore.API.Warehouse\OnlineStore.API.Warehouse.csproj", "{7E2FA654-1DAD-4F04-9BFD-41F7B069F0A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.API.Sales", "OnlineStore.API.Sales\OnlineStore.API.Sales.csproj", "{B66F46F8-62C1-4608-A007-D4DE4819BB42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.API.UnitTests.Common", "OnlineStore.API.UnitTests.Common\OnlineStore.API.UnitTests.Common.csproj", "{56702783-C8A6-4405-8D61-CBCF84FDF7F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.API.UnitTests.Warehouse", "OnlineStore.API.UnitTests.Warehouse\OnlineStore.API.UnitTests.Warehouse.csproj", "{9311DB60-F069-4DBA-A63D-1425FC94B119}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.API.UnitTests.Sales", "OnlineStore.API.UnitTests.Sales\OnlineStore.API.UnitTests.Sales.csproj", "{A7BA408E-D073-438B-9363-8CB6D45693F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +65,34 @@ Global
 		{A5B84EEE-2523-4A51-AAC7-A92EA582114C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5B84EEE-2523-4A51-AAC7-A92EA582114C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5B84EEE-2523-4A51-AAC7-A92EA582114C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A91E8284-128B-4B08-9685-59B018E7429E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A91E8284-128B-4B08-9685-59B018E7429E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A91E8284-128B-4B08-9685-59B018E7429E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A91E8284-128B-4B08-9685-59B018E7429E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF7206A7-AE23-4213-925B-F32ECD99DF08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF7206A7-AE23-4213-925B-F32ECD99DF08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF7206A7-AE23-4213-925B-F32ECD99DF08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF7206A7-AE23-4213-925B-F32ECD99DF08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E2FA654-1DAD-4F04-9BFD-41F7B069F0A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E2FA654-1DAD-4F04-9BFD-41F7B069F0A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E2FA654-1DAD-4F04-9BFD-41F7B069F0A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E2FA654-1DAD-4F04-9BFD-41F7B069F0A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B66F46F8-62C1-4608-A007-D4DE4819BB42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B66F46F8-62C1-4608-A007-D4DE4819BB42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B66F46F8-62C1-4608-A007-D4DE4819BB42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B66F46F8-62C1-4608-A007-D4DE4819BB42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56702783-C8A6-4405-8D61-CBCF84FDF7F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56702783-C8A6-4405-8D61-CBCF84FDF7F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56702783-C8A6-4405-8D61-CBCF84FDF7F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56702783-C8A6-4405-8D61-CBCF84FDF7F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9311DB60-F069-4DBA-A63D-1425FC94B119}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9311DB60-F069-4DBA-A63D-1425FC94B119}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9311DB60-F069-4DBA-A63D-1425FC94B119}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9311DB60-F069-4DBA-A63D-1425FC94B119}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7BA408E-D073-438B-9363-8CB6D45693F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7BA408E-D073-438B-9363-8CB6D45693F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7BA408E-D073-438B-9363-8CB6D45693F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7BA408E-D073-438B-9363-8CB6D45693F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
