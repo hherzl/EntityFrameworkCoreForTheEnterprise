@@ -6,12 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="IdentityModel" Version="4.0.0" />
+    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="2.7.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\OnlineStore.API.Common\OnlineStore.API.Common.csproj" />
+    <ProjectReference Include="..\OnlineStore.IdentityServer\OnlineStore.IdentityServer.csproj" />
   </ItemGroup>
 
 </Project>
