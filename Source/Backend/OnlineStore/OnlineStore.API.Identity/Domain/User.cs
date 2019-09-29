@@ -1,4 +1,4 @@
-﻿namespace OnlineStore.API.Identity.Models
+﻿namespace OnlineStore.API.Identity.Domain
 {
     public class User
     {

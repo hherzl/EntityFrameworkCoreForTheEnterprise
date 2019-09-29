@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using IdentityServer4.Models;
 using IdentityServer4.Validation;
-using OnlineStore.API.Identity.Models;
+using OnlineStore.API.Identity.Domain;
 
 namespace OnlineStore.API.Identity.Validation
 {

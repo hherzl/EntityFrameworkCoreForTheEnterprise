@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using OnlineStore.API.Identity.Models;
+using OnlineStore.API.Identity.Domain;
 using OnlineStore.API.Identity.Services;
 using OnlineStore.API.Identity.Validation;
 
