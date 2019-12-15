@@ -3,15 +3,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using OnlineStore.Core.BusinessLayer.Contracts;
-using OnlineStore.Core.BusinessLayer.Requests;
 using OnlineStore.API.Common.Clients.Contracts;
 using OnlineStore.API.Common.Clients.Models;
-using OnlineStore.API.Common.Filters;
 using OnlineStore.API.Common.Controllers;
+using OnlineStore.API.Common.Filters;
 using OnlineStore.API.Common.Responses;
-using OnlineStore.API.Sales.Security;
 using OnlineStore.API.Sales.Requests;
+using OnlineStore.API.Sales.Security;
+using OnlineStore.Core.BusinessLayer.Contracts;
+using OnlineStore.Core.BusinessLayer.Requests;
 
 namespace OnlineStore.API.Sales.Controllers
 {

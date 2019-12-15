@@ -18,8 +18,8 @@ namespace OnlineStore.API.Warehouse.Controllers
     [Route("api/v1/[controller]")]
     public class WarehouseController : OnlineStoreController
     {
-        protected ILogger Logger;
-        protected IWarehouseService Service;
+        readonly ILogger Logger;
+        readonly IWarehouseService Service;
 
         public WarehouseController(ILogger<WarehouseController> logger, IWarehouseService service)
             : base()

@@ -48,10 +48,7 @@ namespace OnlineStore.API.Sales
             /* Setting dependency injection */
 
             // For DbContext
-            services.AddDbContext<OnlineStoreDbContext>(builder =>
-            {
-                builder.UseSqlServer(Configuration["ConnectionStrings:OnlineStore"]);
-            });
+            services.AddDbContext<OnlineStoreDbContext>(builder =>builder.UseSqlServer(Configuration["ConnectionStrings:OnlineStore"]));
 
             // User info
             services.AddScoped<IUserInfo, UserInfo>();
@@ -110,7 +107,7 @@ namespace OnlineStore.API.Sales
 
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new Info { Title = "Online Store API", Version = "v1" });
+                options.SwaggerDoc("v1", new Info { Title = "Online Store Sales API", Version = "v1" });
 
                 // Get xml comments path
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
@@ -149,7 +146,7 @@ namespace OnlineStore.API.Sales
 
             app.UseSwagger();
 
-            app.UseSwaggerUI(options => options.SwaggerEndpoint("/swagger/v1/swagger.json", "Online Store API"));
+            app.UseSwaggerUI(options => options.SwaggerEndpoint("/swagger/v1/swagger.json", "Online Store Sales API"));
 
             app.UseMvc();
         }
