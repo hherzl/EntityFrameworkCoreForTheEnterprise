@@ -20,17 +20,13 @@ namespace OnlineStore.API.Sales.Controllers
     [ApiController]
     public class SalesController : OnlineStoreController
     {
-        protected readonly ILogger Logger;
-        protected readonly IRothschildHouseIdentityClient RothschildHouseIdentityClient;
-        protected readonly IRothschildHousePaymentClient RothschildHousePaymentClient;
-        protected readonly ISalesService SalesService;
+        readonly ILogger Logger;
+        readonly IRothschildHouseIdentityClient RothschildHouseIdentityClient;
+        readonly IRothschildHousePaymentClient RothschildHousePaymentClient;
+        readonly ISalesService SalesService;
 
-        public SalesController(
-            ILogger<SalesController> logger,
-            IRothschildHouseIdentityClient rothschildHouseIdentityClient,
-            IRothschildHousePaymentClient rothschildHousePaymentClient,
-            ISalesService salesService
-        ) : base()
+        public SalesController(ILogger<SalesController> logger, IRothschildHouseIdentityClient rothschildHouseIdentityClient, IRothschildHousePaymentClient rothschildHousePaymentClient, ISalesService salesService)
+            : base()
         {
             Logger = logger;
             RothschildHouseIdentityClient = rothschildHouseIdentityClient;
