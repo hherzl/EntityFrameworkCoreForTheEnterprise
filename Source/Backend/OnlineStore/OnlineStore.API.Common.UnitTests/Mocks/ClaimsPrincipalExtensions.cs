@@ -2,7 +2,7 @@
 using IdentityModel;
 using OnlineStore.Core;
 
-namespace OnlineStore.API.Common.UnitTests.Mockers
+namespace OnlineStore.API.Common.UnitTests.Mocks
 {
     public static class ClaimsPrincipalExtensions
     {

@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OnlineStore.API.Common.UnitTests\OnlineStore.API.Common.UnitTests.csproj" />
     <ProjectReference Include="..\OnlineStore.API.Sales\OnlineStore.API.Sales.csproj" />
   </ItemGroup>
 

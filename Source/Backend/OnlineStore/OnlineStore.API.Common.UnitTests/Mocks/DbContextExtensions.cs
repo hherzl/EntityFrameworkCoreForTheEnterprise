@@ -3,7 +3,7 @@ using OnlineStore.Core.Domain;
 using OnlineStore.Core.Domain.Dbo;
 using OnlineStore.Core.Domain.Warehouse;
 
-namespace OnlineStore.API.Warehouse.UnitTests.Mockers
+namespace OnlineStore.API.Common.UnitTests.Mocks
 {
     public static class DbContextExtensions
     {

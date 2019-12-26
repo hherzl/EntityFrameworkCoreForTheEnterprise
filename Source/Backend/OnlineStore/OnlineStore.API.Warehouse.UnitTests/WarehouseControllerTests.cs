@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using OnlineStore.API.Common.UnitTests.Mockers;
+using OnlineStore.API.Common.UnitTests.Mocks;
 using OnlineStore.API.Warehouse.Controllers;
-using OnlineStore.API.Warehouse.UnitTests.Mockers;
+using OnlineStore.API.Warehouse.UnitTests.Mocks;
 using OnlineStore.Common.Helpers;
 using OnlineStore.Core.BusinessLayer.Responses;
 using OnlineStore.Core.Domain.Warehouse;
