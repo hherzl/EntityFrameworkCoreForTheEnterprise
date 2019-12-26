@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RothschildHouse.Models
+namespace RothschildHouse.Domain
 {
 #pragma warning disable CS1591
     public static class DomainDrivenDesignExtensions

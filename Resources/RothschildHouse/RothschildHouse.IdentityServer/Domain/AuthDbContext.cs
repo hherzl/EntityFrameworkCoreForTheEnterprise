@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace RothschildHouse.IdentityServer.Models
+namespace RothschildHouse.IdentityServer.Domain
 {
     public class AuthDbContext : DbContext
     {

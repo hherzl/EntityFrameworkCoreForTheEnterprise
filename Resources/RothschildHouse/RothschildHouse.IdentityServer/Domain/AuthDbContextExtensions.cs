@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using IdentityModel;
 
-namespace RothschildHouse.IdentityServer.Models
+namespace RothschildHouse.IdentityServer.Domain
 {
     public static class AuthDbContextExtensions
     {

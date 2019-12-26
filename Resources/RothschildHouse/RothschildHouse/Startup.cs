@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RothschildHouse.Controllers;
-using RothschildHouse.Models;
+using RothschildHouse.Domain;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace RothschildHouse

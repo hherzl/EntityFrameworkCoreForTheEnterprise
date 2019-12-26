@@ -1,4 +1,4 @@
-﻿namespace RothschildHouse.IdentityServer.Models
+﻿namespace RothschildHouse.IdentityServer.Domain
 {
     public class User
     {

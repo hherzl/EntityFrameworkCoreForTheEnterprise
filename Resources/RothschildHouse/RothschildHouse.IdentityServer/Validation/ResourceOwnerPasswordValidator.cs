@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using IdentityServer4.Models;
 using IdentityServer4.Validation;
-using RothschildHouse.IdentityServer.Models;
+using RothschildHouse.IdentityServer.Domain;
 
 namespace RothschildHouse.IdentityServer.Validation
 {

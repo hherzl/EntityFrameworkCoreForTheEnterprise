@@ -2,15 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace RothschildHouse.Models
+namespace RothschildHouse.Domain
 {
 #pragma warning disable CS1591
     public class Person
     {
-        public Person()
-        {
-        }
-
         public Guid? PersonID { get; set; }
 
         public string GivenName { get; set; }
@@ -26,10 +22,6 @@ namespace RothschildHouse.Models
 
     public class CreditCard
     {
-        public CreditCard()
-        {
-        }
-
         public Guid? CreditCardID { get; set; }
 
         public Guid? PersonID { get; set; }
@@ -53,10 +45,6 @@ namespace RothschildHouse.Models
 
     public class PaymentMethod
     {
-        public PaymentMethod()
-        {
-        }
-
         public Guid? PaymentMethodID { get; set; }
 
         public string PaymentMethodName { get; set; }
@@ -64,10 +52,6 @@ namespace RothschildHouse.Models
 
     public class PaymentTransaction
     {
-        public PaymentTransaction()
-        {
-        }
-
         public Guid? PaymentTransactionID { get; set; }
 
         public Guid? CreditCardID { get; set; }

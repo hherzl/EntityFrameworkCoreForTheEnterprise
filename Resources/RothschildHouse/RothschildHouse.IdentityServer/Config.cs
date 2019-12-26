@@ -10,7 +10,7 @@ namespace RothschildHouse.IdentityServer
         public static IEnumerable<ApiResource> GetApiResources()
             => new List<ApiResource>
             {
-                new ApiResource("RothschildHouseWebAPI", "Rothschild House Web API")
+                new ApiResource("RothschildHouseAPI", "Rothschild House API")
             };
 
         public static IEnumerable<Client> GetClients()
@@ -26,7 +26,7 @@ namespace RothschildHouse.IdentityServer
                     },
                     AllowedScopes =
                     {
-                        "RothschildHouseWebAPI"
+                        "RothschildHouseAPI"
                     },
                     Claims =
                     {

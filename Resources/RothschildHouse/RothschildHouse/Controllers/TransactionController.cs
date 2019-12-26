@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using RothschildHouse.Models;
+using RothschildHouse.Domain;
 using RothschildHouse.Requests;
 using RothschildHouse.Responses;
 
@@ -18,8 +18,8 @@ namespace RothschildHouse.Controllers
     [Authorize]
     public class TransactionController : ControllerBase
     {
-        private readonly ILogger<TransactionController> Logger;
-        private readonly PaymentDbContext DbContext;
+        readonly ILogger<TransactionController> Logger;
+        readonly PaymentDbContext DbContext;
 
         public TransactionController(ILogger<TransactionController> logger, PaymentDbContext dbContext)
         {

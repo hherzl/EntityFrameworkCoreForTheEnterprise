@@ -1,6 +1,6 @@
 ﻿using RothschildHouse.Requests;
 
-namespace RothschildHouse.Models
+namespace RothschildHouse.Domain
 {
 #pragma warning disable CS1591
     public static class CreditCardExtensions
