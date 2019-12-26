@@ -11,7 +11,7 @@ namespace OnlineStore.Mocker
 {
     public class Program
     {
-        private static readonly ILogger Logger;
+        static readonly ILogger Logger;
 
         static Program()
         {
@@ -19,9 +19,7 @@ namespace OnlineStore.Mocker
         }
 
         public static void Main(string[] args)
-        {
-            MainAsync(args).GetAwaiter().GetResult();
-        }
+            => MainAsync(args).GetAwaiter().GetResult();
 
         static async Task MainAsync(string[] args)
         {

@@ -10,7 +10,9 @@ namespace OnlineStore.Mocker
 
         static DbContextMocker()
         {
-            var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
 
             ConnectionString = configuration.GetSection("ConnectionStrings")["OnlineStore"];
         }

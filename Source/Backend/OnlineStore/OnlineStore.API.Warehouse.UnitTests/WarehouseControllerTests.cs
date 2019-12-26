@@ -5,7 +5,6 @@ using OnlineStore.API.Common.UnitTests.Mocks;
 using OnlineStore.API.Warehouse.Controllers;
 using OnlineStore.API.Warehouse.Requests;
 using OnlineStore.API.Warehouse.UnitTests.Mocks;
-using OnlineStore.Common.Helpers;
 using OnlineStore.Core.Business.Requests;
 using OnlineStore.Core.Business.Responses;
 using OnlineStore.Core.Domain.Warehouse;
@@ -21,7 +20,7 @@ namespace OnlineStore.API.Warehouse.UnitTests
             // Arrange
             var userInfo = IdentityMocker.GetWarehouseOperatorIdentity().GetUserInfo();
             var service = ServiceMocker.GetWarehouseService(userInfo, nameof(TestGetProductsAsync), true);
-            var controller = new WarehouseController(LoggingHelper.GetLogger<WarehouseController>(), service);
+            var controller = new WarehouseController(null, service);
 
             // Act
             var response = await controller.GetProductsAsync() as ObjectResult;
@@ -40,7 +39,7 @@ namespace OnlineStore.API.Warehouse.UnitTests
             // Arrange
             var userInfo = IdentityMocker.GetWarehouseOperatorIdentity().GetUserInfo();
             var service = ServiceMocker.GetWarehouseService(userInfo, nameof(TestGetInventoryByProductTestAsync), true);
-            var controller = new WarehouseController(LoggingHelper.GetLogger<WarehouseController>(), service);
+            var controller = new WarehouseController(null, service);
             var productID = 1;
             var locationID = "W01";
 
@@ -61,7 +60,7 @@ namespace OnlineStore.API.Warehouse.UnitTests
             // Arrange
             var userInfo = IdentityMocker.GetWarehouseOperatorIdentity().GetUserInfo();
             var service = ServiceMocker.GetWarehouseService(userInfo, nameof(TestCreateProductTestAsync));
-            var controller = new WarehouseController(LoggingHelper.GetLogger<WarehouseController>(), service);
+            var controller = new WarehouseController(null, service);
             var request = new PostProductRequest
             {
 
@@ -87,7 +86,7 @@ namespace OnlineStore.API.Warehouse.UnitTests
             // Arrange
             var userInfo = IdentityMocker.GetWarehouseOperatorIdentity().GetUserInfo();
             var service = ServiceMocker.GetWarehouseService(userInfo, nameof(TestUpdateProductUnitPriceAsync));
-            var controller = new WarehouseController(LoggingHelper.GetLogger<WarehouseController>(), service);
+            var controller = new WarehouseController(null, service);
             var id = 1;
             var request = new UpdateProductUnitPriceRequest
             {
