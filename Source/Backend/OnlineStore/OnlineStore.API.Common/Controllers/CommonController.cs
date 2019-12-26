@@ -2,6 +2,7 @@
 
 namespace OnlineStore.API.Common.Controllers
 {
+#pragma warning disable CS1591
     [Route("api/[controller]")]
     [ApiController]
     public class CommonController : OnlineStoreController
@@ -11,4 +12,5 @@ namespace OnlineStore.API.Common.Controllers
         {
         }
     }
+#pragma warning restore CS1591
 }
