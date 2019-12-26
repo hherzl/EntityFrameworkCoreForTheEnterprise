@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace OnlineStore.API.Common
 {
+#pragma warning disable CS1591
     public class Program
     {
         public static void Main(string[] args)
@@ -14,4 +15,5 @@ namespace OnlineStore.API.Common
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
     }
+#pragma warning restore CS1591
 }

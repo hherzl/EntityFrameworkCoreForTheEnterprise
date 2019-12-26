@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OnlineStore.API.Common</name>
+    </assembly>
+    <members>
+        <member name="T:OnlineStore.API.Common.Clients.Models.PostPaymentRequest">
+            <summary>
+            Represents post payment model
+            </summary>
+        </member>
+        <member name="M:OnlineStore.API.Common.Clients.Models.PostPaymentRequest.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:OnlineStore.API.Common.Clients.Models.PostPaymentRequest"/>
+            </summary>
+        </member>
+        <member name="P:OnlineStore.API.Common.Clients.Models.PostPaymentRequest.CardHolderName">
+            <summary>
+            Card holder name
+            </summary>
+        </member>
+        <member name="P:OnlineStore.API.Common.Clients.Models.PostPaymentRequest.IssuingNetwork">
+            <summary>
+            Issuing network
+            </summary>
+        </member>
+        <member name="P:OnlineStore.API.Common.Clients.Models.PostPaymentRequest.CardNumber">
+            <summary>
+            Card number
+            </summary>
+        </member>
+        <member name="P:OnlineStore.API.Common.Clients.Models.PostPaymentRequest.ExpirationDate">
+            <summary>
+            Expiration date
+            </summary>
+        </member>
+        <member name="P:OnlineStore.API.Common.Clients.Models.PostPaymentRequest.Cvv">
+            <summary>
+            Cvv (Card Verification Value)
+            </summary>
+        </member>
+        <member name="P:OnlineStore.API.Common.Clients.Models.PostPaymentRequest.Amount">
+            <summary>
+            Amount
+            </summary>
+        </member>
+    </members>
+</doc>
