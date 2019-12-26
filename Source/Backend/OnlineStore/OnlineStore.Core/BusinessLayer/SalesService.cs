@@ -4,16 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using OnlineStore.Core.BusinessLayer.Contracts;
-using OnlineStore.Core.BusinessLayer.Requests;
-using OnlineStore.Core.BusinessLayer.Responses;
+using OnlineStore.Core.Business.Contracts;
+using OnlineStore.Core.Business.Requests;
+using OnlineStore.Core.Business.Responses;
 using OnlineStore.Core.Domain;
 using OnlineStore.Core.Domain.Dbo;
 using OnlineStore.Core.Domain.Repositories;
 using OnlineStore.Core.Domain.Sales;
 using OnlineStore.Core.Domain.Warehouse;
 
-namespace OnlineStore.Core.BusinessLayer
+namespace OnlineStore.Core.Business
 {
     public class SalesService : Service, ISalesService
     {

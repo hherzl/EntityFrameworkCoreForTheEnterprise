@@ -1,7 +1,7 @@
 ﻿using System;
 using OnlineStore.Core.Domain;
 
-namespace OnlineStore.Core.BusinessLayer.Contracts
+namespace OnlineStore.Core.Business.Contracts
 {
     public interface IService : IDisposable
     {

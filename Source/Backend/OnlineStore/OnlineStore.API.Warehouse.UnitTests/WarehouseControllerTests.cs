@@ -6,8 +6,8 @@ using OnlineStore.API.Warehouse.Controllers;
 using OnlineStore.API.Warehouse.Requests;
 using OnlineStore.API.Warehouse.UnitTests.Mocks;
 using OnlineStore.Common.Helpers;
-using OnlineStore.Core.BusinessLayer.Requests;
-using OnlineStore.Core.BusinessLayer.Responses;
+using OnlineStore.Core.Business.Requests;
+using OnlineStore.Core.Business.Responses;
 using OnlineStore.Core.Domain.Warehouse;
 using Xunit;
 

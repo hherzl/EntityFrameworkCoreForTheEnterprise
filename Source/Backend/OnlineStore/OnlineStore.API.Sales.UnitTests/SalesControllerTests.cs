@@ -7,8 +7,8 @@ using OnlineStore.API.Common.UnitTests.Mocks;
 using OnlineStore.API.Sales.Controllers;
 using OnlineStore.API.Sales.Requests;
 using OnlineStore.API.Sales.UnitTests.Mocks;
-using OnlineStore.Core.BusinessLayer.Requests;
-using OnlineStore.Core.BusinessLayer.Responses;
+using OnlineStore.Core.Business.Requests;
+using OnlineStore.Core.Business.Responses;
 using OnlineStore.Core.Domain.Sales;
 using Xunit;
 

@@ -14,8 +14,8 @@ using OnlineStore.API.Common.Clients;
 using OnlineStore.API.Warehouse.PolicyRequirements;
 using OnlineStore.API.Warehouse.Security;
 using OnlineStore.Core;
-using OnlineStore.Core.BusinessLayer;
-using OnlineStore.Core.BusinessLayer.Contracts;
+using OnlineStore.Core.Business;
+using OnlineStore.Core.Business.Contracts;
 using OnlineStore.Core.Domain;
 using Swashbuckle.AspNetCore.Swagger;
 

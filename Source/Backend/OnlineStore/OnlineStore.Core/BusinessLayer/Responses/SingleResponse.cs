@@ -1,4 +1,4 @@
-﻿namespace OnlineStore.Core.BusinessLayer.Responses
+﻿namespace OnlineStore.Core.Business.Responses
 {
     public class SingleResponse<TModel> : ISingleResponse<TModel> where TModel : new()
     {

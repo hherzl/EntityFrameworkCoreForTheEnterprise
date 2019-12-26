@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
-using OnlineStore.Core.BusinessLayer.Contracts;
+using OnlineStore.Core.Business.Contracts;
 using OnlineStore.Core.Domain;
 
-namespace OnlineStore.Core.BusinessLayer
+namespace OnlineStore.Core.Business
 {
     public abstract class Service : IService
     {

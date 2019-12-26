@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using OnlineStore.Core.BusinessLayer.Requests;
-using OnlineStore.Core.BusinessLayer.Responses;
+using OnlineStore.Core.Business.Requests;
+using OnlineStore.Core.Business.Responses;
 using OnlineStore.Core.Domain.Dbo;
 using OnlineStore.Core.Domain.Sales;
 
-namespace OnlineStore.Core.BusinessLayer.Contracts
+namespace OnlineStore.Core.Business.Contracts
 {
     public interface ISalesService : IService
     {

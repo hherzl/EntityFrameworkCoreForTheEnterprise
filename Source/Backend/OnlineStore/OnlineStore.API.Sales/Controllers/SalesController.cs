@@ -10,8 +10,8 @@ using OnlineStore.API.Common.Filters;
 using OnlineStore.API.Common.Responses;
 using OnlineStore.API.Sales.Requests;
 using OnlineStore.API.Sales.Security;
-using OnlineStore.Core.BusinessLayer.Contracts;
-using OnlineStore.Core.BusinessLayer.Requests;
+using OnlineStore.Core.Business.Contracts;
+using OnlineStore.Core.Business.Requests;
 
 namespace OnlineStore.API.Sales.Controllers
 {

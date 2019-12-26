@@ -1,4 +1,4 @@
-﻿namespace OnlineStore.Core.BusinessLayer
+﻿namespace OnlineStore.Core.Business
 {
     public class InvalidQuantityException : OnlineStoreException
     {

@@ -7,8 +7,8 @@ using OnlineStore.API.Common.Filters;
 using OnlineStore.API.Common.Responses;
 using OnlineStore.API.Warehouse.Requests;
 using OnlineStore.API.Warehouse.Security;
-using OnlineStore.Core.BusinessLayer.Contracts;
-using OnlineStore.Core.BusinessLayer.Requests;
+using OnlineStore.Core.Business.Contracts;
+using OnlineStore.Core.Business.Requests;
 
 namespace OnlineStore.API.Warehouse.Controllers
 {

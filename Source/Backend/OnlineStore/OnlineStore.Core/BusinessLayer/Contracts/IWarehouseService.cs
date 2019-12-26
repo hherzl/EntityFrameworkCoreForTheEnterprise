@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using OnlineStore.Core.BusinessLayer.Requests;
-using OnlineStore.Core.BusinessLayer.Responses;
+using OnlineStore.Core.Business.Requests;
+using OnlineStore.Core.Business.Responses;
 using OnlineStore.Core.Domain.Warehouse;
 
-namespace OnlineStore.Core.BusinessLayer.Contracts
+namespace OnlineStore.Core.Business.Contracts
 {
     public interface IWarehouseService : IService
     {

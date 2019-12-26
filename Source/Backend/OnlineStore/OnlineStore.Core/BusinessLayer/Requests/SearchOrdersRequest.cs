@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OnlineStore.Core.BusinessLayer.Requests
+namespace OnlineStore.Core.Business.Requests
 {
     public class SearchOrdersRequest
     {

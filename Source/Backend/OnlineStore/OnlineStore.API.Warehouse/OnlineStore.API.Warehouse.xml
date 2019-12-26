@@ -40,7 +40,7 @@
             <response code="404">If id is not exists</response>
             <response code="500">If there was an internal error</response>
         </member>
-        <member name="M:OnlineStore.API.Warehouse.Controllers.WarehouseController.PutProductUnitPriceAsync(System.Nullable{System.Int32},OnlineStore.Core.BusinessLayer.Requests.UpdateProductUnitPriceRequest)">
+        <member name="M:OnlineStore.API.Warehouse.Controllers.WarehouseController.PutProductUnitPriceAsync(System.Nullable{System.Int32},OnlineStore.Core.Business.Requests.UpdateProductUnitPriceRequest)">
             <summary>
             Updates the unit price for an existing product
             </summary>

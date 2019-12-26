@@ -1,6 +1,6 @@
 ﻿using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using OnlineStore.Core.BusinessLayer.Responses;
+using OnlineStore.Core.Business.Responses;
 
 namespace OnlineStore.API.Common.Responses
 {

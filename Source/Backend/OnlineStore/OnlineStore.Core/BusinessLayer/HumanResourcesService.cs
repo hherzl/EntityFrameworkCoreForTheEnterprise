@@ -2,13 +2,13 @@
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using OnlineStore.Core.BusinessLayer.Contracts;
-using OnlineStore.Core.BusinessLayer.Responses;
+using OnlineStore.Core.Business.Contracts;
+using OnlineStore.Core.Business.Responses;
 using OnlineStore.Core.Domain;
 using OnlineStore.Core.Domain.HumanResources;
 using OnlineStore.Core.Domain.Repositories;
 
-namespace OnlineStore.Core.BusinessLayer
+namespace OnlineStore.Core.Business
 {
     public class HumanResourcesService : Service, IHumanResourcesService
     {

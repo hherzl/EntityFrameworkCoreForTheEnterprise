@@ -4,7 +4,7 @@
         <name>OnlineStore.API.Sales</name>
     </assembly>
     <members>
-        <member name="M:OnlineStore.API.Sales.Controllers.SalesController.SearchOrdersAsync(OnlineStore.Core.BusinessLayer.Requests.SearchOrdersRequest)">
+        <member name="M:OnlineStore.API.Sales.Controllers.SalesController.SearchOrdersAsync(OnlineStore.Core.Business.Requests.SearchOrdersRequest)">
             <summary>
             Retrieves the orders placed by customers
             </summary>

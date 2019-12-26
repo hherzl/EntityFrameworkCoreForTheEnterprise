@@ -1,7 +1,7 @@
 ﻿using OnlineStore.Common.Helpers;
 using OnlineStore.Core;
-using OnlineStore.Core.BusinessLayer;
-using OnlineStore.Core.BusinessLayer.Contracts;
+using OnlineStore.Core.Business;
+using OnlineStore.Core.Business.Contracts;
 
 namespace OnlineStore.API.Common.UnitTests.Mocks
 {

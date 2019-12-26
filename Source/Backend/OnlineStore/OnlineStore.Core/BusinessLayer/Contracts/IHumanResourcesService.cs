@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using OnlineStore.Core.BusinessLayer.Responses;
+using OnlineStore.Core.Business.Responses;
 using OnlineStore.Core.Domain.HumanResources;
 
-namespace OnlineStore.Core.BusinessLayer.Contracts
+namespace OnlineStore.Core.Business.Contracts
 {
     public interface IHumanResourcesService : IService
     {

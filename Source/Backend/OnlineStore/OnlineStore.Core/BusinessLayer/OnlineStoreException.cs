@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OnlineStore.Core.BusinessLayer
+namespace OnlineStore.Core.Business
 {
     public class OnlineStoreException : Exception
     {

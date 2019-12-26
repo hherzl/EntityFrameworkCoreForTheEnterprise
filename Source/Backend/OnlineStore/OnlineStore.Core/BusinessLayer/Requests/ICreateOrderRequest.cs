@@ -2,7 +2,7 @@
 using OnlineStore.Core.Domain.Warehouse;
 using OnlineStore.Core.Domain.Sales;
 
-namespace OnlineStore.Core.BusinessLayer.Requests
+namespace OnlineStore.Core.Business.Requests
 {
     public interface ICreateOrderRequest : IRequest
     {
