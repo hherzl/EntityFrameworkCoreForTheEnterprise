@@ -15,13 +15,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore.API.Warehouse",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore.API.Sales", "OnlineStore.API.Sales\OnlineStore.API.Sales.csproj", "{B66F46F8-62C1-4608-A007-D4DE4819BB42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.API.Common.UnitTests", "OnlineStore.API.Common.UnitTests\OnlineStore.API.Common.UnitTests.csproj", "{EE8FC0D0-7D4E-4DAF-9F22-7877C41C2A79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore.API.Common.UnitTests", "OnlineStore.API.Common.UnitTests\OnlineStore.API.Common.UnitTests.csproj", "{EE8FC0D0-7D4E-4DAF-9F22-7877C41C2A79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.API.Warehouse.UnitTests", "OnlineStore.API.Warehouse.UnitTests\OnlineStore.API.Warehouse.UnitTests.csproj", "{1EFE184C-140D-4CAF-9FFB-CA1B55273C06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore.API.Warehouse.UnitTests", "OnlineStore.API.Warehouse.UnitTests\OnlineStore.API.Warehouse.UnitTests.csproj", "{1EFE184C-140D-4CAF-9FFB-CA1B55273C06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.API.Sales.UnitTests", "OnlineStore.API.Sales.UnitTests\OnlineStore.API.Sales.UnitTests.csproj", "{836472C6-FB5B-49F1-9184-33806F5954DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore.API.Sales.UnitTests", "OnlineStore.API.Sales.UnitTests\OnlineStore.API.Sales.UnitTests.csproj", "{836472C6-FB5B-49F1-9184-33806F5954DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.Common", "OnlineStore.Common\OnlineStore.Common.csproj", "{46282F3D-D7B1-4581-A471-009ACA287220}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore.Common", "OnlineStore.Common\OnlineStore.Common.csproj", "{46282F3D-D7B1-4581-A471-009ACA287220}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.API.Common.IntegrationTests", "OnlineStore.API.Common.IntegrationTests\OnlineStore.API.Common.IntegrationTests.csproj", "{CC11F244-2BAF-4E4A-B37C-1A1D47B9C3D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{46282F3D-D7B1-4581-A471-009ACA287220}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46282F3D-D7B1-4581-A471-009ACA287220}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46282F3D-D7B1-4581-A471-009ACA287220}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC11F244-2BAF-4E4A-B37C-1A1D47B9C3D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC11F244-2BAF-4E4A-B37C-1A1D47B9C3D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC11F244-2BAF-4E4A-B37C-1A1D47B9C3D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC11F244-2BAF-4E4A-B37C-1A1D47B9C3D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
