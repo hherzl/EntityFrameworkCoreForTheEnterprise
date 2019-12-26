@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore.Common", "Onlin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.API.Common.IntegrationTests", "OnlineStore.API.Common.IntegrationTests\OnlineStore.API.Common.IntegrationTests.csproj", "{CC11F244-2BAF-4E4A-B37C-1A1D47B9C3D0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.API.Warehouse.IntegrationTests", "OnlineStore.API.Warehouse.IntegrationTests\OnlineStore.API.Warehouse.IntegrationTests.csproj", "{4C9FF91D-5B20-413B-86C7-5854EE8D9714}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{CC11F244-2BAF-4E4A-B37C-1A1D47B9C3D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC11F244-2BAF-4E4A-B37C-1A1D47B9C3D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC11F244-2BAF-4E4A-B37C-1A1D47B9C3D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C9FF91D-5B20-413B-86C7-5854EE8D9714}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C9FF91D-5B20-413B-86C7-5854EE8D9714}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C9FF91D-5B20-413B-86C7-5854EE8D9714}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C9FF91D-5B20-413B-86C7-5854EE8D9714}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
