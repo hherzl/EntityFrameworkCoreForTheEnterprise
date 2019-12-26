@@ -138,7 +138,8 @@ namespace RothschildHouse.Domain
                 .ApplyConfiguration(new PersonConfiguration())
                 .ApplyConfiguration(new CreditCardConfiguration())
                 .ApplyConfiguration(new PaymentMethodConfiguration())
-                .ApplyConfiguration(new PaymentTransactionConfiguration());
+                .ApplyConfiguration(new PaymentTransactionConfiguration())
+            ;
 
             base.OnModelCreating(modelBuilder);
         }

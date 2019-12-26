@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -47,13 +48,14 @@ namespace RothschildHouse
                 .AddAuthentication("Bearer")
                 .AddIdentityServerAuthentication(options =>
                 {
-                    var settings = new IdentityServerSettings();
+                    var settings = new IdentityServerAuthenticationOptions();
 
                     Configuration.Bind("IdentityServerSettings", settings);
 
                     options.Authority = settings.Authority;
                     options.RequireHttpsMetadata = settings.RequireHttpsMetadata;
                     options.ApiName = settings.ApiName;
+                    options.ApiSecret = settings.ApiSecret;
                 });
 
             // Register the Swagger generator, defining 1 or more Swagger documents
