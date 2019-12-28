@@ -10,7 +10,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using OnlineStore.API.Common.Clients;
 using OnlineStore.API.Warehouse.PolicyRequirements;
 using OnlineStore.API.Warehouse.Security;
 using OnlineStore.Core;
@@ -60,8 +59,8 @@ namespace OnlineStore.API.Warehouse
 
             /* Identity Server for Online Store */
 
-            services.Configure<OnlineStoreIdentityClientSettings>(Configuration.GetSection("OnlineStoreIdentityClientSettings"));
-            services.AddSingleton<OnlineStoreIdentityClientSettings>();
+            //services.Configure<OnlineStoreIdentityClientSettings>(Configuration.GetSection("OnlineStoreIdentityClientSettings"));
+            //services.AddSingleton<OnlineStoreIdentityClientSettings>();
 
             /* Online Store Services */
             services.AddScoped<IWarehouseService, WarehouseService>();
@@ -77,6 +76,16 @@ namespace OnlineStore.API.Warehouse
 
                     options
                         .AddPolicy(Policies.WarehouseOperatorPolicy, builder => builder.Requirements.Add(new WarehouseOperatorPolicyRequirement()));
+
+                    options.AddPolicy(Policies.SearchProductsPolicy, builder =>
+                    {
+                        builder.Requirements.Add(new SearchProductsPolicy());
+                    });
+
+                    options.AddPolicy(Policies.GetProductInventoryPolicy, builder =>
+                    {
+                        builder.Requirements.Add(new GetProductInventoryPolicy());
+                    });
                 });
 
             /* Configuration for Identity Server authentication */

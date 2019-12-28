@@ -6,6 +6,10 @@
         public const string WarehouseManagerPolicy = "WarehouseManagerPolicy";
 
         public const string WarehouseOperatorPolicy = "WarehouseOperatorPolicy";
+
+        public const string SearchProductsPolicy = "SearchProductsPolicy";
+
+        public const string GetProductInventoryPolicy = "GetProductInventoryPolicy";
     }
 #pragma warning restore CS1591
 }

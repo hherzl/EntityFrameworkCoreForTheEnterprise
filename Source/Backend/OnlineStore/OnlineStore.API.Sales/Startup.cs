@@ -58,8 +58,8 @@ namespace OnlineStore.API.Sales
 
             /* Identity Server for Online Store */
 
-            services.Configure<OnlineStoreIdentityClientSettings>(Configuration.GetSection("OnlineStoreIdentityClientSettings"));
-            services.AddSingleton<OnlineStoreIdentityClientSettings>();
+            //services.Configure<OnlineStoreIdentityClientSettings>(Configuration.GetSection("OnlineStoreIdentityClientSettings"));
+            //services.AddSingleton<OnlineStoreIdentityClientSettings>();
 
             /* Rothschild House Payment gateway */
             services.Configure<RothschildHouseIdentitySettings>(Configuration.GetSection("RothschildHouseIdentitySettings"));
@@ -135,7 +135,8 @@ namespace OnlineStore.API.Sales
                 builder
                     .WithOrigins("http://localhost:4200")
                     .AllowAnyHeader()
-                    .AllowAnyMethod();
+                    .AllowAnyMethod()
+                ;
             });
 
             /* Use authentication for Web API */

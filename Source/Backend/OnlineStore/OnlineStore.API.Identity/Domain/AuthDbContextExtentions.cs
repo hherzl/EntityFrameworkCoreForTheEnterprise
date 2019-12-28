@@ -43,6 +43,8 @@ namespace OnlineStore.API.Identity.Domain
                 new UserClaim(Guid.NewGuid(), "1000", JwtClaimTypes.FamilyName, "Lehnsherr")
             );
 
+            dbContext.SaveChanges();
+
             dbContext.Users.Add(new User("2000", "charlesxavier@gmail.com", "professorx".ToSha256(), true));
 
             dbContext.UserClaims.AddRange(
@@ -54,6 +56,8 @@ namespace OnlineStore.API.Identity.Domain
                 new UserClaim(Guid.NewGuid(), "2000", JwtClaimTypes.MiddleName, "F"),
                 new UserClaim(Guid.NewGuid(), "2000", JwtClaimTypes.FamilyName, "Xavier")
             );
+
+            dbContext.SaveChanges();
 
             dbContext.Users.Add(new User("3000", "jameslogan@walla.com", "wolverine".ToSha256(), true));
 
@@ -67,6 +71,8 @@ namespace OnlineStore.API.Identity.Domain
                 new UserClaim(Guid.NewGuid(), "3000", JwtClaimTypes.FamilyName, "Logan")
             );
 
+            dbContext.SaveChanges();
+
             dbContext.Users.Add(new User("4000", "ororo_munroe@yahoo.com", "storm".ToSha256(), true));
 
             dbContext.UserClaims.AddRange(
@@ -79,6 +85,8 @@ namespace OnlineStore.API.Identity.Domain
                 new UserClaim(Guid.NewGuid(), "4000", JwtClaimTypes.FamilyName, "Munroe")
             );
 
+            dbContext.SaveChanges();
+
             dbContext.Users.Add(new User("5000", "warehousemanager1@onlinestore.com", "password1".ToSha256(), true));
 
             dbContext.UserClaims.AddRange(
@@ -87,6 +95,8 @@ namespace OnlineStore.API.Identity.Domain
                 new UserClaim(Guid.NewGuid(), "5000", JwtClaimTypes.Role, "WarehouseManager"),
                 new UserClaim(Guid.NewGuid(), "5000", JwtClaimTypes.Email, "warehousemanager1@onlinestore.com")
             );
+
+            dbContext.SaveChanges();
 
             dbContext.Users.Add(new User("6000", "warehouseoperator1@onlinestore.com", "password1".ToSha256(), true));
 

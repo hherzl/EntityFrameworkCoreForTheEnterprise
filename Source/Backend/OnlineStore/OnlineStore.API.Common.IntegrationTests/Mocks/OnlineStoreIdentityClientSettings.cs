@@ -1,6 +1,5 @@
-﻿namespace OnlineStore.API.Common.Clients
+﻿namespace OnlineStore.API.Common.IntegrationTests.Mocks
 {
-#pragma warning disable CS1591
     public class OnlineStoreIdentityClientSettings
     {
         public string Url { get; set; }
@@ -13,5 +12,4 @@
 
         public string Password { get; set; }
     }
-#pragma warning restore CS1591
 }

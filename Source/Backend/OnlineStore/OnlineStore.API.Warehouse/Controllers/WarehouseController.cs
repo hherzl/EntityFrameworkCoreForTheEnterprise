@@ -13,7 +13,6 @@ using OnlineStore.Core.Business.Requests;
 namespace OnlineStore.API.Warehouse.Controllers
 {
 #pragma warning disable CS1591
-    [Authorize]
     [ApiController]
     [Route("api/v1/[controller]")]
     public class WarehouseController : OnlineStoreController
@@ -30,57 +29,56 @@ namespace OnlineStore.API.Warehouse.Controllers
 #pragma warning restore CS1591
 
         /// <summary>
-        /// Retrieves the products
+        /// Search products
         /// </summary>
-        /// <param name="pageSize">Page size</param>
-        /// <param name="pageNumber">Page number</param>
+        /// <param name="request">Request model</param>
         /// <returns>A sequence that contains the products</returns>
         /// <response code="200">Returns a list of products</response>
         /// <response code="401">If client is not authenticated</response>
         /// <response code="403">If client is not autorized</response>
         /// <response code="500">If there was an internal error</response>
-        [HttpGet("Product")]
+        [HttpPost("search-product")]
         [ProducesResponseType(200)]
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
         [ProducesResponseType(500)]
         [OnlineStoreActionFilter]
-        public async Task<IActionResult> GetProductsAsync(int? pageSize = 10, int? pageNumber = 1)
+        [Authorize(Policy = Policies.SearchProductsPolicy)]
+        public async Task<IActionResult> SearchProductsAsync([FromBody] SearchProductsRequest request)
         {
-            Logger?.LogDebug("{0} has been invoked", nameof(GetProductsAsync));
+            Logger?.LogDebug("{0} has been invoked", nameof(SearchProductsAsync));
 
             // Get response from business logic
-            var response = await Service.GetProductsAsync((int)pageSize, (int)pageNumber);
+            var response = await Service.GetProductsAsync(request.PageSize, request.PageNumber, request.ProductCategoryID);
 
             // Return as http response
             return response.ToHttpResponse();
         }
 
         /// <summary>
-        /// Gets the inventory for product by warehouse ID
+        /// Gets the product inventory for product and location
         /// </summary>
-        /// <param name="id">Product</param>
-        /// <param name="warehouseID">Warehouse</param>
+        /// <param name="request">Request model</param>
         /// <returns>A sequence of inventory transactions by product and warehouse</returns>
         /// <response code="200">Returns the inventory for product</response>
         /// <response code="401">If client is not authenticated</response>
         /// <response code="403">If client is not autorized</response>
         /// <response code="404">If id is not exists</response>
         /// <response code="500">If there was an internal error</response>
-        [HttpGet("ProductInventory/{id}")]
+        [HttpPost("product-inventory")]
         [ProducesResponseType(200)]
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         [OnlineStoreActionFilter]
-        [Authorize(Policy = Policies.WarehouseOperatorPolicy)]
-        public async Task<IActionResult> GetProductInventoryAsync(int? id, string warehouseID)
+        [Authorize(Policy = Policies.GetProductInventoryPolicy)]
+        public async Task<IActionResult> GetProductInventoryAsync([FromBody]GetProductInventoryRequest request)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetProductInventoryAsync));
 
             // Get response from business logic
-            var response = await Service.GetProductInventories(id, warehouseID);
+            var response = await Service.GetProductInventories(request.ProductID, request.LocationID);
 
             // Return as http response
             return response.ToHttpResponse();
@@ -95,7 +93,7 @@ namespace OnlineStore.API.Warehouse.Controllers
         /// <response code="403">If client is not autorized</response>
         /// <response code="404">If id is not exists</response>
         /// <response code="500">If there was an internal error</response>
-        [HttpPost("Product")]
+        [HttpPost("product")]
         [ProducesResponseType(201)]
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
@@ -127,7 +125,7 @@ namespace OnlineStore.API.Warehouse.Controllers
         /// <response code="403">If client is not autorized</response>
         /// <response code="404">If id is not exists</response>
         /// <response code="500">If there was an internal error</response>
-        [HttpPut("ProductUnitPrice/{id}")]
+        [HttpPut("update-product-unit-price/{id}")]
         [ProducesResponseType(201)]
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]

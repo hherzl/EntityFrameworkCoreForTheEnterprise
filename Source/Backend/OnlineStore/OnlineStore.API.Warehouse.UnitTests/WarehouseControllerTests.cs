@@ -15,15 +15,16 @@ namespace OnlineStore.API.Warehouse.UnitTests
     public class WarehouseControllerTests
     {
         [Fact]
-        public async Task TestGetProductsAsync()
+        public async Task SearchProductsAsync()
         {
             // Arrange
             var userInfo = IdentityMocker.GetWarehouseOperatorIdentity().GetUserInfo();
-            var service = ServiceMocker.GetWarehouseService(userInfo, nameof(TestGetProductsAsync), true);
+            var service = ServiceMocker.GetWarehouseService(userInfo, nameof(SearchProductsAsync), true);
             var controller = new WarehouseController(null, service);
+            var request = new SearchProductsRequest();
 
             // Act
-            var response = await controller.GetProductsAsync() as ObjectResult;
+            var response = await controller.SearchProductsAsync(request) as ObjectResult;
             var value = response.Value as IPagedResponse<Product>;
 
             service.Dispose();
@@ -34,17 +35,20 @@ namespace OnlineStore.API.Warehouse.UnitTests
         }
 
         [Fact]
-        public async Task TestGetInventoryByProductTestAsync()
+        public async Task GetInventoryByProductAsync()
         {
             // Arrange
             var userInfo = IdentityMocker.GetWarehouseOperatorIdentity().GetUserInfo();
-            var service = ServiceMocker.GetWarehouseService(userInfo, nameof(TestGetInventoryByProductTestAsync), true);
+            var service = ServiceMocker.GetWarehouseService(userInfo, nameof(GetInventoryByProductAsync), true);
             var controller = new WarehouseController(null, service);
-            var productID = 1;
-            var locationID = "W01";
+            var request = new GetProductInventoryRequest
+            {
+                ProductID = 1,
+                LocationID = "W01"
+            };
 
             // Act
-            var response = await controller.GetProductInventoryAsync(productID, locationID) as ObjectResult;
+            var response = await controller.GetProductInventoryAsync(request) as ObjectResult;
             var value = response.Value as IListResponse<ProductInventory>;
 
             service.Dispose();

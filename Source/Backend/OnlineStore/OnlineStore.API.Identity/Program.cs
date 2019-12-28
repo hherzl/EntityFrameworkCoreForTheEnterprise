@@ -12,7 +12,7 @@ namespace OnlineStore.API.Identity
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseUrls("http://localhost:56000")
+                .UseUrls("http://localhost:5100")
                 .UseStartup<Startup>();
     }
 }

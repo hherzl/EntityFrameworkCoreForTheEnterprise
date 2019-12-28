@@ -4,24 +4,22 @@
         <name>OnlineStore.API.Warehouse</name>
     </assembly>
     <members>
-        <member name="M:OnlineStore.API.Warehouse.Controllers.WarehouseController.GetProductsAsync(System.Nullable{System.Int32},System.Nullable{System.Int32})">
+        <member name="M:OnlineStore.API.Warehouse.Controllers.WarehouseController.SearchProductsAsync(OnlineStore.API.Warehouse.Requests.SearchProductsRequest)">
             <summary>
-            Retrieves the products
+            Search products
             </summary>
-            <param name="pageSize">Page size</param>
-            <param name="pageNumber">Page number</param>
+            <param name="request">Request model</param>
             <returns>A sequence that contains the products</returns>
             <response code="200">Returns a list of products</response>
             <response code="401">If client is not authenticated</response>
             <response code="403">If client is not autorized</response>
             <response code="500">If there was an internal error</response>
         </member>
-        <member name="M:OnlineStore.API.Warehouse.Controllers.WarehouseController.GetProductInventoryAsync(System.Nullable{System.Int32},System.String)">
+        <member name="M:OnlineStore.API.Warehouse.Controllers.WarehouseController.GetProductInventoryAsync(OnlineStore.API.Warehouse.Requests.GetProductInventoryRequest)">
             <summary>
-            Gets the inventory for product by warehouse ID
+            Gets the product inventory for product and location
             </summary>
-            <param name="id">Product</param>
-            <param name="warehouseID">Warehouse</param>
+            <param name="request">Request model</param>
             <returns>A sequence of inventory transactions by product and warehouse</returns>
             <response code="200">Returns the inventory for product</response>
             <response code="401">If client is not authenticated</response>

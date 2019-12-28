@@ -19,7 +19,7 @@ namespace OnlineStore.Core.Business
         {
         }
 
-        public async Task<IPagedResponse<Product>> GetProductsAsync(int pageSize = 10, int pageNumber = 1, int? productCategoryID = null)
+        public async Task<IPagedResponse<Product>> GetProductsAsync(int? pageSize, int? pageNumber, int? productCategoryID = null)
         {
             Logger?.LogInformation("'{0}' has been invoked", nameof(GetProductsAsync));
 
@@ -31,12 +31,12 @@ namespace OnlineStore.Core.Business
                 var query = DbContext.GetProducts(productCategoryID);
 
                 // Set information for paging
-                response.PageSize = pageSize;
-                response.PageNumber = pageNumber;
+                response.PageSize = (int)pageSize;
+                response.PageNumber = (int)pageNumber;
                 response.ItemsCount = await query.CountAsync();
 
                 // Retrieve items, set model for response
-                response.Model = await query.Paging(pageSize, pageNumber).ToListAsync();
+                response.Model = await query.Paging((int)pageSize, (int)pageNumber).ToListAsync();
             }
             catch (Exception ex)
             {

@@ -7,7 +7,7 @@ namespace OnlineStore.Core.Business.Contracts
 {
     public interface IWarehouseService : IService
     {
-        Task<IPagedResponse<Product>> GetProductsAsync(int pageSize = 10, int pageNumber = 1, int? productCategoryID = null);
+        Task<IPagedResponse<Product>> GetProductsAsync(int? pageSize, int? pageNumber, int? productCategoryID = null);
 
         Task<IPagedResponse<Location>> GetWarehousesAsync(int pageSize = 10, int pageNumber = 1);
 
