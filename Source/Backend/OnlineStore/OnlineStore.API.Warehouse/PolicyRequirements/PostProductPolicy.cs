@@ -8,14 +8,13 @@ using OnlineStore.API.Warehouse.Security;
 namespace OnlineStore.API.Warehouse.PolicyRequirements
 {
 #pragma warning disable CS1591
-    public class SearchProductsPolicy : AuthorizationHandler<SearchProductsPolicy>, IAuthorizationRequirement
+    public class PostProductPolicy : AuthorizationHandler<PostProductPolicy>, IAuthorizationRequirement
     {
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, SearchProductsPolicy requirement)
+        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, PostProductPolicy requirement)
         {
             var roles = new string[]
             {
-                Roles.WarehouseManager,
-                Roles.WarehouseOperator
+                Roles.WarehouseManager
             };
 
             if (context.User.HasClaim(claim => claim.Type == JwtClaimTypes.Role && roles.Contains(claim.Value)))

@@ -11,7 +11,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using OnlineStore.API.Warehouse.PolicyRequirements;
-using OnlineStore.API.Warehouse.Security;
 using OnlineStore.Core;
 using OnlineStore.Core.Business;
 using OnlineStore.Core.Business.Contracts;
@@ -57,11 +56,6 @@ namespace OnlineStore.API.Warehouse
             // Logger for services
             services.AddScoped<ILogger, Logger<Service>>();
 
-            /* Identity Server for Online Store */
-
-            //services.Configure<OnlineStoreIdentityClientSettings>(Configuration.GetSection("OnlineStoreIdentityClientSettings"));
-            //services.AddSingleton<OnlineStoreIdentityClientSettings>();
-
             /* Online Store Services */
             services.AddScoped<IWarehouseService, WarehouseService>();
 
@@ -71,20 +65,24 @@ namespace OnlineStore.API.Warehouse
                 .AddMvcCore()
                 .AddAuthorization(options =>
                 {
-                    options
-                        .AddPolicy(Policies.WarehouseManagerPolicy, builder => builder.Requirements.Add(new WarehouseManagerPolicyRequirement()));
-
-                    options
-                        .AddPolicy(Policies.WarehouseOperatorPolicy, builder => builder.Requirements.Add(new WarehouseOperatorPolicyRequirement()));
-
-                    options.AddPolicy(Policies.SearchProductsPolicy, builder =>
+                    options.AddPolicy(Security.Policies.SearchProductsPolicy, builder =>
                     {
                         builder.Requirements.Add(new SearchProductsPolicy());
                     });
 
-                    options.AddPolicy(Policies.GetProductInventoryPolicy, builder =>
+                    options.AddPolicy(Security.Policies.GetProductInventoryPolicy, builder =>
                     {
                         builder.Requirements.Add(new GetProductInventoryPolicy());
+                    });
+
+                    options.AddPolicy(Security.Policies.PostProductPolicy, builder =>
+                    {
+                        builder.Requirements.Add(new PostProductPolicy());
+                    });
+
+                    options.AddPolicy(Security.Policies.PutProductUnitPricePolicy, builder =>
+                    {
+                        builder.Requirements.Add(new PutProductUnitPricePolicy());
                     });
                 });
 
@@ -135,7 +133,11 @@ namespace OnlineStore.API.Warehouse
 
             app.UseSwagger();
 
-            app.UseSwaggerUI(options => options.SwaggerEndpoint("/swagger/v1/swagger.json", "Online Store Warehouse API"));
+            app.UseSwaggerUI(options =>
+            {
+                options
+                    .SwaggerEndpoint("/swagger/v1/swagger.json", "Online Store Warehouse API");
+            });
 
             app.UseMvc();
         }

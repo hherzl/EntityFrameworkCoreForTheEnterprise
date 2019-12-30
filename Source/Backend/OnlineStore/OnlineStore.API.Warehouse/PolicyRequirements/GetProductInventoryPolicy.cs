@@ -12,12 +12,12 @@ namespace OnlineStore.API.Warehouse.PolicyRequirements
     {
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, GetProductInventoryPolicy requirement)
         {
-            var policies = new string[]
+            var roles = new string[]
             {
                 Roles.WarehouseManager
             };
 
-            if (context.User.HasClaim(claim => claim.Type == JwtClaimTypes.Role && policies.Contains(claim.Value)))
+            if (context.User.HasClaim(claim => claim.Type == JwtClaimTypes.Role && roles.Contains(claim.Value)))
                 context.Succeed(requirement);
             else
                 context.Fail();

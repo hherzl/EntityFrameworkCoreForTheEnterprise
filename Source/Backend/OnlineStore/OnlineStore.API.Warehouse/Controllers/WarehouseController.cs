@@ -100,7 +100,7 @@ namespace OnlineStore.API.Warehouse.Controllers
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         [OnlineStoreActionFilter]
-        [Authorize(Policy = Policies.WarehouseManagerPolicy)]
+        [Authorize(Policy = Policies.PostProductPolicy)]
         public async Task<IActionResult> PostProductAsync(PostProductRequest request)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(PostProductAsync));
@@ -132,7 +132,7 @@ namespace OnlineStore.API.Warehouse.Controllers
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         [OnlineStoreActionFilter]
-        [Authorize(Policy = Policies.WarehouseManagerPolicy)]
+        [Authorize(Policy = Policies.PutProductUnitPricePolicy)]
         public async Task<IActionResult> PutProductUnitPriceAsync(int? id, [FromBody]UpdateProductUnitPriceRequest request)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(PutProductUnitPriceAsync));
