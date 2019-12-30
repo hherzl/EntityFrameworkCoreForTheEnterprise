@@ -16,7 +16,7 @@ using OnlineStore.Core.Business.Requests;
 namespace OnlineStore.API.Sales.Controllers
 {
 #pragma warning disable CS1591
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class SalesController : OnlineStoreController
     {

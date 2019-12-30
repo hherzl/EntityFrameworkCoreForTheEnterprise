@@ -80,11 +80,15 @@ namespace OnlineStore.API.Sales
                 .AddMvcCore()
                 .AddAuthorization(options =>
                 {
-                    options
-                        .AddPolicy(Policies.AdministratorPolicy, builder => builder.Requirements.Add(new AdministratorPolicyRequirement()));
+                    options.AddPolicy(Policies.AdministratorPolicy, builder =>
+                    {
+                        builder.Requirements.Add(new AdministratorPolicyRequirement());
+                    });
 
-                    options
-                        .AddPolicy(Policies.CustomerPolicy, builder => builder.Requirements.Add(new CustomerPolicyRequirement()));
+                    options.AddPolicy(Policies.CustomerPolicy, builder =>
+                    {
+                        builder.Requirements.Add(new CustomerPolicyRequirement());
+                    });
                 });
 
             /* Configuration for Identity Server authentication */

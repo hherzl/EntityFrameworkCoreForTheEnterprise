@@ -9,8 +9,8 @@
             => new OnlineStoreIdentityClientSettings
             {
                 Url = "http://localhost:5100",
-                ClientId = "onlinestorewarehouseapiclient",
-                ClientSecret = "onlinestorewarehouseapiclient1",
+                ClientId = "OnlineStoreAPI.Client",
+                ClientSecret = "OnlineStoreAPIClientSecret1",
                 UserName = userName,
                 Password = password
             };

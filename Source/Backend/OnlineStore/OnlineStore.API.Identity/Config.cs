@@ -10,8 +10,13 @@ namespace OnlineStore.API.Identity
         public static IEnumerable<ApiResource> GetApiResources()
             => new List<ApiResource>
             {
-                new ApiResource("OnlineStoreWarehouseAPI", "Online Store Warehouse API"),
-                new ApiResource("OnlineStoreSalesAPI", "Online Store Sales API")
+                new ApiResource("OnlineStoreAPI", "Online Store API")
+                {
+                    ApiSecrets =
+                    {
+                        new Secret("Secret1")
+                    }
+                }
             };
 
         public static IEnumerable<Client> GetClients()
@@ -19,20 +24,22 @@ namespace OnlineStore.API.Identity
             {
                 new Client
                 {
-                    ClientId = "onlinestorewarehouseapiclient",
+                    ClientId = "OnlineStoreAPI.Client",
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                     ClientSecrets =
                     {
-                        new Secret("onlinestorewarehouseapiclient1".Sha256())
+                        new Secret("OnlineStoreAPIClientSecret1".Sha256())
                     },
                     AllowedScopes =
                     {
-                        "OnlineStoreWarehouseAPI"
+                        "OnlineStoreAPI"
                     },
                     Claims =
                     {
                         new Claim(JwtClaimTypes.Role, "Administrator"),
-                        new Claim(JwtClaimTypes.Role, "Customer")
+                        new Claim(JwtClaimTypes.Role, "Customer"),
+                        new Claim(JwtClaimTypes.Role, "WarehouseManager"),
+                        new Claim(JwtClaimTypes.Role, "WarehouseOperator")
                     }
                 }
             };

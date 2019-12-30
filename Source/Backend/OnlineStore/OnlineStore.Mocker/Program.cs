@@ -64,7 +64,7 @@ namespace OnlineStore.Mocker
             var customers = (await salesService.GetCustomersAsync()).Model.ToList();
             var currencies = (await salesService.GetCurrenciesAsync()).Model.ToList();
             var paymentMethods = (await salesService.GetPaymentMethodsAsync()).Model.ToList();
-            var products = (await warehouseService.GetProductsAsync()).Model.ToList();
+            var products = (await warehouseService.GetProductsAsync(10, 1)).Model.ToList();
 
             Logger.LogInformation("Creating orders for {0}", date);
 
