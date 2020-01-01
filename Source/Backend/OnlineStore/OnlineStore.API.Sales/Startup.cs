@@ -56,11 +56,6 @@ namespace OnlineStore.API.Sales
             // Logger for services
             services.AddScoped<ILogger, Logger<Service>>();
 
-            /* Identity Server for Online Store */
-
-            //services.Configure<OnlineStoreIdentityClientSettings>(Configuration.GetSection("OnlineStoreIdentityClientSettings"));
-            //services.AddSingleton<OnlineStoreIdentityClientSettings>();
-
             /* Rothschild House Payment gateway */
             services.Configure<RothschildHouseIdentitySettings>(Configuration.GetSection("RothschildHouseIdentitySettings"));
             services.AddSingleton<RothschildHouseIdentitySettings>();
@@ -80,14 +75,9 @@ namespace OnlineStore.API.Sales
                 .AddMvcCore()
                 .AddAuthorization(options =>
                 {
-                    options.AddPolicy(Policies.AdministratorPolicy, builder =>
-                    {
-                        builder.Requirements.Add(new AdministratorPolicyRequirement());
-                    });
-
                     options.AddPolicy(Policies.CustomerPolicy, builder =>
                     {
-                        builder.Requirements.Add(new CustomerPolicyRequirement());
+                        builder.Requirements.Add(new CustomerPolicy());
                     });
                 });
 
