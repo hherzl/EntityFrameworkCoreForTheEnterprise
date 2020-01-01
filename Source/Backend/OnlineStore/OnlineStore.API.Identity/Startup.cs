@@ -24,12 +24,14 @@ namespace OnlineStore.API.Identity
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             /* Setting up dependency injection */
 
             // DbContext
-            services.AddDbContext<AuthDbContext>(options => options.UseInMemoryDatabase("Auth"));
+            services
+                .AddDbContext<IdentityDbContext>(options => options.UseInMemoryDatabase("Identity"));
 
             // Password validator and profile
             services
@@ -55,13 +57,13 @@ namespace OnlineStore.API.Identity
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
-            /* Seed in-memory DbContext */
+            // Seed IdentityDbContext in-memory
 
             var authDbContext = app
                 .ApplicationServices
                 .CreateScope()
                 .ServiceProvider
-                .GetService<AuthDbContext>();
+                .GetService<IdentityDbContext>();
 
             authDbContext.SeedInMemory();
 

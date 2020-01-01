@@ -2,9 +2,9 @@
 
 namespace OnlineStore.API.Identity.Domain
 {
-    public class AuthDbContext : DbContext
+    public class IdentityDbContext : DbContext
     {
-        public AuthDbContext(DbContextOptions<AuthDbContext> options)
+        public IdentityDbContext(DbContextOptions<IdentityDbContext> options)
             : base(options)
         {
         }

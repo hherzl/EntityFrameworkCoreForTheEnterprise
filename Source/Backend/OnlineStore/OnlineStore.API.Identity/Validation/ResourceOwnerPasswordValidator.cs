@@ -7,9 +7,9 @@ namespace OnlineStore.API.Identity.Validation
 {
     public class ResourceOwnerPasswordValidator : IResourceOwnerPasswordValidator
     {
-        private readonly AuthDbContext DbContext;
+        private readonly IdentityDbContext DbContext;
 
-        public ResourceOwnerPasswordValidator(AuthDbContext dbContext)
+        public ResourceOwnerPasswordValidator(IdentityDbContext dbContext)
         {
             DbContext = dbContext;
         }

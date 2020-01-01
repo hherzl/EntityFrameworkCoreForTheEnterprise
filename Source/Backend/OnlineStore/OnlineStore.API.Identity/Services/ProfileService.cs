@@ -10,9 +10,9 @@ namespace OnlineStore.API.Identity.Services
 {
     public class ProfileService : IProfileService
     {
-        private readonly AuthDbContext DbContext;
+        private readonly IdentityDbContext DbContext;
 
-        public ProfileService(AuthDbContext dbContext)
+        public ProfileService(IdentityDbContext dbContext)
         {
             DbContext = dbContext;
         }

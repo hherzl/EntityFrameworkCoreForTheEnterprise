@@ -5,9 +5,9 @@ using IdentityModel;
 
 namespace OnlineStore.API.Identity.Domain
 {
-    public static class AuthDbContextExtentions
+    public static class IdentityDbContextExtentions
     {
-        public static bool ValidatePassword(this AuthDbContext dbContext, string userName, string password)
+        public static bool ValidatePassword(this IdentityDbContext dbContext, string userName, string password)
         {
             var user = dbContext.Users.FirstOrDefault(item => item.Email == userName);
 
@@ -20,16 +20,16 @@ namespace OnlineStore.API.Identity.Domain
             return false;
         }
 
-        public static User GetUserByUserName(this AuthDbContext dbContext, string userName)
+        public static User GetUserByUserName(this IdentityDbContext dbContext, string userName)
             => dbContext.Users.FirstOrDefault(item => item.Email == userName);
 
-        public static User GetUserByID(this AuthDbContext dbContext, string id)
+        public static User GetUserByID(this IdentityDbContext dbContext, string id)
             => dbContext.Users.FirstOrDefault(item => item.UserID == id);
 
-        public static IEnumerable<UserClaim> GetUserClaimsByUserID(this AuthDbContext dbContext, string userID)
+        public static IEnumerable<UserClaim> GetUserClaimsByUserID(this IdentityDbContext dbContext, string userID)
             => dbContext.UserClaims.Where(item => item.UserID == userID);
 
-        public static void SeedInMemory(this AuthDbContext dbContext)
+        public static void SeedInMemory(this IdentityDbContext dbContext)
         {
             dbContext.Users.Add(new User("1000", "erik.lehnsherr@outlook.com", "magneto".ToSha256(), true));
 
