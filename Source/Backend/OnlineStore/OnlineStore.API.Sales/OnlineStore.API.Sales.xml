@@ -27,7 +27,7 @@
             <response code="404">If id is not exists</response>
             <response code="500">If there was an internal error</response>
         </member>
-        <member name="M:OnlineStore.API.Sales.Controllers.SalesController.GetCreateOrderRequestAsync">
+        <member name="M:OnlineStore.API.Sales.Controllers.SalesController.GetCreateOrderModelAsync">
             <summary>
             Retrieves the request model to create a new order
             </summary>
@@ -37,7 +37,7 @@
             <response code="403">If client is not autorized</response>
             <response code="500">If there was an internal error</response>
         </member>
-        <member name="M:OnlineStore.API.Sales.Controllers.SalesController.PostOrderAsync(OnlineStore.API.Sales.Requests.PostOrderRequest)">
+        <member name="M:OnlineStore.API.Sales.Controllers.SalesController.PlaceOrderAsync(OnlineStore.API.Sales.Requests.PostOrderRequest)">
             <summary>
             Creates a new order
             </summary>
@@ -61,13 +61,13 @@
             <response code="404">If id is not exists</response>
             <response code="500">If there was an internal error</response>
         </member>
-        <member name="M:OnlineStore.API.Sales.Controllers.SalesController.DeleteOrderAsync(System.Int32)">
+        <member name="M:OnlineStore.API.Sales.Controllers.SalesController.CancelOrderAsync(System.Int32)">
             <summary>
-            Deletes an existing order
+            Cancels an existing order
             </summary>
             <param name="id">ID for order</param>
-            <returns>A success response if order is deleted</returns>
-            <response code="200">If order was deleted successfully</response>
+            <returns>A success response if order is cancelled</returns>
+            <response code="200">If order was cancelled successfully</response>
             <response code="401">If client is not authenticated</response>
             <response code="403">If client is not autorized</response>
             <response code="404">If id is not exists</response>

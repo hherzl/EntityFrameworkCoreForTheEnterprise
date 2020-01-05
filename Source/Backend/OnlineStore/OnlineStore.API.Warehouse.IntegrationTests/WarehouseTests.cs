@@ -10,11 +10,11 @@ namespace OnlineStore.API.Warehouse.IntegrationTests
 {
     public class WarehouseTests : IClassFixture<TestFixture<Startup>>
     {
-        private HttpClient apiClient;
+        readonly HttpClient Client;
 
         public WarehouseTests(TestFixture<Startup> fixture)
         {
-            apiClient = fixture.Client;
+            Client = fixture.Client;
         }
 
         [Fact]
@@ -32,9 +32,9 @@ namespace OnlineStore.API.Warehouse.IntegrationTests
             };
 
             // Act
-            apiClient.SetBearerToken(token.AccessToken);
+            Client.SetBearerToken(token.AccessToken);
 
-            var response = await apiClient
+            var response = await Client
                 .PostAsync(request.Url, ContentHelper.GetStringContent(request.Body));
 
             // Assert
@@ -45,7 +45,7 @@ namespace OnlineStore.API.Warehouse.IntegrationTests
         public async Task SearchProductsAsCustomerAsync()
         {
             // Arrange
-            var token = await TokenHelper.GetOnlineStoreTokenForWolverineAsync();
+            var token = await TokenHelper.GetTokenForWolverineAsync();
             var request = new
             {
                 Url = "/api/v1/Warehouse/search-product",
@@ -56,9 +56,9 @@ namespace OnlineStore.API.Warehouse.IntegrationTests
             };
 
             // Act
-            apiClient.SetBearerToken(token.AccessToken);
+            Client.SetBearerToken(token.AccessToken);
 
-            var response = await apiClient
+            var response = await Client
                 .PostAsync(request.Url, ContentHelper.GetStringContent(request.Body));
 
             // Assert
@@ -80,9 +80,9 @@ namespace OnlineStore.API.Warehouse.IntegrationTests
             };
 
             // Act
-            apiClient.SetBearerToken(token.AccessToken);
+            Client.SetBearerToken(token.AccessToken);
 
-            var response = await apiClient
+            var response = await Client
                 .PostAsync(request.Url, ContentHelper.GetStringContent(request.Body));
 
             // Assert
@@ -93,7 +93,7 @@ namespace OnlineStore.API.Warehouse.IntegrationTests
         public async Task GetProductInventoryAsWarehouseOperatorAsync()
         {
             // Arrange
-            var token = await TokenHelper.GetOnlineStoreTokenForWarehouseOperatorAsync();
+            var token = await TokenHelper.GetTokenForWarehouseOperatorAsync();
             var request = new
             {
                 Url = "/api/v1/Warehouse/product-inventory",
@@ -104,9 +104,9 @@ namespace OnlineStore.API.Warehouse.IntegrationTests
             };
 
             // Act
-            apiClient.SetBearerToken(token.AccessToken);
+            Client.SetBearerToken(token.AccessToken);
 
-            var response = await apiClient
+            var response = await Client
                 .PostAsync(request.Url, ContentHelper.GetStringContent(request.Body));
 
             // Assert
@@ -117,7 +117,7 @@ namespace OnlineStore.API.Warehouse.IntegrationTests
         public async Task GetProductInventoryAsCustomerAsync()
         {
             // Arrange
-            var token = await TokenHelper.GetOnlineStoreTokenForWolverineAsync();
+            var token = await TokenHelper.GetTokenForWolverineAsync();
             var request = new
             {
                 Url = "/api/v1/Warehouse/product-inventory",
@@ -129,9 +129,9 @@ namespace OnlineStore.API.Warehouse.IntegrationTests
             };
 
             // Act
-            apiClient.SetBearerToken(token.AccessToken);
+            Client.SetBearerToken(token.AccessToken);
 
-            var response = await apiClient
+            var response = await Client
                 .PostAsync(request.Url, ContentHelper.GetStringContent(request.Body));
 
             // Assert
@@ -156,9 +156,9 @@ namespace OnlineStore.API.Warehouse.IntegrationTests
             };
 
             // Act
-            apiClient.SetBearerToken(token.AccessToken);
+            Client.SetBearerToken(token.AccessToken);
 
-            var response = await apiClient
+            var response = await Client
                 .PostAsync(request.Url, ContentHelper.GetStringContent(request.Body));
 
             // Assert
@@ -180,9 +180,9 @@ namespace OnlineStore.API.Warehouse.IntegrationTests
             };
 
             // Act
-            apiClient.SetBearerToken(token.AccessToken);
+            Client.SetBearerToken(token.AccessToken);
 
-            var response = await apiClient
+            var response = await Client
                 .PutAsync(request.Url, ContentHelper.GetStringContent(request.Body));
 
             // Assert

@@ -7,7 +7,7 @@ namespace OnlineStore.API.Common.Responses
 #pragma warning disable CS1591
     public static class Extensions
     {
-        public static IActionResult ToHttpResponse<TModel>(this IListResponse<TModel> response)
+        public static IActionResult ToHttpResult<TModel>(this IListResponse<TModel> response)
         {
             var status = HttpStatusCode.OK;
 
@@ -22,7 +22,7 @@ namespace OnlineStore.API.Common.Responses
             };
         }
 
-        public static IActionResult ToHttpResponse<TModel>(this ISingleResponse<TModel> response)
+        public static IActionResult ToHttpResult<TModel>(this ISingleResponse<TModel> response)
         {
             var status = HttpStatusCode.OK;
 
@@ -37,7 +37,7 @@ namespace OnlineStore.API.Common.Responses
             };
         }
 
-        public static IActionResult ToHttpResponse(this IResponse response)
+        public static IActionResult ToHttpResult(this IResponse response)
         {
             var status = response.DidError ? HttpStatusCode.InternalServerError : HttpStatusCode.OK;
 

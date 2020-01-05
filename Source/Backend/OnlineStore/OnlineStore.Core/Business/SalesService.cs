@@ -361,9 +361,9 @@ namespace OnlineStore.Core.Business
             return response;
         }
 
-        public async Task<IResponse> RemoveOrderAsync(long id)
+        public async Task<IResponse> CancelOrderAsync(long id)
         {
-            Logger?.LogDebug("'{0}' has been invoked", nameof(RemoveOrderAsync));
+            Logger?.LogDebug("'{0}' has been invoked", nameof(CancelOrderAsync));
 
             var response = new Response();
 
@@ -388,7 +388,7 @@ namespace OnlineStore.Core.Business
             }
             catch (Exception ex)
             {
-                response.SetError(Logger, nameof(RemoveOrderAsync), ex);
+                response.SetError(Logger, nameof(CancelOrderAsync), ex);
             }
 
             return response;

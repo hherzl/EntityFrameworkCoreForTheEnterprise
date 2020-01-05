@@ -44,15 +44,16 @@ namespace OnlineStore.API.Warehouse.Controllers
         [ProducesResponseType(500)]
         [OnlineStoreActionFilter]
         [Authorize(Policy = Policies.SearchProductsPolicy)]
-        public async Task<IActionResult> SearchProductsAsync([FromBody] SearchProductsRequest request)
+        public async Task<IActionResult> SearchProductsAsync([FromBody]SearchProductsRequest request)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(SearchProductsAsync));
 
             // Get response from business logic
-            var response = await Service.GetProductsAsync(request.PageSize, request.PageNumber, request.ProductCategoryID);
+            var response = await Service
+                .GetProductsAsync(request.PageSize, request.PageNumber, request.ProductCategoryID);
 
             // Return as http response
-            return response.ToHttpResponse();
+            return response.ToHttpResult();
         }
 
         /// <summary>
@@ -65,7 +66,7 @@ namespace OnlineStore.API.Warehouse.Controllers
         /// <response code="403">If client is not autorized</response>
         /// <response code="404">If id is not exists</response>
         /// <response code="500">If there was an internal error</response>
-        [HttpPost("product-inventory")]
+        [HttpPost("search-product-inventory")]
         [ProducesResponseType(200)]
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
@@ -78,10 +79,11 @@ namespace OnlineStore.API.Warehouse.Controllers
             Logger?.LogDebug("{0} has been invoked", nameof(GetProductInventoryAsync));
 
             // Get response from business logic
-            var response = await Service.GetProductInventories(request.ProductID, request.LocationID);
+            var response = await Service
+                .GetProductInventories(request.ProductID, request.LocationID);
 
             // Return as http response
-            return response.ToHttpResponse();
+            return response.ToHttpResult();
         }
 
         /// <summary>
@@ -101,7 +103,7 @@ namespace OnlineStore.API.Warehouse.Controllers
         [ProducesResponseType(500)]
         [OnlineStoreActionFilter]
         [Authorize(Policy = Policies.PostProductPolicy)]
-        public async Task<IActionResult> PostProductAsync(PostProductRequest request)
+        public async Task<IActionResult> PostProductAsync([FromBody]PostProductRequest request)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(PostProductAsync));
 
@@ -113,7 +115,7 @@ namespace OnlineStore.API.Warehouse.Controllers
             var response = await Service.CreateProductAsync(entity);
 
             // Return as http response
-            return response.ToHttpResponse();
+            return response.ToHttpResult();
         }
 
         /// <summary>
@@ -133,17 +135,19 @@ namespace OnlineStore.API.Warehouse.Controllers
         [ProducesResponseType(500)]
         [OnlineStoreActionFilter]
         [Authorize(Policy = Policies.PutProductUnitPricePolicy)]
-        public async Task<IActionResult> PutProductUnitPriceAsync(int? id, [FromBody]UpdateProductUnitPriceRequest request)
+        public async Task<IActionResult> UpdateProductUnitPriceAsync(int? id, [FromBody]UpdateProductUnitPriceRequest request)
         {
-            Logger?.LogDebug("{0} has been invoked", nameof(PutProductUnitPriceAsync));
+            Logger?.LogDebug("{0} has been invoked", nameof(UpdateProductUnitPriceAsync));
 
-            // Get response from business logic
             Service.UserInfo = UserInfo;
 
-            var response = await Service.UpdateProductUnitPriceAsync(id, request);
+            // Get response from business logic
+
+            var response = await Service
+                .UpdateProductUnitPriceAsync(id, request);
 
             // Return as http response
-            return response.ToHttpResponse();
+            return response.ToHttpResult();
         }
     }
 }

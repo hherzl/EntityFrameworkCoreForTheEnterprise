@@ -139,7 +139,7 @@ namespace OnlineStore.API.Sales.UnitTests
             var controller = new SalesController(null, null, null, service);
 
             // Act
-            var response = await controller.GetCreateOrderRequestAsync() as ObjectResult;
+            var response = await controller.GetCreateOrderModelAsync() as ObjectResult;
             var value = response.Value as ISingleResponse<CreateOrderRequest>;
 
             // Assert
@@ -174,7 +174,7 @@ namespace OnlineStore.API.Sales.UnitTests
             };
 
             // Act
-            var response = await controller.PostOrderAsync(request) as ObjectResult;
+            var response = await controller.PlaceOrderAsync(request) as ObjectResult;
             var value = response.Value as ISingleResponse<OrderHeader>;
 
             // Assert

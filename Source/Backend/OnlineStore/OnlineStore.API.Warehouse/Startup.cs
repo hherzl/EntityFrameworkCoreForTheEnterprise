@@ -67,22 +67,22 @@ namespace OnlineStore.API.Warehouse
                 {
                     options.AddPolicy(Security.Policies.SearchProductsPolicy, builder =>
                     {
-                        builder.Requirements.Add(new SearchProductsPolicy());
+                        builder.Requirements.Add(new SearchProductsPolicyRequirement());
                     });
 
                     options.AddPolicy(Security.Policies.GetProductInventoryPolicy, builder =>
                     {
-                        builder.Requirements.Add(new GetProductInventoryPolicy());
+                        builder.Requirements.Add(new GetProductInventoryPolicyRequirement());
                     });
 
                     options.AddPolicy(Security.Policies.PostProductPolicy, builder =>
                     {
-                        builder.Requirements.Add(new PostProductPolicy());
+                        builder.Requirements.Add(new PostProductPolicyRequirement());
                     });
 
                     options.AddPolicy(Security.Policies.PutProductUnitPricePolicy, builder =>
                     {
-                        builder.Requirements.Add(new PutProductUnitPricePolicy());
+                        builder.Requirements.Add(new PutProductUnitPricePolicyRequirement());
                     });
                 });
 

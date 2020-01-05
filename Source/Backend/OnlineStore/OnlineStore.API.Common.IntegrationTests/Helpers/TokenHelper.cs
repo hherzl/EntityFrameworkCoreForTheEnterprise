@@ -11,7 +11,7 @@ namespace OnlineStore.API.Common.IntegrationTests.Helpers
         {
             using (var client = new HttpClient())
             {
-                var settings = ClientSettingsMocker.GetOnlineStoreIdentityClientSettings(userName, password);
+                var settings = ClientSettingsMocker.GetIdentityClientSettings(userName, password);
 
                 var disco = await client.GetDiscoveryDocumentAsync(settings.Url);
 
@@ -29,10 +29,10 @@ namespace OnlineStore.API.Common.IntegrationTests.Helpers
         public static async Task<TokenResponse> GetOnlineStoreTokenForWarehouseManagerAsync()
             => await GetOnlineStoreTokenAsync("warehousemanager1@onlinestore.com", "password1");
 
-        public static async Task<TokenResponse> GetOnlineStoreTokenForWarehouseOperatorAsync()
+        public static async Task<TokenResponse> GetTokenForWarehouseOperatorAsync()
             => await GetOnlineStoreTokenAsync("warehouseoperator1@onlinestore.com", "password1");
 
-        public static async Task<TokenResponse> GetOnlineStoreTokenForWolverineAsync()
+        public static async Task<TokenResponse> GetTokenForWolverineAsync()
             => await GetOnlineStoreTokenAsync("jameslogan@walla.com", "wolverine");
     }
 }

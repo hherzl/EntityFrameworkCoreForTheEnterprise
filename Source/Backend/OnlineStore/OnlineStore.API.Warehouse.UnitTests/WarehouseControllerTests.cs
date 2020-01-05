@@ -98,7 +98,7 @@ namespace OnlineStore.API.Warehouse.UnitTests
             };
 
             // Act
-            var response = await controller.PutProductUnitPriceAsync(id, request) as ObjectResult;
+            var response = await controller.UpdateProductUnitPriceAsync(id, request) as ObjectResult;
             var value = response.Value as ISingleResponse<Product>;
 
             // Assert

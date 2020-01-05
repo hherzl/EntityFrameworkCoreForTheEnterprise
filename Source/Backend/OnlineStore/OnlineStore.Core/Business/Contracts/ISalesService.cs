@@ -26,6 +26,6 @@ namespace OnlineStore.Core.Business.Contracts
 
         Task<ISingleResponse<OrderHeader>> CloneOrderAsync(long id);
 
-        Task<IResponse> RemoveOrderAsync(long id);
+        Task<IResponse> CancelOrderAsync(long id);
     }
 }

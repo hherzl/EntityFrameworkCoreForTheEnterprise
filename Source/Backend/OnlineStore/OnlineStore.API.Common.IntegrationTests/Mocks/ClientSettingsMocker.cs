@@ -5,7 +5,7 @@
         // todo: Get identity server url from config file
         // todo: Get token request from config file
 
-        public static OnlineStoreIdentityClientSettings GetOnlineStoreIdentityClientSettings(string userName, string password)
+        public static OnlineStoreIdentityClientSettings GetIdentityClientSettings(string userName, string password)
             => new OnlineStoreIdentityClientSettings
             {
                 Url = "http://localhost:5100",

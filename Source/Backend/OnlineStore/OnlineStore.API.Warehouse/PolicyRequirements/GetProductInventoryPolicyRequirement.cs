@@ -8,9 +8,9 @@ using OnlineStore.API.Warehouse.Security;
 namespace OnlineStore.API.Warehouse.PolicyRequirements
 {
 #pragma warning disable CS1591
-    public class PutProductUnitPricePolicy : AuthorizationHandler<PutProductUnitPricePolicy>, IAuthorizationRequirement
+    public class GetProductInventoryPolicyRequirement : AuthorizationHandler<GetProductInventoryPolicyRequirement>, IAuthorizationRequirement
     {
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, PutProductUnitPricePolicy requirement)
+        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, GetProductInventoryPolicyRequirement requirement)
         {
             var roles = new string[]
             {

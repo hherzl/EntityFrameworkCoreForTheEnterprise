@@ -77,7 +77,7 @@ namespace OnlineStore.API.Sales
                 {
                     options.AddPolicy(Policies.CustomerPolicy, builder =>
                     {
-                        builder.Requirements.Add(new CustomerPolicy());
+                        builder.Requirements.Add(new CustomerPolicyRequirement());
                     });
                 });
 
