@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OnlineStore.API.Warehouse</name>
+    </assembly>
+    <members>
+        <member name="M:OnlineStore.API.Warehouse.Controllers.WarehouseController.GetProductsAsync(OnlineStore.API.Warehouse.Requests.GetProductsRequest)">
+            <summary>
+            Search products
+            </summary>
+            <param name="request">Request model</param>
+            <returns>A sequence that contains the products</returns>
+            <response code="200">Returns a list of products</response>
+            <response code="401">If client is not authenticated</response>
+            <response code="403">If client is not autorized</response>
+            <response code="500">If there was an internal error</response>
+        </member>
+        <member name="M:OnlineStore.API.Warehouse.Controllers.WarehouseController.GetProductInventoryAsync(OnlineStore.API.Warehouse.Requests.GetProductInventoryRequest)">
+            <summary>
+            Gets the product inventory for product and location
+            </summary>
+            <param name="request">Request model</param>
+            <returns>A sequence of inventory transactions by product and warehouse</returns>
+            <response code="200">Returns the inventory for product</response>
+            <response code="401">If client is not authenticated</response>
+            <response code="403">If client is not autorized</response>
+            <response code="404">If id is not exists</response>
+            <response code="500">If there was an internal error</response>
+        </member>
+        <member name="M:OnlineStore.API.Warehouse.Controllers.WarehouseController.PostProductAsync(OnlineStore.API.Warehouse.Requests.PostProductRequest)">
+            <summary>
+            Creates a new product
+            </summary>
+            <returns>A sequence of inventory transactions by product and warehouse</returns>
+            <response code="200">Returns the inventory for product</response>
+            <response code="401">If client is not authenticated</response>
+            <response code="403">If client is not autorized</response>
+            <response code="404">If id is not exists</response>
+            <response code="500">If there was an internal error</response>
+        </member>
+        <member name="M:OnlineStore.API.Warehouse.Controllers.WarehouseController.PutProductUnitPriceAsync(System.Nullable{System.Int32},OnlineStore.API.Warehouse.Requests.PutProductUnitPriceRequest)">
+            <summary>
+            Updates the unit price for an existing product
+            </summary>
+            <returns>A confirmation for product unit price modification</returns>
+            <response code="201">If unit price it was updated successfully</response>
+            <response code="401">If client is not authenticated</response>
+            <response code="403">If client is not autorized</response>
+            <response code="404">If id is not exists</response>
+            <response code="500">If there was an internal error</response>
+        </member>
+        <member name="T:OnlineStore.API.Warehouse.Requests.PostProductRequest">
+            <summary>
+            Represents the model to create a new product
+            </summary>
+        </member>
+        <member name="P:OnlineStore.API.Warehouse.Requests.PostProductRequest.ID">
+            <summary>
+            Gets or sets the ID
+            </summary>
+        </member>
+        <member name="P:OnlineStore.API.Warehouse.Requests.PostProductRequest.ProductName">
+            <summary>
+            Gets or sets the product name
+            </summary>
+        </member>
+        <member name="P:OnlineStore.API.Warehouse.Requests.PostProductRequest.ProductCategoryID">
+            <summary>
+            Gets or sets the product category ID
+            </summary>
+        </member>
+        <member name="P:OnlineStore.API.Warehouse.Requests.PostProductRequest.UnitPrice">
+            <summary>
+            Gets or sets the unit price
+            </summary>
+        </member>
+        <member name="P:OnlineStore.API.Warehouse.Requests.PostProductRequest.Description">
+            <summary>
+            Gets or sets the description
+            </summary>
+        </member>
+    </members>
+</doc>

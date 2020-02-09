@@ -1,0 +1,13 @@
+2019-12-26 00:17:26.979 -06:00 [INF] Starting web host
+2019-12-26 00:19:53.767 -06:00 [INF] Starting web host
+2019-12-26 00:21:01.897 -06:00 [INF] Starting web host
+2019-12-26 00:25:45.494 -06:00 [INF] Starting web host
+2019-12-26 00:27:38.361 -06:00 [INF] Starting web host
+2019-12-26 00:29:28.151 -06:00 [INF] Starting web host
+2019-12-26 00:33:42.557 -06:00 [INF] Starting web host
+2019-12-26 00:35:30.313 -06:00 [INF] Starting web host
+2019-12-26 00:35:33.738 -06:00 [INF] User profile is available. Using 'C:\Users\cherz\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-12-26 00:35:35.252 -06:00 [INF] Request starting HTTP/1.1 GET http://localhost:6000/swagger/index.html  
+2019-12-26 00:35:35.789 -06:00 [INF] Request finished in 543.3036ms 200 text/html
+2019-12-26 00:35:36.534 -06:00 [INF] Request starting HTTP/1.1 GET http://localhost:6000/swagger/v1/swagger.json  
+2019-12-26 00:35:36.619 -06:00 [INF] Request finished in 85.0753ms 200 application/json;charset=utf-8

@@ -5,11 +5,11 @@ namespace OnlineStore.Common.Helpers
 {
     public static class LoggingHelper
     {
-        public static ILogger<T> GetLogger<T>()
+        public static ILogger<TModel> GetLogger<TModel>()
             => new ServiceCollection()
                 .AddLogging()
                 .BuildServiceProvider()
                 .GetService<ILoggerFactory>()
-                .CreateLogger<T>();
+                .CreateLogger<TModel>();
     }
 }
