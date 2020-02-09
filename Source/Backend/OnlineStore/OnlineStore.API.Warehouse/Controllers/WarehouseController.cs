@@ -8,7 +8,6 @@ using OnlineStore.API.Common.Responses;
 using OnlineStore.API.Warehouse.Requests;
 using OnlineStore.API.Warehouse.Security;
 using OnlineStore.Core.Business.Contracts;
-using OnlineStore.Core.Business.Requests;
 
 namespace OnlineStore.API.Warehouse.Controllers
 {
@@ -37,16 +36,16 @@ namespace OnlineStore.API.Warehouse.Controllers
         /// <response code="401">If client is not authenticated</response>
         /// <response code="403">If client is not autorized</response>
         /// <response code="500">If there was an internal error</response>
-        [HttpPost("search-product")]
+        [HttpGet("product")]
         [ProducesResponseType(200)]
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
         [ProducesResponseType(500)]
         [OnlineStoreActionFilter]
         [Authorize(Policy = Policies.SearchProductsPolicy)]
-        public async Task<IActionResult> SearchProductsAsync([FromBody]SearchProductsRequest request)
+        public async Task<IActionResult> GetProductsAsync([FromQuery]GetProductsRequest request)
         {
-            Logger?.LogDebug("{0} has been invoked", nameof(SearchProductsAsync));
+            Logger?.LogDebug("{0} has been invoked", nameof(GetProductsAsync));
 
             // Get response from business logic
             var response = await Service
@@ -66,7 +65,7 @@ namespace OnlineStore.API.Warehouse.Controllers
         /// <response code="403">If client is not autorized</response>
         /// <response code="404">If id is not exists</response>
         /// <response code="500">If there was an internal error</response>
-        [HttpPost("search-product-inventory")]
+        [HttpPost("product-inventory")]
         [ProducesResponseType(200)]
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
@@ -74,7 +73,7 @@ namespace OnlineStore.API.Warehouse.Controllers
         [ProducesResponseType(500)]
         [OnlineStoreActionFilter]
         [Authorize(Policy = Policies.GetProductInventoryPolicy)]
-        public async Task<IActionResult> GetProductInventoryAsync([FromBody]GetProductInventoryRequest request)
+        public async Task<IActionResult> GetProductInventoryAsync([FromQuery]GetProductInventoryRequest request)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetProductInventoryAsync));
 
@@ -107,7 +106,7 @@ namespace OnlineStore.API.Warehouse.Controllers
         {
             Logger?.LogDebug("{0} has been invoked", nameof(PostProductAsync));
 
-            var entity = request.GetProduct();
+            var entity = request.ToEntity();
 
             entity.CreationUser = UserInfo.UserName;
 
@@ -127,7 +126,7 @@ namespace OnlineStore.API.Warehouse.Controllers
         /// <response code="403">If client is not autorized</response>
         /// <response code="404">If id is not exists</response>
         /// <response code="500">If there was an internal error</response>
-        [HttpPut("update-product-unit-price/{id}")]
+        [HttpPut("product-unit-price/{id}")]
         [ProducesResponseType(201)]
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
@@ -135,16 +134,16 @@ namespace OnlineStore.API.Warehouse.Controllers
         [ProducesResponseType(500)]
         [OnlineStoreActionFilter]
         [Authorize(Policy = Policies.PutProductUnitPricePolicy)]
-        public async Task<IActionResult> UpdateProductUnitPriceAsync(int? id, [FromBody]UpdateProductUnitPriceRequest request)
+        public async Task<IActionResult> PutProductUnitPriceAsync(int? id, [FromBody]PutProductUnitPriceRequest request)
         {
-            Logger?.LogDebug("{0} has been invoked", nameof(UpdateProductUnitPriceAsync));
+            Logger?.LogDebug("{0} has been invoked", nameof(PutProductUnitPriceAsync));
 
             Service.UserInfo = UserInfo;
 
             // Get response from business logic
 
             var response = await Service
-                .UpdateProductUnitPriceAsync(id, request);
+                .UpdateProductUnitPriceAsync(id, request.UnitPrice);
 
             // Return as http response
             return response.ToHttpResult();

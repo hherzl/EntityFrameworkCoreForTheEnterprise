@@ -23,10 +23,10 @@ namespace OnlineStore.API.Sales.UnitTests
             var userInfo = IdentityMocker.GetCustomerIdentity().GetUserInfo();
             var service = ServiceMocker.GetSalesService(userInfo, nameof(TestSearchOrdersAsync), true);
             var controller = new SalesController(null, null, null, service);
-            var request = new SearchOrdersRequest();
+            var request = new GetOrdersRequest();
 
             // Act
-            var response = await controller.SearchOrdersAsync(request) as ObjectResult;
+            var response = await controller.GetOrdersAsync(request) as ObjectResult;
             var value = response.Value as IPagedResponse<OrderInfo>;
 
             // Assert
@@ -40,13 +40,13 @@ namespace OnlineStore.API.Sales.UnitTests
             var userInfo = IdentityMocker.GetCustomerIdentity().GetUserInfo();
             var service = ServiceMocker.GetSalesService(userInfo, nameof(TestSearchOrdersByCurrencyAsync), true);
             var controller = new SalesController(null, null, null, service);
-            var request = new SearchOrdersRequest
+            var request = new GetOrdersRequest
             {
                 CurrencyID = "USD"
             };
 
             // Act
-            var response = await controller.SearchOrdersAsync(request) as ObjectResult;
+            var response = await controller.GetOrdersAsync(request) as ObjectResult;
             var value = response.Value as IPagedResponse<OrderInfo>;
 
             // Assert
@@ -61,13 +61,13 @@ namespace OnlineStore.API.Sales.UnitTests
             var userInfo = IdentityMocker.GetCustomerIdentity().GetUserInfo();
             var service = ServiceMocker.GetSalesService(userInfo, nameof(TestSearchOrdersByCustomerAsync), true);
             var controller = new SalesController(null, null, null, service);
-            var request = new SearchOrdersRequest
+            var request = new GetOrdersRequest
             {
                 CustomerID = 1
             };
 
             // Act
-            var response = await controller.SearchOrdersAsync(request) as ObjectResult;
+            var response = await controller.GetOrdersAsync(request) as ObjectResult;
             var value = response.Value as IPagedResponse<OrderInfo>;
 
             // Assert
@@ -82,13 +82,13 @@ namespace OnlineStore.API.Sales.UnitTests
             var userInfo = IdentityMocker.GetCustomerIdentity().GetUserInfo();
             var service = ServiceMocker.GetSalesService(userInfo, nameof(TestSearchOrdersByEmployeeAsync), true);
             var controller = new SalesController(null, null, null, service);
-            var request = new SearchOrdersRequest
+            var request = new GetOrdersRequest
             {
                 EmployeeID = 1
             };
 
             // Act
-            var response = await controller.SearchOrdersAsync(request) as ObjectResult;
+            var response = await controller.GetOrdersAsync(request) as ObjectResult;
             var value = response.Value as IPagedResponse<OrderInfo>;
 
             // Assert
@@ -139,7 +139,7 @@ namespace OnlineStore.API.Sales.UnitTests
             var controller = new SalesController(null, null, null, service);
 
             // Act
-            var response = await controller.GetCreateOrderModelAsync() as ObjectResult;
+            var response = await controller.GetPostOrderModelAsync() as ObjectResult;
             var value = response.Value as ISingleResponse<CreateOrderRequest>;
 
             // Assert
@@ -174,7 +174,7 @@ namespace OnlineStore.API.Sales.UnitTests
             };
 
             // Act
-            var response = await controller.PlaceOrderAsync(request) as ObjectResult;
+            var response = await controller.PostOrderAsync(request) as ObjectResult;
             var value = response.Value as ISingleResponse<OrderHeader>;
 
             // Assert

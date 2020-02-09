@@ -4,7 +4,7 @@
         <name>OnlineStore.API.Warehouse</name>
     </assembly>
     <members>
-        <member name="M:OnlineStore.API.Warehouse.Controllers.WarehouseController.SearchProductsAsync(OnlineStore.API.Warehouse.Requests.SearchProductsRequest)">
+        <member name="M:OnlineStore.API.Warehouse.Controllers.WarehouseController.GetProductsAsync(OnlineStore.API.Warehouse.Requests.GetProductsRequest)">
             <summary>
             Search products
             </summary>
@@ -38,7 +38,7 @@
             <response code="404">If id is not exists</response>
             <response code="500">If there was an internal error</response>
         </member>
-        <member name="M:OnlineStore.API.Warehouse.Controllers.WarehouseController.UpdateProductUnitPriceAsync(System.Nullable{System.Int32},OnlineStore.Core.Business.Requests.UpdateProductUnitPriceRequest)">
+        <member name="M:OnlineStore.API.Warehouse.Controllers.WarehouseController.PutProductUnitPriceAsync(System.Nullable{System.Int32},OnlineStore.API.Warehouse.Requests.PutProductUnitPriceRequest)">
             <summary>
             Updates the unit price for an existing product
             </summary>

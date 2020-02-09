@@ -2,9 +2,9 @@ cls
 set initialPath=%cd%
 set rothschildHouseISPath=%cd%\Resources\RothschildHouse\RothschildHouse.IdentityServer
 set rothschildHousePath=%cd%\Resources\RothschildHouse\RothschildHouse
-set onlineStoreISPath=%cd%\Source\Backend\OnlineStore\OnlineStore.IdentityServer
-set srcPath=%cd%\Source\Backend\OnlineStore\OnlineStore.WebAPI
-set testPath=%cd%\Source\Backend\OnlineStore\OnlineStore.WebAPI.IntegrationTests
+set onlineStoreISPath=%cd%\Source\Backend\OnlineStore\OnlineStore.API.Identity
+set srcPath=%cd%\Source\Backend\OnlineStore\OnlineStore.API.Warehouse
+set testPath=%cd%\Source\Backend\OnlineStore\OnlineStore.API.Warehouse.IntegrationTests
 cd %rothschildHouseISPath%
 start dotnet run
 cd %rothschildHousePath%

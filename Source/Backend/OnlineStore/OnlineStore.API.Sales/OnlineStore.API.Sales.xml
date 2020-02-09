@@ -4,7 +4,7 @@
         <name>OnlineStore.API.Sales</name>
     </assembly>
     <members>
-        <member name="M:OnlineStore.API.Sales.Controllers.SalesController.SearchOrdersAsync(OnlineStore.Core.Business.Requests.SearchOrdersRequest)">
+        <member name="M:OnlineStore.API.Sales.Controllers.SalesController.GetOrdersAsync(OnlineStore.API.Sales.Requests.GetOrdersRequest)">
             <summary>
             Retrieves the orders placed by customers
             </summary>
@@ -27,7 +27,7 @@
             <response code="404">If id is not exists</response>
             <response code="500">If there was an internal error</response>
         </member>
-        <member name="M:OnlineStore.API.Sales.Controllers.SalesController.GetCreateOrderModelAsync">
+        <member name="M:OnlineStore.API.Sales.Controllers.SalesController.GetPostOrderModelAsync">
             <summary>
             Retrieves the request model to create a new order
             </summary>
@@ -37,7 +37,7 @@
             <response code="403">If client is not autorized</response>
             <response code="500">If there was an internal error</response>
         </member>
-        <member name="M:OnlineStore.API.Sales.Controllers.SalesController.PlaceOrderAsync(OnlineStore.API.Sales.Requests.PostOrderRequest)">
+        <member name="M:OnlineStore.API.Sales.Controllers.SalesController.PostOrderAsync(OnlineStore.API.Sales.Requests.PostOrderRequest)">
             <summary>
             Creates a new order
             </summary>
@@ -61,7 +61,7 @@
             <response code="404">If id is not exists</response>
             <response code="500">If there was an internal error</response>
         </member>
-        <member name="M:OnlineStore.API.Sales.Controllers.SalesController.CancelOrderAsync(System.Int32)">
+        <member name="M:OnlineStore.API.Sales.Controllers.SalesController.DeleteOrderAsync(System.Int32)">
             <summary>
             Cancels an existing order
             </summary>

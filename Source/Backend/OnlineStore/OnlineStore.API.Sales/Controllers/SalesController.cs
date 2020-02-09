@@ -11,7 +11,6 @@ using OnlineStore.API.Common.Responses;
 using OnlineStore.API.Sales.Requests;
 using OnlineStore.API.Sales.Security;
 using OnlineStore.Core.Business.Contracts;
-using OnlineStore.Core.Business.Requests;
 
 namespace OnlineStore.API.Sales.Controllers
 {
@@ -44,18 +43,19 @@ namespace OnlineStore.API.Sales.Controllers
         /// <response code="401">If client is not authenticated</response>
         /// <response code="403">If client is not autorized</response>
         /// <response code="500">If there was an internal error</response>
-        [HttpPost("search-orders")]
+        [HttpGet("order")]
         [ProducesResponseType(200)]
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
         [ProducesResponseType(500)]
         [OnlineStoreActionFilter]
-        public async Task<IActionResult> SearchOrdersAsync([FromBody]SearchOrdersRequest request)
+        public async Task<IActionResult> GetOrdersAsync([FromQuery]GetOrdersRequest request)
         {
-            Logger?.LogDebug("{0} has been invoked", nameof(SearchOrdersAsync));
+            Logger?.LogDebug("{0} has been invoked", nameof(GetOrdersAsync));
 
             // Get response from business logic
-            var response = await SalesService.GetOrdersAsync(request);
+            var response = await SalesService
+                .GetOrdersAsync(request.PageSize, request.PageNumber, request.OrderStatusID, request.CustomerID, request.EmployeeID, request.ShipperID, request.CurrencyID, request.PaymentMethodID);
 
             // Return as http response
             return response.ToHttpResult();
@@ -97,16 +97,16 @@ namespace OnlineStore.API.Sales.Controllers
         /// <response code="401">If client is not authenticated</response>
         /// <response code="403">If client is not autorized</response>
         /// <response code="500">If there was an internal error</response>
-        [HttpGet("get-create-order-model")]
+        [HttpGet("order-model")]
         [ProducesResponseType(200)]
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
         [ProducesResponseType(500)]
         [OnlineStoreActionFilter]
         [Authorize(Policy = Policies.CustomerPolicy)]
-        public async Task<IActionResult> GetCreateOrderModelAsync()
+        public async Task<IActionResult> GetPostOrderModelAsync()
         {
-            Logger?.LogDebug("{0} has been invoked", nameof(GetCreateOrderModelAsync));
+            Logger?.LogDebug("{0} has been invoked", nameof(GetPostOrderModelAsync));
 
             // Get response from business logic
             var response = await SalesService.GetCreateOrderRequestAsync();
@@ -125,7 +125,7 @@ namespace OnlineStore.API.Sales.Controllers
         /// <response code="401">If client is not authenticated</response>
         /// <response code="403">If client is not autorized</response>
         /// <response code="500">If there was an internal error</response>
-        [HttpPost("place-order")]
+        [HttpPost("order")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
@@ -133,9 +133,9 @@ namespace OnlineStore.API.Sales.Controllers
         [ProducesResponseType(500)]
         [OnlineStoreActionFilter]
         [Authorize(Policy = Policies.CustomerPolicy)]
-        public async Task<IActionResult> PlaceOrderAsync([FromBody]PostOrderRequest request)
+        public async Task<IActionResult> PostOrderAsync([FromBody]PostOrderRequest request)
         {
-            Logger?.LogDebug("{0} has been invoked", nameof(PlaceOrderAsync));
+            Logger?.LogDebug("{0} has been invoked", nameof(PostOrderAsync));
 
             var token = await RothschildHouseIdentityClient
                 .GetRothschildHouseTokenAsync();
@@ -154,13 +154,13 @@ namespace OnlineStore.API.Sales.Controllers
             var paymentResponse = await paymentHttpResponse
                 .GetPaymentResponseAsync();
 
-            var entity = request.GetOrderHeader();
+            var entity = request.GetHeader();
 
             entity.CreationUser = UserInfo.UserName;
 
             // Get response from business logic
             var response = await SalesService
-                .CreateOrderAsync(entity, request.GetOrderDetails().ToArray());
+                .CreateOrderAsync(entity, request.GetDetails().ToArray());
 
             // Return as http response
             return response.ToHttpResult();
@@ -176,7 +176,7 @@ namespace OnlineStore.API.Sales.Controllers
         /// <response code="403">If client is not autorized</response>
         /// <response code="404">If id is not exists</response>
         /// <response code="500">If there was an internal error</response>
-        [HttpGet("clone-order/{id}")]
+        [HttpGet("order/{id}/clone")]
         [ProducesResponseType(200)]
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
@@ -204,7 +204,7 @@ namespace OnlineStore.API.Sales.Controllers
         /// <response code="403">If client is not autorized</response>
         /// <response code="404">If id is not exists</response>
         /// <response code="500">If there was an internal error</response>
-        [HttpDelete("cancel-order/{id}")]
+        [HttpDelete("order/{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(401)]
         [ProducesResponseType(403)]
@@ -212,9 +212,9 @@ namespace OnlineStore.API.Sales.Controllers
         [ProducesResponseType(500)]
         [OnlineStoreActionFilter]
         [Authorize(Policy = Policies.CustomerPolicy)]
-        public async Task<IActionResult> CancelOrderAsync(int id)
+        public async Task<IActionResult> DeleteOrderAsync(int id)
         {
-            Logger?.LogDebug("{0} has been invoked", nameof(CancelOrderAsync));
+            Logger?.LogDebug("{0} has been invoked", nameof(DeleteOrderAsync));
 
             // Get response from business logic
             var response = await SalesService.CancelOrderAsync(id);

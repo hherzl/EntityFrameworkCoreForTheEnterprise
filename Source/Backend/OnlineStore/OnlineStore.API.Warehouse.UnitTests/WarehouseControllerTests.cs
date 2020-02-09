@@ -5,7 +5,6 @@ using OnlineStore.API.Common.UnitTests.Mocks;
 using OnlineStore.API.Warehouse.Controllers;
 using OnlineStore.API.Warehouse.Requests;
 using OnlineStore.API.Warehouse.UnitTests.Mocks;
-using OnlineStore.Core.Business.Requests;
 using OnlineStore.Core.Business.Responses;
 using OnlineStore.Core.Domain.Warehouse;
 using Xunit;
@@ -15,16 +14,16 @@ namespace OnlineStore.API.Warehouse.UnitTests
     public class WarehouseControllerTests
     {
         [Fact]
-        public async Task SearchProductsAsync()
+        public async Task GetProductsAsync()
         {
             // Arrange
             var userInfo = IdentityMocker.GetWarehouseOperatorIdentity().GetUserInfo();
-            var service = ServiceMocker.GetWarehouseService(userInfo, nameof(SearchProductsAsync), true);
+            var service = ServiceMocker.GetWarehouseService(userInfo, nameof(GetProductsAsync), true);
             var controller = new WarehouseController(null, service);
-            var request = new SearchProductsRequest();
+            var request = new GetProductsRequest();
 
             // Act
-            var response = await controller.SearchProductsAsync(request) as ObjectResult;
+            var response = await controller.GetProductsAsync(request) as ObjectResult;
             var value = response.Value as IPagedResponse<Product>;
 
             service.Dispose();
@@ -59,11 +58,11 @@ namespace OnlineStore.API.Warehouse.UnitTests
         }
 
         [Fact]
-        public async Task TestCreateProductTestAsync()
+        public async Task CreateProductTestAsync()
         {
             // Arrange
             var userInfo = IdentityMocker.GetWarehouseOperatorIdentity().GetUserInfo();
-            var service = ServiceMocker.GetWarehouseService(userInfo, nameof(TestCreateProductTestAsync));
+            var service = ServiceMocker.GetWarehouseService(userInfo, nameof(CreateProductTestAsync));
             var controller = new WarehouseController(null, service);
             var request = new PostProductRequest
             {
@@ -85,20 +84,20 @@ namespace OnlineStore.API.Warehouse.UnitTests
         }
 
         [Fact]
-        public async Task TestUpdateProductUnitPriceAsync()
+        public async Task PutProductUnitPriceAsync()
         {
             // Arrange
             var userInfo = IdentityMocker.GetWarehouseOperatorIdentity().GetUserInfo();
-            var service = ServiceMocker.GetWarehouseService(userInfo, nameof(TestUpdateProductUnitPriceAsync));
+            var service = ServiceMocker.GetWarehouseService(userInfo, nameof(PutProductUnitPriceAsync));
             var controller = new WarehouseController(null, service);
             var id = 1;
-            var request = new UpdateProductUnitPriceRequest
+            var request = new PutProductUnitPriceRequest
             {
                 UnitPrice = 14.99m
             };
 
             // Act
-            var response = await controller.UpdateProductUnitPriceAsync(id, request) as ObjectResult;
+            var response = await controller.PutProductUnitPriceAsync(id, request) as ObjectResult;
             var value = response.Value as ISingleResponse<Product>;
 
             // Assert

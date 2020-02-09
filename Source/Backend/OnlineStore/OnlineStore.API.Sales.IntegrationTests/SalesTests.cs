@@ -18,25 +18,19 @@ namespace OnlineStore.API.Sales.IntegrationTests
         }
 
         [Fact]
-        public async Task TestSearchOrdersAsCustomerAsync()
+        public async Task GetOrdersAsCustomerAsync()
         {
             // Arrange
             var token = await TokenHelper.GetTokenForWolverineAsync();
             var request = new
             {
-                Url = "/api/v1/Sales/SearchOrder",
-                Body = new
-                {
-                    PageSize = 10,
-                    PageNumber = 1
-                }
+                Url = "/api/v1/Sales/order?pageSize=10&pageNumber=1"
             };
 
             // Act
             Client.SetBearerToken(token.AccessToken);
 
-            var response = await Client
-                .PostAsync(request.Url, ContentHelper.GetStringContent(request.Body));
+            var response = await Client.GetAsync(request.Url);
 
             var content = await response.Content.ReadAsStringAsync();
 
@@ -45,89 +39,13 @@ namespace OnlineStore.API.Sales.IntegrationTests
         }
 
         [Fact]
-        public async Task TestSearchOrdersByCurrencyAsCustomerAsync()
+        public async Task GetOrdersByCurrencyAsCustomerAsync()
         {
             // Arrange
             var token = await TokenHelper.GetTokenForWolverineAsync();
             var request = new
             {
-                Url = "/api/v1/Sales/SearchOrder",
-                Body = new
-                {
-                    PageSize = 10,
-                    PageNumber = 1,
-                    CurrencyID = 1
-                }
-            };
-
-            // Act
-            Client.SetBearerToken(token.AccessToken);
-
-            var response = await Client
-                .PostAsync(request.Url, ContentHelper.GetStringContent(request.Body));
-
-            // Assert
-            response.EnsureSuccessStatusCode();
-        }
-
-        [Fact]
-        public async Task TestSearchOrdersByCustomerAsCustomerAsync()
-        {
-            // Arrange
-            var token = await TokenHelper.GetTokenForWolverineAsync();
-            var request = new
-            {
-                Url = "/api/v1/Sales/SearchOrder",
-                Body = new
-                {
-                    PageSize = 10,
-                    PageNumber = 1,
-                    CustomerID = 1
-                }
-            };
-
-            // Act
-            Client.SetBearerToken(token.AccessToken);
-
-            var response = await Client
-                .PostAsync(request.Url, ContentHelper.GetStringContent(request.Body));
-
-            // Assert
-            response.EnsureSuccessStatusCode();
-        }
-
-        [Fact]
-        public async Task TestSearchOrdersByEmployeeAsCustomerAsync()
-        {
-            // Arrange
-            var token = await TokenHelper.GetTokenForWolverineAsync();
-            var request = new
-            {
-                Url = "/api/v1/Sales/SearchOrder",
-                Body = new
-                {
-                    EmployeeID = 1
-                }
-            };
-
-            // Act
-            Client.SetBearerToken(token.AccessToken);
-
-            var response = await Client
-                .PostAsync(request.Url, ContentHelper.GetStringContent(request.Body));
-
-            // Assert
-            response.EnsureSuccessStatusCode();
-        }
-
-        [Fact]
-        public async Task TestGetOrderByIdAsCustomerAsync()
-        {
-            // Arrange
-            var token = await TokenHelper.GetTokenForWolverineAsync();
-            var request = new
-            {
-                Url = string.Format("/api/v1/Sales/Order/{0}", 1)
+                Url = "/api/v1/Sales/order?pageSize=10&pageNumber=1&currencyID=1"
             };
 
             // Act
@@ -140,13 +58,70 @@ namespace OnlineStore.API.Sales.IntegrationTests
         }
 
         [Fact]
-        public async Task TestGetOrderByNonExistingIdAsCustomerAsync()
+        public async Task SearchOrdersByCustomerAsCustomerAsync()
         {
             // Arrange
             var token = await TokenHelper.GetTokenForWolverineAsync();
             var request = new
             {
-                Url = string.Format("/api/v1/Sales/Order/{0}", 0)
+                Url = "/api/v1/Sales/order"
+            };
+
+            // Act
+            Client.SetBearerToken(token.AccessToken);
+
+            var response = await Client.GetAsync(request.Url);
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+        }
+
+        [Fact]
+        public async Task GetOrdersByEmployeeAsCustomerAsync()
+        {
+            // Arrange
+            var token = await TokenHelper.GetTokenForWolverineAsync();
+            var request = new
+            {
+                Url = "/api/v1/Sales/order?employeeId=1"
+            };
+
+            // Act
+            Client.SetBearerToken(token.AccessToken);
+
+            var response = await Client.GetAsync(request.Url);
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+        }
+
+        [Fact]
+        public async Task GetOrderByIdAsCustomerAsync()
+        {
+            // Arrange
+            var token = await TokenHelper.GetTokenForWolverineAsync();
+            var request = new
+            {
+                Url = "/api/v1/Sales/order/1"
+            };
+
+            // Act
+            Client.SetBearerToken(token.AccessToken);
+
+            var response = await Client.GetAsync(request.Url);
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+        }
+
+        [Fact]
+        public async Task GetOrderByNonExistingIdAsCustomerAsync()
+        {
+            // Arrange
+            var token = await TokenHelper.GetTokenForWolverineAsync();
+            var request = new
+            {
+                Url = "/api/v1/Sales/order/0"
             };
 
             // Act
@@ -159,13 +134,13 @@ namespace OnlineStore.API.Sales.IntegrationTests
         }
 
         [Fact]
-        public async Task TestGetCreateOrderRequestAsCustomerAsync()
+        public async Task GetPostOrderRequestAsCustomerAsync()
         {
             // Arrange
             var token = await TokenHelper.GetTokenForWolverineAsync();
             var request = new
             {
-                Url = "/api/v1/Sales/CreateOrderRequest"
+                Url = "/api/v1/Sales/order-model"
             };
 
             // Act
@@ -178,13 +153,13 @@ namespace OnlineStore.API.Sales.IntegrationTests
         }
 
         [Fact]
-        public async Task TestGetCreateOrderRequestAsWarehouseOperatorAsync()
+        public async Task GetPlaceOrderRequestAsWarehouseOperatorAsync()
         {
             // Arrange
             var token = await TokenHelper.GetTokenForWarehouseOperatorAsync();
             var request = new
             {
-                Url = "/api/v1/Sales/CreateOrderRequest"
+                Url = "/api/v1/Sales/order-model"
             };
 
             // Act
@@ -197,12 +172,12 @@ namespace OnlineStore.API.Sales.IntegrationTests
         }
 
         [Fact]
-        public async Task TestPostOrderAsCustomerAsync()
+        public async Task PlaceOrderAsCustomerAsync()
         {
             // Arrange
             var request = new
             {
-                Url = "/api/v1/Sales/Order",
+                Url = "/api/v1/Sales/order",
                 Body = new
                 {
                     UserName = "jameslogan@walla.com",
@@ -242,13 +217,13 @@ namespace OnlineStore.API.Sales.IntegrationTests
         }
 
         [Fact]
-        public async Task TestCloneOrderAsCustomerAsync()
+        public async Task CloneOrderAsCustomerAsync()
         {
             // Arrange
             var token = await TokenHelper.GetTokenForWolverineAsync();
             var request = new
             {
-                Url = string.Format("/api/v1/Sales/CloneOrder/{0}", 1)
+                Url = "/api/v1/Sales/order/1/clone"
             };
 
             // Act

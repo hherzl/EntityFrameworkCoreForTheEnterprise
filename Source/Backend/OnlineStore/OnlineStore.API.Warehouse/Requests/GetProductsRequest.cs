@@ -1,8 +1,9 @@
 ﻿namespace OnlineStore.API.Warehouse.Requests
 {
-    public class SearchProductsRequest
+#pragma warning disable CS1591
+    public class GetProductsRequest
     {
-        public SearchProductsRequest()
+        public GetProductsRequest()
         {
             PageSize = 10;
             PageNumber = 1;
@@ -14,4 +15,5 @@
 
         public int? ProductCategoryID { get; set; }
     }
+#pragma warning restore CS1591
 }

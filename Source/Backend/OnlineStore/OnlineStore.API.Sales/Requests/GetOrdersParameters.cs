@@ -1,10 +1,11 @@
 ﻿using System;
 
-namespace OnlineStore.Core.Business.Requests
+namespace OnlineStore.API.Sales.Requests
 {
-    public class SearchOrdersRequest
+#pragma warning disable CS1591
+    public class GetOrdersRequest
     {
-        public SearchOrdersRequest()
+        public GetOrdersRequest()
         {
             PageSize = 50;
             PageNumber = 1;
@@ -26,4 +27,5 @@ namespace OnlineStore.Core.Business.Requests
 
         public Guid? PaymentMethodID { get; set; }
     }
+#pragma warning restore CS1591
 }

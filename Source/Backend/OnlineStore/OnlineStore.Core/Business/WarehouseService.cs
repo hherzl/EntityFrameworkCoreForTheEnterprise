@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using OnlineStore.Core.Business.Contracts;
-using OnlineStore.Core.Business.Requests;
 using OnlineStore.Core.Business.Responses;
 using OnlineStore.Core.Domain;
 using OnlineStore.Core.Domain.Repositories;
@@ -126,7 +125,7 @@ namespace OnlineStore.Core.Business
             return response;
         }
 
-        public async Task<ISingleResponse<Product>> UpdateProductUnitPriceAsync(int? productID, UpdateProductUnitPriceRequest request)
+        public async Task<ISingleResponse<Product>> UpdateProductUnitPriceAsync(int? productID, decimal? unitPrice)
         {
             Logger?.LogInformation("'{0}' has been invoked", nameof(UpdateProductUnitPriceAsync));
 
@@ -147,8 +146,8 @@ namespace OnlineStore.Core.Business
                 };
 
                 // Change unit price
-                if (entity.UnitPrice != request.UnitPrice)
-                    entity.UnitPrice = request.UnitPrice;
+                if (entity.UnitPrice != unitPrice)
+                    entity.UnitPrice = unitPrice;
 
                 // Set last update info
 

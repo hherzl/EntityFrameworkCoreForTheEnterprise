@@ -7,7 +7,7 @@ namespace OnlineStore.API.Sales.Requests
 #pragma warning disable CS1591
     public static class Extensions
     {
-        public static OrderHeader GetOrderHeader(this PostOrderRequest request)
+        public static OrderHeader GetHeader(this PostOrderRequest request)
             => new OrderHeader
             {
                 ID = request.ID,
@@ -17,7 +17,7 @@ namespace OnlineStore.API.Sales.Requests
                 Comments = request.Comments
             };
 
-        public static IEnumerable<OrderDetail> GetOrderDetails(this PostOrderRequest request)
+        public static IEnumerable<OrderDetail> GetDetails(this PostOrderRequest request)
         {
             foreach (var item in request.Details)
             {

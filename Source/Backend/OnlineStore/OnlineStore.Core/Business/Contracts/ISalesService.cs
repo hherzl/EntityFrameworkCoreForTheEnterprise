@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using OnlineStore.Core.Business.Requests;
 using OnlineStore.Core.Business.Responses;
 using OnlineStore.Core.Domain.Dbo;
@@ -16,7 +17,7 @@ namespace OnlineStore.Core.Business.Contracts
 
         Task<IPagedResponse<PaymentMethod>> GetPaymentMethodsAsync(int pageSize = 10, int pageNumber = 1);
 
-        Task<IPagedResponse<OrderInfo>> GetOrdersAsync(SearchOrdersRequest request);
+        Task<IPagedResponse<OrderInfo>> GetOrdersAsync(int? pageSize, int? pageNumber, short? orderStatusID, int? customerID, int? employeeID, int? shipperID, string currencyID, Guid? paymentMethodID);
 
         Task<ISingleResponse<OrderHeader>> GetOrderAsync(long id);
 
