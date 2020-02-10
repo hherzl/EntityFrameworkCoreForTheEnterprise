@@ -17,11 +17,11 @@ namespace OnlineStore.API.Sales.UnitTests
     public class SalesControllerTests
     {
         [Fact]
-        public async Task TestSearchOrdersAsync()
+        public async Task GetOrdersAsync()
         {
             // Arrange
             var userInfo = IdentityMocker.GetCustomerIdentity().GetUserInfo();
-            var service = ServiceMocker.GetSalesService(userInfo, nameof(TestSearchOrdersAsync), true);
+            var service = ServiceMocker.GetSalesService(userInfo, nameof(GetOrdersAsync), true);
             var controller = new SalesController(null, null, null, service);
             var request = new GetOrdersRequest();
 
@@ -34,11 +34,11 @@ namespace OnlineStore.API.Sales.UnitTests
         }
 
         [Fact]
-        public async Task TestSearchOrdersByCurrencyAsync()
+        public async Task GetOrdersByCurrencyAsync()
         {
             // Arrange
             var userInfo = IdentityMocker.GetCustomerIdentity().GetUserInfo();
-            var service = ServiceMocker.GetSalesService(userInfo, nameof(TestSearchOrdersByCurrencyAsync), true);
+            var service = ServiceMocker.GetSalesService(userInfo, nameof(GetOrdersByCurrencyAsync), true);
             var controller = new SalesController(null, null, null, service);
             var request = new GetOrdersRequest
             {
@@ -55,11 +55,11 @@ namespace OnlineStore.API.Sales.UnitTests
         }
 
         [Fact]
-        public async Task TestSearchOrdersByCustomerAsync()
+        public async Task GetOrdersByCustomerAsync()
         {
             // Arrange
             var userInfo = IdentityMocker.GetCustomerIdentity().GetUserInfo();
-            var service = ServiceMocker.GetSalesService(userInfo, nameof(TestSearchOrdersByCustomerAsync), true);
+            var service = ServiceMocker.GetSalesService(userInfo, nameof(GetOrdersByCustomerAsync), true);
             var controller = new SalesController(null, null, null, service);
             var request = new GetOrdersRequest
             {
@@ -76,11 +76,11 @@ namespace OnlineStore.API.Sales.UnitTests
         }
 
         [Fact]
-        public async Task TestSearchOrdersByEmployeeAsync()
+        public async Task GetOrdersByEmployeeAsync()
         {
             // Arrange
             var userInfo = IdentityMocker.GetCustomerIdentity().GetUserInfo();
-            var service = ServiceMocker.GetSalesService(userInfo, nameof(TestSearchOrdersByEmployeeAsync), true);
+            var service = ServiceMocker.GetSalesService(userInfo, nameof(GetOrdersByEmployeeAsync), true);
             var controller = new SalesController(null, null, null, service);
             var request = new GetOrdersRequest
             {
@@ -97,11 +97,11 @@ namespace OnlineStore.API.Sales.UnitTests
         }
 
         [Fact]
-        public async Task TestGetOrderAsync()
+        public async Task GetOrderAsync()
         {
             // Arrange
             var userInfo = IdentityMocker.GetCustomerIdentity().GetUserInfo();
-            var service = ServiceMocker.GetSalesService(userInfo, nameof(TestGetOrderAsync), true);
+            var service = ServiceMocker.GetSalesService(userInfo, nameof(GetOrderAsync), true);
             var controller = new SalesController(null, null, null, service);
             var id = 1;
 
@@ -114,11 +114,11 @@ namespace OnlineStore.API.Sales.UnitTests
         }
 
         [Fact]
-        public async Task TestGetNonExistingOrderAsync()
+        public async Task GetNonExistingOrderAsync()
         {
             // Arrange
             var userInfo = IdentityMocker.GetCustomerIdentity().GetUserInfo();
-            var service = ServiceMocker.GetSalesService(userInfo, nameof(TestGetNonExistingOrderAsync), true);
+            var service = ServiceMocker.GetSalesService(userInfo, nameof(GetNonExistingOrderAsync), true);
             var controller = new SalesController(null, null, null, service);
             var id = 0;
 
@@ -131,11 +131,11 @@ namespace OnlineStore.API.Sales.UnitTests
         }
 
         [Fact]
-        public async Task TestGetCreateOrderRequestAsync()
+        public async Task GetPostOrderModelAsync()
         {
             // Arrange
             var userInfo = IdentityMocker.GetCustomerIdentity().GetUserInfo();
-            var service = ServiceMocker.GetSalesService(userInfo, nameof(TestGetCreateOrderRequestAsync), true);
+            var service = ServiceMocker.GetSalesService(userInfo, nameof(GetPostOrderModelAsync), true);
             var controller = new SalesController(null, null, null, service);
 
             // Act
@@ -147,11 +147,11 @@ namespace OnlineStore.API.Sales.UnitTests
         }
 
         [Fact]
-        public async Task TestPostOrderAsync()
+        public async Task PostOrderAsync()
         {
             // Arrange
             var userInfo = IdentityMocker.GetCustomerIdentity().GetUserInfo();
-            var service = ServiceMocker.GetSalesService(userInfo, nameof(TestPostOrderAsync), true);
+            var service = ServiceMocker.GetSalesService(userInfo, nameof(PostOrderAsync), true);
             var identityClient = new MockedRothschildHouseIdentityClient();
             var paymentClient = new MockedRothschildHousePaymentClient();
             var controller = new SalesController(null, identityClient, paymentClient, service);
@@ -183,11 +183,11 @@ namespace OnlineStore.API.Sales.UnitTests
         }
 
         [Fact]
-        public async Task TestCloneOrderAsync()
+        public async Task CloneOrderAsync()
         {
             // Arrange
             var userInfo = IdentityMocker.GetCustomerIdentity().GetUserInfo();
-            var service = ServiceMocker.GetSalesService(userInfo, nameof(TestCloneOrderAsync), true);
+            var service = ServiceMocker.GetSalesService(userInfo, nameof(CloneOrderAsync), true);
             var controller = new SalesController(null, null, null, service);
             var id = 1;
 

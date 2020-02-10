@@ -58,11 +58,11 @@ namespace OnlineStore.API.Warehouse.UnitTests
         }
 
         [Fact]
-        public async Task CreateProductTestAsync()
+        public async Task PostProductAsync()
         {
             // Arrange
             var userInfo = IdentityMocker.GetWarehouseOperatorIdentity().GetUserInfo();
-            var service = ServiceMocker.GetWarehouseService(userInfo, nameof(CreateProductTestAsync));
+            var service = ServiceMocker.GetWarehouseService(userInfo, nameof(PostProductAsync));
             var controller = new WarehouseController(null, service);
             var request = new PostProductRequest
             {
