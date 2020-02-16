@@ -4,15 +4,15 @@ using System.Threading.Tasks;
 using IdentityServer4.Extensions;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
-using RothschildHouse.IdentityServer.Domain;
+using RothschildHouse.Identity.Domain;
 
-namespace RothschildHouse.IdentityServer.Services
+namespace RothschildHouse.Identity.Services
 {
-    public class ProfileService : IProfileService
+    public class RothschildHouseProfileService : IProfileService
     {
-        private readonly AuthDbContext DbContext;
+        private readonly IdentityDbContext DbContext;
 
-        public ProfileService(AuthDbContext dbContext)
+        public RothschildHouseProfileService(IdentityDbContext dbContext)
         {
             DbContext = dbContext;
         }

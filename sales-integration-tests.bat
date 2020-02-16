@@ -1,6 +1,6 @@
 cls
 set initialPath=%cd%
-set rothschildHouseISPath=%cd%\Resources\RothschildHouse\RothschildHouse.IdentityServer
+set rothschildHouseISPath=%cd%\Resources\RothschildHouse\RothschildHouse.Identity
 set rothschildHousePath=%cd%\Resources\RothschildHouse\RothschildHouse
 set onlineStoreISPath=%cd%\Source\Backend\OnlineStore\OnlineStore.API.Identity
 set srcPath=%cd%\Source\Backend\OnlineStore\OnlineStore.API.Sales

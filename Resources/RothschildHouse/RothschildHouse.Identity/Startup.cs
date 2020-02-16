@@ -2,29 +2,39 @@
 using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RothschildHouse.IdentityServer.Domain;
-using RothschildHouse.IdentityServer.Services;
-using RothschildHouse.IdentityServer.Validation;
+using RothschildHouse.Identity.Domain;
+using RothschildHouse.Identity.Services;
+using RothschildHouse.Identity.Validation;
 
-namespace RothschildHouse.IdentityServer
+namespace RothschildHouse.Identity
 {
     public class Startup
     {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
+
         // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
             /* Setting up dependency injection */
 
             // For DbContext
-            services.AddDbContext<AuthDbContext>(options => options.UseInMemoryDatabase("Auth"));
+            services.AddDbContext<IdentityDbContext>(options => options.UseInMemoryDatabase("Auth"));
 
             // Password validator and profile
             services
-                .AddTransient<IResourceOwnerPasswordValidator, ResourceOwnerPasswordValidator>()
-                .AddTransient<IProfileService, ProfileService>();
+                .AddTransient<IResourceOwnerPasswordValidator, RothschildHouseResourceOwnerPasswordValidator>()
+                .AddTransient<IProfileService, RothschildHouseProfileService>();
 
             /* Identity Server */
 
@@ -48,15 +58,16 @@ namespace RothschildHouse.IdentityServer
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
-            /* Seed AuthDbContext in-memory */
-
             var authDbContext = app
                 .ApplicationServices
                 .CreateScope()
                 .ServiceProvider
-                .GetService<AuthDbContext>();
+                .GetService<IdentityDbContext>();
 
-            authDbContext.SeedInMemory();
+            /* Seed AuthDbContext in-memory */
+
+            authDbContext
+                .SeedInMemory();
 
             app.UseIdentityServer();
         }

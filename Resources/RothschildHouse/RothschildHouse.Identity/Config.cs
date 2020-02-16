@@ -3,7 +3,7 @@ using System.Security.Claims;
 using IdentityModel;
 using IdentityServer4.Models;
 
-namespace RothschildHouse.IdentityServer
+namespace RothschildHouse.Identity
 {
     public static class Config
     {

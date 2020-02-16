@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RothschildHouse.IdentityServer.Domain
+namespace RothschildHouse.Identity.Domain
 {
     public class UserClaim
     {

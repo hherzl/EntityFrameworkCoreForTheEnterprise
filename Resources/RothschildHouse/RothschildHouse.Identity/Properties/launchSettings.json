@@ -1,6 +1,7 @@
 ﻿{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
   "iisSettings": {
-    "windowsAuthentication": false,
+    "windowsAuthentication": false, 
     "anonymousAuthentication": true,
     "iisExpress": {
       "applicationUrl": "http://localhost:18000",
@@ -11,15 +12,16 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:18000/.well-known/openid-configuration",
+      "launchUrl": ".well-known/openid-configuration",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "RothschildHouse.IdentityServer": {
+    "RothschildHouse.Identity": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:18000/.well-known/openid-configuration",
+      "launchUrl": ".well-known/openid-configuration",
+      "applicationUrl": "http://localhost:18000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

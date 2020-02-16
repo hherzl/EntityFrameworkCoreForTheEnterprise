@@ -1,15 +1,15 @@
 ﻿using System.Threading.Tasks;
 using IdentityServer4.Models;
 using IdentityServer4.Validation;
-using RothschildHouse.IdentityServer.Domain;
+using RothschildHouse.Identity.Domain;
 
-namespace RothschildHouse.IdentityServer.Validation
+namespace RothschildHouse.Identity.Validation
 {
-    public class ResourceOwnerPasswordValidator : IResourceOwnerPasswordValidator
+    public class RothschildHouseResourceOwnerPasswordValidator : IResourceOwnerPasswordValidator
     {
-        private readonly AuthDbContext DbContext;
+        private readonly IdentityDbContext DbContext;
 
-        public ResourceOwnerPasswordValidator(AuthDbContext dbContext)
+        public RothschildHouseResourceOwnerPasswordValidator(IdentityDbContext dbContext)
         {
             DbContext = dbContext;
         }

@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace RothschildHouse.IdentityServer.Domain
+namespace RothschildHouse.Identity.Domain
 {
-    public class AuthDbContext : DbContext
+    public class IdentityDbContext : DbContext
     {
-        public AuthDbContext(DbContextOptions<AuthDbContext> options)
+        public IdentityDbContext(DbContextOptions<IdentityDbContext> options)
             : base(options)
         {
         }

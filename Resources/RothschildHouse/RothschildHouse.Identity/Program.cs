@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace RothschildHouse.IdentityServer
+namespace RothschildHouse.Identity
 {
     public class Program
     {

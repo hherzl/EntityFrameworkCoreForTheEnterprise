@@ -5,44 +5,44 @@ using IdentityModel.Client;
 
 namespace RothschildHouse.Client
 {
-    class Program
+    public static class Program
     {
         static void Main(string[] args)
-        {
-            MainAsync(args).GetAwaiter().GetResult();
-
-            Console.ReadLine();
-        }
+            => MainAsync(args).GetAwaiter().GetResult();
 
         static async Task MainAsync(string[] args)
         {
             /* Discover endpoints from metadata */
 
-            var client = new HttpClient();
-            var disco = await client.GetDiscoveryDocumentAsync("http://localhost:18000");
-
-            if (disco.IsError)
-                Console.WriteLine(disco.Error);
-            else
-                Console.WriteLine("Discovery document it was successfully.");
-
-            /* Create request */
-
-            var tokenRequest = new PasswordTokenRequest
+            using (var client = new HttpClient())
             {
-                Address = disco.TokenEndpoint,
-                ClientId = "onlinestoreclient",
-                ClientSecret = "onlinestoreclientsecret1",
-                UserName = "administrator@onlinestore.com",
-                Password = "onlinestore1"
-            };
+                var disco = await client.GetDiscoveryDocumentAsync("http://localhost:18000");
 
-            var tokenResponse = await client.RequestPasswordTokenAsync(tokenRequest);
+                if (disco.IsError)
+                    Console.WriteLine(disco.Error);
+                else
+                    Console.WriteLine("Discovery document it was successfully.");
 
-            if (tokenResponse.IsError)
-                Console.WriteLine(tokenResponse.Error);
-            else
-                Console.WriteLine("Connection for '{0}' user was successfully.", tokenRequest.UserName);
+                /* Create request */
+
+                var tokenRequest = new PasswordTokenRequest
+                {
+                    Address = disco.TokenEndpoint,
+                    ClientId = "onlinestoreclient",
+                    ClientSecret = "onlinestoreclientsecret1",
+                    UserName = "administrator@onlinestore.com",
+                    Password = "onlinestore1"
+                };
+
+                var tokenResponse = await client.RequestPasswordTokenAsync(tokenRequest);
+
+                if (tokenResponse.IsError)
+                    Console.WriteLine(tokenResponse.Error);
+                else
+                    Console.WriteLine("Connection for '{0}' user was successfully.", tokenRequest.UserName);
+            }
+
+            Console.ReadLine();
         }
     }
 }
