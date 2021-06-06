@@ -33,6 +33,69 @@ namespace OnlineStore.API.Sales.UnitTests
         }
 
         [Fact]
+        public async Task GetOrdersByCurrencyAsync()
+        {
+            // Arrange
+            var userInfo = IdentityMocker.GetCustomerIdentity().GetUserInfo();
+            var service = ServiceMocker.GetSalesService(userInfo, nameof(GetOrdersByCurrencyAsync), true);
+            var controller = new SalesController(null, null, null, service);
+            var request = new GetOrdersRequest
+            {
+                CurrencyID = "USD"
+            };
+
+            // Act
+            var response = await controller.GetOrdersAsync(request) as ObjectResult;
+            var value = response.Value as IPagedResponse<OrderInfo>;
+
+            // Assert
+            Assert.False(value.DidError);
+            Assert.True(value.Model.Count(item => item.CurrencyID == request.CurrencyID) == value.Model.Count());
+        }
+
+        [Fact]
+        public async Task GetOrdersByCustomerAsync()
+        {
+            // Arrange
+            var userInfo = IdentityMocker.GetCustomerIdentity().GetUserInfo();
+            var service = ServiceMocker.GetSalesService(userInfo, nameof(GetOrdersByCustomerAsync), true);
+            var controller = new SalesController(null, null, null, service);
+            var request = new GetOrdersRequest
+            {
+                CustomerID = 1
+            };
+
+            // Act
+            var response = await controller.GetOrdersAsync(request) as ObjectResult;
+            var value = response.Value as IPagedResponse<OrderInfo>;
+
+            // Assert
+            Assert.False(value.DidError);
+            Assert.True(value.Model.Count(item => item.CustomerID == request.CustomerID) == value.Model.Count());
+        }
+
+        [Fact]
+        public async Task GetOrdersByEmployeeAsync()
+        {
+            // Arrange
+            var userInfo = IdentityMocker.GetCustomerIdentity().GetUserInfo();
+            var service = ServiceMocker.GetSalesService(userInfo, nameof(GetOrdersByEmployeeAsync), true);
+            var controller = new SalesController(null, null, null, service);
+            var request = new GetOrdersRequest
+            {
+                EmployeeID = 1
+            };
+
+            // Act
+            var response = await controller.GetOrdersAsync(request) as ObjectResult;
+            var value = response.Value as IPagedResponse<OrderInfo>;
+
+            // Assert
+            Assert.False(value.DidError);
+            Assert.True(value.Model.Count(item => item.EmployeeID == request.EmployeeID) == value.Model.Count());
+        }
+
+        [Fact]
         public async Task GetOrderAsync()
         {
             // Arrange
@@ -67,11 +130,11 @@ namespace OnlineStore.API.Sales.UnitTests
         }
 
         [Fact]
-        public async Task GetCreateOrderRequestAsync()
+        public async Task GetPostOrderModelAsync()
         {
             // Arrange
             var userInfo = IdentityMocker.GetCustomerIdentity().GetUserInfo();
-            var service = ServiceMocker.GetSalesService(userInfo, nameof(GetCreateOrderRequestAsync), true);
+            var service = ServiceMocker.GetSalesService(userInfo, nameof(GetPostOrderModelAsync), true);
             var controller = new SalesController(null, null, null, service);
 
             // Act
