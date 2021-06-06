@@ -7,7 +7,7 @@ namespace RothschildHouse.Identity.Validation
 {
     public class RothschildHouseResourceOwnerPasswordValidator : IResourceOwnerPasswordValidator
     {
-        private readonly IdentityDbContext DbContext;
+        readonly IdentityDbContext DbContext;
 
         public RothschildHouseResourceOwnerPasswordValidator(IdentityDbContext dbContext)
         {

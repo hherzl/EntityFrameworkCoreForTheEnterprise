@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace OnlineStore.API.Sales.Requests
+﻿namespace OnlineStore.API.Sales.Requests
 {
 #pragma warning disable CS1591
     public class GetOrdersRequest
@@ -15,17 +13,9 @@ namespace OnlineStore.API.Sales.Requests
 
         public int? PageNumber { get; set; }
 
-        public short? OrderStatusID { get; set; }
-
         public int? CustomerID { get; set; }
 
-        public int? EmployeeID { get; set; }
-
-        public int? ShipperID { get; set; }
-
-        public string CurrencyID { get; set; }
-
-        public Guid? PaymentMethodID { get; set; }
+        public short? OrderStatusID { get; set; }
     }
 #pragma warning restore CS1591
 }

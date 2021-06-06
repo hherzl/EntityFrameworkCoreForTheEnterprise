@@ -138,17 +138,17 @@ namespace OnlineStore.Core.Business
             return response;
         }
 
-        public async Task<IPagedResponse<OrderInfo>> GetOrdersAsync(int? pageSize, int? pageNumber, short? orderStatusID, int? customerID, int? employeeID, int? shipperID, string currencyID, Guid? paymentMethodID)
+        public async Task<IPagedResponse<CustomerOrderInfo>> GetOrdersForCustomerAsync(int pageSize, int pageNumber, int customerID, short? orderStatusID)
         {
-            Logger?.LogDebug("'{0}' has been invoked", nameof(GetOrdersAsync));
+            Logger?.LogDebug("'{0}' has been invoked", nameof(GetOrdersForCustomerAsync));
 
-            var response = new PagedResponse<OrderInfo>();
+            var response = new PagedResponse<CustomerOrderInfo>();
 
             try
             {
                 // Get query
                 var query = DbContext
-                    .GetOrders(orderStatusID, customerID, employeeID, shipperID, currencyID, paymentMethodID);
+                    .GetOrdersForCustomer(customerID, orderStatusID);
 
                 // Set information for paging
                 response.PageSize = (int)pageSize;
@@ -157,8 +157,7 @@ namespace OnlineStore.Core.Business
 
                 // Retrieve items, set model for response
                 response.Model = await query
-                    .Paging((int)pageSize, (int)pageNumber)
-                    .ToListAsync();
+                    .Paging(pageSize, pageNumber).ToListAsync();
 
                 response.Message = string.Format("Page {0} of {1}, Total of rows: {2}", response.PageNumber, response.PageCount, response.ItemsCount);
 
@@ -166,7 +165,7 @@ namespace OnlineStore.Core.Business
             }
             catch (Exception ex)
             {
-                response.SetError(Logger, nameof(GetOrdersAsync), ex);
+                response.SetError(Logger, nameof(GetOrdersForCustomerAsync), ex);
             }
 
             return response;

@@ -10,7 +10,7 @@ namespace RothschildHouse.Identity.Services
 {
     public class RothschildHouseProfileService : IProfileService
     {
-        private readonly IdentityDbContext DbContext;
+        readonly IdentityDbContext DbContext;
 
         public RothschildHouseProfileService(IdentityDbContext dbContext)
         {

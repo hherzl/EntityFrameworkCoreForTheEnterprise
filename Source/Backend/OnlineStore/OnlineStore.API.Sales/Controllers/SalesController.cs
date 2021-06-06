@@ -49,13 +49,14 @@ namespace OnlineStore.API.Sales.Controllers
         [ProducesResponseType(403)]
         [ProducesResponseType(500)]
         [OnlineStoreActionFilter]
+
         public async Task<IActionResult> GetOrdersAsync([FromQuery]GetOrdersRequest request)
         {
             Logger?.LogDebug("{0} has been invoked", nameof(GetOrdersAsync));
 
             // Get response from business logic
             var response = await SalesService
-                .GetOrdersAsync(request.PageSize, request.PageNumber, request.OrderStatusID, request.CustomerID, request.EmployeeID, request.ShipperID, request.CurrencyID, request.PaymentMethodID);
+                .GetOrdersForCustomerAsync((int)request.PageSize, (int)request.PageNumber, (int)request.CustomerID, request.OrderStatusID);
 
             // Return as http response
             return response.ToHttpResult();

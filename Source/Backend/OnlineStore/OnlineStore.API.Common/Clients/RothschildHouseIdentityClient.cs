@@ -9,7 +9,7 @@ namespace OnlineStore.API.Common.Clients
 #pragma warning disable CS1591
     public class RothschildHouseIdentityClient : IRothschildHouseIdentityClient
     {
-        private readonly RothschildHouseIdentitySettings Settings;
+        readonly RothschildHouseIdentitySettings Settings;
 
         public RothschildHouseIdentityClient(IOptions<RothschildHouseIdentitySettings> settings)
         {

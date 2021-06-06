@@ -4,10 +4,6 @@ namespace OnlineStore.Core.Domain.Sales
 {
     public class OrderInfo
     {
-        public OrderInfo()
-        {
-        }
-
         public long? OrderID { get; set; }
 
         public short? OrderStatusID { get; set; }
@@ -39,8 +35,6 @@ namespace OnlineStore.Core.Domain.Sales
         public string LastUpdateUser { get; set; }
 
         public DateTime? LastUpdateDateTime { get; set; }
-
-        public byte[] Timestamp { get; set; }
 
         public string CustomerCompanyName { get; set; }
 

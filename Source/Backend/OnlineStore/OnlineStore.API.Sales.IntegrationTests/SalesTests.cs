@@ -32,65 +32,6 @@ namespace OnlineStore.API.Sales.IntegrationTests
 
             var response = await Client.GetAsync(request.Url);
 
-            var content = await response.Content.ReadAsStringAsync();
-
-            // Assert
-            response.EnsureSuccessStatusCode();
-        }
-
-        [Fact]
-        public async Task GetOrdersByCurrencyAsCustomerAsync()
-        {
-            // Arrange
-            var token = await TokenHelper.GetTokenForWolverineAsync();
-            var request = new
-            {
-                Url = "/api/v1/Sales/order?pageSize=10&pageNumber=1&currencyID=1"
-            };
-
-            // Act
-            Client.SetBearerToken(token.AccessToken);
-
-            var response = await Client.GetAsync(request.Url);
-
-            // Assert
-            response.EnsureSuccessStatusCode();
-        }
-
-        [Fact]
-        public async Task SearchOrdersByCustomerAsCustomerAsync()
-        {
-            // Arrange
-            var token = await TokenHelper.GetTokenForWolverineAsync();
-            var request = new
-            {
-                Url = "/api/v1/Sales/order"
-            };
-
-            // Act
-            Client.SetBearerToken(token.AccessToken);
-
-            var response = await Client.GetAsync(request.Url);
-
-            // Assert
-            response.EnsureSuccessStatusCode();
-        }
-
-        [Fact]
-        public async Task GetOrdersByEmployeeAsCustomerAsync()
-        {
-            // Arrange
-            var token = await TokenHelper.GetTokenForWolverineAsync();
-            var request = new
-            {
-                Url = "/api/v1/Sales/order?employeeId=1"
-            };
-
-            // Act
-            Client.SetBearerToken(token.AccessToken);
-
-            var response = await Client.GetAsync(request.Url);
-
             // Assert
             response.EnsureSuccessStatusCode();
         }

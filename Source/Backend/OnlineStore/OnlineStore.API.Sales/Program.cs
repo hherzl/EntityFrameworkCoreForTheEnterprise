@@ -37,8 +37,9 @@ namespace OnlineStore.API.Sales
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseSerilog()
                 .UseStartup<Startup>()
-                .UseSerilog();
+            ;
     }
 #pragma warning restore CS1591
 }

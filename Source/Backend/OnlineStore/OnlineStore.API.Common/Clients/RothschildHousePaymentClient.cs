@@ -10,8 +10,8 @@ namespace OnlineStore.API.Common.Clients
 #pragma warning disable CS1591
     public class RothschildHousePaymentClient : IRothschildHousePaymentClient
     {
-        private readonly RothschildHousePaymentSettings Settings;
-        private readonly ApiUrl apiUrl;
+        readonly RothschildHousePaymentSettings Settings;
+        readonly ApiUrl apiUrl;
 
         public RothschildHousePaymentClient(IOptions<RothschildHousePaymentSettings> settings)
         {
