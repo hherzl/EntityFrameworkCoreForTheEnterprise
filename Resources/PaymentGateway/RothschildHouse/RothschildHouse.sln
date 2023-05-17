@@ -5,23 +5,33 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "source", "source", "{823CF489-FAA7-4C8D-BACC-2D8C42B889E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RothschildHouse.GUI.PaymentGateway", "source\RothschildHouse.GUI.PaymentGateway\RothschildHouse.GUI.PaymentGateway.csproj", "{1D31E44B-4417-4D62-B731-4A7A7F746761}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RothschildHouse.GUI.PaymentGateway", "source\RothschildHouse.GUI.PaymentGateway\RothschildHouse.GUI.PaymentGateway.csproj", "{1D31E44B-4417-4D62-B731-4A7A7F746761}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RothschildHouse.API.PaymentGateway", "source\RothschildHouse.API.PaymentGateway\RothschildHouse.API.PaymentGateway.csproj", "{F42F61E0-2B8A-4BDB-B947-9D3CBF650AC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{1D31E44B-4417-4D62-B731-4A7A7F746761}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1D31E44B-4417-4D62-B731-4A7A7F746761}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D31E44B-4417-4D62-B731-4A7A7F746761}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D31E44B-4417-4D62-B731-4A7A7F746761}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F42F61E0-2B8A-4BDB-B947-9D3CBF650AC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F42F61E0-2B8A-4BDB-B947-9D3CBF650AC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F42F61E0-2B8A-4BDB-B947-9D3CBF650AC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F42F61E0-2B8A-4BDB-B947-9D3CBF650AC7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1D31E44B-4417-4D62-B731-4A7A7F746761} = {823CF489-FAA7-4C8D-BACC-2D8C42B889E4}
+		{F42F61E0-2B8A-4BDB-B947-9D3CBF650AC7} = {823CF489-FAA7-4C8D-BACC-2D8C42B889E4}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F63EE7E3-127E-45CA-9315-0797311B7A01}
 	EndGlobalSection
 EndGlobal
