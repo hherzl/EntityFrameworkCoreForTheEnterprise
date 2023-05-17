@@ -1,0 +1,55 @@
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.SignalR.Client
+@using Microsoft.Extensions.Localization
+
+@inject IStringLocalizer<RothschildHouse.WebUI.PaymentGateway.Resources.NavMenu> L;
+
+<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">Rothschild House</a>
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>
+
+<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
+    <nav class="flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> @L["Home"]
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="client-application">
+                <span class="oi oi-globe" aria-hidden="true"></span> @L["ClientApplications"]
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="customer">
+                <span class="oi oi-person" aria-hidden="true"></span> @L["Customers"]
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="card">
+                <span class="oi oi-credit-card" aria-hidden="true"></span> @L["Cards"]
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="payment-transaction">
+                <span class="oi oi-dollar" aria-hidden="true"></span> @L["PaymentTransactions"]
+            </NavLink>
+        </div>
+    </nav>
+</div>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

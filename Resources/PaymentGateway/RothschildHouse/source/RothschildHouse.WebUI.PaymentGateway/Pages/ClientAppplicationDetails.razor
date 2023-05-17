@@ -1,0 +1,79 @@
+﻿@page "/client-application/{Id:guid}"
+
+@using RothschildHouse.Library.Common.Clients.Contracts;
+@using RothschildHouse.Library.Common.Clients.DataContracts;
+@using RothschildHouse.Library.Common.Clients.DataContracts.Common;
+
+@inject IRothschildHouseClient rothschildHouseClient
+
+<PageTitle>Client Application Details</PageTitle>
+
+<h1>Client Appplication Details</h1>
+
+@if (response == null)
+{
+    <strong>There is no information for payment transaction with Id @Id</strong>
+}
+else if (response.Model is not null)
+{
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Id: <strong>@Id</strong></h5>
+            <p class="card-text">
+                <div>
+                    <span>Name: <strong>@response.Model.Name</strong></span>
+                </div>
+
+                <div>
+                    <span>Url: <strong>@response.Model.Url</strong></span>
+                </div>
+            </p>
+        </div>
+    </div>
+
+    <hr />
+
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Status</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Total</th>
+                <th scope="col">Currency</th>
+                <th scope="col">Creation DateTime</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in response.Model.PaymentTransactions)
+            {
+                <tr>
+                    <td scope="row">@item.Id</td>
+                    <td>@item.PaymentTransactionStatus</td>
+                    <td>@item.CustomerId</td>
+                    <td>@item.OrderTotal</td>
+                    <td>@item.Currency</td>
+                    <td>@item.CreationDateTime?.ToShortDateString() (@item.CreationDateTime?.ToShortTimeString())</td>
+                    <td>
+                        <a href="@($"/payment-transaction/{item.Id}")">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a href="@($"/client-application")">Back</a>
+}
+
+@code {
+    [Parameter]
+    public Guid? Id { get; set; }
+
+    private SingleResponse<ClientApplicationDetailsModel> response;
+
+    protected override async Task OnInitializedAsync()
+    {
+        response = await rothschildHouseClient.GetClientApplicationAsync(Id);
+    }
+}

@@ -1,0 +1,21 @@
+﻿@using System.Globalization
+
+@inherits LayoutComponentBase
+
+<PageTitle>Rothschild House</PageTitle>
+
+<div class="page" dir="@(CultureInfo.CurrentCulture.TextInfo.IsRightToLeft ? "rtl" : "ltr")">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <a href="about" target="_blank">About</a>&nbsp;|&nbsp;<CultureSelector />
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>

@@ -1,0 +1,53 @@
+﻿@page "/client-application"
+
+@using RothschildHouse.Library.Common.Clients.Contracts;
+@using RothschildHouse.Library.Common.Clients.DataContracts;
+@using RothschildHouse.Library.Common.Clients.DataContracts.Common;
+
+@inject IRothschildHouseClient rothschildHouseClient
+
+<PageTitle>Client applications</PageTitle>
+
+<h1>Client Applications</h1>
+
+@if (response == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Url</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in response.Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Url</td>
+                    <td>
+                        <a href="@($"/client-application/{item.Id}")">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div>
+        <p>Page <strong>@(response.PageNumber)</strong> of <strong>@(response.PageCount)</strong>, Total items: <strong>@(response.ItemsCount)</strong></p>
+    </div>
+}
+
+@code {
+    private PagedResponse<ClientApplicationItemModel> response;
+
+    protected override async Task OnInitializedAsync()
+    {
+        response = await rothschildHouseClient.SearchClientApplicationsAsync(new SearchClientApplicationsQuery());
+    }
+}

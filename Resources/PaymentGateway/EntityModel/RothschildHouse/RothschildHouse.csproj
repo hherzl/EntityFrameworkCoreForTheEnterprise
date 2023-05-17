@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CatFactory.EntityFrameworkCore" Version="1.0.0-beta-sun-build55" />
+    <PackageReference Include="CatFactory.SqlServer" Version="1.0.0-beta-sun-build67" />
+  </ItemGroup>
+
+</Project>

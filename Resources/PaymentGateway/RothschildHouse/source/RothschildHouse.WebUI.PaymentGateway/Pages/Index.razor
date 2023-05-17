@@ -1,0 +1,68 @@
+﻿@page "/"
+
+@implements IAsyncDisposable
+
+@using System.Globalization
+@using Microsoft.AspNetCore.SignalR.Client
+@using Microsoft.Extensions.Localization
+
+@inject IStringLocalizer<RothschildHouse.WebUI.PaymentGateway.Resources.Index> L;
+
+<PageTitle>@L["Home"]</PageTitle>
+
+<h1>@L["Home"]</h1>
+
+<p>@L["Welcome"]</p>
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+<h2>Notifications</h2>
+
+<p>Connected: <strong>@(IsConnected.ToString())</strong></p>
+
+<ul id="messagesList">
+    @foreach (var message in messages)
+    {
+        <li>@message</li>
+    }
+</ul>
+
+@code {
+    private HubConnection hubConnection;
+    private List<string> messages = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        messages.Add($"{DateTime.Now} Initializing connection with hub...");
+
+        hubConnection = new HubConnectionBuilder()
+            .AddJsonProtocol()
+            .WithUrl("https://localhost:37210/paymenttxnhub")
+            .ConfigureLogging(logging =>
+            {
+                logging.SetMinimumLevel(LogLevel.Information);
+                logging.AddConsole();
+            })
+            .Build()
+            ;
+
+        hubConnection.On<string, decimal, string>("receivePaymentTxn", (clientApplication, amount, currency) =>
+        {
+            messages.Add($"{DateTime.Now} Received txn from '{clientApplication}' client, total: '{amount} {currency}'");
+            InvokeAsync(StateHasChanged);
+        });
+
+        await hubConnection.StartAsync();
+    }
+
+    public bool IsConnected =>
+        hubConnection?.State == HubConnectionState.Connected;
+
+    public async ValueTask DisposeAsync()
+    {
+        if (hubConnection is not null)
+        {
+            await hubConnection.DisposeAsync();
+        }
+    }
+}

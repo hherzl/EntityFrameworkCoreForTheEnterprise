@@ -1,0 +1,118 @@
+﻿@page "/payment-transaction"
+
+@using RothschildHouse.Library.Common.Clients.Contracts;
+@using RothschildHouse.Library.Common.Clients.DataContracts;
+@using RothschildHouse.Library.Common.Clients.DataContracts.Common;
+
+@inject IRothschildHouseClient rothschildHouseClient
+
+<PageTitle>Payment Transactions</PageTitle>
+
+<h1>Payment Transactions</h1>
+
+<div>
+    <select @bind="PaymentTransactionStatusId">
+        <option selected></option>
+        @if (viewBag != null)
+        {
+            @foreach (var item in viewBag?.PaymentTransactionStatuses)
+            {
+                <option value="@item.Id">@item.Name</option>
+            }
+        }
+    </select>
+    <select @bind="ClientApplicationId">
+        <option selected></option>
+        @if (viewBag != null)
+        {
+            @foreach (var item in viewBag?.ClientApplications)
+            {
+                <option value="@item.Id">@item.Name</option>
+            }
+        }
+    </select>
+    <input type="date" id="startDate" @bind-value="StartDate" />
+    <input type="date" id="endDate" @bind-value="EndDate" />
+
+    <button class="btn btn-primary" @onclick="SearchAsync">Search</button>
+</div>
+
+<br />
+
+@if (response == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div>
+        <p>Page <strong>@(response.PageNumber)</strong> of <strong>@(response.PageCount)</strong>, Total items: <strong>@(response.ItemsCount)</strong></p>
+    </div>
+    
+    <hr />
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+    </nav>
+
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Status</th>
+                <th scope="col">Client application</th>
+                <th scope="col">Total</th>
+                <th scope="col">Currency</th>
+                <th scope="col">Creation DateTime</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in response.Model)
+            {
+                <tr>
+                    <td scope="row">@item.Id</td>
+                    <td>@item.PaymentTransactionStatus</td>
+                    <td>@item.ClientApplication</td>
+                    <td>@item.OrderTotal</td>
+                    <td>@item.Currency</td>
+                    <td>@item.CreationDateTime?.ToShortDateString()</td>
+                    <td>
+                        <a href="@($"/payment-transaction/{item.Id}")">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    public short? PaymentTransactionStatusId { get; set; }
+    public Guid? ClientApplicationId { get; set; }
+    public DateTime? StartDate { get; set; }
+    public DateTime? EndDate { get; set; }
+
+    private SearchPaymentTransactionsViewBagRespose viewBag;
+    private PagedResponse<PaymentTransactionItemModel> response;
+
+    protected override async Task OnInitializedAsync()
+    {
+        StartDate = DateTime.Now;
+        EndDate = DateTime.Now;
+
+        viewBag = await rothschildHouseClient.SearchPaymentTransactionsViewBag();
+
+        await SearchAsync();
+    }
+
+    private async Task SearchAsync()
+    {
+        response = await rothschildHouseClient.SearchPaymentTransactionsAsync(
+            new SearchPaymentTransactionsQuery(
+                PaymentTransactionStatusId, ClientApplicationId, StartDate == null ? null : Convert.ToDateTime(StartDate), EndDate == null ? null : Convert.ToDateTime(EndDate)
+            ));
+    }
+}

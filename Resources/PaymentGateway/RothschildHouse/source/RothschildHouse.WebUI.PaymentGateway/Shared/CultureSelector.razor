@@ -1,0 +1,37 @@
+﻿@using System.Globalization
+@inject NavigationManager Navigation
+
+<div>
+    <label>
+        Language:
+        <select @bind="Culture">
+            @foreach (var culture in SupportedCultures.CultureInfos)
+            {
+                <option value="@culture">@culture.DisplayName</option>
+            }
+        </select>
+    </label>
+</div>
+
+@code
+{
+    protected override void OnInitialized()
+    {
+        Culture = CultureInfo.CurrentCulture;
+    }
+
+    private CultureInfo Culture
+    {
+        get => CultureInfo.CurrentCulture;
+        set
+        {
+            if (CultureInfo.CurrentCulture != value)
+            {
+                var uri = new Uri(Navigation.Uri).GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
+                var uriEscaped = Uri.EscapeDataString(uri);
+                var cultureEscaped = Uri.EscapeDataString(value.Name);
+                Navigation.NavigateTo($"Culture/Set?culture={cultureEscaped}&redirectUri={uriEscaped}", forceLoad: true);
+            }
+        }
+    }
+}

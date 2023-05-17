@@ -1,0 +1,93 @@
+﻿@page "/payment-transaction/{Id:long}"
+
+@using RothschildHouse.Library.Common.Clients.Contracts;
+@using RothschildHouse.Library.Common.Clients.DataContracts;
+@using RothschildHouse.Library.Common.Clients.DataContracts.Common;
+
+@inject IRothschildHouseClient rothschildHouseClient
+
+<PageTitle>Payment Transaction Details</PageTitle>
+
+<h1>Payment Transaction Details</h1>
+
+@if (response == null)
+{
+    <strong>There is no information for payment transaction with Id @Id</strong>
+}
+else if (response.Model is not null)
+{
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Id: <strong>@Id</strong></h5>
+            <p class="card-text">
+                <div>
+                    <span>Status: <strong>@response.Model.PaymentTransactionStatus</strong></span>
+                </div>
+                
+                <div>
+                    <span>Created on: <strong>@response.Model.CreationDateTime</strong></span>
+                </div>
+
+                <div>
+                    <span>Client application: <strong>@response.Model.ClientApplication</strong></span>
+                </div>
+                
+                <div>
+                    <span>Total: <strong>@response.Model.OrderTotal</strong></span>
+                </div>
+                
+                <div>
+                    <span>Currency: <strong>@response.Model.Currency</strong></span>
+                </div>
+
+                <div>
+                    <span>Currency rate: <strong>@response.Model.CurrencyRate</strong></span>
+                </div>
+            </p>
+        </div>
+    </div>
+
+    <br />
+
+    <h2>Logs</h2>
+
+    @foreach (var log in response.Model.Logs)
+    {
+        <div class="card">
+            <div class="card-header">
+                @log.PaymentTransactionStatus
+            </div>
+            <div class="card-body">
+                <h5 class="card-title"></h5>
+                <p class="card-text">
+                    <span>Log type: <strong>@log.LogType</strong></span>
+                    <br>
+                    <span>Created on: <strong>@log.CreationDateTime</strong></span>
+                    <br>
+                    <span>Content type: <strong>@log.ContentType</strong></span>
+                    <br>
+                    <span>Content: <pre>@log.Content</pre></span>
+                    <br>
+                    <span>Notes: <strong>@log.Notes</strong></span>
+                    <br>
+                </p>
+            </div>
+        </div>
+
+        <hr />
+    }
+
+    <a href="@($"/payment-transaction")">Back</a>
+}
+
+@code {
+    [Parameter]
+    public long? Id{ get; set; }
+
+    private SingleResponse<PaymentTransactionDetailsModel> response;
+
+    protected override async Task OnInitializedAsync()
+    {
+        response = await rothschildHouseClient.GetPaymentTransactionAsync(Id);
+    }
+}

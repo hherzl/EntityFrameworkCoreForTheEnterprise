@@ -1,0 +1,59 @@
+﻿@page "/customer"
+
+@using RothschildHouse.Library.Common.Clients.Contracts;
+@using RothschildHouse.Library.Common.Clients.DataContracts;
+@using RothschildHouse.Library.Common.Clients.DataContracts.Common;
+
+@inject IRothschildHouseClient rothschildHouseClient
+
+<PageTitle>Customers</PageTitle>
+
+<h1>Customers</h1>
+
+@if (response == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>FullName</th>
+                <th>Email</th>
+                <th>Country</th>
+                <th>Phone</th>
+                <th>Alien Guid</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in response.Model)
+            {
+                <tr>
+                    <td>@item.FullName</td>
+                    <td>@item.Email</td>
+                    <td>@item.Country</td>
+                    <td>@item.Phone</td>
+                    <td>@item.AlienGuid</td>
+                    <td>
+                        <a href="@($"/customer/{item.Id}")">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div>
+        <p>Page <strong>@(response.PageNumber)</strong> of <strong>@(response.PageCount)</strong>, Total items: <strong>@(response.ItemsCount)</strong></p>
+    </div>
+}
+
+@code {
+    private PagedResponse<CustomerItemModel> response;
+
+    protected override async Task OnInitializedAsync()
+    {
+        response = await rothschildHouseClient.SearchCustomersAsync(new SearchCustomersQuery());
+    }
+}

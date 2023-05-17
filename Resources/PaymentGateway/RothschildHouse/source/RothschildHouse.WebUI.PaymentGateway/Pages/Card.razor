@@ -1,0 +1,59 @@
+﻿@page "/card"
+
+@using RothschildHouse.Library.Common.Clients.Contracts;
+@using RothschildHouse.Library.Common.Clients.DataContracts;
+@using RothschildHouse.Library.Common.Clients.DataContracts.Common;
+
+@inject IRothschildHouseClient rothschildHouseClient
+
+<PageTitle>Cards</PageTitle>
+
+<h1>Cards</h1>
+
+@if (response == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Card Type</th>
+                <th>Issuing Network</th>
+                <th>Cardholder Name</th>
+                <th>Card Number</th>
+                <th>Expiration Date</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in response.Model)
+            {
+                <tr>
+                    <td>@item.CardType</td>
+                    <td>@item.IssuingNetwork</td>
+                    <td>@item.CardholderName</td>
+                    <td>@item.CardNumber</td>
+                    <td>@item.ExpirationDate</td>
+                    <td>
+                        <a href="@($"/card/{item.Id}")">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div>
+        <p>Page <strong>@(response.PageNumber)</strong> of <strong>@(response.PageCount)</strong>, Total items: <strong>@(response.ItemsCount)</strong></p>
+    </div>
+}
+
+@code {
+    private PagedResponse<CardItemModel> response;
+
+    protected override async Task OnInitializedAsync()
+    {
+        response = await rothschildHouseClient.SearchCardsAsync(new SearchCardsQuery());
+    }
+}
