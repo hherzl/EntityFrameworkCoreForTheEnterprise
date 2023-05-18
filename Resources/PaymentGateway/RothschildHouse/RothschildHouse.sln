@@ -15,6 +15,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RothschildHouse.Application
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RothschildHouse.Infrastructure.Core", "source\RothschildHouse.Infrastructure.Core\RothschildHouse.Infrastructure.Core.csproj", "{6B29E536-5064-4DB0-81C6-B47DB8D346AD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "seed", "seed", "{31212913-27EE-420F-89AF-645C017797B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RothschildHouse.Seed.PaymentGateway", "seed\RothschildHouse.Seed.PaymentGateway\RothschildHouse.Seed.PaymentGateway.csproj", "{9E74147C-821B-4202-B788-72FECC55CF1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +45,10 @@ Global
 		{6B29E536-5064-4DB0-81C6-B47DB8D346AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B29E536-5064-4DB0-81C6-B47DB8D346AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B29E536-5064-4DB0-81C6-B47DB8D346AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E74147C-821B-4202-B788-72FECC55CF1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E74147C-821B-4202-B788-72FECC55CF1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E74147C-821B-4202-B788-72FECC55CF1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E74147C-821B-4202-B788-72FECC55CF1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,6 +59,7 @@ Global
 		{1D6959E1-6537-4B08-9600-0B47246F6BAF} = {823CF489-FAA7-4C8D-BACC-2D8C42B889E4}
 		{7276D2AC-65C1-44EC-BDCD-99A4ADC209D1} = {823CF489-FAA7-4C8D-BACC-2D8C42B889E4}
 		{6B29E536-5064-4DB0-81C6-B47DB8D346AD} = {823CF489-FAA7-4C8D-BACC-2D8C42B889E4}
+		{9E74147C-821B-4202-B788-72FECC55CF1C} = {31212913-27EE-420F-89AF-645C017797B6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F63EE7E3-127E-45CA-9315-0797311B7A01}
