@@ -1,0 +1,34 @@
+﻿@page "/country"
+
+@using RothschildHouse.GUI.PaymentGateway.Clients;
+@using RothschildHouse.GUI.PaymentGateway.Clients.Models;
+
+@inject RothschildHouseMockClient rothschildHouseClient
+
+<PageTitle>Country</PageTitle>
+
+<h1>Countries</h1>
+
+@if (response == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <MudDataGrid Items="@response.Model">
+        <Columns>
+            <PropertyColumn Property="x => x.Name" />
+            <PropertyColumn Property="x => x.TwoLetterIsoCode" />
+            <PropertyColumn Property="x => x.ThreeLetterIsoCode" />
+        </Columns>
+    </MudDataGrid>
+}
+
+@code {
+    private ListResponse<CountryItemModel> response;
+
+    protected override async Task OnInitializedAsync()
+    {
+        response = await rothschildHouseClient.SearchCountriesAsync(new SearchCountriesRequest());
+    }
+}
