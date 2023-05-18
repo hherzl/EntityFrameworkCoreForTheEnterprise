@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RothschildHouse.Domain.Core\RothschildHouse.Domain.Core.csproj" />
-    <ProjectReference Include="..\RothschildHouse.Library.Client\RothschildHouse.Library.Client.csproj" />
   </ItemGroup>
 
 </Project>

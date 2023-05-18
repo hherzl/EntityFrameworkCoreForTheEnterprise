@@ -1,10 +1,10 @@
 ﻿using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using RothschildHouse.Library.Client.DataContracts.Common.Contracts;
+using RothschildHouse.Application.Core.Common.Contracts;
 
 namespace RothschildHouse.API.PaymentGateway.Models
 {
-    public static class ResponseExtensions
+    public static class Extensions
     {
         public static IActionResult ToOkResult(this IResponse response)
             => new OkObjectResult(response);

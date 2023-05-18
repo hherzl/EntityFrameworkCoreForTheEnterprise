@@ -1,11 +1,28 @@
 ﻿using MediatR;
+using RothschildHouse.Application.Core.Common;
 using RothschildHouse.Application.Core.Common.Contracts;
-using RothschildHouse.Library.Client.DataContracts;
-using RothschildHouse.Library.Client.DataContracts.Common;
-using RothschildHouse.Library.Client.DataContracts.Common.Contracts;
 
 namespace RothschildHouse.Application.Core.Features.Countries.Queries
 {
+    public record CountryItemModel
+    {
+        public short? Id { get; set; }
+        public string Name { get; set; }
+        public string TwoLetterIsoCode { get; set; }
+    }
+
+    public class SearchCountriesQuery : IRequest<IListResponse<CountryItemModel>>
+    {
+        public SearchCountriesQuery()
+        {
+            PageSize = 10;
+            PageNumber = 1;
+        }
+
+        public int PageSize { get; set; }
+        public int PageNumber { get; set; }
+    }
+
     public class SearchCountriesQueryHandler : IRequestHandler<SearchCountriesQuery, IListResponse<CountryItemModel>>
     {
         private readonly IRothschildHouseDbContext _dbContext;
@@ -25,8 +42,7 @@ namespace RothschildHouse.Application.Core.Features.Countries.Queries
                     {
                         Id = 503,
                         Name = "El Salvador",
-                        TwoLetterIsoCode = "SV",
-                        ThreeLetterIsoCode = "SLV"
+                        TwoLetterIsoCode = "SV"
                     }
                 }
             });

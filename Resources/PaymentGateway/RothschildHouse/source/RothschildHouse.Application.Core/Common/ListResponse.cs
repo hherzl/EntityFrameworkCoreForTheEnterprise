@@ -1,6 +1,6 @@
-﻿using RothschildHouse.Library.Client.DataContracts.Common.Contracts;
+﻿using RothschildHouse.Application.Core.Common.Contracts;
 
-namespace RothschildHouse.Library.Client.DataContracts.Common
+namespace RothschildHouse.Application.Core.Common
 {
     public class ListResponse<TModel> : IListResponse<TModel>
     {

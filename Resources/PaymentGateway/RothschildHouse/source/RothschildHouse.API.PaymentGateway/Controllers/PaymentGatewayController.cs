@@ -1,13 +1,14 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RothschildHouse.API.PaymentGateway.Models;
-using RothschildHouse.Library.Client.DataContracts;
+using RothschildHouse.Application.Core.Common.Contracts;
+using RothschildHouse.Application.Core.Features.Countries.Queries;
 
 namespace RothschildHouse.API.PaymentGateway.Controllers
 {
     [ApiController]
     [Route("api/v1")]
-    public class PaymentGatewayController
+    public class PaymentGatewayController : ControllerBase
     {
         private readonly ILogger<PaymentGatewayController> _logger;
         private readonly IMediator _mediator;
@@ -19,9 +20,26 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         }
 
         [HttpPost("search-country")]
+        [ProducesResponseType(200, Type = typeof(IListResponse<CountryItemModel>))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
         public async Task<IActionResult> SearchCountriesAsync([FromBody] SearchCountriesQuery request)
         {
             var response = await _mediator.Send(request);
+
+            return response.ToOkResult();
+        }
+
+        [HttpGet("country/{id}")]
+        [ProducesResponseType(200, Type = typeof(ISingleResponse<CountryDetailsModel>))]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> SearchCountriesAsync(short? id)
+        {
+            var response = await _mediator.Send(new GetCountryQuery(id));
+
+            if (response == null)
+                return NotFound();
 
             return response.ToOkResult();
         }
