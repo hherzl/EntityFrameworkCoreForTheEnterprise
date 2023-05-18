@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RothschildHouse.Application.Core.Common.Contracts;
+using RothschildHouse.Infrastructure.Core.Persistence;
 
 namespace RothschildHouse.Infrastructure.Core
 {

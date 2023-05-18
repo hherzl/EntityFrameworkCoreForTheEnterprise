@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RothschildHouse.Domain.Core.Entities;
-using RothschildHouse.Infrastructure.Core.Configurations.Common;
+using RothschildHouse.Infrastructure.Core.Persistence.Configurations.Common;
 
-namespace RothschildHouse.Infrastructure.Core.Configurations
+namespace RothschildHouse.Infrastructure.Core.Persistence.Configurations
 {
-    internal class CountryConfiguration : EntityConfiguration<Country>
+    internal class CountryConfiguration : AuditableEntityConfiguration<Country>
     {
         public override void Configure(EntityTypeBuilder<Country> builder)
         {

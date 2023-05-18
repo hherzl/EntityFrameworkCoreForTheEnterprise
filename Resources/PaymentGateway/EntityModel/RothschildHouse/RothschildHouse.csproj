@@ -4,11 +4,12 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\source\RothschildHouse.Infrastructure.Core\RothschildHouse.Infrastructure.Core.csproj" />
+    <PackageReference Include="CatFactory.EntityFrameworkCore" Version="1.0.0-beta-sun-build58" />
+    <PackageReference Include="CatFactory.SqlServer" Version="1.0.0-beta-sun-build71" />
   </ItemGroup>
 
 </Project>
