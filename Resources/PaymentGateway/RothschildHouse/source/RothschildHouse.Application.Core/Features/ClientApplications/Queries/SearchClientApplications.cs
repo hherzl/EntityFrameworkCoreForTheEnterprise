@@ -35,18 +35,22 @@ namespace RothschildHouse.Application.Core.Features.ClientApplications.Queries
 
         public async Task<IListResponse<ClientApplicationItemModel>> Handle(SearchClientApplicationsQuery request, CancellationToken cancellationToken)
         {
-            var clientApplications = await _dbContext
+            var query = _dbContext
                 .ClientApplication
                 .AsNoTracking()
+                ;
+
+            var list = await query
+                .Paging(request.PageSize, request.PageNumber)
                 .ToListAsync(cancellationToken)
                 ;
 
-            return new ListResponse<ClientApplicationItemModel>(clientApplications.Select(item => new ClientApplicationItemModel
-            {
-                Id = item.Id,
-                Name = item.Name,
-                Url = item.Url
-            }));
+            var model = list
+                .Select(item => new ClientApplicationItemModel { Id = item.Id, Name = item.Name, Url = item.Url })
+                .ToList()
+                ;
+
+            return new PagedResponse<ClientApplicationItemModel>(model, request.PageSize, request.PageNumber, await query.CountAsync(cancellationToken));
         }
     }
 }
