@@ -1,0 +1,37 @@
+﻿@page "/customer"
+
+@using RothschildHouse.GUI.PaymentGateway.Clients;
+@using RothschildHouse.GUI.PaymentGateway.Clients.Models;
+@using RothschildHouse.GUI.PaymentGateway.Clients.Models.Common;
+
+@inject RothschildHouseClient rothschildHouseClient
+
+<PageTitle>Customers</PageTitle>
+
+<h1>Customers</h1>
+
+@if (response == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <MudDataGrid Items="@response.Model">
+        <Columns>
+            <PropertyColumn Property="x => x.FullName" Title="Name" />
+            <PropertyColumn Property="x => x.Country" Title="Country" />
+            <PropertyColumn Property="x => x.Phone" Title="Phone" />
+            <PropertyColumn Property="x => x.Email" Title="Email" />
+            <PropertyColumn Property="x => x.AlienGuid" Title="Alien Guid" />
+        </Columns>
+    </MudDataGrid>
+}
+
+@code {
+    private ListResponse<CustomerItemModel> response;
+
+    protected override async Task OnInitializedAsync()
+    {
+        response = await rothschildHouseClient.SearchCustomersAsync(new SearchCustomersRequest());
+    }
+}
