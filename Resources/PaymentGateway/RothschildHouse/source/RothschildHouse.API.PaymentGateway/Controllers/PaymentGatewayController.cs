@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RothschildHouse.API.PaymentGateway.Models;
 using RothschildHouse.Application.Core.Common.Contracts;
+using RothschildHouse.Application.Core.Features.ClientApplications.Queries;
 using RothschildHouse.Application.Core.Features.Countries.Queries;
 using RothschildHouse.Application.Core.Features.Currencies.Queries;
 
@@ -66,6 +67,17 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
 
             if (response == null)
                 return NotFound();
+
+            return response.ToOkResult();
+        }
+
+        [HttpPost("search-client-application")]
+        [ProducesResponseType(200, Type = typeof(IListResponse<ClientApplicationItemModel>))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> SearchCurrenciesAsync([FromBody] SearchClientApplicationsQuery request)
+        {
+            var response = await _mediator.Send(request);
 
             return response.ToOkResult();
         }
