@@ -57,7 +57,7 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
             return response.ToOkResult();
         }
 
-        [HttpPost("currency/{id}")]
+        [HttpGet("currency/{id}")]
         [ProducesResponseType(200, Type = typeof(ISingleResponse<CurrencyDetailsModel>))]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
@@ -78,6 +78,20 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         public async Task<IActionResult> SearchCurrenciesAsync([FromBody] SearchClientApplicationsQuery request)
         {
             var response = await _mediator.Send(request);
+
+            return response.ToOkResult();
+        }
+
+        [HttpGet("client-application/{id}")]
+        [ProducesResponseType(200, Type = typeof(ISingleResponse<ClientApplicationDetailsModel>))]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> GetClientApplicationAsync(Guid? id)
+        {
+            var response = await _mediator.Send(new GetClientApplicationQuery(id));
+
+            if (response == null)
+                return NotFound();
 
             return response.ToOkResult();
         }

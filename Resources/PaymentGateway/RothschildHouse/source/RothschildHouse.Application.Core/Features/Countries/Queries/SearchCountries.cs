@@ -37,7 +37,7 @@ namespace RothschildHouse.Application.Core.Features.Countries.Queries
         {
             var countries = await _dbContext.Country.AsNoTracking().ToListAsync(cancellationToken);
 
-            return new ListResponse<CountryItemModel>(countries.Select(item => new CountryItemModel
+            return new ListResponse<CountryItemModel>(countries.Select(item => new CountryItemModel()
             {
                 Id = item.Id,
                 Name = item.Name,

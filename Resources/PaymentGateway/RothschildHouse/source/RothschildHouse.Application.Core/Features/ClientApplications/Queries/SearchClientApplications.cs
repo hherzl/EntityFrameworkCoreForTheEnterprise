@@ -35,7 +35,11 @@ namespace RothschildHouse.Application.Core.Features.ClientApplications.Queries
 
         public async Task<IListResponse<ClientApplicationItemModel>> Handle(SearchClientApplicationsQuery request, CancellationToken cancellationToken)
         {
-            var clientApplications = await _dbContext.ClientApplication.AsNoTracking().ToListAsync(cancellationToken);
+            var clientApplications = await _dbContext
+                .ClientApplication
+                .AsNoTracking()
+                .ToListAsync(cancellationToken)
+                ;
 
             return new ListResponse<ClientApplicationItemModel>(clientApplications.Select(item => new ClientApplicationItemModel
             {
