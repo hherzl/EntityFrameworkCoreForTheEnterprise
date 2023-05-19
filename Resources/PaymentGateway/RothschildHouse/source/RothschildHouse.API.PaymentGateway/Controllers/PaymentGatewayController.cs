@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using RothschildHouse.API.PaymentGateway.Models;
 using RothschildHouse.Application.Core.Common;
 using RothschildHouse.Application.Core.Common.Contracts;
+using RothschildHouse.Application.Core.Features.Cards.Queries;
 using RothschildHouse.Application.Core.Features.ClientApplications.Queries;
 using RothschildHouse.Application.Core.Features.Countries.Queries;
 using RothschildHouse.Application.Core.Features.Currencies.Queries;
@@ -102,7 +103,7 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         [ProducesResponseType(200, Type = typeof(PagedResponse<CustomerItemModel>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> SearchCustomersAsync([FromQuery] SearchCustomersQuery request)
+        public async Task<IActionResult> SearchCustomersAsync([FromBody] SearchCustomersQuery request)
         {
             var response = await _mediator.Send(request);
 
@@ -119,6 +120,17 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
 
             if (response == null)
                 return NotFound();
+
+            return response.ToOkResult();
+        }
+
+        [HttpGet("search-card")]
+        [ProducesResponseType(200, Type = typeof(PagedResponse<CardItemModel>))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> SearchCardsAsync([FromBody] SearchCardsQuery request)
+        {
+            var response = await _mediator.Send(request);
 
             return response.ToOkResult();
         }

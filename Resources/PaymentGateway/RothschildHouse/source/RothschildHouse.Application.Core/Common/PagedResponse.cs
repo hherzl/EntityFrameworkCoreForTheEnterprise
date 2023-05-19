@@ -1,6 +1,8 @@
-﻿namespace RothschildHouse.Application.Core.Common
+﻿using RothschildHouse.Application.Core.Common.Contracts;
+
+namespace RothschildHouse.Application.Core.Common
 {
-    public record PagedResponse<TModel> : ListResponse<TModel> where TModel : class
+    public record PagedResponse<TModel> : ListResponse<TModel>, IPagedResponse<TModel> where TModel : class
     {
         public PagedResponse()
         {

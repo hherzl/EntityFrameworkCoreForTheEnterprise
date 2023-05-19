@@ -47,8 +47,7 @@ namespace RothschildHouse.Application.Core.Features.Customers.Queries
         {
             var entity = await _dbContext.GetCustomerAsync(request.Id, false, true, cancellationToken);
 
-            if (entity == null)
-                entity = await _dbContext.GetCustomerByAlienGuidAsync(request.Id, false, true, cancellationToken);
+            entity ??= await _dbContext.GetCustomerByAlienGuidAsync(request.Id, false, true, cancellationToken);
 
             if (entity == null)
                 return null;
