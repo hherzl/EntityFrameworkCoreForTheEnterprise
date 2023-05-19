@@ -55,5 +55,19 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
 
             return response.ToOkResult();
         }
+
+        [HttpPost("currency/{id}")]
+        [ProducesResponseType(200, Type = typeof(ISingleResponse<CurrencyDetailsModel>))]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> GetCurrencyAsync(short? id)
+        {
+            var response = await _mediator.Send(new GetCurrencyQuery(id));
+
+            if (response == null)
+                return NotFound();
+
+            return response.ToOkResult();
+        }
     }
 }
