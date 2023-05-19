@@ -57,5 +57,17 @@ namespace RothschildHouse.GUI.PaymentGateway.Clients
 
             return JsonSerializer.Deserialize<ListResponse<CurrencyItemModel>>(content, options: DefaultJsonSerializerOptions);
         }
+
+        public async Task<ListResponse<ClientApplicationItemModel>> SearchClientApplicationsAsync(SearchClientApplicationsRequest query)
+        {
+            using var client = CreateHttpClient();
+
+            var response = await client.PostAsync($"{_endpoint}/search-client-application", query.ToStringContent(ApplicationJson));
+            response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            return JsonSerializer.Deserialize<ListResponse<ClientApplicationItemModel>>(content, options: DefaultJsonSerializerOptions);
+        }
     }
 }

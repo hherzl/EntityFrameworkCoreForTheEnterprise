@@ -124,13 +124,27 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
             return response.ToOkResult();
         }
 
-        [HttpGet("search-card")]
+        [HttpPost("search-card")]
         [ProducesResponseType(200, Type = typeof(PagedResponse<CardItemModel>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
         public async Task<IActionResult> SearchCardsAsync([FromBody] SearchCardsQuery request)
         {
             var response = await _mediator.Send(request);
+
+            return response.ToOkResult();
+        }
+
+        [HttpGet("card/{id}")]
+        [ProducesResponseType(200, Type = typeof(ISingleResponse<CardDetailsModel>))]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> GetCardAsync(Guid? id)
+        {
+            var response = await _mediator.Send(new GetCardQuery(id));
+
+            if (response == null)
+                return NotFound();
 
             return response.ToOkResult();
         }
