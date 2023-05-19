@@ -108,5 +108,19 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
 
             return response.ToOkResult();
         }
+
+        [HttpGet("customer/{id}")]
+        [ProducesResponseType(200, Type = typeof(ISingleResponse<CustomerDetailsModel>))]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> GetCustomerAsync(Guid? id)
+        {
+            var response = await _mediator.Send(new GetCustomerQuery(id));
+
+            if (response == null)
+                return NotFound();
+
+            return response.ToOkResult();
+        }
     }
 }
