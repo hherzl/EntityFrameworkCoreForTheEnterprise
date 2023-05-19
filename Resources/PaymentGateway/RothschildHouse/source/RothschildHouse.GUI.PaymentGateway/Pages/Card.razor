@@ -1,0 +1,37 @@
+﻿@page "/card"
+
+@using RothschildHouse.GUI.PaymentGateway.Clients;
+@using RothschildHouse.GUI.PaymentGateway.Clients.Models;
+@using RothschildHouse.GUI.PaymentGateway.Clients.Models.Common;
+
+@inject RothschildHouseClient rothschildHouseClient
+
+<PageTitle>Cards</PageTitle>
+
+<h1>Cards</h1>
+
+@if (response == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <MudDataGrid Items="@response.Model">
+        <Columns>
+            <PropertyColumn Property="x => x.CardType" Title="Card Type" />
+            <PropertyColumn Property="x => x.IssuingNetwork" Title="IssuingNetwork" />
+            <PropertyColumn Property="x => x.CardholderName" Title="CardholderName" />
+            <PropertyColumn Property="x => x.CardNumber" Title="CardNumber" />
+            <PropertyColumn Property="x => x.ExpirationDate" Title="ExpirationDate" />
+        </Columns>
+    </MudDataGrid>
+}
+
+@code {
+    private ListResponse<CardItemModel> response;
+
+    protected override async Task OnInitializedAsync()
+    {
+        response = await rothschildHouseClient.SearchCardsAsync(new SearchCardsRequest());
+    }
+}
