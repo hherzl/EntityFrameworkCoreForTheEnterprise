@@ -2,8 +2,17 @@
 
 namespace RothschildHouse.Application.Core.Common
 {
-    public class ListResponse<TModel> : IListResponse<TModel>
+    public record ListResponse<TModel> : IListResponse<TModel>
     {
+        public ListResponse()
+        {
+        }
+
+        public ListResponse(IEnumerable<TModel> model)
+        {
+            Model = new List<TModel>(model);
+        }
+
         public IEnumerable<TModel> Model { get; set; }
     }
 }

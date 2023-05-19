@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using RothschildHouse.Application.Core.Common;
 using RothschildHouse.Application.Core.Common.Contracts;
 
@@ -34,18 +35,14 @@ namespace RothschildHouse.Application.Core.Features.Countries.Queries
 
         public async Task<IListResponse<CountryItemModel>> Handle(SearchCountriesQuery request, CancellationToken cancellationToken)
         {
-            return await Task.FromResult(new ListResponse<CountryItemModel>
+            var countries = await _dbContext.Country.AsNoTracking().ToListAsync(cancellationToken);
+
+            return new ListResponse<CountryItemModel>(countries.Select(item => new CountryItemModel
             {
-                Model = new List<CountryItemModel>
-                {
-                    new CountryItemModel
-                    {
-                        Id = 503,
-                        Name = "El Salvador",
-                        TwoLetterIsoCode = "SV"
-                    }
-                }
-            });
+                Id = item.Id,
+                Name = item.Name,
+                TwoLetterIsoCode = item.TwoLetterIsoCode
+            }));
         }
     }
 }

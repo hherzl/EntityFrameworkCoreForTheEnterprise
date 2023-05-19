@@ -14,6 +14,6 @@ builder.Services.AddMudServices();
 
 builder.Services.AddHttpClient();
 
-builder.Services.AddScoped<RothschildHouseMockClient>();
+builder.Services.AddScoped<RothschildHouseClient>();
 
 await builder.Build().RunAsync();

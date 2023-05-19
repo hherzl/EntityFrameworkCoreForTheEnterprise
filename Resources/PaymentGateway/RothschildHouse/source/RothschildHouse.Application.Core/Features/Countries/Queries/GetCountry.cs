@@ -33,15 +33,14 @@ namespace RothschildHouse.Application.Core.Features.Countries.Queries
 
         public async Task<ISingleResponse<CountryDetailsModel>> Handle(GetCountryQuery request, CancellationToken cancellationToken)
         {
-            return await Task.FromResult(new SingleResponse<CountryDetailsModel>
+            var entity = await _dbContext.GetCountryAsync(request.Id);
+
+            return new SingleResponse<CountryDetailsModel>(new CountryDetailsModel
             {
-                Model = new CountryDetailsModel
-                {
-                    Id = 503,
-                    Name = "El Salvador",
-                    TwoLetterIsoCode = "SV",
-                    ThreeLetterIsoCode = "SLV"
-                }
+                Id = entity.Id,
+                Name = entity.Name,
+                TwoLetterIsoCode = entity.TwoLetterIsoCode,
+                ThreeLetterIsoCode = entity.ThreeLetterIsoCode
             });
         }
     }

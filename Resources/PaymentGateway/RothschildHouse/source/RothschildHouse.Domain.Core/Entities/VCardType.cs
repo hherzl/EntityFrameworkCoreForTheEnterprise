@@ -1,4 +1,4 @@
-﻿namespace RothschildHouse.Infrastructure.Core.Persistence.QueryModels
+﻿namespace RothschildHouse.Domain.Core.Entities
 {
     public class VCardType
     {

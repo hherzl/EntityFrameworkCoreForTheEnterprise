@@ -1,17 +1,18 @@
 ﻿using System.Net.Http.Headers;
 using System.Text.Json;
 using RothschildHouse.GUI.PaymentGateway.Clients.Models;
+using RothschildHouse.GUI.PaymentGateway.Clients.Models.Common;
 
 namespace RothschildHouse.GUI.PaymentGateway.Clients
 {
-    public class RothschildHouseMockClient
+    public class RothschildHouseClient
     {
         public const string ApplicationJson = "application/json";
 
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly string _endpoint;
 
-        public RothschildHouseMockClient(IHttpClientFactory httpClientFactory, IConfiguration configuration)
+        public RothschildHouseClient(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
             _httpClientFactory = httpClientFactory;
             _endpoint = configuration.GetValue<string>("ClientEndpoints:RothschildHouse");
@@ -43,6 +44,18 @@ namespace RothschildHouse.GUI.PaymentGateway.Clients
             var content = await response.Content.ReadAsStringAsync();
 
             return JsonSerializer.Deserialize<ListResponse<CountryItemModel>>(content, options: DefaultJsonSerializerOptions);
+        }
+
+        public async Task<ListResponse<CurrencyItemModel>> SearchCurrenciesAsync(SearchCurrenciesRequest query)
+        {
+            using var client = CreateHttpClient();
+
+            var response = await client.PostAsync($"{_endpoint}/search-currency", query.ToStringContent(ApplicationJson));
+            response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            return JsonSerializer.Deserialize<ListResponse<CurrencyItemModel>>(content, options: DefaultJsonSerializerOptions);
         }
     }
 }

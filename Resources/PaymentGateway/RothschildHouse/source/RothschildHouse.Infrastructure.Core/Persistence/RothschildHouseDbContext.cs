@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using RothschildHouse.Application.Core.Common.Contracts;
 using RothschildHouse.Domain.Core.Entities;
-using RothschildHouse.Infrastructure.Core.Persistence.QueryModels;
 
 namespace RothschildHouse.Infrastructure.Core.Persistence
 {

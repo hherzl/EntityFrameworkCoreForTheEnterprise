@@ -1,4 +1,4 @@
-﻿namespace RothschildHouse.GUI.PaymentGateway.Clients.Models
+﻿namespace RothschildHouse.GUI.PaymentGateway.Clients.Models.Common
 {
     public record ListResponse<TModel>
     {

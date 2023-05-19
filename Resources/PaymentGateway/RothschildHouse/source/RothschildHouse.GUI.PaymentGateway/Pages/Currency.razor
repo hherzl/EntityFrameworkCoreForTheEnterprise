@@ -1,4 +1,4 @@
-﻿@page "/country"
+﻿@page "/currency"
 
 @using RothschildHouse.GUI.PaymentGateway.Clients;
 @using RothschildHouse.GUI.PaymentGateway.Clients.Models;
@@ -6,9 +6,9 @@
 
 @inject RothschildHouseClient rothschildHouseClient
 
-<PageTitle>Countries</PageTitle>
+<PageTitle>Currencies</PageTitle>
 
-<h1>Countries</h1>
+<h1>Currencies</h1>
 
 @if (response == null)
 {
@@ -19,16 +19,16 @@ else
     <MudDataGrid Items="@response.Model">
         <Columns>
             <PropertyColumn Property="x => x.Name" Title="Name" />
-            <PropertyColumn Property="x => x.TwoLetterIsoCode" Title="Two Letter ISO Code" />
+            <PropertyColumn Property="x => x.Code" Title="Code" />
         </Columns>
     </MudDataGrid>
 }
 
 @code {
-    private ListResponse<CountryItemModel> response;
+    private ListResponse<CurrencyItemModel> response;
 
     protected override async Task OnInitializedAsync()
     {
-        response = await rothschildHouseClient.SearchCountriesAsync(new SearchCountriesRequest());
+        response = await rothschildHouseClient.SearchCurrenciesAsync(new SearchCurrenciesRequest());
     }
 }

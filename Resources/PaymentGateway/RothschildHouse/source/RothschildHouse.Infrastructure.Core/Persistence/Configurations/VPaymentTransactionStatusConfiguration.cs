@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RothschildHouse.Infrastructure.Core.Persistence.QueryModels;
+using RothschildHouse.Domain.Core.Entities;
 
 namespace RothschildHouse.Infrastructure.Core.Persistence.Configurations
 {
