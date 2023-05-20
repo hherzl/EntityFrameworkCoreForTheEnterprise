@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\tp\RothschildHouse.TP.CityBank\RothschildHouse.TP.CityBank.csproj" />
     <ProjectReference Include="..\RothschildHouse.Domain.Core\RothschildHouse.Domain.Core.csproj" />
   </ItemGroup>
 

@@ -1,5 +1,7 @@
 using RothschildHouse.Application.Core;
+using RothschildHouse.Application.Core.Hubs;
 using RothschildHouse.Infrastructure.Core;
+using RothschildHouse.TP.CityBank;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,10 +19,17 @@ builder.Services.AddApplicationServices();
 
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
+builder.Services.AddCityBankServices();
+
 builder.Services.AddCors(policy =>
 {
     policy.AddPolicy("RothschildHouseCorsPolicy", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 });
+
+builder
+    .Services
+    .AddSignalR(options => options.EnableDetailedErrors = true)
+    ;
 
 var app = builder.Build();
 
@@ -37,5 +46,7 @@ app.UseCors("RothschildHouseCorsPolicy");
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<PaymentTransactionsHub>("/paymenttxnhub");
 
 app.Run();

@@ -8,9 +8,11 @@ using RothschildHouse.Application.Core.Features.ClientApplications.Queries;
 using RothschildHouse.Application.Core.Features.Countries.Queries;
 using RothschildHouse.Application.Core.Features.Currencies.Queries;
 using RothschildHouse.Application.Core.Features.Customers.Queries;
+using RothschildHouse.Application.Core.Features.PaymentTransactions.Commands;
 
 namespace RothschildHouse.API.PaymentGateway.Controllers
 {
+#pragma warning disable CS1591
     [ApiController]
     [Route("api/v1")]
     public class PaymentGatewayController : ControllerBase
@@ -23,6 +25,7 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
             _logger = logger;
             _mediator = mediator;
         }
+#pragma warning restore CS1591
 
         /// <summary>
         /// Returns the countries that match with the specified search criteria.
@@ -227,6 +230,25 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
                 return NotFound();
 
             return response.ToOkResult();
+        }
+
+        /// <summary>
+        /// Returns the payment transactions that match with the specified search criteria.
+        /// </summary>
+        /// <param name="request">Search parameters</param>
+        /// <returns>The payment transactions.</returns>
+        /// <response code="200">If resource it was processed  the client applications</response>
+        /// <response code="400">If the request is invalid</response>
+        /// <response code="500">If there was an internal error</response>
+        [HttpPost("process-payment-txn")]
+        [ProducesResponseType(201, Type = typeof(ProcessPaymentTransactionResponse))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> ProcessPaymentTransactionAsync([FromBody] ProcessPaymentTransactionCommand request)
+        {
+            var response = await _mediator.Send(request);
+
+            return response.ToCreatedResult();
         }
     }
 }

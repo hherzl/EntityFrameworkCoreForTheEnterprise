@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\tp\RothschildHouse.TP.CityBank\RothschildHouse.TP.CityBank.csproj" />
     <ProjectReference Include="..\RothschildHouse.Application.Core\RothschildHouse.Application.Core.csproj" />
     <ProjectReference Include="..\RothschildHouse.Infrastructure.Core\RothschildHouse.Infrastructure.Core.csproj" />
   </ItemGroup>

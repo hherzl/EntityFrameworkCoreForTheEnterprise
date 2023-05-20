@@ -18,5 +18,7 @@ namespace RothschildHouse.Application.Core.Common.Contracts
 
         public DbSet<VCardType> VCardType { get; set; }
         public DbSet<VPaymentTransactionStatus> VPaymentTransactionStatus { get; set; }
+
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }
