@@ -23,7 +23,7 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Queries
     {
         public SearchPaymentTransactionsQuery()
         {
-            PageSize = 25;
+            PageSize = 10;
             PageNumber = 1;
         }
 

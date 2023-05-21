@@ -1,0 +1,37 @@
+﻿@page "/payment-txn"
+
+@using RothschildHouse.GUI.PaymentGateway.Clients;
+@using RothschildHouse.GUI.PaymentGateway.Clients.Models;
+@using RothschildHouse.GUI.PaymentGateway.Clients.Models.Common;
+
+@inject RothschildHouseClient rothschildHouseClient
+
+<PageTitle>Payment Transactions</PageTitle>
+
+<h1>Payment Transactions</h1>
+
+@if (response == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <MudDataGrid Items="@response.Model">
+        <Columns>
+            <PropertyColumn Property="x => x.PaymentTransactionStatus" Title="Transaction Status" />
+            <PropertyColumn Property="x => x.ClientApplication" Title="Client Application" />
+            <PropertyColumn Property="x => x.OrderTotal" Title="Order Total" />
+            <PropertyColumn Property="x => x.Currency" Title="Currency" />
+            <PropertyColumn Property="x => x.CreationDateTime" Title="Created on" />
+        </Columns>
+    </MudDataGrid>
+}
+
+@code {
+    private ListResponse<PaymentTransactionItemModel> response;
+
+    protected override async Task OnInitializedAsync()
+    {
+        response = await rothschildHouseClient.SearchPaymentTransactionsAsync(new SearchPaymentTransactionsRequest());
+    }
+}

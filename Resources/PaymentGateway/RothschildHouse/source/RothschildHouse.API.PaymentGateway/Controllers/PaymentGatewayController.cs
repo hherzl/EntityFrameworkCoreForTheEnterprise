@@ -241,7 +241,7 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         /// <response code="200">Returns the payment transactions</response>
         /// <response code="400">If the request is invalid</response>
         /// <response code="500">If there was an internal error</response>
-        [HttpPost("payment-txn")]
+        [HttpPost("search-payment-txn")]
         [ProducesResponseType(200, Type = typeof(IPagedResponse<PaymentTransactionItemModel>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
