@@ -21,11 +21,6 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Queries
 
     public class SearchPaymentTransactionsQuery : IRequest<PagedResponse<PaymentTransactionItemModel>>
     {
-        public SearchPaymentTransactionsQuery()
-        {
-            PageSize = 10;
-            PageNumber = 1;
-        }
 
         public int PageSize { get; set; }
         public int PageNumber { get; set; }

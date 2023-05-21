@@ -41,6 +41,6 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        response = await rothschildHouseClient.SearchPaymentTransactionsAsync(new SearchPaymentTransactionsRequest());
+        response = await rothschildHouseClient.GetPaymentTransactionsAsync(new GetPaymentTransactionsRequest());
     }
 }

@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using RothschildHouse.Application.Core.Common;
 using RothschildHouse.Application.Core.Common.Contracts;
-using RothschildHouse.Domain.Core.Enums;
 
 namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Queries
 {

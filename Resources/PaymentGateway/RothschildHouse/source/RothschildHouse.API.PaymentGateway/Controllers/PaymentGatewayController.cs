@@ -241,11 +241,11 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         /// <response code="200">Returns the payment transactions</response>
         /// <response code="400">If the request is invalid</response>
         /// <response code="500">If there was an internal error</response>
-        [HttpPost("search-payment-txn")]
+        [HttpGet("payment-txn")]
         [ProducesResponseType(200, Type = typeof(IPagedResponse<PaymentTransactionItemModel>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> SearchPaymentTransactionsAsync([FromBody] SearchPaymentTransactionsQuery request)
+        public async Task<IActionResult> SearchPaymentTransactionsAsync([FromQuery] SearchPaymentTransactionsQuery request)
         {
             var response = await _mediator.Send(request);
 

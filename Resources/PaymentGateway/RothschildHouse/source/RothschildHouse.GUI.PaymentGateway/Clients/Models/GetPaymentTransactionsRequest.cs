@@ -3,8 +3,14 @@ using System.Text.Json;
 
 namespace RothschildHouse.GUI.PaymentGateway.Clients.Models
 {
-    public record SearchPaymentTransactionsRequest
+    public record GetPaymentTransactionsRequest
     {
+        public GetPaymentTransactionsRequest()
+        {
+            PageSize = 25;
+            PageNumber = 1;
+        }
+
         public int PageSize { get; set; }
         public int PageNumber { get; set; }
 
