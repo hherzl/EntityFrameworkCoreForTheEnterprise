@@ -2,7 +2,7 @@
 
 namespace RothschildHouse.Application.Core.Common
 {
-    public record SingleResponse<TModel> : ISingleResponse<TModel>
+    public record SingleResponse<TModel> : Response, ISingleResponse<TModel>
     {
         public SingleResponse()
         {

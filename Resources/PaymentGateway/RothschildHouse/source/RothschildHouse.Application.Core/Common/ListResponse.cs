@@ -2,7 +2,7 @@
 
 namespace RothschildHouse.Application.Core.Common
 {
-    public record ListResponse<TModel> : IListResponse<TModel>
+    public record ListResponse<TModel> : Response, IListResponse<TModel>
     {
         public ListResponse()
         {

@@ -1,4 +1,9 @@
-﻿namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Queries
+﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
+using RothschildHouse.Application.Core.Common;
+using RothschildHouse.Application.Core.Common.Contracts;
+
+namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Queries
 {
     public record PaymentTransactionItemModel
     {
@@ -12,5 +17,46 @@
         public decimal? OrderTotal { get; set; }
         public string Currency { get; set; }
         public DateTime? CreationDateTime { get; set; }
+    }
+
+    public class SearchPaymentTransactionsQuery : IRequest<PagedResponse<PaymentTransactionItemModel>>
+    {
+        public SearchPaymentTransactionsQuery()
+        {
+            PageSize = 25;
+            PageNumber = 1;
+        }
+
+        public int PageSize { get; set; }
+        public int PageNumber { get; set; }
+
+        public short? PaymentTransactionStatusId { get; set; }
+        public Guid? ClientApplicationId { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+    }
+
+    public class SearchPaymentTransactionsQueryHandler : IRequestHandler<SearchPaymentTransactionsQuery, PagedResponse<PaymentTransactionItemModel>>
+    {
+        private readonly IRothschildHouseDbContext _dbContext;
+
+        public SearchPaymentTransactionsQueryHandler(IRothschildHouseDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
+        public async Task<PagedResponse<PaymentTransactionItemModel>> Handle(SearchPaymentTransactionsQuery request, CancellationToken cancellationToken)
+        {
+            var query = _dbContext
+                .GetPaymentTransactions(paymentTransactionStatusId: request.PaymentTransactionStatusId, clientApplicationId: request.ClientApplicationId, startDate: request.StartDate, endDate: request.EndDate)
+                ;
+
+            var list = await query
+                .Paging(request.PageSize, request.PageNumber)
+                .ToListAsync(cancellationToken)
+                ;
+
+            return new PagedResponse<PaymentTransactionItemModel>(list, request.PageSize, request.PageNumber, await query.CountAsync(cancellationToken));
+        }
     }
 }

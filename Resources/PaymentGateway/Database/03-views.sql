@@ -10,7 +10,7 @@ AS
     FROM
         [dbo].[EnumDescription]
     WHERE
-        [Type] = 'RothschildHouse.API.PaymentGateway.Domain.Enums.PaymentTransactionStatus'
+        [Type] = 'RothschildHouse.Domain.Core.Enums.PaymentTransactionStatus'
 GO
 
 IF OBJECT_ID('dbo.VCardType') IS NOT NULL
@@ -25,7 +25,7 @@ AS
     FROM
         [dbo].[EnumDescription]
     WHERE
-        [Type] = 'RothschildHouse.API.PaymentGateway.Domain.Enums.CardType'
+        [Type] = 'RothschildHouse.Domain.Core.Enums.CardType'
 GO
 
 SELECT * FROM [dbo].[VPaymentTransactionStatus]
