@@ -70,6 +70,18 @@ namespace RothschildHouse.GUI.PaymentGateway.Clients
             return JsonSerializer.Deserialize<ListResponse<ClientApplicationItemModel>>(content, options: DefaultJsonSerializerOptions);
         }
 
+        public async Task<SingleResponse<ClientApplicationDetailsModel>> GetClientApplicationAsync(Guid? id)
+        {
+            using var client = CreateHttpClient();
+
+            var response = await client.GetAsync($"{_endpoint}/client-application/{id}");
+            response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            return JsonSerializer.Deserialize<SingleResponse<ClientApplicationDetailsModel>>(content, options: DefaultJsonSerializerOptions);
+        }
+
         public async Task<PagedResponse<CardItemModel>> GetCardsAsync(GetCardsRequest request)
         {
             using var client = CreateHttpClient();

@@ -1,0 +1,65 @@
+﻿@page "/client-application/{Id:guid}"
+
+@using RothschildHouse.GUI.PaymentGateway.Clients;
+@using RothschildHouse.GUI.PaymentGateway.Clients.Models;
+@using RothschildHouse.GUI.PaymentGateway.Clients.Models.Common;
+
+@inject RothschildHouseClient rothschildHouseClient
+
+<PageTitle>Client Application Details</PageTitle>
+
+<h1>Client Application Details</h1>
+
+@if (response == null)
+{
+    <strong>There is no information for customer with Id @Id</strong>
+}
+else if (response.Model is not null)
+{
+    <h2>@response.Model.Id</h2>
+
+    <MudGrid>
+        <MudItem lg="4" md="6" sm="12">
+            <MudPaper Class="pa-4">
+                <MudText Typo="Typo.body2">Name: <strong>@response.Model.Name</strong></MudText>
+                <MudText Typo="Typo.body2">Url: <strong>@response.Model.Url</strong></MudText>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+
+    <br />
+
+    <MudDivider />
+
+    <br />
+
+    <h2>Payment Transactions</h2>
+
+    <MudDataGrid Items="@response.Model.PaymentTransactions">
+        <Columns>
+            <PropertyColumn Property="x => x.PaymentTransactionStatus" Title="Transaction Status" />
+            <PropertyColumn Property="x => x.OrderTotal" Title="Order Total" />
+            <PropertyColumn Property="x => x.Currency" Title="Currency" />
+            <PropertyColumn Property="x => x.CreationDateTime" Title="Created on" />
+            <TemplateColumn CellClass="d-flex justify-end">
+                <CellTemplate>
+                    <MudStack Row>
+                        <MudLink Href="@($"/payment-txn/{context.Item.Id}")">Details</MudLink>
+                    </MudStack>
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+    </MudDataGrid>
+}
+
+@code {
+    [Parameter]
+    public Guid? Id { get; set; }
+
+    private SingleResponse<ClientApplicationDetailsModel> response;
+
+    protected override async Task OnInitializedAsync()
+    {
+        response = await rothschildHouseClient.GetClientApplicationAsync(Id);
+    }
+}
