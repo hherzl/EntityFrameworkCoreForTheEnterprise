@@ -12,9 +12,9 @@ namespace RothschildHouse.Application.Core.Features.Countries.Queries
         public string TwoLetterIsoCode { get; set; }
     }
 
-    public class SearchCountriesQuery : IRequest<IListResponse<CountryItemModel>>
+    public class GetCountriesQuery : IRequest<IListResponse<CountryItemModel>>
     {
-        public SearchCountriesQuery()
+        public GetCountriesQuery()
         {
             PageSize = 10;
             PageNumber = 1;
@@ -24,7 +24,7 @@ namespace RothschildHouse.Application.Core.Features.Countries.Queries
         public int PageNumber { get; set; }
     }
 
-    public class SearchCountriesQueryHandler : IRequestHandler<SearchCountriesQuery, IListResponse<CountryItemModel>>
+    public class SearchCountriesQueryHandler : IRequestHandler<GetCountriesQuery, IListResponse<CountryItemModel>>
     {
         private readonly IRothschildHouseDbContext _dbContext;
 
@@ -33,11 +33,11 @@ namespace RothschildHouse.Application.Core.Features.Countries.Queries
             _dbContext = dbContext;
         }
 
-        public async Task<IListResponse<CountryItemModel>> Handle(SearchCountriesQuery request, CancellationToken cancellationToken)
+        public async Task<IListResponse<CountryItemModel>> Handle(GetCountriesQuery request, CancellationToken cancellationToken)
         {
             var countries = await _dbContext.Country.AsNoTracking().ToListAsync(cancellationToken);
 
-            return new ListResponse<CountryItemModel>(countries.Select(item => new CountryItemModel()
+            return new ListResponse<CountryItemModel>(countries.Select(item => new CountryItemModel
             {
                 Id = item.Id,
                 Name = item.Name,

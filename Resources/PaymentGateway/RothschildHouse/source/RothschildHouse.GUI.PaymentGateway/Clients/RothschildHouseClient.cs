@@ -34,11 +34,11 @@ namespace RothschildHouse.GUI.PaymentGateway.Clients
             return client;
         }
 
-        public async Task<ListResponse<CountryItemModel>> SearchCountriesAsync(SearchCountriesRequest query)
+        public async Task<ListResponse<CountryItemModel>> GetCountriesAsync(GetCountriesRequest request)
         {
             using var client = CreateHttpClient();
 
-            var response = await client.PostAsync($"{_endpoint}/search-country", query.ToStringContent(ApplicationJson));
+            var response = await client.GetAsync($"{_endpoint}/country?pageSize={request.PageSize}&pageNumber={request.PageNumber}");
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();

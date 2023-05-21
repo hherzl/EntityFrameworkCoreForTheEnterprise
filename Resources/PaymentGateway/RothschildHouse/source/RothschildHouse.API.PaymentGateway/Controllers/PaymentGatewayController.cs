@@ -36,11 +36,11 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         /// <response code="200">Returns the countries</response>
         /// <response code="400">If the request is invalid</response>
         /// <response code="500">If there was an internal error</response>
-        [HttpPost("search-country")]
+        [HttpGet("country")]
         [ProducesResponseType(200, Type = typeof(IListResponse<CountryItemModel>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> SearchCountriesAsync([FromBody] SearchCountriesQuery request)
+        public async Task<IActionResult> GetCountriesAsync([FromQuery] GetCountriesQuery request)
         {
             var response = await _mediator.Send(request);
 
@@ -59,7 +59,7 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         [ProducesResponseType(200, Type = typeof(ISingleResponse<CountryDetailsModel>))]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> SearchCountriesAsync(short? id)
+        public async Task<IActionResult> GetCountryAsync(short? id)
         {
             var response = await _mediator.Send(new GetCountryQuery(id));
 
