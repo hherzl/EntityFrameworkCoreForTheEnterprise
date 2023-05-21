@@ -253,6 +253,28 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         }
 
         /// <summary>
+        /// Returns an existing payment transaction by Id.
+        /// </summary>
+        /// <param name="id">Payment Transaction Id</param>
+        /// <returns>The payment transaction.</returns>
+        /// <response code="200">Returns the payment transaction</response>
+        /// <response code="404">If the resource doesn't exist</response>
+        /// <response code="500">If there was an internal error</response>
+        [HttpGet("payment-txn/{id}")]
+        [ProducesResponseType(200, Type = typeof(ISingleResponse<PaymentTransactionDetailsModel>))]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> GetPaymentTransactionAsync(long? id)
+        {
+            var response = await _mediator.Send(new GetPaymentTransactionQuery(id));
+
+            if (response == null)
+                return NotFound();
+
+            return response.ToOkResult();
+        }
+
+        /// <summary>
         /// Returns the payment transactions that match with the specified search criteria.
         /// </summary>
         /// <param name="request">Search parameters</param>
