@@ -17,9 +17,9 @@ namespace RothschildHouse.Application.Core.Features.Customers.Queries
         public Guid? AlienGuid { get; set; }
     }
 
-    public class SearchCustomersQuery : IRequest<PagedResponse<CustomerItemModel>>
+    public class GetCustomersQuery : IRequest<PagedResponse<CustomerItemModel>>
     {
-        public SearchCustomersQuery()
+        public GetCustomersQuery()
         {
             PageSize = 10;
             PageNumber = 1;
@@ -29,16 +29,16 @@ namespace RothschildHouse.Application.Core.Features.Customers.Queries
         public int PageNumber { get; set; }
     }
 
-    public class SearchCustomersQueryHandler : IRequestHandler<SearchCustomersQuery, PagedResponse<CustomerItemModel>>
+    public class GetCustomersQueryHandler : IRequestHandler<GetCustomersQuery, PagedResponse<CustomerItemModel>>
     {
         private readonly IRothschildHouseDbContext _dbContext;
 
-        public SearchCustomersQueryHandler(IRothschildHouseDbContext dbContext)
+        public GetCustomersQueryHandler(IRothschildHouseDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public async Task<PagedResponse<CustomerItemModel>> Handle(SearchCustomersQuery request, CancellationToken cancellationToken)
+        public async Task<PagedResponse<CustomerItemModel>> Handle(GetCustomersQuery request, CancellationToken cancellationToken)
         {
             var query = _dbContext.GetCustomers();
 

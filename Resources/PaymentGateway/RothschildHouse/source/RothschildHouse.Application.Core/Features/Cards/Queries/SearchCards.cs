@@ -16,9 +16,9 @@ namespace RothschildHouse.Application.Core.Features.Cards.Queries
         public string ExpirationDate { get; set; }
     }
 
-    public class SearchCardsQuery : IRequest<IPagedResponse<CardItemModel>>
+    public class GetCardsQuery : IRequest<IPagedResponse<CardItemModel>>
     {
-        public SearchCardsQuery()
+        public GetCardsQuery()
         {
             PageSize = 10;
             PageNumber = 1;
@@ -28,16 +28,16 @@ namespace RothschildHouse.Application.Core.Features.Cards.Queries
         public int PageNumber { get; set; }
     }
 
-    public class SearchCardsQueryHandler : IRequestHandler<SearchCardsQuery, IPagedResponse<CardItemModel>>
+    public class GetCardsQueryHandler : IRequestHandler<GetCardsQuery, IPagedResponse<CardItemModel>>
     {
         private readonly IRothschildHouseDbContext _dbContext;
 
-        public SearchCardsQueryHandler(IRothschildHouseDbContext dbContext)
+        public GetCardsQueryHandler(IRothschildHouseDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public async Task<IPagedResponse<CardItemModel>> Handle(SearchCardsQuery request, CancellationToken cancellationToken)
+        public async Task<IPagedResponse<CardItemModel>> Handle(GetCardsQuery request, CancellationToken cancellationToken)
         {
             var query = _dbContext.GetCards();
 

@@ -159,11 +159,11 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         /// <response code="200">Returns the cards</response>
         /// <response code="400">If the request is invalid</response>
         /// <response code="500">If there was an internal error</response>
-        [HttpPost("search-card")]
+        [HttpGet("card")]
         [ProducesResponseType(200, Type = typeof(PagedResponse<CardItemModel>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> SearchCardsAsync([FromBody] SearchCardsQuery request)
+        public async Task<IActionResult> SearchCardsAsync([FromQuery] GetCardsQuery request)
         {
             var response = await _mediator.Send(request);
 
@@ -204,7 +204,7 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         [ProducesResponseType(200, Type = typeof(PagedResponse<CustomerItemModel>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> GetCustomersAsync([FromQuery] SearchCustomersQuery request)
+        public async Task<IActionResult> GetCustomersAsync([FromQuery] GetCustomersQuery request)
         {
             var response = await _mediator.Send(request);
 
