@@ -1,0 +1,70 @@
+﻿@page "/customer/{Id:guid}"
+
+@using RothschildHouse.GUI.PaymentGateway.Clients;
+@using RothschildHouse.GUI.PaymentGateway.Clients.Models;
+@using RothschildHouse.GUI.PaymentGateway.Clients.Models.Common;
+
+@inject RothschildHouseClient rothschildHouseClient
+
+<PageTitle>Customer Details</PageTitle>
+
+<h1>Customer Details</h1>
+
+@if (response == null)
+{
+    <strong>There is no information for customer with Id @Id</strong>
+}
+else if (response.Model is not null)
+{
+    <h2>@response.Model.Id</h2>
+
+    <MudGrid>
+        <MudItem lg="4" md="6" sm="12">
+            <MudPaper Class="pa-4">
+                <MudText Typo="Typo.body2">Name: <strong>@response.Model.Person</strong></MudText>
+                <MudText Typo="Typo.body2">Company: <strong>@response.Model.Company</strong></MudText>
+                <MudText Typo="Typo.body2">Country: <strong>@response.Model.Country</strong></MudText>
+                <MudText Typo="Typo.body2">Phone: <strong>@response.Model.Phone</strong></MudText>
+                <MudText Typo="Typo.body2">Email: <strong>@response.Model.Email</strong></MudText>
+                <MudText Typo="Typo.body2">Alien GUID: <strong>@response.Model.AlienGuid</strong></MudText>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+
+    <br />
+
+    <MudDivider />
+
+    <br />
+
+    <h2>Payment Transactions</h2>
+
+    <MudDataGrid Items="@response.Model.PaymentTransactions">
+        <Columns>
+            <PropertyColumn Property="x => x.PaymentTransactionStatus" Title="Transaction Status" />
+            <PropertyColumn Property="x => x.ClientApplication" Title="Client Application" />
+            <PropertyColumn Property="x => x.OrderTotal" Title="Order Total" />
+            <PropertyColumn Property="x => x.Currency" Title="Currency" />
+            <PropertyColumn Property="x => x.CreationDateTime" Title="Created on" />
+            <TemplateColumn CellClass="d-flex justify-end">
+                <CellTemplate>
+                    <MudStack Row>
+                        <MudLink Href="@($"/payment-txn/{context.Item.Id}")">Details</MudLink>
+                    </MudStack>
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+    </MudDataGrid>
+}
+
+@code {
+    [Parameter]
+    public Guid? Id { get; set; }
+
+    private SingleResponse<CustomerDetailsModel> response;
+
+    protected override async Task OnInitializedAsync()
+    {
+        response = await rothschildHouseClient.GetCustomerAsync(Id);
+    }
+}

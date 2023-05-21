@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RothschildHouse.TP.CityBank
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "mock", "mock", "{D3DBC5E8-33A0-42B7-9B61-F33727855FC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RothschildHouse.Mock.PaymentTransactions", "mock\RothschildHouse.Mock.PaymentTransactions\RothschildHouse.Mock.PaymentTransactions.csproj", "{6AEA7714-7980-4525-B54F-D643803ECD92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RothschildHouse.Mock.PaymentTransactions", "mock\RothschildHouse.Mock.PaymentTransactions\RothschildHouse.Mock.PaymentTransactions.csproj", "{6AEA7714-7980-4525-B54F-D643803ECD92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

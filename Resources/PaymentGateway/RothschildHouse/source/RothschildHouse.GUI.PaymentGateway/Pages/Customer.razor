@@ -23,6 +23,13 @@ else
             <PropertyColumn Property="x => x.Phone" Title="Phone" />
             <PropertyColumn Property="x => x.Email" Title="Email" />
             <PropertyColumn Property="x => x.AlienGuid" Title="Alien Guid" />
+            <TemplateColumn CellClass="d-flex justify-end">
+                <CellTemplate>
+                    <MudStack Row>
+                        <MudLink Href="@($"/customer/{context.Item.Id}")">Details</MudLink>
+                    </MudStack>
+                </CellTemplate>
+            </TemplateColumn>
         </Columns>
     </MudDataGrid>
 }

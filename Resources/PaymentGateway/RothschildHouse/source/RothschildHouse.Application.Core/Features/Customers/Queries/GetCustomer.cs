@@ -65,8 +65,11 @@ namespace RothschildHouse.Application.Core.Features.Customers.Queries
                 {
                     Id = entity.Id,
                     PersonId = entity.PersonId,
+                    Person = entity.PersonFk?.FullName,
                     CompanyId = entity.CompanyId,
+                    Company = entity.CompanyFk?.Name,
                     CountryId = entity.CountryId,
+                    Country = "",
                     AddressLine1 = entity.AddressLine1,
                     AddressLine2 = entity.AddressLine2,
                     Phone = entity.Phone,
