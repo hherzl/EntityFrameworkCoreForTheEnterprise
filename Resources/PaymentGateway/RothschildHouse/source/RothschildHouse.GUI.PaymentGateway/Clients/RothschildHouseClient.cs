@@ -82,19 +82,19 @@ namespace RothschildHouse.GUI.PaymentGateway.Clients
             return JsonSerializer.Deserialize<ListResponse<CardItemModel>>(content, options: DefaultJsonSerializerOptions);
         }
 
-        public async Task<ListResponse<CustomerItemModel>> SearchCustomersAsync(SearchCustomersRequest query)
+        public async Task<PagedResponse<CustomerItemModel>> GetCustomersAsync(GetCustomersRequest request)
         {
             using var client = CreateHttpClient();
 
-            var response = await client.PostAsync($"{_endpoint}/search-customer", query.ToStringContent(ApplicationJson));
+            var response = await client.GetAsync($"{_endpoint}/customer?pageSize={request.PageSize}&pageNumber={request.PageNumber}");
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
 
-            return JsonSerializer.Deserialize<ListResponse<CustomerItemModel>>(content, options: DefaultJsonSerializerOptions);
+            return JsonSerializer.Deserialize<PagedResponse<CustomerItemModel>>(content, options: DefaultJsonSerializerOptions);
         }
 
-        public async Task<ListResponse<PaymentTransactionItemModel>> GetPaymentTransactionsAsync(GetPaymentTransactionsRequest request)
+        public async Task<PagedResponse<PaymentTransactionItemModel>> GetPaymentTransactionsAsync(GetPaymentTransactionsRequest request)
         {
             using var client = CreateHttpClient();
 
@@ -103,7 +103,7 @@ namespace RothschildHouse.GUI.PaymentGateway.Clients
 
             var content = await response.Content.ReadAsStringAsync();
 
-            return JsonSerializer.Deserialize<ListResponse<PaymentTransactionItemModel>>(content, options: DefaultJsonSerializerOptions);
+            return JsonSerializer.Deserialize<PagedResponse<PaymentTransactionItemModel>>(content, options: DefaultJsonSerializerOptions);
         }
 
         public async Task<SingleResponse<PaymentTransactionDetailsModel>> GetPaymentTransactionAsync(long? id)
