@@ -4,8 +4,6 @@ namespace RothschildHouse.Domain.Core.Entities
 {
     public class PaymentTransactionLog : AuditableEntity
     {
-        public const string ApplicationJson = "application/json";
-
         public long? Id { get; set; }
         public long? PaymentTransactionId { get; set; }
         public short? PaymentTransactionStatusId { get; set; }

@@ -112,6 +112,8 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Commands
 
     public class ProcessPaymentTransactionCommandHandler : IRequestHandler<ProcessPaymentTransactionCommand, ProcessPaymentTransactionResponse>
     {
+        public const string ApplicationJson = "application/json";
+
         private readonly IRothschildHouseDbContext _dbContext;
         private readonly ICityBankPaymentServicesClient _cityBankPaymentServicesClient;
 
@@ -197,7 +199,7 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Commands
                 PaymentTransactionId = paymentTxn.Id,
                 PaymentTransactionStatusId = paymentTxn.PaymentTransactionStatusId,
                 LogType = "Request",
-                ContentType = PaymentTransactionLog.ApplicationJson,
+                ContentType = ApplicationJson,
                 Content = paymentGatewayRequest.ToJson(),
                 Active = true,
                 CreationUser = "api",
@@ -215,7 +217,7 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Commands
                     PaymentTransactionId = paymentTxn.Id,
                     PaymentTransactionStatusId = paymentTxn.PaymentTransactionStatusId,
                     LogType = "Response",
-                    ContentType = PaymentTransactionLog.ApplicationJson,
+                    ContentType = ApplicationJson,
                     Content = paymentGatewayResponse.ToJson(),
                     Active = true,
                     CreationUser = "api",
@@ -241,7 +243,7 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Commands
                     PaymentTransactionId = paymentTxn.Id,
                     PaymentTransactionStatusId = paymentTxn.PaymentTransactionStatusId,
                     LogType = "Response",
-                    ContentType = PaymentTransactionLog.ApplicationJson,
+                    ContentType = ApplicationJson,
                     Content = paymentGatewayResponse.ToJson(),
                     Active = true,
                     CreationUser = "api",
