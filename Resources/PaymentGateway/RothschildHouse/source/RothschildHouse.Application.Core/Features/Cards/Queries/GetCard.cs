@@ -14,7 +14,7 @@ namespace RothschildHouse.Application.Core.Features.Cards.Queries
         public string CardType { get; set; }
         public string IssuingNetwork { get; set; }
         public string CardholderName { get; set; }
-        public string CardNumber { get; set; }
+        public string Last4Digits { get; set; }
         public string ExpirationDate { get; set; }
         public string Cvv { get; set; }
 
@@ -67,9 +67,9 @@ namespace RothschildHouse.Application.Core.Features.Cards.Queries
                     CardType = entity.CardTypeId == (short)CardType.Debit ? "Debit" : "Credit",
                     IssuingNetwork = entity.IssuingNetwork,
                     CardholderName = entity.CardholderName,
-                    CardNumber = entity.CardNumber?[^4..],
+                    Last4Digits = entity.CardNumber?[^4..],
                     ExpirationDate = entity.ExpirationDate,
-                    Cvv = entity.Cvv,
+                    Cvv = "****",
                     PaymentTransactions = paymentTransactions
                 }
             };

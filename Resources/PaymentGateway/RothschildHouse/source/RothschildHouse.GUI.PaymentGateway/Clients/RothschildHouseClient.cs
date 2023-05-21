@@ -94,6 +94,18 @@ namespace RothschildHouse.GUI.PaymentGateway.Clients
             return JsonSerializer.Deserialize<PagedResponse<CardItemModel>>(content, options: DefaultJsonSerializerOptions);
         }
 
+        public async Task<SingleResponse<CardDetailsModel>> GetCardAsync(Guid? id)
+        {
+            using var client = CreateHttpClient();
+
+            var response = await client.GetAsync($"{_endpoint}/card/{id}");
+            response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            return JsonSerializer.Deserialize<SingleResponse<CardDetailsModel>>(content, options: DefaultJsonSerializerOptions);
+        }
+
         public async Task<PagedResponse<CustomerItemModel>> GetCustomersAsync(GetCustomersRequest request)
         {
             using var client = CreateHttpClient();

@@ -12,7 +12,7 @@ namespace RothschildHouse.Application.Core.Features.Cards.Queries
         public string CardType { get; set; }
         public string IssuingNetwork { get; set; }
         public string CardholderName { get; set; }
-        public string CardNumber { get; set; }
+        public string Last4Digits { get; set; }
         public string ExpirationDate { get; set; }
     }
 
@@ -46,7 +46,7 @@ namespace RothschildHouse.Application.Core.Features.Cards.Queries
                 .ToListAsync(cancellationToken)
             ;
 
-            list.ForEach(item => item.CardNumber = item.CardNumber?[^4..]);
+            list.ForEach(item => item.Last4Digits = item.Last4Digits?[^4..]);
 
             return new PagedResponse<CardItemModel>(list, request.PageSize, request.PageNumber, await query.CountAsync(cancellationToken));
         }

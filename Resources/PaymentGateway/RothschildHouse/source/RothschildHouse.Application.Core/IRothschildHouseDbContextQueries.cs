@@ -37,7 +37,7 @@ namespace RothschildHouse.Application.Core
                     CardType = cardType.Name,
                     IssuingNetwork = card.IssuingNetwork,
                     CardholderName = card.CardholderName,
-                    CardNumber = card.CardNumber,
+                    Last4Digits = card.CardNumber,
                     ExpirationDate = card.ExpirationDate
                 };
 

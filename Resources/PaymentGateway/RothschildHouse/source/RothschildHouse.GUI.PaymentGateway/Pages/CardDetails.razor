@@ -1,4 +1,4 @@
-﻿@page "/customer/{Id:guid}"
+﻿@page "/card/{Id:guid}"
 
 @using RothschildHouse.GUI.PaymentGateway.Clients;
 @using RothschildHouse.GUI.PaymentGateway.Clients.Models;
@@ -6,13 +6,13 @@
 
 @inject RothschildHouseClient rothschildHouseClient
 
-<PageTitle>Customer Details</PageTitle>
+<PageTitle>Card Details</PageTitle>
 
-<h1>Customer Details</h1>
+<h1>Card Details</h1>
 
 @if (response == null)
 {
-    <strong>There is no information for customer with Id @Id</strong>
+    <strong>There is no information for card with Id @Id</strong>
 }
 else if (response.Model is not null)
 {
@@ -21,12 +21,12 @@ else if (response.Model is not null)
     <MudGrid>
         <MudItem lg="4" md="6" sm="12">
             <MudPaper Class="pa-4">
-                <MudText Typo="Typo.body2">Name: <strong>@response.Model.Person</strong></MudText>
-                <MudText Typo="Typo.body2">Company: <strong>@response.Model.Company</strong></MudText>
-                <MudText Typo="Typo.body2">Country: <strong>@response.Model.Country</strong></MudText>
-                <MudText Typo="Typo.body2">Phone: <strong>@response.Model.Phone</strong></MudText>
-                <MudText Typo="Typo.body2">Email: <strong>@response.Model.Email</strong></MudText>
-                <MudText Typo="Typo.body2">Alien GUID: <strong>@response.Model.AlienGuid</strong></MudText>
+                <MudText Typo="Typo.body2">Card Type: <strong>@response.Model.CardType</strong></MudText>
+                <MudText Typo="Typo.body2">Issuing Network: <strong>@response.Model.IssuingNetwork</strong></MudText>
+                <MudText Typo="Typo.body2">Cardholder Name: <strong>@response.Model.CardholderName</strong></MudText>
+                <MudText Typo="Typo.body2">Last 4 Digits: <strong>@response.Model.Last4Digits</strong></MudText>
+                <MudText Typo="Typo.body2">Expiration Date: <strong>@response.Model.ExpirationDate</strong></MudText>
+                <MudText Typo="Typo.body2">CVV: <strong>@response.Model.Cvv</strong></MudText>
             </MudPaper>
         </MudItem>
     </MudGrid>
@@ -61,10 +61,10 @@ else if (response.Model is not null)
     [Parameter]
     public Guid? Id { get; set; }
 
-    private SingleResponse<CustomerDetailsModel> response;
+    private SingleResponse<CardDetailsModel> response;
 
     protected override async Task OnInitializedAsync()
     {
-        response = await rothschildHouseClient.GetCustomerAsync(Id);
+        response = await rothschildHouseClient.GetCardAsync(Id);
     }
 }
