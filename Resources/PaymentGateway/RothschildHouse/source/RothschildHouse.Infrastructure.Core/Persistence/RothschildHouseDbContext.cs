@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using RothschildHouse.Application.Core.Common.Contracts;
 using RothschildHouse.Domain.Core.Entities;
@@ -7,9 +8,12 @@ namespace RothschildHouse.Infrastructure.Core.Persistence
 {
     public class RothschildHouseDbContext : DbContext, IRothschildHouseDbContext
     {
-        public RothschildHouseDbContext(DbContextOptions<RothschildHouseDbContext> options)
+        private readonly IMediator _mediator;
+
+        public RothschildHouseDbContext(DbContextOptions<RothschildHouseDbContext> options, IMediator mediator)
             : base(options)
         {
+            _mediator = mediator;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -34,5 +38,12 @@ namespace RothschildHouse.Infrastructure.Core.Persistence
 
         public DbSet<VCardType> VCardType { get; set; }
         public DbSet<VPaymentTransactionStatus> VPaymentTransactionStatus { get; set; }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            _mediator?.DispatchNotifications(this);
+
+            return await base.SaveChangesAsync(cancellationToken);
+        }
     }
 }

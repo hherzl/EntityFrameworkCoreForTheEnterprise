@@ -8,6 +8,6 @@ namespace RothschildHouse.Seed.PaymentGateway.Helpers
         private const string ConnectionString = "server=(local); database=RothschildHouse; integrated security=yes; TrustServerCertificate=True;";
 
         public static RothschildHouseDbContext GetRothschildHouseDbContext()
-            => new(new DbContextOptionsBuilder<RothschildHouseDbContext>().UseSqlServer(ConnectionString).Options);
+            => new(new DbContextOptionsBuilder<RothschildHouseDbContext>().UseSqlServer(ConnectionString).Options, null);
     }
 }
