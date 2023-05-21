@@ -34,6 +34,9 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Queries
         public Guid? ClientApplicationId { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
+
+        public bool IsEmpty
+            => !PaymentTransactionStatusId.HasValue && !ClientApplicationId.HasValue && !StartDate.HasValue && !EndDate.HasValue;
     }
 
     public class SearchPaymentTransactionsQueryHandler : IRequestHandler<SearchPaymentTransactionsQuery, PagedResponse<PaymentTransactionItemModel>>
@@ -50,6 +53,9 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Queries
             var query = _dbContext
                 .GetPaymentTransactions(paymentTransactionStatusId: request.PaymentTransactionStatusId, clientApplicationId: request.ClientApplicationId, startDate: request.StartDate, endDate: request.EndDate)
                 ;
+
+            if (request.IsEmpty)
+                query = query.OrderByDescending(item => item.CreationDateTime);
 
             var list = await query
                 .Paging(request.PageSize, request.PageNumber)
