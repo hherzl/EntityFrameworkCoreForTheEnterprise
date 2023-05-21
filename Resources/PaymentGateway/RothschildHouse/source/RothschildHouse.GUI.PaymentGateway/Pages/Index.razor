@@ -1,7 +1,59 @@
 ﻿@page "/"
 
+@using Microsoft.AspNetCore.SignalR.Client;
+
 <PageTitle>Home</PageTitle>
 
 <MudText Typo="Typo.h3" GutterBottom="true">Welcome =)!</MudText>
 <MudText Class="mb-8">Welcome to your new app, powered by MudBlazor!</MudText>
+
+<h2>Notifications</h2>
+
+<p>Connected: <strong>@(IsConnected.ToString())</strong></p>
+
+<ul id="messagesList">
+    @foreach (var message in messages)
+    {
+        <li>@message</li>
+    }
+</ul>
+
+<hr />
+
 <MudAlert Severity="Severity.Normal">You can find documentation and examples on our website here: <MudLink Href="https://mudblazor.com" Typo="Typo.body2" Color="Color.Inherit"><b>www.mudblazor.com</b></MudLink></MudAlert>
+
+@code {
+    private HubConnection hubConnection;
+    private List<string> messages = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        messages.Add($"{DateTime.Now} Initializing connection with hub...");
+
+        hubConnection = new HubConnectionBuilder()
+            .AddJsonProtocol()
+            .WithUrl("https://localhost:37210/paymenttxnhub")
+            .ConfigureLogging(logging => logging.SetMinimumLevel(LogLevel.Information))
+            .Build()
+            ;
+
+        hubConnection.On<string, decimal, string>("receivePaymentTxn", (clientApplication, amount, currency) =>
+        {
+            messages.Add($"{DateTime.Now} Received txn from '{clientApplication}' client, total: '{amount} {currency}'");
+            InvokeAsync(StateHasChanged);
+        });
+        
+        await hubConnection.StartAsync();
+    }
+
+    public bool IsConnected =>
+        hubConnection?.State == HubConnectionState.Connected;
+
+    public async ValueTask DisposeAsync()
+    {
+        if (hubConnection is not null)
+        {
+            await hubConnection.DisposeAsync();
+        }
+    }
+}

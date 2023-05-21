@@ -23,7 +23,7 @@ builder.Services.AddCityBankServices();
 
 builder.Services.AddCors(policy =>
 {
-    policy.AddPolicy("RothschildHouseCorsPolicy", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+    policy.AddPolicy("GuiCorsPolicy", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 });
 
 builder
@@ -41,7 +41,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors("RothschildHouseCorsPolicy");
+app.UseCors("GuiCorsPolicy");
 
 app.UseAuthorization();
 
