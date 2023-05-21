@@ -118,11 +118,11 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         /// <response code="200">Returns the client applications</response>
         /// <response code="400">If the request is invalid</response>
         /// <response code="500">If there was an internal error</response>
-        [HttpPost("search-client-application")]
+        [HttpGet("client-application")]
         [ProducesResponseType(200, Type = typeof(IListResponse<ClientApplicationItemModel>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> SearchCurrenciesAsync([FromBody] SearchClientApplicationsQuery request)
+        public async Task<IActionResult> GetClientApplicationsAsync([FromQuery] GetClientApplicationsQuery request)
         {
             var response = await _mediator.Send(request);
 

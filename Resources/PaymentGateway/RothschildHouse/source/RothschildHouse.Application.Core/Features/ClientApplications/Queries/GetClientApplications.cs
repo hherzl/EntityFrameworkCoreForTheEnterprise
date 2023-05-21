@@ -12,9 +12,9 @@ namespace RothschildHouse.Application.Core.Features.ClientApplications.Queries
         public string Url { get; set; }
     }
 
-    public class SearchClientApplicationsQuery : IRequest<IListResponse<ClientApplicationItemModel>>
+    public class GetClientApplicationsQuery : IRequest<IListResponse<ClientApplicationItemModel>>
     {
-        public SearchClientApplicationsQuery()
+        public GetClientApplicationsQuery()
         {
             PageSize = 10;
             PageNumber = 1;
@@ -24,16 +24,16 @@ namespace RothschildHouse.Application.Core.Features.ClientApplications.Queries
         public int PageNumber { get; set; }
     }
 
-    public class SearchClientApplicationsQueryHandler : IRequestHandler<SearchClientApplicationsQuery, IListResponse<ClientApplicationItemModel>>
+    public class GetClientApplicationsQueryHandler : IRequestHandler<GetClientApplicationsQuery, IListResponse<ClientApplicationItemModel>>
     {
         private readonly IRothschildHouseDbContext _dbContext;
 
-        public SearchClientApplicationsQueryHandler(IRothschildHouseDbContext dbContext)
+        public GetClientApplicationsQueryHandler(IRothschildHouseDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public async Task<IListResponse<ClientApplicationItemModel>> Handle(SearchClientApplicationsQuery request, CancellationToken cancellationToken)
+        public async Task<IListResponse<ClientApplicationItemModel>> Handle(GetClientApplicationsQuery request, CancellationToken cancellationToken)
         {
             var query = _dbContext
                 .ClientApplication

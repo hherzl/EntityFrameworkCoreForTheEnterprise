@@ -58,11 +58,11 @@ namespace RothschildHouse.GUI.PaymentGateway.Clients
             return JsonSerializer.Deserialize<ListResponse<CurrencyItemModel>>(content, options: DefaultJsonSerializerOptions);
         }
 
-        public async Task<ListResponse<ClientApplicationItemModel>> SearchClientApplicationsAsync(SearchClientApplicationsRequest query)
+        public async Task<ListResponse<ClientApplicationItemModel>> GetClientApplicationsAsync(GetClientApplicationsRequest request)
         {
             using var client = CreateHttpClient();
 
-            var response = await client.PostAsync($"{_endpoint}/search-client-application", query.ToStringContent(ApplicationJson));
+            var response = await client.GetAsync($"{_endpoint}/client-application?pageSize={request.PageSize}&pageNumber={request.PageNumber}");
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
