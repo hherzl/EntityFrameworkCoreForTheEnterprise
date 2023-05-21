@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using RothschildHouse.Application.Core.Common;
 using RothschildHouse.Application.Core.Common.Contracts;
+using RothschildHouse.Domain.Core.Enums;
 
 namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Queries
 {
@@ -17,6 +18,11 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Queries
         public string PaymentTransactionStatus { get; set; }
         public Guid? ClientApplicationId { get; set; }
         public string ClientApplication { get; set; }
+        public Guid? CustomerId { get; set; }
+        public string Customer { get; set; }
+        public string CardType { get; set; }
+        public string IssuingNetwork { get; set; }
+        public string CardholderName { get; set; }
         public decimal? OrderTotal { get; set; }
         public string Currency { get; set; }
         public decimal? CurrencyRate { get; set; }
@@ -67,7 +73,9 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Queries
             if (paymentTxn == null)
                 return null;
 
-            var paymentTxnStatuses = await _dbContext.VPaymentTransactionStatus.ToListAsync();
+            var paymentTxnStatuses = await _dbContext.VPaymentTransactionStatus.ToListAsync(cancellationToken);
+            var cardTypes = await _dbContext.VCardType.ToListAsync(cancellationToken);
+            var customer = paymentTxn.CustomerFk.PersonId.HasValue ? paymentTxn.CustomerFk.PersonFk.FullName : paymentTxn.CustomerFk.CompanyFk.Name;
 
             var detailsModel = new PaymentTransactionDetailsModel
             {
@@ -76,6 +84,11 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Queries
                 PaymentTransactionStatus = paymentTxnStatuses.FirstOrDefault(item => item.Id == paymentTxn.PaymentTransactionStatusId)?.Name,
                 ClientApplicationId = paymentTxn.ClientApplicationId,
                 ClientApplication = paymentTxn.ClientApplicationFk.Name,
+                CustomerId = paymentTxn.CustomerId,
+                Customer = customer,
+                CardType = cardTypes.FirstOrDefault(item => item.Id == paymentTxn.CardFk.CardTypeId)?.Name,
+                IssuingNetwork = paymentTxn.CardFk.IssuingNetwork,
+                CardholderName = paymentTxn.CardFk.CardholderName,
                 OrderTotal = paymentTxn.Amount,
                 Currency = paymentTxn.CurrencyFk.Name,
                 CurrencyRate = paymentTxn.CurrencyRate,

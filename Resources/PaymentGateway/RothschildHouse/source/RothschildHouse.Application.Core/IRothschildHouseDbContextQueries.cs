@@ -180,6 +180,9 @@ namespace RothschildHouse.Application.Core
                 query = query
                     .Include(e => e.ClientApplicationFk)
                     .Include(e => e.CustomerFk)
+                        .ThenInclude(e => e.PersonFk)
+                    .Include(e => e.CustomerFk)
+                        .ThenInclude(e => e.CompanyFk)
                     .Include(e => e.CardFk)
                     .Include(e => e.CurrencyFk)
                     .Include(e => e.PaymentTransactionLogList)

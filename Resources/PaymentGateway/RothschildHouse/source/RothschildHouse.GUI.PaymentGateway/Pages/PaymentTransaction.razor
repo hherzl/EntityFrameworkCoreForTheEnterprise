@@ -23,6 +23,15 @@ else
             <PropertyColumn Property="x => x.OrderTotal" Title="Order Total" />
             <PropertyColumn Property="x => x.Currency" Title="Currency" />
             <PropertyColumn Property="x => x.CreationDateTime" Title="Created on" />
+            <TemplateColumn CellClass="d-flex justify-end">
+                <CellTemplate>
+                    <MudStack Row>
+                    <a href="@($"/payment-txn/{context.Item.Id}")">
+                        <MudButton Size="@Size.Small" Variant="@Variant.Filled" Color="@Color.Primary">Details</MudButton>
+                    </a>
+                </MudStack>
+            </CellTemplate>
+            </TemplateColumn>
         </Columns>
     </MudDataGrid>
 }

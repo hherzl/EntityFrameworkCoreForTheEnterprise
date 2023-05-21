@@ -1,0 +1,76 @@
+﻿@page "/payment-txn/{Id:long}"
+
+@using RothschildHouse.GUI.PaymentGateway.Clients;
+@using RothschildHouse.GUI.PaymentGateway.Clients.Models;
+@using RothschildHouse.GUI.PaymentGateway.Clients.Models.Common;
+
+@inject RothschildHouseClient rothschildHouseClient
+
+<PageTitle>Payment Transaction Details</PageTitle>
+
+<h1>Payment Transaction Details</h1>
+
+@if (response == null)
+{
+    <strong>There is no information for payment transaction with Id @Id</strong>
+}
+else if (response.Model is not null)
+{
+    <h2>@response.Model.Id</h2>
+
+    <MudGrid>
+        <MudItem lg="4" md="6" sm="12">
+            <MudPaper Class="pa-4">
+                <MudText Typo="Typo.body2">Client application: <strong>@response.Model.ClientApplication</strong></MudText>
+                <MudText Typo="Typo.body2">Customer: <strong>@response.Model.Customer</strong></MudText>
+                <MudText Typo="Typo.body2">CardType: <strong>@response.Model.CardType</strong></MudText>
+                <MudText Typo="Typo.body2">Issuing Network: <strong>@response.Model.IssuingNetwork</strong></MudText>
+                <MudText Typo="Typo.body2">Cardholder Name: <strong>@response.Model.CardholderName</strong></MudText>
+                <MudText Typo="Typo.body2">Order total: <strong>@response.Model.OrderTotal</strong></MudText>
+                <MudText Typo="Typo.body2">Currency: <strong>@response.Model.Currency</strong></MudText>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+
+    <br />
+
+    <MudDivider />
+
+    <br />
+
+    <h2>Logs</h2>
+
+    @foreach (var item in response.Model.Logs)
+    {
+        <MudCard>
+            <MudCardHeader>
+                <MudCardContent>
+                    <MudText>Status: <strong>@item.PaymentTransactionStatus</strong></MudText>
+                </MudCardContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudText>Type: <strong>@item.LogType</strong></MudText>
+                <MudText>Created on: <strong>@item.CreationDateTime</strong></MudText>
+                <MudText>Notes: <i>@item.Notes</i></MudText>
+                <MudText>Content Type: <strong>@item.ContentType</strong></MudText>
+                <MudText>Content: <pre>@item.Content</pre></MudText>
+            </MudCardContent>
+        </MudCard>
+
+        <br />
+
+        <MudDivider />
+    }
+}
+
+@code {
+    [Parameter]
+    public long? Id { get; set; }
+
+    private SingleResponse<PaymentTransactionDetailsModel> response;
+
+    protected override async Task OnInitializedAsync()
+    {
+        response = await rothschildHouseClient.GetPaymentTransactionAsync(Id);
+    }
+}

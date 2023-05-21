@@ -105,5 +105,17 @@ namespace RothschildHouse.GUI.PaymentGateway.Clients
 
             return JsonSerializer.Deserialize<ListResponse<PaymentTransactionItemModel>>(content, options: DefaultJsonSerializerOptions);
         }
+
+        public async Task<SingleResponse<PaymentTransactionDetailsModel>> GetPaymentTransactionAsync(long? id)
+        {
+            using var client = CreateHttpClient();
+
+            var response = await client.GetAsync($"{_endpoint}/payment-txn/{id}");
+            response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            return JsonSerializer.Deserialize<SingleResponse<PaymentTransactionDetailsModel>>(content, options: DefaultJsonSerializerOptions);
+        }
     }
 }
