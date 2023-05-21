@@ -24,20 +24,22 @@ namespace RothschildHouse.Application.Core.Features.Countries.Queries
         public int PageNumber { get; set; }
     }
 
-    public class SearchCountriesQueryHandler : IRequestHandler<GetCountriesQuery, IListResponse<CountryItemModel>>
+    public class GetCountriesQueryHandler : IRequestHandler<GetCountriesQuery, IListResponse<CountryItemModel>>
     {
         private readonly IRothschildHouseDbContext _dbContext;
 
-        public SearchCountriesQueryHandler(IRothschildHouseDbContext dbContext)
+        public GetCountriesQueryHandler(IRothschildHouseDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
         public async Task<IListResponse<CountryItemModel>> Handle(GetCountriesQuery request, CancellationToken cancellationToken)
         {
-            var countries = await _dbContext.Country.AsNoTracking().ToListAsync(cancellationToken);
+            var query = _dbContext.Country.AsNoTracking().Paging(request.PageSize, request.PageNumber);
 
-            return new ListResponse<CountryItemModel>(countries.Select(item => new CountryItemModel
+            var model = await query.ToListAsync(cancellationToken);
+
+            return new ListResponse<CountryItemModel>(model.Select(item => new CountryItemModel
             {
                 Id = item.Id,
                 Name = item.Name,

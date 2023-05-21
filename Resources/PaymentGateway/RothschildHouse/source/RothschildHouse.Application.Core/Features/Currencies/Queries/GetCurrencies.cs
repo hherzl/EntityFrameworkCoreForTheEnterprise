@@ -13,9 +13,9 @@ namespace RothschildHouse.Application.Core.Features.Currencies.Queries
         public decimal? Rate { get; set; }
     }
 
-    public class SearchCurrenciesQuery : IRequest<IListResponse<CurrencyItemModel>>
+    public class GetCurrenciesQuery : IRequest<IListResponse<CurrencyItemModel>>
     {
-        public SearchCurrenciesQuery()
+        public GetCurrenciesQuery()
         {
             PageSize = 10;
             PageNumber = 1;
@@ -25,20 +25,22 @@ namespace RothschildHouse.Application.Core.Features.Currencies.Queries
         public int PageNumber { get; set; }
     }
 
-    public class SearchCurrenciesQueryHandler : IRequestHandler<SearchCurrenciesQuery, IListResponse<CurrencyItemModel>>
+    public class GetCurrenciesQueryHandler : IRequestHandler<GetCurrenciesQuery, IListResponse<CurrencyItemModel>>
     {
         private readonly IRothschildHouseDbContext _dbContext;
 
-        public SearchCurrenciesQueryHandler(IRothschildHouseDbContext dbContext)
+        public GetCurrenciesQueryHandler(IRothschildHouseDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public async Task<IListResponse<CurrencyItemModel>> Handle(SearchCurrenciesQuery request, CancellationToken cancellationToken)
+        public async Task<IListResponse<CurrencyItemModel>> Handle(GetCurrenciesQuery request, CancellationToken cancellationToken)
         {
-            var currencies = await _dbContext.Currency.AsNoTracking().ToListAsync(cancellationToken);
+            var query = _dbContext.Currency.AsNoTracking().Paging(request.PageSize, request.PageNumber);
 
-            return new ListResponse<CurrencyItemModel>(currencies.Select(item => new CurrencyItemModel
+            var model = await query.ToListAsync(cancellationToken);
+
+            return new ListResponse<CurrencyItemModel>(model.Select(item => new CurrencyItemModel
             {
                 Id = item.Id,
                 Name = item.Name,

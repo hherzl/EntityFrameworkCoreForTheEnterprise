@@ -19,9 +19,8 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Queries
         public DateTime? CreationDateTime { get; set; }
     }
 
-    public class SearchPaymentTransactionsQuery : IRequest<PagedResponse<PaymentTransactionItemModel>>
+    public class GetPaymentTransactionsQuery : IRequest<PagedResponse<PaymentTransactionItemModel>>
     {
-
         public int PageSize { get; set; }
         public int PageNumber { get; set; }
 
@@ -34,16 +33,16 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Queries
             => !PaymentTransactionStatusId.HasValue && !ClientApplicationId.HasValue && !StartDate.HasValue && !EndDate.HasValue;
     }
 
-    public class SearchPaymentTransactionsQueryHandler : IRequestHandler<SearchPaymentTransactionsQuery, PagedResponse<PaymentTransactionItemModel>>
+    public class GetPaymentTransactionsQueryHandler : IRequestHandler<GetPaymentTransactionsQuery, PagedResponse<PaymentTransactionItemModel>>
     {
         private readonly IRothschildHouseDbContext _dbContext;
 
-        public SearchPaymentTransactionsQueryHandler(IRothschildHouseDbContext dbContext)
+        public GetPaymentTransactionsQueryHandler(IRothschildHouseDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public async Task<PagedResponse<PaymentTransactionItemModel>> Handle(SearchPaymentTransactionsQuery request, CancellationToken cancellationToken)
+        public async Task<PagedResponse<PaymentTransactionItemModel>> Handle(GetPaymentTransactionsQuery request, CancellationToken cancellationToken)
         {
             var query = _dbContext
                 .GetPaymentTransactions(paymentTransactionStatusId: request.PaymentTransactionStatusId, clientApplicationId: request.ClientApplicationId, startDate: request.StartDate, endDate: request.EndDate)

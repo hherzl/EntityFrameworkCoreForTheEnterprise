@@ -77,11 +77,11 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         /// <response code="200">Returns the currencies</response>
         /// <response code="400">If the request is invalid</response>
         /// <response code="500">If there was an internal error</response>
-        [HttpPost("search-currency")]
+        [HttpGet("currency")]
         [ProducesResponseType(200, Type = typeof(IListResponse<CurrencyItemModel>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> SearchCurrenciesAsync([FromBody] SearchCurrenciesQuery request)
+        public async Task<IActionResult> GetCurrenciesAsync([FromQuery] GetCurrenciesQuery request)
         {
             var response = await _mediator.Send(request);
 
@@ -163,7 +163,7 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         [ProducesResponseType(200, Type = typeof(PagedResponse<CardItemModel>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> SearchCardsAsync([FromQuery] GetCardsQuery request)
+        public async Task<IActionResult> GetCardsAsync([FromQuery] GetCardsQuery request)
         {
             var response = await _mediator.Send(request);
 
@@ -245,7 +245,7 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         [ProducesResponseType(200, Type = typeof(IPagedResponse<PaymentTransactionItemModel>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> GetPaymentTransactionsAsync([FromQuery] SearchPaymentTransactionsQuery request)
+        public async Task<IActionResult> GetPaymentTransactionsAsync([FromQuery] GetPaymentTransactionsQuery request)
         {
             var response = await _mediator.Send(request);
 
