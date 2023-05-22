@@ -35,6 +35,9 @@ namespace RothschildHouse.Application.Core.Features.Currencies.Queries
         {
             var entity = await _dbContext.GetCurrencyAsync(request.Id);
 
+            if (entity == null)
+                return null;
+
             return new SingleResponse<CurrencyDetailsModel>(new()
             {
                 Id = entity.Id,

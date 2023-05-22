@@ -35,6 +35,9 @@ namespace RothschildHouse.Application.Core.Features.Countries.Queries
         {
             var entity = await _dbContext.GetCountryAsync(request.Id);
 
+            if (entity == null)
+                return null;
+
             return new SingleResponse<CountryDetailsModel>(new CountryDetailsModel
             {
                 Id = entity.Id,
