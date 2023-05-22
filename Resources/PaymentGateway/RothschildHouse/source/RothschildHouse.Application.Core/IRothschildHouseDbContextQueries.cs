@@ -131,6 +131,7 @@ namespace RothschildHouse.Application.Core
                 from txn in ctx.PaymentTransaction
                 join paymentTransactionStatus in ctx.VPaymentTransactionStatus on txn.PaymentTransactionStatusId equals paymentTransactionStatus.Id
                 join clientApplication in ctx.ClientApplication on txn.ClientApplicationId equals clientApplication.Id
+                join card in ctx.Card on txn.CardId equals card.Id
                 join currency in ctx.Currency on txn.CurrencyId equals currency.Id
                 where txn.Active == true
                 select new PaymentTransactionItemModel
@@ -141,6 +142,8 @@ namespace RothschildHouse.Application.Core
                     ClientApplicationId = txn.ClientApplicationId,
                     ClientApplication = clientApplication.Name,
                     CardId = txn.CardId,
+                    IssuingNetwork = card.IssuingNetwork,
+                    CardNumber = card.CardNumber,
                     CustomerId = txn.CustomerId,
                     OrderTotal = txn.Amount,
                     Currency = currency.Code,

@@ -59,6 +59,8 @@ namespace RothschildHouse.Application.Core.Features.Customers.Queries
                 .ToListAsync(cancellationToken)
                 ;
 
+            paymentTransactions.ForEach(item => item.CardNumber = item.CardNumber?[^4..]);
+
             return new SingleResponse<CustomerDetailsModel>
             {
                 Model = new()
