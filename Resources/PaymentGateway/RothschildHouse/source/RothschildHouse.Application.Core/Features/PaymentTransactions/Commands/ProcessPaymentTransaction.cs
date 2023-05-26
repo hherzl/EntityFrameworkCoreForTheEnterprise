@@ -9,7 +9,7 @@ using RothschildHouse.Domain.Core.Enums;
 using RothschildHouse.Domain.Core.Exceptions;
 using RothschildHouse.Domain.Core.Notifications;
 using RothschildHouse.TP.CityBank.Contracts;
-using RothschildHouse.TP.CityBank.DataContracts;
+using RothschildHouse.TP.CityBank.Contracts.DataContracts;
 
 namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Commands
 {

@@ -30,13 +30,13 @@
                     yield return Guid.Parse("811A6254-F551-4FEB-AC9B-EC934E024BEC");
 
                     // María Rosales
-                    yield return Guid.Parse("811A6254-F551-4FEB-AC9B-EC934E024BEC");
+                    yield return Guid.Parse("2341BD82-0235-4233-A103-24CC8D83A51A");
 
                     // Roberto Asturias
-                    yield return Guid.Parse("811A6254-F551-4FEB-AC9B-EC934E024BEC");
+                    yield return Guid.Parse("24868311-7D35-46B3-A6C7-57D10DE064C4");
 
                     // Julio Bonilla
-                    yield return Guid.Parse("811A6254-F551-4FEB-AC9B-EC934E024BEC");
+                    yield return Guid.Parse("F2E95CCA-6E96-456C-92B1-E016990458FF");
                 }
             }
         }
@@ -51,9 +51,9 @@
 
                     yield return (2000, "VISA", "María Rosales", "4012888888881881", "0124", "123");
 
-                    yield return (2000, "Mastercard", "Roberto Asturias", "5555555555554444", "0125", "456");
+                    yield return (2000, "Mastercard", "Julio César Bonilla", "5105105105105100", "0125", "456");
 
-                    yield return (2000, "Mastercard", "Julio Bonilla", "5105105105105100", "0125", "456");
+                    yield return (2000, "Mastercard", "Roberto Asturias", "5555555555554444", "0125", "456");
                 }
             }
         }

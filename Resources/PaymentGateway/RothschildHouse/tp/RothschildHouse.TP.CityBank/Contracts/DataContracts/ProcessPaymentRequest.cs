@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace RothschildHouse.TP.CityBank.DataContracts
+namespace RothschildHouse.TP.CityBank.Contracts.DataContracts
 {
     public class ProcessPaymentRequest
     {

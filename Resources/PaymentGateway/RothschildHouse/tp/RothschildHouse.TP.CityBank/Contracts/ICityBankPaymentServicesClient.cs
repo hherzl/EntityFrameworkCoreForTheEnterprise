@@ -1,4 +1,4 @@
-﻿using RothschildHouse.TP.CityBank.DataContracts;
+﻿using RothschildHouse.TP.CityBank.Contracts.DataContracts;
 
 namespace RothschildHouse.TP.CityBank.Contracts
 {
