@@ -1,11 +1,19 @@
 ﻿@page "/"
 
 @using Microsoft.AspNetCore.SignalR.Client;
+@using RothschildHouse.GUI.PaymentGateway.Clients;
+
+@inject RothschildHouseReportsClient reportsClient;
 
 <PageTitle>Home</PageTitle>
 
-<MudText Typo="Typo.h3" GutterBottom="true">Welcome =)!</MudText>
-<MudText Class="mb-8">Welcome to your new app, powered by MudBlazor!</MudText>
+<MudText Typo="Typo.h4" GutterBottom="true">Welcome =)!</MudText>
+<MudText Class="mb-8">Welcome to RothschildHouse, powered by MudBlazor!</MudText>
+
+<MudText Typo="Typo.h3" GutterBottom="true">Monthly Sales</MudText>
+
+<MudChart ChartOptions="@(new ChartOptions { YAxisTicks = 100 })" ChartType="ChartType.Bar" ChartSeries="@series" XAxisLabels="@xAxisLabels" @bind-SelectedIndex="selectedSerie" Width="100%" Height="500px">
+</MudChart>
 
 <h2>Notifications</h2>
 
@@ -23,11 +31,31 @@
 <MudAlert Severity="Severity.Normal">You can find documentation and examples on our website here: <MudLink Href="https://mudblazor.com" Typo="Typo.body2" Color="Color.Inherit"><b>www.mudblazor.com</b></MudLink></MudAlert>
 
 @code {
-    private HubConnection hubConnection;
-    private List<string> messages = new();
+    int selectedSerie = -1;
+    MonthlySalesResponse monthlySalesResponse;
+    List<ChartSeries> series;
+    string[] xAxisLabels;
+    HubConnection hubConnection;
+    List<string> messages = new();
+
+    async Task LoadChartAsync()
+    {
+        series = new();
+        xAxisLabels = new string[] { };
+
+        monthlySalesResponse = await reportsClient.GetMonthlySalesAsync();
+        xAxisLabels = monthlySalesResponse.Months.ToArray();
+
+        foreach (var item in monthlySalesResponse.Sales)
+        {
+            series.Add(new ChartSeries { Name = item.ClientApplication, Data = item.Values.ToArray() });
+        }
+    }
 
     protected override async Task OnInitializedAsync()
     {
+        await LoadChartAsync();
+
         messages.Add($"{DateTime.Now} Initializing connection with hub...");
 
         hubConnection = new HubConnectionBuilder()
@@ -37,10 +65,12 @@
             .Build()
             ;
 
-        hubConnection.On<string, decimal, string>("receivePaymentTxn", (clientApplication, amount, currency) =>
+        hubConnection.On<string, decimal, string>("receivePaymentTxn", async (clientApplication, amount, currency) =>
         {
             messages.Add($"{DateTime.Now} Received txn from '{clientApplication}' client, total: '{amount} {currency}'");
-            InvokeAsync(StateHasChanged);
+
+            await InvokeAsync(StateHasChanged);
+            await LoadChartAsync();
         });
         
         await hubConnection.StartAsync();

@@ -1,7 +1,4 @@
-using RothschildHouse.Application.Core;
-using RothschildHouse.Application.Core.Hubs;
-using RothschildHouse.Infrastructure.Core;
-using RothschildHouse.TP.CityBank;
+using RothschildHouse.API.Reports.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,26 +7,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options =>
-{
-    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "RothschildHouse.API.PaymentGateway.xml"));
-});
-
-builder.Services.AddApplicationServices(builder.Configuration);
-
-builder.Services.AddInfrastructureServices(builder.Configuration);
-
-builder.Services.AddCityBankServices();
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors(policy =>
 {
     policy.AddPolicy("GuiCorsPolicy", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 });
 
-builder
-    .Services
-    .AddSignalR(options => options.EnableDetailedErrors = true)
-    ;
+builder.Services.Configure<ReportsSettings>(builder.Configuration.GetSection("ReportsSettings"));
+
+builder.Services.AddScoped<ReportsService>();
 
 var app = builder.Build();
 
@@ -46,7 +33,5 @@ app.UseCors("GuiCorsPolicy");
 app.UseAuthorization();
 
 app.MapControllers();
-
-app.MapHub<PaymentTransactionsHub>("/paymenttxnhub");
 
 app.Run();

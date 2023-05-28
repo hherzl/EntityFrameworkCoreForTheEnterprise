@@ -6,7 +6,7 @@ using RothschildHouse.Infrastructure.Core.Persistence;
 
 namespace RothschildHouse.Infrastructure.Core
 {
-    public static class Extensions
+    public static class ConfigureServices
     {
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {

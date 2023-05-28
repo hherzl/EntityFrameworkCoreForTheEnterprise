@@ -1,12 +1,12 @@
 ﻿{
   "$schema": "https://json.schemastore.org/launchsettings.json",
   "profiles": {
-    "RothschildHouse.API.PaymentGateway": {
+    "RothschildHouse.API.Reports": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:37210",
+      "applicationUrl": "https://localhost:37215",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

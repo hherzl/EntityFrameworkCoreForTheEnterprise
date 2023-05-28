@@ -4,6 +4,8 @@ using System.Text.Json;
 using MediatR;
 using RothschildHouse.Application.Core.Common;
 using RothschildHouse.Application.Core.Common.Contracts;
+using RothschildHouse.Application.Core.Services;
+using RothschildHouse.Application.Core.Services.Models;
 using RothschildHouse.Domain.Core.Entities;
 using RothschildHouse.Domain.Core.Enums;
 using RothschildHouse.Domain.Core.Exceptions;
@@ -116,11 +118,13 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Commands
 
         private readonly IRothschildHouseDbContext _dbContext;
         private readonly ICityBankPaymentServicesClient _cityBankPaymentServicesClient;
+        private readonly ReportsService _reportsService;
 
-        public ProcessPaymentTransactionCommandHandler(IRothschildHouseDbContext dbContext, ICityBankPaymentServicesClient cityBankPaymentServicesClient)
+        public ProcessPaymentTransactionCommandHandler(IRothschildHouseDbContext dbContext, ICityBankPaymentServicesClient cityBankPaymentServicesClient, ReportsService reportsService)
         {
             _dbContext = dbContext;
             _cityBankPaymentServicesClient = cityBankPaymentServicesClient;
+            _reportsService = reportsService;
         }
 
         public async Task<ProcessPaymentTransactionResponse> Handle(ProcessPaymentTransactionCommand request, CancellationToken cancellationToken)
@@ -232,6 +236,19 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Commands
                     ClientApplication = clientApplication.Name,
                     Amount = paymentTxn.Amount,
                     Currency = currency.Code
+                });
+
+                await _reportsService.AddSaleAsync(new SaleDocument
+                {
+                    ClientApplicationId = paymentTxn.ClientApplicationId,
+                    ClientApplication = clientApplication.Name,
+                    IssuingNetwork = card.IssuingNetwork,
+                    CardTypeId = card.CardTypeId,
+                    CardType = card.CardTypeId == (short)CardType.Debit ? "Debit" : "Credit",
+                    Total = (double)paymentTxn.Amount,
+                    CurrencyId = currency.Id,
+                    Currency = currency.Code,
+                    CreatedOn = DateTime.Now
                 });
             }
             else

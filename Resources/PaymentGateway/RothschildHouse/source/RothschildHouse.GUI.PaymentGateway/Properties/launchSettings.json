@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "https": {
+    "RothschildHouse.GUI.PaymentGateway": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
