@@ -1,12 +1,12 @@
 ﻿{
   "$schema": "https://json.schemastore.org/launchsettings.json",
   "profiles": {
-    "RothschildHouse.API.Reports": {
+    "RothschildHouse.API.SearchEngine": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:37212",
+      "applicationUrl": "https://localhost:37211",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
