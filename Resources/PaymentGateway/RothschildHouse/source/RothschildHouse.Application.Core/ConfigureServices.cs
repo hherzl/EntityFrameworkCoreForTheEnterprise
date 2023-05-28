@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RothschildHouse.Application.Core.Services;
+using RothschildHouse.Application.Core.Clients;
 
 namespace RothschildHouse.Application.Core
 {
@@ -11,7 +11,7 @@ namespace RothschildHouse.Application.Core
         {
             services.AddMediatR(builder => builder.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
-            services.AddScoped<ReportsService>();
+            services.AddScoped<SearchEngineClient>();
 
             return services;
         }

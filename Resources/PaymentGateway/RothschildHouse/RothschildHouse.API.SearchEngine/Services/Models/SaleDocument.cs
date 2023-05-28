@@ -1,7 +1,7 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
 
-namespace RothschildHouse.Application.Core.Services.Models
+namespace RothschildHouse.API.SearchEngine.Services.Models
 {
     public class SaleDocument
     {

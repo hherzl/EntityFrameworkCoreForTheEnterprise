@@ -47,7 +47,7 @@ namespace RothschildHouse.Mock.PaymentTransactions
 
         public RothschildHouseClient()
         {
-            _endpoint = "https://localhost:37210/api/v1";
+            _endpoint = "https://localhost:7250/api/v1";
         }
 
         private static HttpClient CreateHttpClient()

@@ -1,6 +1,6 @@
-﻿namespace RothschildHouse.Application.Core.Services
+﻿namespace RothschildHouse.API.Reports.Services
 {
-    public class ReportsSettings
+    public record SaleServiceSettings
     {
         public string ConnectionString { get; set; }
         public string Database { get; set; }

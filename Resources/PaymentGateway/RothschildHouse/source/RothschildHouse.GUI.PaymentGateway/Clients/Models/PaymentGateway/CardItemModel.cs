@@ -1,6 +1,6 @@
-﻿namespace RothschildHouse.GUI.PaymentGateway.Clients.Models
+﻿namespace RothschildHouse.GUI.PaymentGateway.Clients.Models.PaymentGateway
 {
-    public record CardDetailsModel
+    public record CardItemModel
     {
         public Guid? Id { get; set; }
         public short? CardTypeId { get; set; }
@@ -9,8 +9,5 @@
         public string CardholderName { get; set; }
         public string Last4Digits { get; set; }
         public string ExpirationDate { get; set; }
-        public string Cvv { get; set; }
-
-        public List<PaymentTransactionItemModel> PaymentTransactions { get; set; }
     }
 }

@@ -14,9 +14,9 @@ builder.Services.AddCors(policy =>
     policy.AddPolicy("GuiCorsPolicy", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 });
 
-builder.Services.Configure<ReportsSettings>(builder.Configuration.GetSection("ReportsSettings"));
+builder.Services.Configure<SaleServiceSettings>(builder.Configuration.GetSection("SearchEngineSettings"));
 
-builder.Services.AddScoped<ReportsService>();
+builder.Services.AddScoped<SaleService>();
 
 var app = builder.Build();
 

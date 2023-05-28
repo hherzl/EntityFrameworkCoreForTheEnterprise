@@ -2,10 +2,10 @@
 using System.Text;
 using System.Text.Json;
 using MediatR;
+using RothschildHouse.Application.Core.Clients;
+using RothschildHouse.Application.Core.Clients.Models;
 using RothschildHouse.Application.Core.Common;
 using RothschildHouse.Application.Core.Common.Contracts;
-using RothschildHouse.Application.Core.Services;
-using RothschildHouse.Application.Core.Services.Models;
 using RothschildHouse.Domain.Core.Entities;
 using RothschildHouse.Domain.Core.Enums;
 using RothschildHouse.Domain.Core.Exceptions;
@@ -118,13 +118,13 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Commands
 
         private readonly IRothschildHouseDbContext _dbContext;
         private readonly ICityBankPaymentServicesClient _cityBankPaymentServicesClient;
-        private readonly ReportsService _reportsService;
+        private readonly SearchEngineClient _searchEngineClient;
 
-        public ProcessPaymentTransactionCommandHandler(IRothschildHouseDbContext dbContext, ICityBankPaymentServicesClient cityBankPaymentServicesClient, ReportsService reportsService)
+        public ProcessPaymentTransactionCommandHandler(IRothschildHouseDbContext dbContext, ICityBankPaymentServicesClient cityBankPaymentServicesClient, SearchEngineClient searchEngineClient)
         {
             _dbContext = dbContext;
             _cityBankPaymentServicesClient = cityBankPaymentServicesClient;
-            _reportsService = reportsService;
+            _searchEngineClient = searchEngineClient;
         }
 
         public async Task<ProcessPaymentTransactionResponse> Handle(ProcessPaymentTransactionCommand request, CancellationToken cancellationToken)
@@ -238,7 +238,7 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Commands
                     Currency = currency.Code
                 });
 
-                await _reportsService.AddSaleAsync(new SaleDocument
+                await _searchEngineClient.IndexSaleAsync(new IndexSaleRequest
                 {
                     ClientApplicationId = paymentTxn.ClientApplicationId,
                     ClientApplication = clientApplication.Name,
@@ -247,8 +247,7 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Commands
                     CardType = card.CardTypeId == (short)CardType.Debit ? "Debit" : "Credit",
                     Total = (double)paymentTxn.Amount,
                     CurrencyId = currency.Id,
-                    Currency = currency.Code,
-                    CreatedOn = DateTime.Now
+                    Currency = currency.Code
                 });
             }
             else

@@ -4,11 +4,11 @@ using RothschildHouse.API.Reports.Services.Models;
 
 namespace RothschildHouse.API.Reports.Services
 {
-    public class ReportsService
+    public class SaleService
     {
         private readonly IMongoCollection<SaleDocument> _salesCollection;
 
-        public ReportsService(IOptions<ReportsSettings> settings)
+        public SaleService(IOptions<SaleServiceSettings> settings)
         {
             var client = new MongoClient(settings.Value.ConnectionString);
             var database = client.GetDatabase(settings.Value.Database);

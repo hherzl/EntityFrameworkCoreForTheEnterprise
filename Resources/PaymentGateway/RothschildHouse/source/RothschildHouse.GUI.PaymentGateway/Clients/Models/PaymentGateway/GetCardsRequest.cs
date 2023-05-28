@@ -1,8 +1,8 @@
-﻿namespace RothschildHouse.GUI.PaymentGateway.Clients.Models
+﻿namespace RothschildHouse.GUI.PaymentGateway.Clients.Models.PaymentGateway
 {
-    public record GetCustomersRequest
+    public record GetCardsRequest
     {
-        public GetCustomersRequest()
+        public GetCardsRequest()
         {
             PageSize = 10;
             PageNumber = 1;

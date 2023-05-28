@@ -8,9 +8,9 @@ namespace RothschildHouse.API.Reports.Controllers
     public class ReportsController : ControllerBase
     {
         private readonly ILogger<ReportsController> _logger;
-        private readonly ReportsService _reportsService;
+        private readonly SaleService _reportsService;
 
-        public ReportsController(ILogger<ReportsController> logger, ReportsService reportsService)
+        public ReportsController(ILogger<ReportsController> logger, SaleService reportsService)
         {
             _logger = logger;
             _reportsService = reportsService;

@@ -2,8 +2,10 @@
 
 @using Microsoft.AspNetCore.SignalR.Client;
 @using RothschildHouse.GUI.PaymentGateway.Clients;
+@using RothschildHouse.GUI.PaymentGateway.Clients.Models;
+@using RothschildHouse.GUI.PaymentGateway.Clients.Models.Reports;
 
-@inject RothschildHouseReportsClient reportsClient;
+@inject ReportsClient reportsClient;
 
 <PageTitle>Home</PageTitle>
 
@@ -60,7 +62,7 @@
 
         hubConnection = new HubConnectionBuilder()
             .AddJsonProtocol()
-            .WithUrl("https://localhost:37210/paymenttxnhub")
+            .WithUrl("https://localhost:7250/paymenttxnhub")
             .ConfigureLogging(logging => logging.SetMinimumLevel(LogLevel.Information))
             .Build()
             ;

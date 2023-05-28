@@ -15,6 +15,8 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "RothschildHouse.API.PaymentGateway.xml"));
 });
 
+builder.Services.AddHttpClient();
+
 builder.Services.AddApplicationServices(builder.Configuration);
 
 builder.Services.AddInfrastructureServices(builder.Configuration);

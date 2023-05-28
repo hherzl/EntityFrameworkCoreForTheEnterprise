@@ -1,21 +1,21 @@
 ﻿using System.Net.Http.Headers;
 using System.Text.Json;
-using RothschildHouse.GUI.PaymentGateway.Clients.Models;
 using RothschildHouse.GUI.PaymentGateway.Clients.Models.Common;
+using RothschildHouse.GUI.PaymentGateway.Clients.Models.PaymentGateway;
 
 namespace RothschildHouse.GUI.PaymentGateway.Clients
 {
-    public class RothschildHouseClient
+    public class PaymentGatewayClient
     {
         public const string ApplicationJson = "application/json";
 
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly string _endpoint;
 
-        public RothschildHouseClient(IHttpClientFactory httpClientFactory, IConfiguration configuration)
+        public PaymentGatewayClient(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
             _httpClientFactory = httpClientFactory;
-            _endpoint = configuration.GetValue<string>("ClientEndpoints:RothschildHouse");
+            _endpoint = configuration.GetValue<string>("ClientEndpoints:PaymentGateway");
         }
 
         static JsonSerializerOptions DefaultJsonSerializerOptions
@@ -27,7 +27,7 @@ namespace RothschildHouse.GUI.PaymentGateway.Clients
 
         private HttpClient CreateHttpClient()
         {
-            var client = _httpClientFactory.CreateClient("RothschildHouse");
+            var client = _httpClientFactory.CreateClient("RothschildHousePaymentGateway");
 
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(ApplicationJson));
 

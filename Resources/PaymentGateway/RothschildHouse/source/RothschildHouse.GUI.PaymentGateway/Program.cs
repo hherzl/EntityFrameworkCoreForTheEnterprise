@@ -14,7 +14,7 @@ builder.Services.AddMudServices();
 
 builder.Services.AddHttpClient();
 
-builder.Services.AddScoped<RothschildHouseClient>();
-builder.Services.AddScoped<RothschildHouseReportsClient>();
+builder.Services.AddScoped<PaymentGatewayClient>();
+builder.Services.AddScoped<ReportsClient>();
 
 await builder.Build().RunAsync();
