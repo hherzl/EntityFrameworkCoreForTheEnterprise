@@ -1,6 +1,9 @@
 ﻿using RothschildHouse.TP.CityBank.Contracts;
 using RothschildHouse.TP.CityBank.Contracts.DataContracts;
 using RothschildHouse.TP.CityBank.Data;
+using RothschildHouse.TP.CityBank.Payloads.Avs.Mocks;
+using RothschildHouse.TP.CityBank.Payloads.Cvv2.Mocks;
+using RothschildHouse.TP.CityBank.Payloads.ProcessPayment.Mocks;
 
 namespace RothschildHouse.TP.CityBank
 {
@@ -23,25 +26,18 @@ namespace RothschildHouse.TP.CityBank
 
             await Task.Delay(2000);
 
-            return await Task.FromResult(new ProcessPaymentResponse
+            var response = new ProcessPaymentResponse
             {
                 Successed = true,
                 Guid = Guid.NewGuid(),
-                AvsPayload = "",
-                Cvv2Payload = "",
-                Authorization = new ProcessPaymentAuthorization
-                {
-                    TransactionId = "",
-                    TransactionCode = "",
-                    TransactionPayload = ""
-                },
-                Capture = new ProcessPaymentCapture
-                {
-                    TransactionId = "",
-                    TransactionPayload = ""
-                },
+                AvsPayload = AvsMocks.StreetAndZip("payment", request).ToJson(),
+                Cvv2Payload = Cvv2Mocks.Match().ToJson(),
+                Authorization = ProcessPaymentAuthorizationMocks.Mock(),
+                Capture = ProcessPaymentCaptureMocks.Mock(),
                 SubscriptionTransactionId = ""
-            });
+            };
+
+            return await Task.FromResult(response);
         }
     }
 }

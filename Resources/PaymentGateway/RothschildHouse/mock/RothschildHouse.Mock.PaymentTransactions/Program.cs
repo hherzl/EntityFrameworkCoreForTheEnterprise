@@ -6,7 +6,8 @@ var mocks = new
 {
     ClientApplications = Mocks.ClientApplications.Items.ToList(),
     Customers = Mocks.Customers.Items.ToList(),
-    Cards = Mocks.Cards.Items.ToList()
+    Cards = Mocks.Cards.Items.ToList(),
+    Currency = "USD"
 };
 
 while (true)
@@ -30,7 +31,7 @@ while (true)
         Cvv = card.Item6,
         OrderGuid = Guid.NewGuid(),
         OrderTotal = orderTotal,
-        Currency = "USD"
+        Currency = mocks.Currency
     };
 
     var rothschildHouseClient = new RothschildHouseClient();

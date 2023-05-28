@@ -3,12 +3,25 @@
 @using RothschildHouse.GUI.PaymentGateway.Clients;
 @using RothschildHouse.GUI.PaymentGateway.Clients.Models;
 @using RothschildHouse.GUI.PaymentGateway.Clients.Models.Common;
+@using System.Text.Json;
 
 @inject RothschildHouseClient rothschildHouseClient
 
 <PageTitle>Payment Transaction Details</PageTitle>
 
 <h1>Payment Transaction Details</h1>
+
+<style>
+    .request-content {
+        color: green;
+        font-size: 11px;
+    }
+
+    .response-content {
+        color: blue;
+        font-size: 11px;
+    }
+</style>
 
 @if (response == null)
 {
@@ -53,7 +66,7 @@ else if (response.Model is not null)
                 <MudText>Created on: <strong>@item.CreationDateTime</strong></MudText>
                 <MudText>Notes: <i>@item.Notes</i></MudText>
                 <MudText>Content Type: <strong>@item.ContentType</strong></MudText>
-                <MudText>Content: <pre>@item.Content</pre></MudText>
+                <MudText>Content: <pre class="@(item.LogType == "Request" ? "request-content" : "response-content")">@item.Content</pre></MudText>
             </MudCardContent>
         </MudCard>
 

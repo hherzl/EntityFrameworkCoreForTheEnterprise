@@ -105,7 +105,7 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Queries
                         PaymentTransactionStatus = paymentTxnStatuses.FirstOrDefault(item => item.Id == logItem.PaymentTransactionStatusId)?.Name,
                         LogType = logItem.LogType,
                         ContentType = logItem.ContentType,
-                        Content = logItem.Content,
+                        Content = logItem.Content.Replace("\\r\\n", Environment.NewLine).Replace("\\u0022", "\""),
                         Notes = logItem.Notes,
                         CreationDateTime = logItem.CreationDateTime
                     };

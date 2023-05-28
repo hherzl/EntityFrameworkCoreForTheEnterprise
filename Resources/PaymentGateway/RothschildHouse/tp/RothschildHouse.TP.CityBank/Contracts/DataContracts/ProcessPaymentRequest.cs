@@ -2,7 +2,7 @@
 
 namespace RothschildHouse.TP.CityBank.Contracts.DataContracts
 {
-    public class ProcessPaymentRequest
+    public record ProcessPaymentRequest
     {
         public short? CardTypeId { get; set; }
         public string IssuingNetwork { get; set; }
@@ -10,10 +10,14 @@ namespace RothschildHouse.TP.CityBank.Contracts.DataContracts
         public string CardNumber { get; set; }
         public string ExpirationDate { get; set; }
         public string Cvv { get; set; }
+
+        public string Address { get; set; }
+        public string PostalCode { get; set; }
+
         public decimal? OrderTotal { get; set; }
         public string Currency { get; set; }
 
         public virtual string ToJson()
-            => JsonSerializer.Serialize(this, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase, WriteIndented = true });
+            => JsonSerializer.Serialize(this, GlobalJsonSerializerOptions.Default);
     }
 }

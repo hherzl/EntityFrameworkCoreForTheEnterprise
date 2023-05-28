@@ -22,7 +22,7 @@ namespace RothschildHouse.TP.CityBank.Contracts.DataContracts
         public string SubscriptionTransactionId { get; set; }
 
         public virtual string ToJson()
-            => JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
+            => JsonSerializer.Serialize(this, GlobalJsonSerializerOptions.Default);
     }
 
     public record ProcessPaymentAuthorization
