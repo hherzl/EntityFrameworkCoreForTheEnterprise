@@ -23,6 +23,8 @@ namespace RothschildHouse.API.SearchEngine.Controllers
         {
             var document = new SaleDocument
             {
+                PaymentTxnId = request.PaymentTxnId,
+                PaymentTxnGuid = request.PaymentTxnGuid,
                 ClientApplicationId = request.ClientApplicationId,
                 ClientApplication = request.ClientApplication,
                 IssuingNetwork = request.IssuingNetwork,
@@ -31,6 +33,7 @@ namespace RothschildHouse.API.SearchEngine.Controllers
                 Total = request.Total,
                 CurrencyId = request.CurrencyId,
                 Currency = request.Currency,
+                PaymentTxnDateTime = request.PaymentTxnDateTime,
                 CreatedOn = DateTime.Now
             };
 

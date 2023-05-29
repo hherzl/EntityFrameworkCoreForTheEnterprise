@@ -1,7 +1,9 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using RothschildHouse.Application.Core.Common.Contracts;
+using RothschildHouse.Domain.Core.Common;
 using RothschildHouse.Domain.Core.Entities;
 
 namespace RothschildHouse.Infrastructure.Core.Persistence
@@ -41,6 +43,19 @@ namespace RothschildHouse.Infrastructure.Core.Persistence
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
+            foreach (var entry in ChangeTracker.Entries())
+            {
+                if (entry.State == EntityState.Added && entry.Entity is AuditableEntity auditEntity)
+                {
+                    auditEntity.Active = true;
+
+                    if (string.IsNullOrEmpty(auditEntity.CreationUser))
+                        auditEntity.CreationUser = "dbContext";
+
+                    auditEntity.CreationDateTime = DateTime.Now;
+                }
+            }
+
             _mediator?.DispatchNotifications(this);
 
             return await base.SaveChangesAsync(cancellationToken);

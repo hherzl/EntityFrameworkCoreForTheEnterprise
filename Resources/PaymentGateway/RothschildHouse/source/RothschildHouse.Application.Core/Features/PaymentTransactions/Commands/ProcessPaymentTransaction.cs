@@ -141,10 +141,7 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Commands
                     CardholderName = request.CardholderName,
                     CardNumber = request.CardNumber,
                     ExpirationDate = request.ExpirationDate,
-                    Cvv = request.Cvv,
-                    Active = true,
-                    CreationUser = "api",
-                    CreationDateTime = DateTime.Now
+                    Cvv = request.Cvv
                 };
 
                 _dbContext.Card.Add(card);
@@ -176,10 +173,7 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Commands
                 CurrencyId = currency.Id,
                 CurrencyRate = currency.Rate,
                 PaymentTransactionDateTime = request.TransactionDateTime,
-                Notes = request.Notes,
-                Active = true,
-                CreationUser = "api",
-                CreationDateTime = DateTime.Now
+                Notes = request.Notes
             };
 
             _dbContext.PaymentTransaction.Add(paymentTxn);
@@ -204,10 +198,7 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Commands
                 PaymentTransactionStatusId = paymentTxn.PaymentTransactionStatusId,
                 LogType = "Request",
                 ContentType = ApplicationJson,
-                Content = paymentGatewayRequest.ToJson(),
-                Active = true,
-                CreationUser = "api",
-                CreationDateTime = DateTime.Now
+                Content = paymentGatewayRequest.ToJson()
             });
 
             var paymentGatewayResponse = await _cityBankPaymentServicesClient.ProcessPaymentAsync(paymentGatewayRequest);
@@ -222,10 +213,7 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Commands
                     PaymentTransactionStatusId = paymentTxn.PaymentTransactionStatusId,
                     LogType = "Response",
                     ContentType = ApplicationJson,
-                    Content = paymentGatewayResponse.ToJson(),
-                    Active = true,
-                    CreationUser = "api",
-                    CreationDateTime = DateTime.Now
+                    Content = paymentGatewayResponse.ToJson()
                 };
 
                 _dbContext.PaymentTransactionLog.Add(paymentTxnLog);
@@ -240,6 +228,8 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Commands
 
                 await _searchEngineClient.IndexSaleAsync(new IndexSaleRequest
                 {
+                    PaymentTxnId = paymentTxn.Id,
+                    PaymentTxnGuid = paymentTxn.Guid,
                     ClientApplicationId = paymentTxn.ClientApplicationId,
                     ClientApplication = clientApplication.Name,
                     IssuingNetwork = card.IssuingNetwork,
@@ -247,7 +237,8 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Commands
                     CardType = card.CardTypeId == (short)CardType.Debit ? "Debit" : "Credit",
                     Total = (double)paymentTxn.Amount,
                     CurrencyId = currency.Id,
-                    Currency = currency.Code
+                    Currency = currency.Code,
+                    PaymentTxnDateTime = paymentTxn.PaymentTransactionDateTime
                 });
             }
             else
@@ -260,10 +251,7 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Commands
                     PaymentTransactionStatusId = paymentTxn.PaymentTransactionStatusId,
                     LogType = "Response",
                     ContentType = ApplicationJson,
-                    Content = paymentGatewayResponse.ToJson(),
-                    Active = true,
-                    CreationUser = "api",
-                    CreationDateTime = DateTime.Now
+                    Content = paymentGatewayResponse.ToJson()
                 });
             }
 

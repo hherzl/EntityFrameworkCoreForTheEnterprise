@@ -7,8 +7,6 @@ namespace RothschildHouse.GUI.PaymentGateway.Clients
 {
     public class PaymentGatewayClient
     {
-        public const string ApplicationJson = "application/json";
-
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly string _endpoint;
 
@@ -29,7 +27,7 @@ namespace RothschildHouse.GUI.PaymentGateway.Clients
         {
             var client = _httpClientFactory.CreateClient("RothschildHousePaymentGateway");
 
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(ApplicationJson));
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(ContentTypes.ApplicationJson));
 
             return client;
         }

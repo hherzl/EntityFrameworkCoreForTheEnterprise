@@ -9,6 +9,12 @@ namespace RothschildHouse.API.Reports.Services.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
+        [BsonElement("paymentTxnId")]
+        public long? PaymentTxnId { get; set; }
+
+        [BsonElement("paymentTxnGuid")]
+        public Guid? PaymentTxnGuid { get; set; }
+
         [BsonElement("clientApplicationId")]
         public Guid? ClientApplicationId { get; set; }
 
@@ -32,6 +38,9 @@ namespace RothschildHouse.API.Reports.Services.Models
 
         [BsonElement("currency")]
         public string Currency { get; set; }
+
+        [BsonElement("paymentTxnDateTime")]
+        public DateTime? PaymentTxnDateTime { get; set; }
 
         [BsonElement("createdOn")]
         public DateTime? CreatedOn { get; set; }
