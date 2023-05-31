@@ -1,8 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RothschildHouse.API.PaymentGateway.Models;
-using RothschildHouse.Application.Core.Common;
-using RothschildHouse.Application.Core.Common.Contracts;
 using RothschildHouse.Application.Core.Features.Cards.Queries;
 using RothschildHouse.Application.Core.Features.ClientApplications.Queries;
 using RothschildHouse.Application.Core.Features.Countries.Queries;
@@ -10,6 +8,7 @@ using RothschildHouse.Application.Core.Features.Currencies.Queries;
 using RothschildHouse.Application.Core.Features.Customers.Queries;
 using RothschildHouse.Application.Core.Features.PaymentTransactions.Commands;
 using RothschildHouse.Application.Core.Features.PaymentTransactions.Queries;
+using RothschildHouse.Library.Common.Clients.Models.Common;
 
 namespace RothschildHouse.API.PaymentGateway.Controllers
 {
@@ -37,7 +36,7 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         /// <response code="400">If the request is invalid</response>
         /// <response code="500">If there was an internal error</response>
         [HttpGet("country")]
-        [ProducesResponseType(200, Type = typeof(IListResponse<CountryItemModel>))]
+        [ProducesResponseType(200, Type = typeof(ListResponse<CountryItemModel>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
         public async Task<IActionResult> GetCountriesAsync([FromQuery] GetCountriesQuery request)
@@ -56,7 +55,7 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         /// <response code="404">If the resource doesn't exist</response>
         /// <response code="500">If there was an internal error</response>
         [HttpGet("country/{id}")]
-        [ProducesResponseType(200, Type = typeof(ISingleResponse<CountryDetailsModel>))]
+        [ProducesResponseType(200, Type = typeof(SingleResponse<CountryDetailsModel>))]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         public async Task<IActionResult> GetCountryAsync(short? id)
@@ -78,7 +77,7 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         /// <response code="400">If the request is invalid</response>
         /// <response code="500">If there was an internal error</response>
         [HttpGet("currency")]
-        [ProducesResponseType(200, Type = typeof(IListResponse<CurrencyItemModel>))]
+        [ProducesResponseType(200, Type = typeof(ListResponse<CurrencyItemModel>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
         public async Task<IActionResult> GetCurrenciesAsync([FromQuery] GetCurrenciesQuery request)
@@ -97,7 +96,7 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         /// <response code="404">If the resource doesn't exist</response>
         /// <response code="500">If there was an internal error</response>
         [HttpGet("currency/{id}")]
-        [ProducesResponseType(200, Type = typeof(ISingleResponse<CurrencyDetailsModel>))]
+        [ProducesResponseType(200, Type = typeof(SingleResponse<CurrencyDetailsModel>))]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         public async Task<IActionResult> GetCurrencyAsync(short? id)
@@ -119,7 +118,7 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         /// <response code="400">If the request is invalid</response>
         /// <response code="500">If there was an internal error</response>
         [HttpGet("client-application")]
-        [ProducesResponseType(200, Type = typeof(IListResponse<ClientApplicationItemModel>))]
+        [ProducesResponseType(200, Type = typeof(ListResponse<ClientApplicationItemModel>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
         public async Task<IActionResult> GetClientApplicationsAsync([FromQuery] GetClientApplicationsQuery request)
@@ -138,7 +137,7 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         /// <response code="404">If the resource doesn't exist</response>
         /// <response code="500">If there was an internal error</response>
         [HttpGet("client-application/{id}")]
-        [ProducesResponseType(200, Type = typeof(ISingleResponse<ClientApplicationDetailsModel>))]
+        [ProducesResponseType(200, Type = typeof(SingleResponse<ClientApplicationDetailsModel>))]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         public async Task<IActionResult> GetClientApplicationAsync(Guid? id)
@@ -179,7 +178,7 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         /// <response code="404">If the resource doesn't exist</response>
         /// <response code="500">If there was an internal error</response>
         [HttpGet("card/{id}")]
-        [ProducesResponseType(200, Type = typeof(ISingleResponse<CardDetailsModel>))]
+        [ProducesResponseType(200, Type = typeof(SingleResponse<CardDetailsModel>))]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         public async Task<IActionResult> GetCardAsync(Guid? id)
@@ -220,7 +219,7 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         /// <response code="404">If the resource doesn't exist</response>
         /// <response code="500">If there was an internal error</response>
         [HttpGet("customer/{id}")]
-        [ProducesResponseType(200, Type = typeof(ISingleResponse<CustomerDetailsModel>))]
+        [ProducesResponseType(200, Type = typeof(SingleResponse<CustomerDetailsModel>))]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         public async Task<IActionResult> GetCustomerAsync(Guid? id)
@@ -260,7 +259,7 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         /// <response code="400">If the request is invalid</response>
         /// <response code="500">If there was an internal error</response>
         [HttpGet("payment-txn")]
-        [ProducesResponseType(200, Type = typeof(IPagedResponse<PaymentTransactionItemModel>))]
+        [ProducesResponseType(200, Type = typeof(PagedResponse<PaymentTransactionItemModel>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
         public async Task<IActionResult> GetPaymentTransactionsAsync([FromQuery] GetPaymentTransactionsQuery request)
@@ -279,7 +278,7 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         /// <response code="404">If the resource doesn't exist</response>
         /// <response code="500">If there was an internal error</response>
         [HttpGet("payment-txn/{id}")]
-        [ProducesResponseType(200, Type = typeof(ISingleResponse<PaymentTransactionDetailsModel>))]
+        [ProducesResponseType(200, Type = typeof(SingleResponse<PaymentTransactionDetailsModel>))]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         public async Task<IActionResult> GetPaymentTransactionAsync(long? id)

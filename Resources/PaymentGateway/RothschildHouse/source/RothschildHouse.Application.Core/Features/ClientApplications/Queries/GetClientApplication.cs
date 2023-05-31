@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using RothschildHouse.Application.Core.Common;
 using RothschildHouse.Application.Core.Common.Contracts;
 using RothschildHouse.Application.Core.Features.PaymentTransactions.Queries;
+using RothschildHouse.Library.Common.Clients.Models.Common;
 
 namespace RothschildHouse.Application.Core.Features.ClientApplications.Queries
 {
@@ -15,7 +15,7 @@ namespace RothschildHouse.Application.Core.Features.ClientApplications.Queries
         public List<PaymentTransactionItemModel> PaymentTransactions { get; set; }
     }
 
-    public class GetClientApplicationQuery : IRequest<ISingleResponse<ClientApplicationDetailsModel>>
+    public class GetClientApplicationQuery : IRequest<SingleResponse<ClientApplicationDetailsModel>>
     {
         public GetClientApplicationQuery(Guid? id)
         {
@@ -25,7 +25,7 @@ namespace RothschildHouse.Application.Core.Features.ClientApplications.Queries
         public Guid? Id { get; set; }
     }
 
-    public class GetClientApplicationQueryHandler : IRequestHandler<GetClientApplicationQuery, ISingleResponse<ClientApplicationDetailsModel>>
+    public class GetClientApplicationQueryHandler : IRequestHandler<GetClientApplicationQuery, SingleResponse<ClientApplicationDetailsModel>>
     {
         private readonly IRothschildHouseDbContext _dbContext;
 
@@ -34,7 +34,7 @@ namespace RothschildHouse.Application.Core.Features.ClientApplications.Queries
             _dbContext = dbContext;
         }
 
-        public async Task<ISingleResponse<ClientApplicationDetailsModel>> Handle(GetClientApplicationQuery request, CancellationToken cancellationToken)
+        public async Task<SingleResponse<ClientApplicationDetailsModel>> Handle(GetClientApplicationQuery request, CancellationToken cancellationToken)
         {
             var entity = await _dbContext.GetClientApplicationAsync(request.Id);
 

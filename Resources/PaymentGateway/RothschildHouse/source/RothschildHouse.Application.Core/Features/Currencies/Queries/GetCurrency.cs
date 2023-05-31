@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using RothschildHouse.Application.Core.Common;
 using RothschildHouse.Application.Core.Common.Contracts;
+using RothschildHouse.Library.Common.Clients.Models.Common;
 
 namespace RothschildHouse.Application.Core.Features.Currencies.Queries
 {
@@ -12,7 +12,7 @@ namespace RothschildHouse.Application.Core.Features.Currencies.Queries
         public decimal? Rate { get; set; }
     }
 
-    public class GetCurrencyQuery : IRequest<ISingleResponse<CurrencyDetailsModel>>
+    public class GetCurrencyQuery : IRequest<SingleResponse<CurrencyDetailsModel>>
     {
         public GetCurrencyQuery(short? id)
         {
@@ -22,7 +22,7 @@ namespace RothschildHouse.Application.Core.Features.Currencies.Queries
         public short? Id { get; set; }
     }
 
-    public class GetCurrencyQueryHandler : IRequestHandler<GetCurrencyQuery, ISingleResponse<CurrencyDetailsModel>>
+    public class GetCurrencyQueryHandler : IRequestHandler<GetCurrencyQuery, SingleResponse<CurrencyDetailsModel>>
     {
         private readonly IRothschildHouseDbContext _dbContext;
 
@@ -31,7 +31,7 @@ namespace RothschildHouse.Application.Core.Features.Currencies.Queries
             _dbContext = dbContext;
         }
 
-        public async Task<ISingleResponse<CurrencyDetailsModel>> Handle(GetCurrencyQuery request, CancellationToken cancellationToken)
+        public async Task<SingleResponse<CurrencyDetailsModel>> Handle(GetCurrencyQuery request, CancellationToken cancellationToken)
         {
             var entity = await _dbContext.GetCurrencyAsync(request.Id);
 

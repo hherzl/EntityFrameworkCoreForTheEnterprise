@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using RothschildHouse.Application.Core.Common;
 using RothschildHouse.Application.Core.Common.Contracts;
+using RothschildHouse.Library.Common.Clients.Models.Common;
 
 namespace RothschildHouse.Application.Core.Features.Countries.Queries
 {
@@ -12,7 +12,7 @@ namespace RothschildHouse.Application.Core.Features.Countries.Queries
         public string ThreeLetterIsoCode { get; set; }
     }
 
-    public class GetCountryQuery : IRequest<ISingleResponse<CountryDetailsModel>>
+    public class GetCountryQuery : IRequest<SingleResponse<CountryDetailsModel>>
     {
         public GetCountryQuery(short? id)
         {
@@ -22,7 +22,7 @@ namespace RothschildHouse.Application.Core.Features.Countries.Queries
         public short? Id { get; set; }
     }
 
-    public class GetCountryQueryHandler : IRequestHandler<GetCountryQuery, ISingleResponse<CountryDetailsModel>>
+    public class GetCountryQueryHandler : IRequestHandler<GetCountryQuery, SingleResponse<CountryDetailsModel>>
     {
         private readonly IRothschildHouseDbContext _dbContext;
 
@@ -31,7 +31,7 @@ namespace RothschildHouse.Application.Core.Features.Countries.Queries
             _dbContext = dbContext;
         }
 
-        public async Task<ISingleResponse<CountryDetailsModel>> Handle(GetCountryQuery request, CancellationToken cancellationToken)
+        public async Task<SingleResponse<CountryDetailsModel>> Handle(GetCountryQuery request, CancellationToken cancellationToken)
         {
             var entity = await _dbContext.GetCountryAsync(request.Id);
 

@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using RothschildHouse.Application.Core.Common;
 using RothschildHouse.Application.Core.Common.Contracts;
+using RothschildHouse.Library.Common.Clients.Models.Common;
 
 namespace RothschildHouse.Application.Core.Features.Currencies.Queries
 {
@@ -13,7 +13,7 @@ namespace RothschildHouse.Application.Core.Features.Currencies.Queries
         public decimal? Rate { get; set; }
     }
 
-    public class GetCurrenciesQuery : IRequest<IListResponse<CurrencyItemModel>>
+    public class GetCurrenciesQuery : IRequest<ListResponse<CurrencyItemModel>>
     {
         public GetCurrenciesQuery()
         {
@@ -25,7 +25,7 @@ namespace RothschildHouse.Application.Core.Features.Currencies.Queries
         public int PageNumber { get; set; }
     }
 
-    public class GetCurrenciesQueryHandler : IRequestHandler<GetCurrenciesQuery, IListResponse<CurrencyItemModel>>
+    public class GetCurrenciesQueryHandler : IRequestHandler<GetCurrenciesQuery, ListResponse<CurrencyItemModel>>
     {
         private readonly IRothschildHouseDbContext _dbContext;
 
@@ -34,7 +34,7 @@ namespace RothschildHouse.Application.Core.Features.Currencies.Queries
             _dbContext = dbContext;
         }
 
-        public async Task<IListResponse<CurrencyItemModel>> Handle(GetCurrenciesQuery request, CancellationToken cancellationToken)
+        public async Task<ListResponse<CurrencyItemModel>> Handle(GetCurrenciesQuery request, CancellationToken cancellationToken)
         {
             var query = _dbContext.Currency.AsNoTracking().Paging(request.PageSize, request.PageNumber);
 

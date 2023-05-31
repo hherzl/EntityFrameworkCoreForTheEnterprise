@@ -1,8 +1,8 @@
-﻿using RothschildHouse.Application.Core.Common.Contracts;
+﻿//using RothschildHouse.Application.Core.Common.Contracts;
 
-namespace RothschildHouse.Application.Core.Common
-{
-    public record Response : IResponse
-    {
-    }
-}
+//namespace RothschildHouse.Application.Core.Common
+//{
+//    public record Response : IResponse
+//    {
+//    }
+//}

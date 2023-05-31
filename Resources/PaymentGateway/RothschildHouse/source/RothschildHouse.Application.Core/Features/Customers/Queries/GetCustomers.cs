@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using RothschildHouse.Application.Core.Common;
 using RothschildHouse.Application.Core.Common.Contracts;
+using RothschildHouse.Library.Common.Clients.Models.Common;
 
 namespace RothschildHouse.Application.Core.Features.Customers.Queries
 {

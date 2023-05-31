@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using RothschildHouse.Application.Core.Common;
 using RothschildHouse.Application.Core.Common.Contracts;
+using RothschildHouse.Library.Common.Clients.Models.Common;
 
 namespace RothschildHouse.Application.Core.Features.ClientApplications.Queries
 {
@@ -12,7 +12,7 @@ namespace RothschildHouse.Application.Core.Features.ClientApplications.Queries
         public string Url { get; set; }
     }
 
-    public class GetClientApplicationsQuery : IRequest<IListResponse<ClientApplicationItemModel>>
+    public class GetClientApplicationsQuery : IRequest<ListResponse<ClientApplicationItemModel>>
     {
         public GetClientApplicationsQuery()
         {
@@ -24,7 +24,7 @@ namespace RothschildHouse.Application.Core.Features.ClientApplications.Queries
         public int PageNumber { get; set; }
     }
 
-    public class GetClientApplicationsQueryHandler : IRequestHandler<GetClientApplicationsQuery, IListResponse<ClientApplicationItemModel>>
+    public class GetClientApplicationsQueryHandler : IRequestHandler<GetClientApplicationsQuery, ListResponse<ClientApplicationItemModel>>
     {
         private readonly IRothschildHouseDbContext _dbContext;
 
@@ -33,7 +33,7 @@ namespace RothschildHouse.Application.Core.Features.ClientApplications.Queries
             _dbContext = dbContext;
         }
 
-        public async Task<IListResponse<ClientApplicationItemModel>> Handle(GetClientApplicationsQuery request, CancellationToken cancellationToken)
+        public async Task<ListResponse<ClientApplicationItemModel>> Handle(GetClientApplicationsQuery request, CancellationToken cancellationToken)
         {
             var query = _dbContext.ClientApplication.AsNoTracking().Paging(request.PageSize, request.PageNumber);
 

@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using RothschildHouse.Application.Core.Common;
 using RothschildHouse.Application.Core.Common.Contracts;
+using RothschildHouse.Library.Common.Clients.Models.Common;
 
 namespace RothschildHouse.Application.Core.Features.Countries.Queries
 {
@@ -12,7 +12,7 @@ namespace RothschildHouse.Application.Core.Features.Countries.Queries
         public string TwoLetterIsoCode { get; set; }
     }
 
-    public class GetCountriesQuery : IRequest<IListResponse<CountryItemModel>>
+    public class GetCountriesQuery : IRequest<ListResponse<CountryItemModel>>
     {
         public GetCountriesQuery()
         {
@@ -24,7 +24,7 @@ namespace RothschildHouse.Application.Core.Features.Countries.Queries
         public int PageNumber { get; set; }
     }
 
-    public class GetCountriesQueryHandler : IRequestHandler<GetCountriesQuery, IListResponse<CountryItemModel>>
+    public class GetCountriesQueryHandler : IRequestHandler<GetCountriesQuery, ListResponse<CountryItemModel>>
     {
         private readonly IRothschildHouseDbContext _dbContext;
 
@@ -33,7 +33,7 @@ namespace RothschildHouse.Application.Core.Features.Countries.Queries
             _dbContext = dbContext;
         }
 
-        public async Task<IListResponse<CountryItemModel>> Handle(GetCountriesQuery request, CancellationToken cancellationToken)
+        public async Task<ListResponse<CountryItemModel>> Handle(GetCountriesQuery request, CancellationToken cancellationToken)
         {
             var query = _dbContext.Country.AsNoTracking().Paging(request.PageSize, request.PageNumber);
 

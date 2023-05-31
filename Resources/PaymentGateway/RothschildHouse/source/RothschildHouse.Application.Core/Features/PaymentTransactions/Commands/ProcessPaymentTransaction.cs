@@ -2,14 +2,14 @@
 using System.Text;
 using System.Text.Json;
 using MediatR;
-using RothschildHouse.Application.Core.Clients;
-using RothschildHouse.Application.Core.Clients.Models;
-using RothschildHouse.Application.Core.Common;
 using RothschildHouse.Application.Core.Common.Contracts;
 using RothschildHouse.Domain.Core.Entities;
 using RothschildHouse.Domain.Core.Enums;
 using RothschildHouse.Domain.Core.Exceptions;
 using RothschildHouse.Domain.Core.Notifications;
+using RothschildHouse.Library.Common.Clients;
+using RothschildHouse.Library.Common.Clients.Models.Common;
+using RothschildHouse.Library.Common.Clients.Models.SearchEngine;
 using RothschildHouse.TP.CityBank.Contracts;
 using RothschildHouse.TP.CityBank.Contracts.DataContracts;
 

@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using RothschildHouse.Application.Core.Common;
 using RothschildHouse.Application.Core.Common.Contracts;
+using RothschildHouse.Library.Common.Clients.Models.Common;
 
 namespace RothschildHouse.Application.Core.Features.Cards.Queries
 {
@@ -16,7 +16,7 @@ namespace RothschildHouse.Application.Core.Features.Cards.Queries
         public string ExpirationDate { get; set; }
     }
 
-    public class GetCardsQuery : IRequest<IPagedResponse<CardItemModel>>
+    public class GetCardsQuery : IRequest<PagedResponse<CardItemModel>>
     {
         public GetCardsQuery()
         {
@@ -28,7 +28,7 @@ namespace RothschildHouse.Application.Core.Features.Cards.Queries
         public int PageNumber { get; set; }
     }
 
-    public class GetCardsQueryHandler : IRequestHandler<GetCardsQuery, IPagedResponse<CardItemModel>>
+    public class GetCardsQueryHandler : IRequestHandler<GetCardsQuery, PagedResponse<CardItemModel>>
     {
         private readonly IRothschildHouseDbContext _dbContext;
 
@@ -37,7 +37,7 @@ namespace RothschildHouse.Application.Core.Features.Cards.Queries
             _dbContext = dbContext;
         }
 
-        public async Task<IPagedResponse<CardItemModel>> Handle(GetCardsQuery request, CancellationToken cancellationToken)
+        public async Task<PagedResponse<CardItemModel>> Handle(GetCardsQuery request, CancellationToken cancellationToken)
         {
             var query = _dbContext.GetCards();
 
