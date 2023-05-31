@@ -31,6 +31,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RothschildHouse.API.Reports
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RothschildHouse.API.SearchEngine", "source\RothschildHouse.API.SearchEngine\RothschildHouse.API.SearchEngine.csproj", "{451EA3FC-7F61-426A-A879-6D8F652EB61B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RothschildHouse.API.Notifications", "source\RothschildHouse.API.Notifications\RothschildHouse.API.Notifications.csproj", "{8F4F4B20-6128-478E-908A-07E86A48AED7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{451EA3FC-7F61-426A-A879-6D8F652EB61B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{451EA3FC-7F61-426A-A879-6D8F652EB61B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{451EA3FC-7F61-426A-A879-6D8F652EB61B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F4F4B20-6128-478E-908A-07E86A48AED7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F4F4B20-6128-478E-908A-07E86A48AED7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F4F4B20-6128-478E-908A-07E86A48AED7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F4F4B20-6128-478E-908A-07E86A48AED7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,6 +98,7 @@ Global
 		{6AEA7714-7980-4525-B54F-D643803ECD92} = {D3DBC5E8-33A0-42B7-9B61-F33727855FC2}
 		{14B21B35-3C8D-4A01-B6C7-0538B8B38F4F} = {823CF489-FAA7-4C8D-BACC-2D8C42B889E4}
 		{451EA3FC-7F61-426A-A879-6D8F652EB61B} = {823CF489-FAA7-4C8D-BACC-2D8C42B889E4}
+		{8F4F4B20-6128-478E-908A-07E86A48AED7} = {823CF489-FAA7-4C8D-BACC-2D8C42B889E4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F63EE7E3-127E-45CA-9315-0797311B7A01}
