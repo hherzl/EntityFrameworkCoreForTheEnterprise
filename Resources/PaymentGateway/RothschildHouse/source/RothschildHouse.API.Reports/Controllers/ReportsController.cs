@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RothschildHouse.Library.Common.Clients.Models.Reports;
 using RothschildHouse.Library.Common.NoSql;
 
 namespace RothschildHouse.API.Reports.Controllers
@@ -42,37 +43,12 @@ namespace RothschildHouse.API.Reports.Controllers
                     item.Values.Add(
                         sales
                             .Where(item => item.CreatedOn.Value.Year == now.Year && item.CreatedOn.Value.Month == (i + 1) && item.ClientApplication == clientApplication)
-                            .Sum(item => item.Total)
+                            .Sum(item => (double)item.Total)
                         );
                 }
             }
 
             return Ok(response);
         }
-    }
-
-    public record MonthlySalesResponse
-    {
-        public MonthlySalesResponse()
-        {
-            Months = new() { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
-            Sales = new();
-        }
-
-        public List<string> Months { get; set; }
-        public List<MonthlySaleItemModel> Sales { get; set; }
-    }
-
-    public record MonthlySaleItemModel
-    {
-        public MonthlySaleItemModel()
-        {
-            Values = new();
-        }
-
-        public string Year { get; set; }
-        public string Month { get; set; }
-        public string ClientApplication { get; set; }
-        public List<double?> Values { get; set; }
     }
 }
