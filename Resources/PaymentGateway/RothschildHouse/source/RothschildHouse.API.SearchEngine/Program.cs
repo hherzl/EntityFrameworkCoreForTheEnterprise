@@ -1,4 +1,4 @@
-using RothschildHouse.API.SearchEngine.Services;
+using RothschildHouse.Library.Common.NoSql;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.Configure<SaleServiceSettings>(builder.Configuration.GetSection("SearchEngineSettings"));
+builder.Services.Configure<SaleServiceSettings>(builder.Configuration.GetSection("NoSql:SearchEngine"));
 builder.Services.AddScoped<SaleService>();
 
 var app = builder.Build();

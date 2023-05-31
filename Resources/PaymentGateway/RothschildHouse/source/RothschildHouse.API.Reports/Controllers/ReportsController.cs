@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RothschildHouse.API.Reports.Services;
+using RothschildHouse.Library.Common.NoSql;
 
 namespace RothschildHouse.API.Reports.Controllers
 {

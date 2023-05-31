@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RothschildHouse.API.SearchEngine.Models;
-using RothschildHouse.API.SearchEngine.Services;
-using RothschildHouse.API.SearchEngine.Services.Models;
+using RothschildHouse.Library.Common.NoSql;
+using RothschildHouse.Library.Common.NoSql.Documents;
 
 namespace RothschildHouse.API.SearchEngine.Controllers
 {

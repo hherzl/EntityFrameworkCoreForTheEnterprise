@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using RothschildHouse.API.Reports.Services.Models;
+using RothschildHouse.Library.Common.NoSql.Documents;
 
-namespace RothschildHouse.API.Reports.Services
+namespace RothschildHouse.Library.Common.NoSql
 {
     public class SaleService
     {

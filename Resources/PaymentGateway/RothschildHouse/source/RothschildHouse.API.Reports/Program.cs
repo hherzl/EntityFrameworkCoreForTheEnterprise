@@ -1,4 +1,4 @@
-using RothschildHouse.API.Reports.Services;
+using RothschildHouse.Library.Common.NoSql;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,8 +14,7 @@ builder.Services.AddCors(policy =>
     policy.AddPolicy("GuiCorsPolicy", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 });
 
-builder.Services.Configure<SaleServiceSettings>(builder.Configuration.GetSection("SearchEngineSettings"));
-
+builder.Services.Configure<SaleServiceSettings>(builder.Configuration.GetSection("NoSql:SearchEngine"));
 builder.Services.AddScoped<SaleService>();
 
 var app = builder.Build();

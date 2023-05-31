@@ -1,4 +1,4 @@
-﻿namespace RothschildHouse.API.Reports.Services
+﻿namespace RothschildHouse.Library.Common.NoSql
 {
     public record SaleServiceSettings
     {
