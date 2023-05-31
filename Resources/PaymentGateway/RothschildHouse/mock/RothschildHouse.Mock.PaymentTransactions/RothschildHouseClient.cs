@@ -1,5 +1,5 @@
 ﻿using System.Net.Http.Headers;
-using System.Text;
+using System.Net.Http.Json;
 using System.Text.Json;
 
 namespace RothschildHouse.Mock.PaymentTransactions
@@ -22,12 +22,6 @@ namespace RothschildHouse.Mock.PaymentTransactions
         public string Currency { get; set; }
         public DateTime? TransactionDateTime { get; set; }
         public string Notes { get; set; }
-
-        public virtual string ToJson()
-            => JsonSerializer.Serialize(this);
-
-        public virtual StringContent ToStringContent(string mediaType)
-            => new(ToJson(), Encoding.Default, mediaType);
     }
 
     internal record ProcessPaymentTransactionResponse
@@ -41,7 +35,7 @@ namespace RothschildHouse.Mock.PaymentTransactions
 
     internal class RothschildHouseClient
     {
-        public const string ApplicationJson = "application/json";
+        const string ApplicationJson = "application/json";
 
         private readonly string _endpoint;
 
@@ -70,7 +64,7 @@ namespace RothschildHouse.Mock.PaymentTransactions
         {
             using var client = CreateHttpClient();
 
-            var response = await client.PostAsync($"{_endpoint}/process-payment-txn", request.ToStringContent(ApplicationJson));
+            var response = await client.PostAsJsonAsync($"{_endpoint}/process-payment-txn", request);
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();

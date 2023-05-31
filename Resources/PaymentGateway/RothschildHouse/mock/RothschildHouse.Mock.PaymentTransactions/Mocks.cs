@@ -57,5 +57,16 @@
                 }
             }
         }
+
+        public static class Currencies
+        {
+            public static IEnumerable<string> Items
+            {
+                get
+                {
+                    yield return "USD";
+                }
+            }
+        }
     }
 }

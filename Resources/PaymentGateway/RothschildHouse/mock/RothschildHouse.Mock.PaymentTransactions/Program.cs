@@ -7,7 +7,7 @@ var mocks = new
     ClientApplications = Mocks.ClientApplications.Items.ToList(),
     Customers = Mocks.Customers.Items.ToList(),
     Cards = Mocks.Cards.Items.ToList(),
-    Currency = "USD"
+    Currencies = Mocks.Currencies.Items.ToList()
 };
 
 while (true)
@@ -15,6 +15,7 @@ while (true)
     var clientApplicationIndex = mocksRandom.Next(mocks.ClientApplications.Count);
     var customerIndex = mocksRandom.Next(mocks.Customers.Count);
     var cardIndex = mocksRandom.Next(mocks.Cards.Count);
+    var currencyIndex = mocksRandom.Next(mocks.Currencies.Count);
     var card = mocks.Cards[cardIndex];
     var orderTotal = (decimal)mocksRandom.Next(1, 100);
 
@@ -31,7 +32,7 @@ while (true)
         Cvv = card.Item6,
         OrderGuid = Guid.NewGuid(),
         OrderTotal = orderTotal,
-        Currency = mocks.Currency
+        Currency = mocks.Currencies[currencyIndex]
     };
 
     var rothschildHouseClient = new RothschildHouseClient();
