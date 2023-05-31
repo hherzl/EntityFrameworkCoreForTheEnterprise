@@ -236,6 +236,24 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         /// <summary>
         /// Returns the payment transactions that match with the specified search criteria.
         /// </summary>
+        /// <returns>The payment transactions.</returns>
+        /// <response code="200">Returns the client applications</response>
+        /// <response code="400">If the request is invalid</response>
+        /// <response code="500">If there was an internal error</response>
+        [HttpGet("payment-txn-viewbag")]
+        [ProducesResponseType(200, Type = typeof(GetPaymentTransactionsViewBagRespose))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> SearchPaymentTransactionsViewBagAsync()
+        {
+            var response = await _mediator.Send(new GetPaymentTransactionsViewBagQuery());
+
+            return response.ToOkResult();
+        }
+
+        /// <summary>
+        /// Returns the payment transactions that match with the specified search criteria.
+        /// </summary>
         /// <param name="request">Search parameters</param>
         /// <returns>The customers.</returns>
         /// <response code="200">Returns the payment transactions</response>

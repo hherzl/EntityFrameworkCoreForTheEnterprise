@@ -11,12 +11,49 @@
 
 <h1>Payment Transactions</h1>
 
+<MudGrid>
+    <MudItem xs="12" sm="16" md="4">
+        <MudSelect T="short?" Label="Status" @bind-value="@PaymentTransactionStatusId">
+            <MudSelectItem Value="default(short?)"></MudSelectItem>
+            @if (viewBag != null)
+            {
+                @foreach (var item in viewBag?.PaymentTransactionStatuses)
+                {
+                    <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
+                }
+            }
+        </MudSelect>
+
+        <MudSelect T="Guid?" Label="Client application" @bind-value="@ClientApplicationId">
+            <MudSelectItem Value="default(Guid?)"></MudSelectItem>
+            @if (viewBag != null)
+            {
+                @foreach (var item in viewBag?.ClientApplications)
+                {
+                    <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
+                }
+            }
+        </MudSelect>
+
+        <MudDatePicker Label="Start date" @bind-Date="StartDate" />
+        <MudDatePicker Label="End date" @bind-Date="EndDate" />
+
+        <br />
+
+        <MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.Search" @onclick="SearchAsync" />
+    </MudItem>
+</MudGrid>
+
+<br />
+
 @if (response == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
+    <MudText Typo="Typo.body1">Page size: <strong>@(response.PageSize)</strong>, Total of items: <strong>@(response.ItemsCount)</strong>.</MudText>
+    <br />
     <MudDataGrid Items="@response.Model">
         <Columns>
             <PropertyColumn Property="x => x.PaymentTransactionStatus" Title="Transaction Status" />
@@ -36,10 +73,26 @@ else
 }
 
 @code {
-    private ListResponse<PaymentTransactionItemModel> response;
+    short? PaymentTransactionStatusId { get; set; }
+    Guid? ClientApplicationId { get; set; }
+    DateTime? StartDate { get; set; }
+    DateTime? EndDate { get; set; }
+
+    GetPaymentTransactionsViewBagRespose viewBag;
+    PagedResponse<PaymentTransactionItemModel> response;
 
     protected override async Task OnInitializedAsync()
     {
-        response = await rothschildHouseClient.GetPaymentTransactionsAsync(new GetPaymentTransactionsRequest());
+        StartDate = DateTime.Now;
+        EndDate = DateTime.Now;
+
+        viewBag = await rothschildHouseClient.GetPaymentTransactionsViewBag();
+
+        await SearchAsync();
+    }
+
+    private async Task SearchAsync()
+    {
+        response = await rothschildHouseClient.GetPaymentTransactionsAsync(new GetPaymentTransactionsRequest(PaymentTransactionStatusId, ClientApplicationId, StartDate, EndDate));
     }
 }
