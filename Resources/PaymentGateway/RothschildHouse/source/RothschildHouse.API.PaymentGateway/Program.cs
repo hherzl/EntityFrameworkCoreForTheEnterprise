@@ -1,6 +1,6 @@
 using RothschildHouse.Application.Core;
-using RothschildHouse.Application.Core.Hubs;
 using RothschildHouse.Infrastructure.Core;
+using RothschildHouse.Library.Common.Queue;
 using RothschildHouse.TP.CityBank;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,10 +28,8 @@ builder.Services.AddCors(policy =>
     policy.AddPolicy("GuiCorsPolicy", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 });
 
-builder
-    .Services
-    .AddSignalR(options => options.EnableDetailedErrors = true)
-    ;
+builder.Services.Configure<MqClientSettings>(builder.Configuration.GetSection("Queue:PaymentTransaction"));
+builder.Services.AddScoped<PaymentTransactionMqClient>();
 
 var app = builder.Build();
 
@@ -48,7 +46,5 @@ app.UseCors("GuiCorsPolicy");
 app.UseAuthorization();
 
 app.MapControllers();
-
-app.MapHub<PaymentTransactionsHub>("/paymenttxnhub");
 
 app.Run();

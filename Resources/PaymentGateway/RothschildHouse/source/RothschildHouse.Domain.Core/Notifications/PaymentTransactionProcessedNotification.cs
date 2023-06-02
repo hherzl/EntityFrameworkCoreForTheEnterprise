@@ -4,6 +4,7 @@ namespace RothschildHouse.Domain.Core.Notifications
 {
     public class PaymentTransactionProcessedNotification : INotification
     {
+        public long? Id { get; set; }
         public Guid? Guid { get; set; }
         public string ClientApplication { get; set; }
         public decimal? Amount { get; set; }

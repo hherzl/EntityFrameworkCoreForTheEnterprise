@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 
-namespace RothschildHouse.Application.Core.Hubs
+namespace RothschildHouse.API.Notifications.Hubs
 {
     public class PaymentTransactionsHub : Hub
     {

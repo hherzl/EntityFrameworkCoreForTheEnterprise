@@ -1,27 +1,36 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
-using RothschildHouse.Application.Core.Hubs;
 using RothschildHouse.Domain.Core.Notifications;
+using RothschildHouse.Library.Common.Queue;
+using RothschildHouse.Library.Common.Queue.Messages;
 
 namespace RothschildHouse.Application.Core.Features.PaymentTransactions.NotificationHandlers
 {
     public class PaymentTransactionProcessedNotificationHandler : INotificationHandler<PaymentTransactionProcessedNotification>
     {
         private readonly ILogger _logger;
-        private readonly IHubContext<PaymentTransactionsHub> _hubContext;
+        private readonly PaymentTransactionMqClient _paymentTransactionMqClient;
 
-        public PaymentTransactionProcessedNotificationHandler(ILogger<PaymentTransactionProcessedNotificationHandler> logger, IHubContext<PaymentTransactionsHub> hubContext)
+        public PaymentTransactionProcessedNotificationHandler(ILogger<PaymentTransactionProcessedNotificationHandler> logger, PaymentTransactionMqClient paymentTransactionMqClient)
         {
             _logger = logger;
-            _hubContext = hubContext;
+            _paymentTransactionMqClient = paymentTransactionMqClient;
         }
 
-        public async Task Handle(PaymentTransactionProcessedNotification notification, CancellationToken cancellationToken)
+        public Task Handle(PaymentTransactionProcessedNotification notification, CancellationToken cancellationToken)
         {
             _logger.LogInformation($"Payment Transaction processed, GUID: {notification.Guid}, Client application: {notification.ClientApplication} Amount: {notification.Amount} {notification.Currency}");
 
-            await _hubContext.Clients.All.SendAsync(HubMethods.ReceivePaymentTxn, notification.ClientApplication, notification.Amount, notification.Currency);
+            _paymentTransactionMqClient.Publish(new PublishPaymentTransactionMessage
+            {
+                Id = notification.Id,
+                Guid = notification.Guid,
+                ClientApplication = notification.ClientApplication,
+                Amount = notification.Amount,
+                Currency = notification.Currency
+            });
+
+            return Task.CompletedTask;
         }
     }
 }

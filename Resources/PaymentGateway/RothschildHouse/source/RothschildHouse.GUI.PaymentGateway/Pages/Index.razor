@@ -61,7 +61,7 @@
 
         hubConnection = new HubConnectionBuilder()
             .AddJsonProtocol()
-            .WithUrl("https://localhost:7250/paymenttxnhub")
+            .WithUrl("https://localhost:7251/paymenttxnhub")
             .ConfigureLogging(logging => logging.SetMinimumLevel(LogLevel.Information))
             .Build()
             ;

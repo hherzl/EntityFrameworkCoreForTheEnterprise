@@ -54,7 +54,7 @@ namespace RothschildHouse.Application.Core
             return await query.FirstOrDefaultAsync(item => item.Id == id, cancellationToken);
         }
 
-        public static async Task<Card> GetCardAsync(this IRothschildHouseDbContext ctx, string issuingNetwork, string cardNumber, bool tracking = true, bool include = true, CancellationToken cancellationToken = default)
+        public static async Task<Card> GetCardByAsync(this IRothschildHouseDbContext ctx, string issuingNetwork, string cardNumber, bool tracking = true, bool include = true, CancellationToken cancellationToken = default)
         {
             var query = ctx.Card.AsQueryable();
 

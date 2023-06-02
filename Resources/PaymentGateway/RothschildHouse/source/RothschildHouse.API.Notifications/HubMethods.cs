@@ -1,4 +1,4 @@
-﻿namespace RothschildHouse.Application.Core
+﻿namespace RothschildHouse.API.Notifications
 {
     public static class HubMethods
     {

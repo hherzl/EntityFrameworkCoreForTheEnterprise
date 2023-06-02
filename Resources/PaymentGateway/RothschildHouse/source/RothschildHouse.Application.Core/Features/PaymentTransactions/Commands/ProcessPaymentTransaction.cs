@@ -130,7 +130,7 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Commands
         public async Task<ProcessPaymentTransactionResponse> Handle(ProcessPaymentTransactionCommand request, CancellationToken cancellationToken)
         {
             var card = await _dbContext
-                .GetCardAsync(request.IssuingNetwork, request.CardNumber, cancellationToken: cancellationToken);
+                .GetCardByAsync(request.IssuingNetwork, request.CardNumber, false, false, cancellationToken);
 
             if (card == null)
             {
@@ -220,6 +220,7 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Commands
 
                 paymentTxnLog.AddNotification(new PaymentTransactionProcessedNotification
                 {
+                    Id = paymentTxn.Id,
                     Guid = paymentTxn.Guid,
                     ClientApplication = clientApplication.Name,
                     Amount = paymentTxn.Amount,
