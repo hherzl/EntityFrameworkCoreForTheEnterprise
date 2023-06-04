@@ -23,7 +23,7 @@
         public int PageNumber { get; set; }
         public int ItemsCount { get; set; }
 
-        public double PageCount
+        public int PageCount
             => ItemsCount < PageSize ? 1 : (int)(((double)ItemsCount / PageSize) + 1);
     }
 }

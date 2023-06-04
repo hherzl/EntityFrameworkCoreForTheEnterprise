@@ -11,7 +11,14 @@
 <h1>Payment Transactions</h1>
 
 <MudGrid>
-    <MudItem xs="12" sm="16" md="4">
+    <MudItem xs="12">
+        <MudSelect T="int" Label="Page size" @bind-value="@PageSize">
+            <MudSelectItem Value="25" />
+            <MudSelectItem Value="50" />
+            <MudSelectItem Value="100" />
+        </MudSelect>
+    </MudItem>
+    <MudItem xs="12">
         <MudSelect T="short?" Label="Status" @bind-value="@PaymentTransactionStatusId">
             <MudSelectItem Value="default(short?)"></MudSelectItem>
             @if (viewBag != null)
@@ -22,7 +29,6 @@
                 }
             }
         </MudSelect>
-
         <MudSelect T="Guid?" Label="Client application" @bind-value="@ClientApplicationId">
             <MudSelectItem Value="default(Guid?)"></MudSelectItem>
             @if (viewBag != null)
@@ -33,12 +39,14 @@
                 }
             }
         </MudSelect>
-
+    </MudItem>
+    <MudItem xs="6">
         <MudDatePicker Label="Start date" @bind-Date="StartDate" />
+    </MudItem>
+    <MudItem xs="6">
         <MudDatePicker Label="End date" @bind-Date="EndDate" />
-
-        <br />
-
+    </MudItem>
+    <MudItem xs="12">
         <MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.Search" @onclick="SearchAsync" />
     </MudItem>
 </MudGrid>
@@ -51,27 +59,39 @@
 }
 else
 {
-    <MudText Typo="Typo.body1">Page size: <strong>@(response.PageSize)</strong>, Total of items: <strong>@(response.ItemsCount)</strong>.</MudText>
-    <br />
-    <MudDataGrid Items="@response.Model">
-        <Columns>
-            <PropertyColumn Property="x => x.PaymentTransactionStatus" Title="Transaction Status" />
-            <PropertyColumn Property="x => x.ClientApplication" Title="Client Application" />
-            <PropertyColumn Property="x => x.OrderTotal" Title="Order Total" />
-            <PropertyColumn Property="x => x.Currency" Title="Currency" />
-            <PropertyColumn Property="x => x.CreationDateTime" Title="Created on" />
-            <TemplateColumn CellClass="d-flex justify-end">
-                <CellTemplate>
-                    <MudStack Row>
-                        <MudLink Href="@($"/payment-txn/{context.Item.Id}")">Details</MudLink>
-                    </MudStack>
-                </CellTemplate>
-            </TemplateColumn>
-        </Columns>
-    </MudDataGrid>
+    <MudGrid>
+        <MudItem xs="12">
+            <MudText Typo="Typo.body1">Page size: <strong>@(response.PageSize)</strong>, Total of items: <strong>@(response.ItemsCount)</strong>.</MudText>
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudPagination Color="Color.Primary" Count="@((int)response.PageCount)" SelectedChanged="PageChangedAsync" />
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudDataGrid Items="@response.Model">
+                <Columns>
+                    <PropertyColumn Property="x => x.Id" Title="ID" />
+                    <PropertyColumn Property="x => x.PaymentTransactionStatus" Title="Transaction Status" />
+                    <PropertyColumn Property="x => x.ClientApplication" Title="Client Application" />
+                    <PropertyColumn Property="x => x.OrderTotal" Title="Order Total" />
+                    <PropertyColumn Property="x => x.Currency" Title="Currency" />
+                    <PropertyColumn Property="x => x.CreationDateTime" Title="Created on" />
+                    <TemplateColumn CellClass="d-flex justify-end">
+                        <CellTemplate>
+                            <MudStack Row>
+                                <MudLink Href="@($"/payment-txn/{context.Item.Id}")">Details</MudLink>
+                            </MudStack>
+                        </CellTemplate>
+                    </TemplateColumn>
+                </Columns>
+            </MudDataGrid>
+        </MudItem>
+    </MudGrid>
 }
 
 @code {
+    int PageSize { get; set; }
     short? PaymentTransactionStatusId { get; set; }
     Guid? ClientApplicationId { get; set; }
     DateTime? StartDate { get; set; }
@@ -82,6 +102,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        PageSize = 25;
         StartDate = DateTime.Now;
         EndDate = DateTime.Now;
 
@@ -92,6 +113,18 @@ else
 
     private async Task SearchAsync()
     {
-        response = await rothschildHouseClient.GetPaymentTransactionsAsync(new GetPaymentTransactionsRequest(PaymentTransactionStatusId, ClientApplicationId, StartDate, EndDate));
+        response = await rothschildHouseClient.GetPaymentTransactionsAsync(new GetPaymentTransactionsRequest(PaymentTransactionStatusId, ClientApplicationId, StartDate, EndDate)
+        {
+            PageSize = PageSize
+        });
+    }
+
+    private async Task PageChangedAsync(int i)
+    {
+        response = await rothschildHouseClient.GetPaymentTransactionsAsync(new GetPaymentTransactionsRequest(PaymentTransactionStatusId, ClientApplicationId, StartDate, EndDate)
+        {
+            PageSize = PageSize,
+            PageNumber = i
+        });
     }
 }
