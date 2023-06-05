@@ -5,6 +5,7 @@
 @using RothschildHouse.Library.Common.Clients.Models.Reports;
 
 @inject ReportsClient reportsClient;
+@inject IConfiguration configuration;
 
 <PageTitle>Home</PageTitle>
 
@@ -61,7 +62,7 @@
 
         hubConnection = new HubConnectionBuilder()
             .AddJsonProtocol()
-            .WithUrl("https://localhost:7251/paymenttxnhub")
+            .WithUrl(configuration["Hubs:PaymentTxn"])
             .ConfigureLogging(logging => logging.SetMinimumLevel(LogLevel.Information))
             .Build()
             ;
