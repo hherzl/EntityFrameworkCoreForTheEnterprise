@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace RothschildHouse.Mock.PaymentTransactions
 {
-    internal record ProcessPaymentTransactionCommand
+    internal record ProcessPaymentTransactionRequest
     {
         public Guid? ClientApplication { get; set; }
         public Guid? CustomerGuid { get; set; }
@@ -60,7 +60,7 @@ namespace RothschildHouse.Mock.PaymentTransactions
                 WriteIndented = true
             };
 
-        public async Task<ProcessPaymentTransactionResponse> ProcessPaymentTransactionAsync(ProcessPaymentTransactionCommand request)
+        public async Task<ProcessPaymentTransactionResponse> ProcessPaymentTransactionAsync(ProcessPaymentTransactionRequest request)
         {
             using var client = CreateHttpClient();
 

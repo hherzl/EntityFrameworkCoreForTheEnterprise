@@ -10,38 +10,62 @@ var mocks = new
     Currencies = Mocks.Currencies.Items.ToList()
 };
 
-while (true)
-{
-    var clientApplicationIndex = mocksRandom.Next(mocks.ClientApplications.Count);
-    var customerIndex = mocksRandom.Next(mocks.Customers.Count);
-    var cardIndex = mocksRandom.Next(mocks.Cards.Count);
-    var currencyIndex = mocksRandom.Next(mocks.Currencies.Count);
-    var card = mocks.Cards[cardIndex];
-    var orderTotal = (decimal)mocksRandom.Next(1, 100);
+var now = DateTime.Now;
 
-    var request = new ProcessPaymentTransactionCommand
+var startDate = new DateTime(now.Year, 1, 1);
+var endDate = new DateTime(now.Year, now.Month, now.Day);
+
+if (args.Length > 0)
+{
+    if (args[0] == "--start-date=now")
     {
-        ClientApplication = mocks.ClientApplications[clientApplicationIndex],
-        CustomerGuid = mocks.Customers[customerIndex],
-        StoreId = 0,
-        CardTypeId = card.Item1,
-        IssuingNetwork = card.Item2,
-        CardholderName = card.Item3,
-        CardNumber = card.Item4,
-        ExpirationDate = card.Item5,
-        Cvv = card.Item6,
-        OrderGuid = Guid.NewGuid(),
-        OrderTotal = orderTotal,
-        Currency = mocks.Currencies[currencyIndex]
-    };
+        startDate = new DateTime(now.Year, now.Month, now.Day);
+        endDate = new DateTime(now.Year, now.Month, now.Day).AddDays(1);
+    }
+}
+
+while (startDate < endDate)
+{
+    var paymentTransactionsPerDay = mocksRandom.Next(20);
+
+    Console.WriteLine($"Mocking '{paymentTransactionsPerDay}' payment orders for {startDate}");
 
     var rothschildHouseClient = new RothschildHouseClient();
 
-    Console.WriteLine($"{DateTime.Now}: Processing payment transaction: total: '{request.OrderTotal} {request.Currency}'...");
+    for (var i = 1; i <= paymentTransactionsPerDay; i++)
+    {
+        var clientApplicationIndex = mocksRandom.Next(mocks.ClientApplications.Count);
+        var customerIndex = mocksRandom.Next(mocks.Customers.Count);
+        var cardIndex = mocksRandom.Next(mocks.Cards.Count);
+        var currencyIndex = mocksRandom.Next(mocks.Currencies.Count);
+        var card = mocks.Cards[cardIndex];
+        var orderTotal = (decimal)mocksRandom.Next(1, 50);
 
-    var response = await rothschildHouseClient.ProcessPaymentTransactionAsync(request);
+        var request = new ProcessPaymentTransactionRequest
+        {
+            ClientApplication = mocks.ClientApplications[clientApplicationIndex],
+            CustomerGuid = mocks.Customers[customerIndex],
+            StoreId = 0,
+            CardTypeId = card.Item1,
+            IssuingNetwork = card.Item2,
+            CardholderName = card.Item3,
+            CardNumber = card.Item4,
+            ExpirationDate = card.Item5,
+            Cvv = card.Item6,
+            OrderGuid = Guid.NewGuid(),
+            OrderTotal = orderTotal,
+            Currency = mocks.Currencies[currencyIndex],
+            TransactionDateTime = startDate
+        };
 
-    Console.WriteLine($"{DateTime.Now}:  Transaction ID: '{response.Id}', Client: '{response.Client}', Amount: '{response.OrderTotal} {response.Currency}'");
+        Console.WriteLine($"{DateTime.Now}: Processing payment transaction: cardholder name: '{request.CardholderName}', total: '{request.OrderTotal} {request.Currency}'...");
 
-    await Task.Delay(3000);
+        var response = await rothschildHouseClient.ProcessPaymentTransactionAsync(request);
+
+        Console.WriteLine($"{DateTime.Now}:  Transaction ID: '{response.Id}', Client: '{response.Client}', Amount: '{response.OrderTotal} {response.Currency}'");
+
+        startDate = startDate.AddDays(1);
+    }
+
+    await Task.Delay(100);
 }

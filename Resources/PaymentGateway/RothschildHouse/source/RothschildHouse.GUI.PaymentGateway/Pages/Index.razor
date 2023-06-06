@@ -12,9 +12,9 @@
 <MudText Typo="Typo.h4" GutterBottom="true">Welcome =)!</MudText>
 <MudText Class="mb-8">Welcome to RothschildHouse, powered by MudBlazor!</MudText>
 
-<MudText Typo="Typo.h3" GutterBottom="true">Monthly Sales</MudText>
+<MudText Typo="Typo.h3" GutterBottom="true">Yearly Sales</MudText>
 
-<MudChart ChartOptions="@(new ChartOptions { YAxisTicks = 100 })" ChartType="ChartType.Bar" ChartSeries="@series" XAxisLabels="@xAxisLabels" @bind-SelectedIndex="selectedSerie" Width="100%" Height="500px">
+<MudChart ChartOptions="@chartOptions" ChartType="ChartType.Bar" ChartSeries="@series" XAxisLabels="@xAxisLabels" @bind-SelectedIndex="selectedSerie" Width="100%" Height="500px">
 </MudChart>
 
 <h2>Notifications</h2>
@@ -22,7 +22,7 @@
 <p>Connected: <strong>@(IsConnected.ToString())</strong></p>
 
 <ul id="messagesList">
-    @foreach (var message in messages)
+    @foreach (var message in messages.Take(10))
     {
         <li>@message</li>
     }
@@ -33,24 +33,32 @@
 <MudAlert Severity="Severity.Normal">You can find documentation and examples on our website here: <MudLink Href="https://mudblazor.com" Typo="Typo.body2" Color="Color.Inherit"><b>www.mudblazor.com</b></MudLink></MudAlert>
 
 @code {
-    int selectedSerie = -1;
-    MonthlySalesResponse monthlySalesResponse;
+    YearlySalesResponse yearlySalesResponse;
+
+    ChartOptions chartOptions;
     List<ChartSeries> series;
     string[] xAxisLabels;
+    int selectedSerie = -1;
+
     HubConnection hubConnection;
     List<string> messages = new();
 
     async Task LoadChartAsync()
     {
+        chartOptions = new ChartOptions { YAxisTicks = 500 };
         series = new();
         xAxisLabels = new string[] { };
 
-        monthlySalesResponse = await reportsClient.GetMonthlySalesAsync();
-        xAxisLabels = monthlySalesResponse.Months.ToArray();
+        yearlySalesResponse = await reportsClient.GetYearlySalesAsync(DateTime.Now.Year);
+        xAxisLabels = yearlySalesResponse.Months.ToArray();
 
-        foreach (var item in monthlySalesResponse.Sales)
+        foreach (var item in yearlySalesResponse.Sales)
         {
-            series.Add(new ChartSeries { Name = item.ClientApplication, Data = item.Values.ToArray() });
+            series.Add(new ChartSeries
+            {
+                Name = item.ClientApplication,
+                Data = item.Values.ToArray()
+            });
         }
     }
 
@@ -69,7 +77,7 @@
 
         hubConnection.On<string, decimal, string>("receivePaymentTxn", async (clientApplication, amount, currency) =>
         {
-            messages.Add($"{DateTime.Now} Received txn from '{clientApplication}' client, total: '{amount} {currency}'");
+            messages.Insert(0, $"{DateTime.Now} Received txn from '{clientApplication}' client, total: '{amount} {currency}'");
 
             await InvokeAsync(StateHasChanged);
             await LoadChartAsync();
@@ -84,8 +92,6 @@
     public async ValueTask DisposeAsync()
     {
         if (hubConnection is not null)
-        {
             await hubConnection.DisposeAsync();
-        }
     }
 }

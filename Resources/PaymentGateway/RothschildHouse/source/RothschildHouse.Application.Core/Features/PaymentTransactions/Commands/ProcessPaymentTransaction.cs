@@ -172,7 +172,7 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Commands
                 Amount = request.OrderTotal,
                 CurrencyId = currency.Id,
                 CurrencyRate = currency.Rate,
-                PaymentTransactionDateTime = request.TransactionDateTime,
+                PaymentTransactionDateTime = request.TransactionDateTime ?? DateTime.Now,
                 Notes = request.Notes
             };
 

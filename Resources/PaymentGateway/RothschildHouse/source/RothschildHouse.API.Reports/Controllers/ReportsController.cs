@@ -17,21 +17,23 @@ namespace RothschildHouse.API.Reports.Controllers
             _reportsService = reportsService;
         }
 
-        [HttpGet("monthly-sale")]
-        public async Task<IActionResult> GetMonthlySalesAsync()
+        [HttpGet("yearly-sale/{year}")]
+        public async Task<IActionResult> GetYearlySalesAsync(int year)
         {
-            var sales = await _reportsService.GetSalesAsync();
+            _logger?.LogDebug($"'{nameof(GetYearlySalesAsync)}' has been invoked");
+
+            var sales = await _reportsService.GetSalesAsync(year);
             var clientApplications = sales.Select(item => item.ClientApplication).Distinct().ToList();
 
-            var response = new MonthlySalesResponse();
+            var response = new YearlySalesResponse();
 
-            var now = DateTime.Now;
+            var date = new DateTime(year, 1, 1);
 
             foreach (var clientApplication in clientApplications)
             {
-                var item = new MonthlySaleItemModel
+                var item = new YearlySaleItemModel
                 {
-                    Year = $"{now.Year}",
+                    Year = $"{date.Year}",
                     ClientApplication = clientApplication
                 };
 
@@ -39,13 +41,48 @@ namespace RothschildHouse.API.Reports.Controllers
 
                 for (var i = 0; i < response.Months.Count; i++)
                 {
+                    var total = sales
+                        .Where(item => item.PaymentTxnDateTime.Value.Year == date.Year)
+                        .Where(item => item.PaymentTxnDateTime.Value.Month == (i + 1))
+                        .Where(item => item.ClientApplication == clientApplication)
+                        .Sum(item => item.Total)
+                        ;
+
                     item.Month = response.Months[i];
-                    item.Values.Add(
-                        sales
-                            .Where(item => item.CreatedOn.Value.Year == now.Year && item.CreatedOn.Value.Month == (i + 1) && item.ClientApplication == clientApplication)
-                            .Sum(item => (double)item.Total)
-                        );
+                    item.Values.Add(total ?? 0);
                 }
+            }
+
+            return Ok(response);
+        }
+
+        [HttpGet("monthly-sale/{year}/{month}")]
+        public async Task<IActionResult> GetMonthlySaleAsync(int year, int month)
+        {
+            _logger?.LogDebug($"'{nameof(GetMonthlySaleAsync)}' has been invoked");
+
+            var sales = await _reportsService.GetSalesAsync(year, month);
+            var clientApplications = sales.Select(item => item.ClientApplication).Distinct().ToList();
+
+            var response = new MonthlySalesResponse
+            {
+                Year = year,
+                Month = month
+            };
+
+            foreach (var clientApplication in clientApplications)
+            {
+                response.Sales.Add(new MonthlySaleItemModel
+                {
+                    Year = $"{year}",
+                    Month = $"{month}",
+                    ClientApplication = clientApplication,
+                    Total = sales
+                        .Where(item => item.PaymentTxnDateTime.Value.Year == year)
+                        .Where(item => item.PaymentTxnDateTime.Value.Month == month)
+                        .Where(item => item.ClientApplication == clientApplication)
+                        .Sum(item => item.Total)
+                });
             }
 
             return Ok(response);

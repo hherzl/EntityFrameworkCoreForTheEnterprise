@@ -16,8 +16,11 @@ namespace RothschildHouse.Library.Common.NoSql
             _salesCollection = database.GetCollection<SaleDocument>(settings.Value.CollectionName);
         }
 
-        public async Task<List<SaleDocument>> GetSalesAsync()
-            => await _salesCollection.Find(_ => true).ToListAsync();
+        public async Task<List<SaleDocument>> GetSalesAsync(int year)
+            => await _salesCollection.Find(item => item.PaymentTxnDateTime.Value.Year == year).ToListAsync();
+
+        public async Task<List<SaleDocument>> GetSalesAsync(int year, int month)
+            => await _salesCollection.Find(item => item.PaymentTxnDateTime.Value.Year == year && item.PaymentTxnDateTime.Value.Month == month).ToListAsync();
 
         public async Task AddSaleAsync(SaleDocument document)
             => await _salesCollection.InsertOneAsync(document);

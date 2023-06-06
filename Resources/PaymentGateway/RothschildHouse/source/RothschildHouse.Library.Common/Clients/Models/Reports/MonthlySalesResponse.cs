@@ -1,14 +1,18 @@
 ﻿namespace RothschildHouse.Library.Common.Clients.Models.Reports
 {
-    public record MonthlySalesResponse
+    public class MonthlySalesResponse
     {
         public MonthlySalesResponse()
         {
-            Months = new() { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
             Sales = new();
         }
 
-        public List<string> Months { get; set; }
+        public int Year { get; set; }
+        public int Month { get; set; }
+
+        public double? Total
+            => Sales.Sum(item => item.Total);
+
         public List<MonthlySaleItemModel> Sales { get; set; }
     }
 }

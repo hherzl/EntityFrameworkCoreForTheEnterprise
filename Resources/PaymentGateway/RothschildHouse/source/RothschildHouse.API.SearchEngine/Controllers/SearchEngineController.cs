@@ -20,8 +20,10 @@ namespace RothschildHouse.API.SearchEngine.Controllers
         }
 
         [HttpPost("sale")]
-        public async Task<IActionResult> PostSaleAsync([FromBody] IndexSaleRequest request)
+        public async Task<IActionResult> IndexSaleAsync([FromBody] IndexSaleRequest request)
         {
+            _logger?.LogDebug($"'{nameof(IndexSaleAsync)}' has been invoked");
+
             var document = new SaleDocument
             {
                 PaymentTxnId = request.PaymentTxnId,
