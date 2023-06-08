@@ -28,7 +28,7 @@ namespace RothschildHouse.Application.Core.Features.Cards.Queries
 
         public async Task<SingleResponse<CardDetailsModel>> Handle(GetCardQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _dbContext.GetCardAsync(request.Id, true, true, cancellationToken);
+            var entity = await _dbContext.GetCardAsync(request.Id, cancellationToken, false);
 
             if (entity == null)
                 return null;

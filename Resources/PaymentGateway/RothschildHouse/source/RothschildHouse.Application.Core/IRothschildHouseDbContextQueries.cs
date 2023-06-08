@@ -42,7 +42,7 @@ namespace RothschildHouse.Application.Core
             return query;
         }
 
-        public static async Task<Card> GetCardAsync(this IRothschildHouseDbContext ctx, Guid? id, bool tracking = true, bool include = true, CancellationToken cancellationToken = default)
+        public static async Task<Card> GetCardAsync(this IRothschildHouseDbContext ctx, Guid? id, CancellationToken cancellationToken = default, bool tracking = true)
         {
             var query = ctx.Card.AsQueryable();
 
@@ -52,7 +52,7 @@ namespace RothschildHouse.Application.Core
             return await query.FirstOrDefaultAsync(item => item.Id == id, cancellationToken);
         }
 
-        public static async Task<Card> GetCardByAsync(this IRothschildHouseDbContext ctx, string issuingNetwork, string cardNumber, bool tracking = true, bool include = true, CancellationToken cancellationToken = default)
+        public static async Task<Card> GetCardByAsync(this IRothschildHouseDbContext ctx, string issuingNetwork, string cardNumber, CancellationToken cancellationToken = default, bool tracking = true)
         {
             var query = ctx.Card.AsQueryable();
 
@@ -184,7 +184,7 @@ namespace RothschildHouse.Application.Core
             return query;
         }
 
-        public static async Task<Transaction> GetTransactionAsync(this IRothschildHouseDbContext ctx, long? id, bool tracking = true, bool include = true, CancellationToken cancellationToken = default)
+        public static async Task<Transaction> GetTransactionAsync(this IRothschildHouseDbContext ctx, long? id, CancellationToken cancellationToken = default, bool tracking = true, bool include = true)
         {
             var query = ctx.Transaction.AsQueryable();
 

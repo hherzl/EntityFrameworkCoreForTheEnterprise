@@ -132,7 +132,8 @@ namespace RothschildHouse.Application.Core.Features.Transactions.Commands
         public async Task<ProcessTransactionResponse> Handle(ProcessTransactionCommand request, CancellationToken cancellationToken)
         {
             var card = await _dbContext
-                .GetCardByAsync(request.IssuingNetwork, request.CardNumber, false, false, cancellationToken);
+                .GetCardByAsync(request.IssuingNetwork, request.CardNumber, cancellationToken, false)
+                ;
 
             if (card == null)
             {
