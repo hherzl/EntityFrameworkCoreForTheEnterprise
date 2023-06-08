@@ -1,9 +1,8 @@
-﻿using System.Text.Json;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace RothschildHouse.TP.CityBank.Payloads.Avs
 {
-    internal record CityBankAvsPayload
+    public record CityBankAvsPayload
     {
         [JsonPropertyName("type")]
         public string Type { get; set; }
@@ -13,8 +12,5 @@ namespace RothschildHouse.TP.CityBank.Payloads.Avs
 
         [JsonPropertyName("paymentMethod")]
         public PaymentMethodPayload PaymentMethodPayload { get; set; }
-
-        public string ToJson()
-            => JsonSerializer.Serialize(this, GlobalJsonSerializerOptions.Default);
     }
 }

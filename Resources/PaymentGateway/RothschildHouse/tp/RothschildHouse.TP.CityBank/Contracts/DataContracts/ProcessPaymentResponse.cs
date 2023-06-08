@@ -1,4 +1,6 @@
 ﻿using System.Text.Json;
+using RothschildHouse.TP.CityBank.Payloads.Avs;
+using RothschildHouse.TP.CityBank.Payloads.Cvv2;
 
 namespace RothschildHouse.TP.CityBank.Contracts.DataContracts
 {
@@ -16,8 +18,8 @@ namespace RothschildHouse.TP.CityBank.Contracts.DataContracts
         public bool Successed { get; set; }
         public Guid? Guid { get; set; }
 
-        public string AvsPayload { get; set; }
-        public string Cvv2Payload { get; set; }
+        public CityBankAvsPayload AvsPayload { get; set; }
+        public Cvv2Payload Cvv2Payload { get; set; }
 
         public ProcessPaymentAuthorization Authorization { get; set; }
         public ProcessPaymentCapture Capture { get; set; }

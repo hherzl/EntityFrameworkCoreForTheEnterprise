@@ -2,7 +2,7 @@
 
 namespace RothschildHouse.TP.CityBank.Payloads.Avs
 {
-    internal record PaymentMethodPayload
+    public record PaymentMethodPayload
     {
         [JsonPropertyName("card")]
         public CardPayload Card { get; set; }

@@ -30,8 +30,8 @@ namespace RothschildHouse.TP.CityBank
             {
                 Successed = true,
                 Guid = Guid.NewGuid(),
-                AvsPayload = AvsMocks.StreetAndZip("payment", request).ToJson(),
-                Cvv2Payload = Cvv2Mocks.Match().ToJson(),
+                AvsPayload = AvsMocks.StreetAndZip("payment", request),
+                Cvv2Payload = Cvv2Mocks.Match(),
                 Authorization = ProcessPaymentAuthorizationMocks.Mock(),
                 Capture = ProcessPaymentCaptureMocks.Mock(),
                 SubscriptionTransactionId = ""
