@@ -2,16 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using RothschildHouse.Application.Core.Common.Contracts;
 using RothschildHouse.Library.Common.Clients.Models.Common;
+using RothschildHouse.Library.Common.Clients.Models.PaymentGateway;
 
 namespace RothschildHouse.Application.Core.Features.Countries.Queries
 {
-    public record CountryItemModel
-    {
-        public short? Id { get; set; }
-        public string Name { get; set; }
-        public string TwoLetterIsoCode { get; set; }
-    }
-
     public class GetCountriesQuery : IRequest<ListResponse<CountryItemModel>>
     {
         public GetCountriesQuery()

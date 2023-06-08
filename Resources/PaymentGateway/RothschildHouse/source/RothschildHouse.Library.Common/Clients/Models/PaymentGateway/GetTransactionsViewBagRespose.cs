@@ -2,9 +2,9 @@
 
 namespace RothschildHouse.Library.Common.Clients.Models.PaymentGateway
 {
-    public record GetPaymentTransactionsViewBagRespose
+    public record GetTransactionsViewBagRespose : Response
     {
-        public List<ListItem<short?>> PaymentTransactionStatuses { get; set; }
+        public List<ListItem<short?>> TransactionStatuses { get; set; }
         public List<ListItem<Guid?>> ClientApplications { get; set; }
     }
 }

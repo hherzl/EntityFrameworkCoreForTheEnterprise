@@ -1,4 +1,4 @@
-﻿@page "/payment-txn"
+﻿@page "/txn"
 
 @using RothschildHouse.Library.Common.Clients;
 @using RothschildHouse.Library.Common.Clients.Models.Common;
@@ -6,9 +6,9 @@
 
 @inject PaymentGatewayClient rothschildHouseClient
 
-<PageTitle>Payment Transactions</PageTitle>
+<PageTitle>Transactions</PageTitle>
 
-<h1>Payment Transactions</h1>
+<h1>Transactions</h1>
 
 <MudGrid>
     <MudItem xs="12">
@@ -19,11 +19,11 @@
         </MudSelect>
     </MudItem>
     <MudItem xs="12">
-        <MudSelect T="short?" Label="Status" @bind-value="@PaymentTransactionStatusId">
+        <MudSelect T="short?" Label="Status" @bind-value="@TransactionStatusId">
             <MudSelectItem Value="default(short?)"></MudSelectItem>
             @if (viewBag != null)
             {
-                @foreach (var item in viewBag?.PaymentTransactionStatuses)
+                @foreach (var item in viewBag?.TransactionStatuses)
                 {
                     <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
                 }
@@ -72,7 +72,7 @@ else
             <MudDataGrid Items="@response.Model">
                 <Columns>
                     <PropertyColumn Property="x => x.Id" Title="ID" />
-                    <PropertyColumn Property="x => x.PaymentTransactionStatus" Title="Transaction Status" />
+                    <PropertyColumn Property="x => x.TransactionStatus" Title="Transaction Status" />
                     <PropertyColumn Property="x => x.ClientApplication" Title="Client Application" />
                     <PropertyColumn Property="x => x.OrderTotal" Title="Order Total" />
                     <PropertyColumn Property="x => x.Currency" Title="Currency" />
@@ -80,7 +80,7 @@ else
                     <TemplateColumn CellClass="d-flex justify-end">
                         <CellTemplate>
                             <MudStack Row>
-                                <MudLink Href="@($"/payment-txn/{context.Item.Id}")">Details</MudLink>
+                                <MudLink Href="@($"/txn/{context.Item.Id}")">Details</MudLink>
                             </MudStack>
                         </CellTemplate>
                     </TemplateColumn>
@@ -92,13 +92,13 @@ else
 
 @code {
     int PageSize { get; set; }
-    short? PaymentTransactionStatusId { get; set; }
+    short? TransactionStatusId { get; set; }
     Guid? ClientApplicationId { get; set; }
     DateTime? StartDate { get; set; }
     DateTime? EndDate { get; set; }
 
-    GetPaymentTransactionsViewBagRespose viewBag;
-    PagedResponse<PaymentTransactionItemModel> response;
+    GetTransactionsViewBagRespose viewBag;
+    PagedResponse<TransactionItemModel> response;
 
     protected override async Task OnInitializedAsync()
     {
@@ -106,14 +106,14 @@ else
         StartDate = DateTime.Now;
         EndDate = DateTime.Now;
 
-        viewBag = await rothschildHouseClient.GetPaymentTransactionsViewBag();
+        viewBag = await rothschildHouseClient.GetTransactionsViewBag();
 
         await SearchAsync();
     }
 
     private async Task SearchAsync()
     {
-        response = await rothschildHouseClient.GetPaymentTransactionsAsync(new GetPaymentTransactionsRequest(PaymentTransactionStatusId, ClientApplicationId, StartDate, EndDate)
+        response = await rothschildHouseClient.GetTransactionsAsync(new GetTransactionsRequest(TransactionStatusId, ClientApplicationId, StartDate, EndDate)
         {
             PageSize = PageSize
         });
@@ -121,7 +121,7 @@ else
 
     private async Task PageChangedAsync(int i)
     {
-        response = await rothschildHouseClient.GetPaymentTransactionsAsync(new GetPaymentTransactionsRequest(PaymentTransactionStatusId, ClientApplicationId, StartDate, EndDate)
+        response = await rothschildHouseClient.GetTransactionsAsync(new GetTransactionsRequest(TransactionStatusId, ClientApplicationId, StartDate, EndDate)
         {
             PageSize = PageSize,
             PageNumber = i

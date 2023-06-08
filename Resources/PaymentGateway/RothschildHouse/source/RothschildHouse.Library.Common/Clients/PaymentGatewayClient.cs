@@ -126,40 +126,40 @@ namespace RothschildHouse.Library.Common.Clients
             return JsonSerializer.Deserialize<SingleResponse<CustomerDetailsModel>>(content, options: DefaultJsonSerializerOptions);
         }
 
-        public async Task<GetPaymentTransactionsViewBagRespose> GetPaymentTransactionsViewBag()
+        public async Task<GetTransactionsViewBagRespose> GetTransactionsViewBag()
         {
             using var client = CreateHttpClient();
 
-            var response = await client.GetAsync($"payment-txn-viewbag");
+            var response = await client.GetAsync($"txn-viewbag");
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
 
-            return JsonSerializer.Deserialize<GetPaymentTransactionsViewBagRespose>(content, options: DefaultJsonSerializerOptions);
+            return JsonSerializer.Deserialize<GetTransactionsViewBagRespose>(content, options: DefaultJsonSerializerOptions);
         }
 
-        public async Task<PagedResponse<PaymentTransactionItemModel>> GetPaymentTransactionsAsync(GetPaymentTransactionsRequest request)
+        public async Task<PagedResponse<TransactionItemModel>> GetTransactionsAsync(GetTransactionsRequest request)
         {
             using var client = CreateHttpClient();
 
-            var response = await client.GetAsync($"payment-txn?pageSize={request.PageSize}&pageNumber={request.PageNumber}&PaymentTransactionStatusId={request.PaymentTransactionStatusId}&clientApplicationId={request.ClientApplicationId}&startDate={request.StartDate}&endDate={request.EndDate}");
+            var response = await client.GetAsync($"txn?pageSize={request.PageSize}&pageNumber={request.PageNumber}&transactionStatusId={request.TransactionStatusId}&clientApplicationId={request.ClientApplicationId}&startDate={request.StartDate}&endDate={request.EndDate}");
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
 
-            return JsonSerializer.Deserialize<PagedResponse<PaymentTransactionItemModel>>(content, options: DefaultJsonSerializerOptions);
+            return JsonSerializer.Deserialize<PagedResponse<TransactionItemModel>>(content, options: DefaultJsonSerializerOptions);
         }
 
-        public async Task<SingleResponse<PaymentTransactionDetailsModel>> GetPaymentTransactionAsync(long? id)
+        public async Task<SingleResponse<TransactionDetailsModel>> GetTransactionAsync(long? id)
         {
             using var client = CreateHttpClient();
 
-            var response = await client.GetAsync($"payment-txn/{id}");
+            var response = await client.GetAsync($"txn/{id}");
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
 
-            return JsonSerializer.Deserialize<SingleResponse<PaymentTransactionDetailsModel>>(content, options: DefaultJsonSerializerOptions);
+            return JsonSerializer.Deserialize<SingleResponse<TransactionDetailsModel>>(content, options: DefaultJsonSerializerOptions);
         }
     }
 }

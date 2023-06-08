@@ -1,8 +1,8 @@
-IF OBJECT_ID('dbo.VPaymentTransactionStatus') IS NOT NULL
-	DROP VIEW [dbo].[VPaymentTransactionStatus]
+IF OBJECT_ID('dbo.VTransactionStatus') IS NOT NULL
+	DROP VIEW [dbo].[VTransactionStatus]
 GO
 
-CREATE VIEW [dbo].[VPaymentTransactionStatus]
+CREATE VIEW [dbo].[VTransactionStatus]
 AS
     SELECT
         [Value] AS [Id],
@@ -10,7 +10,7 @@ AS
     FROM
         [dbo].[EnumDescription]
     WHERE
-        [Type] = 'RothschildHouse.Domain.Core.Enums.PaymentTransactionStatus'
+        [Type] = 'RothschildHouse.Domain.Core.Enums.TransactionStatus'
 GO
 
 IF OBJECT_ID('dbo.VCardType') IS NOT NULL
@@ -28,7 +28,7 @@ AS
         [Type] = 'RothschildHouse.Domain.Core.Enums.CardType'
 GO
 
-SELECT * FROM [dbo].[VPaymentTransactionStatus]
+SELECT * FROM [dbo].[VTransactionStatus]
 GO
 
 SELECT * FROM [dbo].[VCardType]

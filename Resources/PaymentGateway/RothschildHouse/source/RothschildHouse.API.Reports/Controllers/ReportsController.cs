@@ -42,8 +42,8 @@ namespace RothschildHouse.API.Reports.Controllers
                 for (var i = 0; i < response.Months.Count; i++)
                 {
                     var total = sales
-                        .Where(item => item.PaymentTxnDateTime.Value.Year == date.Year)
-                        .Where(item => item.PaymentTxnDateTime.Value.Month == (i + 1))
+                        .Where(item => item.TxnDateTime.Value.Year == date.Year)
+                        .Where(item => item.TxnDateTime.Value.Month == (i + 1))
                         .Where(item => item.ClientApplication == clientApplication)
                         .Sum(item => item.Total)
                         ;
@@ -78,8 +78,8 @@ namespace RothschildHouse.API.Reports.Controllers
                     Month = $"{month}",
                     ClientApplication = clientApplication,
                     Total = sales
-                        .Where(item => item.PaymentTxnDateTime.Value.Year == year)
-                        .Where(item => item.PaymentTxnDateTime.Value.Month == month)
+                        .Where(item => item.TxnDateTime.Value.Year == year)
+                        .Where(item => item.TxnDateTime.Value.Month == month)
                         .Where(item => item.ClientApplication == clientApplication)
                         .Sum(item => item.Total)
                 });

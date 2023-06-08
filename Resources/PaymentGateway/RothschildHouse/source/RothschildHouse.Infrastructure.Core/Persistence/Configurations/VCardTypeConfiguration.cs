@@ -9,7 +9,7 @@ namespace RothschildHouse.Infrastructure.Core.Persistence.Configurations
         public void Configure(EntityTypeBuilder<VCardType> builder)
         {
             // Set configuration for entity
-            builder.ToTable("VCardType", "dbo");
+            builder.ToView("VCardType", "dbo");
 
             // Set key for entity
             builder.HasKey(p => p.Id);

@@ -9,6 +9,6 @@ namespace RothschildHouse.Domain.Core.Entities
         public string Name { get; set; }
         public string Url { get; set; }
 
-        public virtual Collection<PaymentTransaction> PaymentTransactionList { get; set; }
+        public virtual Collection<Transaction> PaymentTransactionList { get; set; }
     }
 }

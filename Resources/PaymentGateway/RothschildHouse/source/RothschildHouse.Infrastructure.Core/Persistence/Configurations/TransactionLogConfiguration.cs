@@ -5,14 +5,14 @@ using RothschildHouse.Infrastructure.Core.Persistence.Configurations.Common;
 
 namespace RothschildHouse.Infrastructure.Core.Persistence.Configurations
 {
-    internal class PaymentTransactionLogConfiguration : AuditableEntityConfiguration<PaymentTransactionLog>
+    internal class TransactionLogConfiguration : AuditableEntityConfiguration<TransactionLog>
     {
-        public override void Configure(EntityTypeBuilder<PaymentTransactionLog> builder)
+        public override void Configure(EntityTypeBuilder<TransactionLog> builder)
         {
             base.Configure(builder);
 
             // Set configuration for entity
-            builder.ToTable("PaymentTransactionLog", "dbo");
+            builder.ToTable("TransactionLog", "dbo");
 
             // Set key for entity
             builder.HasKey(p => p.Id);
@@ -28,13 +28,13 @@ namespace RothschildHouse.Infrastructure.Core.Persistence.Configurations
                 ;
 
             builder
-                .Property(p => p.PaymentTransactionId)
+                .Property(p => p.TransactionId)
                 .HasColumnType("bigint")
                 .IsRequired()
                 ;
 
             builder
-                .Property(p => p.PaymentTransactionStatusId)
+                .Property(p => p.TransactionStatusId)
                 .HasColumnType("smallint")
                 .IsRequired()
                 ;
@@ -65,10 +65,10 @@ namespace RothschildHouse.Infrastructure.Core.Persistence.Configurations
             // Add configuration for foreign keys
 
             builder
-                .HasOne(p => p.PaymentTransactionFk)
-                .WithMany(b => b.PaymentTransactionLogList)
-                .HasForeignKey(p => p.PaymentTransactionId)
-                .HasConstraintName("FK_dbo_PaymentTransactionLog_PaymentTransactionId_dbo_PaymentTransaction")
+                .HasOne(p => p.TransactionFk)
+                .WithMany(b => b.TransactionLogList)
+                .HasForeignKey(p => p.TransactionId)
+                .HasConstraintName("FK_dbo_TransactionLog_TransactionId_dbo_Transaction")
                 ;
         }
     }

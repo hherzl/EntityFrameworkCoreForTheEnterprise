@@ -169,13 +169,13 @@ var currency = db
     .SetPrimaryKey(e => e.Id)
     ;
 
-var paymentTxn = db
+var txn = db
     .DefineEntity(new
     {
         Id = (long)0,
         Guid = Guid.Empty,
         ClientFullClassName = "",
-        PaymentTransactionStatusId = (short)0,
+        TransactionStatusId = (short)0,
         ClientApplicationId = Guid.Empty,
         CustomerId = Guid.Empty,
         StoreId = 0,
@@ -183,14 +183,14 @@ var paymentTxn = db
         Amount = 0m,
         CurrencyId = (short)0,
         CurrencyRate = 0m,
-        PaymentTransactionDateTime = DateTime.Now,
+        TransactionDateTime = DateTime.Now,
         Notes = ""
     })
-    .SetNaming("PaymentTransaction")
+    .SetNaming("Transaction")
     .SetColumnFor(e => e.ClientFullClassName, length: 200)
     .SetColumnFor(e => e.Amount, prec: 12, scale: 4)
     .SetColumnFor(e => e.CurrencyRate, prec: 18, scale: 4)
-    .SetColumnFor(e => e.PaymentTransactionDateTime, nullable: true)
+    .SetColumnFor(e => e.TransactionDateTime, nullable: true)
     .SetColumnFor(e => e.Notes, nullable: true)
     .SetIdentity(e => e.Id)
     .SetPrimaryKey(e => e.Id)
@@ -201,24 +201,24 @@ var paymentTxn = db
     .AddForeignKey(e => e.CurrencyId, currency.Table)
     ;
 
-var paymentTxnLog = db
+var txnLog = db
     .DefineEntity(new
     {
         Id = (long)0,
-        PaymentTransactionId = (long)0,
-        PaymentTransactionStatusId = (short)0,
+        TransactionId = (long)0,
+        TransactionStatusId = (short)0,
         LogType = "",
         ContentType = "",
         Content = "",
         Notes = ""
     })
-    .SetNaming("PaymentTransactionLog")
+    .SetNaming("TransactionLog")
     .SetColumnFor(e => e.LogType, length: 25, nullable: true)
     .SetColumnFor(e => e.ContentType, length: 100, nullable: true)
     .SetColumnFor(e => e.Notes, nullable: true)
     .SetIdentity(e => e.Id)
     .SetPrimaryKey(e => e.Id)
-    .AddForeignKey(e => e.PaymentTransactionId, paymentTxn.Table)
+    .AddForeignKey(e => e.TransactionId, txn.Table)
     ;
 
 dynamic importBag = new ExpandoObject();

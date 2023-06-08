@@ -1,4 +1,4 @@
-﻿@page "/payment-txn/{Id:long}"
+﻿@page "/txn/{Id:long}"
 
 @using RothschildHouse.Library.Common.Clients;
 @using RothschildHouse.Library.Common.Clients.Models.Common;
@@ -18,13 +18,13 @@
     }
 </style>
 
-<PageTitle>Payment Transaction Details</PageTitle>
+<PageTitle>Transaction Details</PageTitle>
 
-<h1>Payment Transaction Details</h1>
+<h1>Transaction Details</h1>
 
 @if (response == null)
 {
-    <strong>There is no information for payment transaction with Id @Id</strong>
+    <strong>There is no information for transaction with Id @Id</strong>
 }
 else if (response.Model is not null)
 {
@@ -57,7 +57,7 @@ else if (response.Model is not null)
         <MudCard>
             <MudCardHeader>
                 <MudCardContent>
-                    <MudText>Status: <strong>@item.PaymentTransactionStatus</strong></MudText>
+                    <MudText>Status: <strong>@item.TransactionStatus</strong></MudText>
                 </MudCardContent>
             </MudCardHeader>
             <MudCardContent>
@@ -79,10 +79,10 @@ else if (response.Model is not null)
     [Parameter]
     public long? Id { get; set; }
 
-    private SingleResponse<PaymentTransactionDetailsModel> response;
+    private SingleResponse<TransactionDetailsModel> response;
 
     protected override async Task OnInitializedAsync()
     {
-        response = await rothschildHouseClient.GetPaymentTransactionAsync(Id);
+        response = await rothschildHouseClient.GetTransactionAsync(Id);
     }
 }

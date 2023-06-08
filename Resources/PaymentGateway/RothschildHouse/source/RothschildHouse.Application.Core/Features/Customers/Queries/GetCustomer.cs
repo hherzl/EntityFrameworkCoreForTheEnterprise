@@ -1,29 +1,11 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using RothschildHouse.Application.Core.Common.Contracts;
-using RothschildHouse.Application.Core.Features.PaymentTransactions.Queries;
 using RothschildHouse.Library.Common.Clients.Models.Common;
+using RothschildHouse.Library.Common.Clients.Models.PaymentGateway;
 
 namespace RothschildHouse.Application.Core.Features.Customers.Queries
 {
-    public record CustomerDetailsModel
-    {
-        public Guid? Id { get; set; }
-        public int? PersonId { get; set; }
-        public string Person { get; set; }
-        public int? CompanyId { get; set; }
-        public string Company { get; set; }
-        public short? CountryId { get; set; }
-        public string Country { get; set; }
-        public string AddressLine1 { get; set; }
-        public string AddressLine2 { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; }
-        public Guid? AlienGuid { get; set; }
-
-        public List<PaymentTransactionItemModel> PaymentTransactions { get; set; }
-    }
-
     public class GetCustomerQuery : IRequest<SingleResponse<CustomerDetailsModel>>
     {
         public GetCustomerQuery(Guid? id)
@@ -34,11 +16,11 @@ namespace RothschildHouse.Application.Core.Features.Customers.Queries
         public Guid? Id { get; set; }
     }
 
-    public class GetPaymentTransactionQueryHandler : IRequestHandler<GetCustomerQuery, SingleResponse<CustomerDetailsModel>>
+    public class GetCustomerQueryHandler : IRequestHandler<GetCustomerQuery, SingleResponse<CustomerDetailsModel>>
     {
         private readonly IRothschildHouseDbContext _dbContext;
 
-        public GetPaymentTransactionQueryHandler(IRothschildHouseDbContext dbContext)
+        public GetCustomerQueryHandler(IRothschildHouseDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -52,14 +34,14 @@ namespace RothschildHouse.Application.Core.Features.Customers.Queries
             if (entity == null)
                 return null;
 
-            var paymentTransactions = await _dbContext
-                .GetPaymentTransactions(customerId: entity.Id)
+            var transactions = await _dbContext
+                .GetTransactions(customerId: entity.Id)
                 .OrderByDescending(item => item.CreationDateTime)
                 .Paging(10, 1)
                 .ToListAsync(cancellationToken)
                 ;
 
-            paymentTransactions.ForEach(item => item.CardNumber = item.CardNumber?[^4..]);
+            transactions.ForEach(item => item.CardNumber = item.CardNumber?[^4..]);
 
             return new SingleResponse<CustomerDetailsModel>
             {
@@ -77,7 +59,7 @@ namespace RothschildHouse.Application.Core.Features.Customers.Queries
                     Phone = entity.Phone,
                     Email = entity.Email,
                     AlienGuid = entity.AlienGuid,
-                    PaymentTransactions = paymentTransactions
+                    Transactions = transactions
                 }
             };
         }

@@ -19,6 +19,6 @@ namespace RothschildHouse.Domain.Core.Entities
         public Company CompanyFk { get; set; }
         public Country CountryFk { get; set; }
 
-        public virtual Collection<PaymentTransaction> PaymentTransactionList { get; set; }
+        public virtual Collection<Transaction> PaymentTransactionList { get; set; }
     }
 }

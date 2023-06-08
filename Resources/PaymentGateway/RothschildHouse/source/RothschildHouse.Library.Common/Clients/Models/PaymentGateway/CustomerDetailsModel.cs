@@ -15,6 +15,6 @@
         public string Email { get; set; }
         public Guid? AlienGuid { get; set; }
 
-        public List<PaymentTransactionItemModel> PaymentTransactions { get; set; }
+        public List<TransactionItemModel> Transactions { get; set; }
     }
 }

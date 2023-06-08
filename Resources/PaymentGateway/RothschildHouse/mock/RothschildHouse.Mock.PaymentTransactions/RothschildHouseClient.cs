@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace RothschildHouse.Mock.PaymentTransactions
 {
-    internal record ProcessPaymentTransactionRequest
+    internal record ProcessTransactionRequest
     {
         public Guid? ClientApplication { get; set; }
         public Guid? CustomerGuid { get; set; }
@@ -24,7 +24,7 @@ namespace RothschildHouse.Mock.PaymentTransactions
         public string Notes { get; set; }
     }
 
-    internal record ProcessPaymentTransactionResponse
+    internal record ProcessTransactionResponse
     {
         public long? Id { get; set; }
         public bool Successed { get; set; }
@@ -60,16 +60,16 @@ namespace RothschildHouse.Mock.PaymentTransactions
                 WriteIndented = true
             };
 
-        public async Task<ProcessPaymentTransactionResponse> ProcessPaymentTransactionAsync(ProcessPaymentTransactionRequest request)
+        public async Task<ProcessTransactionResponse> ProcessTransactionAsync(ProcessTransactionRequest request)
         {
             using var client = CreateHttpClient();
 
-            var response = await client.PostAsJsonAsync($"{_endpoint}/process-payment-txn", request);
+            var response = await client.PostAsJsonAsync($"{_endpoint}/process-txn", request);
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
 
-            return JsonSerializer.Deserialize<ProcessPaymentTransactionResponse>(content, options: DefaultJsonSerializerOptions);
+            return JsonSerializer.Deserialize<ProcessTransactionResponse>(content, options: DefaultJsonSerializerOptions);
         }
     }
 }

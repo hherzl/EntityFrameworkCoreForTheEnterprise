@@ -11,6 +11,6 @@
         public string ExpirationDate { get; set; }
         public string Cvv { get; set; }
 
-        public List<PaymentTransactionItemModel> PaymentTransactions { get; set; }
+        public List<TransactionItemModel> Transactions { get; set; }
     }
 }

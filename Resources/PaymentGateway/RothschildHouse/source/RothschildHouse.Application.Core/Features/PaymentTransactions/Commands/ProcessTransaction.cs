@@ -13,11 +13,11 @@ using RothschildHouse.Library.Common.Clients.Models.SearchEngine;
 using RothschildHouse.TP.CityBank.Contracts;
 using RothschildHouse.TP.CityBank.Contracts.DataContracts;
 
-namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Commands
+namespace RothschildHouse.Application.Core.Features.Transactions.Commands
 {
-    public record ProcessPaymentTransactionCommand : IRequest<ProcessPaymentTransactionResponse>, IValidatableObject
+    public record ProcessTransactionCommand : IRequest<ProcessTransactionResponse>, IValidatableObject
     {
-        public ProcessPaymentTransactionCommand()
+        public ProcessTransactionCommand()
         {
         }
 
@@ -92,13 +92,13 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Commands
         }
     }
 
-    public record ProcessPaymentTransactionResponse : CreatedResponse<long?>
+    public record ProcessTransactionResponse : CreatedResponse<long?>
     {
-        public ProcessPaymentTransactionResponse()
+        public ProcessTransactionResponse()
         {
         }
 
-        public ProcessPaymentTransactionResponse(bool successed, string client, decimal? orderTotal, string currency)
+        public ProcessTransactionResponse(bool successed, string client, decimal? orderTotal, string currency)
         {
             Successed = successed;
             Client = client;
@@ -112,22 +112,24 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Commands
         public string Currency { get; set; }
     }
 
-    public class ProcessPaymentTransactionCommandHandler : IRequestHandler<ProcessPaymentTransactionCommand, ProcessPaymentTransactionResponse>
+    public class ProcessTransactionCommandHandler : IRequestHandler<ProcessTransactionCommand, ProcessTransactionResponse>
     {
-        public const string ApplicationJson = "application/json";
+        public const string APPLICATION_JSON = "application/json";
+        public const string REQUEST = "Request";
+        public const string RESPONSE = "Response";
 
         private readonly IRothschildHouseDbContext _dbContext;
         private readonly ICityBankPaymentServicesClient _cityBankPaymentServicesClient;
         private readonly SearchEngineClient _searchEngineClient;
 
-        public ProcessPaymentTransactionCommandHandler(IRothschildHouseDbContext dbContext, ICityBankPaymentServicesClient cityBankPaymentServicesClient, SearchEngineClient searchEngineClient)
+        public ProcessTransactionCommandHandler(IRothschildHouseDbContext dbContext, ICityBankPaymentServicesClient cityBankPaymentServicesClient, SearchEngineClient searchEngineClient)
         {
             _dbContext = dbContext;
             _cityBankPaymentServicesClient = cityBankPaymentServicesClient;
             _searchEngineClient = searchEngineClient;
         }
 
-        public async Task<ProcessPaymentTransactionResponse> Handle(ProcessPaymentTransactionCommand request, CancellationToken cancellationToken)
+        public async Task<ProcessTransactionResponse> Handle(ProcessTransactionCommand request, CancellationToken cancellationToken)
         {
             var card = await _dbContext
                 .GetCardByAsync(request.IssuingNetwork, request.CardNumber, false, false, cancellationToken);
@@ -160,11 +162,11 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Commands
             var customer = await _dbContext.GetCustomerAsync(request.CustomerGuid, cancellationToken, false, false)
                 ?? throw new RothschildHouseException($"There is no data for Customer with Id '{request.CustomerGuid}'");
 
-            var paymentTxn = new PaymentTransaction
+            var txn = new Transaction
             {
                 Guid = Guid.NewGuid(),
                 ClientFullClassName = typeof(ICityBankPaymentServicesClient).FullName,
-                PaymentTransactionStatusId = (short)PaymentTransactionStatus.Requested,
+                TransactionStatusId = (short)TransactionStatus.Requested,
                 ClientApplicationId = clientApplication.Id,
                 CustomerId = customer.Id,
                 StoreId = request.StoreId,
@@ -172,11 +174,11 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Commands
                 Amount = request.OrderTotal,
                 CurrencyId = currency.Id,
                 CurrencyRate = currency.Rate,
-                PaymentTransactionDateTime = request.TransactionDateTime ?? DateTime.Now,
+                TransactionDateTime = request.TransactionDateTime ?? DateTime.Now,
                 Notes = request.Notes
             };
 
-            _dbContext.PaymentTransaction.Add(paymentTxn);
+            _dbContext.Transaction.Add(txn);
 
             await _dbContext.SaveChangesAsync(cancellationToken);
 
@@ -188,16 +190,16 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Commands
                 CardNumber = request.CardNumber,
                 ExpirationDate = request.ExpirationDate,
                 Cvv = request.Cvv,
-                OrderTotal = paymentTxn.Amount,
+                OrderTotal = txn.Amount,
                 Currency = currency.Code
             };
 
-            _dbContext.PaymentTransactionLog.Add(new PaymentTransactionLog
+            _dbContext.TransactionLog.Add(new TransactionLog
             {
-                PaymentTransactionId = paymentTxn.Id,
-                PaymentTransactionStatusId = paymentTxn.PaymentTransactionStatusId,
-                LogType = "Request",
-                ContentType = ApplicationJson,
+                TransactionId = txn.Id,
+                TransactionStatusId = txn.TransactionStatusId,
+                LogType = REQUEST,
+                ContentType = APPLICATION_JSON,
                 Content = paymentGatewayRequest.ToJson()
             });
 
@@ -205,65 +207,65 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Commands
 
             if (paymentGatewayResponse.Successed)
             {
-                paymentTxn.PaymentTransactionStatusId = (short)PaymentTransactionStatus.Processed;
+                txn.TransactionStatusId = (short)TransactionStatus.Processed;
 
-                var paymentTxnLog = new PaymentTransactionLog
+                var paymentTxnLog = new TransactionLog
                 {
-                    PaymentTransactionId = paymentTxn.Id,
-                    PaymentTransactionStatusId = paymentTxn.PaymentTransactionStatusId,
-                    LogType = "Response",
-                    ContentType = ApplicationJson,
+                    TransactionId = txn.Id,
+                    TransactionStatusId = txn.TransactionStatusId,
+                    LogType = RESPONSE,
+                    ContentType = APPLICATION_JSON,
                     Content = paymentGatewayResponse.ToJson()
                 };
 
-                _dbContext.PaymentTransactionLog.Add(paymentTxnLog);
+                _dbContext.TransactionLog.Add(paymentTxnLog);
 
-                paymentTxnLog.AddNotification(new PaymentTransactionProcessedNotification
+                paymentTxnLog.AddNotification(new TransactionProcessedNotification
                 {
-                    Id = paymentTxn.Id,
-                    Guid = paymentTxn.Guid,
+                    Id = txn.Id,
+                    Guid = txn.Guid,
                     ClientApplication = clientApplication.Name,
-                    Amount = paymentTxn.Amount,
+                    Amount = txn.Amount,
                     Currency = currency.Code
                 });
 
                 await _searchEngineClient.IndexSaleAsync(new IndexSaleRequest
                 {
-                    PaymentTxnId = paymentTxn.Id,
-                    PaymentTxnGuid = paymentTxn.Guid,
-                    ClientApplicationId = paymentTxn.ClientApplicationId,
+                    TxnId = txn.Id,
+                    TxnGuid = txn.Guid,
+                    TxnDateTime = txn.TransactionDateTime,
+                    ClientApplicationId = txn.ClientApplicationId,
                     ClientApplication = clientApplication.Name,
                     IssuingNetwork = card.IssuingNetwork,
                     CardTypeId = card.CardTypeId,
                     CardType = card.CardTypeId == (short)CardType.Debit ? "Debit" : "Credit",
-                    Total = (double)paymentTxn.Amount,
+                    Total = (double)txn.Amount,
                     CurrencyId = currency.Id,
-                    Currency = currency.Code,
-                    PaymentTxnDateTime = paymentTxn.PaymentTransactionDateTime
+                    Currency = currency.Code
                 });
             }
             else
             {
-                paymentTxn.PaymentTransactionStatusId = (short)PaymentTransactionStatus.Denied;
+                txn.TransactionStatusId = (short)TransactionStatus.Denied;
 
-                _dbContext.PaymentTransactionLog.Add(new PaymentTransactionLog
+                _dbContext.TransactionLog.Add(new TransactionLog
                 {
-                    PaymentTransactionId = paymentTxn.Id,
-                    PaymentTransactionStatusId = paymentTxn.PaymentTransactionStatusId,
-                    LogType = "Response",
-                    ContentType = ApplicationJson,
+                    TransactionId = txn.Id,
+                    TransactionStatusId = txn.TransactionStatusId,
+                    LogType = RESPONSE,
+                    ContentType = APPLICATION_JSON,
                     Content = paymentGatewayResponse.ToJson()
                 });
             }
 
             await _dbContext.SaveChangesAsync(cancellationToken);
 
-            return new ProcessPaymentTransactionResponse
+            return new ProcessTransactionResponse
             {
-                Id = paymentTxn.Id,
+                Id = txn.Id,
                 Successed = paymentGatewayResponse.Successed,
                 Client = clientApplication.Name,
-                OrderTotal = paymentTxn.Amount,
+                OrderTotal = txn.Amount,
                 Currency = currency.Code
             };
         }

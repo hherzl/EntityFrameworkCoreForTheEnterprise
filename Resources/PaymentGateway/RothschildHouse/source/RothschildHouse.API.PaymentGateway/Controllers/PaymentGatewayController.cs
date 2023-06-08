@@ -6,9 +6,10 @@ using RothschildHouse.Application.Core.Features.ClientApplications.Queries;
 using RothschildHouse.Application.Core.Features.Countries.Queries;
 using RothschildHouse.Application.Core.Features.Currencies.Queries;
 using RothschildHouse.Application.Core.Features.Customers.Queries;
-using RothschildHouse.Application.Core.Features.PaymentTransactions.Commands;
-using RothschildHouse.Application.Core.Features.PaymentTransactions.Queries;
+using RothschildHouse.Application.Core.Features.Transactions.Commands;
+using RothschildHouse.Application.Core.Features.Transactions.Queries;
 using RothschildHouse.Library.Common.Clients.Models.Common;
+using RothschildHouse.Library.Common.Clients.Models.PaymentGateway;
 
 namespace RothschildHouse.API.PaymentGateway.Controllers
 {
@@ -233,36 +234,36 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         }
 
         /// <summary>
-        /// Returns the payment transactions that match with the specified search criteria.
+        /// Returns the transactions that match with the specified search criteria.
         /// </summary>
-        /// <returns>The payment transactions.</returns>
+        /// <returns>The transactions.</returns>
         /// <response code="200">Returns the client applications</response>
         /// <response code="400">If the request is invalid</response>
         /// <response code="500">If there was an internal error</response>
-        [HttpGet("payment-txn-viewbag")]
-        [ProducesResponseType(200, Type = typeof(GetPaymentTransactionsViewBagRespose))]
+        [HttpGet("txn-viewbag")]
+        [ProducesResponseType(200, Type = typeof(GetTransactionsViewBagRespose))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> SearchPaymentTransactionsViewBagAsync()
+        public async Task<IActionResult> SearchTransactionsViewBagAsync()
         {
-            var response = await _mediator.Send(new GetPaymentTransactionsViewBagQuery());
+            var response = await _mediator.Send(new GetTransactionsViewBagQuery());
 
             return response.ToOkResult();
         }
 
         /// <summary>
-        /// Returns the payment transactions that match with the specified search criteria.
+        /// Returns the transactions that match with the specified search criteria.
         /// </summary>
         /// <param name="request">Search parameters</param>
         /// <returns>The customers.</returns>
-        /// <response code="200">Returns the payment transactions</response>
+        /// <response code="200">Returns the transactions</response>
         /// <response code="400">If the request is invalid</response>
         /// <response code="500">If there was an internal error</response>
-        [HttpGet("payment-txn")]
-        [ProducesResponseType(200, Type = typeof(PagedResponse<PaymentTransactionItemModel>))]
+        [HttpGet("txn")]
+        [ProducesResponseType(200, Type = typeof(PagedResponse<TransactionItemModel>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> GetPaymentTransactionsAsync([FromQuery] GetPaymentTransactionsQuery request)
+        public async Task<IActionResult> GetTransactionsAsync([FromQuery] GetTransactionsQuery request)
         {
             var response = await _mediator.Send(request);
 
@@ -270,20 +271,20 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         }
 
         /// <summary>
-        /// Returns an existing payment transaction by Id.
+        /// Returns an existing transaction by Id.
         /// </summary>
-        /// <param name="id">Payment Transaction Id</param>
-        /// <returns>The payment transaction.</returns>
-        /// <response code="200">Returns the payment transaction</response>
+        /// <param name="id">Transaction Id</param>
+        /// <returns>The transaction.</returns>
+        /// <response code="200">Returns the transaction</response>
         /// <response code="404">If the resource doesn't exist</response>
         /// <response code="500">If there was an internal error</response>
-        [HttpGet("payment-txn/{id}")]
-        [ProducesResponseType(200, Type = typeof(SingleResponse<PaymentTransactionDetailsModel>))]
+        [HttpGet("txn/{id}")]
+        [ProducesResponseType(200, Type = typeof(SingleResponse<TransactionDetailsModel>))]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> GetPaymentTransactionAsync(long? id)
+        public async Task<IActionResult> GetTransactionAsync(long? id)
         {
-            var response = await _mediator.Send(new GetPaymentTransactionQuery(id));
+            var response = await _mediator.Send(new GetTransactionQuery(id));
 
             if (response == null)
                 return NotFound();
@@ -292,18 +293,18 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         }
 
         /// <summary>
-        /// Returns the payment transactions that match with the specified search criteria.
+        /// Returns the transactions that match with the specified search criteria.
         /// </summary>
         /// <param name="request">Search parameters</param>
-        /// <returns>The payment transactions.</returns>
+        /// <returns>The transactions.</returns>
         /// <response code="200">If resource it was processed  the client applications</response>
         /// <response code="400">If the request is invalid</response>
         /// <response code="500">If there was an internal error</response>
-        [HttpPost("process-payment-txn")]
-        [ProducesResponseType(201, Type = typeof(ProcessPaymentTransactionResponse))]
+        [HttpPost("process-txn")]
+        [ProducesResponseType(201, Type = typeof(ProcessTransactionResponse))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> ProcessPaymentTransactionAsync([FromBody] ProcessPaymentTransactionCommand request)
+        public async Task<IActionResult> ProcessTransactionAsync([FromBody] ProcessTransactionCommand request)
         {
             var response = await _mediator.Send(request);
 

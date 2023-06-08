@@ -28,8 +28,8 @@ builder.Services.AddCors(policy =>
     policy.AddPolicy("GuiCorsPolicy", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 });
 
-builder.Services.Configure<MqClientSettings>(builder.Configuration.GetSection("Queue:PaymentTransaction"));
-builder.Services.AddScoped<PaymentTransactionMqClient>();
+builder.Services.Configure<MqClientSettings>(builder.Configuration.GetSection("Queue:Transaction"));
+builder.Services.AddScoped<TransactionMqClient>();
 
 var app = builder.Build();
 

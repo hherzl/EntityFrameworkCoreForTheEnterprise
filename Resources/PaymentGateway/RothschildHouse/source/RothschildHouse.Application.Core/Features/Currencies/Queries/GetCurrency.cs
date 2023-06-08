@@ -1,17 +1,10 @@
 ﻿using MediatR;
 using RothschildHouse.Application.Core.Common.Contracts;
 using RothschildHouse.Library.Common.Clients.Models.Common;
+using RothschildHouse.Library.Common.Clients.Models.PaymentGateway;
 
 namespace RothschildHouse.Application.Core.Features.Currencies.Queries
 {
-    public record CurrencyDetailsModel
-    {
-        public short? Id { get; set; }
-        public string Name { get; set; }
-        public string Code { get; set; }
-        public decimal? Rate { get; set; }
-    }
-
     public class GetCurrencyQuery : IRequest<SingleResponse<CurrencyDetailsModel>>
     {
         public GetCurrencyQuery(short? id)

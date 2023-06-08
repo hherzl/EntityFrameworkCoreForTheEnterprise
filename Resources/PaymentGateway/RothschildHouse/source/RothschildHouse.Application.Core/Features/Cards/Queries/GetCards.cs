@@ -2,20 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using RothschildHouse.Application.Core.Common.Contracts;
 using RothschildHouse.Library.Common.Clients.Models.Common;
+using RothschildHouse.Library.Common.Clients.Models.PaymentGateway;
 
 namespace RothschildHouse.Application.Core.Features.Cards.Queries
 {
-    public record CardItemModel
-    {
-        public Guid? Id { get; set; }
-        public short? CardTypeId { get; set; }
-        public string CardType { get; set; }
-        public string IssuingNetwork { get; set; }
-        public string CardholderName { get; set; }
-        public string Last4Digits { get; set; }
-        public string ExpirationDate { get; set; }
-    }
-
     public class GetCardsQuery : IRequest<PagedResponse<CardItemModel>>
     {
         public GetCardsQuery()

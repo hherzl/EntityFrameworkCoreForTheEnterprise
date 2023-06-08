@@ -5,11 +5,11 @@ using RothschildHouse.Library.Common.Queue.Messages;
 
 namespace RothschildHouse.Library.Common.Queue
 {
-    public class PaymentTransactionMqClient
+    public class TransactionMqClient
     {
         private readonly ILogger _logger;
 
-        public PaymentTransactionMqClient(ILogger<PaymentTransactionMqClient> logger, IOptions<MqClientSettings> options)
+        public TransactionMqClient(ILogger<TransactionMqClient> logger, IOptions<MqClientSettings> options)
         {
             _logger = logger;
             Settings = options.Value;
@@ -17,7 +17,7 @@ namespace RothschildHouse.Library.Common.Queue
 
         public MqClientSettings Settings { get; }
 
-        public PublishPaymentTransactionResult Publish(PublishPaymentTransactionMessage request)
+        public PublishTransactionResult Publish(PublishTransactionMessage request)
         {
             var connectionFactory = new ConnectionFactory
             {
@@ -33,7 +33,7 @@ namespace RothschildHouse.Library.Common.Queue
 
             using var model = connection.CreateModel();
 
-            var result = new PublishPaymentTransactionResult();
+            var result = new PublishTransactionResult();
 
             try
             {
@@ -45,13 +45,13 @@ namespace RothschildHouse.Library.Common.Queue
 
                 model.BasicPublish(exchange: "", body: request.ToBytes(), routingKey: Settings.Queue);
 
-                result.Message = $"The message publishing in queue: '{Settings.Queue}' for payment transaction '{request.Id}' was successfully, Id: '{result.Id}'";
+                result.Message = $"The message publishing in queue: '{Settings.Queue}' for transaction '{request.Id}' was successfully, Id: '{result.Id}'";
 
                 _logger?.LogInformation(result.Message);
             }
             catch (Exception ex)
             {
-                _logger?.LogCritical(ex, $"There was an error publishing queue message in: '{Settings.Queue}' for payment transaction: '{request.Id}'");
+                _logger?.LogCritical(ex, $"There was an error publishing queue message in: '{Settings.Queue}' for transaction: '{request.Id}'");
 
                 result.Failed = true;
             }

@@ -1,10 +1,10 @@
 ﻿namespace RothschildHouse.Library.Common.Clients.Models.PaymentGateway
 {
-    public record PaymentTransactionItemModel
+    public record TransactionItemModel
     {
         public long? Id { get; set; }
-        public short? PaymentTransactionStatusId { get; set; }
-        public string PaymentTransactionStatus { get; set; }
+        public short? TransactionStatusId { get; set; }
+        public string TransactionStatus { get; set; }
         public Guid? ClientApplicationId { get; set; }
         public string ClientApplication { get; set; }
         public Guid? CustomerId { get; set; }
@@ -16,3 +16,4 @@
         public DateTime? CreationDateTime { get; set; }
     }
 }
+

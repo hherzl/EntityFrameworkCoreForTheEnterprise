@@ -1,6 +1,6 @@
 ﻿namespace RothschildHouse.Library.Common.Queue.Messages
 {
-    public record PublishPaymentTransactionResult
+    public record PublishTransactionResult
     {
         public string Message { get; set; }
         public bool Failed { get; set; }

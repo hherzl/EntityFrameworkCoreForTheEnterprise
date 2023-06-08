@@ -1,26 +1,12 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using RothschildHouse.Application.Core.Common.Contracts;
-using RothschildHouse.Application.Core.Features.PaymentTransactions.Queries;
 using RothschildHouse.Domain.Core.Enums;
 using RothschildHouse.Library.Common.Clients.Models.Common;
+using RothschildHouse.Library.Common.Clients.Models.PaymentGateway;
 
 namespace RothschildHouse.Application.Core.Features.Cards.Queries
 {
-    public record CardDetailsModel
-    {
-        public Guid? Id { get; set; }
-        public short? CardTypeId { get; set; }
-        public string CardType { get; set; }
-        public string IssuingNetwork { get; set; }
-        public string CardholderName { get; set; }
-        public string Last4Digits { get; set; }
-        public string ExpirationDate { get; set; }
-        public string Cvv { get; set; }
-
-        public List<PaymentTransactionItemModel> PaymentTransactions { get; set; }
-    }
-
     public class GetCardQuery : IRequest<SingleResponse<CardDetailsModel>>
     {
         public GetCardQuery()
@@ -51,14 +37,14 @@ namespace RothschildHouse.Application.Core.Features.Cards.Queries
             if (entity == null)
                 return null;
 
-            var paymentTransactions = await _dbContext
-                .GetPaymentTransactions(cardId: entity.Id)
+            var transactions = await _dbContext
+                .GetTransactions(cardId: entity.Id)
                 .OrderByDescending(item => item.CreationDateTime)
                 .Paging(10, 1)
                 .ToListAsync(cancellationToken)
                 ;
 
-            paymentTransactions.ForEach(item => item.CardNumber = item.CardNumber?[^4..]);
+            transactions.ForEach(item => item.CardNumber = item.CardNumber?[^4..]);
 
             return new SingleResponse<CardDetailsModel>
             {
@@ -72,7 +58,7 @@ namespace RothschildHouse.Application.Core.Features.Cards.Queries
                     Last4Digits = entity.CardNumber?[^4..],
                     ExpirationDate = entity.ExpirationDate,
                     Cvv = "****",
-                    PaymentTransactions = paymentTransactions
+                    Transactions = transactions
                 }
             };
         }

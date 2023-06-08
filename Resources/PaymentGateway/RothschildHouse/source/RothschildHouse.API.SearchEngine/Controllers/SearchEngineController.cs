@@ -26,8 +26,9 @@ namespace RothschildHouse.API.SearchEngine.Controllers
 
             var document = new SaleDocument
             {
-                PaymentTxnId = request.PaymentTxnId,
-                PaymentTxnGuid = request.PaymentTxnGuid,
+                TxnId = request.TxnId,
+                TxnGuid = request.TxnGuid,
+                TxnDateTime = request.TxnDateTime,
                 ClientApplicationId = request.ClientApplicationId,
                 ClientApplication = request.ClientApplication,
                 IssuingNetwork = request.IssuingNetwork,
@@ -36,15 +37,14 @@ namespace RothschildHouse.API.SearchEngine.Controllers
                 Total = request.Total,
                 CurrencyId = request.CurrencyId,
                 Currency = request.Currency,
-                PaymentTxnDateTime = request.PaymentTxnDateTime,
                 CreatedOn = DateTime.Now
             };
 
-            _logger?.LogInformation($"Indexing sale for payment transaction '{request.PaymentTxnId}'...");
+            _logger?.LogInformation($"Indexing sale for transaction '{request.TxnId}'...");
 
             await _saleService.AddSaleAsync(document);
 
-            _logger?.LogInformation($" Payment transaction '{request.PaymentTxnId}' was indexed successfully, Id: '{document.Id}'");
+            _logger?.LogInformation($" Transaction '{request.TxnId}' was indexed successfully, Id: '{document.Id}'");
 
             return Ok(new CreatedResponse<string>(document.Id));
         }

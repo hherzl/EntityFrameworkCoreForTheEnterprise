@@ -6,6 +6,6 @@
         public string Name { get; set; }
         public string Url { get; set; }
 
-        public List<PaymentTransactionItemModel> PaymentTransactions { get; set; }
+        public List<TransactionItemModel> Transactions { get; set; }
     }
 }

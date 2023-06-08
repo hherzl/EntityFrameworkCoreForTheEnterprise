@@ -8,20 +8,20 @@ using RothschildHouse.Library.Common.Queue.Messages;
 
 namespace RothschildHouse.API.Notifications.Services
 {
-    public class PaymentTransactionReceiverService : BackgroundService
+    public class TransactionReceiverService : BackgroundService
     {
         private readonly ILogger _logger;
-        private readonly IHubContext<PaymentTransactionsHub> _hubContext;
+        private readonly IHubContext<TransactionsHub> _hubContext;
         private readonly MqClientSettings _settings;
         private readonly ConnectionFactory _factory;
         private readonly IConnection _connection;
         private readonly IModel _model;
         private readonly IServiceProvider _serviceProvider;
 
-        public PaymentTransactionReceiverService
+        public TransactionReceiverService
         (
-            ILogger<PaymentTransactionReceiverService> logger,
-            IHubContext<PaymentTransactionsHub> hubContext,
+            ILogger<TransactionReceiverService> logger,
+            IHubContext<TransactionsHub> hubContext,
             IOptions<MqClientSettings> options,
             IServiceProvider serviceProvider
         )
@@ -63,11 +63,11 @@ namespace RothschildHouse.API.Notifications.Services
 
             consumer.Received += async (sender, args) =>
             {
-                var request = PublishPaymentTransactionMessage.DeserializeFrom(args.Body.ToArray());
+                var request = PublishTransactionMessage.DeserializeFrom(args.Body.ToArray());
 
-                _logger.LogInformation($"Received payment transaction: {request.ToJson()}");
+                _logger.LogInformation($"Received transaction: {request.ToJson()}");
 
-                await _hubContext.Clients.All.SendAsync(HubMethods.ReceivePaymentTxn, request.ClientApplication, request.Amount, request.Currency);
+                await _hubContext.Clients.All.SendAsync(HubMethods.ReceiveTxn, request.ClientApplication, request.Amount, request.Currency);
             };
 
             _model.BasicConsume(queue: _settings.Queue, autoAck: true, consumer: consumer);

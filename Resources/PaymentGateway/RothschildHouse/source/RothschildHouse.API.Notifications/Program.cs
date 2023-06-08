@@ -16,8 +16,8 @@ builder.Services.AddCors(policy =>
     policy.AddPolicy("GuiCorsPolicy", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 });
 
-builder.Services.Configure<MqClientSettings>(builder.Configuration.GetSection("Queue:PaymentTransaction"));
-builder.Services.AddHostedService<PaymentTransactionReceiverService>();
+builder.Services.Configure<MqClientSettings>(builder.Configuration.GetSection("Queue:Transaction"));
+builder.Services.AddHostedService<TransactionReceiverService>();
 
 builder
     .Services
@@ -40,6 +40,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MapHub<PaymentTransactionsHub>("/paymenttxnhub");
+app.MapHub<TransactionsHub>("/txnhub");
 
 app.Run();

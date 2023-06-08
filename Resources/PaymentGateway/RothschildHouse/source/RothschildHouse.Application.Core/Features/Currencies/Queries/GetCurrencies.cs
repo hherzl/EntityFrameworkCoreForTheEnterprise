@@ -2,17 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using RothschildHouse.Application.Core.Common.Contracts;
 using RothschildHouse.Library.Common.Clients.Models.Common;
+using RothschildHouse.Library.Common.Clients.Models.PaymentGateway;
 
 namespace RothschildHouse.Application.Core.Features.Currencies.Queries
 {
-    public record CurrencyItemModel
-    {
-        public short? Id { get; set; }
-        public string Name { get; set; }
-        public string Code { get; set; }
-        public decimal? Rate { get; set; }
-    }
-
     public class GetCurrenciesQuery : IRequest<ListResponse<CurrencyItemModel>>
     {
         public GetCurrenciesQuery()

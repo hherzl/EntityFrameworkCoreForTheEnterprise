@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RothschildHouse.Application.Core.Common.Contracts;
-using RothschildHouse.Application.Core.Features.Cards.Queries;
-using RothschildHouse.Application.Core.Features.Customers.Queries;
-using RothschildHouse.Application.Core.Features.PaymentTransactions.Queries;
 using RothschildHouse.Domain.Core.Entities;
+using RothschildHouse.Library.Common.Clients.Models.PaymentGateway;
 
 namespace RothschildHouse.Application.Core
 {
@@ -128,10 +126,10 @@ namespace RothschildHouse.Application.Core
             return await query.FirstOrDefaultAsync(item => item.AlienGuid == guid, cancellationToken);
         }
 
-        public static IQueryable<PaymentTransactionItemModel> GetPaymentTransactions
+        public static IQueryable<TransactionItemModel> GetTransactions
         (
             this IRothschildHouseDbContext ctx,
-            short? paymentTransactionStatusId = null,
+            short? transactionStatusId = null,
             Guid? clientApplicationId = null,
             Guid? customerId = null,
             Guid? cardId = null,
@@ -140,17 +138,17 @@ namespace RothschildHouse.Application.Core
         )
         {
             var query =
-                from txn in ctx.PaymentTransaction
-                join paymentTransactionStatus in ctx.VPaymentTransactionStatus on txn.PaymentTransactionStatusId equals paymentTransactionStatus.Id
+                from txn in ctx.Transaction
+                join transactionStatus in ctx.VTransactionStatus on txn.TransactionStatusId equals transactionStatus.Id
                 join clientApplication in ctx.ClientApplication on txn.ClientApplicationId equals clientApplication.Id
                 join card in ctx.Card on txn.CardId equals card.Id
                 join currency in ctx.Currency on txn.CurrencyId equals currency.Id
                 where txn.Active == true
-                select new PaymentTransactionItemModel
+                select new TransactionItemModel
                 {
                     Id = txn.Id,
-                    PaymentTransactionStatusId = txn.PaymentTransactionStatusId,
-                    PaymentTransactionStatus = paymentTransactionStatus.Name,
+                    TransactionStatusId = txn.TransactionStatusId,
+                    TransactionStatus = transactionStatus.Name,
                     ClientApplicationId = txn.ClientApplicationId,
                     ClientApplication = clientApplication.Name,
                     CardId = txn.CardId,
@@ -162,8 +160,8 @@ namespace RothschildHouse.Application.Core
                     CreationDateTime = txn.CreationDateTime
                 };
 
-            if (paymentTransactionStatusId.HasValue)
-                query = query.Where(item => item.PaymentTransactionStatusId == paymentTransactionStatusId);
+            if (transactionStatusId.HasValue)
+                query = query.Where(item => item.TransactionStatusId == transactionStatusId);
 
             if (clientApplicationId.HasValue)
                 query = query.Where(item => item.ClientApplicationId == clientApplicationId);
@@ -183,9 +181,9 @@ namespace RothschildHouse.Application.Core
             return query;
         }
 
-        public static async Task<PaymentTransaction> GetPaymentTransactionAsync(this IRothschildHouseDbContext ctx, long? id, bool tracking = true, bool include = true, CancellationToken cancellationToken = default)
+        public static async Task<Transaction> GetTransactionAsync(this IRothschildHouseDbContext ctx, long? id, bool tracking = true, bool include = true, CancellationToken cancellationToken = default)
         {
-            var query = ctx.PaymentTransaction.AsQueryable();
+            var query = ctx.Transaction.AsQueryable();
 
             if (tracking == false)
                 query = query.AsNoTracking();
@@ -200,7 +198,7 @@ namespace RothschildHouse.Application.Core
                         .ThenInclude(e => e.CompanyFk)
                     .Include(e => e.CardFk)
                     .Include(e => e.CurrencyFk)
-                    .Include(e => e.PaymentTransactionLogList)
+                    .Include(e => e.TransactionLogList)
                     ;
             }
 

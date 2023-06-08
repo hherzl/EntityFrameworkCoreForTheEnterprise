@@ -5,14 +5,14 @@ using RothschildHouse.Infrastructure.Core.Persistence.Configurations.Common;
 
 namespace RothschildHouse.Infrastructure.Core.Persistence.Configurations
 {
-    internal class PaymentTransactionConfiguration : AuditableEntityConfiguration<PaymentTransaction>
+    internal class TransactionConfiguration : AuditableEntityConfiguration<Transaction>
     {
-        public override void Configure(EntityTypeBuilder<PaymentTransaction> builder)
+        public override void Configure(EntityTypeBuilder<Transaction> builder)
         {
             base.Configure(builder);
 
             // Set configuration for entity
-            builder.ToTable("PaymentTransaction", "dbo");
+            builder.ToTable("Transaction", "dbo");
 
             // Set key for entity
             builder.HasKey(p => p.Id);
@@ -41,7 +41,7 @@ namespace RothschildHouse.Infrastructure.Core.Persistence.Configurations
                 ;
 
             builder
-                .Property(p => p.PaymentTransactionStatusId)
+                .Property(p => p.TransactionStatusId)
                 .HasColumnType("smallint")
                 .IsRequired()
                 ;
@@ -89,7 +89,7 @@ namespace RothschildHouse.Infrastructure.Core.Persistence.Configurations
                 ;
 
             builder
-                .Property(p => p.PaymentTransactionDateTime)
+                .Property(p => p.TransactionDateTime)
                 .HasColumnType("datetime")
                 ;
 

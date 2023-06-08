@@ -3,7 +3,7 @@ using RothschildHouse.Domain.Core.Enums;
 
 namespace RothschildHouse.Seed.PaymentGateway.Seeds
 {
-    internal class VPaymentTransactionStatuses
+    internal class VTransactionStatuses
     {
         public static IEnumerable<EnumDescription> Items
         {
@@ -11,22 +11,22 @@ namespace RothschildHouse.Seed.PaymentGateway.Seeds
             {
                 yield return new EnumDescription
                 {
-                    Type = typeof(PaymentTransactionStatus).FullName,
-                    Value = (short)PaymentTransactionStatus.Requested,
+                    Type = typeof(TransactionStatus).FullName,
+                    Value = (short)TransactionStatus.Requested,
                     Description = "Requested"
                 };
 
                 yield return new EnumDescription
                 {
-                    Type = typeof(PaymentTransactionStatus).FullName,
-                    Value = (short)PaymentTransactionStatus.Denied,
+                    Type = typeof(TransactionStatus).FullName,
+                    Value = (short)TransactionStatus.Denied,
                     Description = "Denied"
                 };
 
                 yield return new EnumDescription
                 {
-                    Type = typeof(PaymentTransactionStatus).FullName,
-                    Value = (short)PaymentTransactionStatus.Processed,
+                    Type = typeof(TransactionStatus).FullName,
+                    Value = (short)TransactionStatus.Processed,
                     Description = "Processed"
                 };
             }

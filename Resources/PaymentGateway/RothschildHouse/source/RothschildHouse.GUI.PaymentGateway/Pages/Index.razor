@@ -70,12 +70,12 @@
 
         hubConnection = new HubConnectionBuilder()
             .AddJsonProtocol()
-            .WithUrl(configuration["Hubs:PaymentTxn"])
+            .WithUrl(configuration["Hubs:Txn:Endpoint"])
             .ConfigureLogging(logging => logging.SetMinimumLevel(LogLevel.Information))
             .Build()
             ;
 
-        hubConnection.On<string, decimal, string>("receivePaymentTxn", async (clientApplication, amount, currency) =>
+        hubConnection.On<string, decimal, string>(configuration["Hubs:Txn:Method"], async (clientApplication, amount, currency) =>
         {
             messages.Insert(0, $"{DateTime.Now} Received txn from '{clientApplication}' client, total: '{amount} {currency}'");
 

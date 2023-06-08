@@ -2,7 +2,7 @@
 
 namespace RothschildHouse.Domain.Core.Notifications
 {
-    public class PaymentTransactionProcessedNotification : INotification
+    public class TransactionProcessedNotification : INotification
     {
         public long? Id { get; set; }
         public Guid? Guid { get; set; }

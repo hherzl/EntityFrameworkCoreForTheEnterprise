@@ -68,7 +68,7 @@ foreach (var item in VCustomerTypes.Items)
     ctx.SaveChanges();
 }
 
-foreach (var item in VPaymentTransactionStatuses.Items)
+foreach (var item in VTransactionStatuses.Items)
 {
     item.Active = true;
 

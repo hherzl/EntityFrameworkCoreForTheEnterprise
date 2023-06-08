@@ -26,13 +26,13 @@ if (args.Length > 0)
 
 while (startDate < endDate)
 {
-    var paymentTransactionsPerDay = mocksRandom.Next(25);
+    var transactionsPerDay = mocksRandom.Next(25);
 
-    Console.WriteLine($"Mocking '{paymentTransactionsPerDay}' payment orders for {startDate}");
+    Console.WriteLine($"Mocking '{transactionsPerDay}' transactions for {startDate}");
 
     var rothschildHouseClient = new RothschildHouseClient();
 
-    for (var i = 1; i <= paymentTransactionsPerDay; i++)
+    for (var i = 1; i <= transactionsPerDay; i++)
     {
         var clientApplicationIndex = mocksRandom.Next(mocks.ClientApplications.Count);
         var customerIndex = mocksRandom.Next(mocks.Customers.Count);
@@ -41,7 +41,7 @@ while (startDate < endDate)
         var card = mocks.Cards[cardIndex];
         var orderTotal = (decimal)mocksRandom.Next(1, 50);
 
-        var request = new ProcessPaymentTransactionRequest
+        var request = new ProcessTransactionRequest
         {
             ClientApplication = mocks.ClientApplications[clientApplicationIndex],
             CustomerGuid = mocks.Customers[customerIndex],
@@ -58,14 +58,14 @@ while (startDate < endDate)
             TransactionDateTime = startDate
         };
 
-        Console.WriteLine($"{DateTime.Now}: Processing payment transaction: cardholder name: '{request.CardholderName}', total: '{request.OrderTotal} {request.Currency}'...");
+        Console.WriteLine($"{DateTime.Now}: Processing transaction: cardholder name: '{request.CardholderName}', total: '{request.OrderTotal} {request.Currency}'...");
 
-        var response = await rothschildHouseClient.ProcessPaymentTransactionAsync(request);
+        var response = await rothschildHouseClient.ProcessTransactionAsync(request);
 
         Console.WriteLine($"{DateTime.Now}:  Transaction Id: '{response.Id}', Client: '{response.Client}', Amount: '{response.OrderTotal} {response.Currency}'");
-
-        startDate = startDate.AddDays(1);
     }
+
+    startDate = startDate.AddDays(1);
 
     Console.WriteLine();
 

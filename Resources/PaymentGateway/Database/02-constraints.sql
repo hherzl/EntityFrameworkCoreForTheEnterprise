@@ -62,34 +62,34 @@ ALTER TABLE [dbo].[Currency] ADD CONSTRAINT [PK_dbo_Currency]
 	PRIMARY KEY ([Id])
 GO
 
-ALTER TABLE [dbo].[PaymentTransaction] ADD CONSTRAINT [PK_dbo_PaymentTransaction]
+ALTER TABLE [dbo].[Transaction] ADD CONSTRAINT [PK_dbo_Transaction]
 	PRIMARY KEY ([Id])
 GO
 
-ALTER TABLE [dbo].[PaymentTransaction] ADD CONSTRAINT [UQ_dbo_PaymentTransaction_Guid]
+ALTER TABLE [dbo].[Transaction] ADD CONSTRAINT [UQ_dbo_Transaction_Guid]
 	UNIQUE ([Guid])
 GO
 
-ALTER TABLE [dbo].[PaymentTransaction] ADD CONSTRAINT [FK_dbo_PaymentTransaction_ClientApplicationId_dbo_ClientApplication]
+ALTER TABLE [dbo].[Transaction] ADD CONSTRAINT [FK_dbo_Transaction_ClientApplicationId_dbo_ClientApplication]
 	FOREIGN KEY ([ClientApplicationId]) REFERENCES [dbo].[ClientApplication]
 GO
 
-ALTER TABLE [dbo].[PaymentTransaction] ADD CONSTRAINT [FK_dbo_PaymentTransaction_CustomerId_dbo_Customer]
+ALTER TABLE [dbo].[Transaction] ADD CONSTRAINT [FK_dbo_Transaction_CustomerId_dbo_Customer]
 	FOREIGN KEY ([CustomerId]) REFERENCES [dbo].[Customer]
 GO
 
-ALTER TABLE [dbo].[PaymentTransaction] ADD CONSTRAINT [FK_dbo_PaymentTransaction_CardId_dbo_Card]
+ALTER TABLE [dbo].[Transaction] ADD CONSTRAINT [FK_dbo_Transaction_CardId_dbo_Card]
 	FOREIGN KEY ([CardId]) REFERENCES [dbo].[Card]
 GO
 
-ALTER TABLE [dbo].[PaymentTransaction] ADD CONSTRAINT [FK_dbo_PaymentTransaction_CurrencyId_dbo_Currency]
+ALTER TABLE [dbo].[Transaction] ADD CONSTRAINT [FK_dbo_Transaction_CurrencyId_dbo_Currency]
 	FOREIGN KEY ([CurrencyId]) REFERENCES [dbo].[Currency]
 GO
 
-ALTER TABLE [dbo].[PaymentTransactionLog] ADD CONSTRAINT [PK_dbo_PaymentTransactionLog]
+ALTER TABLE [dbo].[TransactionLog] ADD CONSTRAINT [PK_dbo_TransactionLog]
 	PRIMARY KEY ([Id])
 GO
 
-ALTER TABLE [dbo].[PaymentTransactionLog] ADD CONSTRAINT [FK_dbo_PaymentTransactionLog_PaymentTransactionId_dbo_PaymentTransaction]
-	FOREIGN KEY ([PaymentTransactionId]) REFERENCES [dbo].[PaymentTransaction]
+ALTER TABLE [dbo].[TransactionLog] ADD CONSTRAINT [FK_dbo_TransactionLog_TransactionId_dbo_Transaction]
+	FOREIGN KEY ([TransactionId]) REFERENCES [dbo].[Transaction]
 GO

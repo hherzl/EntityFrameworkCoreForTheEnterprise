@@ -1,17 +1,10 @@
 ﻿using MediatR;
 using RothschildHouse.Application.Core.Common.Contracts;
 using RothschildHouse.Library.Common.Clients.Models.Common;
+using RothschildHouse.Library.Common.Clients.Models.PaymentGateway;
 
 namespace RothschildHouse.Application.Core.Features.Countries.Queries
 {
-    public record CountryDetailsModel
-    {
-        public short? Id { get; set; }
-        public string Name { get; set; }
-        public string TwoLetterIsoCode { get; set; }
-        public string ThreeLetterIsoCode { get; set; }
-    }
-
     public class GetCountryQuery : IRequest<SingleResponse<CountryDetailsModel>>
     {
         public GetCountryQuery(short? id)

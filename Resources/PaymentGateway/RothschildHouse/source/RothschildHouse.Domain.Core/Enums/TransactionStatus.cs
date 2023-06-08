@@ -1,6 +1,6 @@
 ﻿namespace RothschildHouse.Domain.Core.Enums
 {
-    public enum PaymentTransactionStatus : short
+    public enum TransactionStatus : short
     {
         Requested = 0,
         Denied = 5,

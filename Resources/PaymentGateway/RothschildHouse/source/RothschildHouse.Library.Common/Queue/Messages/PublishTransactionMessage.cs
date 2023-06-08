@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace RothschildHouse.Library.Common.Queue.Messages
 {
-    public record PublishPaymentTransactionMessage
+    public record PublishTransactionMessage
     {
         public long? Id { get; set; }
         public Guid? Guid { get; set; }
@@ -17,7 +17,7 @@ namespace RothschildHouse.Library.Common.Queue.Messages
         public byte[] ToBytes()
             => Encoding.UTF8.GetBytes(ToJson());
 
-        public static PublishPaymentTransactionMessage DeserializeFrom(byte[] bytes)
-                => JsonSerializer.Deserialize<PublishPaymentTransactionMessage>(Encoding.UTF8.GetString(bytes));
+        public static PublishTransactionMessage DeserializeFrom(byte[] bytes)
+                => JsonSerializer.Deserialize<PublishTransactionMessage>(Encoding.UTF8.GetString(bytes));
     }
 }

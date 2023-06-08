@@ -2,21 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using RothschildHouse.Application.Core.Common.Contracts;
 using RothschildHouse.Library.Common.Clients.Models.Common;
+using RothschildHouse.Library.Common.Clients.Models.PaymentGateway;
 
 namespace RothschildHouse.Application.Core.Features.Customers.Queries
 {
-    public record CustomerItemModel
-    {
-        public Guid? Id { get; set; }
-        public string FullName { get; set; }
-        public string Name { get; set; }
-        public short? CountryId { get; set; }
-        public string Country { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; }
-        public Guid? AlienGuid { get; set; }
-    }
-
     public class GetCustomersQuery : IRequest<PagedResponse<CustomerItemModel>>
     {
         public GetCustomersQuery()

@@ -4,12 +4,12 @@ using RothschildHouse.Domain.Core.Entities;
 
 namespace RothschildHouse.Infrastructure.Core.Persistence.Configurations
 {
-    internal class VPaymentTransactionStatusConfiguration : IEntityTypeConfiguration<VPaymentTransactionStatus>
+    internal class VTransactionStatusConfiguration : IEntityTypeConfiguration<VTransactionStatus>
     {
-        public void Configure(EntityTypeBuilder<VPaymentTransactionStatus> builder)
+        public void Configure(EntityTypeBuilder<VTransactionStatus> builder)
         {
             // Set configuration for entity
-            builder.ToTable("VPaymentTransactionStatus", "dbo");
+            builder.ToView("VTransactionStatus", "dbo");
 
             // Set key for entity
             builder.HasKey(p => p.Id);

@@ -35,9 +35,9 @@ else if (response.Model is not null)
 
     <h2>Payment Transactions</h2>
 
-    <MudDataGrid Items="@response.Model.PaymentTransactions">
+    <MudDataGrid Items="@response.Model.Transactions">
         <Columns>
-            <PropertyColumn Property="x => x.PaymentTransactionStatus" Title="Status" />
+            <PropertyColumn Property="x => x.TransactionStatus" Title="Status" />
             <PropertyColumn Property="x => x.IssuingNetwork" Title="Issuing Network" />
             <PropertyColumn Property="x => x.CardNumber" Title="Card Number" />
             <PropertyColumn Property="x => x.OrderTotal" Title="Order Total" />

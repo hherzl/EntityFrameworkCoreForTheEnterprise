@@ -10,6 +10,6 @@ namespace RothschildHouse.Domain.Core.Entities
         public string Code { get; set; }
         public decimal? Rate { get; set; }
 
-        public virtual Collection<PaymentTransaction> PaymentTransactionList { get; set; }
+        public virtual Collection<Transaction> PaymentTransactionList { get; set; }
     }
 }

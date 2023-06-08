@@ -2,16 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using RothschildHouse.Application.Core.Common.Contracts;
 using RothschildHouse.Library.Common.Clients.Models.Common;
+using RothschildHouse.Library.Common.Clients.Models.PaymentGateway;
 
 namespace RothschildHouse.Application.Core.Features.ClientApplications.Queries
 {
-    public record ClientApplicationItemModel
-    {
-        public Guid? Id { get; set; }
-        public string Name { get; set; }
-        public string Url { get; set; }
-    }
-
     public class GetClientApplicationsQuery : IRequest<ListResponse<ClientApplicationItemModel>>
     {
         public GetClientApplicationsQuery()

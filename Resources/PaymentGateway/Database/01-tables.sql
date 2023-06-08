@@ -1,9 +1,9 @@
-IF OBJECT_ID('dbo.PaymentTransactionLog') IS NOT NULL
-	DROP TABLE [dbo].[PaymentTransactionLog]
+IF OBJECT_ID('dbo.TransactionLog') IS NOT NULL
+	DROP TABLE [dbo].[TransactionLog]
 GO
 
-IF OBJECT_ID('dbo.PaymentTransaction') IS NOT NULL
-	DROP TABLE [dbo].[PaymentTransaction]
+IF OBJECT_ID('dbo.Transaction') IS NOT NULL
+	DROP TABLE [dbo].[Transaction]
 GO
 
 IF OBJECT_ID('dbo.Currency') IS NOT NULL
@@ -178,12 +178,12 @@ CREATE TABLE [dbo].[Currency]
 )
 GO
 
-CREATE TABLE [dbo].[PaymentTransaction]
+CREATE TABLE [dbo].[Transaction]
 (
 	[Id] BIGINT NOT NULL IDENTITY(1, 1),
 	[Guid] UNIQUEIDENTIFIER NOT NULL,
 	[ClientFullClassName] NVARCHAR(200) NOT NULL,
-	[PaymentTransactionStatusId] SMALLINT NOT NULL,
+	[TransactionStatusId] SMALLINT NOT NULL,
 	[ClientApplicationId] UNIQUEIDENTIFIER NOT NULL,
 	[CustomerId] UNIQUEIDENTIFIER NOT NULL,
 	[StoreId] INT NOT NULL,
@@ -191,7 +191,7 @@ CREATE TABLE [dbo].[PaymentTransaction]
 	[Amount] DECIMAL(12, 4) NOT NULL,
 	[CurrencyId] SMALLINT NOT NULL,
 	[CurrencyRate] DECIMAL(18, 4) NOT NULL,
-	[PaymentTransactionDateTime] DATETIME NULL,
+	[TransactionDateTime] DATETIME NULL,
 	[Notes] NVARCHAR(MAX) NULL,
 	[Active] BIT NOT NULL,
 	[CreationUser] NVARCHAR(50) NOT NULL,
@@ -202,11 +202,11 @@ CREATE TABLE [dbo].[PaymentTransaction]
 )
 GO
 
-CREATE TABLE [dbo].[PaymentTransactionLog]
+CREATE TABLE [dbo].[TransactionLog]
 (
 	[Id] BIGINT NOT NULL IDENTITY(1, 1),
-	[PaymentTransactionId] BIGINT NOT NULL,
-	[PaymentTransactionStatusId] SMALLINT NOT NULL,
+	[TransactionId] BIGINT NOT NULL,
+	[TransactionStatusId] SMALLINT NOT NULL,
 	[LogType] NVARCHAR(25) NULL,
 	[ContentType] NVARCHAR(100) NULL,
 	[Content] NVARCHAR(MAX) NOT NULL,
