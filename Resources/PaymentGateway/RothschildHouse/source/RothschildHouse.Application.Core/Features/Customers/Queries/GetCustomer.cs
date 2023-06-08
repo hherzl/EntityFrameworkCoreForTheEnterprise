@@ -45,9 +45,9 @@ namespace RothschildHouse.Application.Core.Features.Customers.Queries
 
         public async Task<SingleResponse<CustomerDetailsModel>> Handle(GetCustomerQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _dbContext.GetCustomerAsync(request.Id, false, true, cancellationToken);
+            var entity = await _dbContext.GetCustomerAsync(request.Id, cancellationToken, false);
 
-            entity ??= await _dbContext.GetCustomerByAlienGuidAsync(request.Id, false, true, cancellationToken);
+            entity ??= await _dbContext.GetCustomerByAlienGuidAsync(request.Id, cancellationToken, false, true);
 
             if (entity == null)
                 return null;
@@ -71,7 +71,7 @@ namespace RothschildHouse.Application.Core.Features.Customers.Queries
                     CompanyId = entity.CompanyId,
                     Company = entity.CompanyFk?.Name,
                     CountryId = entity.CountryId,
-                    Country = "",
+                    Country = entity.CountryFk.Name,
                     AddressLine1 = entity.AddressLine1,
                     AddressLine2 = entity.AddressLine2,
                     Phone = entity.Phone,

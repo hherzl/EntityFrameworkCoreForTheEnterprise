@@ -72,7 +72,7 @@ namespace RothschildHouse.Application.Core
                 from customerPerson in customerPersonGroup.DefaultIfEmpty()
                 join company in ctx.Company on customer.CompanyId equals company.Id into customerCompanyGroup
                 from customerCompany in customerCompanyGroup.DefaultIfEmpty()
-                join country in ctx.Company on customer.CountryId equals country.Id into customerCountryGroup
+                join country in ctx.Country on customer.CountryId equals country.Id into customerCountryGroup
                 from customerCountry in customerCountryGroup.DefaultIfEmpty()
                 where customer.Active == true
                 select new CustomerItemModel
@@ -90,7 +90,7 @@ namespace RothschildHouse.Application.Core
             return query;
         }
 
-        public static async Task<Customer> GetCustomerAsync(this IRothschildHouseDbContext ctx, Guid? id, bool tracking = true, bool include = true, CancellationToken cancellationToken = default)
+        public static async Task<Customer> GetCustomerAsync(this IRothschildHouseDbContext ctx, Guid? id, CancellationToken cancellationToken = default, bool tracking = true, bool include = true)
         {
             var query = ctx.Customer.AsQueryable();
 
@@ -98,12 +98,18 @@ namespace RothschildHouse.Application.Core
                 query = query.AsNoTracking();
 
             if (include)
-                query = query.Include(e => e.PersonFk).Include(e => e.CompanyFk);
+            {
+                query = query
+                    .Include(e => e.PersonFk)
+                    .Include(e => e.CompanyFk)
+                    .Include(e => e.CountryFk)
+                    ;
+            }
 
             return await query.FirstOrDefaultAsync(item => item.Id == id, cancellationToken);
         }
 
-        public static async Task<Customer> GetCustomerByAlienGuidAsync(this IRothschildHouseDbContext ctx, Guid? guid, bool tracking = true, bool include = true, CancellationToken cancellationToken = default)
+        public static async Task<Customer> GetCustomerByAlienGuidAsync(this IRothschildHouseDbContext ctx, Guid? guid, CancellationToken cancellationToken = default, bool tracking = true, bool include = true)
         {
             var query = ctx.Customer.AsQueryable();
 
@@ -111,7 +117,13 @@ namespace RothschildHouse.Application.Core
                 query = query.AsNoTracking();
 
             if (include)
-                query = query.Include(e => e.PersonFk).Include(e => e.CompanyFk);
+            {
+                query = query
+                    .Include(e => e.PersonFk)
+                    .Include(e => e.CompanyFk)
+                    .Include(e => e.CountryFk)
+                    ;
+            }
 
             return await query.FirstOrDefaultAsync(item => item.AlienGuid == guid, cancellationToken);
         }

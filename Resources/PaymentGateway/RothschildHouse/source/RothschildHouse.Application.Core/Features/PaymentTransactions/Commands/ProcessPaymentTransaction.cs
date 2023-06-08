@@ -157,7 +157,7 @@ namespace RothschildHouse.Application.Core.Features.PaymentTransactions.Commands
             var clientApplication = await _dbContext.GetClientApplicationAsync(request.ClientApplication)
                 ?? throw new RothschildHouseException($"There is no definition for Client Application with Id '{request.ClientApplication}'");
 
-            var customer = await _dbContext.GetCustomerAsync(request.CustomerGuid, tracking: false, include: false, cancellationToken)
+            var customer = await _dbContext.GetCustomerAsync(request.CustomerGuid, cancellationToken, false, false)
                 ?? throw new RothschildHouseException($"There is no data for Customer with Id '{request.CustomerGuid}'");
 
             var paymentTxn = new PaymentTransaction
