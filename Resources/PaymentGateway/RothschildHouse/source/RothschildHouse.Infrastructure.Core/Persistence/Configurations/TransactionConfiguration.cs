@@ -34,9 +34,13 @@ namespace RothschildHouse.Infrastructure.Core.Persistence.Configurations
                 ;
 
             builder
-                .Property(p => p.ClientFullClassName)
-                .HasColumnType("nvarchar")
-                .HasMaxLength(200)
+                .Property(p => p.TransactionDateTime)
+                .HasColumnType("datetime")
+                ;
+
+            builder
+                .Property(p => p.TransactionTypeId)
+                .HasColumnType("smallint")
                 .IsRequired()
                 ;
 
@@ -49,6 +53,13 @@ namespace RothschildHouse.Infrastructure.Core.Persistence.Configurations
             builder
                 .Property(p => p.ClientApplicationId)
                 .HasColumnType("uniqueidentifier")
+                .IsRequired()
+                ;
+
+            builder
+                .Property(p => p.ClientFullClassName)
+                .HasColumnType("nvarchar")
+                .HasMaxLength(511)
                 .IsRequired()
                 ;
 
@@ -89,11 +100,6 @@ namespace RothschildHouse.Infrastructure.Core.Persistence.Configurations
                 ;
 
             builder
-                .Property(p => p.TransactionDateTime)
-                .HasColumnType("datetime")
-                ;
-
-            builder
                 .Property(p => p.Notes)
                 .HasColumnType("nvarchar(max)")
                 ;
@@ -103,36 +109,37 @@ namespace RothschildHouse.Infrastructure.Core.Persistence.Configurations
             builder
                 .HasIndex(p => p.Guid)
                 .IsUnique()
-                .HasDatabaseName("UQ_dbo_PaymentTransaction_Guid");
+                .HasDatabaseName("UQ_dbo_Transaction_Guid")
+                ;
 
             // Add configuration for foreign keys
 
             builder
                 .HasOne(p => p.ClientApplicationFk)
-                .WithMany(b => b.PaymentTransactionList)
+                .WithMany(b => b.TransactionList)
                 .HasForeignKey(p => p.ClientApplicationId)
-                .HasConstraintName("FK_dbo_PaymentTransaction_ClientApplicationId_dbo_ClientApplication")
+                .HasConstraintName("FK_dbo_Transaction_ClientApplicationId_dbo_ClientApplication")
                 ;
 
             builder
                 .HasOne(p => p.CustomerFk)
-                .WithMany(b => b.PaymentTransactionList)
+                .WithMany(b => b.TransactionList)
                 .HasForeignKey(p => p.CustomerId)
-                .HasConstraintName("FK_dbo_PaymentTransaction_CustomerId_dbo_Customer")
+                .HasConstraintName("FK_dbo_Transaction_CustomerId_dbo_Customer")
                 ;
 
             builder
                 .HasOne(p => p.CardFk)
-                .WithMany(b => b.PaymentTransactionList)
+                .WithMany(b => b.TransactionList)
                 .HasForeignKey(p => p.CardId)
-                .HasConstraintName("FK_dbo_PaymentTransaction_CardId_dbo_Card")
+                .HasConstraintName("FK_dbo_Transaction_CardId_dbo_Card")
                 ;
 
             builder
                 .HasOne(p => p.CurrencyFk)
-                .WithMany(b => b.PaymentTransactionList)
+                .WithMany(b => b.TransactionList)
                 .HasForeignKey(p => p.CurrencyId)
-                .HasConstraintName("FK_dbo_PaymentTransaction_CurrencyId_dbo_Currency")
+                .HasConstraintName("FK_dbo_Transaction_CurrencyId_dbo_Currency")
                 ;
         }
     }

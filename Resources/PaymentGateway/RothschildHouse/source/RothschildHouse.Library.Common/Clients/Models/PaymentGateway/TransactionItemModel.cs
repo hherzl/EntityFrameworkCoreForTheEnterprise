@@ -3,6 +3,8 @@
     public record TransactionItemModel
     {
         public long? Id { get; set; }
+        public short? TransactionTypeId { get; set; }
+        public string TransactionType { get; set; }
         public short? TransactionStatusId { get; set; }
         public string TransactionStatus { get; set; }
         public Guid? ClientApplicationId { get; set; }
@@ -16,4 +18,3 @@
         public DateTime? CreationDateTime { get; set; }
     }
 }
-

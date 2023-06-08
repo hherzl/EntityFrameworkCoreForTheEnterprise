@@ -9,10 +9,6 @@ namespace RothschildHouse.Application.Core.Features.Cards.Queries
 {
     public class GetCardQuery : IRequest<SingleResponse<CardDetailsModel>>
     {
-        public GetCardQuery()
-        {
-        }
-
         public GetCardQuery(Guid? id)
         {
             Id = id;

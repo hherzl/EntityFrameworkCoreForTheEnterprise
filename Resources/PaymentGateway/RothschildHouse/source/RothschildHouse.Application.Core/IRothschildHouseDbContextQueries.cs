@@ -139,7 +139,8 @@ namespace RothschildHouse.Application.Core
         {
             var query =
                 from txn in ctx.Transaction
-                join transactionStatus in ctx.VTransactionStatus on txn.TransactionStatusId equals transactionStatus.Id
+                join txnType in ctx.VTransactionType on txn.TransactionTypeId equals txnType.Id
+                join txnStatus in ctx.VTransactionStatus on txn.TransactionStatusId equals txnStatus.Id
                 join clientApplication in ctx.ClientApplication on txn.ClientApplicationId equals clientApplication.Id
                 join card in ctx.Card on txn.CardId equals card.Id
                 join currency in ctx.Currency on txn.CurrencyId equals currency.Id
@@ -147,8 +148,10 @@ namespace RothschildHouse.Application.Core
                 select new TransactionItemModel
                 {
                     Id = txn.Id,
+                    TransactionTypeId = txn.TransactionTypeId,
+                    TransactionType = txnType.Name,
                     TransactionStatusId = txn.TransactionStatusId,
-                    TransactionStatus = transactionStatus.Name,
+                    TransactionStatus = txnStatus.Name,
                     ClientApplicationId = txn.ClientApplicationId,
                     ClientApplication = clientApplication.Name,
                     CardId = txn.CardId,

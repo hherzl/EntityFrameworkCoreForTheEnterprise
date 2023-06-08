@@ -240,7 +240,7 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         /// <response code="200">Returns the client applications</response>
         /// <response code="400">If the request is invalid</response>
         /// <response code="500">If there was an internal error</response>
-        [HttpGet("txn-viewbag")]
+        [HttpGet("transaction-viewbag")]
         [ProducesResponseType(200, Type = typeof(GetTransactionsViewBagRespose))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
@@ -259,7 +259,7 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         /// <response code="200">Returns the transactions</response>
         /// <response code="400">If the request is invalid</response>
         /// <response code="500">If there was an internal error</response>
-        [HttpGet("txn")]
+        [HttpGet("transaction")]
         [ProducesResponseType(200, Type = typeof(PagedResponse<TransactionItemModel>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
@@ -278,7 +278,7 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         /// <response code="200">Returns the transaction</response>
         /// <response code="404">If the resource doesn't exist</response>
         /// <response code="500">If there was an internal error</response>
-        [HttpGet("txn/{id}")]
+        [HttpGet("transaction/{id}")]
         [ProducesResponseType(200, Type = typeof(SingleResponse<TransactionDetailsModel>))]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
@@ -300,7 +300,7 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         /// <response code="200">If resource it was processed  the client applications</response>
         /// <response code="400">If the request is invalid</response>
         /// <response code="500">If there was an internal error</response>
-        [HttpPost("process-txn")]
+        [HttpPost("process-transaction")]
         [ProducesResponseType(201, Type = typeof(ProcessTransactionResponse))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]

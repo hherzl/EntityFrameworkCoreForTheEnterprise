@@ -165,16 +165,17 @@ namespace RothschildHouse.Application.Core.Features.Transactions.Commands
             var txn = new Transaction
             {
                 Guid = Guid.NewGuid(),
-                ClientFullClassName = typeof(ICityBankPaymentServicesClient).FullName,
+                TransactionDateTime = request.TransactionDateTime ?? DateTime.Now,
+                TransactionTypeId = (short)TransactionType.Payment,
                 TransactionStatusId = (short)TransactionStatus.Requested,
                 ClientApplicationId = clientApplication.Id,
+                ClientFullClassName = typeof(ICityBankPaymentServicesClient).FullName,
                 CustomerId = customer.Id,
                 StoreId = request.StoreId,
                 CardId = card.Id,
                 Amount = request.OrderTotal,
                 CurrencyId = currency.Id,
                 CurrencyRate = currency.Rate,
-                TransactionDateTime = request.TransactionDateTime ?? DateTime.Now,
                 Notes = request.Notes
             };
 

@@ -174,24 +174,25 @@ var txn = db
     {
         Id = (long)0,
         Guid = Guid.Empty,
-        ClientFullClassName = "",
+        TransactionDateTime = DateTime.Now,
+        TransactionTypeId = (short)0,
         TransactionStatusId = (short)0,
         ClientApplicationId = Guid.Empty,
+        ClientFullClassName = "",
         CustomerId = Guid.Empty,
         StoreId = 0,
         CardId = Guid.Empty,
         Amount = 0m,
         CurrencyId = (short)0,
         CurrencyRate = 0m,
-        TransactionDateTime = DateTime.Now,
         Notes = ""
     })
     .SetNaming("Transaction")
-    .SetColumnFor(e => e.ClientFullClassName, length: 200)
+    .SetColumnFor(e => e.TransactionDateTime, nullable: true)
+    .SetColumnFor(e => e.ClientFullClassName, length: 511)
+    .SetColumnFor(e => e.Notes, nullable: true)
     .SetColumnFor(e => e.Amount, prec: 12, scale: 4)
     .SetColumnFor(e => e.CurrencyRate, prec: 18, scale: 4)
-    .SetColumnFor(e => e.TransactionDateTime, nullable: true)
-    .SetColumnFor(e => e.Notes, nullable: true)
     .SetIdentity(e => e.Id)
     .SetPrimaryKey(e => e.Id)
     .AddUnique(e => e.Guid)
@@ -236,7 +237,7 @@ SqlServerDatabaseScriptCodeBuilder.CreateScript(db, @"C:\Temp\Databases", true, 
 
 // Create instance of Entity Framework Core project
 var project = EntityFrameworkCoreProject
-    .CreateForV3x("RothschildHouse.Domain.Core", db, @"C:\Temp\RothschildHouse.Domain");
+    .CreateForV5x("RothschildHouse.Domain.Core", db, @"C:\Temp\RothschildHouse.Domain");
 
 // Apply settings for Entity Framework Core project
 project.GlobalSelection(settings =>

@@ -68,6 +68,15 @@ foreach (var item in VCustomerTypes.Items)
     ctx.SaveChanges();
 }
 
+foreach (var item in VTransactionTypes.Items)
+{
+    item.Active = true;
+
+    ctx.EnumDescription.Add(item);
+
+    ctx.SaveChanges();
+}
+
 foreach (var item in VTransactionStatuses.Items)
 {
     item.Active = true;

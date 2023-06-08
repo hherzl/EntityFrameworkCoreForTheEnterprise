@@ -1,3 +1,18 @@
+IF OBJECT_ID('dbo.VTransactionType') IS NOT NULL
+	DROP VIEW [dbo].[VTransactionType]
+GO
+
+CREATE VIEW [dbo].[VTransactionType]
+AS
+    SELECT
+        [Value] AS [Id],
+        [Description] AS [Name]
+    FROM
+        [dbo].[EnumDescription]
+    WHERE
+        [Type] = 'RothschildHouse.Domain.Core.Enums.TransactionType'
+GO
+
 IF OBJECT_ID('dbo.VTransactionStatus') IS NOT NULL
 	DROP VIEW [dbo].[VTransactionStatus]
 GO
@@ -26,6 +41,9 @@ AS
         [dbo].[EnumDescription]
     WHERE
         [Type] = 'RothschildHouse.Domain.Core.Enums.CardType'
+GO
+
+SELECT * FROM [dbo].[VTransactionType]
 GO
 
 SELECT * FROM [dbo].[VTransactionStatus]

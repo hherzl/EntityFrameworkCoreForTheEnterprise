@@ -1,5 +1,4 @@
-﻿using System.Net.Http.Headers;
-using System.Text.Json;
+﻿using System.Text.Json;
 using RothschildHouse.Library.Common.Clients.Models.Common;
 using RothschildHouse.Library.Common.Clients.Models.PaymentGateway;
 
@@ -25,8 +24,6 @@ namespace RothschildHouse.Library.Common.Clients
         {
             var client = _httpClientFactory.CreateClient("PaymentGateway");
 
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(ContentTypes.ApplicationJson));
-
             return client;
         }
 
@@ -38,7 +35,6 @@ namespace RothschildHouse.Library.Common.Clients
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
-
             return JsonSerializer.Deserialize<ListResponse<CountryItemModel>>(content, options: DefaultJsonSerializerOptions);
         }
 
@@ -50,7 +46,6 @@ namespace RothschildHouse.Library.Common.Clients
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
-
             return JsonSerializer.Deserialize<ListResponse<CurrencyItemModel>>(content, options: DefaultJsonSerializerOptions);
         }
 
@@ -62,7 +57,6 @@ namespace RothschildHouse.Library.Common.Clients
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
-
             return JsonSerializer.Deserialize<ListResponse<ClientApplicationItemModel>>(content, options: DefaultJsonSerializerOptions);
         }
 
@@ -74,7 +68,6 @@ namespace RothschildHouse.Library.Common.Clients
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
-
             return JsonSerializer.Deserialize<SingleResponse<ClientApplicationDetailsModel>>(content, options: DefaultJsonSerializerOptions);
         }
 
@@ -86,7 +79,6 @@ namespace RothschildHouse.Library.Common.Clients
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
-
             return JsonSerializer.Deserialize<PagedResponse<CardItemModel>>(content, options: DefaultJsonSerializerOptions);
         }
 
@@ -98,7 +90,6 @@ namespace RothschildHouse.Library.Common.Clients
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
-
             return JsonSerializer.Deserialize<SingleResponse<CardDetailsModel>>(content, options: DefaultJsonSerializerOptions);
         }
 
@@ -110,7 +101,6 @@ namespace RothschildHouse.Library.Common.Clients
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
-
             return JsonSerializer.Deserialize<PagedResponse<CustomerItemModel>>(content, options: DefaultJsonSerializerOptions);
         }
 
@@ -122,7 +112,6 @@ namespace RothschildHouse.Library.Common.Clients
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
-
             return JsonSerializer.Deserialize<SingleResponse<CustomerDetailsModel>>(content, options: DefaultJsonSerializerOptions);
         }
 
@@ -130,11 +119,10 @@ namespace RothschildHouse.Library.Common.Clients
         {
             using var client = CreateHttpClient();
 
-            var response = await client.GetAsync($"txn-viewbag");
+            var response = await client.GetAsync($"transaction-viewbag");
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
-
             return JsonSerializer.Deserialize<GetTransactionsViewBagRespose>(content, options: DefaultJsonSerializerOptions);
         }
 
@@ -142,11 +130,10 @@ namespace RothschildHouse.Library.Common.Clients
         {
             using var client = CreateHttpClient();
 
-            var response = await client.GetAsync($"txn?pageSize={request.PageSize}&pageNumber={request.PageNumber}&transactionStatusId={request.TransactionStatusId}&clientApplicationId={request.ClientApplicationId}&startDate={request.StartDate}&endDate={request.EndDate}");
+            var response = await client.GetAsync($"transaction?pageSize={request.PageSize}&pageNumber={request.PageNumber}&transactionStatusId={request.TransactionStatusId}&clientApplicationId={request.ClientApplicationId}&startDate={request.StartDate}&endDate={request.EndDate}");
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
-
             return JsonSerializer.Deserialize<PagedResponse<TransactionItemModel>>(content, options: DefaultJsonSerializerOptions);
         }
 
@@ -154,11 +141,10 @@ namespace RothschildHouse.Library.Common.Clients
         {
             using var client = CreateHttpClient();
 
-            var response = await client.GetAsync($"txn/{id}");
+            var response = await client.GetAsync($"transaction/{id}");
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
-
             return JsonSerializer.Deserialize<SingleResponse<TransactionDetailsModel>>(content, options: DefaultJsonSerializerOptions);
         }
     }

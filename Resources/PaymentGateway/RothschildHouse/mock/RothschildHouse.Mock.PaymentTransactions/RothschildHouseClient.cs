@@ -64,11 +64,10 @@ namespace RothschildHouse.Mock.PaymentTransactions
         {
             using var client = CreateHttpClient();
 
-            var response = await client.PostAsJsonAsync($"{_endpoint}/process-txn", request);
+            var response = await client.PostAsJsonAsync($"{_endpoint}/process-transaction", request);
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
-
             return JsonSerializer.Deserialize<ProcessTransactionResponse>(content, options: DefaultJsonSerializerOptions);
         }
     }

@@ -33,10 +33,8 @@ namespace RothschildHouse.Application.Core.Features.Transactions.Queries
         {
             var query = _dbContext
                 .GetTransactions(transactionStatusId: request.TransactionStatusId, clientApplicationId: request.ClientApplicationId, startDate: request.StartDate, endDate: request.EndDate)
+                .OrderByDescending(item => item.CreationDateTime)
                 ;
-
-            if (request.IsEmpty)
-                query = query.OrderByDescending(item => item.CreationDateTime);
 
             var list = await query
                 .Paging(request.PageSize, request.PageNumber)

@@ -72,7 +72,8 @@ else
             <MudDataGrid Items="@response.Model">
                 <Columns>
                     <PropertyColumn Property="x => x.Id" Title="ID" />
-                    <PropertyColumn Property="x => x.TransactionStatus" Title="Transaction Status" />
+                    <PropertyColumn Property="x => x.TransactionType" Title="Type" />
+                    <PropertyColumn Property="x => x.TransactionStatus" Title="Status" />
                     <PropertyColumn Property="x => x.ClientApplication" Title="Client Application" />
                     <PropertyColumn Property="x => x.OrderTotal" Title="Order Total" />
                     <PropertyColumn Property="x => x.Currency" Title="Currency" />
@@ -91,20 +92,22 @@ else
 }
 
 @code {
-    int PageSize { get; set; }
-    short? TransactionStatusId { get; set; }
-    Guid? ClientApplicationId { get; set; }
-    DateTime? StartDate { get; set; }
-    DateTime? EndDate { get; set; }
+        int PageSize { get; set; }
+        short? TransactionStatusId { get; set; }
+        Guid? ClientApplicationId { get; set; }
+        DateTime? StartDate { get; set; }
+        DateTime? EndDate { get; set; }
 
-    GetTransactionsViewBagRespose viewBag;
-    PagedResponse<TransactionItemModel> response;
+        GetTransactionsViewBagRespose viewBag;
+        PagedResponse<TransactionItemModel> response;
 
     protected override async Task OnInitializedAsync()
     {
         PageSize = 25;
-        StartDate = DateTime.Now;
-        EndDate = DateTime.Now;
+
+        var now = DateTime.Now;
+        StartDate = new(now.Year, now.Month, now.Day);
+        EndDate = new(now.Year, now.Month, now.Day);
 
         viewBag = await rothschildHouseClient.GetTransactionsViewBag();
 
