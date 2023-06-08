@@ -8,13 +8,13 @@
             {
                 get
                 {
-                    // UCommerce
+                    // eCommerce
                     yield return Guid.Parse("9B26240D-6BFA-4F80-AE67-37712D1388A7");
 
                     // Mocks
                     yield return Guid.Parse("B74CB3C2-BB35-4436-BCFB-8769B521CA3D");
 
-                    // GUI
+                    // PayButton
                     yield return Guid.Parse("D4159097-96BE-43E0-9E8F-ED4384B0F9C2");
                 }
             }
@@ -37,6 +37,12 @@
 
                     // Julio Bonilla
                     yield return Guid.Parse("F2E95CCA-6E96-456C-92B1-E016990458FF");
+
+                    // Amelia Brand
+                    yield return Guid.Parse("4B76BB9C-BF57-43C7-B75E-13EB0C047F47");
+
+                    // Joseph Cooper
+                    yield return Guid.Parse("EE3EE5D7-40A1-4AA8-9B8D-B596B6B8C575");
                 }
             }
         }
@@ -47,13 +53,17 @@
             {
                 get
                 {
-                    yield return (2000, "VISA", "Juan Carlos Pérez", "4111111111111111", "0124", "123");
+                    yield return (2000, "VISA", "Juan Carlos Pérez", "4111111111111111", "0124", "111");
 
-                    yield return (2000, "VISA", "María Rosales", "4012888888881881", "0124", "123");
+                    yield return (2000, "VISA", "María Rosales", "4012888888881881", "0624", "333");
 
-                    yield return (2000, "Mastercard", "Julio César Bonilla", "5105105105105100", "0125", "456");
+                    yield return (2000, "Mastercard", "Julio Bonilla", "5105105105105100", "0125", "666");
 
-                    yield return (2000, "Mastercard", "Roberto Asturias", "5555555555554444", "0125", "456");
+                    yield return (2000, "Mastercard", "Roberto Asturias", "5555555555554444", "0325", "999");
+
+                    yield return (2000, "American Express", "Amelia Brand", "371741686208810", "1224", "7015");
+
+                    yield return (2000, "American Express", "Joseph Cooper", "371691232939410", "0624", "3708");
                 }
             }
         }

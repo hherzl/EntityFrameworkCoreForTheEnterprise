@@ -22,7 +22,7 @@ namespace RothschildHouse.TP.CityBank
             var card = _database.Cards.FirstOrDefault(item => item.CardNumber == request.CardNumber);
 
             if (card == null)
-                return await Task.FromResult(new ProcessPaymentResponse { Successed = false });
+                return await Task.FromResult(ProcessPaymentResponse.Failed);
 
             await Task.Delay(2000);
 

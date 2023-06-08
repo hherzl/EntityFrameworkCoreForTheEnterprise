@@ -27,7 +27,6 @@ namespace RothschildHouse.Seed.PaymentGateway.Seeds
                 yield return (new Person
                 {
                     GivenName = "María",
-                    MiddleName = "",
                     FamilyName = "Rosales",
                     FullName = "María Rosales"
                 },
@@ -57,7 +56,6 @@ namespace RothschildHouse.Seed.PaymentGateway.Seeds
                 yield return (new Person
                 {
                     GivenName = "Roberto",
-                    MiddleName = "",
                     FamilyName = "Asturias",
                     FullName = "Roberto Asturias"
                 },
@@ -67,6 +65,34 @@ namespace RothschildHouse.Seed.PaymentGateway.Seeds
                     CountryId = 1,
                     Phone = "+150366558877",
                     Email = "roberto_asturias_sv@hotmail.com"
+                });
+
+                yield return (new Person
+                {
+                    GivenName = "Amelia",
+                    FamilyName = "Brand",
+                    FullName = "Amelia Brand"
+                },
+                new Customer
+                {
+                    Id = Guid.Parse("4B76BB9C-BF57-43C7-B75E-13EB0C047F47"),
+                    CountryId = 1,
+                    Phone = "+170211223344",
+                    Email = "ameliabrand@nasa.gov"
+                });
+
+                yield return (new Person
+                {
+                    GivenName = "Joseph",
+                    FamilyName = "Cooper",
+                    FullName = "Joseph Cooper"
+                },
+                new Customer
+                {
+                    Id = Guid.Parse("EE3EE5D7-40A1-4AA8-9B8D-B596B6B8C575"),
+                    CountryId = 1,
+                    Phone = "+170222334455",
+                    Email = "joseph.cooper@farmersunion.us"
                 });
             }
         }

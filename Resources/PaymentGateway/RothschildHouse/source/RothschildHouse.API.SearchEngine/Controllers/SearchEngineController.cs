@@ -40,7 +40,11 @@ namespace RothschildHouse.API.SearchEngine.Controllers
                 CreatedOn = DateTime.Now
             };
 
+            _logger?.LogInformation($"Indexing sale for payment transaction '{request.PaymentTxnId}'...");
+
             await _saleService.AddSaleAsync(document);
+
+            _logger?.LogInformation($" Payment transaction '{request.PaymentTxnId}' was indexed successfully, Id: '{document.Id}'");
 
             return Ok(new CreatedResponse<string>(document.Id));
         }

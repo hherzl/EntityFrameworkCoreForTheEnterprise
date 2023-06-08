@@ -4,6 +4,9 @@ namespace RothschildHouse.TP.CityBank.Contracts.DataContracts
 {
     public record ProcessPaymentResponse
     {
+        public static ProcessPaymentResponse Failed
+            => new() { Successed = false };
+
         public ProcessPaymentResponse()
         {
             Authorization = new ProcessPaymentAuthorization();
