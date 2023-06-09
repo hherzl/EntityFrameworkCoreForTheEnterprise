@@ -1,4 +1,4 @@
-﻿@page "/txn"
+﻿@page "/transaction"
 
 @using RothschildHouse.Library.Common.Clients;
 @using RothschildHouse.Library.Common.Clients.Models.Common;
@@ -81,7 +81,7 @@ else
                     <TemplateColumn CellClass="d-flex justify-end">
                         <CellTemplate>
                             <MudStack Row>
-                                <MudLink Href="@($"/txn/{context.Item.Id}")">Details</MudLink>
+                                <MudLink Href="@($"/transaction/{context.Item.Id}")">Details</MudLink>
                             </MudStack>
                         </CellTemplate>
                     </TemplateColumn>

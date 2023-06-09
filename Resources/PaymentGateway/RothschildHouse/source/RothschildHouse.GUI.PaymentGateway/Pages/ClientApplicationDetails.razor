@@ -33,7 +33,7 @@ else if (response.Model is not null)
 
     <br />
 
-    <h2>Payment Transactions</h2>
+    <h2>Transactions</h2>
 
     <MudDataGrid Items="@response.Model.Transactions">
         <Columns>
@@ -46,7 +46,7 @@ else if (response.Model is not null)
             <TemplateColumn CellClass="d-flex justify-end">
                 <CellTemplate>
                     <MudStack Row>
-                        <MudLink Href="@($"/payment-txn/{context.Item.Id}")">Details</MudLink>
+                        <MudLink Href="@($"/transaction/{context.Item.Id}")">Details</MudLink>
                     </MudStack>
                 </CellTemplate>
             </TemplateColumn>

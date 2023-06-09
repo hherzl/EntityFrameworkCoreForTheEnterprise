@@ -17,4 +17,12 @@
   <ItemGroup>
     <ProjectReference Include="..\RothschildHouse.Library.Common\RothschildHouse.Library.Common.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Transaction.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Transaction.razor" />
+  </ItemGroup>
 </Project>
