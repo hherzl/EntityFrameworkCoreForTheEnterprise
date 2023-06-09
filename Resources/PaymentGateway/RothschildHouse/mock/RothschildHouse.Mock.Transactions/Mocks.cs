@@ -1,4 +1,4 @@
-﻿namespace RothschildHouse.Mock.PaymentTransactions
+﻿namespace RothschildHouse.Mock.Transactions
 {
     internal class Mocks
     {

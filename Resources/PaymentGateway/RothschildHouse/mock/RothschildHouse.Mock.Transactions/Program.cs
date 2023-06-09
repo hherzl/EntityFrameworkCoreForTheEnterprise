@@ -1,4 +1,4 @@
-﻿using RothschildHouse.Mock.PaymentTransactions;
+﻿using RothschildHouse.Mock.Transactions;
 
 var mocksRandom = new Random();
 

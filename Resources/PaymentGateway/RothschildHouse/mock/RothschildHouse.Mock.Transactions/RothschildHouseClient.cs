@@ -2,7 +2,7 @@
 using System.Net.Http.Json;
 using System.Text.Json;
 
-namespace RothschildHouse.Mock.PaymentTransactions
+namespace RothschildHouse.Mock.Transactions
 {
     internal record ProcessTransactionRequest
     {
@@ -35,7 +35,7 @@ namespace RothschildHouse.Mock.PaymentTransactions
 
     internal class RothschildHouseClient
     {
-        const string ApplicationJson = "application/json";
+        const string APPLICATION_JSON = "application/json";
 
         private readonly string _endpoint;
 
@@ -48,7 +48,7 @@ namespace RothschildHouse.Mock.PaymentTransactions
         {
             var client = new HttpClient();
 
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(ApplicationJson));
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(APPLICATION_JSON));
 
             return client;
         }
