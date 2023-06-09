@@ -26,7 +26,7 @@ if (args.Length > 0)
 
 while (startDate < endDate)
 {
-    var transactionsPerDay = mocksRandom.Next(25);
+    var transactionsPerDay = mocksRandom.Next(10);
 
     Console.WriteLine($"Mocking '{transactionsPerDay}' transactions for {startDate}");
 
@@ -62,7 +62,7 @@ while (startDate < endDate)
 
         var response = await rothschildHouseClient.ProcessTransactionAsync(request);
 
-        Console.WriteLine($"{DateTime.Now}:  Transaction Id: '{response.Id}', Client: '{response.Client}', Amount: '{response.OrderTotal} {response.Currency}'");
+        Console.WriteLine($"{DateTime.Now}:  Txn Id: '{response.Id}', client: '{response.Client}', total: '{response.OrderTotal} {response.Currency}'");
     }
 
     startDate = startDate.AddDays(1);

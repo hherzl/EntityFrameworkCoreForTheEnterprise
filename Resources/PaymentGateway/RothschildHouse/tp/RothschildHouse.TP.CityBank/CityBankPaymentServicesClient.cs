@@ -24,7 +24,7 @@ namespace RothschildHouse.TP.CityBank
             if (card == null)
                 return await Task.FromResult(ProcessPaymentResponse.Failed);
 
-            await Task.Delay(2000);
+            await Task.Delay(500);
 
             var response = new ProcessPaymentResponse
             {
