@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RothschildHouse.API.SearchEngine.Models;
 using RothschildHouse.Library.Common.Clients.Models.Common;
+using RothschildHouse.Library.Common.Clients.Models.SearchEngine;
 using RothschildHouse.Library.Common.NoSql;
 using RothschildHouse.Library.Common.NoSql.Documents;
 
