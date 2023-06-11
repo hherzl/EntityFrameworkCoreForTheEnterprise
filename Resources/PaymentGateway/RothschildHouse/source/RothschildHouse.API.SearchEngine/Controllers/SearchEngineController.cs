@@ -20,29 +20,41 @@ namespace RothschildHouse.API.SearchEngine.Controllers
         }
 
         [HttpPost("sale")]
+        [ProducesResponseType(201, Type = typeof(CreatedResponse<string>))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
         public async Task<IActionResult> IndexSaleAsync([FromBody] IndexSaleRequest request)
         {
             _logger?.LogDebug($"'{nameof(IndexSaleAsync)}' has been invoked");
 
-            var document = new SaleDocument
-            {
-                TxnId = request.TxnId,
-                TxnGuid = request.TxnGuid,
-                TxnDateTime = request.TxnDateTime,
-                ClientApplicationId = request.ClientApplicationId,
-                ClientApplication = request.ClientApplication,
-                IssuingNetwork = request.IssuingNetwork,
-                CardTypeId = request.CardTypeId,
-                CardType = request.CardType,
-                Total = request.Total,
-                CurrencyId = request.CurrencyId,
-                Currency = request.Currency,
-                CreatedOn = DateTime.Now
-            };
+            var document = await _saleService.GetByTxnIdAsync(request.TxnId);
 
             _logger?.LogInformation($"Indexing sale for transaction '{request.TxnId}'...");
 
-            await _saleService.AddSaleAsync(document);
+            if (document == null)
+            {
+                document = new SaleDocument
+                {
+                    TxnId = request.TxnId,
+                    TxnGuid = request.TxnGuid,
+                    TxnDateTime = request.TxnDateTime,
+                    ClientApplicationId = request.ClientApplicationId,
+                    ClientApplication = request.ClientApplication,
+                    IssuingNetwork = request.IssuingNetwork,
+                    CardTypeId = request.CardTypeId,
+                    CardType = request.CardType,
+                    Total = request.Total,
+                    CurrencyId = request.CurrencyId,
+                    Currency = request.Currency,
+                    CreatedOn = DateTime.Now
+                };
+
+                await _saleService.AddSaleAsync(document);
+            }
+            else
+            {
+                await _saleService.UpdateAsync(request.TxnId, document);
+            }
 
             _logger?.LogInformation($" Transaction '{request.TxnId}' was indexed successfully, Id: '{document.Id}'");
 
