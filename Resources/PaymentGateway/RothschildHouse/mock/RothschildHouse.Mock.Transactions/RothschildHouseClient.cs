@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using Microsoft.Extensions.Configuration;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
 
@@ -41,7 +42,13 @@ namespace RothschildHouse.Mock.Transactions
 
         public RothschildHouseClient()
         {
-            _endpoint = "https://localhost:7250/api/v1";
+            var _config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build()
+                ;
+
+            _endpoint = _config["Clients:RothschildHouse"];            
         }
 
         private static HttpClient CreateHttpClient()
