@@ -38,17 +38,18 @@ namespace RothschildHouse.Mock.Transactions
     {
         const string APPLICATION_JSON = "application/json";
 
+        private readonly IConfigurationRoot _configurationRoot;
         private readonly string _endpoint;
 
         public RothschildHouseClient()
         {
-            var _config = new ConfigurationBuilder()
+            _configurationRoot = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build()
                 ;
 
-            _endpoint = _config["Clients:RothschildHouse"];            
+            _endpoint = _configurationRoot["Clients:RothschildHouse"];            
         }
 
         private static HttpClient CreateHttpClient()
