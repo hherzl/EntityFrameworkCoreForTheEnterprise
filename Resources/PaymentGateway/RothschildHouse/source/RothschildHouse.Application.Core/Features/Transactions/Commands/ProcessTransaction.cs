@@ -241,7 +241,7 @@ namespace RothschildHouse.Application.Core.Features.Transactions.Commands
                     IssuingNetwork = card.IssuingNetwork,
                     CardTypeId = card.CardTypeId,
                     CardType = card.CardTypeId == (short)CardType.Debit ? "Debit" : "Credit",
-                    Total = (double)txn.Amount,
+                    Total = txn.Amount,
                     CurrencyId = currency.Id,
                     Currency = currency.Code
                 });

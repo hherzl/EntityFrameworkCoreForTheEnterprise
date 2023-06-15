@@ -10,7 +10,7 @@
         public int Year { get; set; }
         public int Month { get; set; }
 
-        public double? Total
+        public decimal? Total
             => Sales.Sum(item => item.Total);
 
         public List<MonthlySaleItemModel> Sales { get; set; }

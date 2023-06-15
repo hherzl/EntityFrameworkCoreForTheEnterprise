@@ -5,6 +5,6 @@
         public string Year { get; set; }
         public string Month { get; set; }
         public string ClientApplication { get; set; }
-        public double? Total { get; set; }
+        public decimal? Total { get; set; }
     }
 }

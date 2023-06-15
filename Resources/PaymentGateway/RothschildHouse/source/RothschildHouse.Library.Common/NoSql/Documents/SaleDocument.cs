@@ -34,7 +34,7 @@ namespace RothschildHouse.Library.Common.NoSql.Documents
         public string CardType { get; set; }
 
         [BsonElement("total")]
-        public double? Total { get; set; }
+        public decimal? Total { get; set; }
 
         [BsonElement("currencyId")]
         public short? CurrencyId { get; set; }

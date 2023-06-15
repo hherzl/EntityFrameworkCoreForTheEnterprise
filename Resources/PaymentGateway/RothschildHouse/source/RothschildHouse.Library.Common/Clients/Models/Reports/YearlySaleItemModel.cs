@@ -10,6 +10,6 @@
         public string Year { get; set; }
         public string Month { get; set; }
         public string ClientApplication { get; set; }
-        public List<double> Values { get; set; }
+        public List<decimal> Values { get; set; }
     }
 }
