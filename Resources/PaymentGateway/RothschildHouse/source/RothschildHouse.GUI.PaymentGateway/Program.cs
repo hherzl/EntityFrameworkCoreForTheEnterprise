@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -27,5 +28,10 @@ builder.Services.AddHttpClient<PaymentGatewayClient>("PaymentGateway", client =>
 
 builder.Services.AddScoped<ReportsClient>();
 builder.Services.AddScoped<PaymentGatewayClient>();
+
+var culture = new CultureInfo("en-US");
+
+CultureInfo.DefaultThreadCurrentCulture = culture;
+CultureInfo.DefaultThreadCurrentUICulture = culture;
 
 await builder.Build().RunAsync();
