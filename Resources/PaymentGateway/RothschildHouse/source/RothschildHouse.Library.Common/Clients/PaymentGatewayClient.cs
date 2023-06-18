@@ -93,11 +93,22 @@ namespace RothschildHouse.Library.Common.Clients
             return JsonSerializer.Deserialize<SingleResponse<CardDetailsModel>>(content, options: DefaultJsonSerializerOptions);
         }
 
+        public async Task<GetCustomersViewBagRespose> GetCustomersViewBag()
+        {
+            using var client = CreateHttpClient();
+
+            var response = await client.GetAsync($"customer-viewbag");
+            response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<GetCustomersViewBagRespose>(content, options: DefaultJsonSerializerOptions);
+        }
+
         public async Task<PagedResponse<CustomerItemModel>> GetCustomersAsync(GetCustomersRequest request)
         {
             using var client = CreateHttpClient();
 
-            var response = await client.GetAsync($"customer?pageSize={request.PageSize}&pageNumber={request.PageNumber}");
+            var response = await client.GetAsync($"customer?pageSize={request.PageSize}&pageNumber={request.PageNumber}&name={request.Name}&countryId={request.CountryID}&phone={request.Phone}&email={request.Email}");
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();

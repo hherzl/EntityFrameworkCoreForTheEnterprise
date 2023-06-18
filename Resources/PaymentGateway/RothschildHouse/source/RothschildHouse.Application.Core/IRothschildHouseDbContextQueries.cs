@@ -62,7 +62,13 @@ namespace RothschildHouse.Application.Core
             return await query.FirstOrDefaultAsync(item => item.IssuingNetwork == issuingNetwork && item.CardNumber == cardNumber, cancellationToken);
         }
 
-        public static IQueryable<CustomerItemModel> GetCustomers(this IRothschildHouseDbContext ctx)
+        public static IQueryable<CustomerItemModel> GetCustomers(
+            this IRothschildHouseDbContext ctx,
+            string fullName = null,
+            short? countryId = null,
+            string phone = null,
+            string email = null
+        )
         {
             var query =
                 from customer in ctx.Customer
@@ -84,6 +90,18 @@ namespace RothschildHouse.Application.Core
                     Email = customer.Email,
                     AlienGuid = customer.AlienGuid
                 };
+
+            if (!string.IsNullOrEmpty(fullName))
+                query = query.Where(item => item.FullName.Contains(fullName));
+
+            if (countryId.HasValue)
+                query = query.Where(item => item.CountryId == countryId);
+
+            if (!string.IsNullOrEmpty(phone))
+                query = query.Where(item => item.Phone.Contains(phone));
+
+            if (!string.IsNullOrEmpty(email))
+                query = query.Where(item => item.Email.Contains(email));
 
             return query;
         }
