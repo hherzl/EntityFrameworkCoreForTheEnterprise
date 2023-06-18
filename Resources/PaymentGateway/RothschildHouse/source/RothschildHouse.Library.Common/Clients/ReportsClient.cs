@@ -5,6 +5,8 @@ namespace RothschildHouse.Library.Common.Clients
 {
     public class ReportsClient
     {
+        public const string ClientName = "Reports";
+
         private readonly IHttpClientFactory _httpClientFactory;
 
         public ReportsClient(IHttpClientFactory httpClientFactory)
@@ -21,7 +23,7 @@ namespace RothschildHouse.Library.Common.Clients
 
         private HttpClient CreateHttpClient()
         {
-            var httpClient = _httpClientFactory.CreateClient("Reports");
+            var httpClient = _httpClientFactory.CreateClient(ClientName);
 
             return httpClient;
         }

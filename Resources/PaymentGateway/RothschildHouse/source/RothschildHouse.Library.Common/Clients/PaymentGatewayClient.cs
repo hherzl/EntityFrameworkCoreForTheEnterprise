@@ -6,6 +6,8 @@ namespace RothschildHouse.Library.Common.Clients
 {
     public class PaymentGatewayClient
     {
+        public const string ClientName = "PaymentGateway";
+
         private readonly IHttpClientFactory _httpClientFactory;
 
         public PaymentGatewayClient(IHttpClientFactory httpClientFactory)
@@ -22,7 +24,7 @@ namespace RothschildHouse.Library.Common.Clients
 
         private HttpClient CreateHttpClient()
         {
-            var client = _httpClientFactory.CreateClient("PaymentGateway");
+            var client = _httpClientFactory.CreateClient(ClientName);
 
             return client;
         }

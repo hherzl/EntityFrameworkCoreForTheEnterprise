@@ -14,16 +14,16 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddMudServices();
 
-builder.Services.AddHttpClient<ReportsClient>("Reports", client =>
+builder.Services.AddHttpClient<ReportsClient>(ReportsClient.ClientName, client =>
 {
     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(ContentTypes.ApplicationJson));
-    client.BaseAddress = new Uri(builder.Configuration.GetValue<string>("Clients:Reports"));
+    client.BaseAddress = new Uri(builder.Configuration.GetValue<string>($"Clients:{ReportsClient.ClientName}"));
 });
 
-builder.Services.AddHttpClient<PaymentGatewayClient>("PaymentGateway", client =>
+builder.Services.AddHttpClient<PaymentGatewayClient>(PaymentGatewayClient.ClientName, client =>
 {
     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(ContentTypes.ApplicationJson));
-    client.BaseAddress = new Uri(builder.Configuration.GetValue<string>("Clients:PaymentGateway"));
+    client.BaseAddress = new Uri(builder.Configuration.GetValue<string>($"Clients:{PaymentGatewayClient.ClientName}"));
 });
 
 builder.Services.AddScoped<ReportsClient>();
