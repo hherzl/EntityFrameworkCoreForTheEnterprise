@@ -29,9 +29,9 @@ builder.Services.AddHttpClient<PaymentGatewayClient>("PaymentGateway", client =>
 builder.Services.AddScoped<ReportsClient>();
 builder.Services.AddScoped<PaymentGatewayClient>();
 
-//var culture = new CultureInfo("en-US");
+var culture = new CultureInfo("en-US");
 
-//CultureInfo.DefaultThreadCurrentCulture = culture;
-//CultureInfo.DefaultThreadCurrentUICulture = culture;
+CultureInfo.DefaultThreadCurrentCulture = culture;
+CultureInfo.DefaultThreadCurrentUICulture = culture;
 
 await builder.Build().RunAsync();

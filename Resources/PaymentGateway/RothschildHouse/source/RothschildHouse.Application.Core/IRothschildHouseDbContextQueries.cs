@@ -166,6 +166,7 @@ namespace RothschildHouse.Application.Core
                 select new TransactionItemModel
                 {
                     Id = txn.Id,
+                    TransactionDateTime = txn.TransactionDateTime,
                     TransactionTypeId = txn.TransactionTypeId,
                     TransactionType = txnType.Name,
                     TransactionStatusId = txn.TransactionStatusId,
@@ -194,10 +195,10 @@ namespace RothschildHouse.Application.Core
                 query = query.Where(item => item.CardId == cardId);
 
             if (startDate.HasValue)
-                query = query.Where(item => item.CreationDateTime >= startDate.ToStartDateTime());
+                query = query.Where(item => item.TransactionDateTime >= startDate.ToStartDateTime());
 
             if (endDate.HasValue)
-                query = query.Where(item => item.CreationDateTime <= endDate.ToEndDateTime());
+                query = query.Where(item => item.TransactionDateTime <= endDate.ToEndDateTime());
 
             return query;
         }
