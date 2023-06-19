@@ -3,6 +3,7 @@
     public record TransactionItemModel
     {
         public long? Id { get; set; }
+        public DateTime? TransactionDateTime { get; set; }
         public short? TransactionTypeId { get; set; }
         public string TransactionType { get; set; }
         public short? TransactionStatusId { get; set; }

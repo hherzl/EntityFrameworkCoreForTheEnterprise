@@ -3,6 +3,7 @@
 @using RothschildHouse.Library.Common.Clients;
 @using RothschildHouse.Library.Common.Clients.Models.Common;
 @using RothschildHouse.Library.Common.Clients.Models.PaymentGateway;
+@using System.Globalization;
 
 @inject PaymentGatewayClient rothschildHouseClient
 
@@ -92,20 +93,21 @@ else
 }
 
 @code {
-        int PageSize { get; set; }
-        short? TransactionStatusId { get; set; }
-        Guid? ClientApplicationId { get; set; }
-        DateTime? StartDate { get; set; }
-        DateTime? EndDate { get; set; }
+    int PageSize { get; set; }
+    short? TransactionStatusId { get; set; }
+    Guid? ClientApplicationId { get; set; }
+    DateTime? StartDate { get; set; }
+    DateTime? EndDate { get; set; }
 
-        GetTransactionsViewBagRespose viewBag;
-        PagedResponse<TransactionItemModel> response;
+    GetTransactionsViewBagRespose viewBag;
+    PagedResponse<TransactionItemModel> response;
 
     protected override async Task OnInitializedAsync()
     {
         PageSize = 25;
 
         var now = DateTime.Now;
+
         StartDate = new(now.Year, now.Month, now.Day);
         EndDate = new(now.Year, now.Month, now.Day);
 

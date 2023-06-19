@@ -193,6 +193,24 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         }
 
         /// <summary>
+        /// Returns the customer that match with the specified search criteria.
+        /// </summary>
+        /// <returns>The customers.</returns>
+        /// <response code="200">Returns the customer view bag</response>
+        /// <response code="400">If the request is invalid</response>
+        /// <response code="500">If there was an internal error</response>
+        [HttpGet("customer-viewbag")]
+        [ProducesResponseType(200, Type = typeof(GetCustomersViewBagRespose))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> SearchCustomersViewBagAsync()
+        {
+            var response = await _mediator.Send(new GetCustomersViewBagQuery());
+
+            return response.ToOkResult();
+        }
+
+        /// <summary>
         /// Returns the customers that match with the specified search criteria.
         /// </summary>
         /// <param name="request">Search parameters</param>

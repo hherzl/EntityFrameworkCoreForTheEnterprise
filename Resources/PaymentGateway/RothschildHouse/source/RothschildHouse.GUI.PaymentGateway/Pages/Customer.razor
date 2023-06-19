@@ -10,34 +10,110 @@
 
 <h1>Customers</h1>
 
+<MudGrid>
+    <MudItem xs="12">
+        <MudSelect T="int" Label="Page size" @bind-value="@PageSize">
+            <MudSelectItem Value="25" />
+            <MudSelectItem Value="50" />
+            <MudSelectItem Value="100" />
+        </MudSelect>
+    </MudItem>
+    <MudItem xs="12">
+        <MudSelect T="short?" Label="Countries" @bind-value="@CountryId">
+            <MudSelectItem Value="default(short?)"></MudSelectItem>
+            @if (viewBag != null)
+            {
+                @foreach (var item in viewBag?.Countries)
+                {
+                    <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
+                }
+            }
+        </MudSelect>
+    </MudItem>
+    <MudItem xs="12">
+        <MudTextField @bind-Value="Name" Label="Customer name" Variant="Variant.Text" />
+    </MudItem>
+    <MudItem xs="6">
+        <MudTextField @bind-Value="Phone" Label="Phone number" Variant="Variant.Text" />
+    </MudItem>
+    <MudItem xs="6">
+        <MudTextField @bind-Value="Email" Label="Email" Variant="Variant.Text" />
+    </MudItem>    
+    <MudItem xs="12">
+        <MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.Search" @onclick="SearchAsync" />
+    </MudItem>
+</MudGrid>
+
+<br />
+
 @if (response == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
-    <MudDataGrid Items="@response.Model">
-        <Columns>
-            <PropertyColumn Property="x => x.FullName" Title="Name" />
-            <PropertyColumn Property="x => x.Country" Title="Country" />
-            <PropertyColumn Property="x => x.Phone" Title="Phone" />
-            <PropertyColumn Property="x => x.Email" Title="Email" />
-            <TemplateColumn CellClass="d-flex justify-end">
-                <CellTemplate>
-                    <MudStack Row>
-                        <MudLink Href="@($"/customer/{context.Item.Id}")">Details</MudLink>
-                    </MudStack>
-                </CellTemplate>
-            </TemplateColumn>
-        </Columns>
-    </MudDataGrid>
+    <MudGrid>
+        <MudItem xs="12">
+            <MudText Typo="Typo.body1">Page size: <strong>@(response.PageSize)</strong>, Total of items: <strong>@(response.ItemsCount)</strong>.</MudText>
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudPagination Color="Color.Primary" Count="@((int)response.PageCount)" SelectedChanged="PageChangedAsync" />
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudDataGrid Items="@response.Model">
+                <Columns>
+                    <PropertyColumn Property="x => x.FullName" Title="Name" />
+                    <PropertyColumn Property="x => x.Country" Title="Country" />
+                    <PropertyColumn Property="x => x.Phone" Title="Phone" />
+                    <PropertyColumn Property="x => x.Email" Title="Email" />
+                    <TemplateColumn CellClass="d-flex justify-end">
+                        <CellTemplate>
+                            <MudStack Row>
+                                <MudLink Href="@($"/customer/{context.Item.Id}")">Details</MudLink>
+                            </MudStack>
+                        </CellTemplate>
+                    </TemplateColumn>
+                </Columns>
+            </MudDataGrid>
+        </MudItem>        
+    </MudGrid>    
 }
 
 @code {
-    private ListResponse<CustomerItemModel> response;
+    int PageSize { get; set; }
+    string Name { get; set; }
+    short? CountryId { get; set; }
+    string Phone { get; set; }
+    string Email { get; set; }
+
+    GetCustomersViewBagRespose viewBag;
+    PagedResponse<CustomerItemModel> response;
 
     protected override async Task OnInitializedAsync()
     {
-        response = await rothschildHouseClient.GetCustomersAsync(new GetCustomersRequest());
+        PageSize = 25;
+
+        viewBag = await rothschildHouseClient.GetCustomersViewBag();
+
+        await SearchAsync();
+    }
+
+    private async Task SearchAsync()
+    {
+        response = await rothschildHouseClient.GetCustomersAsync(new GetCustomersRequest(Name, CountryId, Phone, Email)
+        {
+            PageSize = PageSize
+        });
+    }
+
+    private async Task PageChangedAsync(int i)
+    {
+        response = await rothschildHouseClient.GetCustomersAsync(new GetCustomersRequest(Name, CountryId, Phone, Email)
+        {
+            PageSize = PageSize,
+            PageNumber = i
+        });
     }
 }
