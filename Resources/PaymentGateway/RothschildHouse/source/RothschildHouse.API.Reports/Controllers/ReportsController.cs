@@ -18,6 +18,8 @@ namespace RothschildHouse.API.Reports.Controllers
         }
 
         [HttpGet("yearly-sale/{year}")]
+        [ProducesResponseType(201, Type = typeof(YearlySalesResponse))]
+        [ProducesResponseType(500)]
         public async Task<IActionResult> GetYearlySalesAsync(int year)
         {
             _logger?.LogDebug($"'{nameof(GetYearlySalesAsync)}' has been invoked");
@@ -57,6 +59,8 @@ namespace RothschildHouse.API.Reports.Controllers
         }
 
         [HttpGet("monthly-sale/{year}/{month}")]
+        [ProducesResponseType(201, Type = typeof(MonthlySalesResponse))]
+        [ProducesResponseType(500)]
         public async Task<IActionResult> GetMonthlySaleAsync(int year, int month)
         {
             _logger?.LogDebug($"'{nameof(GetMonthlySaleAsync)}' has been invoked");

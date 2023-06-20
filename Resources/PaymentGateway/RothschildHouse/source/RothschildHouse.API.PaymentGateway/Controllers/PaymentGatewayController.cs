@@ -203,7 +203,7 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         [ProducesResponseType(200, Type = typeof(GetCustomersViewBagRespose))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> SearchCustomersViewBagAsync()
+        public async Task<IActionResult> GetCustomersViewBagAsync()
         {
             var response = await _mediator.Send(new GetCustomersViewBagQuery());
 
@@ -262,7 +262,7 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         [ProducesResponseType(200, Type = typeof(GetTransactionsViewBagRespose))]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> SearchTransactionsViewBagAsync()
+        public async Task<IActionResult> GetTransactionsViewBagAsync()
         {
             var response = await _mediator.Send(new GetTransactionsViewBagQuery());
 
