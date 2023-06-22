@@ -95,7 +95,7 @@ else
     {
         PageSize = 25;
 
-        viewBag = await rothschildHouseClient.GetCustomersViewBag();
+        viewBag = await rothschildHouseClient.GetCustomersViewBagAsync();
 
         await SearchAsync();
     }
