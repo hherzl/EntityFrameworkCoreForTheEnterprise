@@ -16,6 +16,13 @@ namespace RothschildHouse.Application.Core.Features.Cards.Queries
 
         public int PageSize { get; set; }
         public int PageNumber { get; set; }
+
+        public long? CardTypeId { get; set; }
+        public string CardholderName { get; set; }
+        public string IssuingNetwork { get; set; }
+        
+        public bool? IsEmpty 
+            => !CardTypeId.HasValue && string.IsNullOrEmpty(CardholderName) && string.IsNullOrEmpty(IssuingNetwork);
     }
 
     public class GetCardsQueryHandler : IRequestHandler<GetCardsQuery, PagedResponse<CardItemModel>>
@@ -29,7 +36,7 @@ namespace RothschildHouse.Application.Core.Features.Cards.Queries
 
         public async Task<PagedResponse<CardItemModel>> Handle(GetCardsQuery request, CancellationToken cancellationToken)
         {
-            var query = _dbContext.GetCards();
+            var query = _dbContext.GetCards(cardTypeId: request.CardTypeId, issuingNetwork: request.IssuingNetwork, cardholderName: request.CardholderName);
 
             var list = await query
                 .Paging(request.PageSize, request.PageNumber)

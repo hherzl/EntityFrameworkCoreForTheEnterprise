@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using RothschildHouse.Domain.Core.Entities;
 using RothschildHouse.Library.Common.Clients.Models.Common;
 using RothschildHouse.Library.Common.Clients.Models.PaymentGateway;
 
@@ -73,11 +74,22 @@ namespace RothschildHouse.Library.Common.Clients
             return JsonSerializer.Deserialize<SingleResponse<ClientApplicationDetailsModel>>(content, options: DefaultJsonSerializerOptions);
         }
 
+        public async Task<GetCardsViewBagResponse> GetCardsViewBagAsync()
+        {
+            using var client = CreateHttpClient();
+
+            var response = await client.GetAsync("card-viewbag");
+            response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<GetCardsViewBagResponse>(content, options: DefaultJsonSerializerOptions);
+        }
+
         public async Task<PagedResponse<CardItemModel>> GetCardsAsync(GetCardsRequest request)
         {
             using var client = CreateHttpClient();
 
-            var response = await client.GetAsync($"card?pageSize={request.PageSize}&pageNumber={request.PageNumber}");
+            var response = await client.GetAsync($"card?pageSize={request.PageSize}&pageNumber={request.PageNumber}&cardTypeId={request.CardTypeId}&IssuingNetwork={request.IssuingNetwork}&CardholderName={request.CardholderName}");
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
@@ -95,11 +107,11 @@ namespace RothschildHouse.Library.Common.Clients
             return JsonSerializer.Deserialize<SingleResponse<CardDetailsModel>>(content, options: DefaultJsonSerializerOptions);
         }
 
-        public async Task<GetCustomersViewBagRespose> GetCustomersViewBag()
+        public async Task<GetCustomersViewBagRespose> GetCustomersViewBagAsync()
         {
             using var client = CreateHttpClient();
 
-            var response = await client.GetAsync($"customer-viewbag");
+            var response = await client.GetAsync("customer-viewbag");
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();

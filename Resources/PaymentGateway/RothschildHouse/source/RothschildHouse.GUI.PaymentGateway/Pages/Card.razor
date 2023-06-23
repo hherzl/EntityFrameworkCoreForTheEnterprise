@@ -10,35 +10,107 @@
 
 <h1>Cards</h1>
 
+<MudGrid>
+    <MudItem xs="12">
+        <MudSelect T="int" Label="Page size" @bind-value="@PageSize">
+            <MudSelectItem Value="25" />
+            <MudSelectItem Value="50" />
+            <MudSelectItem Value="100" />
+        </MudSelect>
+    </MudItem>
+    <MudItem xs="12">
+        <MudSelect T="long?" Label="Cards" @bind-value="@CardTypeId">
+            <MudSelectItem Value="default(long?)"></MudSelectItem>
+            @if (viewBag != null)
+            {
+                @foreach (var item in viewBag?.CardTypes)
+                {
+                    <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
+                }
+            }
+        </MudSelect>
+    </MudItem>
+    <MudItem xs="12">
+        <MudTextField @bind-Value="CardholderName" Label="Cardholder name" Variant="Variant.Text" />
+    </MudItem>
+    <MudItem xs="12">
+        <MudTextField @bind-Value="IssuingNetwork" Label="Issuing network" Variant="Variant.Text" />
+    </MudItem>    
+    <MudItem xs="12">
+        <MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.Search" @onclick="SearchAsync" />
+    </MudItem>
+</MudGrid>
+
+<br />
+
 @if (response == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
-    <MudDataGrid Items="@response.Model">
-        <Columns>
-            <PropertyColumn Property="x => x.CardType" Title="Card Type" />
-            <PropertyColumn Property="x => x.IssuingNetwork" Title="Issuing Network" />
-            <PropertyColumn Property="x => x.CardholderName" Title="Cardholder Name" />
-            <PropertyColumn Property="x => x.Last4Digits" Title="Last 4 Digits" />
-            <PropertyColumn Property="x => x.ExpirationDate" Title="Expiration Date" />
-            <TemplateColumn CellClass="d-flex justify-end">
-                <CellTemplate>
-                    <MudStack Row>
-                        <MudLink Href="@($"/card/{context.Item.Id}")">Details</MudLink>
-                    </MudStack>
-                </CellTemplate>
-            </TemplateColumn>
-        </Columns>
-    </MudDataGrid>
+    <MudGrid>
+        <MudItem xs="12">
+            <MudText Typo="Typo.body1">Page size: <strong>@(response.PageSize)</strong>, Total of items: <strong>@(response.ItemsCount)</strong>.</MudText>
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudPagination Color="Color.Primary" Count="@((int)response.PageCount)" SelectedChanged="PageChangedAsync" />
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudDataGrid Items="@response.Model">
+                <Columns>
+                    <PropertyColumn Property="x => x.CardType" Title="Card Type" />
+                    <PropertyColumn Property="x => x.IssuingNetwork" Title="Issuing Network" />
+                    <PropertyColumn Property="x => x.CardholderName" Title="Cardholder Name" />
+                    <PropertyColumn Property="x => x.Last4Digits" Title="Last 4 Digits" />
+                    <PropertyColumn Property="x => x.ExpirationDate" Title="Expiration Date" />
+                    <TemplateColumn CellClass="d-flex justify-end">
+                        <CellTemplate>
+                            <MudStack Row>
+                                <MudLink Href="@($"/card/{context.Item.Id}")">Details</MudLink>
+                            </MudStack>
+                        </CellTemplate>
+                    </TemplateColumn>
+                </Columns>
+            </MudDataGrid>
+        </MudItem>        
+    </MudGrid>   
 }
 
 @code {
-    private ListResponse<CardItemModel> response;
+        int PageSize { get; set; }
+        long? CardTypeId { get; set; }
+        string CardholderName { get; set; }
+        string IssuingNetwork { get; set; }
+        
+        GetCardsViewBagResponse viewBag;
+        PagedResponse<CardItemModel> response;
 
     protected override async Task OnInitializedAsync()
     {
-        response = await rothschildHouseClient.GetCardsAsync(new GetCardsRequest());
+        PageSize = 25;
+
+        viewBag = await rothschildHouseClient.GetCardsViewBagAsync();
+
+        await SearchAsync();
+    }
+
+    private async Task SearchAsync()
+    {
+        response = await rothschildHouseClient.GetCardsAsync(new GetCardsRequest(CardTypeId, IssuingNetwork, CardholderName)
+        {
+            PageSize = PageSize
+        });
+    }
+
+    private async Task PageChangedAsync(int i)
+    {
+        response = await rothschildHouseClient.GetCardsAsync(new GetCardsRequest(CardTypeId, IssuingNetwork, CardholderName)
+        {
+            PageSize = PageSize,
+            PageNumber = i
+        });
     }
 }
