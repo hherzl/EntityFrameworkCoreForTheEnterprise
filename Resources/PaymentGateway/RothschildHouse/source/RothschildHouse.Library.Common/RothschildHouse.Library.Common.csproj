@@ -11,10 +11,6 @@
     <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
     <PackageReference Include="MongoDB.Driver" Version="2.19.2" />
     <PackageReference Include="RabbitMQ.Client" Version="6.5.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\RothschildHouse.Domain.Core\RothschildHouse.Domain.Core.csproj" />
-  </ItemGroup>
+  </ItemGroup>  
 
 </Project>
