@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using RothschildHouse.Application.Core.Common.Contracts;
-using RothschildHouse.Domain.Core.Enums;
 using RothschildHouse.Library.Common.Clients.Models.Common;
 using RothschildHouse.Library.Common.Clients.Models.PaymentGateway;
 
@@ -20,17 +19,15 @@ namespace RothschildHouse.Application.Core.Features.Transactions.Queries
 
         public async Task<GetTransactionsViewBagRespose> Handle(GetTransactionsViewBagQuery request, CancellationToken cancellationToken)
         {
-            var enumOptions = Enum.GetValues(typeof(TransactionStatus)).Cast<TransactionStatus>();
+            var transactionStatus = await _dbContext.VTransactionStatus.ToListAsync(cancellationToken);
 
             var clientApplications = await _dbContext.ClientApplication.AsNoTracking().ToListAsync(cancellationToken);
 
-            var response = new GetTransactionsViewBagRespose
+            return new GetTransactionsViewBagRespose
             {
-                TransactionStatuses = enumOptions.Select(item => new ListItem<short?>((short)item, item.ToString())).ToList(),
+                TransactionStatuses = transactionStatus.Select(item => new ListItem<short?>((short)item.Id, item.Name)).ToList(),
                 ClientApplications = clientApplications.Select(item => new ListItem<Guid?>(item.Id, item.Name)).ToList()
             };
-
-            return response;
         }
     }
 }

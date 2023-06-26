@@ -21,12 +21,10 @@ namespace RothschildHouse.Application.Core.Features.Cards.Queries
         {
             var cardTypes = await _dbContext.VCardType.AsNoTracking().ToListAsync(cancellationToken);
 
-            var response = new GetCardsViewBagResponse
+            return new GetCardsViewBagResponse
             {
                 CardTypes = cardTypes.Select(item => new ListItem<long?>(item.Id, item.Name)).ToList()
             };
-
-            return response;
-        }        
+        }
     }
 }

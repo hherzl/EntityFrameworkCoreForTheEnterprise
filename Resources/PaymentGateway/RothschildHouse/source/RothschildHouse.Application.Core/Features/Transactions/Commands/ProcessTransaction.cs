@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text;
-using System.Text.Json;
 using MediatR;
 using RothschildHouse.Application.Core.Common.Contracts;
 using RothschildHouse.Domain.Core.Entities;
@@ -37,12 +35,6 @@ namespace RothschildHouse.Application.Core.Features.Transactions.Commands
         public string Currency { get; set; }
         public DateTime? TransactionDateTime { get; set; }
         public string Notes { get; set; }
-
-        public virtual string ToJson()
-            => JsonSerializer.Serialize(this);
-
-        public virtual StringContent ToStringContent(string mediaType)
-            => new(ToJson(), Encoding.Default, mediaType);
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
@@ -114,9 +106,10 @@ namespace RothschildHouse.Application.Core.Features.Transactions.Commands
 
     public class ProcessTransactionCommandHandler : IRequestHandler<ProcessTransactionCommand, ProcessTransactionResponse>
     {
-        public const string APPLICATION_JSON = "application/json";
         public const string REQUEST = "Request";
         public const string RESPONSE = "Response";
+
+        public const string APPLICATION_JSON = "application/json";
 
         private readonly IRothschildHouseDbContext _dbContext;
         private readonly ICityBankPaymentServicesClient _cityBankPaymentServicesClient;
