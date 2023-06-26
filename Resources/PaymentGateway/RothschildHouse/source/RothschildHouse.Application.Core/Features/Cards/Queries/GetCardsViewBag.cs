@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using RothschildHouse.Application.Core.Common.Contracts;
+using RothschildHouse.Library.Common.Clients.Models.Common;
 using RothschildHouse.Library.Common.Clients.Models.PaymentGateway;
 
 namespace RothschildHouse.Application.Core.Features.Cards.Queries
@@ -17,9 +18,15 @@ namespace RothschildHouse.Application.Core.Features.Cards.Queries
         }
 
         public async Task<GetCardsViewBagResponse> Handle(GetCardsViewBagQuery request, CancellationToken cancellationToken)
-            => new GetCardsViewBagResponse
+        {
+            var cardTypes = await _dbContext.VCardType.AsNoTracking().ToListAsync(cancellationToken);
+
+            var response = new GetCardsViewBagResponse
             {
-                CardTypes = await _dbContext.VCardType.AsNoTracking().ToListAsync(cancellationToken)
-            };        
+                CardTypes = cardTypes.Select(item => new ListItem<long?>(item.Id, item.Name)).ToList()
+            };
+
+            return response;
+        }        
     }
 }

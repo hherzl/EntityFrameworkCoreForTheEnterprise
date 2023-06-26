@@ -156,11 +156,9 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         /// </summary>
         /// <returns>The cards.</returns>
         /// <response code="200">Returns the card view bag</response>
-        /// <response code="400">If the request is invalid</response>
         /// <response code="500">If there was an internal error</response>
         [HttpGet("card-viewbag")]
         [ProducesResponseType(200, Type = typeof(GetCardsViewBagResponse))]
-        [ProducesResponseType(400)]
         [ProducesResponseType(500)]
         public async Task<IActionResult> GetCardsViewBagAsync()
         {
@@ -215,11 +213,9 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         /// </summary>
         /// <returns>The customers.</returns>
         /// <response code="200">Returns the customer view bag</response>
-        /// <response code="400">If the request is invalid</response>
         /// <response code="500">If there was an internal error</response>
         [HttpGet("customer-viewbag")]
         [ProducesResponseType(200, Type = typeof(GetCustomersViewBagRespose))]
-        [ProducesResponseType(400)]
         [ProducesResponseType(500)]
         public async Task<IActionResult> GetCustomersViewBagAsync()
         {
@@ -274,11 +270,9 @@ namespace RothschildHouse.API.PaymentGateway.Controllers
         /// </summary>
         /// <returns>The transactions.</returns>
         /// <response code="200">Returns the client applications</response>
-        /// <response code="400">If the request is invalid</response>
         /// <response code="500">If there was an internal error</response>
         [HttpGet("transaction-viewbag")]
         [ProducesResponseType(200, Type = typeof(GetTransactionsViewBagRespose))]
-        [ProducesResponseType(400)]
         [ProducesResponseType(500)]
         public async Task<IActionResult> GetTransactionsViewBagAsync()
         {

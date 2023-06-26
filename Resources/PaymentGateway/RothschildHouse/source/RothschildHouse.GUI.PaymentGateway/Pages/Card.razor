@@ -31,11 +31,11 @@
         </MudSelect>
     </MudItem>
     <MudItem xs="12">
-        <MudTextField @bind-Value="CardholderName" Label="Cardholder name" Variant="Variant.Text" />
-    </MudItem>
-    <MudItem xs="12">
         <MudTextField @bind-Value="IssuingNetwork" Label="Issuing network" Variant="Variant.Text" />
     </MudItem>    
+    <MudItem xs="12">
+        <MudTextField @bind-Value="CardholderName" Label="Cardholder name" Variant="Variant.Text" />
+    </MudItem>
     <MudItem xs="12">
         <MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.Search" @onclick="SearchAsync" />
     </MudItem>

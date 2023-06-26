@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using RothschildHouse.Domain.Core.Entities;
 using RothschildHouse.Library.Common.Clients.Models.Common;
 using RothschildHouse.Library.Common.Clients.Models.PaymentGateway;
 
