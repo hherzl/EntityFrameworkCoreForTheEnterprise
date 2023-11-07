@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RothschildHouse.API.Payment
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RothschildHouse.Domain", "source\RothschildHouse.Domain\RothschildHouse.Domain.csproj", "{AD64D93D-72E6-4446-8DE1-7823D40AD8D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RothschildHouse.Application", "source\RothschildHouse.Application\RothschildHouse.Application.csproj", "{BB302AB6-EA7E-47FF-A818-24EC496FA1B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,9 +28,14 @@ Global
 		{AD64D93D-72E6-4446-8DE1-7823D40AD8D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD64D93D-72E6-4446-8DE1-7823D40AD8D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD64D93D-72E6-4446-8DE1-7823D40AD8D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB302AB6-EA7E-47FF-A818-24EC496FA1B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB302AB6-EA7E-47FF-A818-24EC496FA1B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB302AB6-EA7E-47FF-A818-24EC496FA1B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB302AB6-EA7E-47FF-A818-24EC496FA1B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7B8A46E8-C11D-4435-814F-6DDD9BA11180} = {C44205DA-F8E8-4137-A4B6-F36CAAC71A4D}
 		{AD64D93D-72E6-4446-8DE1-7823D40AD8D2} = {C44205DA-F8E8-4137-A4B6-F36CAAC71A4D}
+		{BB302AB6-EA7E-47FF-A818-24EC496FA1B8} = {C44205DA-F8E8-4137-A4B6-F36CAAC71A4D}
 	EndGlobalSection
 EndGlobal
