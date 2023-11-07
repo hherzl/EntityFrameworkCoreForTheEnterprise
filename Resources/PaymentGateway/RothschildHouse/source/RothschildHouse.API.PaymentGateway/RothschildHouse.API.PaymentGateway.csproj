@@ -10,4 +10,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RothschildHouse.Application\RothschildHouse.Application.csproj" />
+    <ProjectReference Include="..\RothschildHouse.Infrastructure\RothschildHouse.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
