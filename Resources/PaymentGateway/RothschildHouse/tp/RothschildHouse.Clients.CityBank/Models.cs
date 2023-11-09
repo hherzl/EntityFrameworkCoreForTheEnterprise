@@ -1,7 +1,10 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
+using RothschildHouse.Clients.CityBank.Payloads.Avs;
+using RothschildHouse.Clients.CityBank.Payloads.Cvv2;
+using RothschildHouse.Clients.CityBank.Payloads.ProcessPayment;
 
-namespace RothschildHouse.Application.Clients.PaymentGateway.ThirdParty;
+namespace RothschildHouse.Clients.CityBank;
 
 public record ProcessPaymentRequest
 {
@@ -20,24 +23,6 @@ public record ProcessPaymentRequest
 
     public virtual string ToJson()
         => JsonSerializer.Serialize(this, GlobalJsonSerializerOptions.Default);
-}
-
-public record ProcessPaymentAuthorization
-{
-    public string TransactionId { get; set; }
-    public string TransactionCode { get; set; }
-    public string TransactionPayload { get; set; }
-}
-
-public record ProcessPaymentCapture
-{
-    public string TransactionId { get; set; }
-    public string TransactionPayload { get; set; }
-}
-
-public class Cvv2Payload
-{
-    public string Cvv2ResultCode { get; set; }
 }
 
 public record CardPayload
@@ -70,18 +55,6 @@ public record PaymentMethodPayload
     public BillingAddressPayload BillingAddress { get; set; }
 }
 
-public record CityBankAvsPayload
-{
-    [JsonPropertyName("type")]
-    public string Type { get; set; }
-
-    [JsonPropertyName("amount")]
-    public decimal? Amount { get; set; }
-
-    [JsonPropertyName("paymentMethod")]
-    public PaymentMethodPayload PaymentMethodPayload { get; set; }
-}
-
 public record ProcessPaymentResponse
 {
     public static ProcessPaymentResponse Failed
@@ -89,8 +62,8 @@ public record ProcessPaymentResponse
 
     public ProcessPaymentResponse()
     {
-        Authorization = new ProcessPaymentAuthorization();
-        Capture = new ProcessPaymentCapture();
+        Authorization = new();
+        Capture = new();
     }
 
     public bool Successed { get; set; }

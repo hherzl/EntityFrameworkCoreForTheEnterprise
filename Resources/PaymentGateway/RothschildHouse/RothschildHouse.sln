@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RothschildHouse.Application
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RothschildHouse.Infrastructure", "source\RothschildHouse.Infrastructure\RothschildHouse.Infrastructure.csproj", "{10980881-F347-4E1C-990C-C1355BBF13CD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tp", "tp", "{7E9D7EED-C22B-4EDA-BA94-BE6910FCEE66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RothschildHouse.Clients.CityBank", "tp\RothschildHouse.Clients.CityBank\RothschildHouse.Clients.CityBank.csproj", "{7DBBD04D-78B5-4DA1-B650-26265A4154F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,11 +42,16 @@ Global
 		{10980881-F347-4E1C-990C-C1355BBF13CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10980881-F347-4E1C-990C-C1355BBF13CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10980881-F347-4E1C-990C-C1355BBF13CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DBBD04D-78B5-4DA1-B650-26265A4154F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DBBD04D-78B5-4DA1-B650-26265A4154F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DBBD04D-78B5-4DA1-B650-26265A4154F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DBBD04D-78B5-4DA1-B650-26265A4154F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7B8A46E8-C11D-4435-814F-6DDD9BA11180} = {C44205DA-F8E8-4137-A4B6-F36CAAC71A4D}
 		{AD64D93D-72E6-4446-8DE1-7823D40AD8D2} = {C44205DA-F8E8-4137-A4B6-F36CAAC71A4D}
 		{BB302AB6-EA7E-47FF-A818-24EC496FA1B8} = {C44205DA-F8E8-4137-A4B6-F36CAAC71A4D}
 		{10980881-F347-4E1C-990C-C1355BBF13CD} = {C44205DA-F8E8-4137-A4B6-F36CAAC71A4D}
+		{7DBBD04D-78B5-4DA1-B650-26265A4154F7} = {7E9D7EED-C22B-4EDA-BA94-BE6910FCEE66}
 	EndGlobalSection
 EndGlobal

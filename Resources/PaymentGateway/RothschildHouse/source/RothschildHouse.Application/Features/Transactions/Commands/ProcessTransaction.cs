@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using MediatR;
-using RothschildHouse.Application.Clients.PaymentGateway.ThirdParty;
 using RothschildHouse.Application.Clients.SearchEngine;
 using RothschildHouse.Application.Common;
 using RothschildHouse.Application.Common.Contracts;
+using RothschildHouse.Clients.CityBank;
 using RothschildHouse.Domain.Entities;
 using RothschildHouse.Domain.Enums;
 using RothschildHouse.Domain.Exceptions;

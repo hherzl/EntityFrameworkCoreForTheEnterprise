@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace RothschildHouse.Application.Clients.PaymentGateway.ThirdParty;
+namespace RothschildHouse.Clients.CityBank;
 
 internal class GlobalJsonSerializerOptions
 {

@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\tp\RothschildHouse.Clients.CityBank\RothschildHouse.Clients.CityBank.csproj" />
     <ProjectReference Include="..\RothschildHouse.Application\RothschildHouse.Application.csproj" />
     <ProjectReference Include="..\RothschildHouse.Infrastructure\RothschildHouse.Infrastructure.csproj" />
   </ItemGroup>

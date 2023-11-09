@@ -1,4 +1,4 @@
-﻿namespace RothschildHouse.Application.Clients.PaymentGateway.ThirdParty;
+﻿namespace RothschildHouse.Clients.CityBank;
 
 public interface ICityBankPaymentServicesClient
 {
