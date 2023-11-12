@@ -65,7 +65,7 @@ while (settings.StartDate < settings.EndDate)
         var cardIndex = mocksRandom.Next(mocks.Cards.Count);
         var currencyIndex = mocksRandom.Next(mocks.Currencies.Count);
         var card = mocks.Cards[cardIndex];
-        var orderTotal = (decimal)mocksRandom.Next(1, 50);
+        var orderTotal = (decimal)mocksRandom.Next(1, 100);
 
         var request = new ProcessTransactionRequest
         {
