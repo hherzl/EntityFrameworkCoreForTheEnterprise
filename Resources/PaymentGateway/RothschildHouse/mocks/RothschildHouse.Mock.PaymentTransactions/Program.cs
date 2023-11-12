@@ -1,4 +1,5 @@
-﻿using RothschildHouse.Mock.PaymentTransactions;
+﻿using System.Diagnostics;
+using RothschildHouse.Mock.PaymentTransactions;
 
 var mocksRandom = new Random();
 
@@ -12,23 +13,48 @@ var mocks = new
 
 var now = DateTime.Now;
 
-var startDate = new DateTime(now.Year, 1, 1);
-var endDate = new DateTime(now.Year, now.Month, now.Day);
+var settings = new MockSettings();
 
 if (args.Length > 0)
 {
-    if (args[0] == "--start-date=now")
+    foreach (var arg in args)
     {
-        startDate = new DateTime(now.Year, now.Month, now.Day);
-        endDate = new DateTime(now.Year, now.Month, now.Day).AddDays(1);
+        if (arg.StartsWith("--start-date"))
+        {
+            var value = arg.Split('=')[1];
+            if (value == "now")
+            {
+                settings.StartDate = new DateTime(now.Year, now.Month, now.Day);
+                settings.EndDate = new DateTime(now.Year, now.Month, now.Day).AddDays(1);
+            }
+        }
+        else if (arg.StartsWith("--transactions-per-day"))
+        {
+            var value = arg.Split('=')[1];
+            settings.TransactionsPerDay = Convert.ToInt32(value);
+        }
     }
 }
 
-while (startDate < endDate)
-{
-    var transactionsPerDay = mocksRandom.Next(10);
+Console.ForegroundColor = ConsoleColor.White;
 
-    Console.WriteLine($"Mocking '{transactionsPerDay}' transactions for {startDate}");
+Console.WriteLine($"Settings: '{settings}'");
+Console.WriteLine($"Starting at '{DateTime.Now}'");
+Console.WriteLine();
+
+var duration = new Stopwatch();
+
+duration.Start();
+
+while (settings.StartDate < settings.EndDate)
+{
+    var transactionsPerDay = mocksRandom.Next(settings.TransactionsPerDay);
+
+    Console.ForegroundColor = ConsoleColor.White;
+
+    Console.WriteLine($"Mocking '{transactionsPerDay}' transactions for {settings.StartDate}");
+
+    Console.ForegroundColor = ConsoleColor.DarkBlue;
 
     var rothschildHouseClient = new RothschildHouseClient();
 
@@ -55,19 +81,29 @@ while (startDate < endDate)
             OrderGuid = Guid.NewGuid(),
             OrderTotal = orderTotal,
             Currency = mocks.Currencies[currencyIndex],
-            TransactionDateTime = startDate
+            TransactionDateTime = settings.StartDate
         };
 
-        Console.WriteLine($"{DateTime.Now}: Processing transaction: cardholder name: '{request.CardholderName}', total: '{request.OrderTotal} {request.Currency}'...");
+        Console.WriteLine($" {DateTime.Now}: Processing transaction: cardholder name: '{request.CardholderName}', total: '{request.OrderTotal} {request.Currency}'...");
 
         var response = await rothschildHouseClient.ProcessTransactionAsync(request);
 
-        Console.WriteLine($"{DateTime.Now}:  Txn Id: '{response.Id}', client: '{response.Client}', total: '{response.OrderTotal} {response.Currency}'");
+        Console.WriteLine($"  {DateTime.Now}:  Txn Id: '{response.Id}', client: '{response.Client}', total: '{response.OrderTotal} {response.Currency}'");
     }
 
-    startDate = startDate.AddDays(1);
+    settings.StartDate = settings.StartDate.AddDays(1);
 
     Console.WriteLine();
 
     await Task.Delay(100);
 }
+
+Console.ForegroundColor = ConsoleColor.Green;
+
+Console.WriteLine($"Ending at '{DateTime.Now}'");
+
+duration.Stop();
+
+Console.WriteLine($"Total time: '{duration.Elapsed}'");
+
+Console.ForegroundColor = ConsoleColor.White;
