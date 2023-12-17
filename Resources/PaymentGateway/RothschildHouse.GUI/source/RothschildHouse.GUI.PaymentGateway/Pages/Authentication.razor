@@ -1,0 +1,22 @@
+﻿@page "/authentication123/{action123}"
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+ @using Microsoft.Extensions.Configuration
+
+ @inject NavigationManager UriHelper
+ @inject IConfiguration Config
+
+<RemoteAuthenticatorView Action="@Action">
+    <LogOut>
+        @{
+            var authority = (string)Config["Auth0:Authority"];
+            var clientId = (string)Config["Auth0:ClientId"];
+
+            UriHelper.NavigateTo($"{authority}/v2/logout?client_id={clientId}");
+        }
+    </LogOut>
+</RemoteAuthenticatorView>
+
+@code {
+    [Parameter]
+    public string Action { get; set; }
+}

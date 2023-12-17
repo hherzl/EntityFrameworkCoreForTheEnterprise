@@ -1,0 +1,25 @@
+﻿@page "/authentication/login-callback"
+
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+
+@code {
+    [Parameter] public string ReturnUrl { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            // Authentication succeeded
+            NavigationManager.NavigateTo(string.IsNullOrEmpty(ReturnUrl) ? "/" : ReturnUrl);
+        }
+        else
+        {
+            // Authentication failed
+            NavigationManager.NavigateTo("/error");
+        }
+    }
+}
