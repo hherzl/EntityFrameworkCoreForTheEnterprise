@@ -59,6 +59,9 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "port": 7255
+          },
           "configurations": {
             "production": {
               "browserTarget": "rothschild-house-gui:build:production"

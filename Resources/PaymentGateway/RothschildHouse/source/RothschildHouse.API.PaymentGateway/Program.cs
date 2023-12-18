@@ -22,7 +22,14 @@ builder.Services.AddCityBankServices();
 
 builder.Services.AddCors(policy =>
 {
-    policy.AddPolicy("GuiCorsPolicy", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+    policy.AddPolicy("GuiCorsPolicy", builder =>
+    {
+        builder
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials()
+            .WithOrigins("https://localhost:7255", "http://localhost:7255");
+    });
 });
 
 builder.Services.Configure<MqClientSettings>(builder.Configuration.GetSection("Queue:Transaction"));
