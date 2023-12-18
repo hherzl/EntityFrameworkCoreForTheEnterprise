@@ -8,6 +8,12 @@ namespace RothschildHouse.Application.Features.Transactions.Queries;
 
 public class GetTransactionsQuery : IRequest<PagedResponse<TransactionItemModel>>
 {
+    public GetTransactionsQuery()
+    {
+        PageSize = 10;
+        PageNumber = 1;
+    }
+
     public int PageSize { get; set; }
     public int PageNumber { get; set; }
 
@@ -40,6 +46,8 @@ public class GetPaymentTransactionsQueryHandler : IRequestHandler<GetTransaction
             .Paging(request.PageSize, request.PageNumber)
             .ToListAsync(cancellationToken)
             ;
+        
+        list.ForEach(item => item.CardNumber = item.CardNumber?[^4..]);
 
         return new PagedResponse<TransactionItemModel>(list, request.PageSize, request.PageNumber, await query.CountAsync(cancellationToken));
     }

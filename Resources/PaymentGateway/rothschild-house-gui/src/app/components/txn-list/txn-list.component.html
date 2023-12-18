@@ -1,0 +1,62 @@
+<div class="mat-elevation-z8">
+  <table mat-table class="full-width-table" matSort aria-label="Elements">
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+      <td mat-cell *matCellDef="let row">{{row.id}}</td>
+    </ng-container>
+
+    <!-- transactionDateTime Column -->
+    <ng-container matColumnDef="transactionDateTime">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>DateTime</th>
+      <td mat-cell *matCellDef="let row">{{row.transactionDateTime | date }}</td>
+    </ng-container>
+
+    <!-- transactionType Column -->
+    <ng-container matColumnDef="transactionType">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+      <td mat-cell *matCellDef="let row">{{row.transactionType}}</td>
+    </ng-container>
+
+    <!-- transactionStatus Column -->
+    <ng-container matColumnDef="transactionStatus">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+      <td mat-cell *matCellDef="let row">{{row.transactionStatus}}</td>
+    </ng-container>
+
+    <!-- issuingNetwork Column -->
+    <ng-container matColumnDef="issuingNetwork">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Issuing Network</th>
+      <td mat-cell *matCellDef="let row">{{row.issuingNetwork}}</td>
+    </ng-container>
+
+    <!-- cardNumber Column -->
+    <ng-container matColumnDef="cardNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Card number</th>
+      <td mat-cell *matCellDef="let row">{{row.cardNumber}}</td>
+    </ng-container>
+
+    <!-- orderTotal Column -->
+    <ng-container matColumnDef="orderTotal">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Order Total</th>
+      <td mat-cell *matCellDef="let row">{{row.orderTotal}}</td>
+    </ng-container>
+
+    <!-- currency Column -->
+    <ng-container matColumnDef="currency">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Currency</th>
+      <td mat-cell *matCellDef="let row">{{row.currency}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator #paginator
+      [length]="dataSource?.data?.length"
+      [pageIndex]="0"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 20]"
+      aria-label="Select page">
+  </mat-paginator>
+</div>
