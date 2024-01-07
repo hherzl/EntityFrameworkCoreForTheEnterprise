@@ -64,10 +64,10 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "rothschild-house-gui:build:production"
+              "buildTarget": "rothschild-house-gui:build:production"
             },
             "development": {
-              "browserTarget": "rothschild-house-gui:build:development"
+              "buildTarget": "rothschild-house-gui:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -75,7 +75,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "rothschild-house-gui:build"
+            "buildTarget": "rothschild-house-gui:build"
           }
         },
         "test": {
