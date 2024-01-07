@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { NgChartsModule } from 'ng2-charts';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -28,6 +29,7 @@ import { MatSortModule } from '@angular/material/sort';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    NgChartsModule,
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
