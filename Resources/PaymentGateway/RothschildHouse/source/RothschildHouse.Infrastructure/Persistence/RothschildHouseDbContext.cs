@@ -43,16 +43,25 @@ public class RothschildHouseDbContext : DbContext, IRothschildHouseDbContext
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        foreach (var entry in ChangeTracker.Entries())
+        foreach (var entry in ChangeTracker.Entries<Entity>())
         {
-            if (entry.State == EntityState.Added && entry.Entity is AuditableEntity auditEntity)
+            if (entry.State == EntityState.Added)
             {
-                auditEntity.Active = true;
+                entry.Entity.Active = true;
+            }
+        }
 
-                if (string.IsNullOrEmpty(auditEntity.CreationUser))
-                    auditEntity.CreationUser = "context";
+        foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
+        {
+            if (entry.State == EntityState.Added)
+            {
+                entry.Entity.Active = true;
 
-                auditEntity.CreationDateTime = DateTime.Now;
+                if (string.IsNullOrEmpty(entry.Entity.CreationUser))
+                    entry.Entity.CreationUser = "DbContext";
+
+                if (entry.Entity.CreationDateTime == null)
+                    entry.Entity.CreationDateTime = DateTime.Now;
             }
         }
 

@@ -30,7 +30,6 @@ public record CustomerItemModel
 
 public static class IRothschildHouseDbContextQueries
 {
-
     public static async Task<Country> GetCountryAsync(this IRothschildHouseDbContext ctx, short? id)
         => await ctx.Country.FirstOrDefaultAsync(item => item.Id == id);
 

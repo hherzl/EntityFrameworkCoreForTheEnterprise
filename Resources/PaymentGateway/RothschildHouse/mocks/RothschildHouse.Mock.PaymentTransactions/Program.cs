@@ -54,7 +54,7 @@ while (settings.StartDate < settings.EndDate)
 
     Console.WriteLine($"Mocking '{transactionsPerDay}' transactions for {settings.StartDate}");
 
-    Console.ForegroundColor = ConsoleColor.DarkBlue;
+    Console.ForegroundColor = ConsoleColor.Blue;
 
     var rothschildHouseClient = new RothschildHouseClient();
 

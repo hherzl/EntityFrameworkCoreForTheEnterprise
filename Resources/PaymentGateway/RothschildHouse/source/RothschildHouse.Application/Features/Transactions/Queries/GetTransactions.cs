@@ -21,9 +21,6 @@ public class GetTransactionsQuery : IRequest<PagedResponse<TransactionItemModel>
     public Guid? ClientApplicationId { get; set; }
     public DateTime? StartDate { get; set; }
     public DateTime? EndDate { get; set; }
-
-    public bool IsEmpty
-        => !TransactionStatusId.HasValue && !ClientApplicationId.HasValue && !StartDate.HasValue && !EndDate.HasValue;
 }
 
 public class GetPaymentTransactionsQueryHandler : IRequestHandler<GetTransactionsQuery, PagedResponse<TransactionItemModel>>
@@ -46,7 +43,7 @@ public class GetPaymentTransactionsQueryHandler : IRequestHandler<GetTransaction
             .Paging(request.PageSize, request.PageNumber)
             .ToListAsync(cancellationToken)
             ;
-        
+
         list.ForEach(item => item.CardNumber = item.CardNumber?[^4..]);
 
         return new PagedResponse<TransactionItemModel>(list, request.PageSize, request.PageNumber, await query.CountAsync(cancellationToken));

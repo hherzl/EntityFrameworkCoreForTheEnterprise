@@ -15,7 +15,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient();
 
 builder.Services.AddApplicationServices(builder.Configuration);
-
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
 builder.Services.AddCityBankServices();
