@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { ChartConfiguration, ChartType } from 'chart.js';
+import { ChartResponse, DatasetModel, ReportsClientService } from 'src/app/services/reports-client.service';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,23 @@ import { ChartConfiguration, ChartType } from 'chart.js';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  constructor(private reportsClient: ReportsClientService) {
+  }
+
   private hubConnection!: signalR.HubConnection;
+
+  public dataset!: DatasetModel[];
+  public chartLabels!: string[];
+  public chartType!: ChartType;
+  public chartLegend!: boolean;
+  chartOptions: ChartConfiguration['options'] = {
+    responsive: true,
+    scales: {
+      y: {
+        min: 0
+      }
+    }
+  };
 
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
@@ -28,38 +45,25 @@ export class HomeComponent implements OnInit {
       })
   }
 
-  public addListener = () => {
-    this.hubConnection.on('receiveTxn', (clientApplication, amount, currency) => {
-      console.log(`'${clientApplication}': ${amount} ${currency}`);
+  public loadChart(): void {
+    this.chartType = 'bar';
+    this.chartLegend = true;
+    this.reportsClient.getYearlySales(2024).subscribe(result => {
+      this.chartLabels = result.labels;
+      this.dataset = result.datasets;
     });
   }
 
-  chartOptions: ChartConfiguration['options'] = {
-    responsive: true,
-    scales: {
-      y: {
-        min: 0
-      }
-    }
-  };
-
-  dataSet!: ChartModel[];
-  chartLabels: string[] = ['Real time data for the chart'];
-  chartType: ChartType = 'bar';
-  chartLegend: boolean = true;
+  public addListener = () => {
+    this.hubConnection.on('receiveTxn', (clientApplication, amount, currency) => {
+      console.log(`'${clientApplication}': ${amount} ${currency}`);
+      this.loadChart();
+    });
+  }
 
   public ngOnInit(): void {
     this.startConnection();
+    this.loadChart();
     this.addListener();
-    this.dataSet = new Array<ChartModel>();
-    this.dataSet.push({ data: [5, 7, 9], label: 'Foo', backgroundColor: '#5491DA' });
-    this.dataSet.push({ data: [10, 12, 14], label: 'Bar', backgroundColor: '#E74C3C' });
-    this.dataSet.push({ data: [15, 18, 21], label: 'Baz', backgroundColor: '82E0AA' });
   }
-}
-
-export interface ChartModel {
-  data: number[],
-  label: string
-  backgroundColor: string
 }

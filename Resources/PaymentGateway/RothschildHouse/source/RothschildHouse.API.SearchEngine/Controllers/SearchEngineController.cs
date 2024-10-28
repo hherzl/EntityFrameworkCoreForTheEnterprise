@@ -25,8 +25,6 @@ public class SearchEngineController : ControllerBase
     [ProducesResponseType(500)]
     public async Task<IActionResult> IndexSaleAsync([FromBody] IndexSaleRequest request)
     {
-        _logger?.LogDebug($"'{nameof(IndexSaleAsync)}' has been invoked");
-
         var document = await _saleService.GetByTxnIdAsync(request.TxnId);
 
         _logger?.LogInformation($"Indexing sale for transaction '{request.TxnId}'...");
